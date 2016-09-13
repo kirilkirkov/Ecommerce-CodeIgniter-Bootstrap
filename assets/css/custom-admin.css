@@ -1,0 +1,73 @@
+/*
+Created on : Mar 21, 2016, 3:20:16 PM
+Author     : Kiril Kirkov
+Gitgub     : https://github.com/kirilkirkov
+*/
+html, body { height: 100%;}
+body { font-family: 'Inconsolata' ;background-color: #fbfbfb; color:222d32; }
+
+#wrapper { min-height: 100%; position: relative;}
+#content {padding-bottom:100px;}
+
+h1 {font-size:50px; }
+
+nav.navbar, div.left-side, h1 {text-transform: uppercase; }
+
+.well.login-box {width:300px; margin:0 auto;}
+.well.login-box legend {  font-size:26px;  text-align:center;  font-weight:300;}
+.well.login-box label {  font-weight:300;  font-size:16px;  }
+
+.login-alerts {max-width: 300px; margin:0 auto;}
+
+nav.navbar {background-color:#3c8dbc; border-radius:0; box-shadow: 3px 3px 2px #ccc;}
+nav.navbar a { color:#fff;}
+nav.navbar a.navbar-brand {background: #1e5799; background: -moz-linear-gradient(top,  #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);background: -webkit-linear-gradient(top,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);background: linear-gradient(to bottom,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); }
+nav.navbar li a:hover, nav.navbar li a:focus, nav.navbar li a:active {background-color: transparent;}
+.navbar-nav li a i {margin-right: 7px;}
+nav.navbar ul.dropdown-menu li {margin-bottom: 3px;}
+.nav .open > a, .nav .open > a:focus, .nav .open > a:hover {background-color: transparent;}
+nav.navbar .navbar-toggle {background-color:#1e5799; }
+
+div.left-side { padding:0; background-color: #222d32; color:#b8c7ce;bottom: 0;  display: block;left: 0; overflow: auto;position: absolute;    top: 51px;}
+div.left-side ul.sidebar-menu {list-style: none; margin:0;padding:0;}
+div.left-side ul.sidebar-menu li {margin: 0; padding: 0; position: relative; margin-bottom:5px;}
+div.left-side ul.sidebar-menu li a {display: block;  border-left: 3px solid transparent;  color: #b8c7ce;    padding: 12px 5px 12px 15px; }
+div.left-side ul.sidebar-menu li a i {margin-right: 7px;}
+div.left-side ul.sidebar-menu li a:hover, div.left-side ul.sidebar-menu li a.active {background-color: #2c363b; color:#fff; text-decoration: none; border-left-color: #3c8dbc;}
+div.left-side ul.sidebar-menu li.header {background: #1a2226 none repeat scroll 0 0;  color: #4b646f; padding: 12px 5px 12px 15px; margin-bottom: 20px;}
+div.left-side ul.sidebar-menu li.search {padding-left:15px; padding-right: 15px;}
+div.left-side ul.sidebar-menu li.search .left-finder {background-color: #2c363b; padding-left:5px; padding-right: 25px; width:100%; height:35px; margin-bottom:15px; border:0; border-radius: 4px;}
+div.left-side ul.sidebar-menu li.search form {position: relative;}
+div.left-side ul.sidebar-menu li.search form i {position: absolute; right:10px; top:10px;}
+div.left-side span.alert-admin {padding-left:10px; padding-right: 10px; padding-bottom: 10px; display: inline-block;}
+
+.custab{ border: 1px solid #ccc;  padding: 5px; box-shadow: 3px 3px 2px #ccc; transition: 0.5s; }
+.custab:hover{ box-shadow: 3px 3px 0px transparent; transition: 0.5s;}
+
+.relative {position:relative;}
+.settings {position: absolute; width:320px;  z-index: 1000; display: none; color:#222d32 !important;}
+.settings .panel-body a:hover, .settings .panel-body a:focus {background-color: #2989d8;}
+.settings #pass_result {display:none;}
+
+#articles div.well {margin-top:15px;}
+#articles h3.title {word-break: break-all;overflow: hidden;}
+#articles .find {margin-bottom:36px;}
+#articles a.article-image img {height:250px;}
+#articles div.article.invisible-status {opacity:0.4;}
+#articles span.dropdown-toggle {cursor: pointer;}
+#articles .url {overflow: hidden;}
+#articles .url a {word-break: break-all;}
+#articles .description-article {max-height: 140px; overflow:hidden; margin-bottom:10px;}
+
+#categories a.btn-xs {margin-bottom: 15px;}
+
+footer {padding: 20px 0; color:#fff; text-align: center; background-color: #3c8dbc; width:100%;height:60px;position:absolute;bottom:0;left:0;}
+footer a {color:#fff; text-decoration:underline;}
+
+@media screen and (max-width: 767px) {
+    .left-side {position:relative !important; top:0 !important; margin-bottom: 20px;}
+    nav.navbar {margin-bottom:0;}
+    nav.navbar .navbar-brand {height:55px;}
+    .settings {position: relative;}
+}
+

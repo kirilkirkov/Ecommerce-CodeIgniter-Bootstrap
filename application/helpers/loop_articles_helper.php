@@ -32,7 +32,7 @@ function loop_articles($articles, $currency, $classes = '', $carousel = false) {
         else
             $active = '';
  ?>
- <div class="product-list <?= $carousel == true ? 'item' : '' ?> <?= $classes ?> <?= $active ?>">
+ <div class="product-list column-h <?= $carousel == true ? 'item' : '' ?> <?= $classes ?> <?= $active ?>">
 	<div class="inner">
 		<div class="img-container">
 			<a href="<?= base_url($article['url']) ?>">

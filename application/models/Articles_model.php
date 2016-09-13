@@ -30,7 +30,7 @@ class Articles_model extends CI_Model {
         $this->db->where('visibility', 1);
 		$this->db->where('in_slider', 0);
 		
-		if(!empty($big_get)){
+		if(!empty($big_get) && isset($big_get['category'])){
 			if($big_get['category'] != '') {
 				(int)$big_get['category'];
 				$findInIds = array();

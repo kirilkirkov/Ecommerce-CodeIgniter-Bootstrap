@@ -12,4 +12,5 @@ Bootsrap Responsive online shop
 9. Quantity of products maganed from orders
 10. Fast Loading
 
-## Etc.
+## Screenshot
+![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/screenshot.png "Logo Title Text 1")

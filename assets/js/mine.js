@@ -170,3 +170,9 @@ function submitForm() {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 });
+
+
+//To deal with different heights
+$(document).ready(function () {
+    $("#products-side").eqHeight(".column-h");
+});

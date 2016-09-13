@@ -153,4 +153,6 @@ footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
 }
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
+	#home-slider .carousel-control.right {background-position: -140px center; width: 50px;}
+	#home-slider .carousel-control.left {background-position: 0 center; width: 50px;}
 } 

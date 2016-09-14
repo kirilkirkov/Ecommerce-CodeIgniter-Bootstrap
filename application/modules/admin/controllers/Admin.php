@@ -109,7 +109,7 @@ class Admin extends MX_Controller {
                 } else {
                     $this->saveHistory('Success updated article');
                 }
-               redirect('admin/publish/'.$result); 
+               redirect('admin/publish/'); 
             } else {
                 $this->session->set_flashdata('result_publish', 'Problem with article publish!');
             }

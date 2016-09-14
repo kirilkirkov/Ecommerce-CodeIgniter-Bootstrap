@@ -20,7 +20,7 @@ class Articles_model extends CI_Model {
 
     public function getArticles($category, $lang, $limit = null, $start = null, $big_get) {
         if ($limit !== null && $start !== null) {
-            $this->db->limit($limit, $start);
+            $this->db->limit($limit, $start); 
         }
 		$this->db->select('articles.id,articles.image, articles.quantity, translations.title, translations.price, translations.old_price, translations.url');
 		$this->db->join('translations', 'translations.for_id = articles.id', 'left');
@@ -47,7 +47,7 @@ class Articles_model extends CI_Model {
 				$this->db->like('translations.title', $big_get['search_in_title']);
 			}
 			if($big_get['search_in_body'] != '') {
-				$this->db->like('translations.body', $big_get['search_in_body']);
+				$this->db->like('translations.description', $big_get['search_in_body']);
 			}
 			if($big_get['order_new'] != '') {
 				$this->db->order_by('articles.id', $big_get['order_new']);
@@ -61,28 +61,28 @@ class Articles_model extends CI_Model {
 				$this->db->order_by('articles.procurement', $big_get['order_procurement']);
 			}
 			if($big_get['quantity_more'] != '') {
-				$$this->db->where('articles.quantity > ', $big_get['quantity_more']);
+				$this->db->where('articles.quantity > ', $big_get['quantity_more']);
 			}
 			if($big_get['quantity_more'] != '') {
-				$$this->db->where('articles.quantity > ', $big_get['quantity_more']);
+				$this->db->where('articles.quantity > ', $big_get['quantity_more']);
 			}
 			if($big_get['added_after'] != '') {
 				$time = strtotime($big_get['added_after']);
-				$$this->db->where('articles.time > ', $time);
+				$this->db->where('articles.time > ', $time);
 			}
 			if($big_get['added_before'] != '') {
 				$time = strtotime($big_get['added_before']);
-				$$this->db->where('articles.time < ', $time);
+				$this->db->where('articles.time < ', $time);
 			}
 			if($big_get['price_from'] != '') {
-				$$this->db->where('translations.price >= ', $big_get['price_from']);
+				$this->db->where('translations.price >= ', $big_get['price_from']);
 			}
 			if($big_get['price_to'] != '') {
-				$$this->db->where('translations.price <= ', $big_get['price_to']);
+				$this->db->where('translations.price <= ', $big_get['price_to']);
 			}
-		}				
-		
+		}
         $query = $this->db->get('articles');
+		//echo $this->db->last_query();
         return $query->result_array();
     }
     
@@ -122,8 +122,9 @@ class Articles_model extends CI_Model {
     }
     
     public function getCountQuantities() {
-    	$query = $this->db->query('SELECT SUM(IF(quantity<=0,1,0)) as out_of_stock, SUM(IF(quantity>0,1,0)) as in_stock FROM articles WHERE visibility = 1');
-    	return $query->row_array();
+    	$query = $this->db->query('SELECT SUM(IF(quantity<=0,1,0)) as out_of_stock, SUM(IF(quantity>0,1,0)) as in_stock FROM articles WHERE visibility = 1 AND category = "shop"');
+    	echo $this->db->last_query();
+		return $query->row_array();
     }
 	
 	public function setToCart($post) {

@@ -1,9 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+if(count($sliderArticles) > 0) {
 ?>
 <div id="home-slider" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-  <?php 		   
+  <?php
   $i = 0;
     while ($i < count($sliderArticles)) {
 	?>
@@ -25,17 +26,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<?= $article['basic_description'] ?>
 			</div>
 			<div class="price text-right"><?= $article['price'].$currency ?></div>
-			<div class="xs-center"><a class="buy-now" href="<?=  base_url($article['url']) ?>"><?= lang('show_now') ?></a></div>
+			<div class="xs-center"><a class="buy-now" href="<?=  base_url($article['url']) ?>"><span class="glyphicon glyphicon-shopping-cart"></span> <?= lang('buy_now') ?></a></div>
 		</div>
     </div>
 	 </div>
 	 <?php $i++; } ?>
   </div>
   </div>
-
   <a class="left carousel-control" href="#home-slider" role="button" data-slide="prev"></a>
   <a class="right carousel-control" href="#home-slider" role="button" data-slide="next"></a>
 </div>
+<?php } ?>
 <div class="container" id="home-page">
     <div class="row">
         <div class="col-md-3">
@@ -108,10 +109,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <span><?= lang('products') ?></span>
             </div>
             <div class="product-sort">
-			
-
 <div class="row">
-  <div class="col-xs-4">
+  <div class="ord col-sm-4">
     <div class="form-group">
                 <select class="selectpicker order form-control" data-order-to="order_new">
                     <option <?= isset($_GET['order_new']) && $_GET['order_new'] == "desc" ? 'selected' : '' ?> <?= !isset($_GET['order_new']) || $_GET['order_new'] == "" ? 'selected' : '' ?> value="desc"><?= lang('new') ?> </option>
@@ -119,7 +118,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </select>
 				</div>
 				  </div>
-				  <div class="col-xs-4">
+				  <div class="ord col-sm-4">
     <div class="form-group">
                 <select class="selectpicker order form-control" data-order-to="order_price" title="<?= lang('price_title') ?>..">
 					<option></option>
@@ -128,7 +127,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </select>
 				</div>
 				  </div>
-				  <div class="col-xs-4">
+				  <div class="ord col-sm-4">
     <div class="form-group">
                 <select class="selectpicker order form-control" data-order-to="order_procurement" title="<?= lang('procurement_title') ?>..">
 				    <option></option>
@@ -139,8 +138,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				  </div>
 				   </div>
             </div>
-            <?php loop_articles($shop_articles, $currency, 'col-sm-4 col-md-3'); ?>
-            <?= $links_pagination ?>
+            <?php if(!empty($shop_articles)) {
+				loop_articles($shop_articles, $currency, 'col-sm-4 col-md-3');
+			} else {
+				?>
+				<script>
+				$(document).ready(function() {ShowNotificator('alert-danger', '<?= lang('no_results') ?>');});
+				</script>
+				<?php
+			}				
+			echo $links_pagination ;
+			?>
         </div>
     </div>
 </div>

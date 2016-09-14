@@ -43,9 +43,9 @@ function loop_articles($articles, $currency, $classes = '', $carousel = false) {
 			<a href="<?= base_url($article['url']) ?>"><?= $article['title'] ?></a>
 		</h2>
 		<div class="price">
-			<span class="underline"><?= lang('price') ?>: <span><?= number_format($article['price'], 2).$currency ?></span></span>
+			<span class="underline"><?= lang('price') ?>: <span><?= $article['price'] != '' ? number_format($article['price'], 2):0 ?><?= $currency ?></span></span>
 			<?php
-			if ($article['old_price'] != '') {
+			if ($article['old_price'] != '' && $article['old_price'] != 0) {
 				$percent = $article['old_price'] / $article['price'];
 				$percent_friendly = number_format($percent * 100, 2) . '%';
 				?>

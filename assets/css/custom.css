@@ -15,12 +15,11 @@ body { font-family:arial; padding-top:0; color:#424449;}
 #top-part #adv-search .dropdown.dropdown-lg .dropdown-menu { margin-top: -1px; padding: 6px 20px;}
 #top-part #adv-search .input-group-btn .btn-group { display: flex !important;}
 #top-part #adv-search .btn-group .btn {border-radius: 0; margin-left: -1px;}
-#top-part #adv-search .btn-group .btn:last-child {border-top-right-radius: 4px; border-bottom-right-radius: 4px;}
 #top-part #adv-search .btn-group .form-horizontal .btn[type="submit"] { border-top-left-radius: 4px; border-bottom-left-radius: 4px;}
 #top-part #adv-search .form-horizontal .form-group {margin-left: 0; margin-right: 0;}
 #top-part #adv-search .form-group .form-control:last-child { border-top-left-radius: 4px;border-bottom-left-radius: 4px;}
 #top-part #adv-search .dropdown.dropdown-lg .dropdown-menu {width: 515px;}
-#top-part ul.shop-dropdown {list-style:none; padding:0; margin:0;}
+#top-part ul.shop-dropdown {list-style:none; padding:0; margin:0; margin-right-15px;}
 #top-part ul.shop-dropdown li.text-right {padding:10px 12px;}
 #top-part div.center {padding-top:15px;}
 #top-part div.right {padding-top:13px;}
@@ -39,6 +38,9 @@ body { font-family:arial; padding-top:0; color:#424449;}
 #top-part ul.dropdown-cart li .item-in .right-side {float: left; margin-left: 2px; width: 170px; border-bottom: 1px solid #f1f1f1;}
 #top-part ul.dropdown-cart .item-info .prices span {display:inline !important; color:#fe3a3a;}
 #top-part ul.dropdown-cart .item-info .prices, #top-part ul.dropdown-cart .item-info .currency {color:#fe3a3a; display: inline !important;}
+#top-part #search_in_title {border-radius:0; box-shadow:none;}
+
+.nav  > li  > a:hover, .nav > li > a:focus  {background-color:#4285f4; color:#fff;}
 
 #home-slider {margin-bottom:40px; height:370px;}
 #home-slider .right-side {padding-top:60px;}
@@ -56,7 +58,7 @@ body { font-family:arial; padding-top:0; color:#424449;}
 
 .table-products img.product-image {width:80px;}
 
-nav.navbar-silver {background-color:#f3f3f3;}
+nav.navbar-silver {background-color:#f3f3f3;-webkit-box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);-moz-box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);}
 nav a.navbar-brand, .navbar-nav > li > a {color:#777;}
 
 div.filter-sidebar {margin-bottom:30px;}
@@ -88,8 +90,6 @@ div.product-sort .form-group {margin-bottom:0;}
 button.btn-blue {box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); background-color:#4285f4; color:#fff;}
 button.btn-blue:hover { color:#fff;}
 
-.d-none {display:none;}
-
 #checkout-page .payment-type {margin:20px 0;}
 #checkout-page  .form-control { border-radius:0; box-shadow: none; color:#666; font-size:13px;}
 #checkout-page .form-group label {font-size:13px; color:#666;}
@@ -103,6 +103,7 @@ button.btn-blue:hover { color:#fff;}
 #small_carousel blockquote {text-align: center; border: none;}
 #small_carousel .profile-circle {width: 100px; height: 100px; margin: 0 auto; border-radius: 100px;}
 #small_carousel .profile-circle img {width:100%;}
+#small_carousel .carousel-indicators .active {height:15px; width:15px;}
 
 #view-article  h1  {font-size:20px;margin-top:0; margin-bottom:40px;}
 #view-article .table-product-info .left {width:200px;}
@@ -150,6 +151,7 @@ footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
 	 #home-slider .right-side .text-right {text-align:center; }
 	 #home-slider .right-side a.buy-now {float:none;}
 	 #home-slider .right-side .xs-center {text-align:center; height:50px;}
+	 .ord {margin-bottom:7px;}
 }
 /* Portrait phones and smaller */
 @media (max-width: 480px) {

@@ -66,7 +66,8 @@ $lang['added_on'] = 'Добавен в магазина';
 $lang['in_category'] = 'В категория';
 $lang['description'] = 'Описание';
 $lang['oder_from_category'] = 'Други артикули от тази категория';
-$lang['show_now'] = 'Купи сега';
+$lang['buy_now'] = 'Купи сега';
+$lang['no_results'] = 'Няма намерени резултати!';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'Не сте въвели име';

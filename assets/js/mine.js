@@ -25,70 +25,14 @@ function manageShoppingCart(action, article_id, reload = false) {
 		url: "manageShoppingCart",
 		data: {article_id: article_id, action:action}
 	}).done(function (data) {
-		var num_added = parseInt($('[data-artticle-id="'+article_id+'"] .num_added').text());
+		$(".dropdown-cart").empty();
+		$(".dropdown-cart").append(data);
+		var sum_items =  parseInt($('.sumOfItems').text());
 		if(action == 'add') {
-			if(data == '1') {
-				if(num_added > 1)  {
-					$('[data-artticle-id="'+article_id+'"] .num_added').empty().text(num_added+1);
-					var num_added_single = parseInt($('[data-artticle-id="'+article_id+'"] .prices .num-added-single').text())+1;
-					var price_single = parseFloat($('[data-artticle-id="'+article_id+'"] .prices .price-single').text().replace(',',''));
-					var sum_price_single = parseFloat($('[data-artticle-id="'+article_id+'"] .prices .sum-price-single').text().replace(',',''));
-					var new_sum_price_single = num_added_single*price_single;
-					$('[data-artticle-id="'+article_id+'"] .prices .num-added-single').text(num_added_single);
-					$('[data-artticle-id="'+article_id+'"] .prices .sum-price-single').text(new_sum_price_single);
-				} else {
-					$('[data-artticle-id="'+article_id+'"] .num_added').text(2);
-					var price_single = parseFloat($('[data-artticle-id="'+article_id+'"] .prices').text().replace(',',''));
-					$('[data-artticle-id="'+article_id+'"] .prices').empty().append(
-					'<span class="num-added-single">2</span> x <span class="price-single">'+price_single+'</span> - <span class="sum-price-single">'+price_single*2+'</span>'
-					);
-				}
-			} else {
-				var price_single = parseFloat($(data).find('.prices').text());
-				console.log(price_single);
-				if($('ul.dropdown-cart li').length == 2) { // its first item
-					$('.cleaner').show().nextAll().remove();
-					$('ul.dropdown-cart').append('<li class="divider"></li><li class="divider"></li><li class="text-center"><a class="go-checkout btn btn-default btn-sm" href="">'+lang.checkout+' - <span class="finalSum">'+price_single+'</span> <span class="glyphicon glyphicon-hand-right"></span></a></li>');
-					var its_first = true;
-				}
-				$('ul.dropdown-cart li:nth-child(2)').after(data);
-			}
-			var sum_of_items = parseInt($('.sumOfItems').text());
-			$('.sumOfItems').empty().text(sum_of_items+1);
-			if(its_first != true) {
-				var finalSum = parseFloat($('.finalSum').text().replace(',',''));
-				$('.finalSum').text(finalSum+price_single);
-			}
+			$('.sumOfItems').text(sum_items+1);
 		}
 		if(action == 'remove') {
-			if(num_added-1 > 1)  {
-				$('[data-artticle-id="'+article_id+'"] .num_added').empty().text(num_added-1);
-				var num_added_single = parseInt($('[data-artticle-id="'+article_id+'"] .prices .num-added-single').text())-1;
-				var price_single = parseFloat($('[data-artticle-id="'+article_id+'"] .prices .price-single').text());
-				var sum_price_single = parseFloat($('[data-artticle-id="'+article_id+'"] .prices .sum-price-single').text());
-				var new_sum_price_single = num_added_single*price_single;
-				$('[data-artticle-id="'+article_id+'"] .prices .num-added-single').text(num_added_single);
-				$('[data-artticle-id="'+article_id+'"] .prices .sum-price-single').text(new_sum_price_single);
-			} else if(num_added-1 == 1) {
-				$('[data-artticle-id="'+article_id+'"] .num_added').text(1);
-				var price_single = parseFloat($('[data-artticle-id="'+article_id+'"] .prices .price-single').text());
-				$('[data-artticle-id="'+article_id+'"] .prices').empty().append(price_single);
-			} else {
-				var price_single = parseFloat($('[data-artticle-id="'+article_id+'"] .prices').text());
-				$('[data-artticle-id="'+article_id+'"]').remove();
-			}
-			
-			var sum_of_items = parseInt($('.sumOfItems').text())-1;
-			$('.sumOfItems').empty().text(sum_of_items);
-			if(sum_of_items == 0) {
-				$('.cleaner').hide().nextAll().remove();
-				$('ul.dropdown-cart').append('<li class="text-center">'+lang.no_products+'</li>');
-				$('.sumOfItems').text(0);
-			} else {
-				var finalSum = parseFloat($('.finalSum').text());
-				$('.finalSum').text(finalSum-price_single);
-			
-			}
+			$('.sumOfItems').text(sum_items-1);
 		}
 		var url = window.location.href; 
 		var lastSegment = url.split('/').pop();
@@ -106,7 +50,7 @@ function manageShoppingCart(action, article_id, reload = false) {
 
 function clearCart() {
 	$.ajax({type: "POST", url: 'clearShoppingCart'});
-	$('.cleaner').hide().nextAll().remove();
+	$('ul.dropdown-cart').empty();
 	$('ul.dropdown-cart').append('<li class="text-center">'+lang.no_products+'</li>');
 	$('.sumOfItems').text(0);
 	ShowNotificator('alert-success', lang.cleared_cart);
@@ -153,8 +97,10 @@ $("#search_in_title").keyup(function() {
   $('[name="search_in_title"]').val($(this).val());
 });
 $('#clear-form').click(function(){
-	document.getElementById("bigger-search").reset();
 	$('#search_in_title, [name="search_in_title"]').val('');
+	$('#bigger-search .form-control').each(function() {
+		$(this).val('');
+	});
 	submitForm();
 });
 $('.clear-filter').click(function(){ //clear filter in right col
@@ -170,7 +116,6 @@ function submitForm() {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 });
-
 
 //To deal with different heights
 $(document).ready(function () {

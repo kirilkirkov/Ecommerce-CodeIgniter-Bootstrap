@@ -8,7 +8,7 @@ class MY_Controller extends MX_Controller {
     public $lang_link;
     public $all_langs;
 	private $sum_values = 0;
-	protected $currency;
+	public $currency;
     
     public function __construct() {
         parent::__construct();
@@ -27,7 +27,7 @@ class MY_Controller extends MX_Controller {
         $this->load->view('_parts/footer', $footer);
     }
 	
-	private function getCartItems() {
+	public function getCartItems() {
 		if((!isset($_SESSION['shopping_cart']) || empty($_SESSION['shopping_cart'])) && get_cookie('shopping_cart') != NULL) {
 			$_SESSION['shopping_cart'] = unserialize(get_cookie('shopping_cart'));
 		} elseif(!isset($_SESSION['shopping_cart']) || empty($_SESSION['shopping_cart'])) {
@@ -47,7 +47,7 @@ class MY_Controller extends MX_Controller {
 			$article['sum_price'] = $article['price'] * $count_articles[$article['id']];
 			$finalSum = $finalSum + $article['sum_price'];
 			$article['sum_price'] = number_format($article['sum_price'], 2);
-			$article['price'] = number_format($article['price'], 2);
+			$article['price'] = $article['price']!= '' ? number_format($article['price'], 2):0;
 		}
 		$result['finalSum'] = number_format($finalSum, 2);
 		return $result;

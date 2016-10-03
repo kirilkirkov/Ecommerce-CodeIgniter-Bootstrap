@@ -49,6 +49,10 @@ div.left-side span.alert-admin {padding-left:10px; padding-right: 10px; padding-
 .settings .panel-body a:hover, .settings .panel-body a:focus {background-color: #2989d8;}
 .settings #pass_result {display:none;}
 
+ul.list-none {list-style:none;}
+.red {color:red}
+.green {color:green}
+
 #articles div.well {margin-top:15px;}
 #articles h3.title {word-break: break-all;overflow: hidden;}
 #articles .find {margin-bottom:36px;}

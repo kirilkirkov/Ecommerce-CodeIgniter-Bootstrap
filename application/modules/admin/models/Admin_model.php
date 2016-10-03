@@ -22,21 +22,18 @@ class Admin_model extends CI_Model {
 	
 	public function getMaxProductId() {
 		$this->db->select_max('product_id');
-		$result = $this->db->get('articles');
+		$result = $this->db->get('products');
 		$obj = $result->row();
 		return $obj->product_id;
 	}
 
-    public function articlesCount($search = null, $category = null) {
+    public function productsCount($search = null) {
         if ($search !== null) {
             $search = $this->db->escape_like_str($search);
            $this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
         }
-        if ($category !== null) {
-            $this->db->where('category', $category);
-        }
-		 $this->db->join('translations', 'translations.for_id = articles.id', 'left');
-        return $this->db->count_all_results('articles');
+		 $this->db->join('translations', 'translations.for_id = products.id', 'left');
+        return $this->db->count_all_results('products');
     }
 
     public function getLanguages() {
@@ -53,9 +50,8 @@ class Admin_model extends CI_Model {
         return $query;
     }
     
-    public function numShopArticles() {
-    	$this->db->where('category', 'shop');
-    	return $this->db->count_all_results('articles');
+    public function numShopProducts() {
+    	return $this->db->count_all_results('products');
     }
 
     public function setLanguage($post) {
@@ -91,19 +87,25 @@ class Admin_model extends CI_Model {
         return $result;
     }
 
-    public function setArticle($post, $id = 0) {
+    public function setProduct($post, $id = 0) {
         if ($id > 0) {
+			unset($post['title_for_url']);
             $post['time_update'] = time();
-            $result = $this->db->where('id', $id)->update('articles', $post);
+            $result = $this->db->where('id', $id)->update('products', $post);
         } else {
-			if($post['category'] == 'shop') {
-				$this->db->select_max('product_id');
-				$query = $this->db->get('articles');
-				$rr = $query->row_array();
-				$post['product_id'] = $rr['product_id']+1;
-			}
+			if(trim($post['title_for_url']) != '') {
+    			$url_fr = except_letters($post['title_for_url']);
+    		} else {
+    			$url_fr = 'shop-product'; 
+    		}
+			unset($post['title_for_url']);
+			$this->db->select_max('product_id');
+			$query = $this->db->get('products');
+			$rr = $query->row_array();
+			$post['product_id'] = $rr['product_id']+1;
+			$post['url'] = str_replace(' ', '_', $url_fr . '_' . $post['product_id']);
             $post['time'] = time();
-            $result = $this->db->insert('articles', $post);
+            $result = $this->db->insert('products', $post);
             $last_id = $this->db->insert_id();
         }
        if($result==false) return false;
@@ -113,9 +115,9 @@ class Admin_model extends CI_Model {
        }
     }
     
-    public function setTranslation($post, $id, $is_update, $is_shop) {
+    public function setProductTranslation($post, $id, $is_update) {
     	$i=0;
-    	$current_trans = $this->getTranslations($id, 'article'); 
+    	$current_trans = $this->getTranslations($id, 'product'); 
     	foreach($post['abbr'] as $abbr) {
     		$arr = array();
     		$emergency_insert = false;
@@ -123,16 +125,6 @@ class Admin_model extends CI_Model {
     			$emergency_insert = true;
     		}
     		$post['title'][$i] = str_replace('"', "'", $post['title'][$i]);
-    		if(($abbr == 'en' || $abbr == 'bg') && trim($post['title'][$i]) != '') {
-    			$url_fr = except_letters($post['title'][$i]);
-    		} else {
-    			$url_fr = 'shop-article'; 
-    		}
-    		if($is_shop) {
-    			$url = str_replace(' ', '_', $url_fr . '_' . $id);
-    		} else {
-    			$url = str_replace(' ', '_', $url_fr . '_pageid_' . $id);
-    		}
 			$post['price'][$i] = str_replace(' ', '', $post['price'][$i]); 
 			$post['price'][$i] = str_replace(',', '', $post['price'][$i]); 
     		$arr = array(
@@ -141,15 +133,14 @@ class Admin_model extends CI_Model {
     			'description' => $post['description'][$i],
     			'price' => $post['price'][$i],
 				'old_price' => $post['old_price'][$i],
-    			'url' => $url,
     			'abbr' => $abbr,
     			'for_id' => $id,
-    			'type' => 'article'
+    			'type' => 'product'
     		);
     		if($is_update === true && $emergency_insert === false) {
     			$abbr = $arr['abbr'];
     			unset($arr['for_id'], $arr['abbr'], $arr['url']);
-    			$this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'article')->update('translations', $arr);
+    			$this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'product')->update('translations', $arr);
     		}
     		else  $this->db->insert('translations', $arr);
     		$i++;
@@ -211,37 +202,26 @@ class Admin_model extends CI_Model {
         return $query;
     }
 
-    public function getArticles($limit, $page, $search = null, $category = null, $orderby = null) {
+    public function getProducts($limit, $page, $search = null, $orderby = null) {
         if ($search !== null) {
             $search = $this->db->escape_like_str($search);
             $this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
         }
-        if ($category !== null) {
-            $this->db->where('articles.category', $category);
-        }
         if ($orderby !== null) {
-            $this->db->order_by('articles.id', $orderby);
+            $this->db->order_by('products.id', $orderby);
         } else {
-            $this->db->order_by('articles.id', 'desc');
+            $this->db->order_by('products.id', 'desc');
         }
-        $this->db->join('translations', 'translations.for_id = articles.id', 'left');
-        $this->db->where('translations.type', 'article');
+        $this->db->join('translations', 'translations.for_id = products.id', 'left');
+        $this->db->where('translations.type', 'product');
         $this->db->where('translations.abbr', $this->def_lang);
-        $query = $this->db->select('articles.*, translations.title, translations.description, translations.price, translations.old_price, translations.abbr, translations.url, translations.for_id, translations.type, translations.basic_description')->get('articles', $limit, $page);
+        $query = $this->db->select('products.*, translations.title, translations.description, translations.price, translations.old_price, translations.abbr, products.url, translations.for_id, translations.type, translations.basic_description')->get('products', $limit, $page);
         return $query;
     }
 
-    public function getCategories($lang = null) {
-        if ($lang != null) {
-            $where = " AND language = '$lang'";
-        }
-        $query = $this->db->query('SELECT categories.*, (SELECT COUNT(id) FROM articles WHERE articles.category = name) as num FROM `categories` WHERE categories.name != "shop" ORDER BY `id` DESC ');
-        return $query;
-    }
-
-    public function getOneArticle($id) {
-        $query = $this->db->where('id', $id)
-                ->get('articles');
+    public function getOneProduct($id) {
+        $query = $this->db->where('product_id', $id)
+                ->get('products');
         if ($query->num_rows() > 0) {
             return $query->row_array();
         } else {
@@ -258,7 +238,7 @@ class Admin_model extends CI_Model {
             if (isset($post['rename_all'])) {
                 $this->db->where('category', $post['rename_all']);
                 unset($post['rename_all']);
-                $this->db->update('articles', array('category' => $post['name']));
+                $this->db->update('products', array('category' => $post['name']));
             }
             $this->db->where('id', $id);
             $result = $this->db->update('categories', $post);
@@ -272,10 +252,10 @@ class Admin_model extends CI_Model {
         return $result;
     }
 
-    public function deleteArticle($id) {
-    	$this->deleteTranslations($id, 'article');
+    public function deleteproduct($id) {
+    	$this->deleteTranslations($id, 'product');
         $this->db->where('id', $id);
-        $result = $this->db->delete('articles');
+        $result = $this->db->delete('products');
         return $result;
     }
     
@@ -299,10 +279,37 @@ class Admin_model extends CI_Model {
     	}
     	return $arr;
     }
+	
+	public function setBlogTranslations($post, $id, $is_update) {
+    	$i=0;
+    	$current_trans = $this->getTranslations($id, 'blog'); 
+    	foreach($post['abbr'] as $abbr) {
+    		$arr = array();
+    		$emergency_insert = false;
+    		if(!isset($current_trans[$abbr])) {
+    			$emergency_insert = true;
+    		}
+    		$post['title'][$i] = str_replace('"', "'", $post['title'][$i]);
+    		$arr = array(
+    			'title' => $post['title'][$i],
+    			'description' => $post['description'][$i],
+    			'abbr' => $abbr,
+    			'for_id' => $id,
+    			'type' => 'blog'
+    		);
+    		if($is_update === true && $emergency_insert === false) {
+    			$abbr = $arr['abbr'];
+    			unset($arr['for_id'], $arr['abbr'], $arr['url']);
+    			$this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'blog')->update('translations', $arr);
+    		}
+    		else  $this->db->insert('translations', $arr);
+    		$i++;
+    	}
+    }
 
-    public function articleStatusChagne($id, $to_status) {
+    public function productStatusChagne($id, $to_status) {
         $this->db->where('id', $id);
-        $result = $this->db->update('articles', array('visibility' => $to_status));
+        $result = $this->db->update('products', array('visibility' => $to_status));
         return $result;
     }
 	
@@ -324,8 +331,8 @@ class Admin_model extends CI_Model {
 		$arr = $result->row_array();
 		$products = unserialize($arr['products']);
 		foreach($products as $product_id=>$quantity) {
-			$this->db->query('UPDATE articles SET quantity=quantity'.$operator.$quantity.' WHERE product_id='.$product_id);
-			$this->db->query('UPDATE articles SET procurement=procurement'.$operator_pro.$quantity.' WHERE product_id='.$product_id);
+			$this->db->query('UPDATE products SET quantity=quantity'.$operator.$quantity.' WHERE product_id='.$product_id);
+			$this->db->query('UPDATE products SET procurement=procurement'.$operator_pro.$quantity.' WHERE product_id='.$product_id);
 		}
 	}
 
@@ -344,5 +351,95 @@ class Admin_model extends CI_Model {
 		$result = $this->db->get('orders_cash_on_delivery');
 		return $result->result_array();
 	}
-
+	
+	public function getPages($active = null, $advanced = false) {
+		if($active != null) {
+			$this->db->where('enabled', $active);
+		}
+		if($advanced == false) {
+			$this->db->select('name');
+		}else {
+			$this->db->select('*');
+		}
+		$result = $this->db->get('active_pages');
+		if($result != false) {
+			$array = array();
+			if($advanced == false) {
+				foreach($result->result_array() as $arr) $array[] = $arr['name']; 
+			}else {
+				$array = $result->result_array();
+			}
+			return $array;
+		}
+	}
+	
+	public function getOnePost($id) {
+		$query = $this->db->where('id', $id)->get('blog_posts');
+    	if ($query->num_rows() > 0) {
+    		return $query->row_array();
+    	} else {
+    		return false;
+    	}
+	}
+	
+	public function setPost($post, $id) {
+    	if ($id > 0) {
+			unset($post['title']);
+    		$result = $this->db->where('id', $id)->update('blog_posts', $post);
+			if($result === true) $result = $id;
+    	} else {
+		    $post['time'] = time();
+			$title = str_replace('"', "'", $post['title']);
+			unset($post['title']);
+    		$result = $this->db->insert('blog_posts', $post);
+    		$last_id = $this->db->insert_id();
+    		
+    		$arr = array();
+			
+    		$arr['url'] = str_replace(' ', '-', except_letters($title)).'_'.$last_id.'';
+    		$this->db->where('id', $last_id);
+    		$this->db->update('blog_posts', $arr);
+			
+			if($result === true) $result = $last_id;
+    	}
+    	return $result;
+    }
+	
+	public function postsCount($search = null) {
+    	if ($search !== null) {
+    		$this->db->like('title', $search);
+    	}
+    	return $this->db->count_all_results('blog_posts');
+    }
+	
+	public function getPosts($lang = null, $limit, $page, $search = null, $month = null) {
+    	if ($search !== null) {
+    		$search=$this->db->escape_like_str($search);
+    		$this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
+    	}
+		if($month !== null) {
+			$from = $month['from'];
+			$to = $month['to'];
+			$this->db->where("time BETWEEN $from AND $to");
+		}
+		$this->db->join('translations', 'translations.for_id = blog_posts.id', 'left');
+        $this->db->where('translations.type', 'blog');
+		if($lang == null) {
+			$this->db->where('translations.abbr', $this->def_lang);
+		} else {
+			$this->db->where('translations.abbr', $lang);
+		}
+        $query = $this->db->select('blog_posts.id, translations.title, translations.description, blog_posts.url, blog_posts.time, blog_posts.image')->get('blog_posts', $limit, $page);
+    	return $query->result_array();
+	}
+	
+	public function deletePost($id) {
+		$this->db->where('id', $id)->delete('blog_posts');
+		$this->db->where('for_id', $id)->where('type', 'blog')->delete('translations');
+	}
+	
+	public function changePageStatus($id, $to_status) {
+		$result = $this->db->where('id', $id)->update('active_pages', array('enabled' => $to_status));
+		return $result;
+	}
 }

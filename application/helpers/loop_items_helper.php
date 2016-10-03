@@ -19,7 +19,7 @@ function loop_items($cartItems, $currency, $lang_url) {
 			<img src="<?= base_url('/attachments/shop_images/' . $cartItem['image']) ?>" alt="" />
 			</div>
 			 <div class="right-side">
-			<a href="<?= $lang_url . $cartItem['url'] ?>" class="item-info">
+			<a href="<?= $lang_url . '/' . $cartItem['url'] ?>" class="item-info">
 				<span><?= $cartItem['title'] ?></span>
 				<span class="prices"><?= $cartItem['num_added'] == 1 ? $cartItem['price'] : '<span class="num-added-single">' . $cartItem['num_added'] . '</span> x <span class="price-single">' . $cartItem['price'] . '</span> - <span class="sum-price-single">' . $cartItem['sum_price'] . '</span>' ?></span>
 				<span class="currency"><?= $currency ?></span>
@@ -36,7 +36,7 @@ function loop_items($cartItems, $currency, $lang_url) {
 	?>
 	<li class="divider"></li>
 <li class="text-center">
-	<a class="go-checkout btn btn-default btn-sm" href="<?= $lang_url . 'checkout' ?>">
+	<a class="go-checkout btn btn-default btn-sm" href="<?= $lang_url . '/checkout' ?>">
 		<?= !empty($cartItems['array']) ? '<i class="fa fa-check"></i> ' . lang('checkout') . ' - <span class="finalSum">' . $cartItems['finalSum'] . '</span>'.$currency : '<span class="no-for-pay">' . lang('no_for_pay') . '</span>' ?>
 	</a>
 </li>

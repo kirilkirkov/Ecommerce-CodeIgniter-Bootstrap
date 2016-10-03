@@ -68,6 +68,21 @@ $lang['description'] = 'Описание';
 $lang['oder_from_category'] = 'Други артикули от тази категория';
 $lang['buy_now'] = 'Купи сега';
 $lang['no_results'] = 'Няма намерени резултати!';
+$lang['blog'] = 'Блог';
+$lang['latest_blog'] = 'Последно в блога';
+$lang['read_mode'] = 'Прочети повече';
+$lang['archive'] = 'Архив';
+$lang['no_same_category_products'] = 'Няма други продукти от тази категория';
+$lang['no_posts'] = 'Няма публикувани статии';
+$lang['go_back'] = 'Върни на зад';
+$lang['no_archives'] = 'Няма адхиви';
+$lang['newsletter'] = 'Последни новини';
+$lang['subscribe'] = 'Запиши се';
+$lang['about_us'] = 'За нас';
+$lang['no_categories'] = 'Няма категории';
+$lang['information'] = 'Информация';
+$lang['contact_us'] = 'Свържете се с нас';
+$lang['contact_us_feel_free'] = 'Очакваме да ни се обадите';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'Не сте въвели име';

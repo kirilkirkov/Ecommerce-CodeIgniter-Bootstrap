@@ -22,14 +22,14 @@ function pagination($url, $rowscount, $per_page, $segment = 2) {
     $config['next_tag_close'] = '</li>';
     $config['prev_tag_open'] = '<li>';
     $config['prev_tag_close'] = '</li>';
-    $config['first_link'] = 'First';
+    $config['first_link'] = lang('first');
     $config['first_tag_open'] = '<li>';
     $config['first_tag_close'] = '</li>';
-    $config['last_link'] = 'Last';
+    $config['last_link'] = lang('last');
     $config['last_tag_open'] = '<li>';
     $config['last_tag_close'] = '</li>';
-    $config['next_link'] = 'Следваща';
-    $config['prev_link'] = 'Предишна';
+    $config['next_link'] = lang('next');
+    $config['prev_link'] = lang('previous');
     $config['reuse_query_string'] = TRUE;
     $ci->pagination->initialize($config);
     return $ci->pagination->create_links();

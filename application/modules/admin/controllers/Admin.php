@@ -16,6 +16,7 @@ class Admin extends MX_Controller {
     private $username;
     private $history;
     private $def_lang;
+	private $activePages;
 
     //$data['links_pagination'] = pagination('admin/view_all', $rowscount, $this->num_rows, 3);
 
@@ -26,7 +27,10 @@ class Admin extends MX_Controller {
         $this->load->helper(array('text', 'file', 'pagination', 'text', 'except_letters', 'currencies'));
         $this->load->Model('Admin_model');
         $this->def_lang = $this->config->item('language_abbr');
+		$this->activePages = $vars['activePages'] = $this->getActivePages();
+    	$this->load->vars($vars); 
     }
+
 
     public function index() {
         $data = array();
@@ -64,19 +68,13 @@ class Admin extends MX_Controller {
         $is_update = false;
         $trans_load = null;
         if ($id > 0 && $_POST == null) {
-            $_POST = $this->Admin_model->getOneArticle($id);
-            $trans_load = $this->Admin_model->getTranslations($id, 'article');
+            $_POST = $this->Admin_model->getOneproduct($id);
+            $trans_load = $this->Admin_model->getTranslations($id, 'product');
         }
        if (isset($_POST['submit'])) {
        	if($id > 0) $is_update = true;
        	unset($_POST['submit']); 
-        	if($_POST['category'] == 'shop') {
-        		$u_path = 'shop_images/';
-        		$is_shop = true;
-        	} else {
-        		$is_shop = false;
-        		$u_path = 'images/';
-        	}
+        	$u_path = 'shop_images/';
             $config['upload_path'] = './attachments/'.$u_path;
             $config['allowed_types'] = 'gif|jpg|png|jpeg|JPG|PNG|JPEG';
             $this->load->library('upload', $config);
@@ -99,29 +97,30 @@ class Admin extends MX_Controller {
             		'price' => $_POST['price'],
 					'old_price' => $_POST['old_price']
             );
-            unset($_POST['translations'], $_POST['title'], $_POST['basic_description'], $_POST['description'], $_POST['price'], $_POST['old_price']); //remove for article
-            $result = $this->Admin_model->setArticle($_POST, $id); 
+			$flipped = array_flip($_POST['translations']);
+			$_POST['title_for_url'] = $_POST['title'][$flipped[$this->def_lang]];
+            unset($_POST['translations'], $_POST['title'], $_POST['basic_description'], $_POST['description'], $_POST['price'], $_POST['old_price']); //remove for product
+            $result = $this->Admin_model->setProduct($_POST, $id); 
             if ($result !== false) {
-            	$this->Admin_model->setTranslation($translations, $result, $is_update, $is_shop); // send to translation table
-                $this->session->set_flashdata('result_publish', 'Article is published!');
+            	$this->Admin_model->setProductTranslation($translations, $result, $is_update); // send to translation table
+                $this->session->set_flashdata('result_publish', 'product is published!');
                 if ($id == 0) {
-                    $this->saveHistory('Success published article');
+                    $this->saveHistory('Success published product');
                 } else {
-                    $this->saveHistory('Success updated article');
+                    $this->saveHistory('Success updated product');
                 }
-               redirect('admin/publish/'); 
+               redirect('admin/products'); 
             } else {
-                $this->session->set_flashdata('result_publish', 'Problem with article publish!');
+                $this->session->set_flashdata('result_publish', 'Problem with product publish!');
             }
         }
         $data = array();
         $head = array();
-        $head['title'] = 'Administration - Publish Article';
+        $head['title'] = 'Administration - Publish Product';
         $head['description'] = '!';
         $head['keywords'] = '';
         $data['id'] = $id;
         $data['trans_load'] = $trans_load;
-        $data['categoiries'] = $this->Admin_model->getCategories();
         $data['languages'] = $this->Admin_model->getLanguages();
         $data['shop_categories'] = $this->Admin_model->getShopCategories();
         $this->load->view('_parts/header', $head);
@@ -130,22 +129,22 @@ class Admin extends MX_Controller {
         $this->saveHistory('Go to publish page');
     }
 
-    public function articles($page = 0) {
+    public function products($page = 0) {
         $this->login_check();
-        $this->saveHistory('Go to articles');
+        $this->saveHistory('Go to products');
         if (isset($_GET['delete'])) {
-            $result = $this->Admin_model->deleteArticle($_GET['delete']);
+            $result = $this->Admin_model->deleteproduct($_GET['delete']);
             if ($result == true) {
-                $this->session->set_flashdata('result_delete', 'Article is deleted!');
-                $this->saveHistory('Delete article id - ' . $_GET['delete']);
+                $this->session->set_flashdata('result_delete', 'product is deleted!');
+                $this->saveHistory('Delete product id - ' . $_GET['delete']);
             } else {
-                $this->session->set_flashdata('result_delete', 'Problem with article delete!');
+                $this->session->set_flashdata('result_delete', 'Problem with product delete!');
             }
-            redirect('admin/articles');
+            redirect('admin/products');
         }
         $data = array();
         $head = array();
-        $head['title'] = 'Administration - View Articles';
+        $head['title'] = 'Administration - View products';
         $head['description'] = '!';
         $head['keywords'] = '';
 
@@ -155,26 +154,20 @@ class Admin extends MX_Controller {
         } else {
             $search = null;
         }
-        if ($this->input->get('category') !== NULL) {
-            $category = $this->input->get('category');
-        } else {
-            $category = null;
-        }
         if ($this->input->get('orderby') !== NULL) {
             $orderby = $this->input->get('orderby');
         } else {
             $orderby = null;
         }
-        $data['articles_lang'] = $articles_lang = $this->session->userdata('admin_lang_articles');
-        $rowscount = $this->Admin_model->articlesCount($search, $category, $articles_lang);
-        $data['articles'] = $this->Admin_model->getArticles($this->num_rows, $page, $search, $category, $orderby);
-        $data['links_pagination'] = pagination('admin/articles', $rowscount, $this->num_rows, 3);
-        $data['categoiries'] = $this->Admin_model->getCategories($articles_lang);
-        $data['num_shop_art'] = $this->Admin_model->numShopArticles();
+        $data['products_lang'] = $products_lang = $this->session->userdata('admin_lang_products');
+        $rowscount = $this->Admin_model->productsCount($search);
+        $data['products'] = $this->Admin_model->getproducts($this->num_rows, $page, $search, $orderby);
+        $data['links_pagination'] = pagination('admin/products', $rowscount, $this->num_rows, 3);
+        $data['num_shop_art'] = $this->Admin_model->numShopproducts();
         $data['languages'] = $this->Admin_model->getLanguages();
 
         $this->load->view('_parts/header', $head);
-        $this->load->view('articles', $data);
+        $this->load->view('products', $data);
         $this->load->view('_parts/footer');
     }
     
@@ -477,14 +470,14 @@ class Admin extends MX_Controller {
         $this->saveHistory('Password change for user: ' . $this->username);
     }
 
-    public function articleStatusChange() { //called from ajax
+    public function productstatusChange() { //called from ajax
         $this->login_check();
-        $result = $this->Admin_model->articleStatusChagne($_POST['id'], $_POST['to_status']);
+        $result = $this->Admin_model->productstatusChagne($_POST['id'], $_POST['to_status']);
         if ($result == true)
             echo 1;
         else
             echo 0;
-        $this->saveHistory('Change article id ' . $_POST['id'] . ' to status ' . $_POST['to_status']);
+        $this->saveHistory('Change product id ' . $_POST['id'] . ' to status ' . $_POST['to_status']);
     }
 	
 	public function changeOrderStatus() {
@@ -508,5 +501,119 @@ class Admin extends MX_Controller {
         }
         $this->username = $this->session->userdata('logged_in');
     }
+	
+	public function blog($page = 0) {
+		$this->login_check();
+		if(isset($_GET['delete'])) {
+			$this->Admin_model->deletePost($_GET['delete']);
+			redirect('admin/blog');
+		}
+        $data = array();
+        $head = array();
+        $head['title'] = 'Administration - Blog Posts';
+        $head['description'] = '!';
+        $head['keywords'] = '';
+		
+
+    	if ($this->input->get('search') !== NULL) {
+    		$search = $this->input->get('search');
+    	} else {
+    		$search = null;
+    	}
+    	$data = array();
+    	$rowscount = $this->Admin_model->postsCount($search);
+    	$data['posts'] = $this->Admin_model->getPosts(null, $this->num_rows, $page, $search);
+    	$data['links_pagination'] = pagination('admin/blog', $rowscount, $this->num_rows, 3);
+    	$data['page'] = $page;
+		
+        $this->load->view('_parts/header', $head);
+        $this->load->view('blog', $data);
+        $this->load->view('_parts/footer');
+        $this->saveHistory('Go to Blog');
+	}
+	
+	public function blogPublish($id = 0) {
+		$this->login_check();
+		$trans_load = null;
+		$is_update = false;
+		if($id > 0) $is_update = true;
+    	if ($id > 0 && $_POST == null) {
+    		$_POST = $this->Admin_model->getOnePost($id);
+			 $trans_load = $this->Admin_model->getTranslations($id, 'blog');
+    	}
+    	 if (isset($_POST['submit'])) {
+			unset($_POST['submit']);
+    		$config['upload_path'] = './attachments/blog_images/';
+    		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+    		$this->load->library('upload', $config);
+    		$this->upload->initialize($config);
+    		if (!$this->upload->do_upload('userfile')) {
+    			log_message('error', 'Image Upload Error: ' . $this->upload->display_errors());
+    		}
+    		$img = $this->upload->data();
+    		if ($img['file_name'] != null) {
+    			$_POST['image'] = $img['file_name'];
+    		}
+			$translations = array(
+            		'abbr' => $_POST['translations'],
+            		'title' => $_POST['title'],
+            		'description' => $_POST['description']
+            );
+			
+			$flipped = array_flip($_POST['translations']);
+			$_POST['title'] = $_POST['title'][$flipped[$this->def_lang]];
+			unset($_POST['description'], $_POST['translations']);
+    		$result = $this->Admin_model->setPost($_POST, $id);
+    		if ($result !== false) {
+				$this->Admin_model->setBlogTranslations($translations, $result, $is_update);
+    			$this->session->set_flashdata('result_publish', 'Successful published!');
+    			redirect('admin/blog');
+    		} else {
+    			$this->session->set_flashdata('result_publish', 'Blog post publish error!');
+    		}
+    	}
+		
+        $data = array();
+        $head = array();
+		$data['id'] = $id;
+        $head['title'] = 'Administration - Publish Blog Post';
+        $head['description'] = '!';
+        $head['keywords'] = '';
+		$data['languages'] = $this->Admin_model->getLanguages();
+		$data['trans_load'] = $trans_load;
+        $this->load->view('_parts/header', $head);
+        $this->load->view('blogPublish', $data);
+        $this->load->view('_parts/footer');
+        $this->saveHistory('Go to Blog Publish product');
+	}
+		
+	public function getActivePages() {
+		return $this->Admin_model->getPages(true, false);
+	}
+	
+	
+	public function pages() {
+		$this->login_check();
+		$data = array();
+        $head = array();
+		$head['title'] = 'Administration - Pages Manage';
+		$head['description'] = '!';
+        $head['keywords'] = '';
+		$data['pages'] = $this->Admin_model->getPages(null, true);
+		$this->load->view('_parts/header', $head);
+        $this->load->view('pages', $data);
+        $this->load->view('_parts/footer');
+		$this->saveHistory('Go to Pages manage');
+	}
+	
+	public function changePageStatus() {
+		$this->login_check();
+		$result = $this->Admin_model->changePageStatus($_POST['id'], $_POST['status']);
+        if ($result == true)
+            echo 1;
+        else
+            echo 0;
+        $this->saveHistory('Page status Changed' );
+	}
 
 }

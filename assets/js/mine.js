@@ -119,5 +119,7 @@ $(function () {
 
 //To deal with different heights
 $(document).ready(function () {
-    $("#products-side").eqHeight(".column-h");
+	if($(".eqHeight .column-h").length > 0) {
+		$(".eqHeight").eqHeight(".column-h");
+	}
 });

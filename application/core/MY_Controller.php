@@ -6,21 +6,27 @@ class MY_Controller extends MX_Controller {
 	public $my_lang_full;
     public $def_lang;
     public $lang_link;
+	public $lang_url;
     public $all_langs;
 	private $sum_values = 0;
 	public $currency;
+	public $activePages = array() ;
     
     public function __construct() {
         parent::__construct();
         $this->load->model('admin/Admin_model');
         $this->setLanguage();
+		$this->activePages = $this->getActivePages();
+		$this->lang_url = rtrim(base_url($this->lang_link), '/');
     }
 
     public function render($view, $head, $data = null, $footer = null) {
 		$head['cartItems'] = $this->getCartItems();
 		$head['sumOfItems'] = $this->sum_values;
-    	$vars['lang_url'] = base_url($this->lang_link.'/');
+    	$vars['lang_url'] = $this->lang_url;
 		$vars['currency'] = $this->currency;
+		$vars['activePages'] = $this->activePages;
+		$vars['footerCategories'] = $this->Articles_model->getFooterCategories($this->my_lang);
     	$this->load->vars($vars); 
         $this->load->view('_parts/header', $head);
         $this->load->view($view, $data);
@@ -34,7 +40,7 @@ class MY_Controller extends MX_Controller {
 			return 0;
 		}
 		$result['array'] = $this->Articles_model->getShopItems(array_unique($_SESSION['shopping_cart']), $this->my_lang);
-		if(empty($result)) {
+		if(empty($result['array'])) {
 			unset($_SESSION['shopping_cart']);
 			@delete_cookie('shopping_cart');
 			return 0;
@@ -42,6 +48,7 @@ class MY_Controller extends MX_Controller {
 		$count_articles = array_count_values($_SESSION['shopping_cart']);
 		$this->sum_values = array_sum($count_articles);
 		$finalSum = 0;
+		
 		foreach($result['array'] as &$article) {
 			$article['num_added'] = $count_articles[$article['id']];
 			$article['sum_price'] = $article['price'] * $count_articles[$article['id']];
@@ -94,6 +101,10 @@ class MY_Controller extends MX_Controller {
 		if ($this->input->is_ajax_request()) {
 			echo 1;
 		}
+	}
+	
+	public function getActivePages() {
+		return $this->Admin_model->getPages(true);
 	}
 
 }

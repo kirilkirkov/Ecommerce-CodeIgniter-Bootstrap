@@ -1,5 +1,5 @@
 <?php
-$table_head = array_keys($cash_on_delivery[0]);
+if(!empty($cash_on_delivery)) $table_head = array_keys($cash_on_delivery[0]);
 ?>
 <div class="table-responsive">
 	<h3>Cash On Delivery - Orders</h3>
@@ -10,6 +10,7 @@ $table_head = array_keys($cash_on_delivery[0]);
 	<option <?= isset($_GET['order_by']) && $_GET['order_by']=='processed' ? 'selected' : '' ?> value="processed">Order by not processed</option>
 	</select>
 	</div>
+	<?php if(!empty($cash_on_delivery)) { ?>
 	<table class="table table-condensed table-bordered table-striped">
 		<thead>
 			<tr>
@@ -53,6 +54,9 @@ $table_head = array_keys($cash_on_delivery[0]);
 			<?php } ?>
 		</tbody>
 	</table>
+	<?php } else { ?>
+	<div class="alert alert-info">No orders to the moment!</div>
+	<?php } ?>
 </div>
 <script>
 function changeStatus(id) {

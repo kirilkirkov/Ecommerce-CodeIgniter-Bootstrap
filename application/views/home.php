@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-if(count($sliderArticles) > 0) {
+if(count($sliderProducts) > 0) {
 ?>
 <div id="home-slider" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
   <?php
   $i = 0;
-    while ($i < count($sliderArticles)) {
+    while ($i < count($sliderProducts)) {
 	?>
     <li data-target="#home-slider" data-slide-to="0" class="<?= $i==0 ? 'active' : '' ?>"></li>
 	<?php $i++;} ?>
@@ -14,19 +14,19 @@ if(count($sliderArticles) > 0) {
   
 <div class="container">
   <div class="carousel-inner" role="listbox">
-  <?php $i=0; foreach($sliderArticles as $article) { ?>
+  <?php $i=0; foreach($sliderProducts as $article) { ?>
     <div class="item <?= $i == 0 ? 'active':'' ?>">
 	<div class="row">
 		<div class="col-sm-6 left-side">
 			<img src="<?= base_url('attachments/shop_images/'.$article['image']) ?>" class="img-responsive" alt="">
 		</div>
 		<div class="col-sm-6 right-side">
-			<h3 class="text-right"><?= $article['title'] ?></h3>
+			<h3 class="text-right"><?= character_limiter($article['title'], 100) ?></h3>
 			<div class="description text-right">
-				<?= $article['basic_description'] ?>
+				<?= character_limiter(strip_tags($article['basic_description']), 150) ?>
 			</div>
 			<div class="price text-right"><?= $article['price'].$currency ?></div>
-			<div class="xs-center"><a class="buy-now" href="<?=  base_url($article['url']) ?>"><span class="glyphicon glyphicon-shopping-cart"></span> <?= lang('buy_now') ?></a></div>
+			<div class="xs-center"><a class="buy-now" href="<?=  $lang_url . '/' . $article['url'] ?>"><span class="glyphicon glyphicon-shopping-cart"></span> <?= lang('buy_now') ?></a></div>
 		</div>
     </div>
 	 </div>
@@ -104,7 +104,7 @@ if(count($sliderArticles) > 0) {
                 </ul>
             </div>
         </div>
-        <div class="col-md-9" id="products-side">
+        <div class="col-md-9 eqHeight" id="products-side">
             <div class="alone title">
                 <span><?= lang('products') ?></span>
             </div>
@@ -138,8 +138,8 @@ if(count($sliderArticles) > 0) {
 				  </div>
 				   </div>
             </div>
-            <?php if(!empty($shop_articles)) {
-				loop_articles($shop_articles, $currency, 'col-sm-4 col-md-3');
+            <?php if(!empty($products)) {
+				loop_products($products, $currency, 'col-sm-4 col-md-3', false, $lang_url);
 			} else {
 				?>
 				<script>
@@ -147,7 +147,7 @@ if(count($sliderArticles) > 0) {
 				</script>
 				<?php
 			}				
-			echo $links_pagination ;
+			echo $links_pagination;
 			?>
         </div>
     </div>

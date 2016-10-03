@@ -72,19 +72,25 @@
                                 <ul class="sidebar-menu">
                                     <li class="header">MAIN NAVIGATION</li>
                                     <li class="search">
-                                        <form method="GET" action="<?= base_url('admin/articles') ?>">
-                                            <input type="text" name="search" value="" placeholder="Find article.." class="left-finder">
+                                        <form method="GET" action="<?= base_url('admin/products') ?>">
+                                            <input type="text" name="search" value="" placeholder="Find product.." class="left-finder">
                                             <i class="fa fa-search"></i>
                                         </form>
                                     </li>
-                                    <li><a href="<?= base_url('admin/publish') ?>" <?= urldecode(uri_string()) == 'admin/publish' ? 'class="active"' : '' ?>><i class="fa fa-edit"></i> Publish</a></li>
-                                    <li><a href="<?= base_url('admin/articles') ?>" <?= urldecode(uri_string()) == 'admin/articles' ? 'class="active"' : '' ?>><i class="fa fa-files-o"></i> Articles</a></li>
+									<li class="header">MAGAZINE</li>
+                                    <li><a href="<?= base_url('admin/publish') ?>" <?= urldecode(uri_string()) == 'admin/publish' ? 'class="active"' : '' ?>><i class="fa fa-edit"></i> Publish product</a></li>
+                                    <li><a href="<?= base_url('admin/products') ?>" <?= urldecode(uri_string()) == 'admin/products' ? 'class="active"' : '' ?>><i class="fa fa-files-o"></i> Products</a></li>
                                     <li><a href="<?= base_url('admin/shop_categories') ?>" <?= urldecode(uri_string()) == 'admin/shop_categories' ? 'class="active"' : '' ?>><i class="fa fa-list-alt"></i> Shop Categories</a></li>
 									<li><a href="<?= base_url('admin/orders') ?>" <?= urldecode(uri_string()) == 'admin/orders' ? 'class="active"' : '' ?>><i class="fa fa-money" aria-hidden="true"></i> Orders</a></li>
+									 <?php if(in_array('blog', $activePages)) { ?>
+									 <li class="header">BLOG</li>
+									 <li><a href="<?= base_url('admin/blogPublish') ?>" <?= urldecode(uri_string()) == 'admin/blogPublish' ? 'class="active"' : '' ?>><i class="fa fa-money" aria-hidden="true"></i> Publish post</a></li>
+									 <li><a href="<?= base_url('admin/blog') ?>" <?= urldecode(uri_string()) == 'admin/blog' ? 'class="active"' : '' ?>><i class="fa fa-money" aria-hidden="true"></i> Posts</a></li>
+									 <?php } ?>
+									<li class="header">SETTINGS</li>
+									<li><a href="<?= base_url('admin/pages') ?>" <?= urldecode(uri_string()) == 'admin/pages' ? 'class="active"' : '' ?>><i class="fa fa-file" aria-hidden="true"></i> Pages</a></li>
                                     <li><a href="<?= base_url('admin/history') ?>" <?= urldecode(uri_string()) == 'admin/history' ? 'class="active"' : '' ?>><i class="fa fa-history"></i> Activity History</a></li>
-                                </ul>
-                                <hr>
-								 <ul class="sidebar-menu">
+                               <li class="header">ADVANCED SETTINGS</li>
 								 <li><a href="javascript:void(0);" id="dev-zone"><i class="fa fa-wrench" aria-hidden="true"></i> Developer zone</a></li>
 								 </ul>
 								 <div class="toggle-dev" style="display:none">

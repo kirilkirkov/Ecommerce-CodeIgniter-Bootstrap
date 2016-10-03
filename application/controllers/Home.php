@@ -37,10 +37,10 @@ class Home extends MY_Controller {
         $data['home_categories'] = $tree = buildTree($all_categories);
         $data['countQuantities'] = $this->Articles_model->getCountQuantities();
 		$data['bestSellers'] = $this->Articles_model->getbestSellers($this->my_lang);
-		$data['sliderArticles'] = $this->Articles_model->getSliderArticles($this->my_lang);
+		$data['sliderProducts'] = $this->Articles_model->getSliderProducts($this->my_lang);
 
-        $data['shop_articles'] = $this->Articles_model->getArticles('shop', $this->my_lang, $this->num_rows, $page, $_GET);
-        $rowscount = $this->Articles_model->articlesCount('shop');
+        $data['products'] = $this->Articles_model->getProducts($this->my_lang, $this->num_rows, $page, $_GET);
+        $rowscount = $this->Articles_model->productsCount('shop');
         $data['links_pagination'] = pagination('home', $rowscount, $this->num_rows);
         $this->render('home', $head, $data);
     }
@@ -62,5 +62,21 @@ class Home extends MY_Controller {
 		// get items from db and add him to cart from ajax
 		$result = $this->getCartItems();
 		loop_items($result, $this->currency, base_url($this->lang_link.'/'));
+	}
+	
+	public function viewProduct($id) {
+		$data = array(); 
+        $head = array();
+        $data['product'] = $this->Articles_model->getOneProduct($id, $this->my_lang);
+		$data['sameCagegoryProducts'] = $this->Articles_model->sameCagegoryProducts($this->my_lang, $data['product']['shop_categorie'], $id);
+        if ($data['product'] === null) {
+            show_404();
+        }
+        $head['title'] = $data['product']['title'];
+        $description = url_title(character_limiter(strip_tags($data['product']['description']), 130));
+        $description = str_replace("-", " ", $description) . '..';
+        $head['description'] = $description;
+        $head['keywords'] = '';
+        $this->render('view_product', $head, $data);
 	}
 }

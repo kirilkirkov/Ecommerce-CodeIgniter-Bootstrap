@@ -143,8 +143,11 @@
                         <div id="navbar" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="<?= $lang_url ?>"><?= lang('home') ?></a></li>
-                                <li><a href="<?= $lang_url . 'checkout' ?>"><?= lang('checkout') ?></a></li>
-                                <li><a href="<?= $lang_url . 'contacts' ?>"><?= lang('contacts') ?></a></li>
+								<?php if(in_array('blog', $activePages)) { ?>
+								 <li><a href="<?= $lang_url . '/blog' ?>"><?= lang('blog') ?></a></li>
+								<?php } ?>
+                                <li><a href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?></a></li>
+                                <li><a href="<?= $lang_url . '/contacts' ?>"><?= lang('contacts') ?></a></li>
                             </ul>
                         </div>
                     </div>

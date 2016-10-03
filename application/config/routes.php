@@ -57,18 +57,27 @@ $route['^(\w{2})$'] = $route['default_controller'];
 
 //Ajax called
 $route['convertCurrency'] = 'admin/convertCurrency';
+$route['(\w{2})/convertCurrency'] = 'admin/convertCurrency';
 $route['changeOrderStatus'] = 'admin/changeOrderStatus';
+$route['(\w{2})/changeOrderStatus'] = 'admin/changeOrderStatus';
+$route['changePageStatus'] = 'admin/changePageStatus';
+$route['(\w{2})/changePageStatus'] = 'admin/changePageStatus';
 $route['manageShoppingCart'] = 'home/manageShoppingCart';
+$route['(\w{2})/manageShoppingCart'] = 'home/manageShoppingCart';
 $route['clearShoppingCart'] = 'home/clearShoppingCart';
+$route['(\w{2})/clearShoppingCart'] = 'home/clearShoppingCart';
 
 $route[rawurlencode('home').'/(:num)'] = "home/index/$1";
 
 $route['jsloader/(:any)']  = "JSLoader/file/$1";
 
-$route['(:any)_(:num)'] = "view_article/index/$2";
-$route['(\w{2})/(:any)_(:num)'] = "view_article/index/$3";
-$route['shop-article_(:num)'] = "view_article/index/$3";
-$route['(\w{2})/(:any)_pageid_(:num)'] = "view_subpage/index/$3";
+$route['(:any)_(:num)'] = "home/viewProduct/$2";
+$route['(\w{2})/(:any)_(:num)'] = "home/viewProduct/$3";
+$route['shop-product_(:num)'] = "home/viewProduct/$3";
+
+$route['blog/(:num)'] = "blog/index/$1";
+$route['blog/(:any)_(:num)'] = "blog/viewPost/$2";
+$route['(\w{2})/blog/(:any)_(:num)'] = "blog/viewPost/$3";
 
 $route['^(\w{2})/(.*)$'] = '$2';
 

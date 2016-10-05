@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | a PHP script and you can easily do that on your own.
   |
  */
-$config['base_url'] = 'http://healthyshopgr.com/';
+$config['base_url'] = 'http://shop.dev/';
 
 /*
   |--------------------------------------------------------------------------
@@ -74,7 +74,7 @@ $config['url_suffix'] = '';
   |
   | When make it TRUE history in admin panel will work
  */
-$config['admin_history'] = false;
+$config['admin_history'] = true;
 
 /*
   |--------------------------------------------------------------------------

@@ -8,6 +8,7 @@
 </div>
 <script src="<?= base_url('assets/bootstrap-select-1.9.4/js/bootstrap-select.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
+<script src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
 <script>
     if ($(window).width() > 767) {
         var left_side_width = $('.left-side').width();
@@ -49,9 +50,32 @@
             alert('Too short pass!');
         }
     }
-	$("#dev-zone").click(function() {
-	  $(".toggle-dev").slideToggle( "slow" );
-	});
+    $("#dev-zone").click(function () {
+        $(".toggle-dev").slideToggle("slow");
+    });
+
+    $("a.confirm-delete").click(function (e) {
+        e.preventDefault();
+        var lHref = $(this).attr('href');
+        bootbox.confirm({
+            message: "Are you sure want to delete?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    window.location.href = lHref;
+                }
+            }
+        });
+    });
 </script>
 </body>
 </html>

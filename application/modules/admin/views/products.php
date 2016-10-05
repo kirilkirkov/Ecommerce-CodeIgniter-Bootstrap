@@ -19,23 +19,7 @@
     <h1>Products</h1>
     <hr>
     <div class="row">
-        <div class="col-md-3">
-            <form method="GET" action="">
-                <h4 class="">Search</h4>
-                <div class="input-group find">
-                    <input class="form-control" placeholder="Search" value="<?= @$_GET['search'] ?>" name="search" id="srch-term" type="text">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <button type="button" class="btn btn-default btn-sm btn-block hidden-lg hidden-md" data-toggle="collapse" data-target="#demo">Refine your search <span class="caret"></span>
-            </button>
-            <div id="demo" class="collapse in">
-                </div>
-            </div>
-            <div class="col-md-9">
+            <div class="col-xs-12">
                 <div class="well hidden-xs"> 
                     <div class="row">
                         <div class="col-xs-4">
@@ -45,11 +29,6 @@
                             </select>
                         </div>
                         <div class="col-xs-8">
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"></span></button>
-                                <button type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list"></span></button>
-                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span></button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -93,7 +72,7 @@
                                 </div>
                                 <div class = "pull-right">
                                     <a href="<?= base_url('admin/publish/' . $row->id) ?>" class="btn btn-info">Edit</a>
-                                    <a href="<?= base_url('admin/products?delete=' . $row->id) ?>" onclick="return confirm('Are you sure continue deleting?')" class = "btn btn-danger">Delete</a>
+                                    <a href="<?= base_url('admin/products?delete=' . $row->id) ?>"  class="btn btn-danger confirm-delete">Delete</a>
                                 </div>
                             </div>
                         </div>

@@ -34,7 +34,7 @@
                         <div class="caption">
                             <h3 style="height:113px; overflow: hiddrten;"><a href="<?= base_url($row['url']) ?>" target="_blank"><?= character_limiter($row['title'], 90) ?></a></h3>
                             <a href="<?= base_url('admin/blogPublish/' . $row['id']) ?>" class="btn btn-primary" role="button">Edit</a>
-                            <a href="<?= base_url('admin/blog/?delete=' . $row['id']) ?>" class="btn btn-danger" role="button" onclick="return confirm('Are you sure?')">Delete</a>
+                            <a href="<?= base_url('admin/blog/?delete=' . $row['id']) ?>" class="btn btn-danger confirm-delete" role="button">Delete</a>
                         </div>
                     </div>
                 </div> 

@@ -4,8 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container" id="blog">
     <div class="row eqHeight">
         <div class="col-sm-4">
+		<div class="blog-home-left-categ">
             <?= $archives ?>
-			
+			</div>
 			<div class="filter-sidebar">
                 <div class="title">
                     <span><?= lang('best_sellers') ?></span>

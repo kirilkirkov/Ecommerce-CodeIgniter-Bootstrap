@@ -11,6 +11,7 @@
     });
 </script>
 <h1>File Manager</h1>
+<p>Here you can list all site files</p>
 <hr>
 <div class="alert alert-danger">Danger zone! Do not touch if you're not sure!</div>
 <div id="elfinder"></div>

@@ -1,15 +1,18 @@
 <?php
 
-class Admin_model extends CI_Model {
+class Admin_model extends CI_Model
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->def_lang = $this->config->item('language_abbr');
     }
-    
+
     private $def_lang;
 
-    public function loginCheck($values) {
+    public function loginCheck($values)
+    {
         $arr = array(
             'username' => $values['username'],
             'password' => md5($values['password']),
@@ -19,190 +22,216 @@ class Admin_model extends CI_Model {
         $res_arr = $result->row_array();
         return $res_arr;
     }
-	
-	public function getMaxProductId() {
-		$this->db->select_max('product_id');
-		$result = $this->db->get('products');
-		$obj = $result->row();
-		return $obj->product_id;
-	}
 
-    public function productsCount($search = null) {
+    public function getMaxProductId()
+    {
+        $this->db->select_max('product_id');
+        $result = $this->db->get('products');
+        $obj = $result->row();
+        return $obj->product_id;
+    }
+
+    public function productsCount($search = null)
+    {
         if ($search !== null) {
             $search = $this->db->escape_like_str($search);
-           $this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
+            $this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
         }
-		 $this->db->join('translations', 'translations.for_id = products.id', 'left');
+        $this->db->join('translations', 'translations.for_id = products.id', 'left');
+        $this->db->where('translations.type', 'product');
+        $this->db->where('translations.abbr', $this->def_lang);
         return $this->db->count_all_results('products');
     }
 
-    public function getLanguages() {
+    public function getLanguages()
+    {
         $query = $this->db->query('SELECT * FROM languages');
         return $query;
     }
-	
-    public function getUsers($id = null) {
-		if($id != null) {
-			$this->db->where('id', $id);
-		}
+
+    public function getAdminUsers($id = null)
+    {
+        if ($id != null) {
+            $this->db->where('id', $id);
+        }
         $query = $this->db->query('SELECT * FROM users');
-		if($id != null) return $query->row_array(); else 
-        return $query;
-    }
-    
-    public function numShopProducts() {
-    	return $this->db->count_all_results('products');
+        if ($id != null)
+            return $query->row_array();
+        else
+            return $query;
     }
 
-    public function setLanguage($post) {
-    	$post['name'] = strtolower($post['name']);
+    public function numShopProducts()
+    {
+        return $this->db->count_all_results('products');
+    }
+
+    public function setLanguage($post)
+    {
+        $post['name'] = strtolower($post['name']);
         $result = $this->db->insert('languages', $post);
         return $result;
     }
-	
-	public function setUser($post) {
-		$post['password'] = md5($post['password']);
-		if($post['edit'] > 0) {
-			if(strlen(trim($post['password'])) < 3) {
-				unset($post['password']);
-			}
-			$this->db->where('id', $post['edit']);
-			unset($post['id'], $post['edit']);
-			$result = $this->db->update('users', $post);
-		} else {
-        $result = $this->db->insert('users', $post);
-		}
+
+    public function setAdminUser($post)
+    {
+        $post['password'] = md5($post['password']);
+        if ($post['edit'] > 0) {
+            if (strlen(trim($post['password'])) < 3) {
+                unset($post['password']);
+            }
+            $this->db->where('id', $post['edit']);
+            unset($post['id'], $post['edit']);
+            $result = $this->db->update('users', $post);
+        } else {
+            unset($post['edit']);
+            $result = $this->db->insert('users', $post);
+        }
         return $result;
     }
 
-    public function deleteLanguage($id) {
+    public function deleteLanguage($id)
+    {
         $this->db->where('id', $id);
         $result = $this->db->delete('languages');
         return $result;
     }
-	
-    public function deleteUser($id) {
+
+    public function deleteAdminUser($id)
+    {
         $this->db->where('id', $id);
         $result = $this->db->delete('users');
         return $result;
     }
 
-    public function setProduct($post, $id = 0) {
+    public function setProduct($post, $id = 0)
+    {
         if ($id > 0) {
-			unset($post['title_for_url']);
+            unset($post['title_for_url']);
             $post['time_update'] = time();
             $result = $this->db->where('id', $id)->update('products', $post);
         } else {
-			if(trim($post['title_for_url']) != '') {
-    			$url_fr = except_letters($post['title_for_url']);
-    		} else {
-    			$url_fr = 'shop-product'; 
-    		}
-			unset($post['title_for_url']);
-			$this->db->select_max('product_id');
-			$query = $this->db->get('products');
-			$rr = $query->row_array();
-			$post['product_id'] = $rr['product_id']+1;
-			$post['url'] = str_replace(' ', '_', $url_fr . '_' . $post['product_id']);
+            if (trim($post['title_for_url']) != '') {
+                $url_fr = except_letters($post['title_for_url']);
+            } else {
+                $url_fr = 'shop-product';
+            }
+            unset($post['title_for_url']);
+            $this->db->select_max('product_id');
+            $query = $this->db->get('products');
+            $rr = $query->row_array();
+            $post['product_id'] = $rr['product_id'] + 1;
+            $post['url'] = str_replace(' ', '_', $url_fr . '_' . $post['product_id']);
             $post['time'] = time();
             $result = $this->db->insert('products', $post);
             $last_id = $this->db->insert_id();
         }
-       if($result==false) return false;
-       else {
-       	if($id>0) return $id;
-       	else return $last_id;
-       }
-    }
-    
-    public function setProductTranslation($post, $id, $is_update) {
-    	$i=0;
-    	$current_trans = $this->getTranslations($id, 'product'); 
-    	foreach($post['abbr'] as $abbr) {
-    		$arr = array();
-    		$emergency_insert = false;
-    		if(!isset($current_trans[$abbr])) {
-    			$emergency_insert = true;
-    		}
-    		$post['title'][$i] = str_replace('"', "'", $post['title'][$i]);
-			$post['price'][$i] = str_replace(' ', '', $post['price'][$i]); 
-			$post['price'][$i] = str_replace(',', '', $post['price'][$i]); 
-    		$arr = array(
-    			'title' => $post['title'][$i],
-    			'basic_description' => $post['basic_description'][$i],
-    			'description' => $post['description'][$i],
-    			'price' => $post['price'][$i],
-				'old_price' => $post['old_price'][$i],
-    			'abbr' => $abbr,
-    			'for_id' => $id,
-    			'type' => 'product'
-    		);
-    		if($is_update === true && $emergency_insert === false) {
-    			$abbr = $arr['abbr'];
-    			unset($arr['for_id'], $arr['abbr'], $arr['url']);
-    			$this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'product')->update('translations', $arr);
-    		}
-    		else  $this->db->insert('translations', $arr);
-    		$i++;
-    	}
-    }
-    
-    public function getShopCategories() {
-    	$query = $this->db->query('SELECT translations_first.*, (SELECT name FROM translations WHERE for_id = sub_for AND type="shop_categorie" AND abbr = translations_first.abbr) as sub_is FROM translations as translations_first INNER JOIN shop_categories ON shop_categories.id = translations_first.for_id WHERE type="shop_categorie"');
-    	$arr = array();
-    	foreach ($query->result() as $shop_categorie) {
-    		$arr[$shop_categorie->for_id]['info'][] = array(
-    				'abbr' => $shop_categorie->abbr,
-    				'name' => $shop_categorie->name
-    		);
-    		$arr[$shop_categorie->for_id]['sub'][] = $shop_categorie->sub_is;
-    	}
-    	return $arr;
-    }
-    
-    public function setShopCategorie($post) {
-    	$this->db->insert('shop_categories', array('sub_for' => $post['sub_for']));
-    	$id = $this->db->insert_id();
-    	
-    	$i=0;
-    	foreach($post['translations'] as $abbr) {
-    		$arr = array();
-    		$arr['abbr'] = $abbr;
-    		$arr['type'] = 'shop_categorie';
-    		$arr['name'] = $post['categorie_name'][$i];
-    		$arr['for_id'] = $id;
-    		$result = $this->db->insert('translations', $arr);
-    		$i++;
-    	}
-    	return $result;
-    }
-    
-    public function deleteShopCategorie($id) {
-      $this->db->where('for_id', $id);
-      $this->db->where('type', 'shop_categorie');
-      $this->db->delete('translations');
-      
-      $this->db->where('id', $id);
-      $this->db->or_where('sub_for', $id);
-      $result = $this->db->delete('shop_categories');
-      return $result;
+        if ($result == false)
+            return false;
+        else {
+            if ($id > 0)
+                return $id;
+            else
+                return $last_id;
+        }
     }
 
-    public function historyCount() {
+    public function setProductTranslation($post, $id, $is_update)
+    {
+        $i = 0;
+        $current_trans = $this->getTranslations($id, 'product');
+        foreach ($post['abbr'] as $abbr) {
+            $arr = array();
+            $emergency_insert = false;
+            if (!isset($current_trans[$abbr])) {
+                $emergency_insert = true;
+            }
+            $post['title'][$i] = str_replace('"', "'", $post['title'][$i]);
+            $post['price'][$i] = str_replace(' ', '', $post['price'][$i]);
+            $post['price'][$i] = str_replace(',', '', $post['price'][$i]);
+            $arr = array(
+                'title' => $post['title'][$i],
+                'basic_description' => $post['basic_description'][$i],
+                'description' => $post['description'][$i],
+                'price' => $post['price'][$i],
+                'old_price' => $post['old_price'][$i],
+                'abbr' => $abbr,
+                'for_id' => $id,
+                'type' => 'product'
+            );
+            if ($is_update === true && $emergency_insert === false) {
+                $abbr = $arr['abbr'];
+                unset($arr['for_id'], $arr['abbr'], $arr['url']);
+                $this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'product')->update('translations', $arr);
+            } else
+                $this->db->insert('translations', $arr);
+            $i++;
+        }
+    }
+
+    public function getShopCategories()
+    {
+        $query = $this->db->query('SELECT translations_first.*, (SELECT name FROM translations WHERE for_id = sub_for AND type="shop_categorie" AND abbr = translations_first.abbr) as sub_is FROM translations as translations_first INNER JOIN shop_categories ON shop_categories.id = translations_first.for_id WHERE type="shop_categorie"');
+        $arr = array();
+        foreach ($query->result() as $shop_categorie) {
+            $arr[$shop_categorie->for_id]['info'][] = array(
+                'abbr' => $shop_categorie->abbr,
+                'name' => $shop_categorie->name
+            );
+            $arr[$shop_categorie->for_id]['sub'][] = $shop_categorie->sub_is;
+        }
+        return $arr;
+    }
+
+    public function setShopCategorie($post)
+    {
+        $this->db->insert('shop_categories', array('sub_for' => $post['sub_for']));
+        $id = $this->db->insert_id();
+
+        $i = 0;
+        foreach ($post['translations'] as $abbr) {
+            $arr = array();
+            $arr['abbr'] = $abbr;
+            $arr['type'] = 'shop_categorie';
+            $arr['name'] = $post['categorie_name'][$i];
+            $arr['for_id'] = $id;
+            $result = $this->db->insert('translations', $arr);
+            $i++;
+        }
+        return $result;
+    }
+
+    public function deleteShopCategorie($id)
+    {
+        $this->db->where('for_id', $id);
+        $this->db->where('type', 'shop_categorie');
+        $this->db->delete('translations');
+
+        $this->db->where('id', $id);
+        $this->db->or_where('sub_for', $id);
+        $result = $this->db->delete('shop_categories');
+        return $result;
+    }
+
+    public function historyCount()
+    {
         return $this->db->count_all_results('history');
     }
 
-    public function setHistory($activity, $user) {
+    public function setHistory($activity, $user)
+    {
         $this->db->insert('history', array('activity' => $activity, 'username' => $user, 'time' => time()));
     }
 
-    public function getHistory($limit, $page) {
+    public function getHistory($limit, $page)
+    {
         $this->db->order_by('id', 'desc');
         $query = $this->db->select('*')->get('history', $limit, $page);
         return $query;
     }
 
-    public function getProducts($limit, $page, $search = null, $orderby = null) {
+    public function getProducts($limit, $page, $search = null, $orderby = null)
+    {
         if ($search !== null) {
             $search = $this->db->escape_like_str($search);
             $this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
@@ -219,7 +248,8 @@ class Admin_model extends CI_Model {
         return $query;
     }
 
-    public function getOneProduct($id) {
+    public function getOneProduct($id)
+    {
         $query = $this->db->where('product_id', $id)
                 ->get('products');
         if ($query->num_rows() > 0) {
@@ -229,217 +259,222 @@ class Admin_model extends CI_Model {
         }
     }
 
-    public function setCategorie($post) {
-        $id = $post['id'];
-        unset($post['id']);
-        if ($id == 0) {
-            $result = $this->db->insert('categories', $post);
-        } else {
-            if (isset($post['rename_all'])) {
-                $this->db->where('category', $post['rename_all']);
-                unset($post['rename_all']);
-                $this->db->update('products', array('category' => $post['name']));
-            }
-            $this->db->where('id', $id);
-            $result = $this->db->update('categories', $post);
-        }
-        return $result;
-    }
-
-    public function deleteCategorie($id) {
-        $this->db->where('id', $id);
-        $result = $this->db->delete('categories');
-        return $result;
-    }
-
-    public function deleteproduct($id) {
-    	$this->deleteTranslations($id, 'product');
+    public function deleteproduct($id)
+    {
+        $this->deleteTranslations($id, 'product');
         $this->db->where('id', $id);
         $result = $this->db->delete('products');
         return $result;
     }
-    
-    private function deleteTranslations($id, $type) {
-    	$this->db->where('for_id', $id);
-    	$this->db->where('type', $type);
-    	$this->db->delete('translations');
-    }
-    
-    public function getTranslations($id, $type) {
-    	$this->db->where('for_id', $id);
-    	$this->db->where('type', $type);
-    	$query = $this->db->select('*')->get('translations');
-    	$arr = array();
-    	foreach ($query->result() as $row) { 
-    		$arr[$row->abbr]['title'] = $row->title;
-    		$arr[$row->abbr]['basic_description'] = $row->basic_description;
-    		$arr[$row->abbr]['description'] = $row->description;
-    		$arr[$row->abbr]['price'] = $row->price;
-			$arr[$row->abbr]['old_price'] = $row->old_price;
-    	}
-    	return $arr;
-    }
-	
-	public function setBlogTranslations($post, $id, $is_update) {
-    	$i=0;
-    	$current_trans = $this->getTranslations($id, 'blog'); 
-    	foreach($post['abbr'] as $abbr) {
-    		$arr = array();
-    		$emergency_insert = false;
-    		if(!isset($current_trans[$abbr])) {
-    			$emergency_insert = true;
-    		}
-    		$post['title'][$i] = str_replace('"', "'", $post['title'][$i]);
-    		$arr = array(
-    			'title' => $post['title'][$i],
-    			'description' => $post['description'][$i],
-    			'abbr' => $abbr,
-    			'for_id' => $id,
-    			'type' => 'blog'
-    		);
-    		if($is_update === true && $emergency_insert === false) {
-    			$abbr = $arr['abbr'];
-    			unset($arr['for_id'], $arr['abbr'], $arr['url']);
-    			$this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'blog')->update('translations', $arr);
-    		}
-    		else  $this->db->insert('translations', $arr);
-    		$i++;
-    	}
+
+    private function deleteTranslations($id, $type)
+    {
+        $this->db->where('for_id', $id);
+        $this->db->where('type', $type);
+        $this->db->delete('translations');
     }
 
-    public function productStatusChagne($id, $to_status) {
+    public function getTranslations($id, $type)
+    {
+        $this->db->where('for_id', $id);
+        $this->db->where('type', $type);
+        $query = $this->db->select('*')->get('translations');
+        $arr = array();
+        foreach ($query->result() as $row) {
+            $arr[$row->abbr]['title'] = $row->title;
+            $arr[$row->abbr]['basic_description'] = $row->basic_description;
+            $arr[$row->abbr]['description'] = $row->description;
+            $arr[$row->abbr]['price'] = $row->price;
+            $arr[$row->abbr]['old_price'] = $row->old_price;
+        }
+        return $arr;
+    }
+
+    public function setBlogTranslations($post, $id, $is_update)
+    {
+        $i = 0;
+        $current_trans = $this->getTranslations($id, 'blog');
+        foreach ($post['abbr'] as $abbr) {
+            $arr = array();
+            $emergency_insert = false;
+            if (!isset($current_trans[$abbr])) {
+                $emergency_insert = true;
+            }
+            $post['title'][$i] = str_replace('"', "'", $post['title'][$i]);
+            $arr = array(
+                'title' => $post['title'][$i],
+                'description' => $post['description'][$i],
+                'abbr' => $abbr,
+                'for_id' => $id,
+                'type' => 'blog'
+            );
+            if ($is_update === true && $emergency_insert === false) {
+                $abbr = $arr['abbr'];
+                unset($arr['for_id'], $arr['abbr'], $arr['url']);
+                $this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'blog')->update('translations', $arr);
+            } else
+                $this->db->insert('translations', $arr);
+            $i++;
+        }
+    }
+
+    public function productStatusChagne($id, $to_status)
+    {
         $this->db->where('id', $id);
         $result = $this->db->update('products', array('visibility' => $to_status));
         return $result;
     }
-	
-	public function changeOrderStatus($id, $to_status) {
+
+    public function changeOrderStatus($id, $to_status)
+    {
         $this->db->where('id', $id);
         $result = $this->db->update('orders_cash_on_delivery', array('processed' => $to_status));
-		if($result == true) {
-			$this->manageQuantitiesAndProcurement($id, $to_status);
-		}
+        if ($result == true) {
+            $this->manageQuantitiesAndProcurement($id, $to_status);
+        }
         return $result;
     }
-	
-	private function manageQuantitiesAndProcurement($id, $to_status) {
-		if($to_status == 0) { $operator = '+'; $operator_pro = '-'; }
-	    else { $operator = '-'; $operator_pro = '+'; }
-		$this->db->select('products');
-		$this->db->where('id', $id);
-		$result = $this->db->get('orders_cash_on_delivery');
-		$arr = $result->row_array();
-		$products = unserialize($arr['products']);
-		foreach($products as $product_id=>$quantity) {
-			$this->db->query('UPDATE products SET quantity=quantity'.$operator.$quantity.' WHERE product_id='.$product_id);
-			$this->db->query('UPDATE products SET procurement=procurement'.$operator_pro.$quantity.' WHERE product_id='.$product_id);
-		}
-	}
 
-    public function changePass($new_pass, $username) {
+    private function manageQuantitiesAndProcurement($id, $to_status)
+    {
+        if ($to_status == 0) {
+            $operator = '+';
+            $operator_pro = '-';
+        } else {
+            $operator = '-';
+            $operator_pro = '+';
+        }
+        $this->db->select('products');
+        $this->db->where('id', $id);
+        $result = $this->db->get('orders_cash_on_delivery');
+        $arr = $result->row_array();
+        $products = unserialize($arr['products']);
+        foreach ($products as $product_id => $quantity) {
+            $this->db->query('UPDATE products SET quantity=quantity' . $operator . $quantity . ' WHERE product_id=' . $product_id);
+            $this->db->query('UPDATE products SET procurement=procurement' . $operator_pro . $quantity . ' WHERE product_id=' . $product_id);
+        }
+    }
+
+    public function changePass($new_pass, $username)
+    {
         $this->db->where('username', $username);
         $result = $this->db->update('users', array('password' => md5($new_pass)));
         return $result;
     }
-	
-	public function getCashOnDeliveryOrders($order_by) {
-		if($order_by != null) {
-			if($order_by == 'id') $type = 'DESC'; else $type = 'ASC';
-			$this->db->order_by($order_by, $type);
-		}
-		$this->db->select('*');
-		$result = $this->db->get('orders_cash_on_delivery');
-		return $result->result_array();
-	}
-	
-	public function getPages($active = null, $advanced = false) {
-		if($active != null) {
-			$this->db->where('enabled', $active);
-		}
-		if($advanced == false) {
-			$this->db->select('name');
-		}else {
-			$this->db->select('*');
-		}
-		$result = $this->db->get('active_pages');
-		if($result != false) {
-			$array = array();
-			if($advanced == false) {
-				foreach($result->result_array() as $arr) $array[] = $arr['name']; 
-			}else {
-				$array = $result->result_array();
-			}
-			return $array;
-		}
-	}
-	
-	public function getOnePost($id) {
-		$query = $this->db->where('id', $id)->get('blog_posts');
-    	if ($query->num_rows() > 0) {
-    		return $query->row_array();
-    	} else {
-    		return false;
-    	}
-	}
-	
-	public function setPost($post, $id) {
-    	if ($id > 0) {
-			unset($post['title']);
-    		$result = $this->db->where('id', $id)->update('blog_posts', $post);
-			if($result === true) $result = $id;
-    	} else {
-		    $post['time'] = time();
-			$title = str_replace('"', "'", $post['title']);
-			unset($post['title']);
-    		$result = $this->db->insert('blog_posts', $post);
-    		$last_id = $this->db->insert_id();
-    		
-    		$arr = array();
-			
-    		$arr['url'] = str_replace(' ', '-', except_letters($title)).'_'.$last_id.'';
-    		$this->db->where('id', $last_id);
-    		$this->db->update('blog_posts', $arr);
-			
-			if($result === true) $result = $last_id;
-    	}
-    	return $result;
+
+    public function getCashOnDeliveryOrders($order_by)
+    {
+        if ($order_by != null) {
+            if ($order_by == 'id')
+                $type = 'DESC';
+            else
+                $type = 'ASC';
+            $this->db->order_by($order_by, $type);
+        }
+        $this->db->select('*');
+        $result = $this->db->get('orders_cash_on_delivery');
+        return $result->result_array();
     }
-	
-	public function postsCount($search = null) {
-    	if ($search !== null) {
-    		$this->db->like('title', $search);
-    	}
-    	return $this->db->count_all_results('blog_posts');
+
+    public function getPages($active = null, $advanced = false)
+    {
+        if ($active != null) {
+            $this->db->where('enabled', $active);
+        }
+        if ($advanced == false) {
+            $this->db->select('name');
+        } else {
+            $this->db->select('*');
+        }
+        $result = $this->db->get('active_pages');
+        if ($result != false) {
+            $array = array();
+            if ($advanced == false) {
+                foreach ($result->result_array() as $arr)
+                    $array[] = $arr['name'];
+            } else {
+                $array = $result->result_array();
+            }
+            return $array;
+        }
     }
-	
-	public function getPosts($lang = null, $limit, $page, $search = null, $month = null) {
-    	if ($search !== null) {
-    		$search=$this->db->escape_like_str($search);
-    		$this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
-    	}
-		if($month !== null) {
-			$from = $month['from'];
-			$to = $month['to'];
-			$this->db->where("time BETWEEN $from AND $to");
-		}
-		$this->db->join('translations', 'translations.for_id = blog_posts.id', 'left');
+
+    public function getOnePost($id)
+    {
+        $query = $this->db->where('id', $id)->get('blog_posts');
+        if ($query->num_rows() > 0) {
+            return $query->row_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function setPost($post, $id)
+    {
+        if ($id > 0) {
+            unset($post['title']);
+            $result = $this->db->where('id', $id)->update('blog_posts', $post);
+            if ($result === true)
+                $result = $id;
+        } else {
+            $post['time'] = time();
+            $title = str_replace('"', "'", $post['title']);
+            unset($post['title']);
+            $result = $this->db->insert('blog_posts', $post);
+            $last_id = $this->db->insert_id();
+
+            $arr = array();
+
+            $arr['url'] = str_replace(' ', '-', except_letters($title)) . '_' . $last_id . '';
+            $this->db->where('id', $last_id);
+            $this->db->update('blog_posts', $arr);
+
+            if ($result === true)
+                $result = $last_id;
+        }
+        return $result;
+    }
+
+    public function postsCount($search = null)
+    {
+        if ($search !== null) {
+            $this->db->like('title', $search);
+        }
+        return $this->db->count_all_results('blog_posts');
+    }
+
+    public function getPosts($lang = null, $limit, $page, $search = null, $month = null)
+    {
+        if ($search !== null) {
+            $search = $this->db->escape_like_str($search);
+            $this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
+        }
+        if ($month !== null) {
+            $from = $month['from'];
+            $to = $month['to'];
+            $this->db->where("time BETWEEN $from AND $to");
+        }
+        $this->db->join('translations', 'translations.for_id = blog_posts.id', 'left');
         $this->db->where('translations.type', 'blog');
-		if($lang == null) {
-			$this->db->where('translations.abbr', $this->def_lang);
-		} else {
-			$this->db->where('translations.abbr', $lang);
-		}
+        if ($lang == null) {
+            $this->db->where('translations.abbr', $this->def_lang);
+        } else {
+            $this->db->where('translations.abbr', $lang);
+        }
         $query = $this->db->select('blog_posts.id, translations.title, translations.description, blog_posts.url, blog_posts.time, blog_posts.image')->get('blog_posts', $limit, $page);
-    	return $query->result_array();
-	}
-	
-	public function deletePost($id) {
-		$this->db->where('id', $id)->delete('blog_posts');
-		$this->db->where('for_id', $id)->where('type', 'blog')->delete('translations');
-	}
-	
-	public function changePageStatus($id, $to_status) {
-		$result = $this->db->where('id', $id)->update('active_pages', array('enabled' => $to_status));
-		return $result;
-	}
+        return $query->result_array();
+    }
+
+    public function deletePost($id)
+    {
+        $this->db->where('id', $id)->delete('blog_posts');
+        $this->db->where('for_id', $id)->where('type', 'blog')->delete('translations');
+    }
+
+    public function changePageStatus($id, $to_status)
+    {
+        $result = $this->db->where('id', $id)->update('active_pages', array('enabled' => $to_status));
+        return $result;
+    }
+
 }

@@ -128,6 +128,7 @@ button.btn-blue:hover { color:#fff;}
 .blog-artchive {   margin-bottom: 20px;   padding-left: 0; list-style:none;}
 .blog-artchive .item { -moz-border-bottom-colors: none; -moz-border-left-colors: none; padding:10px 0px;  -moz-border-right-colors: none; -moz-border-top-colors: none;  background: transparent none repeat scroll 0 0; border-color: -moz-use-text-color -moz-use-text-color #ccc;  border-image: none;  border-style: none none dotted; border-width: 0 0 1px;  padding-left: 10px;}
 .blog-artchive .item a {color:#666;}
+.blog-home-left-categ {margin-bottom:80px;}
 
 .add-to-cart a img {display:none;}
 div#notificator {padding:15px 25px; width:200px; position:fixed; top:20px; left:50%; margin-left:-100px; z-index:5000; text-align:center; display:none; }

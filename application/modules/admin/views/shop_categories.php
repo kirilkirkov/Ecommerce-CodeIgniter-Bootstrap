@@ -50,7 +50,7 @@
                     	<?php } 
                     ?></td>
                     <td class="text-center">
-                        <a href="<?= base_url('admin/shop_categories/?delete=' .$key_cat) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure continue deleting?')"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                        <a href="<?= base_url('admin/shop_categories/?delete=' .$key_cat) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Del</a>
                     </td>
                 </tr>
             <?php } ?>

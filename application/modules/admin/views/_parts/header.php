@@ -21,20 +21,19 @@
         <div id="wrapper">
             <div id="content">
                 <?php if ($this->session->userdata('logged_in')) { ?>
-                    <nav class="navbar">
+                    <nav class="navbar navbar-default">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                                 <i class="fa fa-lg fa-bars"></i>
                             </button>
-                            <a class="navbar-brand text-center" id="brand" href="#">Administration</a>
                         </div>
                         <div id="navbar" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lg fa-bars"></i> <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li class="active"><a href="<?= base_url('admin') ?>"><i class="fa fa-home"></i> Home</a></li>
-                                        <li class="active"><a href="<?= base_url() ?>"><i class="fa fa-home"></i> Open site</a></li>
+                                        <li><a href="<?= base_url('admin') ?>"><i class="fa fa-home"></i> Home</a></li>
+                                        <li><a href="<?= base_url() ?>"><i class="glyphicon glyphicon-star"></i> Open site</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -46,7 +45,7 @@
                                                     <div class="panel-title">Settings</div>
                                                 </div>     
                                                 <div class="panel-body">
-                                                    <label>New Pass</label> <span class="bg-success" id="pass_result">Changed!</span>
+                                                    <label>Change my password</label> <span class="bg-success" id="pass_result">Changed!</span>
                                                     <form class="form-inline" role="form">
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" placeholder="New password" name="new_pass">
@@ -68,48 +67,42 @@
                 <div class="container-fluid">
                     <div class="row">
                         <?php if ($this->session->userdata('logged_in')) { ?>
-                            <div class="col-sm-3 col-md-2 left-side">
+                            <div class="col-sm-3 col-md-3 col-lg-2 left-side navbar-default">
                                 <ul class="sidebar-menu">
-                                    <li class="header">MAIN NAVIGATION</li>
-                                    <li class="search">
-                                        <form method="GET" action="<?= base_url('admin/products') ?>">
-                                            <input type="text" name="search" value="" placeholder="Find product.." class="left-finder">
-                                            <i class="fa fa-search"></i>
-                                        </form>
+                                    <li class="sidebar-search">
+                                        <div class="input-group custom-search-form">
+                                            <form method="GET" action="<?= base_url('admin/products') ?>">
+                                                <div class="input-group">
+                                                    <input class="form-control" name="search" value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>" type="text" placeholder="Search in products...">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" value="" placeholder="Find product.." type="submit">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </li>
-									<li class="header">MAGAZINE</li>
+                                    <li class="header">MAGAZINE</li>
                                     <li><a href="<?= base_url('admin/publish') ?>" <?= urldecode(uri_string()) == 'admin/publish' ? 'class="active"' : '' ?>><i class="fa fa-edit"></i> Publish product</a></li>
                                     <li><a href="<?= base_url('admin/products') ?>" <?= urldecode(uri_string()) == 'admin/products' ? 'class="active"' : '' ?>><i class="fa fa-files-o"></i> Products</a></li>
                                     <li><a href="<?= base_url('admin/shop_categories') ?>" <?= urldecode(uri_string()) == 'admin/shop_categories' ? 'class="active"' : '' ?>><i class="fa fa-list-alt"></i> Shop Categories</a></li>
-									<li><a href="<?= base_url('admin/orders') ?>" <?= urldecode(uri_string()) == 'admin/orders' ? 'class="active"' : '' ?>><i class="fa fa-money" aria-hidden="true"></i> Orders</a></li>
-									 <?php if(in_array('blog', $activePages)) { ?>
-									 <li class="header">BLOG</li>
-									 <li><a href="<?= base_url('admin/blogPublish') ?>" <?= urldecode(uri_string()) == 'admin/blogPublish' ? 'class="active"' : '' ?>><i class="fa fa-money" aria-hidden="true"></i> Publish post</a></li>
-									 <li><a href="<?= base_url('admin/blog') ?>" <?= urldecode(uri_string()) == 'admin/blog' ? 'class="active"' : '' ?>><i class="fa fa-money" aria-hidden="true"></i> Posts</a></li>
-									 <?php } ?>
-									<li class="header">SETTINGS</li>
-									<li><a href="<?= base_url('admin/pages') ?>" <?= urldecode(uri_string()) == 'admin/pages' ? 'class="active"' : '' ?>><i class="fa fa-file" aria-hidden="true"></i> Pages</a></li>
+                                    <li><a href="<?= base_url('admin/orders') ?>" <?= urldecode(uri_string()) == 'admin/orders' ? 'class="active"' : '' ?>><i class="fa fa-money" aria-hidden="true"></i> Orders</a></li>
+                                    <?php if (in_array('blog', $activePages)) { ?>
+                                        <li class="header">BLOG</li>
+                                        <li><a href="<?= base_url('admin/blogPublish') ?>" <?= urldecode(uri_string()) == 'admin/blogPublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> Publish post</a></li>
+                                        <li><a href="<?= base_url('admin/blog') ?>" <?= urldecode(uri_string()) == 'admin/blog' ? 'class="active"' : '' ?>><i class="fa fa-th" aria-hidden="true"></i> Posts</a></li>
+                                    <?php } ?>
+                                    <li class="header">SETTINGS</li>
+                                    <li><a href="<?= base_url('admin/pages') ?>" <?= urldecode(uri_string()) == 'admin/pages' ? 'class="active"' : '' ?>><i class="fa fa-file" aria-hidden="true"></i> Active Pages</a></li>
                                     <li><a href="<?= base_url('admin/history') ?>" <?= urldecode(uri_string()) == 'admin/history' ? 'class="active"' : '' ?>><i class="fa fa-history"></i> Activity History</a></li>
-                               <li class="header">ADVANCED SETTINGS</li>
-								 <li><a href="javascript:void(0);" id="dev-zone"><i class="fa fa-wrench" aria-hidden="true"></i> Developer zone</a></li>
-								 </ul>
-								 <div class="toggle-dev" style="display:none">
-								<ul class="sidebar-menu">
-                                    <li><a href="<?= base_url('admin/categories') ?>" <?= urldecode(uri_string()) == 'admin/categories' ? 'class="active"' : '' ?>><i class="fa fa-list-alt"></i> Categories</a></li>
+                                    <li class="header">ADVANCED SETTINGS</li>
                                     <li><a href="<?= base_url('admin/languages') ?>" <?= urldecode(uri_string()) == 'admin/languages' ? 'class="active"' : '' ?>><i class="fa fa-globe"></i> Languages</a></li>
                                     <li><a href="<?= base_url('admin/filemanager') ?>" <?= urldecode(uri_string()) == 'admin/filemanager' ? 'class="active"' : '' ?>><i class="fa fa-file-code-o"></i> File Manager</a></li>
-                                    <li><a href="<?= base_url('admin/plugins') ?>" <?= urldecode(uri_string()) == 'admin/plugins' ? 'class="active"' : '' ?>><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Plugins</a></li>
-									<li><a href="<?= base_url('admin/users') ?>" <?= urldecode(uri_string()) == 'admin/users' ? 'class="active"' : '' ?>><i class="fa fa-user" aria-hidden="true"></i> Users</a></li>
-								</ul>
-                                <span class="alert-admin">
-                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Do not forget to change ENVIRONMENT in index.php to PRODUCTION! 
-                                </span>
-                                <span class="alert-admin">
-                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Do not forget to set site domain in config.php -> base_url 
-                                </span>
-								</div>
+                                    <li><a href="<?= base_url('admin/adminusers') ?>" <?= urldecode(uri_string()) == 'admin/adminusers' ? 'class="active"' : '' ?>><i class="fa fa-user" aria-hidden="true"></i> Admin Users</a></li>
+                                </ul>
                             </div>
-                            <div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2">
+                            <div class="col-sm-9 col-md-9 col-lg-10 col-sm-offset-3 col-md-offset-3 col-lg-offset-2">
                             <?php } else { ?>
                                 <div class="">
                                 <?php } ?>

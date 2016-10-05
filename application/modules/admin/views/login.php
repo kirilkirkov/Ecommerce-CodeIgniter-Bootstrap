@@ -1,46 +1,41 @@
 <style>
     body {
-        background: -webkit-linear-gradient(90deg, #6b70ff 10%, #353889 90%);
-        background: -moz-linear-gradient(90deg, #6b70ff 10%, #353889 90%);
-        background: -ms-linear-gradient(90deg, #6b70ff 10%, #353889 90%);
-        background: -o-linear-gradient(90deg, #6b70ff 10%, #353889 90%);
-        background: linear-gradient(90deg, #6b70ff 10%, #353889 90%);
-        font-family: 'Open Sans', sans-serif!important;
-        padding-top:100px;
+        background-image:url('/assets/imgs/login-bg.png');
+        background-position: bottom  right;
+        background-repeat: no-repeat;
+        background-color:#548fd0;
     }
+    .avatar {background-image:url('/assets/imgs/login-cover.png')}
 </style>
 <div class="container">
-    <div class="login-alerts">
-        <?php if(validation_errors()) { ?>
-            <div class="alert alert-danger"><?= validation_errors() ?></div>
+    <div class="login-container">
+        <div id="output">       
             <?php
-        }
-        if($this->session->flashdata('err_login')) {
-            ?>
-            <div class="alert alert-danger"><?= $this->session->flashdata('err_login'); ?></div>
-            <?php
-        }
-        ?>
-    </div>  
-    <div class = "row">
-        <div class = "col-md-12">
-            <div class = "well login-box">
-                <form action = "" method = "POST">
-                    <legend>Login</legend>
-                    <div class = "form-group">
-                        <label for="username">Username</label>
-                        <input value="" id="username" placeholder="Username" name="username" type="text" class="form-control" />
-                    </div>
-                    <div class = "form-group">
-                        <label for="password">Password</label>
-                        <input id="password" value="" placeholder="Password" name="password" type="password" class="form-control" />
-                    </div>
-                    <div class = "form-group text-center">
-                        <a href="<?= base_url() ?>" class="btn btn-danger btn-cancel-action">Cancel</a>
-                        <input type="submit" class="btn btn-success btn-login-submit" value="Login" />
-                    </div>
-                </form>
-            </div>
+            if ($this->session->flashdata('err_login')) {
+                ?>
+                <div class="alert alert-danger"><?= $this->session->flashdata('err_login') ?></div>
+                <?php
+            }
+            ?></div>
+        <div class="avatar"></div>
+        <div class="form-box">
+            <form action="" method="POST">
+                <input type="text" name="username" placeholder="username">
+                <input type="password" name="password" placeholder="password">
+                <button class="btn btn-info btn-block login" type="submit">Login</button>
+            </form>
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        var username = $("input[name=username]");
+        var password = $("input[name=password]");
+        $('button[type="submit"]').click(function (e) {
+            if (username.val() == "" || password.val() == "") {
+                e.preventDefault();
+                $("#output").addClass("alert alert-danger animated fadeInUp").html("Please.. enter all fields ;)");
+            }
+        });
+    });
+</script>

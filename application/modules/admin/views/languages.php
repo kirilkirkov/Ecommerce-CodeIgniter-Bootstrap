@@ -46,7 +46,7 @@
 					<td><?= $language->currency ?></td>
                     <td class="text-center">
                     <?php if($def_lang != $language->abbr) { ?>
-                        <a href="<?= base_url('admin/languages/?delete=' . $language->id) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure continue deleting?')"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                        <a href="<?= base_url('admin/languages/?delete=' . $language->id) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Del</a>
                      <?php } else { ?>
                      is default
                      <?php } ?>

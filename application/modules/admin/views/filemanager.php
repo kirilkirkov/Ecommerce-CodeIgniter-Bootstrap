@@ -10,7 +10,7 @@
         });
     });
 </script>
-<h1>File Manager</h1>
+<h1><img src="<?= base_url('assets/imgs/filemanager.png') ?>" class="header-img"> File Manager</h1>
 <p>Here you can list all site files</p>
 <hr>
 <div class="alert alert-danger">Danger zone! Do not touch if you're not sure!</div>

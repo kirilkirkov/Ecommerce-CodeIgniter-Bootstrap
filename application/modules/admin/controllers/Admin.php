@@ -179,6 +179,10 @@ class Admin extends MX_Controller
     {
         if ($this->input->is_ajax_request()) {
             $amount = $_POST['sum'];
+            if ($amount == null) {
+                echo 'Please type a price';
+                exit;
+            }
             $from = $_POST['from'];
             $to = $_POST['to'];
             $url = "https://www.google.com/finance/converter?a=$amount&from=$from&to=$to";
@@ -394,6 +398,53 @@ class Admin extends MX_Controller
         $this->load->view('_parts/footer');
         if ($page == 0)
             $this->saveHistory('Go to History');
+    }
+
+    public function styling()
+    {
+        $this->login_check();
+        $data = array();
+        $head = array();
+        $head['title'] = 'Administration - Styling';
+        $head['description'] = '!';
+        $head['keywords'] = '';
+
+        if (isset($_POST['uploadimage'])) {
+            $config['upload_path'] = './assets/imgs/site-logo/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = 1500;
+            $config['max_width'] = 1024;
+            $config['max_height'] = 768;
+
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('sitelogo')) {
+                $this->session->set_flashdata('resultSiteLogoPublish', $this->upload->display_errors());
+            } else {
+                $data = array('upload_data' => $this->upload->data());
+                $newImage = $data['upload_data']['file_name'];
+                $this->Admin_model->setValueStore('sitelogo', $newImage);
+                $this->session->set_flashdata('resultSiteLogoPublish', 'New logo is set!');
+            }
+            redirect('admin/styling');
+        }
+        if (isset($_POST['naviText'])) {
+            $this->Admin_model->setValueStore('navitext', $_POST['naviText']);
+            $this->session->set_flashdata('resultNaviText', 'New navigation text is set!');
+            redirect('admin/styling');
+        }
+        if (isset($_POST['footerCopyright'])) {
+            $this->Admin_model->setValueStore('footercopyright', $_POST['footerCopyright']);
+            $this->session->set_flashdata('resultFooterCopyright', 'New navigation text is set!');
+            redirect('admin/styling');
+        }
+        $data['siteLogo'] = $this->Admin_model->getValueStore('sitelogo');
+        $data['naviText'] = $this->Admin_model->getValueStore('navitext');
+        $data['footerCopyright'] = $this->Admin_model->getValueStore('footercopyright');
+        $this->load->view('_parts/header', $head);
+        $this->load->view('styling', $data);
+        $this->load->view('_parts/footer');
+        $this->saveHistory('Go to Styling Page');
     }
 
     private function saveHistory($activity)

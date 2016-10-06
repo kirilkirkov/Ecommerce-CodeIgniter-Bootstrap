@@ -19,7 +19,7 @@ body { font-family:arial; padding-top:0; color:#424449;}
 #top-part #adv-search .form-horizontal .form-group {margin-left: 0; margin-right: 0;}
 #top-part #adv-search .form-group .form-control:last-child { border-top-left-radius: 4px;border-bottom-left-radius: 4px;}
 #top-part #adv-search .dropdown.dropdown-lg .dropdown-menu {width: 515px;}
-#top-part ul.shop-dropdown {list-style:none; padding:0; margin:0; margin-right-15px;}
+#top-part ul.shop-dropdown {list-style:none; padding:0; margin:0; margin-right:-15px;}
 #top-part ul.shop-dropdown li.text-right {padding:10px 12px;}
 #top-part div.center {padding-top:15px;}
 #top-part div.right {padding-top:13px;}

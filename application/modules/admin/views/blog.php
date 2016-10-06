@@ -1,3 +1,5 @@
+<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Blog Posts</h1>
+<hr>
     <?php if ($this->session->flashdata('result_publish')) { ?>
         <hr>
         <div class="alert alert-info"><?= $this->session->flashdata('result_publish'); ?></div>

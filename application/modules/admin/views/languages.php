@@ -1,5 +1,5 @@
 <div id="languages">
-    <h1>Languages</h1> 
+    <h1><img src="<?= base_url('assets/imgs/small-globe.png') ?>" class="header-img" style="margin-top:-3px;"> Languages</h1> 
     <hr>
     <?php if (validation_errors()) { ?>
         <hr>
@@ -33,23 +33,23 @@
                     <th>Image</th>
                     <th>Abbr</th>
                     <th>Name</th>
-					<th>Currency</th>
+                    <th>Currency</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
             <?php foreach ($languages->result() as $language) { ?>
                 <tr>
                     <td><?= $language->id ?></td>
-                    <td><img src="<?= base_url('attachments/lang_flags/'.$language->flag) ?>" alt="No country flag" style="width:16px; height:11px;"></td>
+                    <td><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="No country flag" style="width:16px; height:11px;"></td>
                     <td><?= $language->abbr ?></td>
                     <td><?= $language->name ?></td>
-					<td><?= $language->currency ?></td>
+                    <td><?= $language->currency ?></td>
                     <td class="text-center">
-                    <?php if($def_lang != $language->abbr) { ?>
-                        <a href="<?= base_url('admin/languages/?delete=' . $language->id) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Del</a>
-                     <?php } else { ?>
-                     is default
-                     <?php } ?>
+                        <?php if ($def_lang != $language->abbr) { ?>
+                            <a href="<?= base_url('admin/languages/?delete=' . $language->id) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                        <?php } else { ?>
+                            is default
+                        <?php } ?>
                 </tr>
             <?php } ?>
         </table>

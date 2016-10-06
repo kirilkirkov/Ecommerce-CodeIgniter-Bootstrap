@@ -1,5 +1,5 @@
 <script src="<?= base_url('assets/js/ckeditor/ckeditor.js') ?>"></script>
-<h1>Publish product</h1>
+<h1><img src="<?= base_url('assets/imgs/shop-cart-add-icon.png') ?>" class="header-img" style="margin-top:-3px;"> Publish product</h1>
 <hr>
 <?php
 if (validation_errors()) {

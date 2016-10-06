@@ -1,6 +1,6 @@
 <script src="<?= base_url('assets/js/ckeditor/ckeditor.js') ?>"></script>
 
-<h1>Publish post</h1>
+<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Publish post</h1>
 <hr>
 <div class="row">
 	<div class="col-sm-8 col-md-7">

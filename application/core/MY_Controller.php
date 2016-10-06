@@ -27,6 +27,9 @@ class MY_Controller extends MX_Controller {
 		$vars['currency'] = $this->currency;
 		$vars['activePages'] = $this->activePages;
 		$vars['footerCategories'] = $this->Articles_model->getFooterCategories($this->my_lang);
+        $vars['sitelogo'] = $this->Admin_model->getValueStore('sitelogo');
+        $vars['naviText'] = $this->Admin_model->getValueStore('navitext');
+        $vars['footerCopyright'] = $this->Admin_model->getValueStore('footercopyright');
     	$this->load->vars($vars); 
         $this->load->view('_parts/header', $head);
         $this->load->view($view, $data);

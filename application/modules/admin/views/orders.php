@@ -2,7 +2,7 @@
 if(!empty($cash_on_delivery)) $table_head = array_keys($cash_on_delivery[0]);
 ?>
 <div class="table-responsive">
-	<h3>Cash On Delivery - Orders</h3>
+    <h1><img src="<?= base_url('assets/imgs/orders.png') ?>" class="header-img" style="margin-top:-2px;"> <u>Orders</u> - Cash On Delivery</h1>
 	<hr>
 	<div style="margin-bottom:10px;">
 	<select class="selectpicker changeOrder">

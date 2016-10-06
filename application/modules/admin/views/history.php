@@ -1,4 +1,4 @@
-<h1>History</h1>
+<h1><img src="<?= base_url('assets/imgs/timer.png') ?>" class="header-img" style="margin-top:-3px;"> History</h1>
 <hr>
 <?php if ($history === false) { ?>
     <div class="alert alert-danger">History is stopped! Go to config.php and set <b>admin_history</b> to <b>TRUE</b></div>

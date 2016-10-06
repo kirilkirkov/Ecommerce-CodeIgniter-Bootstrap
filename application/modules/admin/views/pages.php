@@ -1,4 +1,4 @@
-<h1>Pages Manager</h1>
+<h1><img src="<?= base_url('assets/imgs/webpages.jpg') ?>" class="header-img" style="margin-top:-3px;"> Pages Manager</h1>
 <p>Here you can control which pages you want to have</p>
 <hr>
 <div class="row">

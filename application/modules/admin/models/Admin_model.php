@@ -477,4 +477,17 @@ class Admin_model extends CI_Model
         return $result;
     }
 
+    public function setValueStore($key, $value)
+    {
+        $this->db->where('thekey', $key);
+        $this->db->update('valueStore', array('value' => $value));
+    }
+
+    public function getValueStore($key)
+    {
+        $query = $this->db->query("SELECT value FROM valueStore WHERE thekey = '$key'");
+        $img = $query->row_array();
+        return $img['value'];
+    }
+
 }

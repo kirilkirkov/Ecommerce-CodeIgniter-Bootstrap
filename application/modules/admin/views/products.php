@@ -16,7 +16,7 @@
     }
     $langs = $languages->result();
     ?>
-    <h1>Products</h1>
+    <h1><img src="<?= base_url('assets/imgs/products-img.png') ?>" class="header-img" style="margin-top:-2px;"> Products</h1>
     <hr>
     <div class="row">
             <div class="col-xs-12">

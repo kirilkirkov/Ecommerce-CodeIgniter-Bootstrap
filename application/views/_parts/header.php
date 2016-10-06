@@ -49,7 +49,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-3 left">
-                                <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="Site name">
+                                <img src="<?= base_url('assets/imgs/site-logo/' . $sitelogo) ?>" alt="<?= $_SERVER['HTTP_HOST'] ?>">
                             </div>
                             <div class="col-sm-6 center">
                                 <div class="input-group" id="adv-search">
@@ -60,12 +60,12 @@
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?= lang('more') ?> <span class="caret"></span></button>
                                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
                                                     <form class="form-horizontal" method="GET" action="<?= base_url() ?>" id="bigger-search" role="form">
-														<input type="hidden" name="category" value="<?= isset($_GET['category']) ? $_GET['category'] : '' ?>">
-														<input type="hidden" name="in_stock" value="<?= isset($_GET['in_stock']) ? $_GET['in_stock'] : '' ?>">
-														<input type="hidden" name="search_in_title" value="<?= isset($_GET['search_in_title']) ? $_GET['search_in_title'] : '' ?>">
-														<input type="hidden" name="order_new" value="<?= isset($_GET['order_new']) ? $_GET['order_new'] : '' ?>">
-														<input type="hidden" name="order_price" value="<?= isset($_GET['order_price']) ? $_GET['order_price'] : '' ?>">
-														<input type="hidden" name="order_procurement" value="<?= isset($_GET['order_procurement']) ? $_GET['order_procurement'] : '' ?>">
+                                                        <input type="hidden" name="category" value="<?= isset($_GET['category']) ? $_GET['category'] : '' ?>">
+                                                        <input type="hidden" name="in_stock" value="<?= isset($_GET['in_stock']) ? $_GET['in_stock'] : '' ?>">
+                                                        <input type="hidden" name="search_in_title" value="<?= isset($_GET['search_in_title']) ? $_GET['search_in_title'] : '' ?>">
+                                                        <input type="hidden" name="order_new" value="<?= isset($_GET['order_new']) ? $_GET['order_new'] : '' ?>">
+                                                        <input type="hidden" name="order_price" value="<?= isset($_GET['order_price']) ? $_GET['order_price'] : '' ?>">
+                                                        <input type="hidden" name="order_procurement" value="<?= isset($_GET['order_procurement']) ? $_GET['order_procurement'] : '' ?>">
                                                         <div class="form-group">
                                                             <label for="quantity_more"><?= lang('quantity_more_than') ?></label>
                                                             <input type="text" value="<?= isset($_GET['quantity_more']) ? $_GET['quantity_more'] : '' ?>" name="quantity_more" id="quantity_more" placeholder="<?= lang('type_a_number') ?>" class="form-control">
@@ -107,8 +107,8 @@
                                                             </div>
                                                         </div>
                                                         <button type="submit" class="btn btn-blue"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-														<a class="btn btn-default" id="clear-form" href="javascript:void(0);"><?= lang('clear_form') ?></a>
-													</form>
+                                                        <a class="btn btn-default" id="clear-form" href="javascript:void(0);"><?= lang('clear_form') ?></a>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <button type="button" onclick="submitForm()" class="btn btn-blue"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -121,7 +121,7 @@
                                     <li class="dropdown text-right">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> <span class="sumOfItems"><?= $cartItems['array'] == 0 ? 0 : $sumOfItems ?></span> - <?= lang('items') ?><span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-cart" role="menu">
-                                                <?php loop_items($cartItems, $currency, $lang_url); ?>
+                                            <?php loop_items($cartItems, $currency, $lang_url); ?>
                                         </ul>
                                     </li>
                                 </ul>
@@ -138,14 +138,16 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="<?= base_url() ?>">The-Onl1neSh0p</a>
+                            <?php if($naviText != null) { ?>
+                            <a class="navbar-brand" href="<?= base_url() ?>"><?= $naviText ?></a>
+                            <?php } ?>
                         </div>
                         <div id="navbar" class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav">
+                            <ul class="nav navbar-nav" style="<?= $naviText == null ? 'margin-left:-15px;' : '' ?>">
                                 <li class="active"><a href="<?= $lang_url ?>"><?= lang('home') ?></a></li>
-								<?php if(in_array('blog', $activePages)) { ?>
-								 <li><a href="<?= $lang_url . '/blog' ?>"><?= lang('blog') ?></a></li>
-								<?php } ?>
+                                    <?php if (in_array('blog', $activePages)) { ?>
+                                    <li><a href="<?= $lang_url . '/blog' ?>"><?= lang('blog') ?></a></li>
+                                <?php } ?>
                                 <li><a href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?></a></li>
                                 <li><a href="<?= $lang_url . '/contacts' ?>"><?= lang('contacts') ?></a></li>
                             </ul>

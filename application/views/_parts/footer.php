@@ -15,24 +15,24 @@
                         <li> <a href="#">» Lorem Ipsum </a> </li>
                     </ul>
                 </div>
-				<div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                     <h3><?= lang('categories') ?></h3>
-                    <?php if(!empty($footerCategories)) { ?>
-					<ul>
-					<?php foreach($footerCategories as $key=>$categorie) { ?>
-                        <li><a href="javascript:void(0);" data-categorie-id="<?= $key ?>" class="go-category"><?= $categorie ?></a></li>
-					<?php } ?>
-                    </ul>
-					<?php } else { ?>
-					 <p><?= lang('no_categories') ?></p>
-					<?php } ?>
+                    <?php if (!empty($footerCategories)) { ?>
+                        <ul>
+                            <?php foreach ($footerCategories as $key => $categorie) { ?>
+                                <li><a href="javascript:void(0);" data-categorie-id="<?= $key ?>" class="go-category"><?= $categorie ?></a></li>
+                            <?php } ?>
+                        </ul>
+                    <?php } else { ?>
+                        <p><?= lang('no_categories') ?></p>
+                    <?php } ?>
                 </div>
                 <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                     <h3><?= lang('contacts') ?></h3>
                     <ul class="footer-icon">
-                        <li><span><i class="fa fa-map-marker"></i></span> Lorem Ipsum</li>
-                        <li><span><i class="fa fa-phone"></i></span> Lorem Ipsum</li>
-                        <li><span><i class="fa fa-envelope"></i></span> Lorem Ipsum</li>
+                        <li><span><i class="fa fa-map-marker"></i></span> <?= $footerContactAddr ?></li>
+                        <li><span><i class="fa fa-phone"></i></span> <?= $footerContactPhone ?></li>
+                        <li><span><i class="fa fa-envelope"></i></span> <?= $footerContactEmail ?></li>
                     </ul>
                 </div>
                 <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
@@ -40,17 +40,19 @@
                     <ul>
                         <li>
                             <div class="input-append newsletter-box text-center">
-                                <input type="text" class="full text-center" placeholder="Email ">
-                                <button class="btn  bg-gray" type="button"> <?= lang('subscribe') ?> <i class="fa fa-long-arrow-right"> </i> </button>
+                                <form method="POST" id="subscribeForm">
+                                    <input type="text" class="full text-center" name="subscribeEmail" placeholder="<?= lang('email_address') ?>">
+                                    <button class="btn bg-gray" onclick="checkEmailField()" type="button"> <?= lang('subscribe') ?> <i class="fa fa-long-arrow-right"></i></button>
+                                </form>
                             </div>
                         </li>
                     </ul>
                     <ul class="social">
-                        <li> <a href="#"> <i class=" fa fa-facebook">   </i> </a> </li>
-                        <li> <a href="#"> <i class="fa fa-twitter">   </i> </a> </li>
-                        <li> <a href="#"> <i class="fa fa-google-plus">   </i> </a> </li>
-                        <li> <a href="#"> <i class="fa fa-pinterest">   </i> </a> </li>
-                        <li> <a href="#"> <i class="fa fa-youtube">   </i> </a> </li>
+                        <li> <a href="#"><i class=" fa fa-facebook"></i></a></li>
+                        <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li> <a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li> <a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        <li> <a href="#"><i class="fa fa-youtube"></i></a></li>
                     </ul>
                 </div>
             </div> 
@@ -61,7 +63,7 @@
             <p class="pull-left"><?= $footerCopyright ?></p>
             <div class="pull-right">
                 <ul class="nav nav-pills payments">
-                	<li><i class="fa fa-cc-visa"></i></li>
+                    <li><i class="fa fa-cc-visa"></i></li>
                     <li><i class="fa fa-cc-mastercard"></i></li>
                     <li><i class="fa fa-cc-amex"></i></li>
                     <li><i class="fa fa-cc-paypal"></i></li>
@@ -70,6 +72,13 @@
         </div>
     </div>
 </footer>
+<?php if ($this->session->flashdata('emailAdded')) { ?>
+    <script>
+        $(document).ready(function () {
+            ShowNotificator('alert-success', '<?= lang('email_added') ?>');
+        });
+    </script>
+<?php } ?>
 </div>
 </div>
 <div id="notificator" class="alert"></div>

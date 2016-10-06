@@ -83,6 +83,12 @@ $lang['no_categories'] = 'Няма категории';
 $lang['information'] = 'Информация';
 $lang['contact_us'] = 'Свържете се с нас';
 $lang['contact_us_feel_free'] = 'Очакваме да ни се обадите';
+$lang['name'] = 'Име';
+$lang['subject'] = 'Заглавие';
+$lang['message'] = 'Съобщение';
+$lang['send_message'] = 'Изпрати съобщението';
+$lang['our_office'] = 'Нашият офис';
+$lang['email_added'] = 'Имейл адреса ви е добавен успешно';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'Не сте въвели име';

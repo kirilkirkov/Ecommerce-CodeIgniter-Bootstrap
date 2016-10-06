@@ -218,6 +218,11 @@ class Admin_model extends CI_Model
         return $this->db->count_all_results('history');
     }
 
+    public function emailsCount()
+    {
+        return $this->db->count_all_results('subscribed');
+    }
+
     public function setHistory($activity, $user)
     {
         $this->db->insert('history', array('activity' => $activity, 'username' => $user, 'time' => time()));
@@ -488,6 +493,18 @@ class Admin_model extends CI_Model
         $query = $this->db->query("SELECT value FROM valueStore WHERE thekey = '$key'");
         $img = $query->row_array();
         return $img['value'];
+    }
+
+    public function getSuscribedEmails($limit, $page)
+    {
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->select('*')->get('subscribed', $limit, $page);
+        return $query;
+    }
+
+    public function deleteEmail($id)
+    {
+        $this->db->where('id', $id)->delete('subscribed');
     }
 
 }

@@ -438,9 +438,31 @@ class Admin extends MX_Controller
             $this->session->set_flashdata('resultFooterCopyright', 'New navigation text is set!');
             redirect('admin/styling');
         }
+        if (isset($_POST['contactsPage'])) {
+            $this->Admin_model->setValueStore('contactspage', $_POST['contactsPage']);
+            $this->session->set_flashdata('resultContactspage', 'Contacts page is updated!');
+            redirect('admin/styling');
+        }
+        if (isset($_POST['footerContacts'])) {
+            $this->Admin_model->setValueStore('footerContactAddr', $_POST['footerContactAddr']);
+            $this->Admin_model->setValueStore('footerContactPhone', $_POST['footerContactPhone']);
+            $this->Admin_model->setValueStore('footerContactEmail', $_POST['footerContactEmail']);
+            $this->session->set_flashdata('resultfooterContacts', 'Contacts on footer are updated!');
+            redirect('admin/styling');
+        }
+        if (isset($_POST['googleMaps'])) {
+            $this->Admin_model->setValueStore('googleMaps', $_POST['googleMaps']);
+            $this->session->set_flashdata('resultGoogleMaps', 'Google maps coordinates are updated!');
+            redirect('admin/styling');
+        }
         $data['siteLogo'] = $this->Admin_model->getValueStore('sitelogo');
         $data['naviText'] = $this->Admin_model->getValueStore('navitext');
         $data['footerCopyright'] = $this->Admin_model->getValueStore('footercopyright');
+        $data['contactsPage'] = $this->Admin_model->getValueStore('contactspage');
+        $data['footerContactAddr'] = $this->Admin_model->getValueStore('footerContactAddr');
+        $data['footerContactPhone'] = $this->Admin_model->getValueStore('footerContactPhone');
+        $data['footerContactEmail'] = $this->Admin_model->getValueStore('footerContactEmail');
+        $data['googleMaps'] = $this->Admin_model->getValueStore('googleMaps');
         $this->load->view('_parts/header', $head);
         $this->load->view('styling', $data);
         $this->load->view('_parts/footer');
@@ -637,6 +659,38 @@ class Admin extends MX_Controller
         else
             echo 0;
         $this->saveHistory('Page status Changed');
+    }
+
+    public function emails($page = 0)
+    {
+        $this->login_check();
+        if (isset($_POST['export'])) {
+            $rowscount = $this->Admin_model->emailsCount();
+            header("Content-Disposition: attachment; filename=online-shop-$rowscount-emails-export.txt");
+            $all_emails = $this->Admin_model->getSuscribedEmails(0, 0);
+            foreach ($all_emails->result() as $row) {
+                echo $row->email . "\n";
+            }
+            exit;
+        }
+        if (isset($_GET['delete'])) {
+            $data = $this->Admin_model->deleteEmail($_GET['delete']);
+            $this->session->set_flashdata('emailDeleted', 'Email addres is deleted!');
+            redirect('admin/emails');
+        }
+        $data = array();
+        $head = array();
+        $head['title'] = 'Administration - Subscribed Emails';
+        $head['description'] = '!';
+        $head['keywords'] = '';
+        $rowscount = $this->Admin_model->emailsCount();
+        $data['links_pagination'] = pagination('admin/emails', $rowscount, 20, 3);
+        $data['emails'] = $this->Admin_model->getSuscribedEmails(20, $page);
+        $this->load->view('_parts/header', $head);
+        $this->load->view('emails', $data);
+        $this->load->view('_parts/footer');
+        if ($page == 0)
+            $this->saveHistory('Go to Subscribed Emails');
     }
 
 }

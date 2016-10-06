@@ -82,6 +82,12 @@ $lang['no_categories'] = 'No categories';
 $lang['information'] = 'Information';
 $lang['contact_us'] = 'Contact us';
 $lang['contact_us_feel_free'] = 'Feel free to contact us';
+$lang['name'] = 'Name';
+$lang['subject'] = 'Subject';
+$lang['message'] = 'Message';
+$lang['send_message'] = 'Send Message';
+$lang['our_office'] = 'Our Office';
+$lang['email_added'] = 'Your email address is added';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';

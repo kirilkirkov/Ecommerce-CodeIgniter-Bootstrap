@@ -2,7 +2,7 @@
 <hr>
     <?php if ($this->session->flashdata('result_publish')) { ?>
         <hr>
-        <div class="alert alert-info"><?= $this->session->flashdata('result_publish'); ?></div>
+        <div class="alert alert-info"><?= $this->session->flashdata('result_publish') ?></div>
         <?php
     }
     ?>

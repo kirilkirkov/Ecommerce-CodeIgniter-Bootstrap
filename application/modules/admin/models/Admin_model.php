@@ -227,6 +227,11 @@ class Admin_model extends CI_Model
         return $this->db->count_all_results('history');
     }
 
+    public function cashOnDeliveryOrdersCount()
+    {
+        return $this->db->count_all_results('orders_cash_on_delivery');
+    }
+
     public function emailsCount()
     {
         return $this->db->count_all_results('subscribed');
@@ -342,19 +347,29 @@ class Admin_model extends CI_Model
     public function changeOrderStatus($id, $to_status)
     {
         $this->db->where('id', $id);
-        $result = $this->db->update('orders_cash_on_delivery', array('processed' => $to_status));
-        if ($result == true) {
-            $this->manageQuantitiesAndProcurement($id, $to_status);
+        $this->db->select('processed');
+        $result1 = $this->db->get('orders_cash_on_delivery');
+        $res = $result1->row_array();
+
+        if ($res['processed'] != $to_status) {
+            $this->db->where('id', $id);
+            $result = $this->db->update('orders_cash_on_delivery', array('processed' => $to_status));
+            if ($result == true) {
+                $this->manageQuantitiesAndProcurement($id, $to_status, $res['processed']);
+            }
+        } else {
+            $result = false;
         }
         return $result;
     }
 
-    private function manageQuantitiesAndProcurement($id, $to_status)
+    private function manageQuantitiesAndProcurement($id, $to_status, $current)
     {
-        if ($to_status == 0) {
+        if (($to_status == 0 || $to_status == 2) && $current == 1) {
             $operator = '+';
             $operator_pro = '-';
-        } else {
+        }
+        if ($to_status == 1) {
             $operator = '-';
             $operator_pro = '+';
         }
@@ -364,8 +379,10 @@ class Admin_model extends CI_Model
         $arr = $result->row_array();
         $products = unserialize($arr['products']);
         foreach ($products as $product_id => $quantity) {
-            $this->db->query('UPDATE products SET quantity=quantity' . $operator . $quantity . ' WHERE product_id=' . $product_id);
-            $this->db->query('UPDATE products SET procurement=procurement' . $operator_pro . $quantity . ' WHERE product_id=' . $product_id);
+            if (isset($operator))
+                $this->db->query('UPDATE products SET quantity=quantity' . $operator . $quantity . ' WHERE product_id=' . $product_id);
+            if (isset($operator_pro))
+                $this->db->query('UPDATE products SET procurement=procurement' . $operator_pro . $quantity . ' WHERE product_id=' . $product_id);
         }
     }
 
@@ -376,7 +393,7 @@ class Admin_model extends CI_Model
         return $result;
     }
 
-    public function getCashOnDeliveryOrders($order_by)
+    public function getCashOnDeliveryOrders($limit, $page, $order_by)
     {
         if ($order_by != null) {
             if ($order_by == 'id')
@@ -386,7 +403,7 @@ class Admin_model extends CI_Model
             $this->db->order_by($order_by, $type);
         }
         $this->db->select('*');
-        $result = $this->db->get('orders_cash_on_delivery');
+        $result = $this->db->get('orders_cash_on_delivery', $limit, $page);
         return $result->result_array();
     }
 

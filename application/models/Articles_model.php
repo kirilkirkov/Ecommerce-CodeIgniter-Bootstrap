@@ -185,6 +185,10 @@ class Articles_model extends CI_Model
             $post['products'] = array();
             foreach ($post['product_id'] as $product) {
                 $post['products'][$product] = $post['quantity'][$i];
+                /*
+                 * If you want to decrease qunatity after product is processed... remove bottm update line!
+                 */
+                // $this->db->query('UPDATE products SET quantity=quantity-' . $post['quantity'][$i] . ' WHERE product_id = ' . $product);
                 $i++;
             }
             unset($post['product_id'], $post['payment_type'], $post['quantity']);

@@ -434,7 +434,7 @@ class Admin extends MX_Controller
         $this->saveHistory('Go to File Manager');
     }
 
-    public function orders()
+    public function orders($page = 0)
     {
         $this->login_check();
         $data = array();
@@ -444,14 +444,17 @@ class Admin extends MX_Controller
         $head['keywords'] = '';
 
         $order_by = null;
-        if (isset($_GET['order_by'])) {
+        if (isset($_GET['order_by']) && $_GET['order_by'] == 'id' && $_GET['order_by'] == 'processed') {
             $order_by = $_GET['order_by'];
         }
-        $data['cash_on_delivery'] = $this->Admin_model->getCashOnDeliveryOrders($order_by);
+        $rowscount = $this->Admin_model->cashOnDeliveryOrdersCount();
+        $data['cash_on_delivery'] = $this->Admin_model->getCashOnDeliveryOrders(20, $page, $order_by);
+        $data['links_pagination'] = pagination('admin/orders', $rowscount, 20, 3);
         $this->load->view('_parts/header', $head);
         $this->load->view('orders', $data);
         $this->load->view('_parts/footer');
-        $this->saveHistory('Go to orders page');
+        if ($page == 0)
+            $this->saveHistory('Go to orders page');
     }
 
     public function querybuilder()
@@ -656,7 +659,7 @@ class Admin extends MX_Controller
             echo 1;
         else
             echo 0;
-        $this->saveHistory('Change order status id ' . $_POST['the_id'] . ' to status ' . $_POST['to_status']);
+        $this->saveHistory('Change order status on product Id ' . $_POST['the_id'] . ' to status ' . $_POST['to_status']);
     }
 
     public function logout()

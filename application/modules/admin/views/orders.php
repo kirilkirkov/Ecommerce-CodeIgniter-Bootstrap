@@ -9,7 +9,7 @@ if (!empty($cash_on_delivery))
         <div style="margin-bottom:10px;">
             <select class="selectpicker changeOrder">
                 <option <?= isset($_GET['order_by']) && $_GET['order_by'] == 'id' ? 'selected' : '' ?> value="id">Order by new</option>
-                <option <?= isset($_GET['order_by']) && $_GET['order_by'] == 'processed' ? 'selected' : '' ?> value="processed">Order by not processed</option>
+                <option <?= (isset($_GET['order_by']) && $_GET['order_by'] == 'processed') || !isset($_GET['order_by']) ? 'selected' : '' ?> value="processed">Order by not processed</option>
             </select>
         </div>
         <table class="table table-condensed table-bordered table-striped">
@@ -33,6 +33,8 @@ if (!empty($cash_on_delivery))
                                 $params = 'class="bg-danger" data-action-id="' . $id . '"';
                             elseif ($key == 'processed' && $td == 1)
                                 $params = 'class="bg-success" data-action-id="' . $id . '"';
+                            elseif ($key == 'processed' && $td == 2)
+                                $params = 'class="bg-warning" data-action-id="' . $id . '"';
                             ?>
                             <td <?= $params ?>>
                                 <?php
@@ -40,7 +42,10 @@ if (!empty($cash_on_delivery))
                                     $arr_products = unserialize($td);
                                     foreach ($arr_products as $product_id => $product_quantity) {
                                         ?>
-                                        <div>Product ID: <b class="product-<?= $id ?>"><?= $product_id ?></b></div>
+                                        <div>
+                                            <a data-toggle="tooltip" data-placement="top" title="Click to preview" target="_blank" href="<?= base_url('preview_' . $product_id) ?>">Product ID: 
+                                                <b class="product-<?= $id ?>"><?= $product_id ?></b></a>
+                                        </div>
                                         <div>Quantity:  <b><?= $product_quantity ?></b></div>
                                         <hr>
                                         <?php
@@ -48,43 +53,51 @@ if (!empty($cash_on_delivery))
                                 } else {
                                     if ($key == 'date')
                                         $td = date('d.M.Y / H:m:s', $td);
-                                    if ($key == 'processed' && $td == 0)
-                                        $td = '<div>No</div> <input type="hidden" value="' . $td . '" id="id-' . $id . '"> <a href="javascript:void(0);" onclick="changeStatus(' . $id . ')" class="btn btn-primary btn-xs">change</a>';
-                                    if ($key == 'processed' && $td == 1)
-                                        $td = '<div>Yes</div> <input type="hidden" value="' . $td . '" id="id-' . $id . '"> <a href="javascript:void(0);" onclick="changeStatus(' . $id . ')" class="btn btn-primary btn-xs">change</a>';
-                                    ?>
-                                    <?= $td ?>
-                                <?php } ?> 
+                                    if ($key == 'processed') {
+                                        if ($td == 0)
+                                            $type = 'No';
+                                        if ($td == 1)
+                                            $type = 'Yes';
+                                        if ($td == 2)
+                                            $type = 'Rejected';
+                                        ?>
+                                        <div class="status text-center" style="padding:5px; font-size:16px;">
+                                            -- <b><?= $type ?></b> --
+                                        </div>
+                                        <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeStatus(<?= $id ?>, 1)" class="btn btn-success btn-xs">processed</a></div>
+                                        <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeStatus(<?= $id ?>, 0)" class="btn btn-danger btn-xs">no processed</a></div>
+                                        <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeStatus(<?= $id ?>, 2)" class="btn btn-warning btn-xs">rejected</a></div>
+                                        <?php
+                                    }
+                                    echo $td;
+                                }
+                                ?> 
                             </td>
                         <?php } ?>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
+        <?= $links_pagination ?>
     <?php } else { ?>
         <div class="alert alert-info">No orders to the moment!</div>
     <?php } ?>
 </div>
 <script>
-    function changeStatus(id) {
-        var status = $('#id-' + id);
-        var new_status;
-        if (status.val() == 0) {
-            new_status = 1;
-        } else {
-            new_status = 0;
-        }
-        $.post("<?= base_url('changeOrderStatus') ?>", {the_id: id, to_status: new_status}, function (data) {
+    function changeStatus(id, to_status) {
+        $.post("<?= base_url('changeOrderStatus') ?>", {the_id: id, to_status: to_status}, function (data) {
             if (data == '1') {
-                var status = $('#id-' + id);
-                if (status.val() == 0) {
-                    $('[data-action-id="' + id + '"] div').text('Yes');
-                    $('[data-action-id="' + id + '"]').removeClass("bg-danger").addClass("bg-success");
-                    status.val(1);
-                } else {
-                    $('[data-action-id="' + id + '"] div').text('No');
-                    $('[data-action-id="' + id + '"]').removeClass("bg-success").addClass("bg-danger");
-                    status.val(0);
+                if (to_status == 0) {
+                    $('[data-action-id="' + id + '"] div.status b').text('No');
+                    $('[data-action-id="' + id + '"]').removeClass().addClass('bg-danger');
+                }
+                if (to_status == 1) {
+                    $('[data-action-id="' + id + '"] div.status b').text('Yes');
+                    $('[data-action-id="' + id + '"]').removeClass().addClass('bg-success');
+                }
+                if (to_status == 2) {
+                    $('[data-action-id="' + id + '"] div.status b').text('Rejected');
+                    $('[data-action-id="' + id + '"]').removeClass().addClass('bg-warning');
                 }
             }
         });

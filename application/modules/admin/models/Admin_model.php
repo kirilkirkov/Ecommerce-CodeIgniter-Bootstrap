@@ -452,8 +452,9 @@ class Admin_model extends CI_Model
     public function postsCount($search = null)
     {
         if ($search !== null) {
-            $this->db->like('title', $search);
+            $this->db->like('translations.title', $search);
         }
+        $this->db->join('translations', 'translations.for_id = blog_posts.id', 'left');
         return $this->db->count_all_results('blog_posts');
     }
 

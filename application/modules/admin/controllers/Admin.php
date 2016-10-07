@@ -17,6 +17,7 @@ class Admin extends MX_Controller
     private $username;
     private $history;
     private $def_lang;
+    private $def_lang_name;
     private $activePages;
 
     //$data['links_pagination'] = pagination('admin/view_all', $rowscount, $this->num_rows, 3);
@@ -26,9 +27,10 @@ class Admin extends MX_Controller
         parent::__construct();
         $this->history = $this->config->item('admin_history');
         $this->load->library(array('session', 'form_validation'));
-        $this->load->helper(array('text', 'file', 'pagination', 'text', 'except_letters', 'currencies'));
+        $this->load->helper(array('text', 'file', 'pagination', 'text', 'except_letters', 'currencies', 'rcopy', 'rrmdir', 'rreadDir', 'savefile'));
         $this->load->Model('Admin_model');
         $this->def_lang = $this->config->item('language_abbr');
+        $this->def_lang_name = $this->config->item('language');
         $this->activePages = $vars['activePages'] = $this->getActivePages();
         $this->load->vars($vars);
     }
@@ -246,34 +248,55 @@ class Admin extends MX_Controller
             }
             redirect('admin/languages');
         }
+        if (isset($_GET['editLang'])) {
+            $num = $this->Admin_model->countLangs($_GET['editLang']);
+            if ($num == 0)
+                redirect('admin/languages');
+            $langFiles = $this->getLangFolderForEdit();
+        }
+        if (isset($_POST['goDaddyGo'])) {
+            $this->saveLanguageFiles();
+            redirect('admin/languages');
+        }
+        if (!is_writable('application/languages/')) {
+            $data['writable'] = 'Languages folder is not writable!';
+        }
         $data = array();
         $head = array();
         $head['title'] = 'Administration - Languages';
         $head['description'] = '!';
         $data['def_lang'] = $this->def_lang;
+        if (isset($langFiles)) {
+            $data['arrPhpFiles'] = $langFiles[0];
+            $data['arrJsFiles'] = $langFiles[1];
+        }
         $head['keywords'] = '';
         $data['languages'] = $this->Admin_model->getLanguages();
 
-        $this->form_validation->set_rules('abbr', 'Abbrevation', 'trim|required|is_unique[languages.abbr]');
-        if ($this->form_validation->run($this)) {
-            $config['upload_path'] = './attachments/lang_flags/';
-            $config['allowed_types'] = 'gif|jpg|png';
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('userfile')) {
-                $error = $this->upload->display_errors();
-                log_message('error', 'Language image upload error: ' . $error);
-            } else {
-                $img = $this->upload->data();
-                if ($img['file_name'] != null)
-                    $_POST['flag'] = $img['file_name'];
-            }
-            $result = $this->Admin_model->setLanguage($_POST);
-            if ($result === true) {
-                $this->session->set_flashdata('result_add', 'Language is added!');
-                $this->saveHistory('Create language - ' . $_POST['abbr']);
-            } else {
-                $this->session->set_flashdata('result_add', 'Problem with language add!');
-            }
+        if (isset($_POST['name']) && isset($_POST['abbr'])) {
+            $dublicates = $this->Admin_model->countLangs($_POST['name'], $_POST['abbr']);
+            if ($dublicates == 0) {
+                $config['upload_path'] = './attachments/lang_flags/';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $this->load->library('upload', $config);
+                if (!$this->upload->do_upload('userfile')) {
+                    $error = $this->upload->display_errors();
+                    log_message('error', 'Language image upload error: ' . $error);
+                } else {
+                    $img = $this->upload->data();
+                    if ($img['file_name'] != null)
+                        $_POST['flag'] = $img['file_name'];
+                }
+                $result = $this->Admin_model->setLanguage($_POST);
+                if ($result === true) {
+                    $this->createLangFolders();
+                    $this->session->set_flashdata('result_add', 'Language is added!');
+                    $this->saveHistory('Create language - ' . $_POST['abbr']);
+                } else {
+                    $this->session->set_flashdata('result_add', 'Problem with language add!');
+                }
+            } else
+                $this->session->set_flashdata('result_add', 'This language exsists!');
             redirect('admin/languages');
         }
 
@@ -281,6 +304,77 @@ class Admin extends MX_Controller
         $this->load->view('languages', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to languages');
+    }
+
+    private function saveLanguageFiles()
+    {
+        $i = 0;
+        $prevFile = 'none';
+        $phpFileInclude = "<?php \n";
+        foreach ($_POST['php_files'] as $phpFile) {
+            if ($phpFile != $prevFile && $i > 0) {
+                savefile($prevFile, $phpFileInclude);
+                $phpFileInclude = "<?php \n";
+            }
+            $phpFileInclude .= '$lang[\'' . htmlentities($_POST['php_keys'][$i]) . '\'] = \'' . htmlentities($_POST['php_values'][$i]) . '\';' . "\n";
+            $prevFile = $phpFile;
+            $i++;
+        }
+        savefile($phpFile, $phpFileInclude);
+
+
+        $i = 0;
+        $prevFile = 'none';
+        $jsFileInclude = "var lang = { \n";
+        foreach ($_POST['js_files'] as $jsFile) {
+            if ($jsFile != $prevFile && $i > 0) {
+                $jsFileInclude .= "};";
+                savefile($prevFile, $jsFileInclude);
+                $jsFileInclude = "var lang = { \n";
+            }
+            $jsFileInclude .= htmlentities($_POST['js_keys'][$i]) . ':' . '"' . htmlentities($_POST['js_values'][$i]) . '",' . "\n";
+            $prevFile = $jsFile;
+            $i++;
+        }
+        $jsFileInclude .= "};";
+        savefile($jsFile, $jsFileInclude);
+    }
+
+    private function getLangFolderForEdit()
+    {
+        $langFiles = array();
+        $files = rreadDir('application/language/' . $_GET['editLang'] . '/');
+        $arrPhpFiles = $arrJsFiles = array();
+        foreach ($files as $ext => $filesLang) {
+            foreach ($filesLang as $fileLang) {
+                if ($ext == 'php') {
+                    require $fileLang;
+                    if (isset($lang)) {
+                        $arrPhpFiles[$fileLang] = $lang;
+                        unset($lang);
+                    }
+                }
+                if ($ext == 'js') {
+                    $jsTrans = file_get_contents($fileLang);
+                    preg_match_all('/(.+?)"(.+?)"/', $jsTrans, $PMA);
+                    $arrJsFiles[$fileLang] = $PMA;
+                    unset($PMA);
+                }
+            }
+        }
+        $langFiles[0] = $arrPhpFiles;
+        $langFiles[1] = $arrJsFiles;
+        return $langFiles;
+    }
+
+    private function createLangFolders()
+    {
+        $newLang = strtolower(trim($_POST['name']));
+        if ($newLang != '') {
+            $from = 'application/language/' . $this->def_lang_name;
+            $to = 'application/language/' . $newLang;
+            rcopy($from, $to);
+        }
     }
 
     public function adminUsers()
@@ -424,6 +518,7 @@ class Admin extends MX_Controller
                 $data = array('upload_data' => $this->upload->data());
                 $newImage = $data['upload_data']['file_name'];
                 $this->Admin_model->setValueStore('sitelogo', $newImage);
+                $this->saveHistory('Change site logo');
                 $this->session->set_flashdata('resultSiteLogoPublish', 'New logo is set!');
             }
             redirect('admin/styling');
@@ -431,16 +526,19 @@ class Admin extends MX_Controller
         if (isset($_POST['naviText'])) {
             $this->Admin_model->setValueStore('navitext', $_POST['naviText']);
             $this->session->set_flashdata('resultNaviText', 'New navigation text is set!');
+            $this->saveHistory('Change navigation text');
             redirect('admin/styling');
         }
         if (isset($_POST['footerCopyright'])) {
             $this->Admin_model->setValueStore('footercopyright', $_POST['footerCopyright']);
             $this->session->set_flashdata('resultFooterCopyright', 'New navigation text is set!');
+            $this->saveHistory('Change footer copyright');
             redirect('admin/styling');
         }
         if (isset($_POST['contactsPage'])) {
             $this->Admin_model->setValueStore('contactspage', $_POST['contactsPage']);
             $this->session->set_flashdata('resultContactspage', 'Contacts page is updated!');
+            $this->saveHistory('Change contacts page');
             redirect('admin/styling');
         }
         if (isset($_POST['footerContacts'])) {
@@ -448,11 +546,29 @@ class Admin extends MX_Controller
             $this->Admin_model->setValueStore('footerContactPhone', $_POST['footerContactPhone']);
             $this->Admin_model->setValueStore('footerContactEmail', $_POST['footerContactEmail']);
             $this->session->set_flashdata('resultfooterContacts', 'Contacts on footer are updated!');
+            $this->saveHistory('Change footer contacts');
+            redirect('admin/styling');
+        }
+        if (isset($_POST['footerSocial'])) {
+            $this->Admin_model->setValueStore('footerSocialFacebook', $_POST['footerSocialFacebook']);
+            $this->Admin_model->setValueStore('footerSocialTwitter', $_POST['footerSocialTwitter']);
+            $this->Admin_model->setValueStore('footerSocialGooglePlus', $_POST['footerSocialGooglePlus']);
+            $this->Admin_model->setValueStore('footerSocialPinterest', $_POST['footerSocialPinterest']);
+            $this->Admin_model->setValueStore('footerSocialYoutube', $_POST['footerSocialYoutube']);
+            $this->session->set_flashdata('resultfooterSocial', 'Social on footer are updated!');
+            $this->saveHistory('Change footer contacts');
             redirect('admin/styling');
         }
         if (isset($_POST['googleMaps'])) {
             $this->Admin_model->setValueStore('googleMaps', $_POST['googleMaps']);
             $this->session->set_flashdata('resultGoogleMaps', 'Google maps coordinates are updated!');
+            $this->saveHistory('Change Google Maps Coordinates');
+            redirect('admin/styling');
+        }
+        if (isset($_POST['footerAboutUs'])) {
+            $this->Admin_model->setValueStore('footerAboutUs', $_POST['footerAboutUs']);
+            $this->session->set_flashdata('resultFooterAboutUs', 'Footer about us text changed!');
+            $this->saveHistory('Change Footer About Us text');
             redirect('admin/styling');
         }
         $data['siteLogo'] = $this->Admin_model->getValueStore('sitelogo');
@@ -462,7 +578,15 @@ class Admin extends MX_Controller
         $data['footerContactAddr'] = $this->Admin_model->getValueStore('footerContactAddr');
         $data['footerContactPhone'] = $this->Admin_model->getValueStore('footerContactPhone');
         $data['footerContactEmail'] = $this->Admin_model->getValueStore('footerContactEmail');
+        
+        $data['footerSocialFacebook'] = $this->Admin_model->getValueStore('footerSocialFacebook');
+        $data['footerSocialTwitter'] = $this->Admin_model->getValueStore('footerSocialTwitter');
+        $data['footerSocialGooglePlus'] = $this->Admin_model->getValueStore('footerSocialGooglePlus');
+        $data['footerSocialPinterest'] = $this->Admin_model->getValueStore('footerSocialPinterest');
+        $data['footerSocialYoutube'] = $this->Admin_model->getValueStore('footerSocialYoutube');
+        
         $data['googleMaps'] = $this->Admin_model->getValueStore('googleMaps');
+        $data['footerAboutUs'] = $this->Admin_model->getValueStore('footerAboutUs');
         $this->load->view('_parts/header', $head);
         $this->load->view('styling', $data);
         $this->load->view('_parts/footer');

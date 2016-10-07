@@ -39,6 +39,12 @@ class MY_Controller extends MX_Controller
         $vars['footerContactPhone'] = htmlentities($this->Admin_model->getValueStore('footerContactPhone'));
         $vars['footerContactEmail'] = htmlentities($this->Admin_model->getValueStore('footerContactEmail'));
         $vars['googleMaps'] = $this->Admin_model->getValueStore('googleMaps');
+        $vars['footerAboutUs'] = $this->Admin_model->getValueStore('footerAboutUs');
+        $vars['footerSocialFacebook'] = $this->Admin_model->getValueStore('footerSocialFacebook');
+        $vars['footerSocialTwitter'] = $this->Admin_model->getValueStore('footerSocialTwitter');
+        $vars['footerSocialGooglePlus'] = $this->Admin_model->getValueStore('footerSocialGooglePlus');
+        $vars['footerSocialPinterest'] = $this->Admin_model->getValueStore('footerSocialPinterest');
+        $vars['footerSocialYoutube'] = $this->Admin_model->getValueStore('footerSocialYoutube');
         $this->load->vars($vars);
         $this->load->view('_parts/header', $head);
         $this->load->view($view, $data);

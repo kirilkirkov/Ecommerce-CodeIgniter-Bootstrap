@@ -1,7 +1,14 @@
 <div id="languages">
     <h1><img src="<?= base_url('assets/imgs/small-globe.png') ?>" class="header-img" style="margin-top:-3px;"> Languages</h1> 
     <hr>
-    <?php if (validation_errors()) { ?>
+    <?php
+    if (isset($writable)) {
+        ?>
+        <div class="alert alert-danger"><?= $writable ?></div>
+        <?php
+    }
+    if (validation_errors()) {
+        ?>
         <hr>
         <div class="alert alert-danger"><?= validation_errors() ?></div>
         <hr>
@@ -21,9 +28,11 @@
         <hr>
         <?php
     }
-    ?>
-    <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_articles" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add new language</a>
-    <?php
+    if (!isset($writable)) {
+        ?>
+        <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_articles" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add new language</a>
+        <?php
+    }
     if ($languages->result()) {
         ?>
         <table class="table table-striped custab">
@@ -41,12 +50,13 @@
                 <tr>
                     <td><?= $language->id ?></td>
                     <td><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="No country flag" style="width:16px; height:11px;"></td>
-                    <td><?= $language->abbr ?></td>
-                    <td><?= $language->name ?></td>
+                    <td><?= strtoupper($language->abbr) ?></td>
+                    <td><?= ucfirst($language->name) ?></td>
                     <td><?= $language->currency ?></td>
                     <td class="text-center">
                         <?php if ($def_lang != $language->abbr) { ?>
-                            <a href="<?= base_url('admin/languages/?delete=' . $language->id) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                            <a href="<?= base_url('admin/languages/?delete=' . $language->id) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                            <a href="<?= base_url('admin/languages/?editLang=' . $language->name) ?>" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
                         <?php } else { ?>
                             is default
                         <?php } ?>
@@ -58,13 +68,60 @@
         <div class="alert alert-info">No languages found!</div>
     <?php } ?>
     <div class="alert alert-warning">
-        <b>How to add language in 3 easy steps</b>
+        <b>How to add language in 2 easy steps</b>
         <ul>
             <li>Add languages here (set Abbrevation, Name, and Image)</li>
-            <li>Copy some of language folders in /application/languages/ and rename it to new language, chage laguages in array</li>
-            <li>Edit articles and set new languages in fields</li>
+            <li>Edit added language and set values</li>
         </ul>
     </div>
+
+    <?php
+    if (isset($_GET['editLang'])) {
+        ?>
+        <form method="POST" id="saveLang">
+            <input type="hidden" name="goDaddyGo" value="">
+            <div class="alert alert-info"><span class="glyphicon glyphicon-alert"></span> Now you edit language: <b><?= ucfirst($_GET['editLang']) ?></b></div>
+            <?php
+            $o = 1;
+            foreach ($arrPhpFiles as $phpFile => $langFinal) {
+                if (!empty($langFinal)) {
+                    foreach ($langFinal as $key => $val) {
+                        ?>
+                        <div class="divLangs">
+                            <span><b><?= $o ?>.</b> <?= $val ?></span>
+                            <input type="hidden" name="php_files[]" value="<?= $phpFile ?>">
+                            <input type="hidden" name="php_keys[]" value="<?= $key ?>">
+                            <input type="text" value="<?= $val ?>" class="form-control" name="php_values[]">
+                        </div>
+                        <?php
+                        $o++;
+                    }
+                }
+            }
+
+            foreach ($arrJsFiles as $jsFile => $langFinal) {
+                $i = 0;
+                foreach ($langFinal[1] as $aaIam) {
+                    ?>
+                    <div class="divLangs">
+                        <span><b><?= $o ?>.</b> <?= $langFinal[2][$i] ?></span>
+                        <input type="hidden" name="js_files[]" value="<?= $jsFile ?>">
+                        <input type="hidden" name="js_keys[]" value="<?= trim(str_replace(':', '', $aaIam)) ?>">
+                        <input type="text" class="form-control" value="<?= $langFinal[2][$i] ?>" name="js_values[]">
+                    </div>
+                    <?php
+                    $i++;
+                    $o++;
+                }
+            }
+            ?>
+            <a href="javascript:void(0);" data-form-id="saveLang" style="margin-left: 10px;" class="btn btn-lg btn-info confirm-save">Save me</a>
+            <a href="<?= base_url('admin/languages') ?>" class="btn btn-lg btn-default">Cancel</a>
+        </form>
+        <?php
+    }
+    ?>
+
     <!-- add edit languages -->
     <div class="modal fade" id="add_edit_articles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

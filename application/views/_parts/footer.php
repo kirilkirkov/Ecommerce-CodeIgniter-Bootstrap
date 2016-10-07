@@ -4,15 +4,14 @@
             <div class="row">
                 <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                     <h3><?= lang('about_us') ?></h3>
-                    <p>Lorem Ipsum</p>
+                    <p><?= $footerAboutUs ?></p>
                 </div>
                 <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                    <h3><?= lang('information') ?></h3>
+                    <h3><?= lang('pages') ?></h3>
                     <ul>
-                        <li> <a href="#">» Lorem Ipsum </a> </li>
-                        <li> <a href="#">» Lorem Ipsum </a> </li>
-                        <li> <a href="#">» Lorem Ipsum </a> </li>
-                        <li> <a href="#">» Lorem Ipsum </a> </li>
+                        <li><a href="<?= base_url() ?>">» <?= lang('home') ?> </a></li>
+                        <li><a href="<?= $lang_url . '/checkout' ?>">» <?= lang('checkout') ?> </a></li>
+                        <li><a href="<?= $lang_url . '/contacts' ?>">» <?= lang('contacts') ?> </a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
@@ -48,11 +47,17 @@
                         </li>
                     </ul>
                     <ul class="social">
-                        <li> <a href="#"><i class=" fa fa-facebook"></i></a></li>
-                        <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li> <a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li> <a href="#"><i class="fa fa-pinterest"></i></a></li>
-                        <li> <a href="#"><i class="fa fa-youtube"></i></a></li>
+                        <?php if ($footerSocialFacebook != '') { ?>
+                            <li> <a href="<?= $footerSocialFacebook ?>"><i class=" fa fa-facebook"></i></a></li>
+                        <?php } if ($footerSocialTwitter != '') { ?>
+                            <li> <a href="<?= $footerSocialTwitter ?>"><i class="fa fa-twitter"></i></a></li>
+                        <?php } if ($footerSocialGooglePlus != '') { ?>
+                            <li> <a href="<?= $footerSocialGooglePlus ?>"><i class="fa fa-google-plus"></i></a></li>
+                        <?php } if ($footerSocialPinterest != '') { ?>
+                            <li> <a href="<?= $footerSocialPinterest ?>"><i class="fa fa-pinterest"></i></a></li>
+                        <?php } if ($footerSocialYoutube != '') { ?>
+                            <li> <a href="<?= $footerSocialYoutube ?>"><i class="fa fa-youtube"></i></a></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div> 

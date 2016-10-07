@@ -76,6 +76,28 @@
             }
         });
     });
+    $("a.confirm-save").click(function (e) {
+        e.preventDefault();
+        var formId = $(this).data('form-id');
+        bootbox.confirm({
+            message: "Are you sure want to save?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    document.getElementById(formId).submit();
+                }
+            }
+        });
+    });
 </script>
 </body>
 </html>

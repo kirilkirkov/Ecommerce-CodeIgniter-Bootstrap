@@ -49,6 +49,15 @@ class Admin_model extends CI_Model
         return $query;
     }
 
+    public function countLangs($name = null, $abbr = null)
+    {
+        if ($name != null)
+            $this->db->where('name', $name);
+        if ($abbr != null)
+            $this->db->or_where('abbr', $abbr);
+        return $this->db->count_all_results('languages');
+    }
+
     public function getAdminUsers($id = null)
     {
         if ($id != null) {

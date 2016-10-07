@@ -455,6 +455,7 @@ class Admin_model extends CI_Model
             $this->db->like('translations.title', $search);
         }
         $this->db->join('translations', 'translations.for_id = blog_posts.id', 'left');
+        $this->db->where('translations.abbr', $this->def_lang);
         return $this->db->count_all_results('blog_posts');
     }
 

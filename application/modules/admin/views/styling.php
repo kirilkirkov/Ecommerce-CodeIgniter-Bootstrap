@@ -182,4 +182,24 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Send email from contact form to:</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('resultEmailTo')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('resultEmailTo') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <div class="input-group">
+                        <input class="form-control" name="contactsEmailTo" value="<?= $contactsEmailTo ?>" type="text">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" value="" type="submit">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

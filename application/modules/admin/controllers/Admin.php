@@ -568,7 +568,13 @@ class Admin extends MX_Controller
         if (isset($_POST['footerAboutUs'])) {
             $this->Admin_model->setValueStore('footerAboutUs', $_POST['footerAboutUs']);
             $this->session->set_flashdata('resultFooterAboutUs', 'Footer about us text changed!');
-            $this->saveHistory('Change Footer About Us text');
+            $this->saveHistory('Change footer about us info');
+            redirect('admin/styling');
+        }
+        if (isset($_POST['contactsEmailTo'])) {
+            $this->Admin_model->setValueStore('contactsEmailTo', $_POST['contactsEmailTo']);
+            $this->session->set_flashdata('resultEmailTo', 'Email changed!');
+            $this->saveHistory('Change where going emails from contact form');
             redirect('admin/styling');
         }
         $data['siteLogo'] = $this->Admin_model->getValueStore('sitelogo');
@@ -578,13 +584,14 @@ class Admin extends MX_Controller
         $data['footerContactAddr'] = $this->Admin_model->getValueStore('footerContactAddr');
         $data['footerContactPhone'] = $this->Admin_model->getValueStore('footerContactPhone');
         $data['footerContactEmail'] = $this->Admin_model->getValueStore('footerContactEmail');
-        
+
         $data['footerSocialFacebook'] = $this->Admin_model->getValueStore('footerSocialFacebook');
         $data['footerSocialTwitter'] = $this->Admin_model->getValueStore('footerSocialTwitter');
         $data['footerSocialGooglePlus'] = $this->Admin_model->getValueStore('footerSocialGooglePlus');
         $data['footerSocialPinterest'] = $this->Admin_model->getValueStore('footerSocialPinterest');
         $data['footerSocialYoutube'] = $this->Admin_model->getValueStore('footerSocialYoutube');
-        
+
+        $data['contactsEmailTo'] = $this->Admin_model->getValueStore('contactsEmailTo');
         $data['googleMaps'] = $this->Admin_model->getValueStore('googleMaps');
         $data['footerAboutUs'] = $this->Admin_model->getValueStore('footerAboutUs');
         $this->load->view('_parts/header', $head);

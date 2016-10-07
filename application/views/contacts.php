@@ -21,14 +21,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="container">
         <div class="row">
             <div class="col-md-8">
+                <?php
+                if ($this->session->flashdata('resultSend')) {
+                    ?>
+                    <hr>
+                    <div class="alert alert-info"><?= $this->session->flashdata('resultSend') ?></div>
+                    <hr>
+                <?php }
+                ?>
                 <div class="well well-sm">
-                    <form>
+                    <form method="POST" action="">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">
                                         <?= lang('name') ?></label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter name" required="required" />
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter name" required="required" />
                                 </div>
                                 <div class="form-group">
                                     <label for="email">
@@ -36,12 +44,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <div class="input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
                                         </span>
-                                        <input type="email" class="form-control" id="email" placeholder="Enter email" required="required" /></div>
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required="required" /></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="subject">
                                         <?= lang('subject') ?></label>
-                                    <input type="text" class="form-control" >
+                                    <input type="text" name="subject" class="form-control" >
                                 </div>
                             </div>
                             <div class="col-md-6">

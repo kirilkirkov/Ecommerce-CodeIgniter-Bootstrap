@@ -186,7 +186,7 @@ if ($this->session->flashdata('result_publish')) {
     $(document).ready(function () {
         $("#showSliderDescrption").click(function () {
             $("#theSliderDescrption").slideToggle("slow", function () {
-                // Animation complete.
+                
             });
         });
     });

@@ -51,11 +51,15 @@ body { font-family:arial; padding-top:0; color:#424449;}
 #home-slider .carousel-control.left, #home-slider .carousel-control.right  { background-image: url('../imgs/carousel-sprite.png');}
 #home-slider .carousel-control.left	{ background-position: 0 center; width: 100px; }
 #home-slider .carousel-control.right	{  background-position: -100px center; width: 100px; }
-#home-slider a.buy-now {float:right; text-transform:uppercase; background: #fff none repeat scroll 0 0; border: 1px solid #ddd; color: #000; cursor: pointer; font-size: 0.85em; outline: medium none; padding: 10px 30px; transition: all 0.3s ease 0s;}
-#home-slider a.buy-now:hover {text-decoration:none;}
+#home-slider a.option {float:right; text-transform:uppercase; background: #fff none repeat scroll 0 0; border: 1px solid #ddd; color: #000; cursor: pointer; font-size: 0.85em; outline: medium none; padding: 10px 30px; transition: all 0.3s ease 0s;}
+#home-slider a.option.right-5 {margin-right: 5px;}
+#home-slider a.option:hover {text-decoration:none;}
 #home-slider .carousel-indicators li {border:1px solid #333;}
 #home-slider .carousel-indicators .active {background-color:#333;}
 
+.oaerror { width: 100%;  margin: 0 auto; background-color: #FFFFFF;  padding: 20px; border: 1px solid #eee; border-left-width: 5px; border-radius: 3px; margin: 0 auto; font-family: 'Open Sans', sans-serif; font-size: 16px;}
+.oaerror.info { border-left-color: #5bc0de;  background-color: rgba(91, 192, 222, 0.1);}
+.oaerror.info strong {  color: #5bc0de;}
 .table-products img.product-image {width:80px;}
 
 nav.navbar-silver {background-color:#f3f3f3;-webkit-box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);-moz-box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);}
@@ -192,7 +196,8 @@ footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
 	 .navbar-toggle .icon-bar   {background-color:#666;}
 	 #home-slider {height:auto;padding-bottom:60px;}
 	 #home-slider .right-side .text-right {text-align:center; }
-	 #home-slider .right-side a.buy-now {float:none;}
+	 #home-slider .right-side a.option {float:none;}
+         #home-slider .right-side a.option.right-5 {margin-left:5px;}
 	 #home-slider .right-side .xs-center {text-align:center; height:50px;}
 	 .ord {margin-bottom:7px;}
 	 #view-article .filter-sidebar {padding-left:10px; padding-right:10px;}

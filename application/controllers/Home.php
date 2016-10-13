@@ -42,7 +42,7 @@ class Home extends MY_Controller
         $data['countQuantities'] = $this->Articles_model->getCountQuantities();
         $data['bestSellers'] = $this->Articles_model->getbestSellers($this->my_lang);
         $data['sliderProducts'] = $this->Articles_model->getSliderProducts($this->my_lang);
-
+        $data['shippingOrder'] = $this->Admin_model->getValueStore('shippingOrder');
         $data['products'] = $this->Articles_model->getProducts($this->my_lang, $this->num_rows, $page, $_GET);
         $rowscount = $this->Articles_model->productsCount('shop');
         $data['links_pagination'] = pagination('home', $rowscount, $this->num_rows);

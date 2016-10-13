@@ -21,10 +21,10 @@
         }
     });
     $(document).ready(function () {
-        $("i.fa.fa-cogs").click(function () {
+        $(".h-settings").click(function () {
             $(".settings").toggle("slow", function () {
                 $("i.fa.fa-cogs").addClass('fa-spin');
-                if ($(this).is(':visible')) {
+                if ($(".settings").is(':visible')) {
                     $("i.fa.fa-cogs").addClass('fa-spin');
                 } else {
                     $("i.fa.fa-cogs").removeClass('fa-spin');

@@ -29,7 +29,7 @@ class Articles_model extends CI_Model
         $this->db->where('translations.abbr', $lang);
         $this->db->where('translations.type', 'product');
         $this->db->where('visibility', 1);
-        $this->db->where('in_slider', 0);
+        // $this->db->where('in_slider', 0); Show slider products in categories
 
         if (!empty($big_get) && isset($big_get['category'])) {
             if ($big_get['category'] != '') {
@@ -194,7 +194,7 @@ class Articles_model extends CI_Model
             unset($post['product_id'], $post['payment_type'], $post['quantity']);
             $post['date'] = time();
             $post['products'] = serialize($post['products']);
-            $this->db->insert('orders_cash_on_delivery', $post);
+            $this->db->insert('orders', $post);
         }
     }
 

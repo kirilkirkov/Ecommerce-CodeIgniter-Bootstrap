@@ -31,7 +31,14 @@ if (count($sliderProducts) > 0) {
                                     <?= character_limiter(strip_tags($article['basic_description']), 150) ?>
                                 </div>
                                 <div class="price text-right"><?= $article['price'] . $currency ?></div>
-                                <div class="xs-center"><a class="buy-now" href="<?= $lang_url . '/' . $article['url'] ?>"><span class="glyphicon glyphicon-shopping-cart"></span> <?= lang('buy_now') ?></a></div>
+                                <div class="xs-center">
+                                    <a class="option add-to-cart" href="javascript:void(0);" data-id="<?= $article['id'] ?>">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> <?= lang('buy_now') ?>
+                                    </a>
+                                    <a class="option right-5" href="<?= $lang_url . '/' . $article['url'] ?>">
+                                        <span class="glyphicon glyphicon-info-sign"></span> <?= lang('details') ?>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -114,6 +121,16 @@ if (count($sliderProducts) > 0) {
                     </li>
                 </ul>
             </div>
+            <?php if ($shippingOrder != 0 && $shippingOrder != null) { ?>
+                <div class="filter-sidebar">
+                    <div class="title">
+                        <span><?= lang('freeShippingHeader') ?></span>
+                    </div>
+                    <div class="oaerror info">
+                        <strong><?= lang('promo') ?></strong> - <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, $currency), lang('freeShipping')) ?>!
+                    </div>
+                </div>
+            <?php } ?>
         </div>
         <div class="col-md-9 eqHeight" id="products-side">
             <div class="alone title">

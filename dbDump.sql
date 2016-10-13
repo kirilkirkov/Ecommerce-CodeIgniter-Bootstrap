@@ -1365,7 +1365,7 @@ INSERT INTO `languages` (`id`, `abbr`, `name`, `currency`, `flag`) VALUES
 -- Table structure for table `orders_cash_on_delivery`
 --
 
-CREATE TABLE IF NOT EXISTS `orders_cash_on_delivery` (
+CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) CHARACTER SET utf8 NOT NULL,
   `last_name` varchar(50) CHARACTER SET utf8 NOT NULL,

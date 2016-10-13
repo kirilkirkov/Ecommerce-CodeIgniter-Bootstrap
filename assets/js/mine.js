@@ -1,5 +1,5 @@
 // Shopping Cart Manager
-$('.add-to-cart a').click(function () {
+$('a.add-to-cart').click(function () {
     var reload = false;
     var article_id = $(this).data('id');
     if ($(this).hasClass('refresh-me')) {

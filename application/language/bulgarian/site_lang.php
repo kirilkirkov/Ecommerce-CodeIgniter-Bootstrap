@@ -89,6 +89,9 @@ $lang['message'] = 'Съобщение';
 $lang['send_message'] = 'Изпрати съобщението';
 $lang['our_office'] = 'Нашият офис';
 $lang['email_added'] = 'Имейл адреса ви е добавен успешно';
+$lang['freeShippingHeader'] = 'Друго';
+$lang['freeShipping'] = 'За поръчка над %price%%currency% доставката е безплатна';
+$lang['promo'] = 'Промоция';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'Не сте въвели име';

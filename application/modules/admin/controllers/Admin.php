@@ -447,8 +447,8 @@ class Admin extends MX_Controller
         if (isset($_GET['order_by']) && $_GET['order_by'] == 'id' && $_GET['order_by'] == 'processed') {
             $order_by = $_GET['order_by'];
         }
-        $rowscount = $this->Admin_model->cashOnDeliveryOrdersCount();
-        $data['cash_on_delivery'] = $this->Admin_model->getCashOnDeliveryOrders(20, $page, $order_by);
+        $rowscount = $this->Admin_model->ordersCount();
+        $data['orders'] = $this->Admin_model->orders(20, $page, $order_by);
         $data['links_pagination'] = pagination('admin/orders', $rowscount, 20, 3);
         $this->load->view('_parts/header', $head);
         $this->load->view('orders', $data);
@@ -580,6 +580,12 @@ class Admin extends MX_Controller
             $this->saveHistory('Change where going emails from contact form');
             redirect('admin/styling');
         }
+        if (isset($_POST['shippingOrder'])) {
+            $this->Admin_model->setValueStore('shippingOrder', $_POST['shippingOrder']);
+            $this->session->set_flashdata('shippingOrder', 'Shipping Order price chagned!');
+            $this->saveHistory('Change Shipping free for order more than ' . $_POST['shippingOrder']);
+            redirect('admin/styling');
+        }
         $data['siteLogo'] = $this->Admin_model->getValueStore('sitelogo');
         $data['naviText'] = $this->Admin_model->getValueStore('navitext');
         $data['footerCopyright'] = $this->Admin_model->getValueStore('footercopyright');
@@ -597,6 +603,7 @@ class Admin extends MX_Controller
         $data['contactsEmailTo'] = $this->Admin_model->getValueStore('contactsEmailTo');
         $data['googleMaps'] = $this->Admin_model->getValueStore('googleMaps');
         $data['footerAboutUs'] = $this->Admin_model->getValueStore('footerAboutUs');
+        $data['shippingOrder'] = $this->Admin_model->getValueStore('shippingOrder');
         $this->load->view('_parts/header', $head);
         $this->load->view('styling', $data);
         $this->load->view('_parts/footer');

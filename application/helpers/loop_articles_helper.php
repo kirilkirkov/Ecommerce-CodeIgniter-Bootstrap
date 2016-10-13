@@ -61,7 +61,7 @@ function loop_articles($articles, $currency, $classes = '', $carousel = false) {
 			<?= lang('in_stock') ?>: <span><?= $article['quantity'] ?></span>
 		</div>
 		<div class="add-to-cart">
-			<a href="javascript:void(0);" data-id="<?= $article['id'] ?>">
+			<a href="javascript:void(0);" class="add-to-cart" data-id="<?= $article['id'] ?>">
 				<span class="glyphicon glyphicon-shopping-cart"></span>
 				<img src="<?= base_url('assets/imgs/ajax-loader.gif') ?>" alt="Loding">
 				<?= lang('add_to_cart') ?></a>

@@ -29,15 +29,10 @@
                         </div>
                         <div id="navbar" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lg fa-bars"></i> <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="<?= base_url('admin') ?>"><i class="fa fa-home"></i> Home</a></li>
-                                        <li><a href="<?= base_url() ?>"><i class="glyphicon glyphicon-star"></i> Open site</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="<?= base_url('admin') ?>"><i class="fa fa-home"></i> Home</a></li>
+                                <li><a href="<?= base_url() ?>" target="_blank"><i class="glyphicon glyphicon-star"></i> Open site</a></li>
                                 <li>
-                                    <a href="javascript:void(0);" style="margin-left:-10px;"><i class="fa fa-lg fa-cogs"></i></a>
+                                    <a href="javascript:void(0);" style="margin-left:-10px;" class="h-settings"><i class="fa fa-lg fa-cogs"></i> Settings</a>
                                     <div class="relative">
                                         <div class="settings">
                                             <div class="panel panel-primary" >

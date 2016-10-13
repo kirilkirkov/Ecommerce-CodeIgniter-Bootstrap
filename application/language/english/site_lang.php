@@ -88,6 +88,9 @@ $lang['message'] = 'Message';
 $lang['send_message'] = 'Send Message';
 $lang['our_office'] = 'Our Office';
 $lang['email_added'] = 'Your email address is added';
+$lang['freeShippingHeader'] = 'Oder';
+$lang['freeShipping'] = 'For order more than %price%%currency% the shipping is free';
+$lang['promo'] = 'Promo';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';

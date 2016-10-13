@@ -1,11 +1,11 @@
 <?php
-if (!empty($cash_on_delivery))
-    $table_head = array_keys($cash_on_delivery[0]);
+if (!empty($orders))
+    $table_head = array_keys($orders[0]);
 ?>
 <div class="table-responsive">
-    <h1><img src="<?= base_url('assets/imgs/orders.png') ?>" class="header-img" style="margin-top:-2px;"> <u>Orders</u> - Cash On Delivery</h1>
+    <h1><img src="<?= base_url('assets/imgs/orders.png') ?>" class="header-img" style="margin-top:-2px;"> Orders</h1>
     <hr>
-    <?php if (!empty($cash_on_delivery)) { ?>
+    <?php if (!empty($orders)) { ?>
         <div style="margin-bottom:10px;">
             <select class="selectpicker changeOrder">
                 <option <?= isset($_GET['order_by']) && $_GET['order_by'] == 'id' ? 'selected' : '' ?> value="id">Order by new</option>
@@ -22,7 +22,7 @@ if (!empty($cash_on_delivery))
             </thead>
             <tbody>
                 <?php
-                foreach ($cash_on_delivery as $tr) {
+                foreach ($orders as $tr) {
                     $id = $tr['id'];
                     ?>
                     <tr>

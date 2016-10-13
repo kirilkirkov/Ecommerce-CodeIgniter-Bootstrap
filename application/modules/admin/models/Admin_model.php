@@ -227,9 +227,9 @@ class Admin_model extends CI_Model
         return $this->db->count_all_results('history');
     }
 
-    public function cashOnDeliveryOrdersCount()
+    public function ordersCount()
     {
-        return $this->db->count_all_results('orders_cash_on_delivery');
+        return $this->db->count_all_results('orders');
     }
 
     public function emailsCount()
@@ -348,12 +348,12 @@ class Admin_model extends CI_Model
     {
         $this->db->where('id', $id);
         $this->db->select('processed');
-        $result1 = $this->db->get('orders_cash_on_delivery');
+        $result1 = $this->db->get('orders');
         $res = $result1->row_array();
 
         if ($res['processed'] != $to_status) {
             $this->db->where('id', $id);
-            $result = $this->db->update('orders_cash_on_delivery', array('processed' => $to_status));
+            $result = $this->db->update('orders', array('processed' => $to_status));
             if ($result == true) {
                 $this->manageQuantitiesAndProcurement($id, $to_status, $res['processed']);
             }
@@ -375,7 +375,7 @@ class Admin_model extends CI_Model
         }
         $this->db->select('products');
         $this->db->where('id', $id);
-        $result = $this->db->get('orders_cash_on_delivery');
+        $result = $this->db->get('orders');
         $arr = $result->row_array();
         $products = unserialize($arr['products']);
         foreach ($products as $product_id => $quantity) {
@@ -393,7 +393,7 @@ class Admin_model extends CI_Model
         return $result;
     }
 
-    public function getCashOnDeliveryOrders($limit, $page, $order_by)
+    public function orders($limit, $page, $order_by)
     {
         if ($order_by != null) {
             if ($order_by == 'id')
@@ -403,7 +403,7 @@ class Admin_model extends CI_Model
             $this->db->order_by($order_by, $type);
         }
         $this->db->select('*');
-        $result = $this->db->get('orders_cash_on_delivery', $limit, $page);
+        $result = $this->db->get('orders', $limit, $page);
         return $result->result_array();
     }
 

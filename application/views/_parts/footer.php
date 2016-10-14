@@ -83,7 +83,9 @@
             ShowNotificator('alert-success', '<?= lang('email_added') ?>');
         });
     </script>
-<?php } ?>
+<?php }
+echo $addedJs;
+?>
 </div>
 </div>
 <div id="notificator" class="alert"></div>

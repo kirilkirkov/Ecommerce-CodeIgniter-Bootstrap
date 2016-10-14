@@ -222,4 +222,20 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Add google or other JavaScript to site</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('addJs')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('addJs') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <textarea style="margin-bottom:5px;" name="addJs" class="form-control"><?= $addJs ?></textarea>
+                    <button class="btn btn-default" value="" type="submit">
+                        Add the code
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

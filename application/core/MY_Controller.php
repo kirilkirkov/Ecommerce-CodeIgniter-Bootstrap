@@ -45,6 +45,7 @@ class MY_Controller extends MX_Controller
         $vars['footerSocialGooglePlus'] = $this->Admin_model->getValueStore('footerSocialGooglePlus');
         $vars['footerSocialPinterest'] = $this->Admin_model->getValueStore('footerSocialPinterest');
         $vars['footerSocialYoutube'] = $this->Admin_model->getValueStore('footerSocialYoutube');
+        $vars['addedJs'] = $this->Admin_model->getValueStore('addJs');
         $this->load->vars($vars);
         $this->load->view('_parts/header', $head);
         $this->load->view($view, $data);

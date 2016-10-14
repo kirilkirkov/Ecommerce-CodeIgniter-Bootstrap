@@ -586,6 +586,12 @@ class Admin extends MX_Controller
             $this->saveHistory('Change Shipping free for order more than ' . $_POST['shippingOrder']);
             redirect('admin/styling');
         }
+        if (isset($_POST['addJs'])) {
+            $this->Admin_model->setValueStore('addJs', $_POST['addJs']);
+            $this->session->set_flashdata('addJs', 'JavaScript code is added');
+            $this->saveHistory('Add JS to website');
+            redirect('admin/styling');
+        }
         $data['siteLogo'] = $this->Admin_model->getValueStore('sitelogo');
         $data['naviText'] = $this->Admin_model->getValueStore('navitext');
         $data['footerCopyright'] = $this->Admin_model->getValueStore('footercopyright');
@@ -604,6 +610,7 @@ class Admin extends MX_Controller
         $data['googleMaps'] = $this->Admin_model->getValueStore('googleMaps');
         $data['footerAboutUs'] = $this->Admin_model->getValueStore('footerAboutUs');
         $data['shippingOrder'] = $this->Admin_model->getValueStore('shippingOrder');
+        $data['addJs'] = $this->Admin_model->getValueStore('addJs');
         $this->load->view('_parts/header', $head);
         $this->load->view('styling', $data);
         $this->load->view('_parts/footer');

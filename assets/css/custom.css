@@ -169,45 +169,47 @@ footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
 }
 /* Landscape tablets and medium desktops */
 @media (min-width: 992px) and (max-width: 1199px) { 
-	#top-part #adv-search .dropdown.dropdown-lg .dropdown-menu {width: 415px;}
-	#home-slider {height:360px;}
-	#home-slider .right-side h3 {font-size:16px;}
-	#home-slider .price {font-size:28px;}
-	#home-slider .left-side img {max-height:360px;}
+    #top-part #adv-search .dropdown.dropdown-lg .dropdown-menu {width: 415px;}
+    #home-slider {height:360px;}
+    #home-slider .right-side h3 {font-size:16px;}
+    #home-slider .price {font-size:28px;}
+    #home-slider .left-side img {max-height:360px;}
 }
 /* Portrait tablets and small desktops */
 @media (min-width: 768px) and (max-width: 991px) {
-	#top-part ul.shop-dropdown a.dropdown-toggle {font-size:12px;}
-	#top-part #adv-search .dropdown.dropdown-lg .dropdown-menu {width: 305px;}
-	#home-slider {height:280px;}
-	#home-slider .right-side h3 {font-size:16px;}
-	#home-slider .price {font-size:20px;}
-	#home-slider .right-side {padding-top:10px;}
-	#home-slider .left-side img {max-height:280px;}
+    #top-part ul.shop-dropdown a.dropdown-toggle {font-size:12px;}
+    #top-part #adv-search .dropdown.dropdown-lg .dropdown-menu {width: 305px;}
+    #home-slider {height:280px;}
+    #home-slider .right-side h3 {font-size:16px;}
+    #home-slider .price {font-size:20px;}
+    #home-slider .right-side {padding-top:10px;}
+    #home-slider .left-side img {max-height:280px;}
 }
 /* Landscape phones and portrait tablets */
 @media screen and (max-width: 767px) { 
-	#top-part {height:auto;}
-	#top-part ul.shop-dropdown {margin:0 auto; width:200px;}
-	div.product-list {text-align:center;}
-	#view-article .the-image {margin-bottom:40px;}
-	#top-part #adv-search .dropdown.dropdown-lg .dropdown-menu {width: auto;}
-	.navbar-toggle{border-color:#666;}
-	 .navbar-toggle .icon-bar   {background-color:#666;}
-	 #home-slider {height:auto;padding-bottom:60px;}
-	 #home-slider .right-side .text-right {text-align:center; }
-	 #home-slider .right-side a.option {float:none;}
-         #home-slider .right-side a.option.right-5 {margin-left:5px;}
-	 #home-slider .right-side .xs-center {text-align:center; height:50px;}
-	 .ord {margin-bottom:7px;}
-	 #view-article .filter-sidebar {padding-left:10px; padding-right:10px;}
-	 #view-article a.btn:first-child {margin-bottom:5px;}
-	 #view-article div.product-list {margin-left:10px; margin-right:10px;}
-	 #view-product .the-image {margin-bottom:30px;}
+    #products-side {padding-left: 15px; padding-right: 15px;}
+    #top-part {height:auto;}
+    #top-part ul.shop-dropdown {margin:0 auto; width:200px;}
+    div.product-list {text-align:center;}
+    #view-article .the-image {margin-bottom:40px;}
+    #top-part #adv-search .dropdown.dropdown-lg .dropdown-menu {width: auto;}
+    .navbar-toggle{border-color:#666;}
+    .navbar-toggle .icon-bar   {background-color:#666;}
+    #home-slider {height:auto;padding-bottom:60px;}
+    #home-slider .right-side .text-right {text-align:center; }
+    #home-slider .right-side a.option {float:none;}
+    #home-slider .right-side a.option.right-5 {margin-left:5px;}
+    #home-slider .right-side .xs-center {text-align:center; height:50px;}
+    .ord {margin-bottom:7px;}
+    #view-article .filter-sidebar {padding-left:10px; padding-right:10px;}
+    #view-article a.btn:first-child {margin-bottom:5px;}
+    #view-article div.product-list {margin-left:10px; margin-right:10px;}
+    #view-product .the-image {margin-bottom:30px;}
 }
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
-	#home-slider .carousel-control.right {background-position: -140px center; width: 50px;}
-	#home-slider .carousel-control.left {background-position: 0 center; width: 50px;}
-        #checkout-page a.pull-right {float:left !important; margin-top: 10px;}
+    #home-slider .carousel-control.right {background-position: -140px center; width: 50px;}
+    #home-slider .carousel-control.left {background-position: 0 center; width: 50px;}
+    #checkout-page a.pull-right {float:left !important; margin-top: 10px;}
+    #view-product a.add-to-cart {margin-bottom: 5px;}
 } 

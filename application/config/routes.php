@@ -67,9 +67,9 @@ $route['(\w{2})/manageShoppingCart'] = 'home/manageShoppingCart';
 $route['clearShoppingCart'] = 'home/clearShoppingCart';
 $route['(\w{2})/clearShoppingCart'] = 'home/clearShoppingCart';
 
-$route[rawurlencode('home').'/(:num)'] = "home/index/$1";
+$route[rawurlencode('home') . '/(:num)'] = "home/index/$1";
 
-$route['jsloader/(:any)']  = "JSLoader/file/$1";
+$route['jsloader/(:any)'] = "JSLoader/file/$1";
 
 $route['(:any)_(:num)'] = "home/viewProduct/$2";
 $route['(\w{2})/(:any)_(:num)'] = "home/viewProduct/$3";
@@ -78,6 +78,9 @@ $route['shop-product_(:num)'] = "home/viewProduct/$3";
 $route['blog/(:num)'] = "blog/index/$1";
 $route['blog/(:any)_(:num)'] = "blog/viewPost/$2";
 $route['(\w{2})/blog/(:any)_(:num)'] = "blog/viewPost/$3";
+
+$route['page/(:any)'] = "page/index/$1";
+$route['(\w{2})/page/(:any)'] = "page/index/$2";
 
 $route['^(\w{2})/(.*)$'] = '$2';
 

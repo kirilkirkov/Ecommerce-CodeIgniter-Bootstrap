@@ -11,14 +11,15 @@ class MY_Controller extends MX_Controller
     public $all_langs;
     private $sum_values = 0;
     public $currency;
-    public $activePages = array();
+    public $nonDynPages = array();
+    private $dynPages = array();
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model('admin/Admin_model');
         $this->setLanguage();
-        $this->activePages = $this->getActivePages();
+        $this->getActivePages();
         $this->lang_url = rtrim(base_url($this->lang_link), '/');
         $this->checkForPostRequests();
     }
@@ -29,7 +30,8 @@ class MY_Controller extends MX_Controller
         $head['sumOfItems'] = $this->sum_values;
         $vars['lang_url'] = $this->lang_url;
         $vars['currency'] = $this->currency;
-        $vars['activePages'] = $this->activePages;
+        $vars['nonDynPages'] = $this->nonDynPages;
+        $vars['dynPages'] = $this->dynPages;
         $vars['footerCategories'] = $this->Articles_model->getFooterCategories($this->my_lang);
         $vars['sitelogo'] = $this->Admin_model->getValueStore('sitelogo');
         $vars['naviText'] = htmlentities($this->Admin_model->getValueStore('navitext'));
@@ -125,9 +127,12 @@ class MY_Controller extends MX_Controller
         }
     }
 
-    public function getActivePages()
+    private function getActivePages()
     {
-        return $this->Admin_model->getPages(true);
+        $activeP = $this->Admin_model->getPages(true);
+        $this->nonDynPages = $this->config->item('no_dynamic_pages');
+        $dynPages = getTextualPages($activeP);
+        $this->dynPages = $this->Articles_model->getDynPagesLangs($dynPages, $this->my_lang);
     }
 
     private function checkForPostRequests()

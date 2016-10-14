@@ -30,7 +30,7 @@
     }
     if (!isset($writable)) {
         ?>
-        <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_articles" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add new language</a>
+        <a href="javascript:void(0);" data-toggle="modal" data-target="#addLanguage" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add new language</a>
         <?php
     }
     if ($languages->result()) {
@@ -123,7 +123,7 @@
     ?>
 
     <!-- add edit languages -->
-    <div class="modal fade" id="add_edit_articles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="addLanguage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form action="" method="POST" enctype="multipart/form-data">

@@ -125,7 +125,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </div>
+                            </div>        
                         </div>
                     </div>
                 </div>
@@ -138,16 +138,29 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <?php if($naviText != null) { ?>
-                            <a class="navbar-brand" href="<?= base_url() ?>"><?= $naviText ?></a>
+                            <?php if ($naviText != null) { ?>
+                                <a class="navbar-brand" href="<?= base_url() ?>"><?= $naviText ?></a>
                             <?php } ?>
                         </div>
                         <div id="navbar" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav" style="<?= $naviText == null ? 'margin-left:-15px;' : '' ?>">
                                 <li class="active"><a href="<?= $lang_url ?>"><?= lang('home') ?></a></li>
-                                    <?php if (in_array('blog', $activePages)) { ?>
-                                    <li><a href="<?= $lang_url . '/blog' ?>"><?= lang('blog') ?></a></li>
-                                <?php } ?>
+                                    <?php
+                                    if (!empty($nonDynPages)) {
+                                        foreach ($nonDynPages as $addonPage) {
+                                            ?>
+                                        <li><a href="<?= $lang_url . '/' . $addonPage ?>"><?= lang($addonPage) ?></a></li>
+                                        <?php
+                                    }
+                                }
+                                if (!empty($dynPages)) {
+                                    foreach ($dynPages as $addonPage) {
+                                        ?>
+                                        <li><a href="<?= $lang_url . '/page/' . $addonPage['pname'] ?>"><?= $addonPage['lname'] ?></a></li>
+                                        <?php
+                                    }
+                                }
+                                ?>
                                 <li><a href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?></a></li>
                                 <li><a href="<?= $lang_url . '/contacts' ?>"><?= lang('contacts') ?></a></li>
                             </ul>

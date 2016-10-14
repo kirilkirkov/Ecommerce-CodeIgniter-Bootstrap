@@ -32,6 +32,7 @@ class Admin extends MX_Controller
         $this->def_lang = $this->config->item('language_abbr');
         $this->def_lang_name = $this->config->item('language');
         $this->activePages = $vars['activePages'] = $this->getActivePages();
+        $vars['textualPages'] = getTextualPages($this->activePages);
         $this->load->vars($vars);
     }
 
@@ -792,10 +793,51 @@ class Admin extends MX_Controller
         $head['description'] = '!';
         $head['keywords'] = '';
         $data['pages'] = $this->Admin_model->getPages(null, true);
+        if (isset($_POST['pname'])) {
+            $this->Admin_model->setPage($_POST['pname']);
+            $this->saveHistory('Add new page with name - ' . $_POST['pname']);
+            redirect('admin/pages');
+        }
+        if (isset($_GET['delete'])) {
+            $this->Admin_model->deletePage($_GET['delete']);
+            $this->saveHistory('Delete page');
+            redirect('admin/pages');
+        }
         $this->load->view('_parts/header', $head);
         $this->load->view('pages', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to Pages manage');
+    }
+
+    public function pageEdit($page = null)
+    {
+        $this->login_check();
+        if ($page == null)
+            redirect('admin/pages');
+        $data = array();
+        $head = array();
+        $head['title'] = 'Administration - Pages Manage';
+        $head['description'] = '!';
+        $head['keywords'] = '';
+        $data['page'] = $this->Admin_model->getOnePageForEdit($page);
+        if (empty($data['page']))
+            redirect('admin/pages');
+
+        if (isset($_POST['updatePage'])) {
+            $translations = array(
+                'abbr' => $_POST['translations'],
+                'name' => $_POST['name'],
+                'description' => $_POST['description']
+            );
+            $this->Admin_model->setEditPageTranslations($translations, $_POST['pageId']);
+            $this->saveHistory('Page ' . $_POST['name'] . ' updated!');
+            redirect('admin/pageEdit/' . $page);
+        }
+
+        $this->load->view('_parts/header', $head);
+        $this->load->view('pageEdit', $data);
+        $this->load->view('_parts/footer');
+        $this->saveHistory('Edit page - ' . $page);
     }
 
     public function changePageStatus()

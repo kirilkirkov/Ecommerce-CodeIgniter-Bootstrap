@@ -289,4 +289,34 @@ class Articles_model extends CI_Model
         }
     }
 
+    public function getDynPagesLangs($dynPages, $forLang)
+    {
+        if (!empty($dynPages)) {
+            $this->db->join('translations', 'translations.for_id = active_pages.id', 'left');
+            $this->db->where_in('active_pages.name', $dynPages);
+            $this->db->where('translations.abbr', $forLang);
+            $this->db->where('translations.type', 'page');
+            $result = $this->db->select('translations.name as lname, active_pages.name as pname')->get('active_pages');
+            $ar = array();
+            $i = 0;
+            foreach ($result->result_array() as $arr) {
+                $ar[$i]['lname'] = $arr['lname'];
+                $ar[$i]['pname'] = $arr['pname'];
+                $i++;
+            }
+            return $ar;
+        } else
+            return $dynPages;
+    }
+
+    public function getOnePage($page, $forLang)
+    {
+        $this->db->join('translations', 'translations.for_id = active_pages.id', 'left');
+        $this->db->where('translations.abbr', $forLang);
+        $this->db->where('translations.type', 'page');
+        $this->db->where('active_pages.name', $page);
+        $result = $this->db->select('translations.description as content, translations.name')->get('active_pages');
+        return $result->row_array();
+    }
+
 }

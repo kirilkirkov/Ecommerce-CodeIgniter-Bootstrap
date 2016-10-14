@@ -145,6 +145,30 @@ class Admin_model extends CI_Model
         }
     }
 
+    public function setPage($name)
+    {
+        $this->db->insert('active_pages', array('name' => $name, 'enabled' => 1));
+        $thisId = $this->db->insert_id();
+        $languages = $this->getLanguages();
+        foreach ($languages->result() as $language) {
+            $this->db->insert('translations', array(
+                'type' => 'page',
+                'for_id' => $thisId,
+                'abbr' => $language->abbr
+            ));
+        }
+    }
+
+    public function deletePage($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('active_pages');
+
+        $this->db->where('for_id', $id);
+        $this->db->where('type', 'page');
+        $this->db->delete('translations');
+    }
+
     public function setProductTranslation($post, $id, $is_update)
     {
         $i = 0;
@@ -337,6 +361,19 @@ class Admin_model extends CI_Model
         }
     }
 
+    public function setEditPageTranslations($post, $id)
+    {
+        $i = 0;
+        foreach ($post['abbr'] as $abbr) {
+            $arr = array(
+                'name' => $post['name'][$i],
+                'description' => $post['description'][$i]
+            );
+            $this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'page')->update('translations', $arr);
+            $i++;
+        }
+    }
+
     public function productStatusChagne($id, $to_status)
     {
         $this->db->where('id', $id);
@@ -428,6 +465,17 @@ class Admin_model extends CI_Model
             }
             return $array;
         }
+    }
+
+    public function getOnePageForEdit($pname)
+    {
+        $this->db->join('translations', 'translations.for_id = active_pages.id', 'left');
+        $this->db->join('languages', 'translations.abbr = languages.abbr', 'left');
+        $this->db->where('translations.type', 'page');
+        $this->db->where('active_pages.enabled', 1);
+        $this->db->where('active_pages.name', $pname);
+        $query = $this->db->select('active_pages.id, translations.description, translations.abbr, translations.name, languages.name as lname, languages.flag')->get('active_pages');
+        return $query->result_array();
     }
 
     public function getOnePost($id)

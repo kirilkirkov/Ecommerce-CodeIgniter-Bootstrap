@@ -149,7 +149,7 @@ div#notificator {padding:15px 25px; width:200px; position:fixed; top:20px; left:
 #modalImagePreview .close:hover,#modalImagePreview .close:focus {    color: #bbb;    text-decoration: none;    cursor: pointer;}
 @media only screen and (max-width: 700px){ #modalImagePreview .modal-content {        width: 100%;    }}
 
-.other-img-preview {width:100px; height: 100px; cursor: pointer;}
+.other-img-preview {width:100px; height: 100px; cursor: pointer; margin-bottom:10px;}
 
 footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
 

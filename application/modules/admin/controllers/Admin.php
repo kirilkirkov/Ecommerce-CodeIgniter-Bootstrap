@@ -136,7 +136,7 @@ class Admin extends MX_Controller
         $this->saveHistory('Go to publish product');
     }
 
-    private function do_upload_others_images()
+    private function do_upload_others_images($is_update)
     {
         $upath = './attachments/shop_images/' . $_POST['folder'] . '/';
         if ($is_update == false)

@@ -167,7 +167,11 @@ class MY_Controller extends MX_Controller
     private function setReferrer()
     {
         if ($this->session->userdata('referrer') == null) {
-            $this->session->set_userdata('referrer', $_SERVER['HTTP_REFERER']);
+            if (!isset($_SERVER['HTTP_REFERER']))
+                $ref = 'Direct';
+            else
+                $ref = $_SERVER['HTTP_REFERER'];
+            $this->session->set_userdata('referrer', $ref);
         }
     }
 

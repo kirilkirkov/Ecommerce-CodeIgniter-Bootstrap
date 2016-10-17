@@ -137,6 +137,20 @@ button.btn-blue:hover { color:#fff;}
 .add-to-cart a img {display:none;}
 div#notificator {padding:15px 25px; width:200px; position:fixed; top:20px; left:50%; margin-left:-100px; z-index:5000; text-align:center; display:none; }
 
+#myImg { border-radius: 5px;  cursor: pointer;  transition: 0.3s;}
+#myImg:hover {opacity: 0.7;}
+#modalImagePreview {  display: none;  position: fixed;  z-index: 100;  padding-top: 100px;  left: 0;  top: 0;  width: 100%;   height: 100%;  overflow: auto;     background-color: rgb(0,0,0);    background-color: rgba(0,0,0,0.9);}
+#modalImagePreview .modal-content {   margin: auto;  display: block;  width: 80%;   max-width: 700px;}
+#modalImagePreview #caption {    margin: auto;    display: block;    width: 80%;    max-width: 700px;    text-align: center;    color: #ccc;    padding: 10px 0;    height: 150px;}
+#modalImagePreview .modal-content, #modalImagePreview #caption {    -webkit-animation-name: zoom;    -webkit-animation-duration: 0.6s;    animation-name: zoom;    animation-duration: 0.6s;}
+@-webkit-keyframes zoom {    from {-webkit-transform:scale(0)}    to {-webkit-transform:scale(1)}}
+@keyframes zoom {    from {transform:scale(0)}    to {transform:scale(1)}}
+#modalImagePreview .close {    position: absolute;    top: 15px;    right: 35px;    color: #f1f1f1;    font-size: 40px;    font-weight: bold;    transition: 0.3s;}
+#modalImagePreview .close:hover,#modalImagePreview .close:focus {    color: #bbb;    text-decoration: none;    cursor: pointer;}
+@media only screen and (max-width: 700px){ #modalImagePreview .modal-content {        width: 100%;    }}
+
+.other-img-preview {width:100px; height: 100px; cursor: pointer;}
+
 footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
 
 .full { width: 100%;	}
@@ -174,6 +188,7 @@ footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
     #home-slider .right-side h3 {font-size:16px;}
     #home-slider .price {font-size:28px;}
     #home-slider .left-side img {max-height:360px;}
+    .other-img-preview {width:75px; height: 75px;}
 }
 /* Portrait tablets and small desktops */
 @media (min-width: 768px) and (max-width: 991px) {
@@ -205,6 +220,7 @@ footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
     #view-article a.btn:first-child {margin-bottom:5px;}
     #view-article div.product-list {margin-left:10px; margin-right:10px;}
     #view-product .the-image {margin-bottom:30px;}
+    .other-img-preview {width:75px; height: 75px; margin-bottom:50px;}
 }
 /* Portrait phones and smaller */
 @media (max-width: 480px) {

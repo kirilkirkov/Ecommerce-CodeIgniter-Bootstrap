@@ -18,6 +18,7 @@ if ($this->session->flashdata('result_publish')) {
 }
 ?>
 <form role="form" method="POST" action="" enctype="multipart/form-data">
+    <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : time() ?>" name="folder">
     <?php foreach ($languages->result() as $language) { ?>
         <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
     <?php } foreach ($languages->result() as $language) { ?>
@@ -77,6 +78,36 @@ if ($this->session->flashdata('result_publish')) {
         ?>
         <label for="userfile">Cover Image</label>
         <input type="file" id="userfile" name="userfile">
+    </div>
+    <div class="form-group">
+        <?php
+        if (isset($_POST['folder']) && $_POST['folder'] != null) {
+            ?>
+            <div>       
+                <?php
+                $dir = "attachments/shop_images/" . $_POST['folder'] . '/';
+                if (is_dir($dir)) {
+                    if ($dh = opendir($dir)) {
+                        $i = 0;
+                        while (($file = readdir($dh)) !== false) {
+                            if (is_file($dir . $file)) {
+                                ?>
+                                <div class="other-img" id="image-container-<?= $i ?>">
+                                    <img src="<?= base_url($dir . $file) ?>" style="width:100px; height: 100px;">
+                                    <a href="javascript:void(0);" onclick="removeImage('<?= $file ?>', '<?= $_POST['folder'] ?>', <?= $i ?>)"><span class="glyphicon glyphicon-remove"></span></a>
+                                </div>
+                                <?php
+                            }
+                            $i++;
+                        }
+                        closedir($dh);
+                    }
+                }
+                ?>
+            </div>
+        <?php } ?>
+        <label for="others">Other Images</label>
+        <input type="file" name="others[]" id="others" multiple />
     </div>
     <div class="form-group for-shop">
         <label>Shop Categories</label>
@@ -186,8 +217,18 @@ if ($this->session->flashdata('result_publish')) {
     $(document).ready(function () {
         $("#showSliderDescrption").click(function () {
             $("#theSliderDescrption").slideToggle("slow", function () {
-                
+
             });
         });
     });
+
+    function removeImage(image, folder, container) {
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url('removeImage') ?>",
+            data: {image: image, folder: folder}
+        }).done(function (data) {
+            $('#image-container-' + container).remove();
+        });
+    }
 </script>

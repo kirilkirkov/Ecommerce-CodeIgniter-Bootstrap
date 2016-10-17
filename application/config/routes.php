@@ -57,6 +57,7 @@ $route['^(\w{2})$'] = $route['default_controller'];
 
 //Ajax called
 $route['convertCurrency'] = 'admin/convertCurrency';
+$route['removeImage'] = 'admin/removeImage';
 $route['(\w{2})/convertCurrency'] = 'admin/convertCurrency';
 $route['changeOrderStatus'] = 'admin/changeOrderStatus';
 $route['(\w{2})/changeOrderStatus'] = 'admin/changeOrderStatus';

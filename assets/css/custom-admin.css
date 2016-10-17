@@ -26,6 +26,9 @@ input.form-control {border:1px solid #dadada; border-radius: 0; box-shadow:none;
 .animated {  -webkit-animation-duration: 1s;  animation-duration: 1s;  -webkit-animation-fill-mode: both;  animation-fill-mode: both;}
 #theSliderDescrption {display:none;}
 
+.other-img {display: inline-block; position:relative;}
+.other-img a {position:absolute; right:0; top:0; background-color: #fff; color:red;}
+
 .header-img {float: left;height: 40px;margin-right: 10px;margin-top: -10px;}
 .divLangs { padding:10px; margin-bottom: 10px;}
 

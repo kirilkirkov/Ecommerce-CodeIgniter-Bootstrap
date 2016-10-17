@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 13, 2016 at 05:39 PM
+-- Generation Time: Oct 17, 2016 at 02:10 PM
 -- Server version: 5.5.52-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.19
 
@@ -31,14 +31,16 @@ CREATE TABLE IF NOT EXISTS `active_pages` (
   `name` varchar(50) NOT NULL,
   `enabled` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `active_pages`
 --
 
 INSERT INTO `active_pages` (`id`, `name`, `enabled`) VALUES
-(1, 'blog', 1);
+(1, 'blog', 1),
+(5, 'test', 0),
+(6, 'kiro', 0);
 
 -- --------------------------------------------------------
 
@@ -75,8 +77,13 @@ CREATE TABLE IF NOT EXISTS `history` (
   `username` varchar(50) DEFAULT NULL,
   `time` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2019 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `languages`
+--
 
 CREATE TABLE IF NOT EXISTS `languages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -113,6 +120,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `notes` text NOT NULL,
   `products` text NOT NULL,
   `date` int(10) unsigned NOT NULL,
+  `referrer` varchar(255) NOT NULL,
   `processed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
@@ -121,9 +129,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `first_name`, `last_name`, `email`, `phone`, `address`, `city`, `post_code`, `notes`, `products`, `date`, `processed`) VALUES
-(7, 'dqwdqw', 'dqwqw', 'fqe@dfqe.qf', '321321', 'qwdqw', 'dqwdwq', '321dqw', 'dqw', 'a:1:{i:7;s:1:"2";}', 1475847973, 0),
-(8, 'fqef', 'qefqe', 'dqw@dqw.dqw', '32112', 'dqwdqw', 'dqwdq', '3232', 'dwqdqw', 'a:1:{i:6;s:1:"3";}', 1475848157, 1);
+INSERT INTO `orders` (`id`, `first_name`, `last_name`, `email`, `phone`, `address`, `city`, `post_code`, `notes`, `products`, `date`, `referrer`, `processed`) VALUES
+(7, 'dqwdqw', 'dqwqw', 'fqe@dfqe.qf', '321321', 'qwdqw', 'dqwdwq', '321dqw', 'dqw', 'a:1:{i:7;s:1:"2";}', 1475847973, '', 0),
+(8, 'fqef', 'qefqe', 'dqw@dqw.dqw', '32112', 'dqwdqw', 'dqwdq', '3232', 'dwqdqw', 'a:1:{i:6;s:1:"3";}', 1475848157, '', 1);
 
 -- --------------------------------------------------------
 
@@ -134,7 +142,7 @@ INSERT INTO `orders` (`id`, `first_name`, `last_name`, `email`, `phone`, `addres
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(10) unsigned NOT NULL COMMENT 'id of products for shop',
-  `folder` int(10) unsigned NOT NULL,
+  `folder` int(50) DEFAULT NULL COMMENT 'folder with images',
   `image` varchar(255) NOT NULL,
   `time` int(10) unsigned NOT NULL COMMENT 'time created',
   `time_update` int(10) unsigned NOT NULL COMMENT 'time updated',
@@ -145,20 +153,20 @@ CREATE TABLE IF NOT EXISTS `products` (
   `in_slider` tinyint(1) NOT NULL DEFAULT '0',
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `product_id`, `folder`, `image`, `time`, `time_update`, `visibility`, `shop_categorie`, `quantity`, `procurement`, `in_slider`, `url`) VALUES
-(1, 1, 0, '9506112864286.jpg', 1475067224, 1475067292, 1, 1, 29, 0, 0, 'Лаптоп_ASUS_X554SJXX025D_1'),
-(2, 2, 0, '9029329911838.jpg', 1475067266, 1475067286, 1, 1, 6, 0, 0, 'Плот_за_вграждане_BOSCH_PKK651F17E_2'),
-(3, 3, 0, '8982720315422.jpg', 1475067365, 1475067395, 1, 2, 5, 0, 0, 'Домашнo_кинo_PHILIPS_HTD3510_3'),
-(4, 4, 0, '9506115780638.jpg', 1475067529, 0, 1, 1, 44, 0, 0, 'Домашнo_кинo_PHILIPS_CSS5530G_4'),
-(5, 5, 0, '9018778779678.jpg', 1475067601, 1475067611, 1, 3, 33, 0, 0, 'Инверторен_климатик_SANG_TAC09CHSAHCI_5'),
-(6, 6, 0, 'detail_1244399-401_01.jpg', 1475067684, 1475067699, 1, 4, 22, 3, 0, 'Тениска_Alter_Ego_Compression__6'),
-(7, 7, 0, 'Mane-menu-Nike-Air-Max.png', 1475067990, 1475133973, 1, 5, 200, 0, 1, 'Обувки_AIR_MAX_COMMAND_LEA_7');
+(1, 1, NULL, '9506112864286.jpg', 1475067224, 1475067292, 1, 1, 29, 0, 0, 'Лаптоп_ASUS_X554SJXX025D_1'),
+(2, 2, NULL, '9029329911838.jpg', 1475067266, 1475067286, 1, 1, 6, 0, 0, 'Плот_за_вграждане_BOSCH_PKK651F17E_2'),
+(3, 3, NULL, '8982720315422.jpg', 1475067365, 1475067395, 1, 2, 5, 0, 0, 'Домашнo_кинo_PHILIPS_HTD3510_3'),
+(4, 4, NULL, '9506115780638.jpg', 1475067529, 0, 1, 1, 44, 0, 0, 'Домашнo_кинo_PHILIPS_CSS5530G_4'),
+(5, 5, NULL, '9018778779678.jpg', 1475067601, 1475067611, 1, 3, 33, 0, 0, 'Инверторен_климатик_SANG_TAC09CHSAHCI_5'),
+(6, 6, NULL, 'detail_1244399-401_01.jpg', 1475067684, 1475067699, 1, 4, 22, 3, 0, 'Тениска_Alter_Ego_Compression__6'),
+(7, 7, 1476697868, 'Mane-menu-Nike-Air-Max.png', 1475067990, 1476702549, 1, 5, 200, 0, 1, 'Обувки_AIR_MAX_COMMAND_LEA_7');
 
 -- --------------------------------------------------------
 
@@ -231,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `translations` (
   `name` varchar(50) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `art_id_abbr` (`abbr`,`for_id`,`type`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
 
 --
 -- Dumping data for table `translations`
@@ -267,7 +275,11 @@ INSERT INTO `translations` (`id`, `title`, `description`, `basic_description`, `
 (27, 'Обувки AIR MAX COMMAND LEA', '<p style="float: left; padding: 0 5px; margin: 20px 0">Мъжки спортни обувки подходящи за ежедневието<br />\r\nКласически дизайн и изключителна мекота събрани в едно.</p>\r\n', '<p>Мъжки спортни обувки подходящи за ежедневието Класически дизайн и изключителна мекота събрани в едно.</p>\r\n', '200', '', 'bg', 7, 'product', ''),
 (28, 'Shoes AIR MAX COMMAND LEA', '<p style="float: left; padding: 0 5px; margin: 20px 0">Мъжки спортни обувки подходящи за ежедневието<br />\r\nКласически дизайн и изключителна мекота събрани в едно.</p>\r\n', '<p>Мъжки спортни обувки подходящи за ежедневието Класически дизайн и изключителна мекота събрани в едно.</p>\r\n', '178', '', 'en', 7, 'product', ''),
 (29, '', '', '', '', '', 'bg', 5, 'shop_categorie', 'Обувки'),
-(30, '', '', '', '', '', 'en', 5, 'shop_categorie', 'Shoes');
+(30, '', '', '', '', '', 'en', 5, 'shop_categorie', 'Shoes'),
+(68, '', '<p>тест ми</p>\r\n', '', '', '', 'bg', 5, 'page', 'тест'),
+(69, '', '<p>test me</p>\r\n', '', '', '', 'en', 5, 'page', 'test'),
+(70, '', '', '', '', '', 'bg', 6, 'page', 'Киро'),
+(71, '', '', '', '', '', 'en', 6, 'page', 'kiro');
 
 -- --------------------------------------------------------
 
@@ -303,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `valueStore` (
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `key` (`thekey`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `valueStore`
@@ -314,9 +326,9 @@ INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
 (2, 'navitext', 'My Online Shop'),
 (3, 'footercopyright', 'Copyright © Footer E-commerce Plugin 2014. All right reserved. '),
 (4, 'contactspage', '<address><strong>Twitter, Inc.</strong><br />\r\n795 Folsom Ave, Suite 600<br />\r\nSan Francisco, CA 94107<br />\r\n<abbr title="Phone">P:</abbr> (123) 456-7890</address>\r\n\r\n<address><strong>Full Name</strong><br />\r\n<a href="mailto:#">first.last@example.com</'),
-(5, 'footerContactAddr', '1'),
-(6, 'footerContactEmail', '3'),
-(7, 'footerContactPhone', '2'),
+(5, 'footerContactAddr', ''),
+(6, 'footerContactEmail', ''),
+(7, 'footerContactPhone', 'asd'),
 (8, 'googleMaps', '42.676850, 23.379063'),
 (9, 'footerAboutUs', 'test'),
 (10, 'footerSocialFacebook', '1'),
@@ -327,3 +339,7 @@ INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
 (16, 'contactsEmailTo', 'kiro@abv.bg'),
 (17, 'shippingOrder', '50'),
 (18, 'addJs', '');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

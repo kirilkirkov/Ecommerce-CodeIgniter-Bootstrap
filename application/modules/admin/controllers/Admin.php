@@ -19,6 +19,7 @@ class Admin extends MX_Controller
     private $def_lang;
     private $def_lang_name;
     private $activePages;
+    private $allowed_img_types = 'gif|jpg|png|jpeg|JPG|PNG|JPEG';
 
     //$data['links_pagination'] = pagination('admin/view_all', $rowscount, $this->num_rows, 3);
 
@@ -80,9 +81,8 @@ class Admin extends MX_Controller
             if ($id > 0)
                 $is_update = true;
             unset($_POST['submit']);
-            $u_path = 'shop_images/';
-            $config['upload_path'] = './attachments/' . $u_path;
-            $config['allowed_types'] = 'gif|jpg|png|jpeg|JPG|PNG|JPEG';
+            $config['upload_path'] = './attachments/shop_images/';
+            $config['allowed_types'] = $this->allowed_img_types;
             $this->load->library('upload', $config);
             $this->upload->initialize($config);
             if (!$this->upload->do_upload('userfile')) {
@@ -92,6 +92,7 @@ class Admin extends MX_Controller
             if ($img['file_name'] != null) {
                 $_POST['image'] = $img['file_name'];
             }
+            $this->do_upload_others_images($is_update);
             if (isset($_GET['to_lang'])) {
                 $id = 0;
             }
@@ -133,6 +134,32 @@ class Admin extends MX_Controller
         $this->load->view('publish', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to publish product');
+    }
+
+    private function do_upload_others_images()
+    {
+        $upath = './attachments/shop_images/' . $_POST['folder'] . '/';
+        if ($is_update == false)
+            mkdir($upath, 0777);
+
+        $this->load->library('upload');
+
+        $files = $_FILES;
+        $cpt = count($_FILES['others']['name']);
+        for ($i = 0; $i < $cpt; $i++) {
+            unset($_FILES);
+            $_FILES['others']['name'] = $files['others']['name'][$i];
+            $_FILES['others']['type'] = $files['others']['type'][$i];
+            $_FILES['others']['tmp_name'] = $files['others']['tmp_name'][$i];
+            $_FILES['others']['error'] = $files['others']['error'][$i];
+            $_FILES['others']['size'] = $files['others']['size'][$i];
+
+            $this->upload->initialize(array(
+                'upload_path' => $upath,
+                'allowed_types' => $this->allowed_img_types
+            ));
+            $this->upload->do_upload('others');
+        }
     }
 
     public function products($page = 0)
@@ -194,6 +221,14 @@ class Admin extends MX_Controller
             $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
             $this->saveHistory('Convert currency from ' . $from . ' to ' . $to . ' with amount ' . $amount);
             echo round($converted, 2);
+        }
+    }
+
+    public function removeImage()
+    {
+        if ($this->input->is_ajax_request()) {
+            $img = './attachments/shop_images/' . $_POST['folder'] . '/' . $_POST['image'];
+            unlink($img);
         }
     }
 

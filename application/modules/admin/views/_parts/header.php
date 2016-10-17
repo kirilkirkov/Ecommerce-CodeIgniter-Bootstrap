@@ -91,7 +91,7 @@
                                     <?php if (!empty($textualPages)) { ?>
                                         <li class="header">TEXTUAL PAGES</li>
                                         <?php foreach ($textualPages as $textualPage) { ?>
-                                            <li><a href="<?= base_url('admin/pageEdit/' . $textualPage) ?>" <?= strpos(urldecode(uri_string()), 'pageEdit') ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> <?= strtoupper($textualPage) ?></a></li>
+                                            <li><a href="<?= base_url('admin/pageEdit/' . $textualPage) ?>" <?= strpos(urldecode(uri_string()), $textualPage) ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> <?= strtoupper($textualPage) ?></a></li>
                                             <?php
                                         }
                                     }

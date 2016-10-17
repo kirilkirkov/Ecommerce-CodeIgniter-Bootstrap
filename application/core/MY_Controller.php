@@ -22,12 +22,23 @@ class MY_Controller extends MX_Controller
         $this->getActivePages();
         $this->lang_url = rtrim(base_url($this->lang_link), '/');
         $this->checkForPostRequests();
+        $this->setReferrer();
     }
 
     public function render($view, $head, $data = null, $footer = null)
     {
         $head['cartItems'] = $this->getCartItems();
         $head['sumOfItems'] = $this->sum_values;
+        $vars = $this->loadVars();
+        $this->load->vars($vars);
+        $this->load->view('_parts/header', $head);
+        $this->load->view($view, $data);
+        $this->load->view('_parts/footer', $footer);
+    }
+
+    private function loadVars()
+    {
+        $vars = array();
         $vars['lang_url'] = $this->lang_url;
         $vars['currency'] = $this->currency;
         $vars['nonDynPages'] = $this->nonDynPages;
@@ -48,10 +59,7 @@ class MY_Controller extends MX_Controller
         $vars['footerSocialPinterest'] = $this->Admin_model->getValueStore('footerSocialPinterest');
         $vars['footerSocialYoutube'] = $this->Admin_model->getValueStore('footerSocialYoutube');
         $vars['addedJs'] = $this->Admin_model->getValueStore('addJs');
-        $this->load->vars($vars);
-        $this->load->view('_parts/header', $head);
-        $this->load->view($view, $data);
-        $this->load->view('_parts/footer', $footer);
+        return $vars;
     }
 
     public function getCartItems()
@@ -153,6 +161,13 @@ class MY_Controller extends MX_Controller
             } else {
                 echo 'window.location = "' . base_url() . '"';
             }
+        }
+    }
+
+    private function setReferrer()
+    {
+        if ($this->session->userdata('referrer') == null) {
+            $this->session->set_userdata('referrer', $_SERVER['HTTP_REFERER']);
         }
     }
 

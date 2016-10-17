@@ -830,7 +830,7 @@ class Admin extends MX_Controller
                 'description' => $_POST['description']
             );
             $this->Admin_model->setEditPageTranslations($translations, $_POST['pageId']);
-            $this->saveHistory('Page ' . $_POST['name'] . ' updated!');
+            $this->saveHistory('Page ' . $_POST['pageId'] . ' updated!');
             redirect('admin/pageEdit/' . $page);
         }
 

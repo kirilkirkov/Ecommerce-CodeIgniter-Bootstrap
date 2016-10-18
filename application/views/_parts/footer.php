@@ -29,9 +29,22 @@
                 <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                     <h3><?= lang('contacts') ?></h3>
                     <ul class="footer-icon">
-                        <li><span><i class="fa fa-map-marker"></i></span> <?= $footerContactAddr ?></li>
-                        <li><span><i class="fa fa-phone"></i></span> <?= $footerContactPhone ?></li>
-                        <li><span><i class="fa fa-envelope"></i></span> <?= $footerContactEmail ?></li>
+                        <?php if ($footerContactAddr != '') { ?>
+                            <li>
+                                <span class="pull-left"><i class="fa fa-map-marker"></i></span> 
+                                <span class="pull-left f-cont-info"> <?= $footerContactAddr ?></span> 
+                            </li>
+                        <?php }if ($footerContactPhone != '') { ?>
+                            <li>
+                                <span class="pull-left"><i class="fa fa-phone"></i></span> 
+                                <span class="pull-left f-cont-info"> <?= $footerContactPhone ?></span> 
+                            </li>
+                        <?php } if ($footerContactEmail != '') { ?>
+                            <li>
+                                <span class="pull-left"><i class="fa fa-envelope"></i></span> 
+                                <span class="pull-left f-cont-info"><a href="mailto:<?= $footerContactEmail ?>"><?= $footerContactEmail ?></a></span>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
                 <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
@@ -83,7 +96,8 @@
             ShowNotificator('alert-success', '<?= lang('email_added') ?>');
         });
     </script>
-<?php }
+    <?php
+}
 echo $addedJs;
 ?>
 </div>

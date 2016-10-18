@@ -177,6 +177,7 @@ footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
 .footer-bottom p.pull-left {	padding-top: 6px;}
 .payments {	font-size: 1.5em;	}
 .footer .footer-icon span i {border: 1px solid #a3a3a3;  border-radius: 100%; height: 30px; line-height: 25px;margin-bottom: 5px;    margin-right: 5px;    text-align: center;    width: 30px;}
+.f-cont-info {word-break: break-all; width: 70%;}
 
 /* Large desktops and laptops */
 @media (min-width: 1200px) {

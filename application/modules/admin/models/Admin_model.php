@@ -293,7 +293,7 @@ class Admin_model extends CI_Model
 
     public function getOneProduct($id)
     {
-        $query = $this->db->where('product_id', $id)
+        $query = $this->db->where('id', $id)
                 ->get('products');
         if ($query->num_rows() > 0) {
             return $query->row_array();

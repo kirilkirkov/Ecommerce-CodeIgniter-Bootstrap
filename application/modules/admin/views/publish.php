@@ -69,7 +69,7 @@ if ($this->session->flashdata('result_publish')) {
             $u_path = 'attachments/shop_images/';
             ?>
             <p>Current image:</p>
-            <img src="<?= base_url($u_path . $_POST['image']) ?>" class="img-responsive">
+            <img src="<?= base_url($u_path . $_POST['image']) ?>" class="img-responsive" style="max-width:300px;">
             <?php if (isset($_GET['to_lang'])) { ?>
                 <input type="hidden" name="image" value="<?= $_POST['image'] ?>">
                 <?php

@@ -92,7 +92,7 @@ class Admin extends MX_Controller
             if ($img['file_name'] != null) {
                 $_POST['image'] = $img['file_name'];
             }
-            $this->do_upload_others_images($is_update);
+            $this->do_upload_others_images();
             if (isset($_GET['to_lang'])) {
                 $id = 0;
             }
@@ -136,11 +136,12 @@ class Admin extends MX_Controller
         $this->saveHistory('Go to publish product');
     }
 
-    private function do_upload_others_images($is_update)
+    private function do_upload_others_images()
     {
         $upath = './attachments/shop_images/' . $_POST['folder'] . '/';
-        if ($is_update == false)
+		if (!file_exists($upath)) {
             mkdir($upath, 0777);
+		}
 
         $this->load->library('upload');
 

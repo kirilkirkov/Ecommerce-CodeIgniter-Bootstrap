@@ -108,7 +108,7 @@ class Articles_model extends CI_Model
 
     public function getOneProduct($id, $lang)
     {
-        $this->db->where('products.id', $id);
+        $this->db->where('products.product_id', $id);
 
         $this->db->select('products.*, translations.title,translations.description, translations.price, translations.old_price, products.url, trans2.name as categorie_name');
 

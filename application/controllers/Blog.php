@@ -23,8 +23,8 @@ class Blog extends MY_Controller
         $data = array();
         $head = array();
         $arrSeo = $this->Articles_model->getSeo('page_blog', $this->my_lang);
-        $head['title'] = $arrSeo['title'];
-        $head['description'] = $arrSeo['description'];
+        $head['title'] = @$arrSeo['title'];
+        $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
         if (isset($_GET['find'])) {
             $find = $_GET['find'];

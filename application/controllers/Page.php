@@ -12,7 +12,7 @@ class Page extends MY_Controller
     }
 
     public function index($page = null)
-    {
+    {   
         $this->goOut($page);
         $page = $this->Articles_model->getOnePage($page, $this->my_lang);
         $this->goOut($page);
@@ -20,7 +20,7 @@ class Page extends MY_Controller
         $head = array();
         $head['title'] = $page['name'];
         $head['description'] = character_limiter(strip_tags(trim($page['content'])), 120);
-        $head['keywords'] = str_replace(" ", ",", $data['name']);
+        $head['keywords'] = str_replace(" ", ",", $page['name']);
         $data['content'] = $page['content'];
         $this->render('dynPage', $head, $data);
     }

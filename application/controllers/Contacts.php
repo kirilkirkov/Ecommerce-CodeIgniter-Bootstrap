@@ -25,8 +25,8 @@ class Contacts extends MY_Controller
             redirect('contacts');
         }
         $arrSeo = $this->Articles_model->getSeo('page_contacts', $this->my_lang);
-        $head['title'] = $arrSeo['title'];
-        $head['description'] = $arrSeo['description'];
+        $head['title'] = @$arrSeo['title'];
+        $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
         $this->render('contacts', $head, $data);
     }

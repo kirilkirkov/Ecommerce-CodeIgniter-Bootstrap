@@ -16,8 +16,8 @@ class Checkout extends MY_Controller
         $data = array();
         $head = array();
         $arrSeo = $this->Articles_model->getSeo('page_checkout', $this->my_lang);
-        $head['title'] = $arrSeo['title'];
-        $head['description'] = $arrSeo['description'];
+        $head['title'] = @$arrSeo['title'];
+        $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
         $new_request = false;
         if (isset($_POST['payment_type']) && $_POST['payment_type'] == 1) { // Cash On Delivery

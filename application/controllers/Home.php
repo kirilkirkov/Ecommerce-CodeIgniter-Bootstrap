@@ -19,8 +19,8 @@ class Home extends MY_Controller
         $data = array();
         $head = array();
         $arrSeo = $this->Articles_model->getSeo('page_home', $this->my_lang);
-        $head['title'] = $arrSeo['title'];
-        $head['description'] = $arrSeo['description'];
+        $head['title'] = @$arrSeo['title'];
+        $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
         $all_categories = $this->Articles_model->getShopCategories($this->my_lang);
 

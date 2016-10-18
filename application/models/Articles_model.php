@@ -106,6 +106,21 @@ class Articles_model extends CI_Model
         return $arr;
     }
 
+    public function getSeo($page, $abbr)
+    {
+        $this->db->where('type', $page);
+        $this->db->where('abbr', $abbr);
+        $query = $this->db->get('translations');
+        $arr = array();
+        if ($query !== false) {
+            foreach ($query->result_array() as $row) {
+                $arr['title'] = $row['title'];
+                $arr['description'] = $row['description'];
+            }
+        }
+        return $arr;
+    }
+
     public function getOneProduct($id, $lang)
     {
         $this->db->where('products.product_id', $id);

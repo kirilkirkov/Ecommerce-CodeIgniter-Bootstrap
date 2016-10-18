@@ -20,7 +20,7 @@ class Page extends MY_Controller
         $head = array();
         $head['title'] = $page['name'];
         $head['description'] = character_limiter(strip_tags(trim($page['content'])), 120);
-        $head['keywords'] = '';
+        $head['keywords'] = str_replace(" ", ",", $data['name']);
         $data['content'] = $page['content'];
         $this->render('dynPage', $head, $data);
     }

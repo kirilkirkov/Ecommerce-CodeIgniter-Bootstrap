@@ -18,9 +18,10 @@ class Home extends MY_Controller
     {
         $data = array();
         $head = array();
-        $head['title'] = 'Title information‎';
-        $head['description'] = 'Description info';
-        $head['keywords'] = 'key,words,for,seo';
+        $arrSeo = $this->Articles_model->getSeo('page_home', $this->my_lang);
+        $head['title'] = $arrSeo['title'];
+        $head['description'] = $arrSeo['description'];
+        $head['keywords'] = str_replace(" ", ",", $head['title']);
         $all_categories = $this->Articles_model->getShopCategories($this->my_lang);
 
         function buildTree(array $elements, $parentId = 0)
@@ -86,7 +87,7 @@ class Home extends MY_Controller
         $description = url_title(character_limiter(strip_tags($data['product']['description']), 130));
         $description = str_replace("-", " ", $description) . '..';
         $head['description'] = $description;
-        $head['keywords'] = '';
+        $head['keywords'] = str_replace(" ", ",", $data['product']['title']);
         $this->render('view_product', $head, $data);
     }
 

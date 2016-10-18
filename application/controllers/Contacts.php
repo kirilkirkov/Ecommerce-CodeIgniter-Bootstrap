@@ -24,9 +24,10 @@ class Contacts extends MY_Controller
             }
             redirect('contacts');
         }
-        $head['title'] = 'Title information?';
-        $head['description'] = 'Description info';
-        $head['keywords'] = 'key,words,for,seo';
+        $arrSeo = $this->Articles_model->getSeo('page_contacts', $this->my_lang);
+        $head['title'] = $arrSeo['title'];
+        $head['description'] = $arrSeo['description'];
+        $head['keywords'] = str_replace(" ", ",", $head['title']);
         $this->render('contacts', $head, $data);
     }
 

@@ -163,6 +163,37 @@ class Admin extends MX_Controller
         }
     }
 
+    public function titles()
+    {
+        $this->login_check();
+        $data = array();
+        $head = array();
+        $head['title'] = 'Administration - Titles / Descriptions';
+        $head['description'] = '!';
+        $head['keywords'] = '';
+
+        if (isset($_POST['save'])) {
+            $translations = array(
+                'pages' => $_POST['pages'],
+                'abbr' => $_POST['translations'],
+                'title' => $_POST['title'],
+                'description' => $_POST['description']
+            );
+            $this->Admin_model->setSeoPageTranslations($translations);
+            $this->saveHistory('Changed Titles / Descriptions');
+            $this->session->set_flashdata('result_publish', 'Saved successful!');
+            redirect('admin/titles');
+        }
+
+        $data['seo_trans'] = $this->Admin_model->getSeoTranslations();
+        $data['languages'] = $this->Admin_model->getLanguages();
+        $data['seo_pages'] = $this->Admin_model->getSeoPages();
+        $this->load->view('_parts/header', $head);
+        $this->load->view('titles', $data);
+        $this->load->view('_parts/footer');
+        $this->saveHistory('Go to Titles / Descriptions page');
+    }
+
     public function products($page = 0)
     {
         $this->login_check();

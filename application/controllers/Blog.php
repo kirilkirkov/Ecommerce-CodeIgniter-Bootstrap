@@ -22,9 +22,10 @@ class Blog extends MY_Controller
     {
         $data = array();
         $head = array();
-        $head['title'] = 'Title information‎';
-        $head['description'] = 'Description info';
-        $head['keywords'] = 'key,words,for,seo';
+        $arrSeo = $this->Articles_model->getSeo('page_blog', $this->my_lang);
+        $head['title'] = $arrSeo['title'];
+        $head['description'] = $arrSeo['description'];
+        $head['keywords'] = str_replace(" ", ",", $head['title']);
         if (isset($_GET['find'])) {
             $find = $_GET['find'];
         } else
@@ -50,9 +51,9 @@ class Blog extends MY_Controller
         $head = array();
         $data['article'] = $this->Articles_model->getOnePost($this->my_lang, $id);
         $data['archives'] = $this->getBlogArchiveHtml();
-        $head['title'] = 'Title information‎';
-        $head['description'] = 'Description info';
-        $head['keywords'] = 'key,words,for,seo';
+        $head['title'] = $data['article']['title'];
+        $head['description'] = url_title(character_limiter(strip_tags($data['article']['description']), 130));
+        $head['keywords'] = str_replace(" ", ",", $data['article']['title']);
         $this->render('view_blog_post', $head, $data);
     }
 

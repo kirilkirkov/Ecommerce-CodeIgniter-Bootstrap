@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 18, 2016 at 11:39 AM
+-- Generation Time: Oct 18, 2016 at 02:34 PM
 -- Server version: 5.5.52-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.19
 
@@ -171,6 +171,28 @@ INSERT INTO `products` (`id`, `product_id`, `folder`, `image`, `time`, `time_upd
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `seo_pages`
+--
+
+CREATE TABLE IF NOT EXISTS `seo_pages` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `seo_pages`
+--
+
+INSERT INTO `seo_pages` (`id`, `name`) VALUES
+(1, 'home'),
+(2, 'checkout'),
+(3, 'contacts'),
+(4, 'blog');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `shopping_cart`
 --
 
@@ -239,7 +261,7 @@ CREATE TABLE IF NOT EXISTS `translations` (
   `name` varchar(50) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `art_id_abbr` (`abbr`,`for_id`,`type`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=102 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=113 ;
 
 --
 -- Dumping data for table `translations`
@@ -279,7 +301,15 @@ INSERT INTO `translations` (`id`, `title`, `description`, `basic_description`, `
 (68, '', '<p>тест ми</p>\r\n', '', '', '', 'bg', 5, 'page', 'тест'),
 (69, '', '<p>test me</p>\r\n', '', '', '', 'en', 5, 'page', 'test'),
 (70, '', '', '', '', '', 'bg', 6, 'page', 'Киро'),
-(71, '', '', '', '', '', 'en', 6, 'page', 'kiro');
+(71, '', '', '', '', '', 'en', 6, 'page', 'kiro'),
+(105, 'хоме', 'хоме1', '', '', '', 'bg', 0, 'page_home', ''),
+(106, 'home', 'home1', '', '', '', 'en', 0, 'page_home', ''),
+(107, '', '', '', '', '', 'bg', 0, 'page_checkout', ''),
+(108, '', '', '', '', '', 'en', 0, 'page_checkout', ''),
+(109, '', '', '', '', '', 'bg', 0, 'page_contacts', ''),
+(110, '', '', '', '', '', 'en', 0, 'page_contacts', ''),
+(111, '', '', '', '', '', 'bg', 0, 'page_blog', ''),
+(112, '', '', '', '', '', 'en', 0, 'page_blog', '');
 
 -- --------------------------------------------------------
 
@@ -327,8 +357,8 @@ INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
 (3, 'footercopyright', 'Copyright © Footer E-commerce Plugin 2014. All right reserved. '),
 (4, 'contactspage', '<address><strong>Twitter, Inc.</strong><br />\r\n795 Folsom Ave, Suite 600<br />\r\nSan Francisco, CA 94107<br />\r\n<abbr title="Phone">P:</abbr> (123) 456-7890</address>\r\n\r\n<address><strong>Full Name</strong><br />\r\n<a href="mailto:#">first.last@example.com</'),
 (5, 'footerContactAddr', ''),
-(6, 'footerContactEmail', ''),
-(7, 'footerContactPhone', 'asd'),
+(6, 'footerContactEmail', ' shopchoise@gmail.com'),
+(7, 'footerContactPhone', ''),
 (8, 'googleMaps', '42.676850, 23.379063'),
 (9, 'footerAboutUs', 'test'),
 (10, 'footerSocialFacebook', '1'),

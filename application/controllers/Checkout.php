@@ -15,9 +15,10 @@ class Checkout extends MY_Controller
     {
         $data = array();
         $head = array();
-        $head['title'] = 'Title information?';
-        $head['description'] = 'Description info';
-        $head['keywords'] = 'key,words,for,seo';
+        $arrSeo = $this->Articles_model->getSeo('page_checkout', $this->my_lang);
+        $head['title'] = $arrSeo['title'];
+        $head['description'] = $arrSeo['description'];
+        $head['keywords'] = str_replace(" ", ",", $head['title']);
         $new_request = false;
         if (isset($_POST['payment_type']) && $_POST['payment_type'] == 1) { // Cash On Delivery
             $errors = $this->cashOnDeliveryValidate($_POST);

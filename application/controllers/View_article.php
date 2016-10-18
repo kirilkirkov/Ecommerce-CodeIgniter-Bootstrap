@@ -20,7 +20,7 @@ class View_article extends MY_Controller {
         $description = url_title(character_limiter(strip_tags($data['article']['description']), 130));
         $description = str_replace("-", " ", $description) . '..';
         $head['description'] = $description;
-        $head['keywords'] = '';
+        $head['keywords'] = str_replace(" ", ",", $data['article']['title']);
         $this->render('view_article', $head, $data);
     }
 

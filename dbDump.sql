@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 17, 2016 at 02:10 PM
+-- Generation Time: Oct 18, 2016 at 11:39 AM
 -- Server version: 5.5.52-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.19
 
@@ -142,7 +142,7 @@ INSERT INTO `orders` (`id`, `first_name`, `last_name`, `email`, `phone`, `addres
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(10) unsigned NOT NULL COMMENT 'id of products for shop',
-  `folder` int(50) DEFAULT NULL COMMENT 'folder with images',
+  `folder` int(10) unsigned DEFAULT NULL COMMENT 'folder with images',
   `image` varchar(255) NOT NULL,
   `time` int(10) unsigned NOT NULL COMMENT 'time created',
   `time_update` int(10) unsigned NOT NULL COMMENT 'time updated',
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `in_slider` tinyint(1) NOT NULL DEFAULT '0',
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `products`
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `translations` (
   `name` varchar(50) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `art_id_abbr` (`abbr`,`for_id`,`type`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=102 ;
 
 --
 -- Dumping data for table `translations`
@@ -315,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `valueStore` (
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `key` (`thekey`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `valueStore`
@@ -338,7 +338,8 @@ INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
 (14, 'footerSocialYoutube', '5'),
 (16, 'contactsEmailTo', 'kiro@abv.bg'),
 (17, 'shippingOrder', '50'),
-(18, 'addJs', '');
+(18, 'addJs', ''),
+(19, 'publicQuantity', '0');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

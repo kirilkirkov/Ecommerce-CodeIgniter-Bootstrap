@@ -139,9 +139,9 @@ class Admin extends MX_Controller
     private function do_upload_others_images()
     {
         $upath = './attachments/shop_images/' . $_POST['folder'] . '/';
-		if (!file_exists($upath)) {
+        if (!file_exists($upath)) {
             mkdir($upath, 0777);
-		}
+        }
 
         $this->load->library('upload');
 
@@ -629,6 +629,12 @@ class Admin extends MX_Controller
             $this->saveHistory('Add JS to website');
             redirect('admin/styling');
         }
+        if (isset($_POST['publicQuantity'])) {
+            $this->Admin_model->setValueStore('publicQuantity', $_POST['publicQuantity']);
+            $this->session->set_flashdata('publicQuantity', 'Public quantity visibility changed');
+            $this->saveHistory('Change publicQuantity visibility');
+            redirect('admin/styling');
+        }
         $data['siteLogo'] = $this->Admin_model->getValueStore('sitelogo');
         $data['naviText'] = $this->Admin_model->getValueStore('navitext');
         $data['footerCopyright'] = $this->Admin_model->getValueStore('footercopyright');
@@ -648,6 +654,7 @@ class Admin extends MX_Controller
         $data['footerAboutUs'] = $this->Admin_model->getValueStore('footerAboutUs');
         $data['shippingOrder'] = $this->Admin_model->getValueStore('shippingOrder');
         $data['addJs'] = $this->Admin_model->getValueStore('addJs');
+        $data['publicQuantity'] = $this->Admin_model->getValueStore('publicQuantity');
         $this->load->view('_parts/header', $head);
         $this->load->view('styling', $data);
         $this->load->view('_parts/footer');

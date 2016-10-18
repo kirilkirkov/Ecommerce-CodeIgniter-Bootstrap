@@ -238,4 +238,20 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Public quantity visability 1/0 (yes/no)</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('publicQuantity')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('publicQuantity') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="text" name="publicQuantity" style="margin-bottom:5px;" value="<?= $publicQuantity ?>" class="form-control">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

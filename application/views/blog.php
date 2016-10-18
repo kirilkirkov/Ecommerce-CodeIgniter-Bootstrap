@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <span><?= lang('best_sellers') ?></span>
                     <i class="fa fa-trophy" aria-hidden="true"></i>
                 </div>
-                <?php loop_products($bestSellers, $currency, '', true, $lang_url); ?>
+                <?php loop_products($bestSellers, $currency, '', true, $lang_url, $publicQuantity); ?>
             </div>
         </div>
         <div class="col-sm-8 col-md-9">
@@ -34,24 +34,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <small>
                                         <span>
                                             <i class="fa fa-clock-o"></i>
-        <?= date('M d, y', $post['time']) ?>
+                                            <?= date('M d, y', $post['time']) ?>
                                         </span>
                                     </small>
                                     <p><?= character_limiter(strip_tags($post['description']), 300) ?></p>
                                     <a class="btn pull-right" href="<?= $lang_url . '/blog/' . $post['url'] ?>">
                                         <i class="fa fa-long-arrow-right"></i>
-        <?= lang('read_mode') ?>
+                                        <?= lang('read_mode') ?>
                                     </a>
                                 </div>
                             </div>
                         </div>
-                    <?php }
+                        <?php
+                    }
                 } else {
                     ?>
                     <div class="alert alert-info"><?= lang('no_posts') ?></div>
-            <?php } ?>
+                <?php } ?>
             </div>
-<?= $links_pagination ?>
+            <?= $links_pagination ?>
         </div>
     </div>
 </div>

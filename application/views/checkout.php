@@ -111,7 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <span><?= lang('best_sellers') ?></span>
                     <i class="fa fa-trophy" aria-hidden="true"></i>
                 </div>
-                <?php loop_products($bestSellers, $currency, '', true, $lang_url); ?>
+                <?php loop_products($bestSellers, $currency, '', true, $lang_url, $publicQuantity); ?>
             </div>
         </div>
     </div>

@@ -49,14 +49,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="col-sm-6"><?= $product['old_price'] . $currency ?></div>
                     <div class="col-sm-12 border-bottom"></div>
                 </div>
-            <?php } ?>
-            <div class="row row-info">
-                <div class="col-sm-6">
-                    <b><?= lang('in_stock') ?>:</b>
+            <?php } if ($publicQuantity == 1) { ?>
+                <div class="row row-info">
+                    <div class="col-sm-6">
+                        <b><?= lang('in_stock') ?>:</b>
+                    </div>
+                    <div class="col-sm-6"><?= $product['quantity'] ?></div>
+                    <div class="col-sm-12 border-bottom"></div>
                 </div>
-                <div class="col-sm-6"><?= $product['quantity'] ?></div>
-                <div class="col-sm-12 border-bottom"></div>
-            </div>
+            <?php } ?>
             <div class="row row-info">
                 <div class="col-sm-6"><b><?= lang('num_added_to_cart') ?>:</b></div>
                 <div class="col-sm-6"><?php
@@ -106,7 +107,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <?php
         if (!empty($sameCagegoryProducts)) {
-            loop_products($sameCagegoryProducts, $currency, 'col-sm-4 col-md-3', false, $lang_url);
+            loop_products($sameCagegoryProducts, $currency, 'col-sm-4 col-md-3', false, $lang_url, $publicQuantity);
         } else {
             ?>
             <div class="alert alert-info"><?= lang('no_same_category_products') ?></div>

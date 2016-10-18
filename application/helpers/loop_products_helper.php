@@ -2,7 +2,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-function loop_products($products, $currency, $classes = '', $carousel = false, $lang_url)
+function loop_products($products, $currency, $classes = '', $carousel = false, $lang_url, $publicQuantity = 1)
 {
     if ($carousel == true) {
         ?>
@@ -56,10 +56,11 @@ function loop_products($products, $currency, $classes = '', $carousel = false, $
                             <div class="price-discount">
                                 <?= lang('old_price') ?>: <span><?= number_format($article['old_price'], 2) . $currency ?></span>
                             </div>
+                        <?php } if ($publicQuantity == 1) { ?>
+                            <div class="quantity">
+                                <?= lang('in_stock') ?>: <span><?= $article['quantity'] ?></span>
+                            </div>
                         <?php } ?>
-                        <div class="quantity">
-                            <?= lang('in_stock') ?>: <span><?= $article['quantity'] ?></span>
-                        </div>
                         <div class="add-to-cart">
                             <a href="javascript:void(0);" class="add-to-cart" data-id="<?= $article['id'] ?>">
                                 <span class="glyphicon glyphicon-shopping-cart"></span>

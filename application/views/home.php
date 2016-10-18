@@ -168,7 +168,7 @@ if (count($sliderProducts) > 0) {
             </div>
             <?php
             if (!empty($products)) {
-                loop_products($products, $currency, 'col-sm-4 col-md-3', false, $lang_url);
+                loop_products($products, $currency, 'col-sm-4 col-md-3', false, $lang_url, $publicQuantity);
             } else {
                 ?>
                 <script>

@@ -18,6 +18,7 @@ Bootsrap Responsive online shop
 15. Easy installation
 16. Easy code change
 17. Edit every text from interface..
+17. Receive ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/paypalLogo.png "Logo Title Text 1") payments, also have option for paypal sandbox testing
 18. Fast Loading
 
 ## Easy installation in 3 steps

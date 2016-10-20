@@ -101,6 +101,7 @@ $lang['go_to_paypal'] = 'Отидете към paypal';
 $lang['you_choose_paypal'] = 'Вие избрахте метод за плащане PayPal. За да направите покупката си моля натиснете бутона продължи.';
 $lang['paypal_cancel_msg'] = 'Вие се отказахте от покупаката си с paypal, може да избере друг начин на плащане!';
 $lang['paypal_success_msg'] = 'Вие успешно заплатихте поръчката си!';
+$lang['not_selected'] = 'Не е избран';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'Не сте въвели име';

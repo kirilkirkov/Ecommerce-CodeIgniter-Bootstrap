@@ -99,6 +99,7 @@ $lang['cancel_payment'] = 'Cacel payment';
 $lang['you_choose_paypal'] = 'You choose tha PayPal payment method. To buy your products please continue.';
 $lang['paypal_cancel_msg'] = 'You successful cancel paypal order.';
 $lang['paypal_success_msg'] = 'You successful buy your order!';
+$lang['not_selected'] = 'Not selected';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';

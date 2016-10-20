@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">
         <div class="col-sm-4">
             <div <?= $product['folder'] != null ? 'style="margin-bottom:20px;"' : '' ?>>
-                <img src="<?= base_url('/attachments/shop_images/' . $product['image']) ?>" class="img-responsive the-image">
+                <img src="<?= base_url('/attachments/shop_images/' . $product['image']) ?>" class="img-responsive the-image" alt="<?= str_replace('"', "'", $product['title']) ?>">
             </div>
             <?php
             if ($product['folder'] != null) {
@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 if (is_file($dir . $file)) {
                                     ?>
                                     <div class="col-xs-4 col-sm-6 col-md-4 text-center">
-                                        <img src="<?= base_url($dir . $file) ?>" class="other-img-preview the-image">
+                                        <img src="<?= base_url($dir . $file) ?>" class="other-img-preview the-image" alt="<?= str_replace('"', "'", $product['title']) ?>">
                                     </div>
                                     <?php
                                 }
@@ -35,7 +35,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }
             ?>
         </div>
-
         <div class="col-sm-8">
             <h1><?= $product['title'] ?></h1>
             <div class="row row-info">
@@ -118,7 +117,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 <div id="modalImagePreview" class="modal">
     <span class="close" onclick="document.getElementById('myModal').style.display = 'none'">&times;</span>
-    <img class="modal-content" id="img01">
+    <img class="modal-content" id="img01" alt="<?= lang('details') ?>">
     <div id="caption"></div>
 </div>
 <script src="<?= base_url('assets/js/image-preveiw.js') ?>"></script>

@@ -36,7 +36,7 @@ function loop_products($products, $currency, $classes = '', $carousel = false, $
                     <div class="inner">
                         <div class="img-container">
                             <a href="<?= $lang_url . '/' . $article['url'] ?>">
-                                <img src="<?= base_url('/attachments/shop_images/' . $article['image']) ?>" alt="">
+                                <img src="<?= base_url('/attachments/shop_images/' . $article['image']) ?>" alt="<?= str_replace('"', "'", $article['title']) ?>">
                             </a>
                         </div>
                         <h2>

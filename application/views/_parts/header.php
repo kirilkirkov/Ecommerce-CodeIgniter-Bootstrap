@@ -37,7 +37,7 @@
                                 foreach ($this->all_langs as $key_lang => $lang) {
                                     ?>
                                     <li <?= $i == $num_langs ? 'class="last-item"' : '' ?>>
-                                        <img src="<?= base_url('attachments/lang_flags/' . $lang['flag']) ?>" alt=""><a href="<?= base_url($key_lang) ?>"><?= $lang['name'] ?></a>
+                                        <img src="<?= base_url('attachments/lang_flags/' . $lang['flag']) ?>" alt="Language-<?= $my_lang ?>"><a href="<?= base_url($key_lang) ?>"><?= $lang['name'] ?></a>
                                     </li>
                                     <?php
                                     $i++;

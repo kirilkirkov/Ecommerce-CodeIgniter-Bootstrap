@@ -195,26 +195,31 @@ class Articles_model extends CI_Model
 
     public function setOrder($post)
     {
-        if ($post['payment_type'] == 1) {
-            $i = 0;
-            $post['products'] = array();
-            foreach ($post['product_id'] as $product) {
-                $post['products'][$product] = $post['quantity'][$i];
-                /*
-                 * If you want to decrease qunatity after product is processed... remove bottm update line!
-                 */
-                // $this->db->query('UPDATE products SET quantity=quantity-' . $post['quantity'][$i] . ' WHERE product_id = ' . $product);
-                $i++;
-            }
-            unset($post['product_id'], $post['payment_type'], $post['quantity']);
-            $post['date'] = time();
-            $post['products'] = serialize($post['products']);
-            $this->db->insert('orders', $post);
+        $q = $this->db->query('SELECT MAX(order_id) as order_id FROM orders');
+        $rr = $q->row_array();
+        if ($rr['order_id'] == 0) {
+            $rr['order_id'] = 1233;
         }
+        $post['order_id'] = $rr['order_id'] + 1;
+
+        $i = 0;
+        $post['products'] = array();
+        foreach ($post['product_id'] as $product) {
+            $post['products'][$product] = $post['quantity'][$i];
+            $i++;
+        }
+        unset($post['product_id'], $post['quantity']);
+        $post['date'] = time();
+        $post['products'] = serialize($post['products']);
+        $result = $this->db->insert('orders', $post);
+        if ($result == true) {
+            return $post['order_id'];
+        }
+        return false;
     }
 
     public function getSliderProducts($lang)
-    { //Slider products only
+    {
         $this->db->select('products.id, products.quantity, products.product_id, products.image, products.url, translations.price, translations.title, translations.basic_description, translations.old_price');
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         $this->db->where('translations.abbr', $lang);
@@ -332,6 +337,19 @@ class Articles_model extends CI_Model
         $this->db->where('active_pages.name', $page);
         $result = $this->db->select('translations.description as content, translations.name')->get('active_pages');
         return $result->row_array();
+    }
+
+    public function changePaypalOrderStatus($id, $status)
+    {
+        $processed = 0;
+        if ($status == 'canceled') {
+            $processed = 2;
+        }
+        $this->db->where('order_id', $id);
+        $this->db->update('orders', array(
+            'paypal_status' => $status,
+            'processed' => $processed
+        ));
     }
 
 }

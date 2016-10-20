@@ -94,8 +94,22 @@ div.product-sort .form-group {margin-bottom:0;}
 button.btn-blue {box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); background-color:#4285f4; color:#fff;}
 button.btn-blue:hover { color:#fff;}
 
-#checkout-page .payment-type {margin:20px 0;}
-#checkout-page  .form-control { border-radius:0; box-shadow: none; color:#666; font-size:13px;}
+.paypal-image {margin: 20px 0;}
+#checkout-page form .btm-10 {margin-bottom:10px;}
+#checkout-page .paypal-form {
+background: rgba(255,255,255,1);
+background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(47%, rgba(246,246,246,1)), color-stop(100%, rgba(237,237,237,1)));
+background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0 );
+padding-top:10px;
+}
+.payment-type-box {padding: 12px; border:1px solid #ccc; margin: 20px 0; position: relative;}
+.payment-type-box .top-header {background-color: #fff; font-size: 14px;  left: 50%; margin-left: -75px; padding-left: 5px; padding-right: 5px; position: absolute; top: -12px; width: 149px;}
+#checkout-page .form-control { border-radius:0; box-shadow: none; color:#666; font-size:13px;}
 #checkout-page .form-group label {font-size:13px; color:#666;}
 #checkout-page .left-side {margin-bottom:30px;}
 
@@ -222,6 +236,9 @@ footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
     #view-article div.product-list {margin-left:10px; margin-right:10px;}
     #view-product .the-image {margin-bottom:30px;}
     .other-img-preview {width:75px; height: 75px; margin-bottom:50px;}
+    #nav-categories, #show-xs-nav .hidde-sp {display:none;}
+    #show-xs-nav { border: 1px solid #666; font-size: 15px; padding: 3px; text-decoration: none; text-align: center; color:#666;}
+    #show-xs-nav span i {margin-left: 5px;}
 }
 /* Portrait phones and smaller */
 @media (max-width: 480px) {

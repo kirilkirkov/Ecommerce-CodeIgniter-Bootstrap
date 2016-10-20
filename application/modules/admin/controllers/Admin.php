@@ -516,13 +516,35 @@ class Admin extends MX_Controller
             $order_by = $_GET['order_by'];
         }
         $rowscount = $this->Admin_model->ordersCount();
-        $data['orders'] = $this->Admin_model->orders(20, $page, $order_by);
-        $data['links_pagination'] = pagination('admin/orders', $rowscount, 20, 3);
+        $data['orders'] = $this->Admin_model->orders(10, $page, $order_by);
+        $data['links_pagination'] = pagination('admin/orders', $rowscount, 10, 3);
+        if (isset($_POST['paypal_sandbox'])) {
+            $this->Admin_model->setValueStore('paypal_sandbox', $_POST['paypal_sandbox']);
+            $this->session->set_flashdata('paypal_sandbox', 'Public quantity visibility changed');
+            $this->saveHistory('Change paypal to sandbox mode');
+            redirect('admin/orders');
+        }
+        if (isset($_POST['paypal_email'])) {
+            $this->Admin_model->setValueStore('paypal_email', $_POST['paypal_email']);
+            $this->session->set_flashdata('paypal_email', 'Public quantity visibility changed');
+            $this->saveHistory('Change paypal business email to: ' . $_POST['paypal_email']);
+            redirect('admin/orders');
+        }
+        if (isset($_POST['paypal_currency'])) {
+            $this->Admin_model->setValueStore('paypal_currency', $_POST['paypal_currency']);
+            $this->session->set_flashdata('paypal_currency', 'Public quantity visibility changed');
+            $this->saveHistory('Change paypal currency to: ' . $_POST['paypal_currency']);
+            redirect('admin/orders');
+        }
+        $data['paypal_sandbox'] = $this->Admin_model->getValueStore('paypal_sandbox');
+        $data['paypal_email'] = $this->Admin_model->getValueStore('paypal_email');
+        $data['paypal_currency'] = $this->Admin_model->getValueStore('paypal_currency');
         $this->load->view('_parts/header', $head);
         $this->load->view('orders', $data);
         $this->load->view('_parts/footer');
-        if ($page == 0)
+        if ($page == 0) {
             $this->saveHistory('Go to orders page');
+        }
     }
 
     public function querybuilder()

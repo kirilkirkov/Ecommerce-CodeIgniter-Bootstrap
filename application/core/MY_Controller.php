@@ -11,6 +11,7 @@ class MY_Controller extends MX_Controller
     public $all_langs;
     private $sum_values = 0;
     public $currency;
+    public $currencyKey;
     public $nonDynPages = array();
     private $dynPages = array();
 
@@ -98,6 +99,7 @@ class MY_Controller extends MX_Controller
         $def_lang = $this->config->item('language');
         $def_lang_abbr = $this->def_lang = $this->config->item('language_abbr');
         $this->currency = $this->config->item('currency');
+        $this->currencyKey = $this->config->item('currencyKey');
         if ($this->uri->segment(1) == $def_lang_abbr) {
             redirect(base_url());
         }
@@ -108,6 +110,7 @@ class MY_Controller extends MX_Controller
                 $this->session->set_userdata('lang', $lang->name);
                 $this->session->set_userdata('lang_abbr', $lang->abbr);
                 $this->currency = $lang->currency;
+                $this->currencyKey = $lang->currencyKey;
                 $have = 1;
             }
         }

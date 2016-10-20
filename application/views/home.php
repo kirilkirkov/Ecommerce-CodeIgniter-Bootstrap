@@ -62,48 +62,54 @@ if (count($sliderProducts) > 0) {
                         <a href="javascript:void(0);" class="clear-filter" data-type-clear="category" data-toggle="tooltip" data-placement="right" title="<?= lang('clear_the_filter') ?>"><i class="fa fa-times" aria-hidden="true"></i></a>
                     <?php } ?>
                 </div>
-                <?php
+                <a href="javascript:void(0)" id="show-xs-nav" class="visible-xs">
+                    <span class="show-sp"><?= lang('showXsNav') ?><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i></span>
+                    <span class="hidde-sp"><?= lang('hideXsNav') ?><i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i></span>
+                </a>
+                <div id="nav-categories">
+                    <?php
 
-                function loop_tree($pages, $is_recursion = false)
-                {
-                    ?>
-                    <ul class="<?= $is_recursion === true ? 'children' : 'parent' ?>">
-                        <?php
-                        foreach ($pages as $page) {
-                            $children = false;
-                            if (isset($page['children']) && !empty($page['children'])) {
-                                $children = true;
+                    function loop_tree($pages, $is_recursion = false)
+                    {
+                        ?>
+                        <ul class="<?= $is_recursion === true ? 'children' : 'parent' ?>">
+                            <?php
+                            foreach ($pages as $page) {
+                                $children = false;
+                                if (isset($page['children']) && !empty($page['children'])) {
+                                    $children = true;
+                                }
+                                ?>
+                                <li>
+                                    <?php if ($children === true) {
+                                        ?>
+                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                    <?php } else { ?>
+                                        <i class="fa fa-circle-o" aria-hidden="true"></i>
+                                    <?php } ?>
+                                    <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'selected' : '' ?>"><?= $page['name'] ?></a>
+                                    <?php
+                                    if ($children === true) {
+                                        loop_tree($page['children'], true);
+                                    } else {
+                                        ?>
+                                    </li>
+                                    <?php
+                                }
                             }
                             ?>
-                            <li>
-                                <?php if ($children === true) {
-                                    ?>
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                <?php } else { ?>
-                                    <i class="fa fa-circle-o" aria-hidden="true"></i>
-                                <?php } ?>
-                                <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'selected' : '' ?>"><?= $page['name'] ?></a>
-                                <?php
-                                if ($children === true) {
-                                    loop_tree($page['children'], true);
-                                } else {
-                                    ?>
-                                </li>
-                                <?php
-                            }
-                        }
-                        ?>
-                    </ul>
-                    <?php
-                    if ($is_recursion === true) {
-                        ?>
-                        </li>
+                        </ul>
                         <?php
+                        if ($is_recursion === true) {
+                            ?>
+                            </li>
+                            <?php
+                        }
                     }
-                }
 
-                loop_tree($home_categories);
-                ?>
+                    loop_tree($home_categories);
+                    ?>
+                </div>
             </div>
             <div class="filter-sidebar">
                 <div class="title">

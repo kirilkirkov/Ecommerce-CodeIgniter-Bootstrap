@@ -51,9 +51,13 @@ if (!empty($orders))
                                         <?php
                                     }
                                 } else {
-                                    if ($key == 'date')
+                                    if ($key == 'payment_type' && $td == 'PayPal') {
+                                        ?>
+                                        <img src="<?= base_url('assets/imgs/paypal.png') ?>" style="height:20px;">
+                                        <?php
+                                    } elseif ($key == 'date') {
                                         $td = date('d.M.Y / H:m:s', $td);
-                                    if ($key == 'processed') {
+                                    } elseif ($key == 'processed') {
                                         if ($td == 0)
                                             $type = 'No';
                                         if ($td == 1)
@@ -68,8 +72,9 @@ if (!empty($orders))
                                         <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeStatus(<?= $id ?>, 0)" class="btn btn-danger btn-xs">no processed</a></div>
                                         <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeStatus(<?= $id ?>, 2)" class="btn btn-warning btn-xs">rejected</a></div>
                                         <?php
+                                    } else {
+                                        echo $td;
                                     }
-                                    echo $td;
                                 }
                                 ?> 
                             </td>
@@ -82,6 +87,70 @@ if (!empty($orders))
     <?php } else { ?>
         <div class="alert alert-info">No orders to the moment!</div>
     <?php } ?>
+</div>
+<hr>
+<h3>Paypal Account Settings</h3>
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Paypal sandbox mode</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('paypal_sandbox')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('paypal_sandbox') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <div class="input-group">
+                        <input class="form-control" name="paypal_sandbox" value="<?= $paypal_sandbox ?>" type="text">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" value="" type="submit">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Paypal business email</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('paypal_email')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('paypal_email') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <div class="input-group">
+                        <input class="form-control" name="paypal_email" value="<?= $paypal_email ?>" type="text">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" value="" type="submit">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Paypal currency (make sure is supported from paypal!)</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('paypal_currency')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('paypal_currency') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <div class="input-group">
+                        <input class="form-control" name="paypal_currency" value="<?= $paypal_currency ?>" type="text">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" value="" type="submit">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     function changeStatus(id, to_status) {

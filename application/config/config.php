@@ -84,11 +84,14 @@ $config['admin_history'] = true;
   | This determines which set of language files should be used. Make sure
   | there is an available translation if you intend to use something other
   | than english.
+  | Must set currencyKey: BGN, USD or other.. Look in currency
+  | hepler for help.. :) 
   |
  */
 $config['language'] = 'bulgarian';
 $config['language_abbr'] = 'bg';
 $config['currency'] = 'лв';
+$config['currencyKey'] = 'BGN';
 
 /*
   |--------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 18, 2016 at 02:34 PM
+-- Generation Time: Oct 20, 2016 at 03:54 PM
 -- Server version: 5.5.52-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.19
 
@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `languages` (
   `abbr` varchar(5) CHARACTER SET utf8 NOT NULL,
   `name` varchar(30) CHARACTER SET utf8 NOT NULL,
   `currency` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `currencyKey` varchar(5) CHARACTER SET utf8 NOT NULL,
   `flag` varchar(255) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
@@ -98,9 +99,9 @@ CREATE TABLE IF NOT EXISTS `languages` (
 -- Dumping data for table `languages`
 --
 
-INSERT INTO `languages` (`id`, `abbr`, `name`, `currency`, `flag`) VALUES
-(1, 'bg', 'bulgarian', 'лв', 'bg.jpg'),
-(18, 'en', 'english', '$', 'en.jpg');
+INSERT INTO `languages` (`id`, `abbr`, `name`, `currency`, `currencyKey`, `flag`) VALUES
+(1, 'bg', 'bulgarian', 'лв', 'BGN', 'bg.jpg'),
+(18, 'en', 'english', '$', 'USD', 'en.jpg');
 
 -- --------------------------------------------------------
 
@@ -110,6 +111,7 @@ INSERT INTO `languages` (`id`, `abbr`, `name`, `currency`, `flag`) VALUES
 
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -121,17 +123,11 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `products` text NOT NULL,
   `date` int(10) unsigned NOT NULL,
   `referrer` varchar(255) NOT NULL,
+  `payment_type` varchar(255) NOT NULL,
+  `paypal_status` varchar(10) DEFAULT NULL,
   `processed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `first_name`, `last_name`, `email`, `phone`, `address`, `city`, `post_code`, `notes`, `products`, `date`, `referrer`, `processed`) VALUES
-(7, 'dqwdqw', 'dqwqw', 'fqe@dfqe.qf', '321321', 'qwdqw', 'dqwdwq', '321dqw', 'dqw', 'a:1:{i:7;s:1:"2";}', 1475847973, '', 0),
-(8, 'fqef', 'qefqe', 'dqw@dqw.dqw', '32112', 'dqwdqw', 'dqwdq', '3232', 'dwqdqw', 'a:1:{i:6;s:1:"3";}', 1475848157, '', 1);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -153,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `in_slider` tinyint(1) NOT NULL DEFAULT '0',
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `products`
@@ -345,7 +341,7 @@ CREATE TABLE IF NOT EXISTS `valueStore` (
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `key` (`thekey`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `valueStore`
@@ -369,7 +365,10 @@ INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
 (16, 'contactsEmailTo', 'kiro@abv.bg'),
 (17, 'shippingOrder', '50'),
 (18, 'addJs', ''),
-(19, 'publicQuantity', '0');
+(19, 'publicQuantity', '0'),
+(20, 'paypal_email', 'kiro_tyson-facilitator@abv.bg'),
+(21, 'paypal_sandbox', '1'),
+(22, 'paypal_currency', 'EUR');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

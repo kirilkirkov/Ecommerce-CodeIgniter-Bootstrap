@@ -45,7 +45,7 @@ $lang['title'] = 'Name';
 $lang['quantity'] = 'Quantity';
 $lang['back_to_shop'] = 'Back to shop';
 $lang['custom_order'] = 'Make order';
-$lang['order_completed'] = 'Your order has been adopted successfully';
+$lang['c_o_d_order_completed'] = 'Your order has been adopted successfully, we will contact you to confirm it';
 $lang['no_products_in_cart'] = 'Still no items in your cart';
 $lang['go_back'] = 'Back';
 $lang['procurement_desc'] = 'Most sallers';
@@ -91,6 +91,14 @@ $lang['email_added'] = 'Your email address is added';
 $lang['freeShippingHeader'] = 'Oder';
 $lang['freeShipping'] = 'For order more than %price%%currency% the shipping is free';
 $lang['promo'] = 'Promo';
+$lang['paypal'] = 'PayPal';
+$lang['showXsNav'] = 'Show categories';
+$lang['hideXsNav'] = 'Hide categories';
+$lang['choose_payment'] = 'Choose payment type';
+$lang['cancel_payment'] = 'Cacel payment';
+$lang['you_choose_paypal'] = 'You choose tha PayPal payment method. To buy your products please continue.';
+$lang['paypal_cancel_msg'] = 'You successful cancel paypal order.';
+$lang['paypal_success_msg'] = 'You successful buy your order!';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';

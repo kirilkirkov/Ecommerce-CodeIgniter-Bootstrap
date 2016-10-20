@@ -145,6 +145,17 @@
                             <input type="text" name="currency" class="form-control" id="currency">
                         </div>
                         <div class="form-group">
+                            <label class="control-label">Currency key:</label>
+                            <select class="selectpicker form-control" data-live-search="true" name="currencyKey">
+                                <?php
+                                $curr = currencies();
+                                foreach ($curr as $key => $val) {
+                                    ?>
+                                    <option value="<?= $key ?>"><?= $key ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <input type="file" name="userfile"">
                         </div>
                     </div>

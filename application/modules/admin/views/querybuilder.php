@@ -26,7 +26,7 @@ if ($success_query === true) {
     <div class="alert alert-info">Broken query! ;)</div>
 <?php } ?>
 <div class="alert alert-danger">Set database name in option menu!</div>
-<form role="form" method="POST">
+<form method="POST">
     <div class="form-group">
         <label for="text">Query:</label>
         <input type="text" placeholder="show tables" value="<?= isset($_POST['query']) ? $_POST['query'] : '' ?>" name="query" class="form-control" id="text">

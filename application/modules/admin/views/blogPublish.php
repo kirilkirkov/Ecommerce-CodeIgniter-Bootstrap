@@ -16,7 +16,7 @@
 			<hr>
 		<?php }
 		?>
-		<form role="form" method="POST" enctype="multipart/form-data">
+		<form method="POST" enctype="multipart/form-data">
 		<?php foreach ($languages->result() as $language) { ?>
 			<input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
 		<?php }  foreach ($languages->result() as $language) { ?>

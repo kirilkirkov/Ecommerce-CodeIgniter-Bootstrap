@@ -17,7 +17,7 @@ if ($this->session->flashdata('result_publish')) {
     <?php
 }
 ?>
-<form role="form" method="POST" action="" enctype="multipart/form-data">
+<form method="POST" action="" enctype="multipart/form-data">
     <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : time() ?>" name="folder">
     <?php foreach ($languages->result() as $language) { ?>
         <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">

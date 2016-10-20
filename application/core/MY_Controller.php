@@ -30,6 +30,7 @@ class MY_Controller extends MX_Controller
     {
         $head['cartItems'] = $this->getCartItems();
         $head['sumOfItems'] = $this->sum_values;
+        $head['my_lang'] = $this->my_lang;
         $vars = $this->loadVars();
         $this->load->vars($vars);
         $this->load->view('_parts/header', $head);

@@ -8,7 +8,7 @@
 ?>
 <div class="row">
     <div class="col-sm-6">
-        <form role="form" method="GET">
+        <form method="GET">
             <div class="input-group">
                 <input type="text" class="form-control" name="search" value="<?= @$_GET['search'] ?>" placeholder="Find here">
                 <span class="input-group-btn">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= $my_lang ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,7 +36,9 @@
                                 $lang_last = '';
                                 foreach ($this->all_langs as $key_lang => $lang) {
                                     ?>
-                                    <li <?= $i == $num_langs ? 'class="last-item"' : '' ?>><img src="<?= base_url('attachments/lang_flags/' . $lang['flag']) ?>" alt=""><a href="<?= base_url($key_lang) ?>"><?= $lang['name'] ?></a></li>
+                                    <li <?= $i == $num_langs ? 'class="last-item"' : '' ?>>
+                                        <img src="<?= base_url('attachments/lang_flags/' . $lang['flag']) ?>" alt=""><a href="<?= base_url($key_lang) ?>"><?= $lang['name'] ?></a>
+                                    </li>
                                     <?php
                                     $i++;
                                 }
@@ -59,7 +61,7 @@
                                             <div class="dropdown dropdown-lg">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?= lang('more') ?> <span class="caret"></span></button>
                                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                                    <form class="form-horizontal" method="GET" action="<?= base_url() ?>" id="bigger-search" role="form">
+                                                    <form class="form-horizontal" method="GET" action="<?= base_url() ?>" id="bigger-search">
                                                         <input type="hidden" name="category" value="<?= isset($_GET['category']) ? $_GET['category'] : '' ?>">
                                                         <input type="hidden" name="in_stock" value="<?= isset($_GET['in_stock']) ? $_GET['in_stock'] : '' ?>">
                                                         <input type="hidden" name="search_in_title" value="<?= isset($_GET['search_in_title']) ? $_GET['search_in_title'] : '' ?>">

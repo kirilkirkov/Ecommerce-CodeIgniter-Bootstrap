@@ -46,8 +46,7 @@ function loop_products($products, $currency, $classes = '', $carousel = false, $
                             <span class="underline"><?= lang('price') ?>: <span><?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= $currency ?></span></span>
                             <?php
                             if ($article['old_price'] != '' && $article['old_price'] != 0) {
-                                $percent = $article['old_price'] / $article['price'];
-                                $percent_friendly = number_format($percent * 100, 2) . '%';
+                                $percent_friendly = number_format((($article['old_price'] - $article['price']) / $article['old_price'])*100) . '%';
                                 ?>
                                 <span class="price-down"><?= $percent_friendly ?></span>
                             <?php } ?>

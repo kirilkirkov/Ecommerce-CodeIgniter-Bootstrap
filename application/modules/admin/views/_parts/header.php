@@ -63,6 +63,18 @@
                     <div class="row">
                         <?php if ($this->session->userdata('logged_in')) { ?>
                             <div class="col-sm-3 col-md-3 col-lg-2 left-side navbar-default">
+                                <div class="show-menu">
+                                    <a id="show-xs-nav" class="visible-xs" href="javascript:void(0)">
+                                        <span class="show-sp">
+                                            Show menu
+                                            <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="hidde-sp">
+                                            Hide menu
+                                            <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+                                        </span>
+                                    </a>
+                                </div>
                                 <ul class="sidebar-menu">
                                     <li class="sidebar-search">
                                         <div class="input-group custom-search-form">

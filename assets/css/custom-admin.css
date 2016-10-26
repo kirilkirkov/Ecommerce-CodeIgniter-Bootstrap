@@ -26,6 +26,11 @@ input.form-control {border:1px solid #dadada; border-radius: 0; box-shadow:none;
 .animated {  -webkit-animation-duration: 1s;  animation-duration: 1s;  -webkit-animation-fill-mode: both;  animation-fill-mode: both;}
 #theSliderDescrption {display:none;}
 
+.show-menu {display: none;}
+#show-xs-nav { border: 1px solid #666; color: #666; font-size: 15px; padding: 3px; text-align: center; text-decoration: none;}
+#show-xs-nav {color: #666;  font-size: 15px; text-align: center;}
+#nav-categories, #show-xs-nav .hidde-sp {   display: none;}
+
 .other-img {display: inline-block; position:relative;}
 .other-img a {position:absolute; right:0; top:0; background-color: #fff; color:red;}
 
@@ -107,5 +112,7 @@ footer a {color:#333; text-decoration:underline;}
     nav.navbar {margin-bottom:0;}
     nav.navbar .navbar-brand {height:55px;}
     .settings {position: relative;}
+    .show-menu {display: block; padding:0 10px !important;}
+    .sidebar-menu {display: none;}
 }
 

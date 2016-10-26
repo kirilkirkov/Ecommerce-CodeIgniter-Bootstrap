@@ -54,16 +54,16 @@ class Articles_model extends CI_Model
             if ($big_get['search_in_body'] != '') {
                 $this->db->like('translations.description', $big_get['search_in_body']);
             }
-            if ($big_get['order_new'] != '') {
-                $this->db->order_by('products.id', $big_get['order_new']);
-            } else {
-                $this->db->order_by('products.id', 'DESC');
-            }
             if ($big_get['order_price'] != '') {
                 $this->db->order_by('translations.price', $big_get['order_price']);
             }
             if ($big_get['order_procurement'] != '') {
                 $this->db->order_by('products.procurement', $big_get['order_procurement']);
+            }
+            if ($big_get['order_new'] != '') {
+                $this->db->order_by('products.id', $big_get['order_new']);
+            } else {
+                $this->db->order_by('products.id', 'DESC');
             }
             if ($big_get['quantity_more'] != '') {
                 $this->db->where('products.quantity > ', $big_get['quantity_more']);

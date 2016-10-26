@@ -68,11 +68,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     ?></div>
                 <div class="col-sm-12 border-bottom"></div>
             </div>
+            <?php if ($publicDateAdded == 1) { ?>
             <div class="row row-info">
                 <div class="col-sm-6"><b><?= lang('added_on') ?>:</b></div>
                 <div class="col-sm-6"><?= date('m.d.Y', $product['time']) ?></div>
                 <div class="col-sm-12 border-bottom"></div>
             </div>
+            <?php } ?>
             <div class="row row-info">
                 <div class="col-sm-6"><b><?= lang('in_category') ?>:</b></div>
                 <div class="col-sm-6"><?= $product['categorie_name'] ?></div>
@@ -85,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <a href="javascript:void(0);" data-id="<?= $product['id'] ?>" class="btn btn-primary refresh-me add-to-cart"><?= lang('add_to_cart') ?></a>
                     </span>
                     <?php if (isset($result[$product['id']])) { ?>
-                        <a href="javascript:void(0);" onclick="removeproduct(<?= $product['id'] ?>, true)" class="btn btn-danger"><?= lang('del_from_cart') ?></a>
+                        <a href="javascript:void(0);" onclick="removeProduct(<?= $product['id'] ?>, true)" class="btn btn-danger"><?= lang('del_from_cart') ?></a>
                     <?php } ?>
                 </div>
                 <div class="col-sm-12 border-bottom"></div>

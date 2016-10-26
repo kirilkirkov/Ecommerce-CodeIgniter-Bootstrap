@@ -254,4 +254,20 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Public date added visability 1/0 (yes/no)</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('publicDateAdded')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('publicDateAdded') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="text" name="publicDateAdded" style="margin-bottom:5px;" value="<?= $publicDateAdded ?>" class="form-control">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

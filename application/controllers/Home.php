@@ -83,6 +83,8 @@ class Home extends MY_Controller
         if ($data['product'] === null) {
             show_404();
         }
+        $vars['publicDateAdded'] = $this->Admin_model->getValueStore('publicDateAdded');
+        $this->load->vars($vars);
         $head['title'] = $data['product']['title'];
         $description = url_title(character_limiter(strip_tags($data['product']['description']), 130));
         $description = str_replace("-", " ", $description) . '..';

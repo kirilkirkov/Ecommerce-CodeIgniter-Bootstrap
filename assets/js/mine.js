@@ -7,7 +7,7 @@ $('a.add-to-cart').click(function () {
     }
     manageShoppingCart('add', article_id, reload);
 });
-function removeArticle(id, reload) {
+function removeProduct(id, reload) {
     manageShoppingCart('remove', id, reload);
 }
 function manageShoppingCart(action, article_id, reload) {

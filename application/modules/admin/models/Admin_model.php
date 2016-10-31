@@ -124,6 +124,7 @@ class Admin_model extends CI_Model
     public function setLanguage($post)
     {
         $post['name'] = strtolower($post['name']);
+        $post['abbr'] = strtolower($post['abbr']);
         $result = $this->db->insert('languages', $post);
         return $result;
     }

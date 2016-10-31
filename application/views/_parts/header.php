@@ -164,6 +164,7 @@
                                 }
                                 ?>
                                 <li><a href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?></a></li>
+                                <li><a href="<?= $lang_url . '/shopping-cart' ?>"><?= lang('shopping_cart') ?></a></li>
                                 <li><a href="<?= $lang_url . '/contacts' ?>"><?= lang('contacts') ?></a></li>
                             </ul>
                         </div>

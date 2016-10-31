@@ -91,6 +91,8 @@ div.product-list div.price span.price-down {text-decoration:none; background-col
 div.product-sort {display: inline-block; margin-bottom: 20px; width: 100%; border: 1px solid #e5e5e5; padding:10px 20px;}
 div.product-sort .form-group {margin-bottom:0;}
 
+.quantity-num { border: 1px solid #333; margin-right: 4px; padding-bottom: 2px; padding-left: 4px; padding-top: 1px;}
+
 button.btn-blue {box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); background-color:#4285f4; color:#fff;}
 button.btn-blue:hover { color:#fff;}
 
@@ -128,6 +130,7 @@ padding-top:10px;
 #view-product .orders-from-category {padding-top:80px;}
 #view-product .row-info {padding:10px 0 0; }
 #view-product .border-bottom {border-bottom: 1px solid #d7d7d7; margin-left: 10px; margin-right: 10px; margin-top:10px;}
+#view-product .manage-buttons a {margin-bottom:5px;}
 
 #contacts  .jumbotron {background: #358CCE;color: #FFF;border-radius: 0px;}
 #contacts .jumbotron-sm { padding-top: 24px;padding-bottom: 24px; }
@@ -164,6 +167,8 @@ div#notificator {padding:15px 25px; width:200px; position:fixed; top:20px; left:
 @media only screen and (max-width: 700px){ #modalImagePreview .modal-content {        width: 100%;    }}
 
 .other-img-preview {width:100px; height: 100px; cursor: pointer; margin-bottom:10px;}
+.relative { position: relative; }
+.remove-product {position: absolute; top:0; left: 0;}
 
 footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
 
@@ -248,5 +253,4 @@ footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
     #home-slider .carousel-control.right {background-position: -140px center; width: 50px;}
     #home-slider .carousel-control.left {background-position: 0 center; width: 50px;}
     #checkout-page a.pull-right {float:left !important; margin-top: 10px;}
-    #view-product a.add-to-cart {margin-bottom: 5px;}
 } 

@@ -80,6 +80,8 @@ $route['blog/(:num)'] = "blog/index/$1";
 $route['blog/(:any)_(:num)'] = "blog/viewPost/$2";
 $route['(\w{2})/blog/(:any)_(:num)'] = "blog/viewPost/$3";
 
+$route['shopping-cart'] = "ShoppingCart";
+
 $route['page/(:any)'] = "page/index/$1";
 $route['(\w{2})/page/(:any)'] = "page/index/$2";
 

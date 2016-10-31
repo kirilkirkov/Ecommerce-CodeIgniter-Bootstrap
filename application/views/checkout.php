@@ -103,7 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <input id="cityInput" class="form-control" name="city" value="<?= @$_POST['city'] ?>" type="text" placeholder="<?= lang('city') ?>">
                     </div>
                     <div class="form-group col-sm-6">
-                        <label for="postInput"><?= lang('post_code') ?> (<sup><?= lang('requires') ?></sup>)</label>
+                        <label for="postInput"><?= lang('post_code') ?></label>
                         <input id="postInput" class="form-control" name="post_code" value="<?= @$_POST['post_code'] ?>" type="text" placeholder="<?= lang('post_code') ?>">
                     </div>
                     <div class="form-group col-sm-12">
@@ -125,13 +125,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <tbody>
                             <?php foreach ($cartItems['array'] as $item) { ?>
                                 <tr>
-                                    <td>
+                                    <td class="relative">
                                         <input type="hidden" name="product_id[]" value="<?= $item['product_id'] ?>">
                                         <input type="hidden" name="quantity[]" value="<?= $item['num_added'] ?>">
                                         <img class="product-image" src="<?= base_url('/attachments/shop_images/' . $item['image']) ?>" alt="">
+                                        <a href="<?= base_url('home/removeFromCart?delete-product=' . $item['product_id'] . '&back-to=checkout') ?>" class="btn btn-xs btn-danger remove-product">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </a>
                                     </td>
                                     <td><a href="<?= base_url($item['url']) ?>"><?= $item['title'] ?></a></td>
-                                    <td><?= $item['num_added'] ?></td>
+                                    <td>
+                                        <a class="btn btn-xs btn-primary refresh-me add-to-cart" data-id="<?= $item['product_id'] ?>" href="javascript:void(0);">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </a>
+                                        <span class="quantity-num">
+                                            <?= $item['num_added'] ?>
+                                        </span>
+                                        <a class="btn  btn-xs btn-danger" onclick="removeProduct(<?= $item['product_id'] ?>, true)" href="javascript:void(0);">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </a>
+                                    </td>
                                     <td><?= $item['price'] . $currency ?></td>
                                     <td><?= $item['sum_price'] . $currency ?></td>
                                 </tr>
@@ -163,4 +176,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 <?php } else { ?>
     <div class="alert alert-info"><?= lang('no_products_in_cart') ?></div>
+<?php } ?>
+<?php
+if ($this->session->flashdata('deleted')) {
+    ?>
+    <script>
+        $(document).ready(function () {
+            ShowNotificator('alert-danger', '<?= $this->session->flashdata('deleted') ?>');
+        });
+    </script>
 <?php } ?>

@@ -74,6 +74,22 @@ class Home extends MY_Controller
         loop_items($result, $this->currency, base_url($this->lang_link . '/'));
     }
 
+    public function removeFromCart()
+    {
+        $backTo = $_GET['back-to'];
+        $count = count(array_keys($_SESSION['shopping_cart'], $_GET['delete-product']));
+        $i = 1;
+        do {
+            if (($key = array_search($_GET['delete-product'], $_SESSION['shopping_cart'])) !== false) {
+                unset($_SESSION['shopping_cart'][$key]);
+            }
+            $i++;
+        } while ($i <= $count);
+        @set_cookie('shopping_cart', serialize($_SESSION['shopping_cart']), 2678400); // 1 month expire time
+        $this->session->set_flashdata('deleted', lang('deleted_product_from_cart'));
+        redirect($this->lang_link . '/' . $backTo);
+    }
+
     public function viewProduct($id)
     {
         $data = array();

@@ -89,10 +89,12 @@ class Checkout extends MY_Controller
         if (mb_strlen(trim($post['city'])) == 0) {
             $errors[] = lang('invalid_city');
         }
-        $post['post_code'] = preg_replace("/[^0-9]/", '', $post['post_code']);
-        if (mb_strlen(trim($post['post_code'])) == 0) {
-            $errors[] = lang('invalid_post_code');
-        }
+        /*
+          $post['post_code'] = preg_replace("/[^0-9]/", '', $post['post_code']);
+          if (mb_strlen(trim($post['post_code'])) == 0) {
+          $errors[] = lang('invalid_post_code');
+          }
+         */
         return $errors;
     }
 

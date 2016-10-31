@@ -143,7 +143,14 @@ class MY_Controller extends MX_Controller
     private function getActivePages()
     {
         $activeP = $this->Admin_model->getPages(true);
-        $this->nonDynPages = $this->config->item('no_dynamic_pages');
+        $dynPages = $this->config->item('no_dynamic_pages');
+        $actDynPages = [];
+        foreach ($activeP as $acp) {
+            if (($key = array_search($acp, $dynPages)) !== false) {
+                $actDynPages[] = $acp;
+            }
+        }
+        $this->nonDynPages = $actDynPages;
         $dynPages = getTextualPages($activeP);
         $this->dynPages = $this->Articles_model->getDynPagesLangs($dynPages, $this->my_lang);
     }

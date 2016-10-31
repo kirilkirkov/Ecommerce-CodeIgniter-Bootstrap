@@ -100,7 +100,14 @@
                                         <li><a href="<?= base_url('admin/blogPublish') ?>" <?= urldecode(uri_string()) == 'admin/blogPublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> Publish post</a></li>
                                         <li><a href="<?= base_url('admin/blog') ?>" <?= urldecode(uri_string()) == 'admin/blog' ? 'class="active"' : '' ?>><i class="fa fa-th" aria-hidden="true"></i> Posts</a></li>
                                     <?php } ?>
-                                    <?php if (!empty($textualPages)) { ?>
+                                    <?php
+                                    if (!empty($textualPages)) {
+                                        foreach ($nonDynPages as $nonDynPage) {
+                                            if (($key = array_search($nonDynPage, $textualPages)) !== false) {
+                                                unset($textualPages[$key]);
+                                            }
+                                        }
+                                        ?>
                                         <li class="header">TEXTUAL PAGES</li>
                                         <?php foreach ($textualPages as $textualPage) { ?>
                                             <li><a href="<?= base_url('admin/pageEdit/' . $textualPage) ?>" <?= strpos(urldecode(uri_string()), $textualPage) ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> <?= strtoupper($textualPage) ?></a></li>

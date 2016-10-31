@@ -34,6 +34,7 @@ class Admin extends MX_Controller
         $this->def_lang_name = $this->config->item('language');
         $this->activePages = $vars['activePages'] = $this->getActivePages();
         $vars['textualPages'] = getTextualPages($this->activePages);
+        $vars['nonDynPages'] = $this->config->item('no_dynamic_pages');
         $this->load->vars($vars);
     }
 

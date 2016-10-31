@@ -49,11 +49,11 @@ class Checkout extends MY_Controller
             if (!empty($emails)) {
                 $toEmails = implode(', ', $emails);
                 $shopName = $this->config->item('base_url');
-                $this->email->from($shopName, '');
-                $this->email->to($toEmails);
-                $this->email->subject('New order request to ' . $shopName);
-                $this->email->message('You have new order request, go to your administration to proccess it!');
-                $this->email->send();
+                $to = $toEmails;
+                $subject = 'New order request to ' . $shopName;
+                $txt = 'You have new order request, go to your administration to proccess it!';
+                $headers = "From: " . $shopName;
+                mail($to, $subject, $txt, $headers);
             }
             /*
              * Else will clear after receive payment

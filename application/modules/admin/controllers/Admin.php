@@ -469,6 +469,9 @@ class Admin extends MX_Controller
         $head['keywords'] = '';
         $data['users'] = $this->Admin_model->getAdminUsers();
         $this->form_validation->set_rules('username', 'User', 'trim|required');
+        if(isset($_POST['edit']) && $_POST['edit'] == 0) {
+            $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        }
         if ($this->form_validation->run($this)) {
             $result = $this->Admin_model->setAdminUser($_POST);
             if ($result === true) {

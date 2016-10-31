@@ -130,16 +130,18 @@ class Admin_model extends CI_Model
 
     public function setAdminUser($post)
     {
-        $post['password'] = md5($post['password']);
         if ($post['edit'] > 0) {
-            if (strlen(trim($post['password'])) < 3) {
+            if (trim($post['password']) == '') {
                 unset($post['password']);
+            } else {
+                $post['password'] = md5($post['password']);
             }
             $this->db->where('id', $post['edit']);
             unset($post['id'], $post['edit']);
             $result = $this->db->update('users', $post);
         } else {
             unset($post['edit']);
+            $post['password'] = md5($post['password']);
             $result = $this->db->insert('users', $post);
         }
         return $result;

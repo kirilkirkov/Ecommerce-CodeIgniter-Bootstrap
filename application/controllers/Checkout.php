@@ -31,10 +31,17 @@ class Checkout extends MY_Controller
             if (!empty($errors)) {
                 $this->session->set_flashdata('submit_error', $errors);
             } else {
-                $result = $this->Articles_model->setOrder($_POST);
-                if ($result == true) {
-                    $new_request = true;
-                }
+                $_SESSION['final_step'] = $_POST;
+                redirect($this->lang_link . '/checkout/finalStep');
+            }
+        }
+        if (isset($_POST['saveOrder'])) {
+            unset($_POST['saveOrder']);
+            $_POST = $_SESSION['final_step'];
+            unset($_SESSION['final_step']);
+            $result = $this->Articles_model->setOrder($_POST);
+            if ($result == true) {
+                $new_request = true;
             }
         }
         if ($new_request == true) { // send emails to users that want it (notify = 1)
@@ -63,8 +70,26 @@ class Checkout extends MY_Controller
         if (get_cookie('paypal') != null && !isset($_GET['payment_type'])) {
             redirect($this->lang_link . '/checkout?order_completed=true&payment_type=PayPal');
         }
+        if (isset($_SESSION['final_step'])) {
+            $_POST = $_SESSION['final_step'];
+        }
         $data['bestSellers'] = $this->Articles_model->getbestSellers($this->my_lang);
         $this->render('checkout', $head, $data);
+    }
+
+    public function finalStep()
+    {
+        if (!isset($_SESSION['final_step'])) {
+            redirect(base_url());
+        }
+        $_SESSION['final_step'];
+        $data = array();
+        $head = array();
+        $arrSeo = $this->Articles_model->getSeo('page_checkout', $this->my_lang);
+        $head['title'] = @$arrSeo['title'];
+        $head['description'] = @$arrSeo['description'];
+        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $this->render('checkout_parts/final_step', $head, $data);
     }
 
     private function userInfoValidate($post)

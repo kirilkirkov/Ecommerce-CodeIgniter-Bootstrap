@@ -104,6 +104,9 @@ $lang['paypal_success_msg'] = 'Вие успешно заплатихте пор
 $lang['not_selected'] = 'Не е избран';
 $lang['shopping_cart'] = 'Кошница с продукти';
 $lang['deleted_product_from_cart'] = 'Продукта е изтрит от кошницата';
+$lang['final_step'] = 'Завърши поръчката';
+$lang['order_correction'] = 'Корекция на поръчката';
+$lang['you_choose_payment'] = 'Вие избрахте плащане с:';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'Не сте въвели име';

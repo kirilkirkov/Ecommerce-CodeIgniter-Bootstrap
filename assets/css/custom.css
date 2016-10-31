@@ -61,6 +61,7 @@ body { font-family:arial; padding-top:0; color:#424449;}
 .oaerror.info { border-left-color: #5bc0de;  background-color: rgba(91, 192, 222, 0.1);}
 .oaerror.info strong {  color: #5bc0de;}
 .table-products img.product-image {width:80px;}
+.final-step-form {margin-top: 50px; text-align: center;}
 
 nav.navbar-silver {background-color:#f3f3f3;-webkit-box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);-moz-box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);}
 nav a.navbar-brand, .navbar-nav > li > a {color:#777;}

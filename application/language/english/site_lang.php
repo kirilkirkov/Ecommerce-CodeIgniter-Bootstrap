@@ -102,6 +102,9 @@ $lang['paypal_success_msg'] = 'You successful buy your order!';
 $lang['not_selected'] = 'Not selected';
 $lang['shopping_cart'] = 'Shopping Cart';
 $lang['deleted_product_from_cart'] = 'The product is deleted from shopping cart';
+$lang['final_step'] = 'Save order';
+$lang['order_correction'] = 'Order correction';
+$lang['you_choose_payment'] = 'You choose payment with:';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';

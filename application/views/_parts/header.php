@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
         <link href="<?= base_url('assets/css/bootstrap-datepicker.min.css') ?>" rel="stylesheet">
         <link href="<?= base_url('assets/css/custom.css') ?>" rel="stylesheet">
+        <link href="<?= base_url('assets/css/style-1/style.css') ?>" rel="stylesheet">
         <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
         <script src="<?= base_url('assets/js/jquery.eqheight.js') ?>"></script>
         <script src="<?= base_url('jsloader/all.js') ?>"></script>
@@ -131,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-                <nav class="navbar navbar-silver">
+                <nav class="navbar">
                     <div class="container">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

@@ -1,0 +1,14 @@
+/* Language bar */
+
+/* Main nav */
+.nav li a:hover, .nav li a:focus {background-color:#4285f4; color:#fff;}
+.navbar { 
+    border-radius: 0;
+    background: #333 none repeat scroll 0 0;
+    border-bottom: 4px solid #4285f4;
+    font-family: "Oxygen Mono",Tahoma,Arial,sans-serif;
+    font-size: 14px;}
+.nav li a, a.navbar-brand { 
+    background: #333 none repeat scroll 0 0;
+    color: #cbcbcb;
+ }

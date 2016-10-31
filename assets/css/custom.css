@@ -40,8 +40,6 @@ body { font-family:arial; padding-top:0; color:#424449;}
 #top-part ul.dropdown-cart .item-info .prices, #top-part ul.dropdown-cart .item-info .currency {color:#fe3a3a; display: inline !important;}
 #top-part #search_in_title {border-radius:0; box-shadow:none;}
 
-.nav  > li  > a:hover, .nav > li > a:focus  {background-color:#4285f4; color:#fff;}
-
 #home-slider {margin-bottom:40px; height:370px;}
 #home-slider .right-side {padding-top:60px;}
 #home-slider .left-side img {max-height:370px;}
@@ -62,9 +60,6 @@ body { font-family:arial; padding-top:0; color:#424449;}
 .oaerror.info strong {  color: #5bc0de;}
 .table-products img.product-image {width:80px;}
 .final-step-form {margin-top: 50px; text-align: center;}
-
-nav.navbar-silver {background-color:#f3f3f3;-webkit-box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);-moz-box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);box-shadow: -3px 10px 4px -8px rgba(0,0,0,0.13);}
-nav a.navbar-brand, .navbar-nav > li > a {color:#777;}
 
 div.filter-sidebar {margin-bottom:30px;}
 div.filter-sidebar .title, .title.alone { border-bottom: 3px solid #90caf9; font-size: 18px;  line-height: 1;  margin: 0 0 10px;   padding: 0;}

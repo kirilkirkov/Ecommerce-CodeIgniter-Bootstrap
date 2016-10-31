@@ -55,7 +55,7 @@ class Articles_model extends CI_Model
                 $this->db->like('translations.description', $big_get['search_in_body']);
             }
             if ($big_get['order_price'] != '') {
-                $this->db->order_by('translations.price', $big_get['order_price']);
+                $this->db->order_by('CAST(price AS DECIMAL(10.2)) '.$big_get['order_price']);
             }
             if ($big_get['order_procurement'] != '') {
                 $this->db->order_by('products.procurement', $big_get['order_procurement']);
@@ -87,6 +87,7 @@ class Articles_model extends CI_Model
             }
         }
         $query = $this->db->get('products');
+        echo $this->db->last_query();
         return $query->result_array();
     }
 

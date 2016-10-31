@@ -156,8 +156,8 @@ if (count($sliderProducts) > 0) {
                         <div class="form-group">
                             <select class="selectpicker order form-control" data-order-to="order_price" title="<?= lang('price_title') ?>..">
                                 <option label="<?= lang('not_selected') ?>"></option>
-                                <option <?= isset($_GET['order_price']) && $_GET['order_price'] == "desc" ? 'selected' : '' ?> value="desc"><?= lang('price_low') ?> </option>
-                                <option <?= isset($_GET['order_price']) && $_GET['order_price'] == "asc" ? 'selected' : '' ?> value="asc"><?= lang('price_high') ?> </option>
+                                <option <?= isset($_GET['order_price']) && $_GET['order_price'] == "asc" ? 'selected' : '' ?> value="asc"><?= lang('price_low') ?> </option>
+                                <option <?= isset($_GET['order_price']) && $_GET['order_price'] == "desc" ? 'selected' : '' ?> value="desc"><?= lang('price_high') ?> </option>
                             </select>
                         </div>
                     </div>

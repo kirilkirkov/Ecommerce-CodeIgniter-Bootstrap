@@ -87,7 +87,6 @@ class Articles_model extends CI_Model
             }
         }
         $query = $this->db->get('products');
-        echo $this->db->last_query();
         return $query->result_array();
     }
 

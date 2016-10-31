@@ -2,8 +2,11 @@
 $('a.add-to-cart').click(function () {
     var reload = false;
     var article_id = $(this).data('id');
+    var goto_site = $(this).data('goto');
     if ($(this).hasClass('refresh-me')) {
         reload = true;
+    } else if (goto_site != null) {
+        reload = goto_site;
     }
     manageShoppingCart('add', article_id, reload);
 });
@@ -36,8 +39,12 @@ function manageShoppingCart(action, article_id, reload) {
         }
         var url = window.location.href;
         var lastSegment = url.split('/').pop();
-        if (lastSegment == 'checkout' || reload == true)
+        if (lastSegment == 'checkout' || reload == true) {
             location.reload(false);
+        }
+        if (reload != true && reload != false) {
+            location.href = reload;
+        }
         ShowNotificator('alert-success', action_success_msg);
     }).fail(function (err) {
         ShowNotificator('alert-danger', action_error_msg);

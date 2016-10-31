@@ -83,9 +83,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="row row-info">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6 manage-buttons">
-                    <a href="javascript:void(0);" data-id="<?= $product['id'] ?>" class="btn btn-primary refresh-me add-to-cart"><?= lang('add_to_cart') ?></a>
+                    <a href="javascript:void(0);" data-id="<?= $product['id'] ?>" data-goto="<?= base_url('shopping-cart') ?>" class="btn btn-primary add-to-cart"><?= lang('add_to_cart') ?></a>
                     <?php if (isset($result[$product['id']])) { ?>
-                        <a href="javascript:void(0);" onclick="removeProduct(<?= $product['id'] ?>, true)" class="btn btn-danger"><?= lang('del_from_cart') ?></a>
+                        <a href="javascript:void(0);" onclick="removeProduct(<?= $product['id'] ?>, '<?= base_url('shopping-cart') ?>')" class="btn btn-danger"><?= lang('del_from_cart') ?></a>
                     <?php } ?>
                 </div>
                 <div class="col-sm-12 border-bottom"></div>

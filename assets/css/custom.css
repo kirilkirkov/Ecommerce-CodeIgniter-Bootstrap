@@ -60,6 +60,7 @@ body { font-family:arial; padding-top:0; color:#424449;}
 .oaerror.info strong {  color: #5bc0de;}
 .table-products img.product-image {width:80px;}
 .final-step-form {margin-top: 50px; text-align: center;}
+.final-step-form input, .final-step-form a {margin-bottom: 5px !important;}
 
 div.filter-sidebar {margin-bottom:30px;}
 div.filter-sidebar .title, .title.alone { border-bottom: 3px solid #90caf9; font-size: 18px;  line-height: 1;  margin: 0 0 10px;   padding: 0;}
@@ -243,6 +244,7 @@ footer { width:100%;height:10px;position:absolute;bottom:0;left:0;}
     #nav-categories, #show-xs-nav .hidde-sp {display:none;}
     #show-xs-nav { border: 1px solid #666; font-size: 15px; padding: 3px; text-decoration: none; text-align: center; color:#666;}
     #show-xs-nav span i {margin-left: 5px;}
+    .final-left-col {margin-bottom: 30px;}
 }
 /* Portrait phones and smaller */
 @media (max-width: 480px) {

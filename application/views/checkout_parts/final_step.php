@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </h1>
     <hr>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 final-left-col">
             <div class="order-info">
                 <h3><?= lang('first_name') ?></h3>
                 <span class=""><?= $_SESSION['final_step']['first_name'] ?></span>

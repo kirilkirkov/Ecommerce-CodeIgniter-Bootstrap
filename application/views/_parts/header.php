@@ -152,14 +152,14 @@
                                     if (!empty($nonDynPages)) {
                                         foreach ($nonDynPages as $addonPage) {
                                             ?>
-                                        <li><a href="<?= $lang_url . '/' . $addonPage ?>"><?= lang($addonPage) ?></a></li>
+                                        <li><a href="<?= $lang_url . '/' . $addonPage ?>"><?= mb_ucfirst(lang($addonPage)) ?></a></li>
                                         <?php
                                     }
                                 }
                                 if (!empty($dynPages)) {
                                     foreach ($dynPages as $addonPage) {
                                         ?>
-                                        <li><a href="<?= $lang_url . '/page/' . $addonPage['pname'] ?>"><?= $addonPage['lname'] ?></a></li>
+                                        <li><a href="<?= $lang_url . '/page/' . $addonPage['pname'] ?>"><?= mb_ucfirst($addonPage['lname']) ?></a></li>
                                         <?php
                                     }
                                 }

@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 if (!empty($posts)) {
                     foreach ($posts as $post) {
                         ?>
-                        <div class="col-md-6 column-h">
+                        <div class="col-md-6 blog-col column-h">
                             <div class="thumbnail blog-list">
                                 <a href="<?= $lang_url . '/blog/' . $post['url'] ?>">
                                     <img src="<?= base_url('attachments/blog_images/' . $post['image']) ?>" alt="<?= $post['title'] ?>">

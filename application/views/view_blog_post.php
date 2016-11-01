@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="container">
 	<div class="row">
-		<div class="col-sm-3">
+		<div class="col-sm-3 left-col-archive">
 				<?= $archives ?>
 				<a href="<?= $lang_url.'/blog' ?>" class="btn btn-default"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i> <?= lang('go_back') ?></a>
             </div>

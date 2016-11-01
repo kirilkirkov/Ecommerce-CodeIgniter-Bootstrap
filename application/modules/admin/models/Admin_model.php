@@ -196,6 +196,8 @@ class Admin_model extends CI_Model
 
     public function setPage($name)
     {
+        $name = strtolower($name);
+        $name = str_replace(' ', '-', $name);
         $this->db->insert('active_pages', array('name' => $name, 'enabled' => 1));
         $thisId = $this->db->insert_id();
         $languages = $this->getLanguages();

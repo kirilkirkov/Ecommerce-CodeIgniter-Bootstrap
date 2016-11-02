@@ -111,6 +111,7 @@ div.product-sort .form-group { margin-bottom : 0; }
 #checkout-page .form-group label { color : #666; font-size : 13px; }
 #checkout-page .left-side { margin-bottom : 30px; }
 #small_carousel.carousel { padding-bottom : 60px; }
+#home-slider .carousel-inner .right-side h3 a {color:#424449;}
 #small_carousel.carousel .carousel-inner .item { ms-transition-property : opacity; opacity : 0; text-align : center; transition-property : opacity; }
 #small_carousel.carousel .carousel-inner .active { ms-transition-property : opacity; opacity : 1; transition-property : opacity; webkit-transition-property : opacity; }
 #small_carousel.carousel .carousel-indicators { bottom : 10px; }
@@ -158,7 +159,7 @@ div#notificator { display : none; left : 50%; margin-left : -100px; padding : 15
 #modalImagePreview .modal-content { display : block; margin : auto; max-width : 700px; width : 80%; }
 #modalImagePreview #caption { color : #ccc; display : block; height : 150px; margin : auto; max-width : 700px; padding : 10px 0; text-align : center; width : 80%; }
 #modalImagePreview .modal-content, #modalImagePreview #caption { animation-duration : 0.6s; animation-name : zoom; webkit-animation-duration : 0.6s; webkit-animation-name : zoom; }
-.steps { margin-bottom: 30px;}
+.steps { margin-bottom: 30px; padding-left:15px; padding-right: 15px;}
 .steps .step { text-align: center; padding-top: 7px; padding-bottom: 7px; border-left: 2px solid #fff;}
 @-webkit-keyframes zoom { from { webkit-transform : scale(0); }
  to { webkit-transform : scale(1); }

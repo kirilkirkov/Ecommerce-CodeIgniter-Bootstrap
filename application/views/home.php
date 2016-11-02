@@ -23,10 +23,16 @@ if (count($sliderProducts) > 0) {
                     <div class="item <?= $i == 0 ? 'active' : '' ?>">
                         <div class="row">
                             <div class="col-sm-6 left-side">
-                                <img src="<?= base_url('attachments/shop_images/' . $article['image']) ?>" class="img-responsive" alt="">
+                                <a href="<?= $lang_url . '/' . $article['url'] ?>">
+                                    <img src="<?= base_url('attachments/shop_images/' . $article['image']) ?>" class="img-responsive" alt="">
+                                </a>
                             </div>
                             <div class="col-sm-6 right-side">
-                                <h3 class="text-right"><?= character_limiter($article['title'], 100) ?></h3>
+                                <h3 class="text-right">
+                                    <a href="<?= $lang_url . '/' . $article['url'] ?>">
+                                        <?= character_limiter($article['title'], 100) ?>
+                                    </a>
+                                </h3>
                                 <div class="description text-right">
                                     <?= character_limiter(strip_tags($article['basic_description']), 150) ?>
                                 </div>
@@ -37,7 +43,7 @@ if (count($sliderProducts) > 0) {
                                         <?= lang('buy_now') ?>
                                     </a>
                                     <a class="option right-5" href="<?= $lang_url . '/' . $article['url'] ?>">
-                                        <img src="<?= base_url('assets/imgs/info.png') ?>" alt="" style="width:20px;">
+                                        <img src="<?= base_url('assets/imgs/info.png') ?>" alt="">
                                         <?= lang('details') ?>
                                     </a>
                                 </div>

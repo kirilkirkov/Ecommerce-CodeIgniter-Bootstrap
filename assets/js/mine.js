@@ -37,6 +37,10 @@ function manageShoppingCart(action, article_id, reload) {
         if (action == 'remove') {
             $('.sumOfItems').text(sum_items - 1);
         }
+        if (reload == true) {
+            location.reload(false);
+            return;
+        }
         if (reload != true && reload != false) {
             location.href = reload;
             return;

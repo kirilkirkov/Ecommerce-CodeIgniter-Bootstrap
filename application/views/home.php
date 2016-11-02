@@ -62,7 +62,7 @@ if (count($sliderProducts) > 0) {
                         <a href="javascript:void(0);" class="clear-filter" data-type-clear="category" data-toggle="tooltip" data-placement="right" title="<?= lang('clear_the_filter') ?>"><i class="fa fa-times" aria-hidden="true"></i></a>
                     <?php } ?>
                 </div>
-                <a href="javascript:void(0)" id="show-xs-nav" class="visible-xs">
+                <a href="javascript:void(0)" id="show-xs-nav" class="visible-xs visible-sm">
                     <span class="show-sp"><?= lang('showXsNav') ?><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i></span>
                     <span class="hidde-sp"><?= lang('hideXsNav') ?><i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i></span>
                 </a>
@@ -87,7 +87,7 @@ if (count($sliderProducts) > 0) {
                                     <?php } else { ?>
                                         <i class="fa fa-circle-o" aria-hidden="true"></i>
                                     <?php } ?>
-                                    <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'selected' : '' ?>"><?= $page['name'] ?></a>
+                                    <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category left-side <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'selected' : '' ?>"><?= $page['name'] ?></a>
                                     <?php
                                     if ($children === true) {
                                         loop_tree($page['children'], true);

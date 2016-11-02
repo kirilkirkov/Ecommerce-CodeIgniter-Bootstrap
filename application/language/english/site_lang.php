@@ -105,6 +105,8 @@ $lang['deleted_product_from_cart'] = 'The product is deleted from shopping cart'
 $lang['final_step'] = 'Save order';
 $lang['order_correction'] = 'Order correction';
 $lang['you_choose_payment'] = 'You choose payment with:';
+$lang['shopping_cart_only'] = 'Shopping Cart';
+$lang['your_basket'] = 'Your Basket';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';

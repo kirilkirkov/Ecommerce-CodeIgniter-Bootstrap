@@ -13,7 +13,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
         <link href="<?= base_url('assets/css/bootstrap-datepicker.min.css') ?>" rel="stylesheet">
         <link href="<?= base_url('assets/css/custom.css') ?>" rel="stylesheet">
-        <link href="<?= base_url('assets/css/style-1/style.css') ?>" rel="stylesheet">
         <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
         <script src="<?= base_url('assets/js/jquery.eqheight.js') ?>"></script>
         <script src="<?= base_url('jsloader/all.js') ?>"></script>
@@ -25,13 +24,13 @@
     <body>
         <div id="wrapper">
             <div id="content">
-                <?php
-                $num_langs = count($this->all_langs);
-                if ($num_langs > 0) {
-                    ?>
-                    <div id="languages-bar">
-                        <div class="container">
-                            <ul>
+                <div id="languages-bar">
+                    <div class="container">
+                        <?php
+                        $num_langs = count($this->all_langs);
+                        if ($num_langs > 0) {
+                            ?>
+                            <ul class="pull-left">
                                 <?php
                                 $i = 1;
                                 $lang_last = '';
@@ -45,22 +44,32 @@
                                 }
                                 ?>
                             </ul>
+                        <?php } ?>
+                        <div class="phone pull-right">
+                            <?php
+                            if ($footerContactPhone != '') {
+                                ?>
+                                <span class="glyphicon glyphicon-phone-alt"></span>
+                                <?php
+                                echo $footerContactPhone;
+                            }
+                            ?>
                         </div>
                     </div>
-                <?php } ?>
+                </div>
                 <div id="top-part">
                     <div class="container">
                         <div class="row">
-                            <div class="col-sm-3 left">
-                                <img src="<?= base_url('assets/imgs/site-logo/' . $sitelogo) ?>" alt="<?= $_SERVER['HTTP_HOST'] ?>">
+                            <div class="col-sm-12 col-md-3 col-lg-4 left">
+                                <img src="<?= base_url('assets/imgs/site-logo/' . $sitelogo) ?>" class="site-logo" alt="<?= $_SERVER['HTTP_HOST'] ?>">
                             </div>
-                            <div class="col-sm-6 center">
+                            <div class="col-sm-6 col-md-5 col-lg-5">
                                 <div class="input-group" id="adv-search">
                                     <input type="text" value="<?= isset($_GET['search_in_title']) ? $_GET['search_in_title'] : '' ?>" id="search_in_title" class="form-control" placeholder="<?= lang('search_by_keyword_title') ?>" />
                                     <div class="input-group-btn">
                                         <div class="btn-group" role="group">
                                             <div class="dropdown dropdown-lg">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?= lang('more') ?> <span class="caret"></span></button>
+                                                <button type="button" class="button-more dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?= lang('more') ?> <span class="caret"></span></button>
                                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
                                                     <form class="form-horizontal" method="GET" action="<?= base_url() ?>" id="bigger-search">
                                                         <input type="hidden" name="category" value="<?= isset($_GET['category']) ? $_GET['category'] : '' ?>">
@@ -109,25 +118,46 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <button type="submit" class="btn btn-blue"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                                        <button type="submit" class="btn btn-inner-search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                                         <a class="btn btn-default" id="clear-form" href="javascript:void(0);"><?= lang('clear_form') ?></a>
                                                     </form>
                                                 </div>
                                             </div>
-                                            <button type="button" onclick="submitForm()" class="btn btn-blue"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                            <button type="button" onclick="submitForm()" class="btn-go-search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3 right">	              		
-                                <ul class="shop-dropdown">
-                                    <li class="dropdown text-right">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> <span class="sumOfItems"><?= $cartItems['array'] == 0 ? 0 : $sumOfItems ?></span> - <?= lang('items') ?><span class="caret"></span></a>
-                                        <ul class="dropdown-menu dropdown-cart" role="menu">
-                                            <?php loop_items($cartItems, $currency, $lang_url); ?>
-                                        </ul>
-                                    </li>
-                                </ul>
+                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                <div class="basket-box">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <img src="<?= base_url('assets/imgs/green-basket.png') ?>" class="green-basket" alt="">
+                                            </td>
+                                            <td>
+                                                <div class="center">
+                                                    <h4><?= lang('your_basket') ?></h4>
+                                                    <a href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?></a> |
+                                                    <a href="<?= $lang_url . '/shopping-cart' ?>"><?= lang('shopping_cart_only') ?></a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <ul class="shop-dropdown">
+                                                    <li class="dropdown text-center">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
+                                                            <div><span class="sumOfItems"><?= $cartItems['array'] == 0 ? 0 : $sumOfItems ?></span> <?= lang('items') ?></div>
+                                                            <span class="glyphicon glyphicon-shopping-cart"></span> <span class="caret"></span>
+                                                        </a>
+                                                        <ul class="dropdown-menu dropdown-menu-right dropdown-cart" role="menu">
+                                                            <?php loop_items($cartItems, $currency, $lang_url); ?>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>        
                         </div>
                     </div>
@@ -147,26 +177,27 @@
                         </div>
                         <div id="navbar" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav" style="<?= $naviText == null ? 'margin-left:-15px;' : '' ?>">
-                                <li class="active"><a href="<?= $lang_url ?>"><?= lang('home') ?></a></li>
-                                    <?php
-                                    if (!empty($nonDynPages)) {
-                                        foreach ($nonDynPages as $addonPage) {
-                                            ?>
-                                        <li><a href="<?= $lang_url . '/' . $addonPage ?>"><?= mb_ucfirst(lang($addonPage)) ?></a></li>
+                                <li<?= uri_string() == '' || uri_string() == $my_lang ? ' class="active"' : '' ?>><a href="<?= $lang_url ?>"><?= lang('home') ?></a></li>
+                                <?php
+                                if (!empty($nonDynPages)) {
+                                    foreach ($nonDynPages as $addonPage) {
+                                        ?>
+                                        <li<?= uri_string() == $addonPage || uri_string() == $my_lang . '/' . $addonPage ? ' class="active"' : '' ?>><a href="<?= $lang_url . '/' . $addonPage ?>"><?= mb_ucfirst(lang($addonPage)) ?></a></li>
                                         <?php
                                     }
                                 }
                                 if (!empty($dynPages)) {
                                     foreach ($dynPages as $addonPage) {
                                         ?>
-                                        <li><a href="<?= $lang_url . '/page/' . $addonPage['pname'] ?>"><?= mb_ucfirst($addonPage['lname']) ?></a></li>
-                                        <?php
+                                        <li<?= urldecode(uri_string()) == 'page/' . $addonPage['pname'] || uri_string() == $my_lang . '/' . 'page/' . $addonPage['pname'] ? ' class="active"' : ''
+                                        ?>><a href="<?= $lang_url . '/page/' . $addonPage['pname'] ?>"><?= mb_ucfirst($addonPage['lname']) ?></a></li>
+                                            <?php
+                                        }
                                     }
-                                }
-                                ?>
-                                <li><a href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?></a></li>
-                                <li><a href="<?= $lang_url . '/shopping-cart' ?>"><?= lang('shopping_cart') ?></a></li>
-                                <li><a href="<?= $lang_url . '/contacts' ?>"><?= lang('contacts') ?></a></li>
+                                    ?>
+                                <li<?= uri_string() == 'checkout' || uri_string() == $my_lang . '/checkout' ? ' class="active"' : '' ?>><a href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?></a></li>
+                                <li<?= uri_string() == 'shopping-cart' || uri_string() == $my_lang . '/shopping-cart' ? ' class="active"' : '' ?>><a href="<?= $lang_url . '/shopping-cart' ?>"><?= lang('shopping_cart') ?></a></li>
+                                <li<?= uri_string() == 'contacts' || uri_string() == $my_lang . '/contacts' ? ' class="active"' : '' ?>><a href="<?= $lang_url . '/contacts' ?>"><?= lang('contacts') ?></a></li>
                             </ul>
                         </div>
                     </div>

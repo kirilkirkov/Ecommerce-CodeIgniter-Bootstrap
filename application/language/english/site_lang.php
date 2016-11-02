@@ -107,6 +107,7 @@ $lang['order_correction'] = 'Order correction';
 $lang['you_choose_payment'] = 'You choose payment with:';
 $lang['shopping_cart_only'] = 'Shopping Cart';
 $lang['your_basket'] = 'Your Basket';
+$lang['checkout_top_header'] = 'Checkout';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';

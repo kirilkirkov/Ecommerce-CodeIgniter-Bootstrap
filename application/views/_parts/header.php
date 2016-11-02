@@ -138,7 +138,7 @@
                                             <td>
                                                 <div class="center">
                                                     <h4><?= lang('your_basket') ?></h4>
-                                                    <a href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?></a> |
+                                                    <a href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout_top_header') ?></a> |
                                                     <a href="<?= $lang_url . '/shopping-cart' ?>"><?= lang('shopping_cart_only') ?></a>
                                                 </div>
                                             </td>

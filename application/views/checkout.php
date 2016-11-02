@@ -6,6 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     if (isset($_GET['order_completed'])) {
         if (isset($_GET['payment_type']) && $_GET['payment_type'] == 'cashOnDelivery') {
             ?>
+            <?= purchase_steps(1, 2, 3) ?>
             <div class="alert alert-success"><?= lang('c_o_d_order_completed') ?>!</div>
             <a href="<?= base_url() ?>" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-left"></span> <?= lang('go_back') ?></a>
             <?php
@@ -48,6 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php } ?>
     </div>
 <?php } elseif ($cartItems['array'] != null) { ?>
+    <?= purchase_steps(1, 2) ?>
     <div class="row">
         <div class="col-sm-9 left-side">
             <form method="POST" id="goOrder">

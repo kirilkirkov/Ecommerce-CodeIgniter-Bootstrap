@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="container">
+    <?= purchase_steps(1,2) ?>
     <h1>
         <?= lang('you_choose_payment') ?>
         <?php if ($_SESSION['final_step']['payment_type'] == 'cashOnDelivery') { ?>

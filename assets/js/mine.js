@@ -37,13 +37,9 @@ function manageShoppingCart(action, article_id, reload) {
         if (action == 'remove') {
             $('.sumOfItems').text(sum_items - 1);
         }
-        var url = window.location.href;
-        var lastSegment = url.split('/').pop();
-        if (lastSegment == 'checkout' || reload == true) {
-            location.reload(false);
-        }
         if (reload != true && reload != false) {
             location.href = reload;
+            return;
         }
         ShowNotificator('alert-success', action_success_msg);
     }).fail(function (err) {

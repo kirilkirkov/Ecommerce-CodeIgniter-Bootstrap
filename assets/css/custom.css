@@ -124,7 +124,7 @@ div.product-sort .form-group { margin-bottom : 0; }
 #view-product .orders-from-category { padding-top : 80px; }
 #view-product .row-info { padding : 10px 0 0; }
 #view-product .border-bottom { border-bottom : 1px solid #d7d7d7; margin-left : 10px; margin-right : 10px; margin-top : 10px; }
-#view-product .manage-buttons a { margin-bottom : 5px; }
+#view-product .manage-buttons a { display: block; margin-bottom: 5px;}
 #contacts .jumbotron { background : #358CCE; border-radius : 0px; color : #FFF; }
 #contacts .jumbotron-sm { padding-bottom : 24px; padding-top : 24px; }
 #contacts .jumbotron small { color : #FFF; }
@@ -145,6 +145,7 @@ div.product-sort .form-group { margin-bottom : 0; }
 .btn-blue { background-color : #4285f4; box-shadow : 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); color : #fff; }
 .text-to-bg { color : #fff; display : inline-block; font-size : 12px; margin-left : 45px; text-align : center; width : 110px; }
 .product-list .price { margin-bottom : 6px; }
+.product-list .add-to-cart { margin-bottom:5px;}
 .add-to-cart.btn-add { background-image : url('../imgs/add-to-cart-btn.png'); display : inline-block; height : 40px; width : 160px; }
 .remove-from-cart.btn-remove { background-image : url('../imgs/remove-from-cart-btn.png'); display : inline-block; height : 40px; width : 160px; }
 .btn-inner-search { background-color : #d83c3c; color : #f1f1f1; }
@@ -157,6 +158,8 @@ div#notificator { display : none; left : 50%; margin-left : -100px; padding : 15
 #modalImagePreview .modal-content { display : block; margin : auto; max-width : 700px; width : 80%; }
 #modalImagePreview #caption { color : #ccc; display : block; height : 150px; margin : auto; max-width : 700px; padding : 10px 0; text-align : center; width : 80%; }
 #modalImagePreview .modal-content, #modalImagePreview #caption { animation-duration : 0.6s; animation-name : zoom; webkit-animation-duration : 0.6s; webkit-animation-name : zoom; }
+.steps { margin-bottom: 30px;}
+.steps .step { text-align: center; padding-top: 7px; padding-bottom: 7px; border-left: 2px solid #fff;}
 @-webkit-keyframes zoom { from { webkit-transform : scale(0); }
  to { webkit-transform : scale(1); }
 }
@@ -258,6 +261,7 @@ footer .footer-icon li { display : block; height : 40px; width : 100%; }
  #navbar { background : #D83C3C; background : linear-gradient(top, #D83C3C, #B03131); background : -moz-linear-gradient(top, #D83C3C, #B03131); background : -ms-linear-gradient(top, #D83C3C, #B03131); background : -webkit-gradient(linear, left top, left bottom, from(#D83C3C), to(#B03131)); }
  .navbar { z-index: 1; }
  .navbar li { float : none; position : static; z-index : 1232; }
+ .steps .step {margin-bottom: 2px;}
 }
 
 @media (max-width: 480px) { 

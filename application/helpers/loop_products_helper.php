@@ -61,9 +61,12 @@ function loop_products($products, $currency, $classes = '', $carousel = false, $
                             </div>
                         <?php } ?>
                         <div class="add-to-cart">
-                            <a href="javascript:void(0);" class="add-to-cart btn-add" data-id="<?= $article['id'] ?>">
+                            <a href="javascript:void(0);" class="add-to-cart btn-add" data-goto="http://shop.dev/shopping-cart" data-id="<?= $article['id'] ?>">
                                 <img class="loader" src="<?= base_url('assets/imgs/ajax-loader.gif') ?>" alt="Loding">
                                 <span class="text-to-bg"><?= lang('add_to_cart') ?></span>
+                            </a>
+                            <a href="javascript:void(0);" data-id="<?= $article['id'] ?>" data-goto="<?= base_url('checkout') ?>" class="add-to-cart btn-add">
+                                <span class="text-to-bg"><?= lang('buy_now') ?></span>
                             </a>
                         </div>
                     </div>

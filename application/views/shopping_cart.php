@@ -8,7 +8,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     if ($cartItems['array'] == null) {
         ?>
         <div class="alert alert-info"><?= lang('no_products_in_cart') ?></div>
-    <?php } else { ?>
+        <?php
+    } else {
+        echo purchase_steps(1);
+        ?>
         <div class="table-responsive">
             <table class="table table-bordered table-products">
                 <thead>

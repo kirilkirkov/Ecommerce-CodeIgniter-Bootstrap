@@ -91,7 +91,8 @@ $autoload['helper'] = array(
     'loop_products', 
     'loop_items', 
     'getTextualPages', 
-    'mb_ucfirst'
+    'mb_ucfirst',
+    'purchase_steps'
 );
 
 /*

@@ -49,7 +49,7 @@
                             <?php
                             if ($footerContactPhone != '') {
                                 ?>
-                                <span class="glyphicon glyphicon-phone-alt"></span>
+                                <img src="<?= base_url('assets/imgs/Phone-icon.png') ?>" alt="Call us">
                                 <?php
                                 echo $footerContactPhone;
                             }
@@ -118,12 +118,16 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <button type="submit" class="btn btn-inner-search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                                        <button type="submit" class="btn btn-inner-search">
+                                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                                        </button>
                                                         <a class="btn btn-default" id="clear-form" href="javascript:void(0);"><?= lang('clear_form') ?></a>
                                                     </form>
                                                 </div>
                                             </div>
-                                            <button type="button" onclick="submitForm()" class="btn-go-search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                            <button type="button" onclick="submitForm()" class="btn-go-search">
+                                                <img src="<?= base_url('assets/imgs/search-ico.png') ?>" alt="Search">
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +151,8 @@
                                                     <li class="dropdown text-center">
                                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
                                                             <div><span class="sumOfItems"><?= $cartItems['array'] == 0 ? 0 : $sumOfItems ?></span> <?= lang('items') ?></div>
-                                                            <span class="glyphicon glyphicon-shopping-cart"></span> <span class="caret"></span>
+                                                            <img src="<?= base_url('assets/imgs/shopping-cart-icon-515.png') ?>" alt="">
+                                                            <span class="caret"></span>
                                                         </a>
                                                         <ul class="dropdown-menu dropdown-menu-right dropdown-cart" role="menu">
                                                             <?php loop_items($cartItems, $currency, $lang_url); ?>

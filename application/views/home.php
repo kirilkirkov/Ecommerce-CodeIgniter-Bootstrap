@@ -33,10 +33,12 @@ if (count($sliderProducts) > 0) {
                                 <div class="price text-right"><?= $article['price'] . $currency ?></div>
                                 <div class="xs-center">
                                     <a class="option add-to-cart" href="javascript:void(0);" data-id="<?= $article['id'] ?>">
-                                        <span class="glyphicon glyphicon-shopping-cart"></span> <?= lang('buy_now') ?>
+                                        <img src="<?= base_url('assets/imgs/shopping-cart-icon-515.png') ?>" alt="">
+                                        <?= lang('buy_now') ?>
                                     </a>
                                     <a class="option right-5" href="<?= $lang_url . '/' . $article['url'] ?>">
-                                        <span class="glyphicon glyphicon-info-sign"></span> <?= lang('details') ?>
+                                        <img src="<?= base_url('assets/imgs/info.png') ?>" alt="" style="width:20px;">
+                                        <?= lang('details') ?>
                                     </a>
                                 </div>
                             </div>

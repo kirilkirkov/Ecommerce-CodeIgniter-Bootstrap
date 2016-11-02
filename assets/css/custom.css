@@ -43,14 +43,14 @@ body { color : #424449; font-family : arial; padding-top : 0; }
 .navbar .active a, .navbar li:hover a { background : #0399D4; background : linear-gradient(top, #EBEBEB, #A1A1A1); background : -moz-linear-gradient(top, #EBEBEB, #A1A1A1); background : -ms-linear-gradient(top, #EBEBEB, #A1A1A1); background : -webkit-gradient(linear, left top, left bottom, from(#EBEBEB), to(#A1A1A1)); box-shadow : 0 1px 1px rgba(0, 0, 0, .2); color : #3B3944; moz-box-shadow : 0 1px 1px rgba(0, 0, 0, .2); text-shadow : 2px 2px 3px #FFFFFF; webkit-box-shadow : 0 1px 1px rgba(0, 0, 0, .2); }
 #adv-search { background-color : #f1f0ee; border-bottom-left-radius : 3px; border-top-left-radius : 3px; box-shadow : 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2); moz-border-radius : 10px; moz-box-shadow : 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2); padding : 10px; webkit-border-radius : 10px; webkit-box-shadow : 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2); }
 #search_in_title { background-color : #fff; border : 0 none; border-radius : 3px 0 0 3px; font : bold 15px "lucida sans","trebuchet MS","Tahoma"; height : 40px; padding : 10px 5px; }
-.button-more, .btn-go-search { background : #d83c3c none repeat scroll 0 0; border : 0 none; border-radius : 0; color : #fff; cursor : pointer; float : right; font : bold 15px/40px "lucida sans","trebuchet MS","Tahoma"; height : 40px; overflow : visible; padding : 0; padding-left : 10px; padding-right : 10px; position : relative; text-shadow : 0 -1px 0 rgba(0, 0, 0, 0.3); text-transform : uppercase; width : 100%; }
+.button-more, .btn-go-search { background : #d83c3c none repeat scroll 0 0; border : 0 none; border-radius : 0; color : #fff; cursor : pointer; float : right; font : bold 15px/40px "lucida sans","trebuchet MS","Tahoma"; height : 40px; overflow : visible; position : relative; text-shadow : 0 -1px 0 rgba(0, 0, 0, 0.3); text-transform : uppercase; width : 100%; }
 .button-more::before { border-color : transparent #d83c3c; border-style : solid solid solid none; border-width : 8px 8px 8px 0; content : ""; left : -6px; position : absolute; top : 12px; }
 .btn-go-search { border-bottom-right-radius : 3px; border-top-right-radius : 3px; }
 .btn-go-search:hover, .button-more:hover { background-color : #e54040; }
 .btn-go-search:active,.btn-go-search:focus, .button-more:hover, .button-more:focus { background-color : #c42f2f; }
 .basket-box { border : 1px solid #e7e7e7; border-bottom-right-radius : 3px; border-top-right-radius : 3px; height : 60px; margin-left : -32px; padding : 8px; }
 .green-basket { height : 50px; margin-top : -5px; }
-.basket-box img { margin-right : 20px; }
+.basket-box .green-basket { margin-right : 20px; }
 .basket-box h4 { margin : 0; }
 .basket-box .center { text-align : center; }
 .basket-box .center a { color : #333; font-size : 13px; }
@@ -67,6 +67,7 @@ body { color : #424449; font-family : arial; padding-top : 0; }
 #home-slider a.option { background : #fff none repeat scroll 0 0; border : 1px solid #ddd; color : #000; cursor : pointer; float : right; font-size : 0.85em; outline : medium none; padding : 10px 30px; text-transform : uppercase; transition : all 0.3s ease 0s; }
 #home-slider a.option.right-5 { margin-right : 5px; }
 #home-slider a.option:hover { text-decoration : none; }
+#home-slider a.option img {width:20px; margin-right: 5px;}
 #home-slider .carousel-indicators li { border : 1px solid #333; }
 #home-slider .carousel-indicators .active { background-color : #333; }
 .oaerror { background-color : #FFFFFF; border : 1px solid #eee; border-left-width : 5px; border-radius : 3px; font-family : 'Open Sans', sans-serif; font-size : 16px; margin : 0 auto; padding : 20px; width : 100%; }
@@ -147,7 +148,7 @@ div.product-sort .form-group { margin-bottom : 0; }
 .add-to-cart.btn-add { background-image : url('../imgs/add-to-cart-btn.png'); display : inline-block; height : 40px; width : 160px; }
 .remove-from-cart.btn-remove { background-image : url('../imgs/remove-from-cart-btn.png'); display : inline-block; height : 40px; width : 160px; }
 .btn-inner-search { background-color : #d83c3c; color : #f1f1f1; }
-.add-to-cart a .loader { display : none; }
+.add-to-cart a .loader { display: none; margin-left: 90px; margin-top: 8px; width:25px; }
 div#notificator { display : none; left : 50%; margin-left : -100px; padding : 15px 25px; position : fixed; text-align : center; top : 20px; width : 200px; z-index : 5000; }
 #clear-form { margin-left : -4px; }
 #myImg { border-radius : 5px; cursor : pointer; transition : 0.3s; }

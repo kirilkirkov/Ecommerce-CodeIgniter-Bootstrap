@@ -125,6 +125,7 @@ div.product-sort .form-group { margin-bottom : 0; }
 #small_carousel .profile-circle { border-radius : 100px; height : 100px; margin : 0 auto; width : 100px; }
 #small_carousel .profile-circle img { width : 100%; }
 #small_carousel .carousel-indicators .active { height : 15px; width : 15px; }
+#small_carousel .add-to-cart {padding-left: 10px; padding-right: 10px;}
 #view-product h1 { font-size : 20px; margin-bottom : 40px; margin-top : 0; }
 #view-product .the-image { border : 1px solid #ddd; box-shadow : 0 6px 12px rgba(0, 0, 0, 0.176); padding : 5px; }
 #view-product .orders-from-category { padding-top : 80px; }
@@ -239,6 +240,7 @@ footer .footer-icon li { display : block; height : 40px; width : 100%; }
 }
 
 @media screen and (max-width: 767px) {
+ #content {padding-bottom: 800px;}
  #products-side { padding-left : 15px; padding-right : 15px; }
  #top-part { height : auto; }
  #top-part ul.shop-dropdown {  width : auto; }

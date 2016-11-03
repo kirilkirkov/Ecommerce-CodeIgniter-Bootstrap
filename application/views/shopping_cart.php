@@ -56,10 +56,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </tr>
                 </tbody>
             </table>
-            <a href="<?= $lang_url ?>" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-circle-arrow-left"></span> <?= lang('back_to_shop') ?></a>
-            <a class="btn btn-primary pull-right" href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?> <i class="fa fa-credit-card-alt" aria-hidden="true"></i></a>
         </div>
-    <?php } ?>
+        <a href="<?= $lang_url ?>" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-circle-arrow-left"></span> <?= lang('back_to_shop') ?></a>
+        <a class="btn btn-primary pull-right" href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?> <i class="fa fa-credit-card-alt" aria-hidden="true"></i></a>
+        <?php } ?>
 </div>
 <?php
 if ($this->session->flashdata('deleted')) {

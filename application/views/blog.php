@@ -38,10 +38,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </span>
                                     </small>
                                     <p><?= character_limiter(strip_tags($post['description']), 300) ?></p>
-                                    <a class="btn pull-right" href="<?= $lang_url . '/blog/' . $post['url'] ?>">
+                                    <a class="btn btn-blog pull-right" href="<?= $lang_url . '/blog/' . $post['url'] ?>">
                                         <i class="fa fa-long-arrow-right"></i>
                                         <?= lang('read_mode') ?>
                                     </a>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>

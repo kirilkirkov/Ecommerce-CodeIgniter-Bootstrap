@@ -192,8 +192,14 @@ if (count($sliderProducts) > 0) {
                 </script>
                 <?php
             }
-            echo $links_pagination;
             ?>
         </div>
     </div>
+    <?php if ($links_pagination != '') { ?>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <?= $links_pagination ?>
+            </div>
+        </div>
+    <?php } ?>
 </div>

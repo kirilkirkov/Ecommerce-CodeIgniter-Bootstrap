@@ -8,12 +8,15 @@ class Articles_model extends CI_Model
         parent::__construct();
     }
 
-    public function productsCount($lang = null)
+    public function productsCount($lang = null, $big_get)
     {
         if ($lang != null) {
             $this->db->join('translations', 'translations.for_id = products.id', 'left');
             $this->db->where('translations.abbr', $lang);
             $this->db->where('translations.type', 'product');
+        }
+        if (!empty($big_get) && isset($big_get['category'])) {
+            $this->getFilter($big_get);
         }
         $this->db->where('visibility', 1);
         return $this->db->count_all_results('products');
@@ -24,6 +27,9 @@ class Articles_model extends CI_Model
         if ($limit !== null && $start !== null) {
             $this->db->limit($limit, $start);
         }
+        if (!empty($big_get) && isset($big_get['category'])) {
+            $this->getFilter($big_get);
+        }
         $this->db->select('products.id,products.image, products.quantity, translations.title, translations.price, translations.old_price, products.url');
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         $this->db->where('translations.abbr', $lang);
@@ -31,63 +37,67 @@ class Articles_model extends CI_Model
         $this->db->where('visibility', 1);
         // $this->db->where('in_slider', 0); Show slider products in categories
 
-        if (!empty($big_get) && isset($big_get['category'])) {
-            if ($big_get['category'] != '') {
-                (int) $big_get['category'];
-                $findInIds = array();
-                $findInIds[] = $big_get['category'];
-                $query = $this->db->query('SELECT id FROM shop_categories WHERE sub_for = ' . $big_get['category']);
-                foreach ($query->result() as $row)
-                    $findInIds[] = $row->id;
-                $this->db->where_in('products.shop_categorie', $findInIds);
-            }
-            if ($big_get['in_stock'] != '') {
-                if ($big_get['in_stock'] == 1)
-                    $sign = '>';
-                else
-                    $sign = '=';
-                $this->db->where('products.quantity ' . $sign, '0');
-            }
-            if ($big_get['search_in_title'] != '') {
-                $this->db->like('translations.title', $big_get['search_in_title']);
-            }
-            if ($big_get['search_in_body'] != '') {
-                $this->db->like('translations.description', $big_get['search_in_body']);
-            }
-            if ($big_get['order_price'] != '') {
-                $this->db->order_by('CAST(price AS DECIMAL(10.2)) '.$big_get['order_price']);
-            }
-            if ($big_get['order_procurement'] != '') {
-                $this->db->order_by('products.procurement', $big_get['order_procurement']);
-            }
-            if ($big_get['order_new'] != '') {
-                $this->db->order_by('products.id', $big_get['order_new']);
-            } else {
-                $this->db->order_by('products.id', 'DESC');
-            }
-            if ($big_get['quantity_more'] != '') {
-                $this->db->where('products.quantity > ', $big_get['quantity_more']);
-            }
-            if ($big_get['quantity_more'] != '') {
-                $this->db->where('products.quantity > ', $big_get['quantity_more']);
-            }
-            if ($big_get['added_after'] != '') {
-                $time = strtotime($big_get['added_after']);
-                $this->db->where('products.time > ', $time);
-            }
-            if ($big_get['added_before'] != '') {
-                $time = strtotime($big_get['added_before']);
-                $this->db->where('products.time < ', $time);
-            }
-            if ($big_get['price_from'] != '') {
-                $this->db->where('translations.price >= ', $big_get['price_from']);
-            }
-            if ($big_get['price_to'] != '') {
-                $this->db->where('translations.price <= ', $big_get['price_to']);
-            }
-        }
+
         $query = $this->db->get('products');
         return $query->result_array();
+    }
+
+    private function getFilter($big_get)
+    {
+
+        if ($big_get['category'] != '') {
+            (int) $big_get['category'];
+            $findInIds = array();
+            $findInIds[] = $big_get['category'];
+            $query = $this->db->query('SELECT id FROM shop_categories WHERE sub_for = ' . $big_get['category']);
+            foreach ($query->result() as $row)
+                $findInIds[] = $row->id;
+            $this->db->where_in('products.shop_categorie', $findInIds);
+        }
+        if ($big_get['in_stock'] != '') {
+            if ($big_get['in_stock'] == 1)
+                $sign = '>';
+            else
+                $sign = '=';
+            $this->db->where('products.quantity ' . $sign, '0');
+        }
+        if ($big_get['search_in_title'] != '') {
+            $this->db->like('translations.title', $big_get['search_in_title']);
+        }
+        if ($big_get['search_in_body'] != '') {
+            $this->db->like('translations.description', $big_get['search_in_body']);
+        }
+        if ($big_get['order_price'] != '') {
+            $this->db->order_by('CAST(price AS DECIMAL(10.2)) ' . $big_get['order_price']);
+        }
+        if ($big_get['order_procurement'] != '') {
+            $this->db->order_by('products.procurement', $big_get['order_procurement']);
+        }
+        if ($big_get['order_new'] != '') {
+            $this->db->order_by('products.id', $big_get['order_new']);
+        } else {
+            $this->db->order_by('products.id', 'DESC');
+        }
+        if ($big_get['quantity_more'] != '') {
+            $this->db->where('products.quantity > ', $big_get['quantity_more']);
+        }
+        if ($big_get['quantity_more'] != '') {
+            $this->db->where('products.quantity > ', $big_get['quantity_more']);
+        }
+        if ($big_get['added_after'] != '') {
+            $time = strtotime($big_get['added_after']);
+            $this->db->where('products.time > ', $time);
+        }
+        if ($big_get['added_before'] != '') {
+            $time = strtotime($big_get['added_before']);
+            $this->db->where('products.time < ', $time);
+        }
+        if ($big_get['price_from'] != '') {
+            $this->db->where('translations.price >= ', $big_get['price_from']);
+        }
+        if ($big_get['price_to'] != '') {
+            $this->db->where('translations.price <= ', $big_get['price_to']);
+        }
     }
 
     public function getShopCategories($lang)

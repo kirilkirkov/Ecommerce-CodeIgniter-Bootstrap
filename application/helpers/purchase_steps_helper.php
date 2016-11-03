@@ -35,13 +35,13 @@ function purchase_steps($step1 = null, $step2 = null, $step3 = null)
     ?>
     <div class="row steps">
         <div class="col-sm-4 step <?= $class1 ?>">
-            <img src="<?= base_url('assets/imgs/' . $icon1) ?>" alt="Ok"> Вашата поръчка
+            <img src="<?= base_url('assets/imgs/' . $icon1) ?>" alt="Ok"> <?= lang('step_your_order') ?>
         </div>
         <div class="col-sm-4 step <?= $class2 ?>">
-            <img src="<?= base_url('assets/imgs/' . $icon2) ?>" alt="Ok"> Начин на плащане
+            <img src="<?= base_url('assets/imgs/' . $icon2) ?>" alt="Ok"> <?= lang('step_payment_method') ?>
         </div>
         <div class="col-sm-4 step <?= $class3 ?>">
-            <img src="<?= base_url('assets/imgs/' . $icon3) ?>" alt="Ok"> Успешна поръчка
+            <img src="<?= base_url('assets/imgs/' . $icon3) ?>" alt="Ok"> <?= lang('step_success_prod') ?>
         </div>
     </div>
     <?php

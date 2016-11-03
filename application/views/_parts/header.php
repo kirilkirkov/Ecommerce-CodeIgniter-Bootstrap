@@ -71,7 +71,7 @@
                                             <div class="dropdown dropdown-lg">
                                                 <button type="button" class="button-more dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?= lang('more') ?> <span class="caret"></span></button>
                                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                                    <form class="form-horizontal" method="GET" action="<?= base_url() ?>" id="bigger-search">
+                                                    <form class="form-horizontal" method="GET" action="<?= $lang_url ?>" id="bigger-search">
                                                         <input type="hidden" name="category" value="<?= isset($_GET['category']) ? $_GET['category'] : '' ?>">
                                                         <input type="hidden" name="in_stock" value="<?= isset($_GET['in_stock']) ? $_GET['in_stock'] : '' ?>">
                                                         <input type="hidden" name="search_in_title" value="<?= isset($_GET['search_in_title']) ? $_GET['search_in_title'] : '' ?>">

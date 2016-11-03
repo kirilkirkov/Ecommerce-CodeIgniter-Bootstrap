@@ -53,8 +53,11 @@ body { color : #424449; font-family : arial; padding-top : 0; }
 .basket-box .green-basket { margin-right : 20px; }
 .basket-box h4 { margin : 0; }
 .basket-box .center { text-align : center; }
-.basket-box .center a { color : #333; font-size : 13px; }
+.basket-box .center a { color : #333; font-size : 11px; }
 .basket-box table { width : 100%; }
+.cleaner {padding-top: 5px; padding-right: 5px;}
+.cleaner a { display:inline-block !important; color:#fff !important; background: #3498db linear-gradient(to bottom, #3498db, #2980b9) repeat scroll 0 0; border-radius: 28px; color: #ffffff; display: inline-block;  font-family: Arial; font-size: 14px; padding: 4px 20px;text-decoration: none;}
+.cleaner a:hover {background: #3cb0fd; background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db); background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);background-image: -o-linear-gradient(top, #3cb0fd, #3498db);background-image: linear-gradient(to bottom, #3cb0fd, #3498db); text-decoration: none;}
 #home-slider { height : 370px; margin-bottom : 40px; }
 #home-slider .right-side { padding-top : 60px; }
 #home-slider .left-side img { max-height : 370px; }
@@ -152,7 +155,7 @@ div.product-sort .form-group { margin-bottom : 0; }
 .add-to-cart.btn-add:active {border-top-color: #1b435e; background: #1b435e;}
 .remove-from-cart.btn-remove { background-image : url('../imgs/remove-from-cart-btn.png'); display : inline-block; height : 40px; width : 160px; }
 .btn-inner-search { background-color : #d83c3c; color : #f1f1f1; }
-.add-to-cart a .loader { display: none; margin-left: 90px; margin-top: 8px; width:25px; }
+.add-to-cart a .loader { display: none; left: 50%;margin-left: -12px; position: absolute; width: 25px; }
 div#notificator { display : none; left : 50%; margin-left : -100px; padding : 15px 25px; position : fixed; text-align : center; top : 20px; width : 200px; z-index : 5000; }
 #clear-form { margin-left : -4px; }
 #myImg { border-radius : 5px; cursor : pointer; transition : 0.3s; }

@@ -110,6 +110,9 @@ $lang['you_choose_payment'] = 'Вие избрахте плащане с:';
 $lang['shopping_cart_only'] = 'Кошница';
 $lang['your_basket'] = 'Продукти';
 $lang['checkout_top_header'] = 'Плащане';
+$lang['step_your_order'] = 'Вашата поръчка';
+$lang['step_payment_method'] = 'Начин на плащане';
+$lang['step_success_prod'] = 'Успешна поръчка';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'Не сте въвели име';

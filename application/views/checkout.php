@@ -135,7 +135,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </a>
                                     </td>
-                                    <td><a href="<?= base_url($item['url']) ?>"><?= $item['title'] ?></a></td>
+                                    <td><a href="<?= $lang_url . '/' . $item['url'] ?>"><?= $item['title'] ?></a></td>
                                     <td>
                                         <a class="btn btn-xs btn-primary refresh-me add-to-cart" data-id="<?= $item['product_id'] ?>" href="javascript:void(0);">
                                             <span class="glyphicon glyphicon-plus"></span>

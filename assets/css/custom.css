@@ -1,7 +1,7 @@
 html, body { height : 100%; }
 body { color : #424449; font-family : arial; padding-top : 0; }
 #wrapper { min-height : 100%; position : relative; }
-#content { padding-bottom : 100px; }
+#content { padding-bottom : 400px; }
 #languages-bar { background : #444444; background : linear-gradient(to bottom, #444444 0%,#333333 100%); background : -moz-linear-gradient(top, #444444 0%, #333333 100%); background : -webkit-linear-gradient(top, #444444 0%,#333333 100%); filter : progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#333333',GradientType=0 ); margin-bottom : 15px; padding : 8px 0; }
 #languages-bar .phone { color : #f1f1f1; font-weight : bold; }
 #languages-bar .phone span { margin-right : 5px; }
@@ -179,7 +179,7 @@ div#notificator { display : none; left : 50%; margin-left : -100px; padding : 15
 .other-img-preview { cursor : pointer; height : 100px; margin-bottom : 10px; width : 100px; }
 .relative { position : relative; }
 .remove-product { left : 0; position : absolute; top : 0; }
-footer { bottom : 0; height : 10px; left : 0; position : absolute; width : 100%; }
+footer { bottom : 0;  left : 0; position : absolute; width : 100%; }
 footer .footer-icon li { display : block; height : 40px; width : 100%; }
 .full { width : 100%; }
 .gap { clear : both; display : block; height : 30px; width : 100%; }

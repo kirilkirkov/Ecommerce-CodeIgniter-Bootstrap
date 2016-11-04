@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS `active_pages` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
+INSERT INTO `active_pages` (`id`, `name`, `enabled`) VALUES
+(1, 'blog', 1);
 
 CREATE TABLE IF NOT EXISTS `blog_posts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -133,6 +135,9 @@ CREATE TABLE IF NOT EXISTS `translations` (
   UNIQUE KEY `art_id_abbr` (`abbr`,`for_id`,`type`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=323122 ;
 
+INSERT INTO `translations` (`id`, `title`, `description`, `basic_description`, `price`, `old_price`, `abbr`, `for_id`, `type`, `name`) VALUES
+(323122, '', '', '', '', '', 'bg', 1, 'page', ''),
+(323123, '', '', '', '', '', 'en', 1, 'page', '');
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -155,3 +160,27 @@ CREATE TABLE IF NOT EXISTS `valueStore` (
   PRIMARY KEY (`id`),
   KEY `key` (`thekey`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+
+INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
+(1, 'sitelogo', 'NewLogo.jpg'),
+(2, 'navitext', ''),
+(3, 'footercopyright', 'Powered by ECC FZE © All right reserved. '),
+(4, 'contactspage', 'Hello dear client'),
+(5, 'footerContactAddr', ''),
+(6, 'footerContactEmail', 'support@shop.dev'),
+(7, 'footerContactPhone', ''),
+(8, 'googleMaps', '42.671840, 83.279163'),
+(9, 'footerAboutUs', ''),
+(10, 'footerSocialFacebook', ''),
+(11, 'footerSocialTwitter', ''),
+(12, 'footerSocialGooglePlus', ''),
+(13, 'footerSocialPinterest', ''),
+(14, 'footerSocialYoutube', ''),
+(16, 'contactsEmailTo', 'contacts@shop.dev'),
+(17, 'shippingOrder', '1'),
+(18, 'addJs', ''),
+(19, 'publicQuantity', '0'),
+(20, 'paypal_email', ''),
+(21, 'paypal_sandbox', '0'),
+(22, 'paypal_currency', 'EUR'),
+(23, 'publicDateAdded', '0');

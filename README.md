@@ -27,6 +27,10 @@ Bootsrap Responsive online shop
 3. Set your site domain in application/config/config.php - $config['base_url'] = 'Yoursite.com';
 4. Opss I forgot for last 4 step... ENJOY! ;)
 
+## Login to administration with:
+User: admin
+Pass: admin
+
 ## Screenshot
 ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/design/redlabel-style/screenshot.png "Logo Title Text 1")
 

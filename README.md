@@ -1,4 +1,6 @@
-# Shopping Cart Solution - CodeIgniter and Bootstrap
+# GO TO BRANCH design/redlabel-style, THERE IS UPDATED DESIGN AND CODE STRUCTURE
+
+## Shopping Cart Solution - CodeIgniter and Bootstrap
 Bootsrap Responsive online shop
 
 1. Bootstrap responsive

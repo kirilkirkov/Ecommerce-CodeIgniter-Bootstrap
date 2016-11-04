@@ -69,13 +69,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <td>
                                     <?= $item['num_added'] ?>
                                 </td>
-                                <td><?= $item['price'] . $currency ?></td>
-                                <td><?= $item['sum_price'] . $currency ?></td>
+                                <td><?= $item['price'] . CURRENCY ?></td>
+                                <td><?= $item['sum_price'] . CURRENCY ?></td>
                             </tr>
                         <?php } ?>
                         <tr>
                             <td colspan="4" class="text-right"><?= lang('total') ?></td>
-                            <td><?= $cartItems['finalSum'] . $currency ?></td>
+                            <td><?= $cartItems['finalSum'] . CURRENCY ?></td>
                         </tr>
                     </tbody>
                 </table>

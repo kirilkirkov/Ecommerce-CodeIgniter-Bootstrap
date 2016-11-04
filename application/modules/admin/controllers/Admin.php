@@ -16,12 +16,8 @@ class Admin extends MX_Controller
     private $thumb_height = 300;
     private $username;
     private $history;
-    private $def_lang;
-    private $def_lang_name;
     private $activePages;
     private $allowed_img_types = 'gif|jpg|png|jpeg|JPG|PNG|JPEG';
-
-    //$data['links_pagination'] = pagination('admin/view_all', $rowscount, $this->num_rows, 3);
 
     public function __construct()
     {
@@ -29,9 +25,7 @@ class Admin extends MX_Controller
         $this->history = $this->config->item('admin_history');
         $this->load->library(array('session', 'form_validation'));
         $this->load->helper(array('text', 'file', 'pagination', 'text', 'except_letters', 'currencies', 'rcopy', 'rrmdir', 'rreadDir', 'savefile'));
-        $this->load->Model('Admin_model');
-        $this->def_lang = $this->config->item('language_abbr');
-        $this->def_lang_name = $this->config->item('language');
+        $this->load->Model('AdminModel');
         $this->activePages = $vars['activePages'] = $this->getActivePages();
         $vars['textualPages'] = getTextualPages($this->activePages);
         $vars['nonDynPages'] = $this->config->item('no_dynamic_pages');
@@ -53,7 +47,7 @@ class Admin extends MX_Controller
             $this->form_validation->set_rules('username', 'Username', 'trim|required');
             $this->form_validation->set_rules('password', 'Password', 'trim|required');
             if ($this->form_validation->run($this)) {
-                $result = $this->Admin_model->loginCheck($_POST);
+                $result = $this->AdminModel->loginCheck($_POST);
                 if (!empty($result)) {
                     $this->session->set_userdata('logged_in', $result['username']);
                     $this->username = $this->session->userdata('logged_in');
@@ -75,8 +69,8 @@ class Admin extends MX_Controller
         $is_update = false;
         $trans_load = null;
         if ($id > 0 && $_POST == null) {
-            $_POST = $this->Admin_model->getOneproduct($id);
-            $trans_load = $this->Admin_model->getTranslations($id, 'product');
+            $_POST = $this->AdminModel->getOneproduct($id);
+            $trans_load = $this->AdminModel->getTranslations($id, 'product');
         }
         if (isset($_POST['submit'])) {
             if ($id > 0)
@@ -106,11 +100,11 @@ class Admin extends MX_Controller
                 'old_price' => $_POST['old_price']
             );
             $flipped = array_flip($_POST['translations']);
-            $_POST['title_for_url'] = $_POST['title'][$flipped[$this->def_lang]];
+            $_POST['title_for_url'] = $_POST['title'][$flipped[MY_DEFAULT_LANGUAGE_ABBR]];
             unset($_POST['translations'], $_POST['title'], $_POST['basic_description'], $_POST['description'], $_POST['price'], $_POST['old_price']); //remove for product
-            $result = $this->Admin_model->setProduct($_POST, $id);
+            $result = $this->AdminModel->setProduct($_POST, $id);
             if ($result !== false) {
-                $this->Admin_model->setProductTranslation($translations, $result, $is_update); // send to translation table
+                $this->AdminModel->setProductTranslation($translations, $result, $is_update); // send to translation table
                 $this->session->set_flashdata('result_publish', 'product is published!');
                 if ($id == 0) {
                     $this->saveHistory('Success published product');
@@ -129,8 +123,8 @@ class Admin extends MX_Controller
         $head['keywords'] = '';
         $data['id'] = $id;
         $data['trans_load'] = $trans_load;
-        $data['languages'] = $this->Admin_model->getLanguages();
-        $data['shop_categories'] = $this->Admin_model->getShopCategories();
+        $data['languages'] = $this->AdminModel->getLanguages();
+        $data['shop_categories'] = $this->AdminModel->getShopCategories();
         $this->load->view('_parts/header', $head);
         $this->load->view('publish', $data);
         $this->load->view('_parts/footer');
@@ -180,15 +174,15 @@ class Admin extends MX_Controller
                 'title' => $_POST['title'],
                 'description' => $_POST['description']
             );
-            $this->Admin_model->setSeoPageTranslations($translations);
+            $this->AdminModel->setSeoPageTranslations($translations);
             $this->saveHistory('Changed Titles / Descriptions');
             $this->session->set_flashdata('result_publish', 'Saved successful!');
             redirect('admin/titles');
         }
 
-        $data['seo_trans'] = $this->Admin_model->getSeoTranslations();
-        $data['languages'] = $this->Admin_model->getLanguages();
-        $data['seo_pages'] = $this->Admin_model->getSeoPages();
+        $data['seo_trans'] = $this->AdminModel->getSeoTranslations();
+        $data['languages'] = $this->AdminModel->getLanguages();
+        $data['seo_pages'] = $this->AdminModel->getSeoPages();
         $this->load->view('_parts/header', $head);
         $this->load->view('titles', $data);
         $this->load->view('_parts/footer');
@@ -200,7 +194,7 @@ class Admin extends MX_Controller
         $this->login_check();
         $this->saveHistory('Go to products');
         if (isset($_GET['delete'])) {
-            $result = $this->Admin_model->deleteproduct($_GET['delete']);
+            $result = $this->AdminModel->deleteproduct($_GET['delete']);
             if ($result == true) {
                 $this->session->set_flashdata('result_delete', 'product is deleted!');
                 $this->saveHistory('Delete product id - ' . $_GET['delete']);
@@ -227,11 +221,11 @@ class Admin extends MX_Controller
             $orderby = null;
         }
         $data['products_lang'] = $products_lang = $this->session->userdata('admin_lang_products');
-        $rowscount = $this->Admin_model->productsCount($search);
-        $data['products'] = $this->Admin_model->getproducts($this->num_rows, $page, $search, $orderby);
+        $rowscount = $this->AdminModel->productsCount($search);
+        $data['products'] = $this->AdminModel->getproducts($this->num_rows, $page, $search, $orderby);
         $data['links_pagination'] = pagination('admin/products', $rowscount, $this->num_rows, 3);
-        $data['num_shop_art'] = $this->Admin_model->numShopproducts();
-        $data['languages'] = $this->Admin_model->getLanguages();
+        $data['num_shop_art'] = $this->AdminModel->numShopproducts();
+        $data['languages'] = $this->AdminModel->getLanguages();
 
         $this->load->view('_parts/header', $head);
         $this->load->view('products', $data);
@@ -273,11 +267,11 @@ class Admin extends MX_Controller
         $head['title'] = 'Administration - Home Categories';
         $head['description'] = '!';
         $head['keywords'] = '';
-        $data['shop_categories'] = $this->Admin_model->getShopCategories();
-        $data['languages'] = $this->Admin_model->getLanguages();
+        $data['shop_categories'] = $this->AdminModel->getShopCategories();
+        $data['languages'] = $this->AdminModel->getLanguages();
         if (isset($_GET['delete'])) {
             $this->saveHistory('Delete a shop categorie');
-            $result = $this->Admin_model->deleteShopCategorie($_GET['delete']);
+            $result = $this->AdminModel->deleteShopCategorie($_GET['delete']);
             if ($result == true) {
                 $this->saveHistory('Home Categorie id - ' . $_GET['delete']);
                 $this->session->set_flashdata('result_delete', 'Shop Categorie is deleted!');
@@ -288,7 +282,7 @@ class Admin extends MX_Controller
         }
         if (isset($_POST['submit'])) {
             $this->saveHistory('Add a shop categorie');
-            $result = $this->Admin_model->setShopCategorie($_POST);
+            $result = $this->AdminModel->setShopCategorie($_POST);
             if ($result === true) {
                 $this->session->set_flashdata('result_add', 'shop categorie is added!');
                 $this->saveHistory('Added shop categorie');
@@ -308,7 +302,7 @@ class Admin extends MX_Controller
     {
         $this->login_check();
         if (isset($_GET['delete'])) {
-            $result = $this->Admin_model->deleteLanguage($_GET['delete']);
+            $result = $this->AdminModel->deleteLanguage($_GET['delete']);
             if ($result == true) {
                 $this->saveHistory('Delete language id - ' . $_GET['delete']);
                 $this->session->set_flashdata('result_delete', 'Language is deleted!');
@@ -318,7 +312,7 @@ class Admin extends MX_Controller
             redirect('admin/languages');
         }
         if (isset($_GET['editLang'])) {
-            $num = $this->Admin_model->countLangs($_GET['editLang']);
+            $num = $this->AdminModel->countLangs($_GET['editLang']);
             if ($num == 0)
                 redirect('admin/languages');
             $langFiles = $this->getLangFolderForEdit();
@@ -334,16 +328,15 @@ class Admin extends MX_Controller
         $head = array();
         $head['title'] = 'Administration - Languages';
         $head['description'] = '!';
-        $data['def_lang'] = $this->def_lang;
         if (isset($langFiles)) {
             $data['arrPhpFiles'] = $langFiles[0];
             $data['arrJsFiles'] = $langFiles[1];
         }
         $head['keywords'] = '';
-        $data['languages'] = $this->Admin_model->getLanguages();
+        $data['languages'] = $this->AdminModel->getLanguages();
 
         if (isset($_POST['name']) && isset($_POST['abbr'])) {
-            $dublicates = $this->Admin_model->countLangs($_POST['name'], $_POST['abbr']);
+            $dublicates = $this->AdminModel->countLangs($_POST['name'], $_POST['abbr']);
             if ($dublicates == 0) {
                 $config['upload_path'] = './attachments/lang_flags/';
                 $config['allowed_types'] = 'gif|jpg|png';
@@ -356,7 +349,7 @@ class Admin extends MX_Controller
                     if ($img['file_name'] != null)
                         $_POST['flag'] = $img['file_name'];
                 }
-                $result = $this->Admin_model->setLanguage($_POST);
+                $result = $this->AdminModel->setLanguage($_POST);
                 if ($result === true) {
                     $this->createLangFolders();
                     $this->session->set_flashdata('result_add', 'Language is added!');
@@ -440,7 +433,7 @@ class Admin extends MX_Controller
     {
         $newLang = strtolower(trim($_POST['name']));
         if ($newLang != '') {
-            $from = 'application/language/' . $this->def_lang_name;
+            $from = 'application/language/' . MY_DEFAULT_LANGUAGE_ABBR;
             $to = 'application/language/' . $newLang;
             rcopy($from, $to);
         }
@@ -450,7 +443,7 @@ class Admin extends MX_Controller
     {
         $this->login_check();
         if (isset($_GET['delete'])) {
-            $result = $this->Admin_model->deleteAdminUser($_GET['delete']);
+            $result = $this->AdminModel->deleteAdminUser($_GET['delete']);
             if ($result == true) {
                 $this->saveHistory('Delete user id - ' . $_GET['delete']);
                 $this->session->set_flashdata('result_delete', 'User is deleted!');
@@ -460,21 +453,20 @@ class Admin extends MX_Controller
             redirect('admin/adminUsers');
         }
         if (isset($_GET['edit']) && !isset($_POST['username'])) {
-            $_POST = $this->Admin_model->getAdminUsers($_GET['edit']);
+            $_POST = $this->AdminModel->getAdminUsers($_GET['edit']);
         }
         $data = array();
         $head = array();
         $head['title'] = 'Administration - Admin Users';
         $head['description'] = '!';
-        $data['def_lang'] = $this->def_lang;
         $head['keywords'] = '';
-        $data['users'] = $this->Admin_model->getAdminUsers();
+        $data['users'] = $this->AdminModel->getAdminUsers();
         $this->form_validation->set_rules('username', 'User', 'trim|required');
-        if(isset($_POST['edit']) && $_POST['edit'] == 0) {
+        if (isset($_POST['edit']) && $_POST['edit'] == 0) {
             $this->form_validation->set_rules('password', 'Password', 'trim|required');
         }
         if ($this->form_validation->run($this)) {
-            $result = $this->Admin_model->setAdminUser($_POST);
+            $result = $this->AdminModel->setAdminUser($_POST);
             if ($result === true) {
                 $this->session->set_flashdata('result_add', 'User is added!');
                 $this->saveHistory('Create admin user - ' . $_POST['username']);
@@ -519,30 +511,30 @@ class Admin extends MX_Controller
         if (isset($_GET['order_by']) && $_GET['order_by'] == 'id' && $_GET['order_by'] == 'processed') {
             $order_by = $_GET['order_by'];
         }
-        $rowscount = $this->Admin_model->ordersCount();
-        $data['orders'] = $this->Admin_model->orders(10, $page, $order_by);
+        $rowscount = $this->AdminModel->ordersCount();
+        $data['orders'] = $this->AdminModel->orders(10, $page, $order_by);
         $data['links_pagination'] = pagination('admin/orders', $rowscount, 10, 3);
         if (isset($_POST['paypal_sandbox'])) {
-            $this->Admin_model->setValueStore('paypal_sandbox', $_POST['paypal_sandbox']);
+            $this->AdminModel->setValueStore('paypal_sandbox', $_POST['paypal_sandbox']);
             $this->session->set_flashdata('paypal_sandbox', 'Public quantity visibility changed');
             $this->saveHistory('Change paypal to sandbox mode');
             redirect('admin/orders');
         }
         if (isset($_POST['paypal_email'])) {
-            $this->Admin_model->setValueStore('paypal_email', $_POST['paypal_email']);
+            $this->AdminModel->setValueStore('paypal_email', $_POST['paypal_email']);
             $this->session->set_flashdata('paypal_email', 'Public quantity visibility changed');
             $this->saveHistory('Change paypal business email to: ' . $_POST['paypal_email']);
             redirect('admin/orders');
         }
         if (isset($_POST['paypal_currency'])) {
-            $this->Admin_model->setValueStore('paypal_currency', $_POST['paypal_currency']);
+            $this->AdminModel->setValueStore('paypal_currency', $_POST['paypal_currency']);
             $this->session->set_flashdata('paypal_currency', 'Public quantity visibility changed');
             $this->saveHistory('Change paypal currency to: ' . $_POST['paypal_currency']);
             redirect('admin/orders');
         }
-        $data['paypal_sandbox'] = $this->Admin_model->getValueStore('paypal_sandbox');
-        $data['paypal_email'] = $this->Admin_model->getValueStore('paypal_email');
-        $data['paypal_currency'] = $this->Admin_model->getValueStore('paypal_currency');
+        $data['paypal_sandbox'] = $this->AdminModel->getValueStore('paypal_sandbox');
+        $data['paypal_email'] = $this->AdminModel->getValueStore('paypal_email');
+        $data['paypal_currency'] = $this->AdminModel->getValueStore('paypal_currency');
         $this->load->view('_parts/header', $head);
         $this->load->view('orders', $data);
         $this->load->view('_parts/footer');
@@ -579,8 +571,8 @@ class Admin extends MX_Controller
         $head['description'] = '!';
         $head['keywords'] = '';
 
-        $rowscount = $this->Admin_model->historyCount();
-        $data['actions'] = $this->Admin_model->getHistory(20, $page);
+        $rowscount = $this->AdminModel->historyCount();
+        $data['actions'] = $this->AdminModel->getHistory(20, $page);
         $data['links_pagination'] = pagination('admin/history', $rowscount, 20, 3);
         $data['history'] = $this->history;
 
@@ -614,111 +606,111 @@ class Admin extends MX_Controller
             } else {
                 $data = array('upload_data' => $this->upload->data());
                 $newImage = $data['upload_data']['file_name'];
-                $this->Admin_model->setValueStore('sitelogo', $newImage);
+                $this->AdminModel->setValueStore('sitelogo', $newImage);
                 $this->saveHistory('Change site logo');
                 $this->session->set_flashdata('resultSiteLogoPublish', 'New logo is set!');
             }
             redirect('admin/styling');
         }
         if (isset($_POST['naviText'])) {
-            $this->Admin_model->setValueStore('navitext', $_POST['naviText']);
+            $this->AdminModel->setValueStore('navitext', $_POST['naviText']);
             $this->session->set_flashdata('resultNaviText', 'New navigation text is set!');
             $this->saveHistory('Change navigation text');
             redirect('admin/styling');
         }
         if (isset($_POST['footerCopyright'])) {
-            $this->Admin_model->setValueStore('footercopyright', $_POST['footerCopyright']);
+            $this->AdminModel->setValueStore('footercopyright', $_POST['footerCopyright']);
             $this->session->set_flashdata('resultFooterCopyright', 'New navigation text is set!');
             $this->saveHistory('Change footer copyright');
             redirect('admin/styling');
         }
         if (isset($_POST['contactsPage'])) {
-            $this->Admin_model->setValueStore('contactspage', $_POST['contactsPage']);
+            $this->AdminModel->setValueStore('contactspage', $_POST['contactsPage']);
             $this->session->set_flashdata('resultContactspage', 'Contacts page is updated!');
             $this->saveHistory('Change contacts page');
             redirect('admin/styling');
         }
         if (isset($_POST['footerContacts'])) {
-            $this->Admin_model->setValueStore('footerContactAddr', $_POST['footerContactAddr']);
-            $this->Admin_model->setValueStore('footerContactPhone', $_POST['footerContactPhone']);
-            $this->Admin_model->setValueStore('footerContactEmail', $_POST['footerContactEmail']);
+            $this->AdminModel->setValueStore('footerContactAddr', $_POST['footerContactAddr']);
+            $this->AdminModel->setValueStore('footerContactPhone', $_POST['footerContactPhone']);
+            $this->AdminModel->setValueStore('footerContactEmail', $_POST['footerContactEmail']);
             $this->session->set_flashdata('resultfooterContacts', 'Contacts on footer are updated!');
             $this->saveHistory('Change footer contacts');
             redirect('admin/styling');
         }
         if (isset($_POST['footerSocial'])) {
-            $this->Admin_model->setValueStore('footerSocialFacebook', $_POST['footerSocialFacebook']);
-            $this->Admin_model->setValueStore('footerSocialTwitter', $_POST['footerSocialTwitter']);
-            $this->Admin_model->setValueStore('footerSocialGooglePlus', $_POST['footerSocialGooglePlus']);
-            $this->Admin_model->setValueStore('footerSocialPinterest', $_POST['footerSocialPinterest']);
-            $this->Admin_model->setValueStore('footerSocialYoutube', $_POST['footerSocialYoutube']);
+            $this->AdminModel->setValueStore('footerSocialFacebook', $_POST['footerSocialFacebook']);
+            $this->AdminModel->setValueStore('footerSocialTwitter', $_POST['footerSocialTwitter']);
+            $this->AdminModel->setValueStore('footerSocialGooglePlus', $_POST['footerSocialGooglePlus']);
+            $this->AdminModel->setValueStore('footerSocialPinterest', $_POST['footerSocialPinterest']);
+            $this->AdminModel->setValueStore('footerSocialYoutube', $_POST['footerSocialYoutube']);
             $this->session->set_flashdata('resultfooterSocial', 'Social on footer are updated!');
             $this->saveHistory('Change footer contacts');
             redirect('admin/styling');
         }
         if (isset($_POST['googleMaps'])) {
-            $this->Admin_model->setValueStore('googleMaps', $_POST['googleMaps']);
+            $this->AdminModel->setValueStore('googleMaps', $_POST['googleMaps']);
             $this->session->set_flashdata('resultGoogleMaps', 'Google maps coordinates are updated!');
             $this->saveHistory('Change Google Maps Coordinates');
             redirect('admin/styling');
         }
         if (isset($_POST['footerAboutUs'])) {
-            $this->Admin_model->setValueStore('footerAboutUs', $_POST['footerAboutUs']);
+            $this->AdminModel->setValueStore('footerAboutUs', $_POST['footerAboutUs']);
             $this->session->set_flashdata('resultFooterAboutUs', 'Footer about us text changed!');
             $this->saveHistory('Change footer about us info');
             redirect('admin/styling');
         }
         if (isset($_POST['contactsEmailTo'])) {
-            $this->Admin_model->setValueStore('contactsEmailTo', $_POST['contactsEmailTo']);
+            $this->AdminModel->setValueStore('contactsEmailTo', $_POST['contactsEmailTo']);
             $this->session->set_flashdata('resultEmailTo', 'Email changed!');
             $this->saveHistory('Change where going emails from contact form');
             redirect('admin/styling');
         }
         if (isset($_POST['shippingOrder'])) {
-            $this->Admin_model->setValueStore('shippingOrder', $_POST['shippingOrder']);
+            $this->AdminModel->setValueStore('shippingOrder', $_POST['shippingOrder']);
             $this->session->set_flashdata('shippingOrder', 'Shipping Order price chagned!');
             $this->saveHistory('Change Shipping free for order more than ' . $_POST['shippingOrder']);
             redirect('admin/styling');
         }
         if (isset($_POST['addJs'])) {
-            $this->Admin_model->setValueStore('addJs', $_POST['addJs']);
+            $this->AdminModel->setValueStore('addJs', $_POST['addJs']);
             $this->session->set_flashdata('addJs', 'JavaScript code is added');
             $this->saveHistory('Add JS to website');
             redirect('admin/styling');
         }
         if (isset($_POST['publicQuantity'])) {
-            $this->Admin_model->setValueStore('publicQuantity', $_POST['publicQuantity']);
+            $this->AdminModel->setValueStore('publicQuantity', $_POST['publicQuantity']);
             $this->session->set_flashdata('publicQuantity', 'Public quantity visibility changed');
             $this->saveHistory('Change publicQuantity visibility');
             redirect('admin/styling');
         }
         if (isset($_POST['publicDateAdded'])) {
-            $this->Admin_model->setValueStore('publicDateAdded', $_POST['publicDateAdded']);
+            $this->AdminModel->setValueStore('publicDateAdded', $_POST['publicDateAdded']);
             $this->session->set_flashdata('publicDateAdded', 'Public date added visibility changed');
             $this->saveHistory('Change public date added visibility');
             redirect('admin/styling');
         }
-        $data['siteLogo'] = $this->Admin_model->getValueStore('sitelogo');
-        $data['naviText'] = $this->Admin_model->getValueStore('navitext');
-        $data['footerCopyright'] = $this->Admin_model->getValueStore('footercopyright');
-        $data['contactsPage'] = $this->Admin_model->getValueStore('contactspage');
-        $data['footerContactAddr'] = $this->Admin_model->getValueStore('footerContactAddr');
-        $data['footerContactPhone'] = $this->Admin_model->getValueStore('footerContactPhone');
-        $data['footerContactEmail'] = $this->Admin_model->getValueStore('footerContactEmail');
+        $data['siteLogo'] = $this->AdminModel->getValueStore('sitelogo');
+        $data['naviText'] = $this->AdminModel->getValueStore('navitext');
+        $data['footerCopyright'] = $this->AdminModel->getValueStore('footercopyright');
+        $data['contactsPage'] = $this->AdminModel->getValueStore('contactspage');
+        $data['footerContactAddr'] = $this->AdminModel->getValueStore('footerContactAddr');
+        $data['footerContactPhone'] = $this->AdminModel->getValueStore('footerContactPhone');
+        $data['footerContactEmail'] = $this->AdminModel->getValueStore('footerContactEmail');
 
-        $data['footerSocialFacebook'] = $this->Admin_model->getValueStore('footerSocialFacebook');
-        $data['footerSocialTwitter'] = $this->Admin_model->getValueStore('footerSocialTwitter');
-        $data['footerSocialGooglePlus'] = $this->Admin_model->getValueStore('footerSocialGooglePlus');
-        $data['footerSocialPinterest'] = $this->Admin_model->getValueStore('footerSocialPinterest');
-        $data['footerSocialYoutube'] = $this->Admin_model->getValueStore('footerSocialYoutube');
+        $data['footerSocialFacebook'] = $this->AdminModel->getValueStore('footerSocialFacebook');
+        $data['footerSocialTwitter'] = $this->AdminModel->getValueStore('footerSocialTwitter');
+        $data['footerSocialGooglePlus'] = $this->AdminModel->getValueStore('footerSocialGooglePlus');
+        $data['footerSocialPinterest'] = $this->AdminModel->getValueStore('footerSocialPinterest');
+        $data['footerSocialYoutube'] = $this->AdminModel->getValueStore('footerSocialYoutube');
 
-        $data['contactsEmailTo'] = $this->Admin_model->getValueStore('contactsEmailTo');
-        $data['googleMaps'] = $this->Admin_model->getValueStore('googleMaps');
-        $data['footerAboutUs'] = $this->Admin_model->getValueStore('footerAboutUs');
-        $data['shippingOrder'] = $this->Admin_model->getValueStore('shippingOrder');
-        $data['addJs'] = $this->Admin_model->getValueStore('addJs');
-        $data['publicQuantity'] = $this->Admin_model->getValueStore('publicQuantity');
-        $data['publicDateAdded'] = $this->Admin_model->getValueStore('publicDateAdded');
+        $data['contactsEmailTo'] = $this->AdminModel->getValueStore('contactsEmailTo');
+        $data['googleMaps'] = $this->AdminModel->getValueStore('googleMaps');
+        $data['footerAboutUs'] = $this->AdminModel->getValueStore('footerAboutUs');
+        $data['shippingOrder'] = $this->AdminModel->getValueStore('shippingOrder');
+        $data['addJs'] = $this->AdminModel->getValueStore('addJs');
+        $data['publicQuantity'] = $this->AdminModel->getValueStore('publicQuantity');
+        $data['publicDateAdded'] = $this->AdminModel->getValueStore('publicDateAdded');
         $this->load->view('_parts/header', $head);
         $this->load->view('styling', $data);
         $this->load->view('_parts/footer');
@@ -729,7 +721,7 @@ class Admin extends MX_Controller
     {
         if ($this->history === true) {
             $usr = $this->username;
-            $this->Admin_model->setHistory($activity, $usr);
+            $this->AdminModel->setHistory($activity, $usr);
         }
     }
 
@@ -754,7 +746,7 @@ class Admin extends MX_Controller
     public function changePass()
     {  //called from ajax
         $this->login_check();
-        $result = $this->Admin_model->changePass($_POST['new_pass'], $this->username);
+        $result = $this->AdminModel->changePass($_POST['new_pass'], $this->username);
         if ($result == true)
             echo 1;
         else
@@ -765,7 +757,7 @@ class Admin extends MX_Controller
     public function productstatusChange()
     { //called from ajax
         $this->login_check();
-        $result = $this->Admin_model->productstatusChagne($_POST['id'], $_POST['to_status']);
+        $result = $this->AdminModel->productstatusChagne($_POST['id'], $_POST['to_status']);
         if ($result == true)
             echo 1;
         else
@@ -776,7 +768,7 @@ class Admin extends MX_Controller
     public function changeOrderStatus()
     {
         $this->login_check();
-        $result = $this->Admin_model->changeOrderStatus($_POST['the_id'], $_POST['to_status']);
+        $result = $this->AdminModel->changeOrderStatus($_POST['the_id'], $_POST['to_status']);
         if ($result == true)
             echo 1;
         else
@@ -802,7 +794,7 @@ class Admin extends MX_Controller
     {
         $this->login_check();
         if (isset($_GET['delete'])) {
-            $this->Admin_model->deletePost($_GET['delete']);
+            $this->AdminModel->deletePost($_GET['delete']);
             redirect('admin/blog');
         }
         $data = array();
@@ -818,8 +810,8 @@ class Admin extends MX_Controller
             $search = null;
         }
         $data = array();
-        $rowscount = $this->Admin_model->postsCount($search);
-        $data['posts'] = $this->Admin_model->getPosts(null, $this->num_rows, $page, $search);
+        $rowscount = $this->AdminModel->postsCount($search);
+        $data['posts'] = $this->AdminModel->getPosts(null, $this->num_rows, $page, $search);
         $data['links_pagination'] = pagination('admin/blog', $rowscount, $this->num_rows, 3);
         $data['page'] = $page;
 
@@ -837,8 +829,8 @@ class Admin extends MX_Controller
         if ($id > 0)
             $is_update = true;
         if ($id > 0 && $_POST == null) {
-            $_POST = $this->Admin_model->getOnePost($id);
-            $trans_load = $this->Admin_model->getTranslations($id, 'blog');
+            $_POST = $this->AdminModel->getOnePost($id);
+            $trans_load = $this->AdminModel->getTranslations($id, 'blog');
         }
         if (isset($_POST['submit'])) {
             unset($_POST['submit']);
@@ -860,11 +852,11 @@ class Admin extends MX_Controller
             );
 
             $flipped = array_flip($_POST['translations']);
-            $_POST['title'] = $_POST['title'][$flipped[$this->def_lang]];
+            $_POST['title'] = $_POST['title'][$flipped[MY_DEFAULT_LANGUAGE_ABBR]];
             unset($_POST['description'], $_POST['translations']);
-            $result = $this->Admin_model->setPost($_POST, $id);
+            $result = $this->AdminModel->setPost($_POST, $id);
             if ($result !== false) {
-                $this->Admin_model->setBlogTranslations($translations, $result, $is_update);
+                $this->AdminModel->setBlogTranslations($translations, $result, $is_update);
                 $this->session->set_flashdata('result_publish', 'Successful published!');
                 redirect('admin/blog');
             } else {
@@ -878,7 +870,7 @@ class Admin extends MX_Controller
         $head['title'] = 'Administration - Publish Blog Post';
         $head['description'] = '!';
         $head['keywords'] = '';
-        $data['languages'] = $this->Admin_model->getLanguages();
+        $data['languages'] = $this->AdminModel->getLanguages();
         $data['trans_load'] = $trans_load;
         $this->load->view('_parts/header', $head);
         $this->load->view('blogPublish', $data);
@@ -888,7 +880,7 @@ class Admin extends MX_Controller
 
     public function getActivePages()
     {
-        return $this->Admin_model->getPages(true, false);
+        return $this->AdminModel->getPages(true, false);
     }
 
     public function pages()
@@ -899,14 +891,14 @@ class Admin extends MX_Controller
         $head['title'] = 'Administration - Pages Manage';
         $head['description'] = '!';
         $head['keywords'] = '';
-        $data['pages'] = $this->Admin_model->getPages(null, true);
+        $data['pages'] = $this->AdminModel->getPages(null, true);
         if (isset($_POST['pname'])) {
-            $this->Admin_model->setPage($_POST['pname']);
+            $this->AdminModel->setPage($_POST['pname']);
             $this->saveHistory('Add new page with name - ' . $_POST['pname']);
             redirect('admin/pages');
         }
         if (isset($_GET['delete'])) {
-            $this->Admin_model->deletePage($_GET['delete']);
+            $this->AdminModel->deletePage($_GET['delete']);
             $this->saveHistory('Delete page');
             redirect('admin/pages');
         }
@@ -926,7 +918,7 @@ class Admin extends MX_Controller
         $head['title'] = 'Administration - Pages Manage';
         $head['description'] = '!';
         $head['keywords'] = '';
-        $data['page'] = $this->Admin_model->getOnePageForEdit($page);
+        $data['page'] = $this->AdminModel->getOnePageForEdit($page);
         if (empty($data['page']))
             redirect('admin/pages');
 
@@ -936,7 +928,7 @@ class Admin extends MX_Controller
                 'name' => $_POST['name'],
                 'description' => $_POST['description']
             );
-            $this->Admin_model->setEditPageTranslations($translations, $_POST['pageId']);
+            $this->AdminModel->setEditPageTranslations($translations, $_POST['pageId']);
             $this->saveHistory('Page ' . $_POST['pageId'] . ' updated!');
             redirect('admin/pageEdit/' . $page);
         }
@@ -950,7 +942,7 @@ class Admin extends MX_Controller
     public function changePageStatus()
     {
         $this->login_check();
-        $result = $this->Admin_model->changePageStatus($_POST['id'], $_POST['status']);
+        $result = $this->AdminModel->changePageStatus($_POST['id'], $_POST['status']);
         if ($result == true)
             echo 1;
         else
@@ -962,16 +954,16 @@ class Admin extends MX_Controller
     {
         $this->login_check();
         if (isset($_POST['export'])) {
-            $rowscount = $this->Admin_model->emailsCount();
+            $rowscount = $this->AdminModel->emailsCount();
             header("Content-Disposition: attachment; filename=online-shop-$rowscount-emails-export.txt");
-            $all_emails = $this->Admin_model->getSuscribedEmails(0, 0);
+            $all_emails = $this->AdminModel->getSuscribedEmails(0, 0);
             foreach ($all_emails->result() as $row) {
                 echo $row->email . "\n";
             }
             exit;
         }
         if (isset($_GET['delete'])) {
-            $data = $this->Admin_model->deleteEmail($_GET['delete']);
+            $data = $this->AdminModel->deleteEmail($_GET['delete']);
             $this->session->set_flashdata('emailDeleted', 'Email addres is deleted!');
             redirect('admin/emails');
         }
@@ -980,9 +972,9 @@ class Admin extends MX_Controller
         $head['title'] = 'Administration - Subscribed Emails';
         $head['description'] = '!';
         $head['keywords'] = '';
-        $rowscount = $this->Admin_model->emailsCount();
+        $rowscount = $this->AdminModel->emailsCount();
         $data['links_pagination'] = pagination('admin/emails', $rowscount, 20, 3);
-        $data['emails'] = $this->Admin_model->getSuscribedEmails(20, $page);
+        $data['emails'] = $this->AdminModel->getSuscribedEmails(20, $page);
         $this->load->view('_parts/header', $head);
         $this->load->view('emails', $data);
         $this->load->view('_parts/footer');

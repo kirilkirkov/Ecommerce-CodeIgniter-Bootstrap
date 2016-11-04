@@ -1,7 +1,8 @@
 <?php
 
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
 
 function mb_ucfirst($str, $encoding = "UTF-8", $lower_str_end = false)
 {

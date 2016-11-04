@@ -19,7 +19,7 @@ class JSLoader extends MY_Controller
             header('HTTP/1.1 404 Not Found');
             return;
         }
-        $contents = file_get_contents('./application/language/' . $this->my_lang_full . '/js/' . $file);
+        $contents = file_get_contents('./application/language/' . MY_LANGUAGE_FULL_NAME . '/js/' . $file);
         if (!$contents) {
             header('HTTP/1.1 404 Not Found');
             return;

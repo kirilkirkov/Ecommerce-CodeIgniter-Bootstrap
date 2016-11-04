@@ -54,7 +54,7 @@
                     <td><?= ucfirst($language->name) ?></td>
                     <td><?= $language->currency ?></td>
                     <td class="text-center">
-                        <?php if ($def_lang != $language->abbr) { ?>
+                        <?php if (MY_DEFAULT_LANGUAGE_ABBR != $language->abbr) { ?>
                             <a href="<?= base_url('admin/languages/?delete=' . $language->id) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Delete</a>
                         <?php } else { ?>
                             Its default

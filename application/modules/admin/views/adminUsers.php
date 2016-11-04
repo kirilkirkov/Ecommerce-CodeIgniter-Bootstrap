@@ -33,7 +33,7 @@
                     <th>username</th>
                     <th>password</th>
                     <th>email</th>
-					<th>notifications</th>
+                    <th>notifications</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
@@ -42,13 +42,13 @@
                     <td><?= $user->id ?></td>
                     <td><?= $user->username ?></td>
                     <td><b>hidden ;)</b></td>
-					<td><?= $user->email ?></td>
-					<td><?= $user->notify ?></td>
+                    <td><?= $user->email ?></td>
+                    <td><?= $user->notify ?></td>
                     <td class="text-center">
-					<div>
-					<a href="?delete=<?= $user->id ?>" class="confirm-delete">Delete</a>
-					<a href="?edit=<?= $user->id ?>">Edit</a>
-					</div>
+                        <div>
+                            <a href="?delete=<?= $user->id ?>" class="confirm-delete">Delete</a>
+                            <a href="?edit=<?= $user->id ?>">Edit</a>
+                        </div>
                     </td>
                 </tr>
             <?php } ?>
@@ -68,7 +68,7 @@
                         <h4 class="modal-title" id="myModalLabel">Add Administrator</h4>
                     </div>
                     <div class="modal-body">
-						<input type="hidden" name="edit" value="<?= isset($_GET['edit']) ? $_GET['edit'] : '0' ?>">
+                        <input type="hidden" name="edit" value="<?= isset($_GET['edit']) ? $_GET['edit'] : '0' ?>">
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" name="username" value="<?= isset($_POST['username']) ? $_POST['username'] : '' ?>" class="form-control" id="username">
@@ -96,9 +96,9 @@
     </div>
 </div>
 <script>
-<?php if(isset($_GET['edit'])) { ?>
-$(document).ready(function() {
- $("#add_edit_users").modal('show');
- });
- <?php } ?>
+<?php if (isset($_GET['edit'])) { ?>
+$(document).ready(function () {
+    $("#add_edit_users").modal('show');
+});
+<?php } ?>
 </script>

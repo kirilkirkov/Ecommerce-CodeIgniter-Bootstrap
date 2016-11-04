@@ -10,10 +10,9 @@ class Checkout extends MY_Controller
         parent::__construct();
         $this->load->library('email');
         $this->load->helper(array('currency_convertor'));
-        $vars['paypal_sandbox'] = $this->Admin_model->getValueStore('paypal_sandbox');
-        $vars['paypal_email'] = $this->Admin_model->getValueStore('paypal_email');
-        $vars['paypal_currency'] = $this->Admin_model->getValueStore('paypal_currency');
-        $vars['currencyKey'] = $this->currencyKey;
+        $vars['paypal_sandbox'] = $this->AdminModel->getValueStore('paypal_sandbox');
+        $vars['paypal_email'] = $this->AdminModel->getValueStore('paypal_email');
+        $vars['paypal_currency'] = $this->AdminModel->getValueStore('paypal_currency');
         $this->load->vars($vars);
     }
 
@@ -21,7 +20,7 @@ class Checkout extends MY_Controller
     {
         $data = array();
         $head = array();
-        $arrSeo = $this->Articles_model->getSeo('page_checkout', $this->my_lang);
+        $arrSeo = $this->Publicmodel->getSeo('page_checkout');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
@@ -39,13 +38,13 @@ class Checkout extends MY_Controller
             unset($_POST['saveOrder']);
             $_POST = $_SESSION['final_step'];
             unset($_SESSION['final_step']);
-            $result = $this->Articles_model->setOrder($_POST);
+            $result = $this->Publicmodel->setOrder($_POST);
             if ($result == true) {
                 $new_request = true;
             }
         }
         if ($new_request == true) { // send emails to users that want it (notify = 1)
-            $emails = $this->Articles_model->getNotifyUsers();
+            $emails = $this->Publicmodel->getNotifyUsers();
             if (!empty($emails)) {
                 $toEmails = implode(', ', $emails);
                 $shopName = $this->config->item('base_url');
@@ -73,7 +72,7 @@ class Checkout extends MY_Controller
         if (isset($_SESSION['final_step'])) {
             $_POST = $_SESSION['final_step'];
         }
-        $data['bestSellers'] = $this->Articles_model->getbestSellers($this->my_lang);
+        $data['bestSellers'] = $this->Publicmodel->getbestSellers();
         $this->render('checkout', $head, $data);
     }
 
@@ -85,7 +84,7 @@ class Checkout extends MY_Controller
         $_SESSION['final_step'];
         $data = array();
         $head = array();
-        $arrSeo = $this->Articles_model->getSeo('page_checkout', $this->my_lang);
+        $arrSeo = $this->Publicmodel->getSeo('page_checkout');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
@@ -130,7 +129,7 @@ class Checkout extends MY_Controller
         }
         @delete_cookie('paypal');
         $orderId = get_cookie('paypal');
-        $this->Articles_model->changePaypalOrderStatus($orderId, 'canceled');
+        $this->Publicmodel->changePaypalOrderStatus($orderId, 'canceled');
         $data = array();
         $head = array();
         $head['title'] = '';
@@ -147,7 +146,7 @@ class Checkout extends MY_Controller
         @delete_cookie('paypal');
         $this->clearShoppingCart();
         $orderId = get_cookie('paypal');
-        $this->Articles_model->changePaypalOrderStatus($orderId, 'payed');
+        $this->Publicmodel->changePaypalOrderStatus($orderId, 'payed');
         $data = array();
         $head = array();
         $head['title'] = '';

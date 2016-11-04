@@ -1,15 +1,7 @@
 <?php
 
-class Admin_model extends CI_Model
+class AdminModel extends CI_Model
 {
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->def_lang = $this->config->item('language_abbr');
-    }
-
-    private $def_lang;
 
     public function loginCheck($values)
     {
@@ -39,7 +31,7 @@ class Admin_model extends CI_Model
         }
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         $this->db->where('translations.type', 'product');
-        $this->db->where('translations.abbr', $this->def_lang);
+        $this->db->where('translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
         return $this->db->count_all_results('products');
     }
 
@@ -337,7 +329,7 @@ class Admin_model extends CI_Model
         }
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         $this->db->where('translations.type', 'product');
-        $this->db->where('translations.abbr', $this->def_lang);
+        $this->db->where('translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
         $query = $this->db->select('products.*, translations.title, translations.description, translations.price, translations.old_price, translations.abbr, products.url, translations.for_id, translations.type, translations.basic_description')->get('products', $limit, $page);
         return $query;
     }
@@ -571,7 +563,7 @@ class Admin_model extends CI_Model
             $this->db->like('translations.title', $search);
         }
         $this->db->join('translations', 'translations.for_id = blog_posts.id', 'left');
-        $this->db->where('translations.abbr', $this->def_lang);
+        $this->db->where('translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
         return $this->db->count_all_results('blog_posts');
     }
 
@@ -589,7 +581,7 @@ class Admin_model extends CI_Model
         $this->db->join('translations', 'translations.for_id = blog_posts.id', 'left');
         $this->db->where('translations.type', 'blog');
         if ($lang == null) {
-            $this->db->where('translations.abbr', $this->def_lang);
+            $this->db->where('translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
         } else {
             $this->db->where('translations.abbr', $lang);
         }

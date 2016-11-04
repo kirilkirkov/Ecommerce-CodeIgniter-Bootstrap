@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </a>
                             </td>
-                            <td><a href="<?= $lang_url . '/' . $item['url'] ?>"><?= $item['title'] ?></a></td>
+                            <td><a href="<?= LANG_URL . '/' . $item['url'] ?>"><?= $item['title'] ?></a></td>
                             <td>
                                 <a class="btn btn-xs btn-primary refresh-me add-to-cart" data-id="<?= $item['product_id'] ?>" href="javascript:void(0);">
                                     <span class="glyphicon glyphicon-plus"></span>
@@ -46,19 +46,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <span class="glyphicon glyphicon-minus"></span>
                                 </a>
                             </td>
-                            <td><?= $item['price'] . $currency ?></td>
-                            <td><?= $item['sum_price'] . $currency ?></td>
+                            <td><?= $item['price'] . CURRENCY ?></td>
+                            <td><?= $item['sum_price'] . CURRENCY ?></td>
                         </tr>
                     <?php } ?>
                     <tr>
                         <td colspan="4" class="text-right"><?= lang('total') ?></td>
-                        <td><?= $cartItems['finalSum'] . $currency ?></td>
+                        <td><?= $cartItems['finalSum'] . CURRENCY ?></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <a href="<?= $lang_url ?>" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-circle-arrow-left"></span> <?= lang('back_to_shop') ?></a>
-        <a class="btn btn-primary pull-right" href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?> <i class="fa fa-credit-card-alt" aria-hidden="true"></i></a>
+        <a href="<?= LANG_URL ?>" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-circle-arrow-left"></span> <?= lang('back_to_shop') ?></a>
+        <a class="btn btn-primary pull-right" href="<?= LANG_URL . '/checkout' ?>"><?= lang('checkout') ?> <i class="fa fa-credit-card-alt" aria-hidden="true"></i></a>
         <?php } ?>
 </div>
 <?php

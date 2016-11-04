@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 foreach ($cartItems['array'] as $item) {
                     ?>
                     <input type="hidden" name="item_name_<?= $i ?>" value="<?= $item['title'] ?>">
-                    <input type="hidden" name="amount_<?= $i ?>" value="<?= convertCurrency($item['price'], $currencyKey, $paypal_currency) ?>">
+                    <input type="hidden" name="amount_<?= $i ?>" value="<?= convertCurrency($item['price'], CURRENCY_KEY, $paypal_currency) ?>">
                     <input type="hidden" name="quantity_<?= $i ?>" value="<?= $item['num_added'] ?>">
                     <?php
                     $i++;
@@ -135,7 +135,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </a>
                                     </td>
-                                    <td><a href="<?= $lang_url . '/' . $item['url'] ?>"><?= $item['title'] ?></a></td>
+                                    <td><a href="<?= LANG_URL . '/' . $item['url'] ?>"><?= $item['title'] ?></a></td>
                                     <td>
                                         <a class="btn btn-xs btn-primary refresh-me add-to-cart" data-id="<?= $item['product_id'] ?>" href="javascript:void(0);">
                                             <span class="glyphicon glyphicon-plus"></span>
@@ -147,20 +147,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <span class="glyphicon glyphicon-minus"></span>
                                         </a>
                                     </td>
-                                    <td><?= $item['price'] . $currency ?></td>
-                                    <td><?= $item['sum_price'] . $currency ?></td>
+                                    <td><?= $item['price'] . CURRENCY ?></td>
+                                    <td><?= $item['sum_price'] . CURRENCY ?></td>
                                 </tr>
                             <?php } ?>
                             <tr>
                                 <td colspan="4" class="text-right"><?= lang('total') ?></td>
-                                <td><?= $cartItems['finalSum'] . $currency ?></td>
+                                <td><?= $cartItems['finalSum'] . CURRENCY ?></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </form>
             <div>
-                <a href="<?= $lang_url ?>" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-circle-arrow-left"></span> <?= lang('back_to_shop') ?></a>
+                <a href="<?= LANG_URL ?>" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-circle-arrow-left"></span> <?= lang('back_to_shop') ?></a>
                 <a href="javascript:void(0);" class="btn btn-primary pull-right" onclick="document.getElementById('goOrder').submit();" class="pull-left"><?= lang('custom_order') ?> <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
                 <div class="clearfix"></div>
             </div>
@@ -171,7 +171,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <span><?= lang('best_sellers') ?></span>
                     <i class="fa fa-trophy" aria-hidden="true"></i>
                 </div>
-                <?php loop_products($bestSellers, $currency, '', true, $lang_url, $publicQuantity); ?>
+                <?= $load::getProducts($bestSellers, '', true, $publicQuantity) ?>
             </div>
         </div>
     </div>

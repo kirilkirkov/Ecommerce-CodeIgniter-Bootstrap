@@ -39,13 +39,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <h1><?= $product['title'] ?></h1>
             <div class="row row-info">
                 <div class="col-sm-6"><b><?= lang('price') ?>:</b></div>
-                <div class="col-sm-6"><?= $product['price'] . $currency ?></div>
+                <div class="col-sm-6"><?= $product['price'] . CURRENCY ?></div>
                 <div class="col-sm-12 border-bottom"></div>
             </div>
             <?php if ($product['old_price'] != '') { ?>
                 <div class="row row-info">
                     <div class="col-sm-6"><b><?= lang('old_price') ?>:</b></div>
-                    <div class="col-sm-6"><?= $product['old_price'] . $currency ?></div>
+                    <div class="col-sm-6"><?= $product['old_price'] . CURRENCY ?></div>
                     <div class="col-sm-12 border-bottom"></div>
                 </div>
             <?php } if ($publicQuantity == 1) { ?>
@@ -83,10 +83,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="row row-info">
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6 manage-buttons">
-                    <a href="javascript:void(0);" data-id="<?= $product['id'] ?>" data-goto="<?= $lang_url . '/checkout' ?>" class="add-to-cart btn-add">
+                    <a href="javascript:void(0);" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/checkout' ?>" class="add-to-cart btn-add">
                         <span class="text-to-bg"><?= lang('buy_now') ?></span>
                     </a>
-                    <a href="javascript:void(0);" data-id="<?= $product['id'] ?>" data-goto="<?= $lang_url . '/shopping-cart' ?>" class="add-to-cart btn-add">
+                    <a href="javascript:void(0);" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/shopping-cart' ?>" class="add-to-cart btn-add">
                         <span class="text-to-bg"><?= lang('add_to_cart') ?></span>
                     </a>
                 </div>
@@ -108,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <?php
         if (!empty($sameCagegoryProducts)) {
-            loop_products($sameCagegoryProducts, $currency, 'col-sm-4 col-md-3', false, $lang_url, $publicQuantity);
+            $load::getProducts($sameCagegoryProducts, 'col-sm-4 col-md-3', false, $publicQuantity);
         } else {
             ?>
             <div class="alert alert-info"><?= lang('no_same_category_products') ?></div>

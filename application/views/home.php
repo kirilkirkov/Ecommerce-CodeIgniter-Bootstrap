@@ -23,26 +23,26 @@ if (count($sliderProducts) > 0) {
                     <div class="item <?= $i == 0 ? 'active' : '' ?>">
                         <div class="row">
                             <div class="col-sm-6 left-side">
-                                <a href="<?= $lang_url . '/' . $article['url'] ?>">
+                                <a href="<?= LANG_URL . '/' . $article['url'] ?>">
                                     <img src="<?= base_url('attachments/shop_images/' . $article['image']) ?>" class="img-responsive" alt="">
                                 </a>
                             </div>
                             <div class="col-sm-6 right-side">
                                 <h3 class="text-right">
-                                    <a href="<?= $lang_url . '/' . $article['url'] ?>">
+                                    <a href="<?= LANG_URL . '/' . $article['url'] ?>">
                                         <?= character_limiter($article['title'], 100) ?>
                                     </a>
                                 </h3>
                                 <div class="description text-right">
                                     <?= character_limiter(strip_tags($article['basic_description']), 150) ?>
                                 </div>
-                                <div class="price text-right"><?= $article['price'] . $currency ?></div>
+                                <div class="price text-right"><?= $article['price'] . CURRENCY ?></div>
                                 <div class="xs-center">
                                     <a class="option add-to-cart" data-goto="<?= base_url('checkout') ?>" href="javascript:void(0);" data-id="<?= $article['id'] ?>">
                                         <img src="<?= base_url('assets/imgs/shopping-cart-icon-515.png') ?>" alt="">
                                         <?= lang('buy_now') ?>
                                     </a>
-                                    <a class="option right-5" href="<?= $lang_url . '/' . $article['url'] ?>">
+                                    <a class="option right-5" href="<?= LANG_URL . '/' . $article['url'] ?>">
                                         <img src="<?= base_url('assets/imgs/info.png') ?>" alt="">
                                         <?= lang('details') ?>
                                     </a>
@@ -141,7 +141,7 @@ if (count($sliderProducts) > 0) {
                         <span><?= lang('freeShippingHeader') ?></span>
                     </div>
                     <div class="oaerror info">
-                        <strong><?= lang('promo') ?></strong> - <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, $currency), lang('freeShipping')) ?>!
+                        <strong><?= lang('promo') ?></strong> - <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, CURRENCY), lang('freeShipping')) ?>!
                     </div>
                 </div>
             <?php } ?>
@@ -182,7 +182,7 @@ if (count($sliderProducts) > 0) {
             </div>
             <?php
             if (!empty($products)) {
-                loop_products($products, $currency, 'col-sm-4 col-md-3', false, $lang_url, $publicQuantity);
+                $load::getProducts($products, 'col-sm-4 col-md-3', false, $publicQuantity);
             } else {
                 ?>
                 <script>

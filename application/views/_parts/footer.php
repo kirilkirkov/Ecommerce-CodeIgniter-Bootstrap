@@ -10,8 +10,8 @@
                     <h3><?= lang('pages') ?></h3>
                     <ul>
                         <li><a href="<?= base_url() ?>">» <?= lang('home') ?> </a></li>
-                        <li><a href="<?= $lang_url . '/checkout' ?>">» <?= lang('checkout') ?> </a></li>
-                        <li><a href="<?= $lang_url . '/contacts' ?>">» <?= lang('contacts') ?> </a></li>
+                        <li><a href="<?= LANG_URL . '/checkout' ?>">» <?= lang('checkout') ?> </a></li>
+                        <li><a href="<?= LANG_URL . '/contacts' ?>">» <?= lang('contacts') ?> </a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">

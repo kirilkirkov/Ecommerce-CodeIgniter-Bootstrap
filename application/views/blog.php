@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <span><?= lang('best_sellers') ?></span>
                     <i class="fa fa-trophy" aria-hidden="true"></i>
                 </div>
-                <?php loop_products($bestSellers, $currency, '', true, $lang_url, $publicQuantity); ?>
+                <?= $load::getProducts($bestSellers, '', true, $publicQuantity) ?>
             </div>
         </div>
         <div class="col-sm-8 col-md-9">
@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         ?>
                         <div class="col-md-6 blog-col column-h">
                             <div class="thumbnail blog-list">
-                                <a href="<?= $lang_url . '/blog/' . $post['url'] ?>">
+                                <a href="<?= LANG_URL . '/blog/' . $post['url'] ?>">
                                     <img src="<?= base_url('attachments/blog_images/' . $post['image']) ?>" alt="<?= $post['title'] ?>">
                                 </a>
                                 <div class="caption">
@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </span>
                                     </small>
                                     <p><?= character_limiter(strip_tags($post['description']), 300) ?></p>
-                                    <a class="btn btn-blog pull-right" href="<?= $lang_url . '/blog/' . $post['url'] ?>">
+                                    <a class="btn btn-blog pull-right" href="<?= LANG_URL . '/blog/' . $post['url'] ?>">
                                         <i class="fa fa-long-arrow-right"></i>
                                         <?= lang('read_mode') ?>
                                     </a>

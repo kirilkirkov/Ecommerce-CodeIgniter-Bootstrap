@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?= $my_lang ?>">
+<html lang="<?= MY_LANGUAGE_ABBR ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,17 +27,17 @@
                 <div id="languages-bar">
                     <div class="container">
                         <?php
-                        $num_langs = count($this->all_langs);
+                        $num_langs = count($allLanguages);
                         if ($num_langs > 0) {
                             ?>
                             <ul class="pull-left">
                                 <?php
                                 $i = 1;
                                 $lang_last = '';
-                                foreach ($this->all_langs as $key_lang => $lang) {
+                                foreach ($allLanguages as $key_lang => $lang) {
                                     ?>
                                     <li <?= $i == $num_langs ? 'class="last-item"' : '' ?>>
-                                        <img src="<?= base_url('attachments/lang_flags/' . $lang['flag']) ?>" alt="Language-<?= $my_lang ?>"><a href="<?= base_url($key_lang) ?>"><?= $lang['name'] ?></a>
+                                        <img src="<?= base_url('attachments/lang_flags/' . $lang['flag']) ?>" alt="Language-<?= MY_LANGUAGE_ABBR ?>"><a href="<?= base_url($key_lang) ?>"><?= $lang['name'] ?></a>
                                     </li>
                                     <?php
                                     $i++;
@@ -71,7 +71,7 @@
                                             <div class="dropdown dropdown-lg">
                                                 <button type="button" class="button-more dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?= lang('more') ?> <span class="caret"></span></button>
                                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                                    <form class="form-horizontal" method="GET" action="<?= $lang_url ?>" id="bigger-search">
+                                                    <form class="form-horizontal" method="GET" action="<?= LANG_URL ?>" id="bigger-search">
                                                         <input type="hidden" name="category" value="<?= isset($_GET['category']) ? $_GET['category'] : '' ?>">
                                                         <input type="hidden" name="in_stock" value="<?= isset($_GET['in_stock']) ? $_GET['in_stock'] : '' ?>">
                                                         <input type="hidden" name="search_in_title" value="<?= isset($_GET['search_in_title']) ? $_GET['search_in_title'] : '' ?>">
@@ -142,8 +142,8 @@
                                             <td>
                                                 <div class="center">
                                                     <h4><?= lang('your_basket') ?></h4>
-                                                    <a href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout_top_header') ?></a> |
-                                                    <a href="<?= $lang_url . '/shopping-cart' ?>"><?= lang('shopping_cart_only') ?></a>
+                                                    <a href="<?= LANG_URL . '/checkout' ?>"><?= lang('checkout_top_header') ?></a> |
+                                                    <a href="<?= LANG_URL . '/shopping-cart' ?>"><?= lang('shopping_cart_only') ?></a>
                                                 </div>
                                             </td>
                                             <td>
@@ -155,7 +155,7 @@
                                                             <span class="caret"></span>
                                                         </a>
                                                         <ul class="dropdown-menu dropdown-menu-right dropdown-cart" role="menu">
-                                                            <?php loop_items($cartItems, $currency, $lang_url); ?>
+                                                            <?= $load::getCartItems($cartItems) ?>
                                                         </ul>
                                                     </li>
                                                 </ul>
@@ -182,27 +182,27 @@
                         </div>
                         <div id="navbar" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav" style="<?= $naviText == null ? 'margin-left:-15px;' : '' ?>">
-                                <li<?= uri_string() == '' || uri_string() == $my_lang ? ' class="active"' : '' ?>><a href="<?= $lang_url ?>"><?= lang('home') ?></a></li>
+                                <li<?= uri_string() == '' || uri_string() == MY_LANGUAGE_ABBR ? ' class="active"' : '' ?>><a href="<?= LANG_URL ?>"><?= lang('home') ?></a></li>
                                 <?php
                                 if (!empty($nonDynPages)) {
                                     foreach ($nonDynPages as $addonPage) {
                                         ?>
-                                        <li<?= uri_string() == $addonPage || uri_string() == $my_lang . '/' . $addonPage ? ' class="active"' : '' ?>><a href="<?= $lang_url . '/' . $addonPage ?>"><?= mb_ucfirst(lang($addonPage)) ?></a></li>
+                                        <li<?= uri_string() == $addonPage || uri_string() == MY_LANGUAGE_ABBR . '/' . $addonPage ? ' class="active"' : '' ?>><a href="<?= LANG_URL . '/' . $addonPage ?>"><?= mb_ucfirst(lang($addonPage)) ?></a></li>
                                         <?php
                                     }
                                 }
                                 if (!empty($dynPages)) {
                                     foreach ($dynPages as $addonPage) {
                                         ?>
-                                        <li<?= urldecode(uri_string()) == 'page/' . $addonPage['pname'] || uri_string() == $my_lang . '/' . 'page/' . $addonPage['pname'] ? ' class="active"' : ''
-                                        ?>><a href="<?= $lang_url . '/page/' . $addonPage['pname'] ?>"><?= mb_ucfirst($addonPage['lname']) ?></a></li>
+                                        <li<?= urldecode(uri_string()) == 'page/' . $addonPage['pname'] || uri_string() == MY_LANGUAGE_ABBR . '/' . 'page/' . $addonPage['pname'] ? ' class="active"' : ''
+                                        ?>><a href="<?= LANG_URL . '/page/' . $addonPage['pname'] ?>"><?= mb_ucfirst($addonPage['lname']) ?></a></li>
                                             <?php
                                         }
                                     }
                                     ?>
-                                <li<?= uri_string() == 'checkout' || uri_string() == $my_lang . '/checkout' ? ' class="active"' : '' ?>><a href="<?= $lang_url . '/checkout' ?>"><?= lang('checkout') ?></a></li>
-                                <li<?= uri_string() == 'shopping-cart' || uri_string() == $my_lang . '/shopping-cart' ? ' class="active"' : '' ?>><a href="<?= $lang_url . '/shopping-cart' ?>"><?= lang('shopping_cart') ?></a></li>
-                                <li<?= uri_string() == 'contacts' || uri_string() == $my_lang . '/contacts' ? ' class="active"' : '' ?>><a href="<?= $lang_url . '/contacts' ?>"><?= lang('contacts') ?></a></li>
+                                <li<?= uri_string() == 'checkout' || uri_string() == MY_LANGUAGE_ABBR . '/checkout' ? ' class="active"' : '' ?>><a href="<?= LANG_URL . '/checkout' ?>"><?= lang('checkout') ?></a></li>
+                                <li<?= uri_string() == 'shopping-cart' || uri_string() == MY_LANGUAGE_ABBR . '/shopping-cart' ? ' class="active"' : '' ?>><a href="<?= LANG_URL . '/shopping-cart' ?>"><?= lang('shopping_cart') ?></a></li>
+                                <li<?= uri_string() == 'contacts' || uri_string() == MY_LANGUAGE_ABBR . '/contacts' ? ' class="active"' : '' ?>><a href="<?= LANG_URL . '/contacts' ?>"><?= lang('contacts') ?></a></li>
                             </ul>
                         </div>
                     </div>

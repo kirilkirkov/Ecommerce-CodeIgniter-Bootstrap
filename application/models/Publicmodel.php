@@ -1,6 +1,6 @@
 <?php
 
-class Articles_model extends CI_Model
+class Publicmodel extends CI_Model
 {
 
     public function __construct()
@@ -8,13 +8,11 @@ class Articles_model extends CI_Model
         parent::__construct();
     }
 
-    public function productsCount($lang = null, $big_get)
+    public function productsCount($big_get)
     {
-        if ($lang != null) {
-            $this->db->join('translations', 'translations.for_id = products.id', 'left');
-            $this->db->where('translations.abbr', $lang);
-            $this->db->where('translations.type', 'product');
-        }
+        $this->db->join('translations', 'translations.for_id = products.id', 'left');
+        $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
+        $this->db->where('translations.type', 'product');
         if (!empty($big_get) && isset($big_get['category'])) {
             $this->getFilter($big_get);
         }
@@ -22,7 +20,25 @@ class Articles_model extends CI_Model
         return $this->db->count_all_results('products');
     }
 
-    public function getProducts($lang, $limit = null, $start = null, $big_get)
+    public function getPosts($limit, $page, $search = null, $month = null)
+    {
+        if ($search !== null) {
+            $search = $this->db->escape_like_str($search);
+            $this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
+        }
+        if ($month !== null) {
+            $from = $month['from'];
+            $to = $month['to'];
+            $this->db->where("time BETWEEN $from AND $to");
+        }
+        $this->db->join('translations', 'translations.for_id = blog_posts.id', 'left');
+        $this->db->where('translations.type', 'blog');
+        $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
+        $query = $this->db->select('blog_posts.id, translations.title, translations.description, blog_posts.url, blog_posts.time, blog_posts.image')->get('blog_posts', $limit, $page);
+        return $query->result_array();
+    }
+
+    public function getProducts($limit = null, $start = null, $big_get)
     {
         if ($limit !== null && $start !== null) {
             $this->db->limit($limit, $start);
@@ -32,7 +48,7 @@ class Articles_model extends CI_Model
         }
         $this->db->select('products.id,products.image, products.quantity, translations.title, translations.price, translations.old_price, products.url');
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
-        $this->db->where('translations.abbr', $lang);
+        $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('translations.type', 'product');
         $this->db->where('visibility', 1);
         // $this->db->where('in_slider', 0); Show slider products in categories
@@ -40,6 +56,14 @@ class Articles_model extends CI_Model
 
         $query = $this->db->get('products');
         return $query->result_array();
+    }
+
+    public function getOneLanguage($myLang)
+    {
+        $this->db->select('*');
+        $this->db->where('abbr', $myLang);
+        $result = $this->db->get('languages');
+        return $result->row_array();
     }
 
     private function getFilter($big_get)
@@ -100,10 +124,10 @@ class Articles_model extends CI_Model
         }
     }
 
-    public function getShopCategories($lang)
+    public function getShopCategories()
     {
         $this->db->select('shop_categories.sub_for, shop_categories.id, translations.name');
-        $this->db->where('abbr', $lang);
+        $this->db->where('abbr', MY_LANGUAGE_ABBR);
         $this->db->where('type', 'shop_categorie');
         $this->db->join('shop_categories', 'shop_categories.id = translations.for_id', 'INNER');
         $query = $this->db->get('translations');
@@ -116,10 +140,10 @@ class Articles_model extends CI_Model
         return $arr;
     }
 
-    public function getSeo($page, $abbr)
+    public function getSeo($page)
     {
         $this->db->where('type', $page);
-        $this->db->where('abbr', $abbr);
+        $this->db->where('abbr', MY_LANGUAGE_ABBR);
         $query = $this->db->get('translations');
         $arr = array();
         if ($query !== false) {
@@ -131,18 +155,18 @@ class Articles_model extends CI_Model
         return $arr;
     }
 
-    public function getOneProduct($id, $lang)
+    public function getOneProduct($id)
     {
         $this->db->where('products.product_id', $id);
 
         $this->db->select('products.*, translations.title,translations.description, translations.price, translations.old_price, products.url, trans2.name as categorie_name');
 
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
-        $this->db->where('translations.abbr', $lang);
+        $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('translations.type', 'product');
 
         $this->db->join('translations as trans2', 'trans2.for_id = products.shop_categorie', 'inner');
-        $this->db->where('trans2.abbr', $lang);
+        $this->db->where('trans2.abbr', MY_LANGUAGE_ABBR);
 
         $this->db->where('visibility', 1);
         $query = $this->db->get('products');
@@ -168,7 +192,7 @@ class Articles_model extends CI_Model
         return $query;
     }
 
-    public function getShopItems($array_items, $lang)
+    public function getShopItems($array_items)
     {
         $this->db->select('products.id, products.product_id, products.image, products.url, translations.price, translations.title');
         $this->db->from('products');
@@ -187,7 +211,7 @@ class Articles_model extends CI_Model
             $this->db->where('products.id =', current($array_items));
         }
         $this->db->join('translations', 'translations.for_id = products.id', 'inner');
-        $this->db->where('translations.abbr', $lang);
+        $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('translations.type', 'product');
         $query = $this->db->get();
         return $query->result_array();
@@ -228,11 +252,11 @@ class Articles_model extends CI_Model
         return false;
     }
 
-    public function getSliderProducts($lang)
+    public function getSliderProducts()
     {
         $this->db->select('products.id, products.quantity, products.product_id, products.image, products.url, translations.price, translations.title, translations.basic_description, translations.old_price');
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
-        $this->db->where('translations.abbr', $lang);
+        $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('translations.type', 'product');
         $this->db->where('visibility', 1);
         $this->db->where('in_slider', 1);
@@ -240,14 +264,14 @@ class Articles_model extends CI_Model
         return $query->result_array();
     }
 
-    public function getbestSellers($lang, $categorie = 0, $noId = 0)
+    public function getbestSellers($categorie = 0, $noId = 0)
     { //best sellers and for categorie..
         $this->db->select('products.id, products.quantity, products.product_id, products.image, products.url, translations.price, translations.title, translations.old_price');
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         if ($noId > 0) {
             $this->db->where('products.id !=', $noId);
         }
-        $this->db->where('translations.abbr', $lang);
+        $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         if ($categorie != 0) {
             $this->db->where('products.shop_categorie !=', $categorie);
         }
@@ -259,13 +283,13 @@ class Articles_model extends CI_Model
         return $query->result_array();
     }
 
-    public function sameCagegoryProducts($lang, $categorie, $noId)
+    public function sameCagegoryProducts($categorie, $noId)
     { //same categorie products
         $this->db->select('products.id, products.quantity, products.product_id, products.image, products.url, translations.price, translations.title, translations.old_price');
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         $this->db->where('products.id !=', $noId);
         $this->db->where('products.shop_categorie =', $categorie);
-        $this->db->where('translations.abbr', $lang);
+        $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('translations.type', 'product');
         $this->db->where('visibility', 1);
         $this->db->order_by('products.id', 'desc');
@@ -274,12 +298,12 @@ class Articles_model extends CI_Model
         return $query->result_array();
     }
 
-    public function getOnePost($lang, $id)
+    public function getOnePost($id)
     {
         $this->db->select('translations.title, translations.description, blog_posts.image, blog_posts.time');
         $this->db->where('blog_posts.id', $id);
         $this->db->join('translations', 'translations.for_id = blog_posts.id', 'left');
-        $this->db->where('translations.abbr', $lang);
+        $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         $query = $this->db->get('blog_posts');
         return $query->row_array();
     }
@@ -293,10 +317,10 @@ class Articles_model extends CI_Model
         return false;
     }
 
-    public function getFooterCategories($lang)
+    public function getFooterCategories()
     {
         $this->db->select('shop_categories.id, translations.name');
-        $this->db->where('abbr', $lang);
+        $this->db->where('abbr', MY_LANGUAGE_ABBR);
         $this->db->where('shop_categories.sub_for =', 0);
         $this->db->where('type', 'shop_categorie');
         $this->db->join('shop_categories', 'shop_categories.id = translations.for_id', 'INNER');
@@ -319,12 +343,12 @@ class Articles_model extends CI_Model
         }
     }
 
-    public function getDynPagesLangs($dynPages, $forLang)
+    public function getDynPagesLangs($dynPages)
     {
         if (!empty($dynPages)) {
             $this->db->join('translations', 'translations.for_id = active_pages.id', 'left');
             $this->db->where_in('active_pages.name', $dynPages);
-            $this->db->where('translations.abbr', $forLang);
+            $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
             $this->db->where('translations.type', 'page');
             $result = $this->db->select('translations.name as lname, active_pages.name as pname')->get('active_pages');
             $ar = array();
@@ -339,10 +363,10 @@ class Articles_model extends CI_Model
             return $dynPages;
     }
 
-    public function getOnePage($page, $forLang)
+    public function getOnePage($page)
     {
         $this->db->join('translations', 'translations.for_id = active_pages.id', 'left');
-        $this->db->where('translations.abbr', $forLang);
+        $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('translations.type', 'page');
         $this->db->where('active_pages.name', $page);
         $result = $this->db->select('translations.description as content, translations.name')->get('active_pages');

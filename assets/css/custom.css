@@ -168,6 +168,8 @@ div#notificator { display : none; left : 50%; margin-left : -100px; padding : 15
 #modalImagePreview .modal-content, #modalImagePreview #caption { animation-duration : 0.6s; animation-name : zoom; webkit-animation-duration : 0.6s; webkit-animation-name : zoom; }
 .steps { margin-bottom: 30px; padding-left:15px; padding-right: 15px;}
 .steps .step { text-align: center; padding-top: 7px; padding-bottom: 7px; border-left: 2px solid #fff;}
+#dynPage .top-bg {background-color: #e7e7e7; height:180px;}
+#dynPage .text-content {margin-top: -100px; background-color: #fff; border-radius: 2px; padding: 80px 56px;box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2); color:#424242;}
 @-webkit-keyframes zoom { from { webkit-transform : scale(0); }
  to { webkit-transform : scale(1); }
 }
@@ -210,6 +212,8 @@ footer .footer-icon li { display : block; height : 40px; width : 100%; }
 .f-cont-info { width : 70%; word-break : break-all; }
 #show-xs-nav { border : 1px solid #666; color : #666; font-size : 15px; padding : 3px; text-align : center; text-decoration : none; }
 #show-xs-nav span i { margin-left : 5px; }
+#shopping-cart .go-shop, #checkout-page .go-shop {float:left;}
+#shopping-cart .go-checkout, #checkout-page .go-order {float:right;}
 
 @media (min-width: 1200px) { 
 }
@@ -256,6 +260,8 @@ footer .footer-icon li { display : block; height : 40px; width : 100%; }
  #home-slider .right-side a.option { margin-bottom: 5px; float: none; display: inline-block; }
  #home-slider .right-side a.option.right-5 { margin-left : 5px; }
  #home-slider .right-side .xs-center { text-align : center; }
+ #home-slider .item .left-side a {display:block; text-align: center;}
+ #home-slider .left-side img {display: inline;}
  .ord { margin-bottom : 7px; }
  #view-article .filter-sidebar { padding-left : 10px; padding-right : 10px; }
  #view-article a.btn:first-child { margin-bottom : 5px; }
@@ -272,6 +278,7 @@ footer .footer-icon li { display : block; height : 40px; width : 100%; }
  .navbar { z-index: 1; }
  .navbar li { float : none; position : static; z-index : 1232; }
  .steps .step {margin-bottom: 2px;}
+ #dynPage .text-content {padding:20px 20px;}
 }
 
 @media (max-width: 480px) { 
@@ -279,4 +286,5 @@ footer .footer-icon li { display : block; height : 40px; width : 100%; }
  #home-slider .carousel-control.left { background-position : 0 center; width : 50px; }
  #checkout-page a.pull-right { float : left !important; margin-top : 10px; }
  #top-part #adv-search .dropdown.dropdown-lg .dropdown-menu {width:210px;}
+ #shopping-cart .go-shop, #shopping-cart .go-checkout, #checkout-page .go-order, #checkout-page .go-shop {float:none; margin-bottom: 7px;}
 }

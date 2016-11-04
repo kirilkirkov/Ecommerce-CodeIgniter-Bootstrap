@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<div class="container">
+<div class="container" id="shopping-cart">
     <h1><?= lang('shopping_cart') ?></h1>
     <hr>
     <?php
@@ -57,16 +57,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </tbody>
             </table>
         </div>
-        <a href="<?= LANG_URL ?>" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-circle-arrow-left"></span> <?= lang('back_to_shop') ?></a>
-        <a class="btn btn-primary pull-right" href="<?= LANG_URL . '/checkout' ?>"><?= lang('checkout') ?> <i class="fa fa-credit-card-alt" aria-hidden="true"></i></a>
-        <?php } ?>
+        <a href="<?= LANG_URL ?>" class="btn btn-primary go-shop">
+            <span class="glyphicon glyphicon-circle-arrow-left"></span>
+            <?= lang('back_to_shop') ?>
+        </a>
+        <a class="btn btn-primary go-checkout" href="<?= LANG_URL . '/checkout' ?>">
+            <?= lang('checkout') ?> 
+            <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+        </a>
+    <?php } ?>
 </div>
 <?php
 if ($this->session->flashdata('deleted')) {
     ?>
-    <script>
-        $(document).ready(function () {
-            ShowNotificator('alert-danger', '<?= $this->session->flashdata('deleted') ?>');
-        });
-    </script>
+<script>
+    $(document).ready(function () {
+        ShowNotificator('alert-danger', '<?= $this->session->flashdata('deleted') ?>');
+    });
+</script>
 <?php } ?>

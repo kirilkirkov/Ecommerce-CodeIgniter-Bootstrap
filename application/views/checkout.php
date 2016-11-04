@@ -160,8 +160,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             </form>
             <div>
-                <a href="<?= LANG_URL ?>" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-circle-arrow-left"></span> <?= lang('back_to_shop') ?></a>
-                <a href="javascript:void(0);" class="btn btn-primary pull-right" onclick="document.getElementById('goOrder').submit();" class="pull-left"><?= lang('custom_order') ?> <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                <a href="<?= LANG_URL ?>" class="btn btn-primary go-shop"><span class="glyphicon glyphicon-circle-arrow-left"></span> <?= lang('back_to_shop') ?></a>
+                <a href="javascript:void(0);" class="btn btn-primary go-order" onclick="document.getElementById('goOrder').submit();" class="pull-left"><?= lang('custom_order') ?> <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
                 <div class="clearfix"></div>
             </div>
         </div>

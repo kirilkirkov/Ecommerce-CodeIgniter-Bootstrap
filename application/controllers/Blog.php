@@ -50,6 +50,9 @@ class Blog extends MY_Controller
         $data = array();
         $head = array();
         $data['article'] = $this->Publicmodel->getOnePost($id);
+        if ($data['article'] == null) {
+            show_404();
+        }
         $data['archives'] = $this->getBlogArchiveHtml();
         $head['title'] = $data['article']['title'];
         $head['description'] = url_title(character_limiter(strip_tags($data['article']['description']), 130));

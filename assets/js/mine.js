@@ -40,8 +40,7 @@ function manageShoppingCart(action, article_id, reload) {
         if (reload == true) {
             location.reload(false);
             return;
-        }
-        if (reload != true && reload != false) {
+        }else if (typeof reload == 'string') {
             location.href = reload;
             return;
         }

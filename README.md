@@ -1,4 +1,4 @@
-# GO TO BRANCH design/redlabel-style, THERE IS UPDATED DESIGN AND CODE STRUCTURE
+### GO TO BRANCH [![Foo](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/clone-logo.jpg)](https://github.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/tree/design/redlabel-style), there is updated design and code structure
 
 ## Shopping Cart Solution - CodeIgniter and Bootstrap
 Bootsrap Responsive online shop

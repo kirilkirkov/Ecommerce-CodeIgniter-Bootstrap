@@ -31,7 +31,7 @@ class Checkout extends MY_Controller
                 $this->session->set_flashdata('submit_error', $errors);
             } else {
                 $_SESSION['final_step'] = $_POST;
-                redirect($this->lang_link . '/checkout/finalStep');
+                redirect(LANG_URL . '/checkout/finalStep');
             }
         }
         if (isset($_POST['saveOrder'])) {
@@ -59,15 +59,15 @@ class Checkout extends MY_Controller
              * We need products to send it to paypal
              */
             if ($_POST['payment_type'] == 'cashOnDelivery') {
-                $this->clearShoppingCart();
+                $this->shoppingcart->clearShoppingCart();
             }
             if ($_POST['payment_type'] == 'PayPal') {
                 @set_cookie('paypal', $result, 2678400); // $result is order id
             }
-            redirect($this->lang_link . '/checkout?order_completed=true&payment_type=' . $_POST['payment_type']);
+            redirect(LANG_URL . '/checkout?order_completed=true&payment_type=' . $_POST['payment_type']);
         }
         if (get_cookie('paypal') != null && !isset($_GET['payment_type'])) {
-            redirect($this->lang_link . '/checkout?order_completed=true&payment_type=PayPal');
+            redirect(LANG_URL . '/checkout?order_completed=true&payment_type=PayPal');
         }
         if (isset($_SESSION['final_step'])) {
             $_POST = $_SESSION['final_step'];
@@ -144,7 +144,7 @@ class Checkout extends MY_Controller
             redirect(base_url());
         }
         @delete_cookie('paypal');
-        $this->clearShoppingCart();
+        $this->shoppingcart->clearShoppingCart();
         $orderId = get_cookie('paypal');
         $this->Publicmodel->changePaypalOrderStatus($orderId, 'payed');
         $data = array();

@@ -77,7 +77,7 @@ class Home extends MY_Controller
         $backTo = $_GET['back-to'];
         $this->shoppingcart->removeFromCart();
         $this->session->set_flashdata('deleted', lang('deleted_product_from_cart'));
-        redirect($this->lang_link . '/' . $backTo);
+        redirect(LANG_URL . '/' . $backTo);
     }
 
     public function clearShoppingCart()

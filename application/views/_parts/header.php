@@ -60,7 +60,9 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12 col-md-3 col-lg-4 left">
-                                <img src="<?= base_url('assets/imgs/site-logo/' . $sitelogo) ?>" class="site-logo" alt="<?= $_SERVER['HTTP_HOST'] ?>">
+                                <a href="<?= base_url() ?>">
+                                    <img src="<?= base_url('assets/imgs/site-logo/' . $sitelogo) ?>" class="site-logo" alt="<?= $_SERVER['HTTP_HOST'] ?>">
+                                </a>
                             </div>
                             <div class="col-sm-6 col-md-5 col-lg-5">
                                 <div class="input-group" id="adv-search">

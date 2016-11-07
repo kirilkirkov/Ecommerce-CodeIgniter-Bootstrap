@@ -95,7 +95,7 @@ div.product-list { cursor : pointer; margin-bottom : 5px; padding-bottom : 15px;
 div.product-list div.inner div.img-container { margin-bottom : 10px; overflow : hidden; }
 div.product-list div.inner div.img-container a { display : block; overflow : hidden; }
 div.product-list div.inner div.img-container a img { height : 200px; }
-div.product-list h2 { height: 50px; overflow: hidden; line-height: 8px; margin: 0; margin-bottom: 10px; }
+div.product-list h2 { height: 55px; overflow: hidden; line-height: 10px; margin: 0; margin-bottom: 10px; }
 div.product-list h2 a { color : #666; font-size : 12px; }
 div.product-list h2 a:hover { text-decoration : none; }
 div.product-list div.price span.underline { text-decoration : underline; }

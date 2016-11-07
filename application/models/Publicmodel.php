@@ -167,6 +167,7 @@ class Publicmodel extends CI_Model
 
         $this->db->join('translations as trans2', 'trans2.for_id = products.shop_categorie', 'inner');
         $this->db->where('trans2.abbr', MY_LANGUAGE_ABBR);
+        $this->db->where('trans2.type', 'shop_categorie');
 
         $this->db->where('visibility', 1);
         $query = $this->db->get('products');

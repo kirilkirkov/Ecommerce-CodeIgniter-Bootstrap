@@ -121,12 +121,6 @@ function submitForm() {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
-//To deal with different heights
-$(document).ready(function () {
-    if ($(".eqHeight .column-h").length > 0) {
-        $(".eqHeight").eqHeight(".column-h");
-    }
-});
 //Email Subscribe
 function checkEmailField() {
     if ($('[name="subscribeEmail"]').val() == '') {

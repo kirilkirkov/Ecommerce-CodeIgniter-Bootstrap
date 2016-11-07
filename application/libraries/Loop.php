@@ -96,7 +96,7 @@ class Loop
                     else
                         $active = '';
                     ?>
-                    <div class="product-list column-h <?= $carousel == true ? 'item' : '' ?> <?= $classes ?> <?= $active ?>">
+                    <div class="product-list <?= $carousel == true ? 'item' : '' ?> <?= $classes ?> <?= $active ?>">
                         <div class="inner">
                             <div class="img-container">
                                 <a href="<?= LANG_URL . '/' . $article['url'] ?>">
@@ -104,7 +104,7 @@ class Loop
                                 </a>
                             </div>
                             <h2>
-                                <a href="<?= LANG_URL . '/' . $article['url'] ?>"><?= $article['title'] ?></a>
+                                <a href="<?= LANG_URL . '/' . $article['url'] ?>"><?= character_limiter($article['title'], 70) ?></a>
                             </h2>
                             <div class="price">
                                 <span class="underline"><?= lang('price') ?>: <span><?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= CURRENCY ?></span></span>

@@ -14,7 +14,6 @@
         <link href="<?= base_url('assets/css/bootstrap-datepicker.min.css') ?>" rel="stylesheet">
         <link href="<?= base_url('assets/css/custom.css') ?>" rel="stylesheet">
         <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
-        <script src="<?= base_url('assets/js/jquery.eqheight.js') ?>"></script>
         <script src="<?= base_url('jsloader/all.js') ?>"></script>
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

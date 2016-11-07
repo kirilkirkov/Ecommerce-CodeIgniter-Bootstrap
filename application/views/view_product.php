@@ -77,8 +77,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php } ?>
             <div class="row row-info">
                 <div class="col-sm-6"><b><?= lang('in_category') ?>:</b></div>
-                <div class="col-sm-6"><?= $product['categorie_name'] ?></div>
-                <div class="col-sm-12 border-bottom"></div>
+                <div class="col-sm-6">
+                    <a href="javascript:void(0);" class="go-category btn-blue-round" data-categorie-id="<?= $product['shop_categorie'] ?>">
+                        <?= $product['categorie_name'] ?>
+                    </a>
+                </div>
+                <div class="col-sm-12 border-bottom">
+
+                </div>
             </div>
             <div class="row row-info">
                 <div class="col-sm-6"></div>

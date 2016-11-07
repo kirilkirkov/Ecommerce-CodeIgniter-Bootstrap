@@ -9,7 +9,7 @@ class Loop
         if (!empty($cartItems['array'])) {
             ?>
             <li class="cleaner text-right">
-                <a href="javascript:void(0);" class="" onclick="clearCart()">
+                <a href="javascript:void(0);" class="btn-blue-round" onclick="clearCart()">
                     <?= lang('clear_all') ?>
                 </a>
             </li>

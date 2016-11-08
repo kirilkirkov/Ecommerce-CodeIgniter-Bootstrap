@@ -24,26 +24,39 @@ class Checkout extends MY_Controller
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $haveFinalPage = $this->AdminModel->getValueStore('finalCheckoutPage');
         $new_request = false;
+        $fromFinalPage = false;
         if (isset($_POST['payment_type'])) {
+            if (isset($_SESSION['final_step']) && isset($_POST['saveOrder'])) {
+                $_POST = $_SESSION['final_step'];
+                $fromFinalPage = true;
+            }
             $errors = $this->userInfoValidate($_POST);
             if (!empty($errors)) {
                 $this->session->set_flashdata('submit_error', $errors);
             } else {
-                $_SESSION['final_step'] = $_POST;
-                redirect(LANG_URL . '/checkout/finalStep');
+                if ($haveFinalPage == true && $fromFinalPage == false) {
+                    $_SESSION['final_step'] = $_POST;
+                    redirect(LANG_URL . '/checkout/finalStep');
+                } elseif ($haveFinalPage == false || $fromFinalPage == true) {
+                    if (isset($_POST['saveOrder'])) {
+                        unset($_POST['saveOrder']);
+                        $_POST = $_SESSION['final_step'];
+                        unset($_SESSION['final_step']);
+                    }
+                    $result = $this->Publicmodel->setOrder($_POST);
+                    if ($result == true) {
+                        $new_request = true;
+                    }
+                }
             }
         }
-        if (isset($_POST['saveOrder'])) {
-            unset($_POST['saveOrder']);
-            $_POST = $_SESSION['final_step'];
-            unset($_SESSION['final_step']);
-            $result = $this->Publicmodel->setOrder($_POST);
-            if ($result == true) {
-                $new_request = true;
-            }
-        }
-        if ($new_request == true) { // send emails to users that want it (notify = 1)
+        /*
+         * Send emails to users that want it
+         * (notify = 1)
+         */
+        if ($new_request == true) {
             $emails = $this->Publicmodel->getNotifyUsers();
             if (!empty($emails)) {
                 $toEmails = implode(', ', $emails);
@@ -64,6 +77,7 @@ class Checkout extends MY_Controller
             if ($_POST['payment_type'] == 'PayPal') {
                 @set_cookie('paypal', $result, 2678400); // $result is order id
             }
+            unset($_SESSION['final_step']);
             redirect(LANG_URL . '/checkout?order_completed=true&payment_type=' . $_POST['payment_type']);
         }
         if (get_cookie('paypal') != null && !isset($_GET['payment_type'])) {
@@ -81,7 +95,6 @@ class Checkout extends MY_Controller
         if (!isset($_SESSION['final_step'])) {
             redirect(base_url());
         }
-        $_SESSION['final_step'];
         $data = array();
         $head = array();
         $arrSeo = $this->Publicmodel->getSeo('page_checkout');

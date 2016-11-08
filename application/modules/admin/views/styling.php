@@ -270,4 +270,22 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Add final checkout page 1/0 (yes/no)</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('finalCheckoutPage')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('finalCheckoutPage') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="text" name="finalCheckoutPage" style="margin-bottom:5px;" value="<?= $finalCheckoutPage ?>" class="form-control">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+                This is the page after fill checkout form and click button order for 
+                last previewing entered data.
+            </div>
+        </div>
+    </div>
 </div>

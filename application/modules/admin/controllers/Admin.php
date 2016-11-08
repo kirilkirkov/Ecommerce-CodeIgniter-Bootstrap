@@ -690,6 +690,12 @@ class Admin extends MX_Controller
             $this->saveHistory('Change public date added visibility');
             redirect('admin/styling');
         }
+        if (isset($_POST['finalCheckoutPage'])) {
+            $this->AdminModel->setValueStore('finalCheckoutPage', $_POST['finalCheckoutPage']);
+            $this->session->set_flashdata('finalCheckoutPage', 'Final checkout page visibility changed');
+            $this->saveHistory('Change visibility of final checkout page');
+            redirect('admin/styling');
+        }
         $data['siteLogo'] = $this->AdminModel->getValueStore('sitelogo');
         $data['naviText'] = $this->AdminModel->getValueStore('navitext');
         $data['footerCopyright'] = $this->AdminModel->getValueStore('footercopyright');
@@ -711,6 +717,7 @@ class Admin extends MX_Controller
         $data['addJs'] = $this->AdminModel->getValueStore('addJs');
         $data['publicQuantity'] = $this->AdminModel->getValueStore('publicQuantity');
         $data['publicDateAdded'] = $this->AdminModel->getValueStore('publicDateAdded');
+        $data['finalCheckoutPage'] = $this->AdminModel->getValueStore('finalCheckoutPage');
         $this->load->view('_parts/header', $head);
         $this->load->view('styling', $data);
         $this->load->view('_parts/footer');

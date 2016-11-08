@@ -85,6 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <hr>
     <form method="POST" action="<?= base_url('checkout') ?>" class="final-step-form">
         <input type="hidden" name="saveOrder" value="1">
+        <input type="hidden" name="payment_type" value="<?= $_SESSION['final_step']['payment_type'] ?>">
         <a href="<?= base_url('checkout') ?>" class="btn btn-lg btn-primary"><?= lang('order_correction') ?></a>
         <input type="submit" value="<?= lang('final_step') ?>" class="btn btn-lg btn-primary">
     </form>

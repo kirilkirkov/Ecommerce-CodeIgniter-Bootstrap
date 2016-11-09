@@ -24,6 +24,8 @@ class Contacts extends MY_Controller
             }
             redirect('contacts');
         }
+        $data['googleMaps'] = $this->AdminModel->getValueStore('googleMaps');
+        $data['googleApi'] = $this->AdminModel->getValueStore('googleApi');
         $arrSeo = $this->Publicmodel->getSeo('page_contacts');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];

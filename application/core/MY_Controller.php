@@ -39,7 +39,6 @@ class MY_Controller extends MX_Controller
         $vars['footerContactAddr'] = htmlentities($this->AdminModel->getValueStore('footerContactAddr'));
         $vars['footerContactPhone'] = htmlentities($this->AdminModel->getValueStore('footerContactPhone'));
         $vars['footerContactEmail'] = htmlentities($this->AdminModel->getValueStore('footerContactEmail'));
-        $vars['googleMaps'] = $this->AdminModel->getValueStore('googleMaps');
         $vars['footerAboutUs'] = $this->AdminModel->getValueStore('footerAboutUs');
         $vars['footerSocialFacebook'] = $this->AdminModel->getValueStore('footerSocialFacebook');
         $vars['footerSocialTwitter'] = $this->AdminModel->getValueStore('footerSocialTwitter');

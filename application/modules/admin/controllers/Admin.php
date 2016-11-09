@@ -650,8 +650,9 @@ class Admin extends MX_Controller
         }
         if (isset($_POST['googleMaps'])) {
             $this->AdminModel->setValueStore('googleMaps', $_POST['googleMaps']);
-            $this->session->set_flashdata('resultGoogleMaps', 'Google maps coordinates are updated!');
-            $this->saveHistory('Change Google Maps Coordinates');
+            $this->AdminModel->setValueStore('googleApi', $_POST['googleApi']);
+            $this->session->set_flashdata('resultGoogleMaps', 'Google maps coordinates and api key are updated!');
+            $this->saveHistory('Update Google Maps Coordinates and Api Key');
             redirect('admin/styling');
         }
         if (isset($_POST['footerAboutUs'])) {
@@ -718,6 +719,7 @@ class Admin extends MX_Controller
         $data['publicQuantity'] = $this->AdminModel->getValueStore('publicQuantity');
         $data['publicDateAdded'] = $this->AdminModel->getValueStore('publicDateAdded');
         $data['finalCheckoutPage'] = $this->AdminModel->getValueStore('finalCheckoutPage');
+        $data['googleApi'] = $this->AdminModel->getValueStore('googleApi');
         $this->load->view('_parts/header', $head);
         $this->load->view('styling', $data);
         $this->load->view('_parts/footer');

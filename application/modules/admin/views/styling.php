@@ -115,14 +115,11 @@
                     <div class="alert alert-info"><?= $this->session->flashdata('resultGoogleMaps') ?></div>
                 <?php } ?>
                 <form method="POST" action="">
-                    <div class="input-group">
-                        <input class="form-control" name="googleMaps" value="<?= $googleMaps ?>" type="text">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" value="" type="submit">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </button>
-                        </span>
-                    </div>
+                    <input class="form-control" placeholder="Direction: 42.676250, 23.371063" name="googleMaps" value="<?= $googleMaps ?>" type="text" style="margin-bottom:10px;">
+                    <input class="form-control" placeholder="Api key" name="googleApi" value="<?= $googleApi ?>" type="text" style="margin-bottom:10px;">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
                 </form>
             </div>
         </div>

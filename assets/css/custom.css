@@ -80,6 +80,10 @@ body { color : #424449; font-family : arial; padding-top : 0; }
 .final-step-form { margin-top : 50px; text-align : center; }
 .final-step-form input, .final-step-form a { margin-bottom : 5px !important; }
 .blog-col, .left-col-archive { margin-bottom : 15px; }
+#search-input-blog { margin:0; margin-top: 10px; margin-bottom: 20px; padding: 0;}
+#search-input-blog .search-query { padding-right: 30px;    padding-left: 3px; margin-bottom: 0; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;}
+#search-input-blog button {border: 0;  background: none;  padding: 2px 5px;      margin-top: 2px;      position: absolute; top:5px;    left: -28px;   margin-bottom: 0;   -webkit-border-radius: 3px;   -moz-border-radius: 3px;    border-radius: 3px;  color:#D9230F;}
+#search-input-blog .search-query:focus + button { z-index: 3;}
 div.filter-sidebar { margin-bottom : 30px; }
 div.filter-sidebar .title, .title.alone { border-bottom : 3px solid #d83c3c; font-size : 18px; line-height : 1; margin : 0 0 10px; padding : 0; }
 div.filter-sidebar .title span, .title.alone span { border-bottom : 3px solid #8c0707; color : #666; display : inline-block; margin-bottom : -3px; padding-bottom : 10px; }
@@ -147,7 +151,7 @@ div.product-sort .form-group { margin-bottom : 0; }
 .blog-artchive { list-style : none; margin-bottom : 20px; padding-left : 0; }
 .blog-artchive .item { background : transparent none repeat scroll 0 0; border-color : -moz-use-text-color -moz-use-text-color #ccc; border-image : none; border-style : none none dotted; border-width : 0 0 1px; moz-border-bottom-colors : none; moz-border-left-colors : none; moz-border-right-colors : none; moz-border-top-colors : none; padding : 10px 0px; padding-left : 10px; }
 .blog-artchive .item a { color : #666; }
-.blog-home-left-categ { margin-bottom : 80px; }
+.blog-home-left-categ { margin-bottom : 20px; }
 .blog-list .description {height: 125px;overflow: hidden;}
 .blog-list h5 {height: 40px; overflow: hidden;}
 .blog-list .img-container {height: 400px; overflow: hidden;}

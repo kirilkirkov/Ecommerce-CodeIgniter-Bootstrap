@@ -27,8 +27,8 @@ class Publicmodel extends CI_Model
             $this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
         }
         if ($month !== null) {
-            $from = $month['from'];
-            $to = $month['to'];
+            $from = intval($month['from']);
+            $to = intval($month['to']);
             $this->db->where("time BETWEEN $from AND $to");
         }
         $this->db->join('translations', 'translations.for_id = blog_posts.id', 'left');

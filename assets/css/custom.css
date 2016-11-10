@@ -35,7 +35,7 @@ body { color : #424449; font-family : arial; padding-top : 0; }
 #top-part ul.dropdown-cart li .item-in .right-side { border-bottom : 1px solid #f1f1f1; float : left; margin-left : 2px; width : 170px; }
 #top-part ul.dropdown-cart .item-info .prices span { color : #fe3a3a; display : inline !important; }
 #top-part ul.dropdown-cart .item-info .prices, #top-part ul.dropdown-cart .item-info .currency { color : #fe3a3a; display : inline !important; }
-.navbar-brand { color : #fff; font-size : 16px; margin-left : 0 !important; margin-right : 15px; margin-top : 8px; padding : 0; }
+.navbar-brand { color : #fff; font-size : 16px; margin-left : 0 !important; margin-right : 15px; margin-top : 8px; padding : 0; height: auto; }
 .navbar-brand:hover { color : #f1f1f1; }
 .navbar { background : #D83C3C; background : linear-gradient(top, #D83C3C, #B03131); background : -moz-linear-gradient(top, #D83C3C, #B03131); background : -ms-linear-gradient(top, #D83C3C, #B03131); background : -webkit-gradient(linear, left top, left bottom, from(#D83C3C), to(#B03131)); border : solid 1px #850E01; border-radius : 0; box-shadow : 2px 2px 3px #661313; line-height : 100%; margin : 0px 0px 0px 0px; margin-bottom : 30px; moz-box-shadow : 2px 2px 3px #661313; padding : 6px 6px 4px 6px; webkit-box-shadow : 2px 2px 3px #661313; }
 .navbar li { float : left; list-style : none; padding : 0px 6px 0px 6px; position : relative; }

@@ -27,9 +27,8 @@ input.form-control {border:1px solid #dadada; border-radius: 0; box-shadow:none;
 #theSliderDescrption {display:none;}
 
 .show-menu {display: none;}
-#show-xs-nav { border: 1px solid #666; color: #666; font-size: 15px; padding: 3px; text-align: center; text-decoration: none;}
-#show-xs-nav {color: #666;  font-size: 15px; text-align: center;}
-#nav-categories, #show-xs-nav .hidde-sp {   display: none;}
+#show-xs-nav { border: 1px solid #666;  padding: 5px; text-decoration: none; color: #666;  font-size: 13px; text-align: center; margin-top: 10px; border-radius: 5px;}
+#nav-categories, #show-xs-nav .hidde-sp {display: none;}
 
 .other-img {display: inline-block; position:relative;}
 .other-img a {position:absolute; right:0; top:0; background-color: #fff; color:red;}

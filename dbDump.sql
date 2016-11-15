@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS `active_pages` (
   `name` varchar(50) NOT NULL,
   `enabled` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 INSERT INTO `active_pages` (`id`, `name`, `enabled`) VALUES
 (1, 'blog', 1);
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `blog_posts` (
   `url` varchar(255) NOT NULL,
   `time` int(10) unsigned NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
 CREATE TABLE IF NOT EXISTS `history` (
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `history` (
   `username` varchar(50) DEFAULT NULL,
   `time` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=302 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
 CREATE TABLE IF NOT EXISTS `languages` (
@@ -34,12 +34,12 @@ CREATE TABLE IF NOT EXISTS `languages` (
   `currencyKey` varchar(5) NOT NULL,
   `flag` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
 INSERT INTO `languages` (`id`, `abbr`, `name`, `currency`, `currencyKey`, `flag`) VALUES
 (1, 'bg', 'bulgarian', 'лв', 'BGN', 'bg.jpg'),
-(2, 'en', 'english', '$', 'USD', 'en.jpg');
+(2, 'en', 'english', '$', 'USD', 'en.jpg'),
 (3, 'gr', 'greece', 'EUR', 'EUR', 'gr.png');
 
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `paypal_status` varchar(10) DEFAULT NULL,
   `processed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
 CREATE TABLE IF NOT EXISTS `products` (
@@ -78,14 +78,14 @@ CREATE TABLE IF NOT EXISTS `products` (
   `in_slider` tinyint(1) NOT NULL DEFAULT '0',
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=223019 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
 CREATE TABLE IF NOT EXISTS `seo_pages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
 INSERT INTO `seo_pages` (`id`, `name`) VALUES
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `shop_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `sub_for` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
 CREATE TABLE IF NOT EXISTS `subscribed` (
@@ -134,11 +134,11 @@ CREATE TABLE IF NOT EXISTS `translations` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `art_id_abbr` (`abbr`,`for_id`,`type`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=323122 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 INSERT INTO `translations` (`id`, `title`, `description`, `basic_description`, `price`, `old_price`, `abbr`, `for_id`, `type`, `name`) VALUES
-(323122, '', '', '', '', '', 'bg', 1, 'page', ''),
-(323123, '', '', '', '', '', 'en', 1, 'page', '');
+(1, '', '', '', '', '', 'bg', 1, 'page', ''),
+(2, '', '', '', '', '', 'en', 1, 'page', '');
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `valueStore` (
   `value` longtext NOT NULL,
   PRIMARY KEY (`id`),
   KEY `key` (`thekey`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
 (1, 'sitelogo', 'NewLogo.jpg'),
@@ -184,4 +184,6 @@ INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
 (20, 'paypal_email', ''),
 (21, 'paypal_sandbox', '0'),
 (22, 'paypal_currency', 'EUR'),
-(23, 'publicDateAdded', '0');
+(23, 'publicDateAdded', '0'),
+(24, 'finalCheckoutPage', '0'),
+(25, 'googleApi', '');

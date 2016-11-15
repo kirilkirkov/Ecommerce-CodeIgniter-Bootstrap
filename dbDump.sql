@@ -39,7 +39,8 @@ CREATE TABLE IF NOT EXISTS `languages` (
 
 INSERT INTO `languages` (`id`, `abbr`, `name`, `currency`, `currencyKey`, `flag`) VALUES
 (1, 'bg', 'bulgarian', 'лв', 'BGN', 'bg.jpg'),
-(18, 'en', 'english', '$', 'USD', 'en.jpg');
+(2, 'en', 'english', '$', 'USD', 'en.jpg');
+(3, 'gr', 'greece', 'EUR', 'EUR', 'gr.png');
 
 
 CREATE TABLE IF NOT EXISTS `orders` (

@@ -311,7 +311,7 @@ class Publicmodel extends CI_Model
 
     public function getArchives()
     {
-        $result = $this->db->query("SELECT DATE_FORMAT(FROM_UNIXTIME(time), '%M %Y') as month, MAX(time) as maxtime, MIN(time) as mintime FROM blog_posts GROUP BY MONTH(FROM_UNIXTIME(time))");
+        $result = $this->db->query("SELECT DATE_FORMAT(FROM_UNIXTIME(time), '%M %Y') as month, MAX(time) as maxtime, MIN(time) as mintime FROM blog_posts GROUP BY DATE_FORMAT(FROM_UNIXTIME(time), '%M %Y')");
         if ($result->num_rows() > 0) {
             return $result->result_array();
         }

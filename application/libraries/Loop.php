@@ -115,11 +115,10 @@ class Loop
                                     <span class="price-down"><?= $percent_friendly ?></span>
                                 <?php } ?>
                             </div>
-                            <?php if ($article['old_price'] != '') { ?>
-                                <div class="price-discount">
-                                    <?= lang('old_price') ?>: <span><?= number_format($article['old_price'], 2) . CURRENCY ?></span>
-                                </div>
-                            <?php } if ($publicQuantity == 1) { ?>
+                            <div class="price-discount <?= $article['old_price'] == '' ? 'invisible' : '' ?>">
+                                <?= lang('old_price') ?>: <span><?= $article['old_price'] != '' ? number_format($article['old_price'], 2) . CURRENCY : '' ?></span>
+                            </div>
+                            <?php if ($publicQuantity == 1) { ?>
                                 <div class="quantity">
                                     <?= lang('in_stock') ?>: <span><?= $article['quantity'] ?></span>
                                 </div>

@@ -13,24 +13,24 @@ function purchase_steps($step1 = null, $step2 = null, $step3 = null)
 {
     if ($step1 == 1) {
         $icon1 = 'ok.png';
-        $class1 = 'bg-primary';
+        $class1 = 'step-bg-ok';
     } else {
         $icon1 = 'no.png';
-        $class1 = 'bg-info';
+        $class1 = 'step-bg-not-ok';
     }
     if ($step2 == 2) {
         $icon2 = 'ok.png';
-        $class2 = 'bg-primary';
+        $class2 = 'step-bg-ok';
     } else {
         $icon2 = 'no.png';
-        $class2 = 'bg-info';
+        $class2 = 'step-bg-not-ok';
     }
     if ($step3 == 3) {
         $icon3 = 'ok.png';
-        $class3 = 'bg-primary';
+        $class3 = 'step-bg-ok';
     } else {
         $icon3 = 'no.png';
-        $class3 = 'bg-info';
+        $class3 = 'step-bg-not-ok';
     }
     ?>
     <div class="row steps">

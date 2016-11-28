@@ -3462,10 +3462,11 @@ var CSSGradientEditor = function(container, options) {
           out += css.ms;
         }
 
-        cssoutput = selector + ' {\n' + out + '}\n';
+        //Add custom border and shadow to original output result
+        var mine_color = getRenderColor(gradientdata.averagebgcolor);
+        cssoutput = selector + ' {\n' + out + 'border : solid 1px ' + mine_color + ';box-shadow : 2px 2px 3px ' + mine_color + '; }\n';
         
         // Here is custom added output for site design
-        var mine_color = getRenderColor(gradientdata.averagebgcolor);
         var more_brigness_color = increase_brightness(mine_color, '20');
         var more_more_brigness_color = increase_brightness(mine_color, '50');
         cssoutput += '.mine-color, .btn-inner-search { background-color:' + mine_color + '; }\n';

@@ -424,7 +424,7 @@
     <form method="POST" action="">
         <div class="form-group">
             <label for="new-style">Paste new style:</label>
-            <textarea class="form-control" name="newStyle" rows="15" id="new-style"><?= $newStyle ?></textarea>
+            <textarea class="form-control" name="newStyle" rows="15" id="new-style" placeholder="Leave empty to load default styles"><?= $newStyle ?></textarea>
         </div>
         <button type="submit" class="btn btn-lg btn-default">Save</button>
     </form>

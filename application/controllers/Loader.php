@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /* Set internal character encoding to UTF-8 */
 mb_internal_encoding("UTF-8");
 
-class JSLoader extends MY_Controller
+class Loader extends MY_Controller
 {
 
     function __construct()
@@ -13,7 +13,7 @@ class JSLoader extends MY_Controller
         $this->load->helper('file');
     }
 
-    public function file($file = null)
+    public function jsFile($file = null)
     {
         if (!$file) {
             header('HTTP/1.1 404 Not Found');
@@ -25,6 +25,21 @@ class JSLoader extends MY_Controller
             return;
         }
         echo $contents;
+    }
+
+    public function cssStyle()
+    {
+        $this->load->Model('admin/AdminModel');
+        $style = $this->AdminModel->getValueStore('newStyle');
+        if ($style == null) {
+            $style = file_get_contents('./assets/css/default-gradient.css');
+            if (!$style) {
+                header('HTTP/1.1 404 Not Found');
+                return;
+            }
+        }
+        header("Content-type: text/css; charset: UTF-8");
+        echo $style;
     }
 
 }

@@ -70,7 +70,8 @@ $route['(\w{2})/clearShoppingCart'] = 'home/clearShoppingCart';
 
 $route[rawurlencode('home') . '/(:num)'] = "home/index/$1";
 
-$route['jsloader/(:any)'] = "JSLoader/file/$1";
+$route['jsloader/(:any)'] = "Loader/jsFile/$1";
+$route['cssloader/(:any)'] = "Loader/cssStyle";
 
 $route['(:any)_(:num)'] = "home/viewProduct/$2";
 $route['(\w{2})/(:any)_(:num)'] = "home/viewProduct/$3";

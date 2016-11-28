@@ -1,4 +1,4 @@
-<script src="<?= base_url('assets/js/ckeditor/ckeditor.js') ?>"></script>
+<script src="<?= base_url('assets/ckeditor/ckeditor.js') ?>"></script>
 <div class="row">
     <div class="col-sm-8">
         <form method="POST" action="">

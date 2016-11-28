@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
         <link href="<?= base_url('assets/css/bootstrap-datepicker.min.css') ?>" rel="stylesheet">
         <link href="<?= base_url('assets/css/custom.css') ?>" rel="stylesheet">
+        <link href="<?= base_url('cssloader/theme.css') ?>" rel="stylesheet">
         <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
         <script src="<?= base_url('jsloader/all.js') ?>"></script>
         <!--[if lt IE 9]>
@@ -70,7 +71,7 @@
                                     <div class="input-group-btn">
                                         <div class="btn-group" role="group">
                                             <div class="dropdown dropdown-lg">
-                                                <button type="button" class="button-more dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?= lang('more') ?> <span class="caret"></span></button>
+                                                <button type="button" class="button-more dropdown-toggle mine-color" data-toggle="dropdown" aria-expanded="false"><?= lang('more') ?> <span class="caret"></span></button>
                                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
                                                     <form class="form-horizontal" method="GET" action="<?= LANG_URL ?>" id="bigger-search">
                                                         <input type="hidden" name="category" value="<?= isset($_GET['category']) ? $_GET['category'] : '' ?>">
@@ -126,7 +127,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            <button type="button" onclick="submitForm()" class="btn-go-search">
+                                            <button type="button" onclick="submitForm()" class="btn-go-search mine-color">
                                                 <img src="<?= base_url('assets/imgs/search-ico.png') ?>" alt="Search">
                                             </button>
                                         </div>
@@ -168,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-                <nav class="navbar">
+                <nav class="navbar gradient-color">
                     <div class="container">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

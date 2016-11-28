@@ -579,16 +579,17 @@ class Admin extends MX_Controller
         $this->load->view('_parts/header', $head);
         $this->load->view('history', $data);
         $this->load->view('_parts/footer');
-        if ($page == 0)
+        if ($page == 0) {
             $this->saveHistory('Go to History');
+        }
     }
 
-    public function styling()
+    public function settings()
     {
         $this->login_check();
         $data = array();
         $head = array();
-        $head['title'] = 'Administration - Styling';
+        $head['title'] = 'Administration - Settings';
         $head['description'] = '!';
         $head['keywords'] = '';
 
@@ -610,25 +611,25 @@ class Admin extends MX_Controller
                 $this->saveHistory('Change site logo');
                 $this->session->set_flashdata('resultSiteLogoPublish', 'New logo is set!');
             }
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['naviText'])) {
             $this->AdminModel->setValueStore('navitext', $_POST['naviText']);
             $this->session->set_flashdata('resultNaviText', 'New navigation text is set!');
             $this->saveHistory('Change navigation text');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['footerCopyright'])) {
             $this->AdminModel->setValueStore('footercopyright', $_POST['footerCopyright']);
             $this->session->set_flashdata('resultFooterCopyright', 'New navigation text is set!');
             $this->saveHistory('Change footer copyright');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['contactsPage'])) {
             $this->AdminModel->setValueStore('contactspage', $_POST['contactsPage']);
             $this->session->set_flashdata('resultContactspage', 'Contacts page is updated!');
             $this->saveHistory('Change contacts page');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['footerContacts'])) {
             $this->AdminModel->setValueStore('footerContactAddr', $_POST['footerContactAddr']);
@@ -636,7 +637,7 @@ class Admin extends MX_Controller
             $this->AdminModel->setValueStore('footerContactEmail', $_POST['footerContactEmail']);
             $this->session->set_flashdata('resultfooterContacts', 'Contacts on footer are updated!');
             $this->saveHistory('Change footer contacts');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['footerSocial'])) {
             $this->AdminModel->setValueStore('footerSocialFacebook', $_POST['footerSocialFacebook']);
@@ -646,56 +647,56 @@ class Admin extends MX_Controller
             $this->AdminModel->setValueStore('footerSocialYoutube', $_POST['footerSocialYoutube']);
             $this->session->set_flashdata('resultfooterSocial', 'Social on footer are updated!');
             $this->saveHistory('Change footer contacts');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['googleMaps'])) {
             $this->AdminModel->setValueStore('googleMaps', $_POST['googleMaps']);
             $this->AdminModel->setValueStore('googleApi', $_POST['googleApi']);
             $this->session->set_flashdata('resultGoogleMaps', 'Google maps coordinates and api key are updated!');
             $this->saveHistory('Update Google Maps Coordinates and Api Key');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['footerAboutUs'])) {
             $this->AdminModel->setValueStore('footerAboutUs', $_POST['footerAboutUs']);
             $this->session->set_flashdata('resultFooterAboutUs', 'Footer about us text changed!');
             $this->saveHistory('Change footer about us info');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['contactsEmailTo'])) {
             $this->AdminModel->setValueStore('contactsEmailTo', $_POST['contactsEmailTo']);
             $this->session->set_flashdata('resultEmailTo', 'Email changed!');
             $this->saveHistory('Change where going emails from contact form');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['shippingOrder'])) {
             $this->AdminModel->setValueStore('shippingOrder', $_POST['shippingOrder']);
             $this->session->set_flashdata('shippingOrder', 'Shipping Order price chagned!');
             $this->saveHistory('Change Shipping free for order more than ' . $_POST['shippingOrder']);
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['addJs'])) {
             $this->AdminModel->setValueStore('addJs', $_POST['addJs']);
             $this->session->set_flashdata('addJs', 'JavaScript code is added');
             $this->saveHistory('Add JS to website');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['publicQuantity'])) {
             $this->AdminModel->setValueStore('publicQuantity', $_POST['publicQuantity']);
             $this->session->set_flashdata('publicQuantity', 'Public quantity visibility changed');
             $this->saveHistory('Change publicQuantity visibility');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['publicDateAdded'])) {
             $this->AdminModel->setValueStore('publicDateAdded', $_POST['publicDateAdded']);
             $this->session->set_flashdata('publicDateAdded', 'Public date added visibility changed');
             $this->saveHistory('Change public date added visibility');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         if (isset($_POST['finalCheckoutPage'])) {
             $this->AdminModel->setValueStore('finalCheckoutPage', $_POST['finalCheckoutPage']);
             $this->session->set_flashdata('finalCheckoutPage', 'Final checkout page visibility changed');
             $this->saveHistory('Change visibility of final checkout page');
-            redirect('admin/styling');
+            redirect('admin/settings');
         }
         $data['siteLogo'] = $this->AdminModel->getValueStore('sitelogo');
         $data['naviText'] = $this->AdminModel->getValueStore('navitext');
@@ -721,9 +722,31 @@ class Admin extends MX_Controller
         $data['finalCheckoutPage'] = $this->AdminModel->getValueStore('finalCheckoutPage');
         $data['googleApi'] = $this->AdminModel->getValueStore('googleApi');
         $this->load->view('_parts/header', $head);
+        $this->load->view('settings', $data);
+        $this->load->view('_parts/footer');
+        $this->saveHistory('Go to Settings Page');
+    }
+
+    public function styling()
+    {
+        $this->login_check();
+        $data = array();
+        $head = array();
+        $head['title'] = 'Administration - Styling';
+        $head['description'] = '!';
+        $head['keywords'] = '';
+
+        if (isset($_POST['newStyle'])) {
+            $this->AdminModel->setValueStore('newStyle', $_POST['newStyle']);
+            $this->saveHistory('Change site styling');
+            redirect('admin/styling');
+        }
+
+        $data['newStyle'] = $this->AdminModel->getValueStore('newStyle');
+        $this->load->view('_parts/header', $head);
         $this->load->view('styling', $data);
         $this->load->view('_parts/footer');
-        $this->saveHistory('Go to Styling Page');
+         $this->saveHistory('Go to Styling page');
     }
 
     private function saveHistory($activity)
@@ -987,8 +1010,9 @@ class Admin extends MX_Controller
         $this->load->view('_parts/header', $head);
         $this->load->view('emails', $data);
         $this->load->view('_parts/footer');
-        if ($page == 0)
+        if ($page == 0) {
             $this->saveHistory('Go to Subscribed Emails');
+        }
     }
 
 }

@@ -150,7 +150,7 @@ if (count($sliderProducts) > 0) {
             <div class="alone title">
                 <span><?= lang('products') ?></span>
             </div>
-            <div class="product-sort">
+            <div class="product-sort gradient-color">
                 <div class="row">
                     <div class="ord col-sm-4">
                         <div class="form-group">

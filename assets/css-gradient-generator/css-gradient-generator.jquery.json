@@ -1,0 +1,30 @@
+{
+  "name": "css-gradient-generator",
+  "title": "CSS Gradient Generator",
+  "description": "CSS gradient generator with the best browser support. Three different layouts to meet Your requirement (from simple linear to complex radial gradients).",
+  "keywords": [
+    "generator",
+    "css",
+    "bootstrap",
+    "responsive",
+    "widget"
+  ],
+  "version": "2.1.0",
+  "author": {
+    "name": "Virtuosoft",
+    "url": "https://github.com/Virtuosoft"
+  },
+  "licenses": [
+    {
+      "type": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0",
+      "url": "http://creativecommons.org/licenses/by-nc-sa/4.0/deed.en_US."
+    }
+  ],
+  "homepage": "http://www.virtuosoft.eu/tools/css-gradient-generator/",
+  "demo": "http://www.virtuosoft.eu/tools/css-gradient-generator/",
+  "docs": "http://www.virtuosoft.eu/tools/css-gradient-generator/",
+  "download": "https://github.com/Virtuosoft/css-gradient-generator/archive/master.zip",
+  "dependencies": {
+    "jquery": ">=1.7"
+  }
+}

@@ -1,0 +1,144 @@
+.cp-container {
+    width: auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.cp-container .cp-transparency,
+.cp-container .cp-swatches .cp-swatch {
+    background:url(data:image/gif;base64,R0lGODlhBgAGAIABAMPDw////yH5BAEKAAEALAAAAAAGAAYAAAIKhIMGGMrs0pGgAAA7) repeat;
+}
+
+.cp-container .cp-slider,
+.cp-container .cp-preview {
+    width: auto;
+    height: 26px;
+    border: 1px solid #dadada;
+    margin: 0 4px;
+    margin-bottom: 5pt;
+    position: relative;
+}
+
+.cp-container .cp-slider {
+    cursor: ew-resize;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.cp-container .cp-preview {
+    height: 39px;
+}
+
+.cp-container .cp-slider span,
+.cp-container .cp-preview input {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-family: sans-serif;
+    line-height: 26px;
+    font-size: 14px;
+}
+
+.cp-container .cp-preview input {
+    line-height: 39px;
+    padding: 0;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    background: none;
+}
+
+.cp-container .cp-marker {
+    position: absolute;
+    display: block;
+    width: 11px;
+    height: 10px;
+    margin-left: -5px;
+    top: -2px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAMAAABVLlSxAAAAtFBMVEUAAAB1dXVsbGxwcHBqampoaGj+/v7r6+vw8PBmZmb6+vp/f39kZGTh4eGxsbHT09NlZWXX19dgYGBfX1/W1tb7+/vx8fHZ2dna2tqBgYFnZ2fg4ODe3t7j4+Pi4uL39/eampro6Ojl5eXy8vLt7e3p6emgoKCmpqatra1ra2v19fXm5ubz8/Pv7+9hYWFjY2N5eXlvb29zc3Ps7Ozd3d2ysrKCgoKDg4P9/f2zs7P4+Pj///83Bdu/AAAAAXRSTlMAQObYZgAAAGlJREFUeNo9ylcbgWAAhuG3ZZQoEkkhDe099P3//9Xg6j56Dh6cjkm623IsnTNIDsqlEsN1HBVI5evdDMtN0FOQKt14lWrArzLcnpZjvx9nshcA342jviO1hlHuTdlgVnzIt8VfNubiNwzmhAsoIAkssgAAAABJRU5ErkJggg==);
+}
+
+.cp-container.cp-unconvertible-cie-color .cp-slider.cp-cielightness .cp-marker,
+.cp-container.cp-unconvertible-cie-color .cp-slider.cp-ciechroma .cp-marker,
+.cp-container.cp-unconvertible-cie-color .cp-slider.cp-ciehue .cp-marker {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAMAAABVLlSxAAAAvVBMVEUAAADLy8u8vLzZ2dlgYGDe3t5sbGxoaGjr6+vb29tqamrCwsJmZmZkZGTW1tbExMTw8PDj4+Pa2tpfX1/z8/PU1NTp6enX19fg4OBwcHDc3NzJycn4+Pj7+/v6+vrd3d3h4eH+/v6lpaWmpqaampqgoKBlZWWzs7Orq6tra2uxsbGBgYF1dXVnZ2d/f3/T09PMzMxhYWFjY2P19fXv7+9vb2/l5eVzc3P////n5+eysrKDg4OCgoJ5eXnoAACu7h75AAAAAXRSTlMAQObYZgAAAG1JREFUeNo1ytsaQkAAReGdkpRKRUTofEANBoOY93+sfMp/tS4WNqM4mSvSdJztEJPFkETyJNUYEmMtzvhApfsQN89cCXxJ3WOD1yXfRlx3Cv8NPK+pZedFFaCVnQ+8rGp02Kl8fPDX3Nvs/YYvAnQLhiGwga0AAAAASUVORK5CYII=);
+}
+
+.cp-container .cp-swatches ul {
+    width: auto;
+    margin: -7px -7px 0 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.cp-container .cp-swatches li {
+    float: left;
+    margin: 7px 7px 0 0;
+}
+
+.cp-swatches button {
+    float: left;
+    margin: 7px 7px 0 0;
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    font-size: 12px;
+    padding: 0;
+}
+
+.cp-container .cp-swatch {
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    cursor: pointer;
+    border-color: #ccc;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    padding: 0;
+}
+
+.cp-container .cp-swatch span {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.cp-container .cp-swatches .cp-swatch.actual {
+    border-color: #777;
+    -webkit-box-shadow: 0 0 5px rgb(250, 128, 0);
+    -moz-box-shadow: 0 0 5px rgb(250, 128, 0);
+    box-shadow: 0 0 5px rgb(250, 128, 0);
+}
+
+.cp-popover-container .popover {
+    max-width: 1000px;
+}
+
+.popover-content .cp-container {
+    width: 263px;
+}
+
+.popover-content .cp-container.cp-container-sm {
+    width: 208px;
+}
+
+.popover-content .cp-container.cp-container-sm .cp-swatch,
+.popover-content .cp-container.cp-container-sm .cp-swatches button {
+    width: 23px;
+    height: 23px;
+}
+
+.popover-content .cp-container.cp-container-lg {
+    width: 369px;
+}
+
+.popover-content .cp-container.cp-container-lg .cp-swatch,
+.popover-content .cp-container.cp-container-lg .cp-swatches button {
+    width: 27px;
+    height: 27px;
+}

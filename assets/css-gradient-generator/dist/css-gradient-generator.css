@@ -1,0 +1,1092 @@
+/*
+ *  CSS Gradient Generator
+ *  v2.1.0
+ *  CSS gradient generator with the best browser support. Three different layouts to meet Your requirement (from simple linear to complex radial gradients).
+ *  http://www.virtuosoft.eu/tools/css-gradient-generator/
+ *
+ *  Made by Virtuosoft:
+ *      István Ujj-Mészáros - https://github.com/istvan-ujjmeszaros
+ *      Ferenc Fapál - http://twitter.com/fwoodpaul
+ *
+ *  Thanks for the following persons:
+ *      Tibor Szász - https://github.com/kowdermeister
+ *      László Sotus - https://github.com/Lacisan
+ *
+ *  Under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 License
+ *  To view a copy of this license, visit
+ *  http://creativecommons.org/licenses/by-nc-sa/4.0/deed.en_US.
+ */
+
+@import url('http://fonts.googleapis.com/css?family=Droid+Sans|Monda');
+
+@media (min-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
+
+body {
+  font-family: 'Droid Sans', sans-serif;
+}
+
+.row.license {
+  margin-bottom: 15px;
+  font-size: 12px;
+}
+
+.row.header {
+  font-size: 12px;
+}
+
+.row.toolbar {
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 36px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 21px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+
+.well h1,
+.well h2,
+.well h3,
+.well h4,
+.well h5 {
+  font-size: 15px;
+}
+
+.fb_iframe_widget {
+  z-index: 3;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Monda;
+}
+
+.css-gradient-editor-container {
+  width: 100%;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding-bottom: 0;
+  margin-top: 15px;
+}
+
+.btn.btn-hover {
+  background-color: transparent;
+  color: #333;
+}
+
+.well.light {
+  background: #fff;
+  margin: 0 0 10px;
+  padding: 5px;
+}
+
+.well.light h2 {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px;
+  margin: 0;
+  border-bottom: 1px dotted #ddd;
+}
+
+.well.light .content {
+  background: #fcfcfc;
+  padding: 15px 15px 5px;
+  margin: 0;
+}
+
+.well.light .content p {
+  margin: 0 0 10px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-colorpickerarea {
+  max-width: 370px;
+  margin-top: 20px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preferences {
+  clear: both;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preview-container {
+  width: 100%;
+  position: relative;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preview-container .css-gradient-controls {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preview-container .css-gradient-controls .btn {
+  background: rgba(0,0,0,0.2);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 5px 5px 9px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-colorstops-advanced {
+  width: 100%;
+  clear: both;
+}
+
+.css-gradient-editor-container .css-gradient-editor-common-preferences {
+  margin-bottom: 15px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preview-container .css-gradient-editor-preview {
+  height: 197px;
+  max-width: 100%;
+  border: 1px solid #ddd;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preview-container .css-gradient-editor-preview div {
+  height: 100%;
+  padding: 5px;
+  font-family: "Courier New", monospace;
+  position: relative;
+}
+
+.css-gradient-editor-container .css-gradient-editor-cssoutput-container,
+.css-gradient-editor-textarea-exportall,
+.css-gradient-editor-textarea-import {
+  width: 100%;
+  border-color: #ddd;
+  font-size: 12px;
+  -moz-user-select: initial;
+  -khtml-user-select: initial;
+  -webkit-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
+}
+
+.css-gradient-editor-textarea-exportall,
+.css-gradient-editor-textarea-import {
+  height: 200px;
+  overflow: auto;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preview,
+.css-gradient-editor-container .color-stop div,
+.css-gradient-editor-container .css-gradient-editor-preset {
+  background: #fff url(data:image/gif;base64,R0lGODlhBgAGAIABAMPDw////yH5BAEKAAEALAAAAAAGAAYAAAIKhIMGGMrs0pGgAAA7) repeat;
+}
+
+.css-gradient-editor-container .color-stop div {
+  width: 100%;
+  height: 100%;
+  border-radius: 99px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-stopeditor {
+  width: auto;
+  height: 15px;
+  border: 1px solid #fff;
+  margin: 5px 0 20px;
+  -webkit-border-radius: 9999px;
+  -moz-border-radius: 9999px;
+  border-radius: 9999px;
+  background: #D1D4D6;
+  box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.1);
+}
+
+.css-gradient-editor-container .css-gradient-editor-stopeditor span {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.css-gradient-editor-container .css-gradient-editor-stoppointmarkers {
+  width: auto;
+  height: 30px;
+  border: 1px solid transparent;
+  margin: 0 0px;
+  position: relative;
+  cursor: crosshair;
+  top: -20px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-opacityarea {
+  width: auto;
+  height: 20px;
+  background-color: rgba(255,255,255,0.2);
+  border: 1px solid transparent;
+  margin: 0 7px;
+  position: relative;
+}
+
+.css-gradient-editor-container .color-stop {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  margin-left: -11px;
+  border: 1px solid #ddd;
+  cursor: move;
+  -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+  overflow: hidden;
+  padding: 3px;
+  background: #fff;
+}
+
+.css-gradient-editor-container .selected {
+  border-color: #777;
+  -webkit-box-shadow: 0 0 5px rgb(250, 128, 0);
+  -moz-box-shadow: 0 0 5px rgb(250, 128, 0);
+  box-shadow: 0 0 5px rgb(250, 128, 0);
+  z-index: 2;
+}
+
+.css-gradient-editor-container .css-gradient-editor-swatches li.actual .css-gradient-editor-preset {
+  border-color: #777;
+  -webkit-box-shadow: 0 0 5px rgb(250, 128, 0);
+  -moz-box-shadow: 0 0 5px rgb(250, 128, 0);
+  box-shadow: 0 0 5px rgb(250, 128, 0);
+}
+
+.css-gradient-editor-container .color-stop span {
+  display: block;
+  border-radius: 9999px;
+  -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.1);
+}
+
+.css-gradient-editor-container .sp-palette-container {
+  float: right;
+  min-width: 161px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-linear-direction {
+  color: #ccc;
+}
+
+.css-gradient-editor-linear-direction-implicit {
+  width: 120px;
+  position: relative;
+  display: inline-block;
+}
+
+.css-gradient-editor-linear-direction-implicit .btn {
+  margin: 0 6px 0 0;
+}
+
+.css-gradient-editor-linear-direction-explicit {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-linear-direction button {
+  width: 31px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-linear-direction .btn-row {
+  margin: 0 0 10px 0;
+}
+
+.css-gradient-editor-container span[class*='css-gradient-editor-direction-'] {
+  width:20px;
+  height:20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position:relative;
+}
+
+.css-gradient-editor-container .css-gradient-editor-direction-right {
+  margin-left: 41px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-controller.css-gradient-editor-direction-angle-input {
+  width: auto;
+  height: auto;
+  border: none;
+}
+
+.css-gradient-editor-container .css-gradient-editor-controller,
+.css-gradient-editor-container .css-gradient-editor-controller .btn {
+  color: #707070;
+  cursor: pointer;
+}
+
+.css-gradient-editor-container .css-gradient-editor-controller.active,
+.css-gradient-editor-container .css-gradient-editor-controller:hover .bootstrap-touchspin .btn,
+.css-gradient-editor-container .css-gradient-editor-controller.active .btn,
+.css-gradient-editor-container .css-gradient-editor-controller:hover .bootstrap-touchspin .input-group-addon,
+.css-gradient-editor-container .css-gradient-editor-controller.active .input-group-addon {
+  color: #fff;
+  background-color: #3396E7;
+}
+
+.css-gradient-editor-container .css-gradient-editor-controller.css-gradient-editor-size-explicit:hover,
+.css-gradient-editor-container .css-gradient-editor-controller.css-gradient-editor-size-explicit.active {
+  background-color: transparent;
+}
+
+.css-gradient-editor-container .css-gradient-editor-controller.css-gradient-editor-direction-angle:hover,
+.css-gradient-editor-container .css-gradient-editor-controller.active.css-gradient-editor-direction-angle,
+.css-gradient-editor-container .css-gradient-editor-controller:hover .bootstrap-touchspin .btn,
+.css-gradient-editor-container .css-gradient-editor-controller.active .bootstrap-touchspin .btn,
+.css-gradient-editor-container .css-gradient-editor-controller:hover .bootstrap-touchspin .input-group-addon,
+.css-gradient-editor-container .css-gradient-editor-controller.active .bootstrap-touchspin .input-group-addon {
+  border-color: #05619c;
+}
+
+.css-gradient-editor-container span.css-gradient-editor-direction-angle {
+  width:40px;
+  height:40px;
+  border-radius:40px;
+  margin-left:45px;
+  margin-bottom: 24px;
+  background: #fff;
+  display:block;
+  border-width: 2px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-direction-angle-input .bootstrap-touchspin {
+  width: 125px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-direction-angle-input .bootstrap-touchspin .input-group-addon {
+  width: 19px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-direction-angle span {
+  display: block;
+  width: 2px;
+  height: 15px;
+  position: absolute;
+  left: 17px;
+  bottom: 17px;
+  background-color: #ccc;
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -ms-transform-origin:1px 14px;
+  -webkit-transform-origin:1px 14px;
+  transform-origin:1px 14px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-direction-angle:hover span,
+.css-gradient-editor-container .css-gradient-editor-direction-angle.active span {
+  background-color: #0867a6;
+}
+
+.css-gradient-editor-container .css-gradient-editor-direction-angle:hover,
+.css-gradient-editor-container .css-gradient-editor-direction-angle.active {
+  background-color: #fff;
+}
+
+.css-gradient-editor-container span.css-gradient-editor-size-explicit input,
+.css-gradient-editor-container span.css-gradient-editor-position-horizontal-explicit input,
+.css-gradient-editor-container span.css-gradient-editor-position-vertical-explicit input,
+.css-gradient-editor-container span.css-gradient-editor-direction-angle-input input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #707070;
+  outline: none;
+  text-align: center;
+}
+
+.css-gradient-editor-container span.css-gradient-editor-size-explicit.active input,
+.css-gradient-editor-container span.css-gradient-editor-position-horizontal-explicit.active input,
+.css-gradient-editor-container span.css-gradient-editor-position-vertical-explicit.active input,
+.css-gradient-editor-container span.css-gradient-editor-direction-angle-input.active input,
+.css-gradient-editor-container span.css-gradient-editor-size-explicit:hover input,
+.css-gradient-editor-container span.css-gradient-editor-position-horizontal-explicit:hover input,
+.css-gradient-editor-container span.css-gradient-editor-position-vertical-explicit:hover input,
+.css-gradient-editor-container span.css-gradient-editor-direction-angle-input:hover input {
+  color: #0867a6;
+  border-color: #0867a6;
+}
+
+.css-gradient-editor-container .bootstrap-touchspin {
+  width: 150px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-size-explicit .bootstrap-touchspin {
+  display: inline-table;
+}
+
+.css-gradient-editor-container input {
+  border: 1px solid #ccc;
+  border-radius: 0;
+  color: #000;
+  outline: none;
+  text-align: center;
+}
+
+.css-gradient-editor-container .input-group-addon {
+  border-radius: 0;
+}
+
+.css-gradient-editor-container .css-gradient-editor-stop-point-color {
+  width: 165px;
+  margin: 2px 10px 2px 0;
+  float:left;
+}
+
+.css-gradient-editor-container .css-gradient-editor-stoppointdata {
+  margin-bottom: 10px;
+  border: 1px solid #BBC1CA;
+  padding: 4px;
+  background: #fff;
+  width: 100%;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 0;
+  position: relative;
+}
+
+.css-gradient-editor-container .css-gradient-editor-stoppointdata.active {
+  background-color: #dadada;
+}
+
+.css-gradient-editor-container .css-gradient-editor-stoppointdata label {
+  margin: 0 0 0 5px;
+  font-size: 11px;
+  font-weight: normal;
+  display: none;
+}
+
+.css-gradient-editor-container .css-gradient-editor-stoppointdata .css-gradient-editor-stop-point-delete {
+  background: 0;
+  border: 0;
+  padding: 2px;
+  box-shadow: none;
+  color: #707070;
+  margin-top: 4px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-stoppointdata .css-gradient-editor-stop-point-delete:hover {
+  color: #333;
+}
+
+.css-gradient-editor-container .css-gradient-editor-stoppointdata .bootstrap-touchspin {
+  width: 10px;
+  max-width: 200px;
+  float:left;
+  margin: 2px 10px 2px 0;
+}
+
+.css-gradient-editor-container .bootstrap-touchspin input {
+  width: 70px;
+  min-width: 60px;
+  max-width: 100px;
+}
+
+.bootstrap-touchspin.input-group > .input-group-addon {
+  height: auto;
+}
+
+@media (max-width:425px) {
+  .css-gradient-editor-stoppointdata .css-gradient-editor-stop-point-color {
+    margin-bottom: 10px;
+  }
+
+  .css-gradient-editor-container .css-gradient-editor-stoppointdata .css-gradient-editor-stop-point-delete {
+    margin-top: 8px;
+    margin-bottom: 15px;
+  }
+}
+
+.css-gradient-editor-container .color-stop.overflow {
+  opacity: 0.5;
+  left: 100% !important;
+}
+.css-gradient-editor-container .color-stop.underflow {
+  opacity: 0.5;
+  left: 0 !important;
+}
+
+.css-gradient-editor-container .form-group {
+  margin: 0;
+  padding: 10px 0 5px;
+}
+
+.css-gradient-editor-container .form-group:last-of-type {
+  border: 0;
+  margin-bottom: -15px;
+}
+
+.css-gradient-editor-container .form-group .controls {
+  margin: 0 0 5px;
+}
+
+.css-gradient-editor-container .form-group .controls label {
+  width: 48px;
+  font-size: 11px;
+  font-weight: normal;
+  display: none;
+  padding: 2px 5px;
+  border: 1px solid #dadada;
+  color: #707070;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.css-gradient-editor-container .form-group .btn-group {
+  vertical-align: top;
+}
+
+.css-gradient-editor-container .nav-tabs {
+  border-bottom: 0;
+}
+
+.css-gradient-editor-container .nav-tabs > li > a {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: bold;
+  -webkit-box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
+  padding: 8px 15px;
+  margin-top: 3px;
+  margin-left: 3px;
+  color: #707070;
+}
+
+.css-gradient-editor-container .nav-tabs > li > a,
+.css-gradient-editor-container .nav-tabs > li > a:hover {
+  border: 1px solid #ddd;
+}
+
+.css-gradient-editor-container .nav-tabs > li > a:focus {
+  outline: none;
+}
+
+.css-gradient-editor-container .nav-tabs > li.active > a,
+.css-gradient-editor-container .nav-tabs > li.active > a:hover,
+.css-gradient-editor-container .nav-tabs > li.active > a:focus {
+  border-color: #ddd;
+  border-bottom: 2px solid #fff;
+  padding: 10px 15px;
+  margin-bottom: -2px;
+  margin-top: 0;
+  margin-left: 0;
+  color: #000;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.css-gradient-editor-container .tab-content.show {
+  padding: 10px;
+  margin: 0;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preferences .tab-content {
+  padding-bottom: 20px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preset.current {
+  margin-right: 5px;
+  width: 29px;
+  height: 29px;
+  top: 1px;
+  border-color: #dadada;
+  cursor: default;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preset {
+  width: 31px;
+  height: 31px;
+  display: inline-block;
+  cursor: pointer;
+  border-color: #ccc;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preset span {
+  position: absolute;
+  left: -226px;
+  top: -226px;
+  right: 0;
+  bottom: 0;
+  width: 480px;
+  height: 480px;
+  -ms-transform: scale(0.062);
+  -webkit-transform: scale(0.062);
+  transform: scale(0.062);
+}
+
+.css-gradient-editor-container .content.css-gradient-editor-swatches {
+  max-height: 197px;
+  overflow: auto;
+  margin-right: -6px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-swatches ul {
+  width: auto;
+  padding: 0;
+  list-style-type: none;
+}
+
+.css-gradient-editor-container .css-gradient-editor-swatches li {
+  float: left;
+  margin: 7px 7px 0 0;
+}
+
+.css-gradient-editor-preview-resize-handler {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAAD1BMVEUAAABoaGh0dHSBgYGUlJTA37BnAAAAAXRSTlMAQObYZgAAACxJREFUGNNjoBEQVEDiCBkgcZQdSDYKiBBGARHCKCAizSgIghoFQVCjSDMNABFuBQVxKa6zAAAAAElFTkSuQmCC);
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  display: block;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+}
+
+.css-gradient-editor-colorstops-easy,
+.css-gradient-editor-colorstops-advanced {
+  padding: 0 15px;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  border-color: #ccc;
+}
+
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  border-color: #cfcfcf;
+}
+
+.btn-default.disabled,
+.btn-default[disabled],
+fieldset[disabled] .btn-default,
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active,
+fieldset[disabled] .btn-default.active {
+  border-color: #ccc;
+  color: #aaa;
+}
+
+.css-gradient-editor-stoppointlist {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  background-color: #3396E7;
+  border-color: #3396E7;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #1489d8;
+  border-color: #1489d8;
+}
+
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+  background-color: #7CAFDB;
+  border-color: transparent;
+}
+
+.input-group-addon {
+  border-color: #ccc;
+}
+
+.panel {
+  border: 1px solid #DADADA;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:0px 0px 67px 0px rgba(0,0,0,0.13),0px 10px 7px -10px rgba(0,0,0,0.93);
+  box-shadow:0px 0px 67px 0px rgba(0,0,0,0.13),0px 10px 7px -10px rgba(0,0,0,0.93);
+  border-radius:0;
+  background-color: #fff;
+  margin-bottom: 30px;
+}
+
+.panel-title {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.panel-heading {
+  border-color: #DADADA;
+  padding: 3px 15px;
+}
+
+.panel-title {
+  font-size: 18px;
+  color: #555;
+  line-height: 31px;
+}
+
+.panel-body {
+  border: none;
+}
+
+.form-control {
+  font-size: 13px;
+  -webkit-transition: none;
+  transition: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.coloroffset-popover-container .popover {
+  max-width: 500px;
+  padding: 0;
+  border-color: #dadada;
+  border-radius: 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 57px 0px, rgba(0, 0, 0, 0.933333) 0px 10px 7px -5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 57px 0px, rgba(0, 0, 0, 0.933333) 0px 10px 7px -5px;
+}
+
+.coloroffset-popover-container .popover-title {
+  font-size: 13px;
+  line-height: 17px;
+  background-color: #fff;
+  border-bottom: 1px solid #dadada;
+  padding: 6px 14px;
+  border-radius: 0;
+}
+
+.coloroffset-container {
+  width: 361px;
+}
+
+.slider-container {
+  display: inline-block;
+  width: 100%;
+  padding: 5px 0;
+  border-radius: 2px;
+  margin: 6px 0;
+  position: relative;
+}
+
+.slider-container .slider-inner {
+  width: 100%;
+  height: 7px;
+  background-color: #D2D5DB;
+  box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.3), inset 0 1px 4px -1px;
+}
+
+.slider-container:last-of-type {
+  margin-bottom: 0;
+}
+
+.slider-container .slider-controller {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  margin-top: -9px;
+  margin-left: -13px;
+  cursor: move;
+  overflow: hidden;
+  padding: 4px 2px;
+}
+
+.slider-container .slider-controller:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  background-color: #585858;
+  background: -webkit-linear-gradient(top left,rgb(84, 88, 95) 0%,rgb(62, 66, 73) 100%);
+  background: linear-gradient(to bottom right,rgb(84, 88, 95) 0%,rgb(62, 66, 73) 100%);
+  box-shadow: 0 0 3px 0px rgba(0,0,0,0.5),0 3px 3px -1px rgba(0,0,0,0.3);
+}
+
+.offset-hue.slider-container .slider-inner {
+  background: linear-gradient(to right, rgb(255, 152, 186) 0%, rgb(255, 155, 169) 3.7%, rgb(255, 157, 152) 7.4%, rgb(255, 158, 133) 11.1%, rgb(255, 160, 107) 14.8%, rgb(255, 162, 61) 18.5%, rgb(240, 172, 1) 22.2%, rgb(212, 184, 3) 25.9%, rgb(181, 193, 0) 29.6%, rgb(144, 202, 24) 33.3%, rgb(100, 208, 62) 37%, rgb(0, 213, 96) 40.7%, rgb(0, 210, 142) 44.4%, rgb(0, 208, 172) 48.1%, rgb(0, 206, 193) 51.8%, rgb(15, 205, 209) 55.5%, rgb(19, 203, 224) 59.2%, rgb(1, 201, 239) 63%, rgb(15, 199, 254) 66.6%, rgb(82, 195, 255) 70.3%, rgb(123, 189, 255) 74.1%, rgb(150, 184, 255) 77.7%, rgb(175, 177, 255) 81.5%, rgb(202, 168, 255) 85.2%, rgb(236, 153, 255) 88.9%, rgb(255, 145, 236) 92.6%, rgb(255, 150, 207) 96.3%, rgb(255, 152, 186) 100%);
+}
+
+.offset-chroma.slider-container .slider-inner {
+  background: linear-gradient(to right, rgb(143, 143, 143), rgb(255, 0, 0));
+}
+
+.offset-lightness.slider-container .slider-inner {
+  background: linear-gradient(to right, #000, #fff);
+}
+
+.btn-primary.zeroclipboard-is-hover {
+  background-color: #1489d8;
+  border-color: #285e8e;
+}
+
+.btn-primary.zeroclipboard-is-active {
+  background-color: #1489d8;
+  border-color: #285e8e;
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 10px rgba(0,0,0,0.2),inset 0 -3px 10px rgba(0,0,0,0.2);
+  box-shadow: inset 0 3px 10px rgba(0,0,0,0.2),inset 0 -3px 10px rgba(0,0,0,0.2);
+}
+
+label {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.syntaxhighlighter {
+  padding: 1px;
+}
+
+pre.css-gradient-editor-cssoutput {
+  background: transparent;
+  border: none;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preview-container .css-gradient-editor-preview.preview-popout {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100px;
+  height: 100px;
+  max-width: 100%;
+  z-index: 1030;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 57px 0px, rgba(0, 0, 0, 0.933333) 0px 10px 7px -5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 57px 0px, rgba(0, 0, 0, 0.933333) 0px 10px 7px -5px;
+  border: none;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preview-container .css-gradient-editor-preview.preview-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: auto !important;
+  z-index: 1030;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 57px 0px, rgba(0, 0, 0, 0.933333) 0px 10px 7px -5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 57px 0px, rgba(0, 0, 0, 0.933333) 0px 10px 7px -5px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+.css-gradient-editor-container .css-gradient-editor-preview-container .css-gradient-editor-preview.preview-sticky.buggyfixed {
+  position: relative;
+}
+
+.btn-info {
+  border: 1px solid transparent;
+}
+
+.btn-group .btn {
+  border-color: #fff;
+}
+
+.css-gradient-editor-layout-selector small {
+  display: block;
+}
+
+.css-gradient-editor-layout-selector .btn {
+  background-color: transparent;
+  color: #3396E7;
+  color: #2F75AD;
+  white-space: normal;
+}
+
+.css-gradient-editor-layout-selector .btn:hover,
+.css-gradient-editor-layout-selector .btn:active,
+.css-gradient-editor-layout-selector .btn.active {
+  background-color: #3396E7;
+  color: #fff;
+}
+
+.css-gradient-editor-layout-selector .btn:active,
+.css-gradient-editor-layout-selector .btn.active {
+  box-shadow: inset 0 3px 10px rgba(0,0,0,0.1),inset 0 -3px 10px rgba(0,0,0,0.1)
+}
+
+@media (max-width:991px) {
+  .css-gradient-editor-container .css-gradient-editor-stopeditor {
+    margin: 30px 0;
+  }
+
+}
+
+#permalinkqr img,
+#permalinkqr canvas {
+  margin: 0 auto;
+  max-width: 80%;
+  max-height: 80%;
+}
+
+label {
+  padding: 4px 15px;
+}
+
+.css-gradient-editor-container .css-gradient-editor-controller {
+  display: inline-block;
+}
+
+.ajax-loader {
+  width: 100%;
+  min-width: 50px;
+  min-height: 30px;
+  background-color: #fff !important;
+  background-image: url(data:image/gif;base64,R0lGODlhKwALAPEAAP///zOW55rL8jOW5yH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAKwALAAACMoSOCMuW2diD88UKG95W88uF4DaGWFmhZid93pq+pwxnLUnXh8ou+sSz+T64oCAyTBUAACH5BAkKAAAALAAAAAArAAsAAAI9xI4IyyAPYWOxmoTHrHzzmGHe94xkmJifyqFKQ0pwLLgHa82xrekkDrIBZRQab1jyfY7KTtPimixiUsevAAAh+QQJCgAAACwAAAAAKwALAAACPYSOCMswD2FjqZpqW9xv4g8KE7d54XmMpNSgqLoOpgvC60xjNonnyc7p+VKamKw1zDCMR8rp8pksYlKorgAAIfkECQoAAAAsAAAAACsACwAAAkCEjgjLltnYmJS6Bxt+sfq5ZUyoNJ9HHlEqdCfFrqn7DrE2m7Wdj/2y45FkQ13t5itKdshFExC8YCLOEBX6AhQAADsAAAAAAAAAAAA=) !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  filter: none !important;
+}
+
+.hero-unit {
+  margin: 0 0 28px;
+}
+
+.hero-unit ul {
+  list-style-type: none;
+}
+
+.hero-unit ul li {
+  font-size: 14px;
+}
+
+css-gradient-editor-container.layout-simple .hide-element {
+  visibility: hidden;
+}
+
+@media (max-width: 992px) {
+  .hero-unit ul li {
+    font-size: 13px;
+  }
+}
+
+.gradient-preferences-easy,
+.gradient-preferences-advanced {
+  display: none;
+}
+
+.layout-simple .gradient-preferences-advanced {
+  display: none;
+}
+
+.layout-simple .gradient-preferences-easy {
+  display: block;
+}
+
+.layout-advanced .gradient-preferences-advanced,
+.layout-expert .gradient-preferences-advanced {
+  display: block;
+}
+
+.layout-advanced .gradient-preferences-easy,
+.layout-expert .gradient-preferences-easy,
+.layout-advanced .css-gradient-editor-size-explicit,
+.layout-advanced .css-gradient-editor-position-horizontal-explicit,
+.layout-advanced .css-gradient-editor-position-vertical-explicit,
+.layout-advanced .css-gradient-editor-radial-shape,
+.layout-advanced .css-gradient-editor-linear-direction-explicit {
+  display: none;
+}
+
+.gradient-preferences-easy {
+  padding: 0 15px;
+}
+
+.gradient-preferences-easy input {
+  width: 100%;
+  margin: 10px auto;
+  display: block;
+  padding: 20px 0;
+}
+
+.layout-simple .css-gradient-editor-linear-direction-implicit {
+  width: 110px;
+  position: relative;
+  display: block;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.layout-simple .css-gradient-editor-linear-direction-implicit .btn-row {
+  clear: both;
+}
+
+.layout-simple .css-gradient-editor-linear-direction-implicit .btn {
+  margin: 5px 0;
+  text-align: center;
+  width: 31px;
+}
+
+.layout-simple .css-gradient-editor-direction-left {
+  float: left;
+}
+
+.layout-simple .css-gradient-editor-direction-right {
+  float: right;
+}
+
+.layout-warning-box {
+  display: block;
+  margin: 0 15px 15px;
+  font-size: 12px;
+  line-height: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.layout-warning-box .label-warning {
+  background-color: rgb(249, 237, 190);
+  border: 1px solid rgb(240, 195, 109);
+  color: rgb(51, 51, 51);
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+  margin: 0 auto 15px;
+}
+
+.layout-warning-advanced,
+.layout-warning-expert {
+  display: none;
+}

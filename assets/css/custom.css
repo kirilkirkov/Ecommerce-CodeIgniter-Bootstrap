@@ -281,7 +281,6 @@ footer .footer-icon li { display : block; height : 40px; width : 100%; }
  #languages-bar { margin-bottom : 10px; }
  #adv-search { margin-bottom : 10px; }
  .basket-box { height : auto; margin-left : 0; }
- #navbar { background : #D83C3C; background : linear-gradient(top, #D83C3C, #B03131); background : -moz-linear-gradient(top, #D83C3C, #B03131); background : -ms-linear-gradient(top, #D83C3C, #B03131); background : -webkit-gradient(linear, left top, left bottom, from(#D83C3C), to(#B03131)); }
  .navbar { z-index: 1; }
  .navbar li { float : none; position : static; z-index : 1232; }
  .steps .step {margin-bottom: 2px;}

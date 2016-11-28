@@ -121,3 +121,4 @@ $lang['address_empty'] = 'You have not entered address';
 $lang['invalid_city'] = 'You have not entered city';
 $lang['invalid_post_code'] = 'You have not entered post code';
 $lang['finded_errors'] = 'I found the following errors';
+$lang['out_of_stock_product'] = 'Product is out of stock';

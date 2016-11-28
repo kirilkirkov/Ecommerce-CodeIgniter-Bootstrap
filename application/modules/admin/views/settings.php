@@ -285,4 +285,20 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Show in list out of stock products (1/0 for yes/no)</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('outOfStock')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('outOfStock') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="text" name="outOfStock" style="margin-bottom:5px;" value="<?= $outOfStock ?>" class="form-control">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

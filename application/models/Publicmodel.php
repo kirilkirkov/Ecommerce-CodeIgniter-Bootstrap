@@ -6,6 +6,7 @@ class Publicmodel extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->Model('AdminModel');
     }
 
     public function productsCount($big_get)
@@ -51,8 +52,11 @@ class Publicmodel extends CI_Model
         $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('translations.type', 'product');
         $this->db->where('visibility', 1);
+        $showOutOfStock = $this->AdminModel->getValueStore('outOfStock');
+        if($showOutOfStock == 0) {
+            $this->db->where('quantity >', 0);
+        }
         // $this->db->where('in_slider', 0); Show slider products in categories
-
 
         $query = $this->db->get('products');
         return $query->result_array();

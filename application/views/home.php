@@ -119,23 +119,24 @@ if (count($sliderProducts) > 0) {
                     ?>
                 </div>
             </div>
-            <div class="filter-sidebar">
-                <div class="title">
-                    <span><?= lang('store') ?></span>
-                    <?php if (isset($_GET['in_stock']) && $_GET['in_stock'] != '') { ?>
-                        <a href="javascript:void(0);" class="clear-filter" data-type-clear="in_stock" data-toggle="tooltip" data-placement="right" title="<?= lang('clear_the_filter') ?>"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    <?php } ?>
+            <?php if ($showOutOfStock == 1) { ?>
+                <div class="filter-sidebar">
+                    <div class="title">
+                        <span><?= lang('store') ?></span>
+                        <?php if (isset($_GET['in_stock']) && $_GET['in_stock'] != '') { ?>
+                            <a href="javascript:void(0);" class="clear-filter" data-type-clear="in_stock" data-toggle="tooltip" data-placement="right" title="<?= lang('clear_the_filter') ?>"><i class="fa fa-times" aria-hidden="true"></i></a>
+                        <?php } ?>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" data-in-stock="1" class="in-stock <?= isset($_GET['in_stock']) && $_GET['in_stock'] == '1' ? 'selected' : '' ?>"><?= lang('in_stock') ?> (<?= $countQuantities['in_stock'] ?>)</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-in-stock="0" class="in-stock <?= isset($_GET['in_stock']) && $_GET['in_stock'] == '0' ? 'selected' : '' ?>"><?= lang('out_of_stock') ?> (<?= $countQuantities['out_of_stock'] ?>)</a>
+                        </li>
+                    </ul>
                 </div>
-                <ul>
-                    <li>
-                        <a href="javascript:void(0);" data-in-stock="1" class="in-stock <?= isset($_GET['in_stock']) && $_GET['in_stock'] == '1' ? 'selected' : '' ?>"><?= lang('in_stock') ?> (<?= $countQuantities['in_stock'] ?>)</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-in-stock="0" class="in-stock <?= isset($_GET['in_stock']) && $_GET['in_stock'] == '0' ? 'selected' : '' ?>"><?= lang('out_of_stock') ?> (<?= $countQuantities['out_of_stock'] ?>)</a>
-                    </li>
-                </ul>
-            </div>
-            <?php if ($shippingOrder != 0 && $shippingOrder != null) { ?>
+            <?php } if ($shippingOrder != 0 && $shippingOrder != null) { ?>
                 <div class="filter-sidebar">
                     <div class="title">
                         <span><?= lang('freeShippingHeader') ?></span>

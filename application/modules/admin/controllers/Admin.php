@@ -698,6 +698,12 @@ class Admin extends MX_Controller
             $this->saveHistory('Change visibility of final checkout page');
             redirect('admin/settings');
         }
+        if (isset($_POST['outOfStock'])) {
+            $this->AdminModel->setValueStore('outOfStock', $_POST['outOfStock']);
+            $this->session->set_flashdata('outOfStock', 'Out of stock settings visibility change');
+            $this->saveHistory('Change visibility of final checkout page');
+            redirect('admin/settings');
+        }
         $data['siteLogo'] = $this->AdminModel->getValueStore('sitelogo');
         $data['naviText'] = $this->AdminModel->getValueStore('navitext');
         $data['footerCopyright'] = $this->AdminModel->getValueStore('footercopyright');
@@ -721,6 +727,7 @@ class Admin extends MX_Controller
         $data['publicDateAdded'] = $this->AdminModel->getValueStore('publicDateAdded');
         $data['finalCheckoutPage'] = $this->AdminModel->getValueStore('finalCheckoutPage');
         $data['googleApi'] = $this->AdminModel->getValueStore('googleApi');
+        $data['outOfStock'] = $this->AdminModel->getValueStore('outOfStock');
         $this->load->view('_parts/header', $head);
         $this->load->view('settings', $data);
         $this->load->view('_parts/footer');

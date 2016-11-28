@@ -9,8 +9,8 @@
     <b>Follow the steps:</b><br>
     <ol>
         <li>Generate the color you want</li>
-        <li>Click Copy CSS or Get CSS</li>
-        <li>Paste in NEW STYLE field at bottom of page and click SAVE</li>
+        <li>Click GET CSS</li>
+        <li>Paste it in NEW STYLE field at bottom of page and click SAVE</li>
     </ol>
     <b>Leave it empty for default style</b>
 </div>
@@ -22,8 +22,7 @@
                     <a href="#" class="btn btn-default css-gradient-editor-configuration" data-toggle="modal" data-target="#configmodal"><span class="pngicon-wrench"></span> Config</a>
                     <a href="" class="btn btn-default css-gradient-editor-permalink"><span class="pngicon-share"></span> Share permalink</a>
                     <a href="#" class="btn btn-default css-gradient-editor-qrcode" title="Gradient permalink QR code" data-toggle="modal" data-target="#qrmodal"><span class="pngicon-qrcode"></span> QR Code</a>
-                    <a target="_blank" href="gradient.php" class="btn btn-default css-gradient-editor-imagegradient" style="margin-right:10px"><span class="pngicon-picture"></span> Get PNG</a>
-                    <button type="button" class="btn btn-primary css-gradient-editor-copycss"><span class="pngicon-copy"></span> Copy CSS</button>
+                    <a target="_blank" href="<?= base_url('assets/css-gradient-generator/gradient.php') ?>" class="btn btn-default css-gradient-editor-imagegradient" style="margin-right:10px"><span class="pngicon-picture"></span> Get PNG</a>
                     <button type="button" class="btn btn-primary css-gradient-editor-getcss" data-toggle="modal" data-target="#cssoutmodal" style="margin-right:10px"><span class="pngicon-file-css"></span> Get CSS</button>
                     <button type="button" class="btn css-gradient-editor-undo"><span class="pngicon-undo"></span> Undo</button>
                     <button type="button" class="btn css-gradient-editor-redo"><span class="pngicon-redo"></span> Redo</button>

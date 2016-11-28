@@ -2423,7 +2423,7 @@ var CSSGradientEditor = function(container, options) {
     currentgradient = getGradientQueryString();
 
     elements.permalink.attr('href', window.location.pathname + '?' + currentgradient).data('querystring', currentgradient);
-    elements.imagegradient.attr('href', 'gradient.php?' + currentgradient);
+    elements.imagegradient.attr('href', '/assets/css-gradient-generator/gradient.php?' + currentgradient);
 
     if (typeof window.history.pushState === 'function') {
       window.history.replaceState({}, '', window.location.pathname + '?' + currentgradient);

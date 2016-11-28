@@ -722,7 +722,7 @@ fieldset[disabled] .btn-primary.active {
   border-color: #ccc;
 }
 
-.panel {
+#styling-page .panel {
   border: 1px solid #DADADA;
   -moz-box-shadow:none;
   -webkit-box-shadow:0px 0px 67px 0px rgba(0,0,0,0.13),0px 10px 7px -10px rgba(0,0,0,0.93);
@@ -732,23 +732,23 @@ fieldset[disabled] .btn-primary.active {
   margin-bottom: 30px;
 }
 
-.panel-title {
+#styling-page .panel-title {
   font-size: 14px;
   line-height: 22px;
 }
 
-.panel-heading {
+#styling-page .panel-heading {
   border-color: #DADADA;
   padding: 3px 15px;
 }
 
-.panel-title {
+#styling-page .panel-title {
   font-size: 18px;
   color: #555;
   line-height: 31px;
 }
 
-.panel-body {
+#styling-page .panel-body {
   border: none;
 }
 
@@ -851,7 +851,7 @@ fieldset[disabled] .btn-primary.active {
   box-shadow: inset 0 3px 10px rgba(0,0,0,0.2),inset 0 -3px 10px rgba(0,0,0,0.2);
 }
 
-label {
+#styling-page label {
   font-weight: normal;
   font-size: 14px;
 }

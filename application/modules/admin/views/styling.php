@@ -80,9 +80,9 @@
             <div class="panel-heading"><h2 class="panel-title pull-left">Gradient properties</h2>
                 <div class="clearfix">
                     <div class="pull-right btn-group">
-                        <a href="" class="btn btn-hover btn-primary btn-sm css-gradient-editor-layout-easy" title="<b>IE6+, Android 2.3+, iOS 3.2+</b><br>CSS, filter, old webkit<br><i>linear gradients</i>">Simple</a>
-                        <a href="" class="btn btn-hover btn-primary btn-sm css-gradient-editor-layout-advanced" title="<b>IE9+, Android 3.0+, iOS 3.2+, WP7.5+</b><br>CSS, SVG<br><i>dynamic radial gradients</i>">Advanced</a>
-                        <a href="" class="btn btn-hover btn-primary btn-sm css-gradient-editor-layout-expert" title="<b>IE10+, Android 4.0+, iOS 5.0+</b><br>Only for browsers with CSS3 support<br><i>experimental</i>">Expert</a>
+                        <a href="" class="btn btn-hover btn-primary btn-sm css-gradient-editor-layout-easy" title="IE6+, Android 2.3+, iOS 3.2+ CSS, filter, old webkit linear gradients ">Simple</a>
+                        <a href="" class="btn btn-hover btn-primary btn-sm css-gradient-editor-layout-advanced" title="IE9+, Android 3.0+, iOS 3.2+, WP7.5+ CSS, SVG dynamic radial gradients ">Advanced</a>
+                        <a href="" class="btn btn-hover btn-primary btn-sm css-gradient-editor-layout-expert" title="IE10+, Android 4.0+, iOS 5.0+ Only for browsers with CSS3 support experimental ">Expert</a>
                     </div>
                 </div>
             </div>
@@ -470,4 +470,7 @@
                 ((0 | (1 << 8) + g + (256 - g) * percent / 100).toString(16)).substr(1) +
                 ((0 | (1 << 8) + b + (256 - b) * percent / 100).toString(16)).substr(1);
     }
+    $(document).ready(function () {
+        $('button, a').tooltip();
+    });
 </script>

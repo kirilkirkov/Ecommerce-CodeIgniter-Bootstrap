@@ -4,8 +4,9 @@
  * @Author:    Kiril Kirkov
  *  Gitgub:    https://github.com/kirilkirkov
  */
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
 date_default_timezone_set('Europe/Sofia');
 
 class Admin extends MX_Controller

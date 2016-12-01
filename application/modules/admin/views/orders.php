@@ -67,69 +67,71 @@
                             </a>
                         </td>
                         <td class="hidden" id="order-id-<?= $tr['order_id'] ?>">
-                            <table class="table more-info-purchase">
-                                <tbody>
-                                    <tr>
-                                        <td><b>Email</b></td>
-                                        <td><a href="mailto:<?= $tr['email'] ?>"><?= $tr['email'] ?></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>City</b></td>
-                                        <td><?= $tr['city'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Address</b></td>
-                                        <td><?= $tr['address'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Postcode</b></td>
-                                        <td><?= $tr['post_code'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Notes</b></td>
-                                        <td><?= $tr['notes'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Come from site</b></td>
-                                        <td><?= $tr['referrer'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Payment Type</b></td>
-                                        <td><?= $tr['payment_type'] ?></td>
-                                    </tr>
-                                    <?php if ($tr['payment_type'] == 'PayPal') { ?>
+                            <div class="table-responsive">
+                                <table class="table more-info-purchase">
+                                    <tbody>
                                         <tr>
-                                            <td><b>PayPal Status</b></td>
-                                            <td><?= $tr['paypal_status'] ?></td>
+                                            <td><b>Email</b></td>
+                                            <td><a href="mailto:<?= $tr['email'] ?>"><?= $tr['email'] ?></a></td>
                                         </tr>
-                                    <?php } ?>
-                                    <tr>
-                                        <td colspan="2"><b>Products</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <?php
-                                            $arr_products = unserialize($tr['products']);
-                                            foreach ($arr_products as $product_id => $product_quantity) {
-                                                $productInfo = modules::run('admin/admin/getProductInfo', $product_id);
-                                                ?>
-                                                <div>
-                                                    <div class="pull-left">
-                                                        <img src="<?= base_url('attachments/shop_images/' . $productInfo['image']) ?>" alt="Product" style="width:100px; margin-right:10px;" class="img-responsive">
+                                        <tr>
+                                            <td><b>City</b></td>
+                                            <td><?= $tr['city'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Address</b></td>
+                                            <td><?= $tr['address'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Postcode</b></td>
+                                            <td><?= $tr['post_code'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Notes</b></td>
+                                            <td><?= $tr['notes'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Come from site</b></td>
+                                            <td><?= $tr['referrer'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Payment Type</b></td>
+                                            <td><?= $tr['payment_type'] ?></td>
+                                        </tr>
+                                        <?php if ($tr['payment_type'] == 'PayPal') { ?>
+                                            <tr>
+                                                <td><b>PayPal Status</b></td>
+                                                <td><?= $tr['paypal_status'] ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                        <tr>
+                                            <td colspan="2"><b>Products</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <?php
+                                                $arr_products = unserialize($tr['products']);
+                                                foreach ($arr_products as $product_id => $product_quantity) {
+                                                    $productInfo = modules::run('admin/admin/getProductInfo', $product_id);
+                                                    ?>
+                                                    <div>
+                                                        <div class="pull-left">
+                                                            <img src="<?= base_url('attachments/shop_images/' . $productInfo['image']) ?>" alt="Product" style="width:100px; margin-right:10px;" class="img-responsive">
+                                                        </div>
+                                                        <a data-toggle="tooltip" data-placement="top" title="Click to preview" target="_blank" href="<?= base_url($productInfo['url']) ?>">
+                                                            <?= base_url($productInfo['url']) ?>
+                                                            <div><b>Quantity:</b> <?= $product_quantity ?></div>
+                                                        </a>
+                                                        <div class="clearfix"></div>
                                                     </div>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Click to preview" target="_blank" href="<?= base_url($productInfo['url']) ?>">
-                                                        <?= base_url($productInfo['url']) ?>
-                                                        <div><b>Quantity:</b> <?= $product_quantity ?></div>
-                                                    </a>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <hr>
-                                            <?php }
-                                            ?>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                                    <hr>
+                                                <?php }
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </td>
                     </tr>
                 <?php } ?>

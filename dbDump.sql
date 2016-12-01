@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `payment_type` varchar(255) NOT NULL,
   `paypal_status` varchar(10) DEFAULT NULL,
   `processed` tinyint(1) NOT NULL DEFAULT '0',
+  `viewed` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'viewed status is change when change processed status',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

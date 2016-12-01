@@ -52,6 +52,7 @@
                                         </div>
                                     </div>
                                 </li>
+                                <li><a href="javascript:void(0);" data-toggle="modal" data-target="#modalCalculator"><i class="fa fa-calculator" aria-hidden="true"></i> Calculator</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="<?= base_url('admin/logout') ?>"><i class="fa fa-sign-out"></i> Logout</a></li>
@@ -94,7 +95,14 @@
                                     <li><a href="<?= base_url('admin/publish') ?>" <?= urldecode(uri_string()) == 'admin/publish' ? 'class="active"' : '' ?>><i class="fa fa-edit"></i> Publish product</a></li>
                                     <li><a href="<?= base_url('admin/products') ?>" <?= urldecode(uri_string()) == 'admin/products' ? 'class="active"' : '' ?>><i class="fa fa-files-o"></i> Products</a></li>
                                     <li><a href="<?= base_url('admin/shop_categories') ?>" <?= urldecode(uri_string()) == 'admin/shop_categories' ? 'class="active"' : '' ?>><i class="fa fa-list-alt"></i> Shop Categories</a></li>
-                                    <li><a href="<?= base_url('admin/orders') ?>" <?= urldecode(uri_string()) == 'admin/orders' ? 'class="active"' : '' ?>><i class="fa fa-money" aria-hidden="true"></i> Orders</a></li>
+                                    <li>
+                                        <a href="<?= base_url('admin/orders') ?>" <?= urldecode(uri_string()) == 'admin/orders' ? 'class="active"' : '' ?>>
+                                            <i class="fa fa-money" aria-hidden="true"></i> Orders 
+                                            <?php if ($numNotPreviewOrders > 0) { ?>
+                                                <img src="<?= base_url('assets/imgs/exlamation-hi.png') ?>" style="position: absolute; right:10px; top:7px;" alt="">
+                                            <?php } ?>
+                                        </a>
+                                    </li>
                                     <?php if (in_array('blog', $activePages)) { ?>
                                         <li class="header">BLOG</li>
                                         <li><a href="<?= base_url('admin/blogPublish') ?>" <?= urldecode(uri_string()) == 'admin/blogPublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> Publish post</a></li>

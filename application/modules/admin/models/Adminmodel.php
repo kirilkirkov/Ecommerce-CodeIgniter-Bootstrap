@@ -632,4 +632,11 @@ class AdminModel extends CI_Model
         $this->db->where('id', $id)->delete('subscribed');
     }
 
+    public function newOrdersCheck()
+    {
+        $result = $this->db->query("SELECT count(id) as num FROM `orders` WHERE viewed = 0");
+        $row = $result->row_array();
+        return $row['num'];
+    }
+
 }

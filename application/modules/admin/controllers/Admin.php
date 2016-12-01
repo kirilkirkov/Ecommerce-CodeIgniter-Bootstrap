@@ -28,8 +28,10 @@ class Admin extends MX_Controller
         $this->load->helper(array('text', 'file', 'pagination', 'text', 'except_letters', 'currencies', 'rcopy', 'rrmdir', 'rreadDir', 'savefile'));
         $this->load->Model('AdminModel');
         $this->activePages = $vars['activePages'] = $this->getActivePages();
+        $numNotPreviewOrders = $this->AdminModel->newOrdersCheck();
         $vars['textualPages'] = getTextualPages($this->activePages);
         $vars['nonDynPages'] = $this->config->item('no_dynamic_pages');
+        $vars['numNotPreviewOrders'] = $numNotPreviewOrders;
         $this->load->vars($vars);
     }
 

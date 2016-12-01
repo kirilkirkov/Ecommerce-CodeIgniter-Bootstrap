@@ -113,6 +113,7 @@ $lang['checkout_top_header'] = 'Плащане';
 $lang['step_your_order'] = 'Вашата поръчка';
 $lang['step_payment_method'] = 'Начин на плащане';
 $lang['step_success_prod'] = 'Успешна поръчка';
+$lang['info_product_list'] = 'Информация за продукта';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'Не сте въвели име';

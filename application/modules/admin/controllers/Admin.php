@@ -705,6 +705,12 @@ class Admin extends MX_Controller
             $this->saveHistory('Change visibility of final checkout page');
             redirect('admin/settings');
         }
+        if (isset($_POST['moreInfoBtn'])) {
+            $this->AdminModel->setValueStore('moreInfoBtn', $_POST['moreInfoBtn']);
+            $this->session->set_flashdata('moreInfoBtn', 'Button More Information visibility is changed');
+            $this->saveHistory('Change visibility of More Information button in products list');
+            redirect('admin/settings');
+        }
         $data['siteLogo'] = $this->AdminModel->getValueStore('sitelogo');
         $data['naviText'] = $this->AdminModel->getValueStore('navitext');
         $data['footerCopyright'] = $this->AdminModel->getValueStore('footercopyright');
@@ -729,6 +735,7 @@ class Admin extends MX_Controller
         $data['finalCheckoutPage'] = $this->AdminModel->getValueStore('finalCheckoutPage');
         $data['googleApi'] = $this->AdminModel->getValueStore('googleApi');
         $data['outOfStock'] = $this->AdminModel->getValueStore('outOfStock');
+        $data['moreInfoBtn'] = $this->AdminModel->getValueStore('moreInfoBtn');
         $this->load->view('_parts/header', $head);
         $this->load->view('settings', $data);
         $this->load->view('_parts/footer');

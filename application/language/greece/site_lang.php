@@ -113,3 +113,4 @@ $lang['final_step'] = '&Alpha;&pi;&omicron;&theta;ή&kappa;&epsilon;&upsilon;&si
 $lang['order_correction'] = ' &delta;&iota;ό&rho;&theta;&omega;&sigma;&eta; ώ&sigma;&tau;&epsilon;';
 $lang['you_choose_payment'] = '&Mu;&pi;&omicron;&rho;&epsilon;ί&tau;&epsilon; &nu;&alpha; &epsilon;&pi;&iota;&lambda;έ&xi;&epsilon;&tau;&epsilon; &tau;&eta;&nu; &pi;&lambda;&eta;&rho;&omega;&mu;ή &mu;&epsilon;:';
 $lang['out_of_stock_product'] = '&Tau;&omicron; &pi;&omicron;&sigma;ό &pi;&omicron;&upsilon; έ&chi;&epsilon;&iota; &epsilon;&xi;&alpha;&nu;&tau;&lambda;&eta;&theta;&epsilon;ί';
+$lang['info_product_list'] = '&Pi;&lambda;&eta;&rho;&omicron;&phi;&omicron;&rho;ί&epsilon;&sigmaf; &gamma;&iota;&alpha; &tau;&omicron; &pi;&rho;&omicron;ϊό&nu;';

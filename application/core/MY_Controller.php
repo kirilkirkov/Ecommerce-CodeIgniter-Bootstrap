@@ -47,6 +47,7 @@ class MY_Controller extends MX_Controller
         $vars['footerSocialYoutube'] = $this->AdminModel->getValueStore('footerSocialYoutube');
         $vars['addedJs'] = $this->AdminModel->getValueStore('addJs');
         $vars['publicQuantity'] = $this->AdminModel->getValueStore('publicQuantity');
+        $vars['moreInfoBtn'] = $this->AdminModel->getValueStore('moreInfoBtn');
         $vars['allLanguages'] = $this->getAllLangs();
         $vars['load'] = $this->loop;
         return $vars;

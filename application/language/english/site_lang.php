@@ -111,6 +111,7 @@ $lang['checkout_top_header'] = 'Checkout';
 $lang['step_your_order'] = 'Your order';
 $lang['step_payment_method'] = 'Method of payment';
 $lang['step_success_prod'] = 'Successful procurement';
+$lang['info_product_list'] = 'Product information';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';

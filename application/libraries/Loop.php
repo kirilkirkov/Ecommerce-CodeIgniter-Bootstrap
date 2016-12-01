@@ -4,6 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Loop
 {
 
+    private static $CI;
+
+    public function __construct()
+    {
+        self::$CI = & get_instance();
+    }
+
     static function getCartItems($cartItems)
     {
         if (!empty($cartItems['array'])) {
@@ -66,7 +73,7 @@ class Loop
         }
     }
 
-    static public function getProducts($products, $classes = '', $carousel = false, $publicQuantity = 1)
+    static public function getProducts($products, $classes = '', $carousel = false)
     {
         if ($carousel == true) {
             ?>
@@ -118,10 +125,14 @@ class Loop
                             <div class="price-discount <?= $article['old_price'] == '' ? 'invisible' : '' ?>">
                                 <?= lang('old_price') ?>: <span><?= $article['old_price'] != '' ? number_format($article['old_price'], 2) . CURRENCY : '' ?></span>
                             </div>
-                            <?php if ($publicQuantity == 1) { ?>
+                            <?php if (self::$CI->load->get_var('publicQuantity') == 1) { ?>
                                 <div class="quantity">
                                     <?= lang('in_stock') ?>: <span><?= $article['quantity'] ?></span>
                                 </div>
+                            <?php } if (self::$CI->load->get_var('moreInfoBtn') == 1) { ?>
+                                <a href="<?= LANG_URL . '/' . $article['url'] ?>" class="info-btn gradient-color">
+                                    <span class="text-to-bg"><?= lang('info_product_list') ?></span>
+                                </a>
                             <?php } ?>
                             <div class="add-to-cart">
                                 <a href="javascript:void(0);" class="add-to-cart btn-add" data-goto="<?= LANG_URL . '/shopping-cart' ?>" data-id="<?= $article['id'] ?>">

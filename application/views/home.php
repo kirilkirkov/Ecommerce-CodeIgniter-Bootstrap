@@ -183,7 +183,7 @@ if (count($sliderProducts) > 0) {
             </div>
             <?php
             if (!empty($products)) {
-                $load::getProducts($products, 'col-sm-4 col-md-3', false, $publicQuantity);
+                $load::getProducts($products, 'col-sm-4 col-md-3', false);
             } else {
                 ?>
                 <script>

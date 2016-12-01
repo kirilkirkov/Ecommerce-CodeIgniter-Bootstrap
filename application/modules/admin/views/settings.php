@@ -301,4 +301,20 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Show 'More information' button in products list</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('moreInfoBtn')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('moreInfoBtn') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="text" name="moreInfoBtn" style="margin-bottom:5px;" value="<?= $moreInfoBtn ?>" class="form-control">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

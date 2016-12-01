@@ -94,6 +94,8 @@ div.filter-sidebar ul.parent i, div.filter-sidebar ul.children i { font-size : 1
 div.filter-sidebar .title a.clear-filter, div.filter-sidebar .title i { color : #666; float : right; }
 div.product-list { cursor : pointer; margin-bottom : 5px; padding-bottom : 15px; padding-top : 15px; }
 #products-side div.product-list:hover, #small_carousel.carousel .carousel-inner { box-shadow : 0 6px 12px rgba(0, 0, 0, 0.176); outline : 1px solid #aaa; }
+.info-btn { color: #fff; margin-bottom:5px;    display: block;    font-size: 13px;    padding: 5px 10px;    text-decoration: none;    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);    vertical-align: middle; border-radius:8px;}
+.info-btn:hover {color:#f2f2f2;}
 div.product-list div.inner div.img-container { margin-bottom : 10px; overflow : hidden; }
 div.product-list div.inner div.img-container a { display : block; overflow : hidden; }
 div.product-list div.inner div.img-container a img { height : 200px; }
@@ -128,6 +130,7 @@ div.product-sort .form-group { margin-bottom : 0; }
 #small_carousel .profile-circle img { width : 100%; }
 #small_carousel .carousel-indicators .active { height : 15px; width : 15px; }
 #small_carousel .add-to-cart {padding-left: 10px; padding-right: 10px;}
+#small_carousel .info-btn {margin-left:10px; margin-right: 10px;}
 #view-product h1 { font-size : 20px; margin-bottom : 40px; margin-top : 0; }
 #view-product .the-image { border : 1px solid #ddd; box-shadow : 0 6px 12px rgba(0, 0, 0, 0.176); padding : 5px; }
 #view-product .orders-from-category { padding-top : 80px; }

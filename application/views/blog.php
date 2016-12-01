@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <span><?= lang('best_sellers') ?></span>
                     <i class="fa fa-trophy" aria-hidden="true"></i>
                 </div>
-                <?= $load::getProducts($bestSellers, '', true, $publicQuantity) ?>
+                <?= $load::getProducts($bestSellers, '', true) ?>
             </div>
         </div>
         <div class="col-sm-8 col-md-9">

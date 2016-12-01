@@ -118,7 +118,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <?php
         if (!empty($sameCagegoryProducts)) {
-            $load::getProducts($sameCagegoryProducts, 'col-sm-4 col-md-3', false, $publicQuantity);
+            $load::getProducts($sameCagegoryProducts, 'col-sm-4 col-md-3', false);
         } else {
             ?>
             <div class="alert alert-info"><?= lang('no_same_category_products') ?></div>

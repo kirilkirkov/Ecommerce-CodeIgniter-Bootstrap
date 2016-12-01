@@ -1,3 +1,4 @@
+<link href="<?= base_url('assets/css/bootstrap-toggle.min.css') ?>" rel="stylesheet">
 <script src="<?= base_url('assets/ckeditor/ckeditor.js') ?>"></script>
 <h1><img src="<?= base_url('assets/imgs/settings-page.png') ?>" class="header-img" style="margin-top:-3px;">Settings</h1>
 <hr>
@@ -237,13 +238,14 @@
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-success col-h">
-            <div class="panel-heading">Public quantity visability 1/0 (yes/no)</div>
+            <div class="panel-heading">Public quantity visability</div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('publicQuantity')) { ?>
                     <div class="alert alert-info"><?= $this->session->flashdata('publicQuantity') ?></div>
                 <?php } ?>
                 <form method="POST" action="">
-                    <input type="text" name="publicQuantity" style="margin-bottom:5px;" value="<?= $publicQuantity ?>" class="form-control">
+                    <input type="hidden" name="publicQuantity" value="<?= $publicQuantity ?>">
+                    <input <?= $publicQuantity == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="publicQuantity" class="toggle-changer" type="checkbox">
                     <button class="btn btn-default" value="" type="submit">
                         Save
                     </button>
@@ -253,13 +255,14 @@
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-success col-h">
-            <div class="panel-heading">Public date added visability 1/0 (yes/no)</div>
+            <div class="panel-heading">Public date added visability</div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('publicDateAdded')) { ?>
                     <div class="alert alert-info"><?= $this->session->flashdata('publicDateAdded') ?></div>
                 <?php } ?>
                 <form method="POST" action="">
-                    <input type="text" name="publicDateAdded" style="margin-bottom:5px;" value="<?= $publicDateAdded ?>" class="form-control">
+                    <input type="hidden" name="publicDateAdded" value="<?= $publicDateAdded ?>">
+                    <input <?= $publicDateAdded == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="publicDateAdded" class="toggle-changer" type="checkbox">
                     <button class="btn btn-default" value="" type="submit">
                         Save
                     </button>
@@ -269,13 +272,14 @@
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-success col-h">
-            <div class="panel-heading">Add final checkout page 1/0 (yes/no)</div>
+            <div class="panel-heading">Add final checkout page</div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('finalCheckoutPage')) { ?>
                     <div class="alert alert-info"><?= $this->session->flashdata('finalCheckoutPage') ?></div>
                 <?php } ?>
                 <form method="POST" action="">
-                    <input type="text" name="finalCheckoutPage" style="margin-bottom:5px;" value="<?= $finalCheckoutPage ?>" class="form-control">
+                    <input type="hidden" name="finalCheckoutPage" value="<?= $finalCheckoutPage ?>">
+                    <input <?= $finalCheckoutPage == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="finalCheckoutPage" class="toggle-changer" type="checkbox">
                     <button class="btn btn-default" value="" type="submit">
                         Save
                     </button>
@@ -287,13 +291,14 @@
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-success col-h">
-            <div class="panel-heading">Show in list out of stock products (1/0 for yes/no)</div>
+            <div class="panel-heading">Show in list out of stock products</div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('outOfStock')) { ?>
                     <div class="alert alert-info"><?= $this->session->flashdata('outOfStock') ?></div>
                 <?php } ?>
                 <form method="POST" action="">
-                    <input type="text" name="outOfStock" style="margin-bottom:5px;" value="<?= $outOfStock ?>" class="form-control">
+                    <input type="hidden" name="outOfStock" value="<?= $outOfStock ?>">
+                    <input <?= $outOfStock == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="outOfStock" class="toggle-changer" type="checkbox">
                     <button class="btn btn-default" value="" type="submit">
                         Save
                     </button>
@@ -309,7 +314,8 @@
                     <div class="alert alert-info"><?= $this->session->flashdata('moreInfoBtn') ?></div>
                 <?php } ?>
                 <form method="POST" action="">
-                    <input type="text" name="moreInfoBtn" style="margin-bottom:5px;" value="<?= $moreInfoBtn ?>" class="form-control">
+                    <input type="hidden" name="moreInfoBtn" value="<?= $moreInfoBtn ?>">
+                    <input <?= $moreInfoBtn == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="moreInfoBtn" class="toggle-changer" type="checkbox">
                     <button class="btn btn-default" value="" type="submit">
                         Save
                     </button>
@@ -318,3 +324,18 @@
         </div>
     </div>
 </div>
+<script src="<?= base_url('assets/js/bootstrap-toggle.min.js') ?>"></script>
+<script>
+$(document).ready(function () {
+    $('.toggle-changer').change(function () {
+        var myValue;
+        if ($(this).prop('checked') == false) {
+            myValue = '0';
+        } else {
+            myValue = '1';
+        }
+        var myData = $(this).data('for-field');
+        $('[name="' + myData + '"]').val(myValue);
+    });
+});
+</script>

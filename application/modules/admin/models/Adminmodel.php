@@ -433,7 +433,7 @@ class AdminModel extends CI_Model
 
         if ($res['processed'] != $to_status) {
             $this->db->where('id', $id);
-            $result = $this->db->update('orders', array('processed' => $to_status));
+            $result = $this->db->update('orders', array('processed' => $to_status, 'viewed' => '1'));
             if ($result == true) {
                 $this->manageQuantitiesAndProcurement($id, $to_status, $res['processed']);
             }

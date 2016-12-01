@@ -36,7 +36,14 @@
                     }
                     ?>
                     <tr>
-                        <td id="order_id-id-<?= $tr['order_id'] ?>"># <?= $tr['order_id'] ?></td>
+                        <td id="order_id-id-<?= $tr['order_id'] ?>">
+                            # <?= $tr['order_id'] ?>
+                            <?php if ($tr['viewed'] == 0) { ?>
+                                <div id="new-order-alert-<?= $tr['id'] ?>">
+                                    <img src="<?= base_url('assets/imgs/new-blinking.gif') ?>" style="width:100px;" alt="blinking">
+                                </div>
+                            <?php } ?>
+                        </td>
                         <td><?= date('d.M.Y / H:m:s', $tr['date']); ?></td>
                         <td>
                             <i class="fa fa-user" aria-hidden="true"></i> 
@@ -229,6 +236,7 @@
                     $('[data-action-id="' + id + '"] div.status b').text('Rejected');
                     $('[data-action-id="' + id + '"]').removeClass().addClass('bg-warning  text-center');
                 }
+                $('#new-order-alert-' + id).remove();
             }
         });
     }

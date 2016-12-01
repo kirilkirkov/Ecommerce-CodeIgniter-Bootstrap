@@ -804,7 +804,7 @@ class Admin extends MX_Controller
     public function productstatusChange()
     { //called from ajax
         $this->login_check();
-        $result = $this->AdminModel->productstatusChagne($_POST['id'], $_POST['to_status']);
+        $result = $this->AdminModel->productStatusChange($_POST['id'], $_POST['to_status']);
         if ($result == true)
             echo 1;
         else

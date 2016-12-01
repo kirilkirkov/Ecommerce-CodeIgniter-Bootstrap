@@ -417,7 +417,7 @@ class AdminModel extends CI_Model
         }
     }
 
-    public function productStatusChagne($id, $to_status)
+    public function productStatusChange($id, $to_status)
     {
         $this->db->where('id', $id);
         $result = $this->db->update('products', array('visibility' => $to_status));

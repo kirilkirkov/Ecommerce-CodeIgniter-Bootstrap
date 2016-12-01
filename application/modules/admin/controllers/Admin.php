@@ -761,7 +761,7 @@ class Admin extends MX_Controller
         $this->load->view('_parts/header', $head);
         $this->load->view('styling', $data);
         $this->load->view('_parts/footer');
-         $this->saveHistory('Go to Styling page');
+        $this->saveHistory('Go to Styling page');
     }
 
     private function saveHistory($activity)
@@ -1028,6 +1028,11 @@ class Admin extends MX_Controller
         if ($page == 0) {
             $this->saveHistory('Go to Subscribed Emails');
         }
+    }
+
+    public function getProductInfo($id)
+    {
+        return $this->AdminModel->getOneProduct($id);
     }
 
 }

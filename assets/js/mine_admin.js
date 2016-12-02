@@ -223,3 +223,26 @@ $(document).ready(function () {
     });
 });
 // Calculator code finish here
+
+// Password strenght starts here
+$(document).ready(function () {
+    //PassStrength 
+    checkPass();
+    $(".new-pass-field").on('keyup', function () {
+        checkPass();
+    });
+
+    //PassGenerator
+    $('.generate-pwd').pGenerator({
+        'bind': 'click',
+        'passwordLength': 9,
+        'uppercase': true,
+        'lowercase': true,
+        'numbers': true,
+        'specialChars': false,
+        'onPasswordGenerated': function (generatedPassword) {
+            $(".new-pass-field").val(generatedPassword);
+            checkPass();
+        }
+    });
+});

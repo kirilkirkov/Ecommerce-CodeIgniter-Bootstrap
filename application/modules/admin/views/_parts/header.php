@@ -43,9 +43,16 @@
                                                     <label>Change my password</label> <span class="bg-success" id="pass_result">Changed!</span>
                                                     <form class="form-inline" role="form">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="New password" name="new_pass">
+                                                            <input type="text" class="form-control new-pass-field" placeholder="New password" name="new_pass">
                                                         </div>
                                                         <a href="javascript:void(0);" onclick="changePass()" class="btn btn-sm btn-primary">Update</a>
+                                                        <hr>
+                                                        <span>Password Strength:</span>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0;">
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" class="btn btn-default generate-pwd">Generate Password</button> 
                                                     </form>
                                                 </div>
                                             </div>

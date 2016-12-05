@@ -12,7 +12,6 @@
         ?>
         <form action="" method="POST">
             <?php
-            //echo'<pre>';print_r($seo_trans);echo'</pre>';
             foreach ($languages->result() as $language) {
                 ?>
                 <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">

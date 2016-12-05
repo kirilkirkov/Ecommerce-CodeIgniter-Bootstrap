@@ -323,19 +323,64 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Cookie Law Notification</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('cookieNotificator')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('cookieNotificator') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="hidden" name="visibility" value="<?= isset($cookieLawInfo['cookieInfo']['visibility']) ? $cookieLawInfo['cookieInfo']['visibility'] : '0' ?>">
+                    <label>Enable:</label>
+                    <input <?= isset($cookieLawInfo['cookieInfo']['visibility']) && $cookieLawInfo['cookieInfo']['visibility'] == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="visibility" class="toggle-changer" type="checkbox">
+                    <hr>
+                    <?php foreach ($languages->result() as $language) { ?>
+                        <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
+                    <?php } foreach ($languages->result() as $language) { ?>
+                        <div class="form-group">
+                            <label for="message-cookie-law">Message (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                            <input type="text" name="message[]" value="<?= isset($cookieLawInfo['cookieTranslate'][$language->abbr]['message']) ? $cookieLawInfo['cookieTranslate'][$language->abbr]['message'] : '' ?>" class="form-control" id="message-cookie-law">
+                        </div>
+                    <?php } foreach ($languages->result() as $language) {
+                        ?>
+                        <div class="form-group">
+                            <label for="btn-cookie-law">Button Text (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                            <input type="text" name="button_text[]" value="<?= isset($cookieLawInfo['cookieTranslate'][$language->abbr]['button_text']) ? $cookieLawInfo['cookieTranslate'][$language->abbr]['button_text'] : '' ?>" class="form-control" id="btn-cookie-law">
+                        </div>
+                    <?php } foreach ($languages->result() as $language) { ?>
+                        <div class="form-group">
+                            <label for="learn_more">Learn More (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">):</label>
+                            <input type="text" name="learn_more[]" value="<?= isset($cookieLawInfo['cookieTranslate'][$language->abbr]['learn_more']) ? $cookieLawInfo['cookieTranslate'][$language->abbr]['learn_more'] : '' ?>" class="form-control" id="learn_more">
+                        </div>
+                    <?php } ?>
+                    <div class="form-group">
+                        <label for="link-cookie-law"><i class="fa fa-link" aria-hidden="true"></i> Link to learn more (the law):</label>
+                        <input type="text" name="link" value="<?= isset($cookieLawInfo['cookieInfo']['link']) ? $cookieLawInfo['cookieInfo']['link'] : '' ?>" class="form-control" id="link-cookie-law">
+                    </div>
+                    <div class="form-group">
+                        <label>Theme choose:</label>
+                        <input type="hidden" name="theme" value="<?= isset($cookieLawInfo['cookieInfo']['theme']) ? $cookieLawInfo['cookieInfo']['theme'] : '' ?>">
+                        <div class="row cookie-law-themes bg-info">
+                            <?php foreach ($law_themes as $theme) { ?>
+                                <div class="col-sm-6">
+                                    <a href="javascript:void(0);" class="select-law-theme" data-law-theme="<?= str_replace('.png', '', $theme) ?>">
+                                        <img src="<?= base_url('assets/imgs/cookie-law-themes/' . $theme) ?>" class="img-responsive theme" alt="<?= $theme ?>">
+                                        <img src="<?= base_url('assets/imgs/ok-themes.png') ?>" <?=
+                                        isset($cookieLawInfo['cookieInfo']['theme']) &&
+                                        $cookieLawInfo['cookieInfo']['theme'] == str_replace('.png', '', $theme) ? 'style="display:block;"' : ''
+                                        ?> class="ok" alt="CHOOSED">
+                                    </a>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <button class="btn btn-default" name="setCookieLaw" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="<?= base_url('assets/js/bootstrap-toggle.min.js') ?>"></script>
-<script>
-$(document).ready(function () {
-    $('.toggle-changer').change(function () {
-        var myValue;
-        if ($(this).prop('checked') == false) {
-            myValue = '0';
-        } else {
-            myValue = '1';
-        }
-        var myData = $(this).data('for-field');
-        $('[name="' + myData + '"]').val(myValue);
-    });
-});
-</script>

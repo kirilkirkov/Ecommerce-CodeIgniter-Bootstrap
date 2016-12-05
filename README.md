@@ -21,7 +21,8 @@ Bootsrap Responsive online shop
 18. Receive ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/paypalLogo.png "Logo Title Text 1") payments, also have option for paypal sandbox testing
 19. Fast Loading
 20. Site color change with easy to use gradient generator
-21. and more.. and more.. 
+21. Add multilanguage cookie notificator from silktide.com for EU Cookie Law 
+22. and more.. and more.. 
 
 ## Easy installation in 3 steps
 1. Import dbDump.sql to your mysql

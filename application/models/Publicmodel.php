@@ -53,7 +53,7 @@ class Publicmodel extends CI_Model
         $this->db->where('translations.type', 'product');
         $this->db->where('visibility', 1);
         $showOutOfStock = $this->AdminModel->getValueStore('outOfStock');
-        if($showOutOfStock == 0) {
+        if ($showOutOfStock == 0) {
             $this->db->where('quantity >', 0);
         }
         // $this->db->where('in_slider', 0); Show slider products in categories
@@ -389,6 +389,19 @@ class Publicmodel extends CI_Model
             'paypal_status' => $status,
             'processed' => $processed
         ));
+    }
+
+    public function getCookieLaw()
+    {
+        $this->db->join('cookie_law_translations', 'cookie_law_translations.for_id = cookie_law.id', 'inner');
+        $this->db->where('cookie_law_translations.abbr', MY_LANGUAGE_ABBR);
+        $this->db->where('cookie_law.visibility', '1');
+        $query = $this->db->select('link, theme, message, button_text, learn_more')->get('cookie_law');
+        if ($query->num_rows() > 0) {
+            return $query->row_array();
+        } else {
+            return false;
+        }
     }
 
 }

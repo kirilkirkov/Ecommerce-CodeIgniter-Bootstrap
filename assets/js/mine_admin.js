@@ -246,3 +246,27 @@ $(document).ready(function () {
         }
     });
 });
+
+//toggle in settings
+$(document).ready(function () {
+    $('.toggle-changer').change(function () {
+        var myValue;
+        if ($(this).prop('checked') == false) {
+            myValue = '0';
+        } else {
+            myValue = '1';
+        }
+        var myData = $(this).data('for-field');
+        $('[name="' + myData + '"]').val(myValue);
+    });
+});
+
+//themes in settings
+$(document).ready(function () {
+    $('.select-law-theme').click(function () {
+        $('.ok').hide();
+        $(this).children('.ok').show();
+        var theme_name = $(this).data('law-theme');
+        $('[name="theme"]').val(theme_name);
+    });
+});

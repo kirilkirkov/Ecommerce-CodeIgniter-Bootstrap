@@ -713,6 +713,12 @@ class Admin extends MX_Controller
             $this->saveHistory('Change visibility of More Information button in products list');
             redirect('admin/settings');
         }
+        if (isset($_POST['setCookieLaw'])) {
+            unset($_POST['setCookieLaw']);
+            $this->setCookieLaw($_POST);
+            $this->saveHistory('Cookie law information changed');
+            redirect('admin/settings');
+        }
         $data['siteLogo'] = $this->AdminModel->getValueStore('sitelogo');
         $data['naviText'] = $this->AdminModel->getValueStore('navitext');
         $data['footerCopyright'] = $this->AdminModel->getValueStore('footercopyright');
@@ -738,10 +744,24 @@ class Admin extends MX_Controller
         $data['googleApi'] = $this->AdminModel->getValueStore('googleApi');
         $data['outOfStock'] = $this->AdminModel->getValueStore('outOfStock');
         $data['moreInfoBtn'] = $this->AdminModel->getValueStore('moreInfoBtn');
+        $data['cookieLawInfo'] = $this->getCookieLaw();
+        $data['languages'] = $this->AdminModel->getLanguages();
+        $data['law_themes'] = array_diff(scandir('./assets/imgs/cookie-law-themes/'), array('..', '.'));
+        $data['cookieLawInfo'] = $this->getCookieLaw();
         $this->load->view('_parts/header', $head);
         $this->load->view('settings', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to Settings Page');
+    }
+
+    private function setCookieLaw($post)
+    {
+        $this->AdminModel->setCookieLaw($post);
+    }
+
+    private function getCookieLaw()
+    {
+        return $this->AdminModel->getCookieLaw();
     }
 
     public function styling()

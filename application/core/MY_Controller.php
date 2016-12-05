@@ -50,6 +50,7 @@ class MY_Controller extends MX_Controller
         $vars['moreInfoBtn'] = $this->AdminModel->getValueStore('moreInfoBtn');
         $vars['allLanguages'] = $this->getAllLangs();
         $vars['load'] = $this->loop;
+        $vars['cookieLaw'] = $this->Publicmodel->getCookieLaw();
         return $vars;
     }
 

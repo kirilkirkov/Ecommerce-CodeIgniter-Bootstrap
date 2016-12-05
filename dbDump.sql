@@ -16,6 +16,34 @@ CREATE TABLE IF NOT EXISTS `blog_posts` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+CREATE TABLE `cookie_law` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `theme` varchar(20) NOT NULL,
+  `visibility` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `cookie_law_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `button_text` varchar(50) NOT NULL,
+  `learn_more` varchar(50) NOT NULL,
+  `abbr` varchar(5) NOT NULL,
+  `for_id` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `cookie_law`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `cookie_law_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQUE` (`abbr`,`for_id`) USING BTREE;
+
+ALTER TABLE `cookie_law`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `cookie_law_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 CREATE TABLE IF NOT EXISTS `history` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

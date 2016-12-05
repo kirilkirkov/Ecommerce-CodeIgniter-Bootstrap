@@ -639,4 +639,54 @@ class AdminModel extends CI_Model
         return $row['num'];
     }
 
+    public function setCookieLaw($post)
+    {
+        $query = $this->db->query('SELECT id FROM cookie_law');
+        if ($query->num_rows() == 0) {
+            $id = 1;
+        } else {
+            $result = $query->row_array();
+            $id = $result['id'];
+        }
+
+        $this->db->replace('cookie_law', array(
+            'id' => $id,
+            'link' => $post['link'],
+            'theme' => $post['theme'],
+            'visibility' => $post['visibility']
+        ));
+        $for_id = $this->db->insert_id();
+
+        $i = 0;
+        foreach ($post['translations'] as $translate) {
+            $this->db->replace('cookie_law_translations', array(
+                'message' => $post['message'][$i],
+                'button_text' => $post['button_text'][$i],
+                'learn_more' => $post['learn_more'][$i],
+                'abbr' => $translate,
+                'for_id' => $for_id
+            ));
+            $i++;
+        }
+    }
+
+    public function getCookieLaw()
+    {
+        $arr = array('cookieInfo' => null, 'cookieTranslate' => null);
+        $query = $this->db->query('SELECT * FROM cookie_law');
+        if ($query->num_rows() > 0) {
+            $arr['cookieInfo'] = $query->row_array();
+            $query = $this->db->query('SELECT * FROM cookie_law_translations');
+            $arrTrans = $query->result_array();
+            foreach ($arrTrans as $trans) {
+                $arr['cookieTranslate'][$trans['abbr']] = array(
+                    'message' => $trans['message'],
+                    'button_text' => $trans['button_text'],
+                    'learn_more' => $trans['learn_more']
+                );
+            }
+        }
+        return $arr;
+    }
+
 }

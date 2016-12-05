@@ -660,9 +660,9 @@ class AdminModel extends CI_Model
         $i = 0;
         foreach ($post['translations'] as $translate) {
             $this->db->replace('cookie_law_translations', array(
-                'message' => $post['message'][$i],
-                'button_text' => $post['button_text'][$i],
-                'learn_more' => $post['learn_more'][$i],
+                'message' => htmlspecialchars($post['message'][$i]),
+                'button_text' => htmlspecialchars($post['button_text'][$i]),
+                'learn_more' => htmlspecialchars($post['learn_more'][$i]),
                 'abbr' => $translate,
                 'for_id' => $for_id
             ));

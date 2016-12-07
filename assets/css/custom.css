@@ -224,9 +224,7 @@ footer .footer-icon li { display : block; height : 40px; width : 100%; }
 #show-xs-nav span i { margin-left : 5px; }
 #shopping-cart .go-shop, #checkout-page .go-shop {float:left;}
 #shopping-cart .go-checkout, #checkout-page .go-order {float:right;}
-
-@media (min-width: 1200px) { 
-}
+#footer .f-col {height:250px;}
 
 @media (min-width: 992px) and (max-width: 1199px) { 
  #top-part #adv-search .dropdown.dropdown-lg .dropdown-menu { width : 415px; }
@@ -288,6 +286,8 @@ footer .footer-icon li { display : block; height : 40px; width : 100%; }
  .navbar li { float : none; position : static; z-index : 1232; }
  .steps .step {margin-bottom: 2px;}
  #dynPage .text-content {padding:20px 20px;}
+.footer p, .footer ul {font-size: 12px;}
+ #footer .f-col {height:220px;}
 }
 
 @media (max-width: 480px) { 

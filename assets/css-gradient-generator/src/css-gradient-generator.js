@@ -3489,15 +3489,7 @@ var CSSGradientEditor = function(container, options) {
       }
     }
     else if (visiblecount === 1) {
-      cssoutput = selector + ' {\n';
-      cssoutput += '    background-color: ' + getRenderColor(sp[0]) + ';\n';
-      cssoutput += '}';
-      if (tinycolor(sp[0].color).getAlpha() < 1) {
-
-        var filter = 'progid:DXImageTransform.Microsoft.gradient(startColorstr="' + tinycolor(sp[0].color).toHex8String() + '",endColorstr="' + tinycolor(sp[0].color).toHex8String() + '")';
-
-        cssoutput += '\n\n/* IE8- CSS hack */\n@media ' + '\\' + '0screen' + '\\' + ',screen' + '\\' + '9 {\n    ' + selector + ' {\n        background-color:transparent;\n        filter: ' + filter + ';\n    }\n}';
-      }
+      alert('Choose more than one color!');
     }
     else {
       cssoutput = selector + ' {\n    background-color: transparent;\n}';

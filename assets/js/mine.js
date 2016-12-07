@@ -44,7 +44,7 @@ function manageShoppingCart(action, article_id, reload) {
             location.href = reload;
             return;
         }
-        ShowNotificator('alert-success', action_success_msg);
+        ShowNotificator('alert-info', action_success_msg);
     }).fail(function (err) {
         ShowNotificator('alert-danger', action_error_msg);
     }).always(function () {
@@ -60,7 +60,7 @@ function clearCart() {
     $('ul.dropdown-cart').empty();
     $('ul.dropdown-cart').append('<li class="text-center">' + lang.no_products + '</li>');
     $('.sumOfItems').text(0);
-    ShowNotificator('alert-success', lang.cleared_cart);
+    ShowNotificator('alert-info', lang.cleared_cart);
 }
 
 // Top Notificator

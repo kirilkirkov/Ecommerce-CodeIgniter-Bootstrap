@@ -72,7 +72,7 @@ if ($this->session->flashdata('deleted')) {
     ?>
 <script>
     $(document).ready(function () {
-        ShowNotificator('alert-danger', '<?= $this->session->flashdata('deleted') ?>');
+        ShowNotificator('alert-info', '<?= $this->session->flashdata('deleted') ?>');
     });
 </script>
 <?php } ?>

@@ -93,7 +93,7 @@
 <?php if ($this->session->flashdata('emailAdded')) { ?>
     <script>
         $(document).ready(function () {
-            ShowNotificator('alert-success', '<?= lang('email_added') ?>');
+            ShowNotificator('alert-info', '<?= lang('email_added') ?>');
         });
     </script>
     <?php

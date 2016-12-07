@@ -188,7 +188,7 @@ if (count($sliderProducts) > 0) {
                 ?>
                 <script>
                     $(document).ready(function () {
-                        ShowNotificator('alert-danger', '<?= lang('no_results') ?>');
+                        ShowNotificator('alert-info', '<?= lang('no_results') ?>');
                     });
                 </script>
                 <?php

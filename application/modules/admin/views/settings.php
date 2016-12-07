@@ -12,7 +12,7 @@
                 <?php } ?>
                 <img src="<?= base_url('assets/imgs/site-logo/' . $siteLogo) ?>" alt="Logo is deleted. Upload new!" class="img-responsive">
                 <hr>
-                <?= form_open_multipart('admin/styling') ?>
+                <form accept-charset="utf-8" method="post" enctype="multipart/form-data" action="">
                 <input type="file" name="sitelogo" size="20" />
                 <input type="submit" value="Upload New" name="uploadimage" class="btn btn-default" />
                 </form>

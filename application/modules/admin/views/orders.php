@@ -114,13 +114,13 @@
                                                 foreach ($arr_products as $product_id => $product_quantity) {
                                                     $productInfo = modules::run('admin/admin/getProductInfo', $product_id);
                                                     ?>
-                                                    <div>
-                                                        <div class="pull-left">
+                                                    <div style="word-break: break-all;">
+                                                        <div>
                                                             <img src="<?= base_url('attachments/shop_images/' . $productInfo['image']) ?>" alt="Product" style="width:100px; margin-right:10px;" class="img-responsive">
                                                         </div>
                                                         <a data-toggle="tooltip" data-placement="top" title="Click to preview" target="_blank" href="<?= base_url($productInfo['url']) ?>">
                                                             <?= base_url($productInfo['url']) ?>
-                                                            <div><b>Quantity:</b> <?= $product_quantity ?></div>
+                                                            <div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;"><b>Quantity:</b> <?= $product_quantity ?></div>
                                                         </a>
                                                         <div class="clearfix"></div>
                                                     </div>

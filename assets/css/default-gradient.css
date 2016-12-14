@@ -1,0 +1,6 @@
+.gradient-color { background: #D83C3C; background: linear-gradient(top, #D83C3C, #B03131); background: -moz-linear-gradient(top, #D83C3C, #B03131); background : -ms-linear-gradient(top, #D83C3C, #B03131); background : -webkit-gradient(linear, left top, left bottom, from(#D83C3C), to(#B03131)); border : solid 1px #850E01;box-shadow : 2px 2px 3px #661313;}
+.mine-color, .btn-inner-search { background-color: #d83c3c; }
+.button-more::before { border-color: transparent #d83c3c;}
+.btn-go-search:active,.btn-go-search:focus, .btn-go-search:hover, .button-more:hover, .button-more:focus, .button-more:hover { background-color: #c42f2f; }
+div.filter-sidebar .title, .title.alone {border-bottom: 3px solid #d83c3c;}
+div.filter-sidebar .title span, .title.alone span {border-bottom : 3px solid #8c0707; }

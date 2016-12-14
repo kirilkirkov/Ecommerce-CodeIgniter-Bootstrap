@@ -37,15 +37,14 @@ function manageShoppingCart(action, article_id, reload) {
         if (action == 'remove') {
             $('.sumOfItems').text(sum_items - 1);
         }
-        var url = window.location.href;
-        var lastSegment = url.split('/').pop();
-        if (lastSegment == 'checkout' || reload == true) {
+        if (reload == true) {
             location.reload(false);
-        }
-        if (reload != true && reload != false) {
+            return;
+        }else if (typeof reload == 'string') {
             location.href = reload;
+            return;
         }
-        ShowNotificator('alert-success', action_success_msg);
+        ShowNotificator('alert-info', action_success_msg);
     }).fail(function (err) {
         ShowNotificator('alert-danger', action_error_msg);
     }).always(function () {
@@ -61,7 +60,7 @@ function clearCart() {
     $('ul.dropdown-cart').empty();
     $('ul.dropdown-cart').append('<li class="text-center">' + lang.no_products + '</li>');
     $('.sumOfItems').text(0);
-    ShowNotificator('alert-success', lang.cleared_cart);
+    ShowNotificator('alert-info', lang.cleared_cart);
 }
 
 // Top Notificator
@@ -121,12 +120,6 @@ function submitForm() {
 //Tootip activator
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
-});
-//To deal with different heights
-$(document).ready(function () {
-    if ($(".eqHeight .column-h").length > 0) {
-        $(".eqHeight").eqHeight(".column-h");
-    }
 });
 //Email Subscribe
 function checkEmailField() {

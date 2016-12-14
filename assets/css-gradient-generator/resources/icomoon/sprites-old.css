@@ -1,0 +1,115 @@
+[class*="pngicon-"] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url(sprites-000.png);
+    background-repeat: no-repeat;
+    position: relative;
+    top: 2px;
+    left: -2px;
+}
+.btn-primary [class*="pngicon-"] {
+    background-image: url(sprites-fff.png);
+}
+.css-gradient-editor-controller [class*="pngicon-"] {
+    background-image: url(sprites-999.png);
+}
+.css-gradient-editor-controller:hover [class*="pngicon-"],
+.css-gradient-editor-controller.active [class*="pngicon-"] {
+    background-image: url(sprites-fff.png);
+}
+.pngicon-qrcode {
+    background-position: 0 0;
+    width: 14px;
+}
+.pngicon-copy {
+    background-position: -30px 0;
+    width: 14px;
+}
+.pngicon-file-css {
+    background-position: -60px 0;
+    width: 14px;
+}
+.pngicon-undo {
+    background-position: -90px 0;
+    width: 14px;
+}
+.pngicon-redo {
+    background-position: -120px 0;
+    width: 14px;
+}
+.pngicon-new tab {
+    background-position: -150px 0;
+    width: 14px;
+}
+.pngicon-wrench {
+    background-position: -180px 0;
+    width: 14px;
+}
+.pngicon-cogs {
+    background-position: -210px 0;
+    width: 14px;
+}
+.pngicon-disk {
+    background-position: -240px 0;
+    width: 14px;
+}
+.pngicon-remove {
+    background-position: -270px 0;
+    width: 15px;
+}
+.pngicon-share {
+    background-position: -301px 0;
+    width: 14px;
+}
+.pngicon-arrow-up-left {
+    background-position: -331px 0;
+    width: 14px;
+}
+.pngicon-arrow-down-left {
+    background-position: -361px 0;
+    width: 14px;
+}
+.pngicon-arrow-up-right {
+    background-position: -391px 0;
+    width: 14px;
+}
+.pngicon-arrow-down-right {
+    background-position: -421px 0;
+    width: 14px;
+}
+.pngicon-arrow-up {
+    background-position: -451px 0;
+    width: 14px;
+}
+.pngicon-arrow-down {
+    background-position: 0 -30px;
+}
+.pngicon-arrow-left {
+    background-position: -30px -30px;
+}
+.pngicon-arrow-right {
+    background-position: -60px -30px;
+}
+.pngicon-plus {
+    background-position: -90px -30px;
+}
+.pngicon-settings {
+    background-position: -120px -30px;
+}
+.pngicon-collapse {
+    background-position: -150px -30px;
+}
+.pngicon-popup {
+    background-position: -180px -30px;
+}
+.pngicon-remove2 {
+    background-position: -210px -30px;
+}
+.pngicon-random {
+    background-position: -240px -30px;
+}
+.pngicon-picture {
+    width: 15px;
+    background-position: -270px -30px;
+}

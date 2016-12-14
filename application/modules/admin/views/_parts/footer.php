@@ -6,113 +6,97 @@
     <footer>Powered by <a href="http://eccfze.ae">ECCFZE</a></footer>
 <?php } ?>
 </div>
+<!-- Modal Calculator -->
+<div class="modal fade" id="modalCalculator" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Calculator</h4>
+            </div>
+            <div class="modal-body" id="calculator">
+                <div class="hero-unit" id="calculator-wrapper">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div id="calculator-screen" class="form-control"></div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="visible-xs">
+                                =
+                            </div>
+                            <div class="hidden-xs">
+                                =
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div id="calculator-result"  class="form-control">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="well">
+                    <div id="calc-board">
+                        <div class="row">
+                            <a href="javascript:void(0);" class="btn btn-default" data-constant="SIN" data-key="115">sin</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-constant="COS" data-key="99">cos</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-constant="MOD" data-key="109">md</a>
+                            <a href="javascript:void(0);" class="btn btn-danger" data-method="reset" data-key="8">C</a>
+                        </div>
+                        <div class="row">
+                            <a href="javascript:void(0);" class="btn btn-default" data-key="55">7</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-key="56">8</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-key="57">9</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-constant="BRO" data-key="40">(</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-constant="BRC" data-key="41">)</a>
+                        </div>
+                        <div class="row">
+                            <a href="javascript:void(0);" class="btn btn-default" data-key="52">4</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-key="53">5</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-key="54">6</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-constant="MIN" data-key="45">-</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-constant="SUM" data-key="43">+</a>
+                        </div>
+                        <div class="row">
+                            <a href="javascript:void(0);" class="btn btn-default" data-key="49">1</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-key="50">2</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-key="51">3</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-constant="DIV" data-key="47">/</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-constant="MULT" data-key="42">*</a>
+                        </div>
+                        <div class="row">
+                            <a href="javascript:void(0);" class="btn btn-default" data-key="46">.</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-key="48">0</a>
+                            <a href="javascript:void(0);" class="btn btn-default" data-constant="PROC" data-key="37">%</a>
+                            <a href="javascript:void(0);" class="btn btn-primary" data-method="calculate" data-key="61">=</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="well">
+                    <legend>History</legend>
+                    <div id="calc-panel">
+                        <div id="calc-history">
+                            <ol id="calc-history-list"></ol>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="<?= base_url('assets/bootstrap-select-1.9.4/js/bootstrap-select.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
+<script src="<?= base_url('assets/js/zxcvbn.js') ?>"></script>
+<script src="<?= base_url('assets/js/zxcvbn_bootstrap3.js') ?>"></script>
+<script src="<?= base_url('assets/js/pGenerator.jquery.js') ?>"></script>
 <script>
-    if ($(window).width() > 767) {
-        var left_side_width = $('.left-side').width();
-        $("#brand").css("width", left_side_width - 1);
-    }
-    $(window).resize(function () {
-        if ($(window).width() > 767) {
-            var left_side_width = $('.left-side').width();
-            $("#brand").css("width", left_side_width - 1);
-        }
-    });
-    $(document).ready(function () {
-        $(".h-settings").click(function () {
-            $(".settings").toggle("slow", function () {
-                $("i.fa.fa-cogs").addClass('fa-spin');
-                if ($(".settings").is(':visible')) {
-                    $("i.fa.fa-cogs").addClass('fa-spin');
-                } else {
-                    $("i.fa.fa-cogs").removeClass('fa-spin');
-                }
-            });
-        });
-    });
-    function changePass() {
-        var new_pass = $('[name="new_pass"]').val();
-        if (jQuery.trim(new_pass).length > 3) {
-            $.ajax({
-                type: "POST",
-                url: "<?= base_url('admin/changePass') ?>",
-                data: {new_pass: new_pass}
-            }).done(function (data) {
-                if (data == '1') {
-                    $("#pass_result").fadeIn(500).delay(2000).fadeOut(500);
-                } else {
-                    alert('Password cant change!');
-                }
-            });
-        } else {
-            alert('Too short pass!');
-        }
-    }
-    $("#dev-zone").click(function () {
-        $(".toggle-dev").slideToggle("slow");
-    });
-
-    $("a.confirm-delete").click(function (e) {
-        e.preventDefault();
-        var lHref = $(this).attr('href');
-        bootbox.confirm({
-            message: "Are you sure want to delete?",
-            buttons: {
-                confirm: {
-                    label: 'Yes',
-                    className: 'btn-success'
-                },
-                cancel: {
-                    label: 'No',
-                    className: 'btn-danger'
-                }
-            },
-            callback: function (result) {
-                if (result) {
-                    window.location.href = lHref;
-                }
-            }
-        });
-    });
-    $("a.confirm-save").click(function (e) {
-        e.preventDefault();
-        var formId = $(this).data('form-id');
-        bootbox.confirm({
-            message: "Are you sure want to save?",
-            buttons: {
-                confirm: {
-                    label: 'Yes',
-                    className: 'btn-success'
-                },
-                cancel: {
-                    label: 'No',
-                    className: 'btn-danger'
-                }
-            },
-            callback: function (result) {
-                if (result) {
-                    document.getElementById(formId).submit();
-                }
-            }
-        });
-    });
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    });
-    //xs hidden categories
-    $("#show-xs-nav").click(function () {
-        $(".sidebar-menu").toggle("slow", function () {
-            if ($(this).is(":visible") == true) {
-                $("#show-xs-nav .hidde-sp").show();
-                $("#show-xs-nav .show-sp").hide();
-            } else {
-                $("#show-xs-nav .hidde-sp").hide();
-                $("#show-xs-nav .show-sp").show();
-            }
-        });
-    });
+    var urls = {
+        changePass: '<?= base_url('admin/changePass') ?>'
+    };
 </script>
+<script src="<?= base_url('assets/js/mine_admin.js') ?>"></script>
 </body>
 </html>

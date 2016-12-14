@@ -1,9 +1,11 @@
 <?php
 
-if(!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
 
-function pagination($url, $rowscount, $per_page, $segment = 2) {
+function pagination($url, $rowscount, $per_page, $segment = 2)
+{
     $ci = & get_instance();
     $ci->load->library('pagination');
 

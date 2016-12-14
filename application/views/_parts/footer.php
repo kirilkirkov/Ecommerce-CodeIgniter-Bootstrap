@@ -2,19 +2,19 @@
     <div class="footer" id="footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6 f-col">
                     <h3><?= lang('about_us') ?></h3>
                     <p><?= $footerAboutUs ?></p>
                 </div>
-                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6 f-col">
                     <h3><?= lang('pages') ?></h3>
                     <ul>
                         <li><a href="<?= base_url() ?>">» <?= lang('home') ?> </a></li>
-                        <li><a href="<?= $lang_url . '/checkout' ?>">» <?= lang('checkout') ?> </a></li>
-                        <li><a href="<?= $lang_url . '/contacts' ?>">» <?= lang('contacts') ?> </a></li>
+                        <li><a href="<?= LANG_URL . '/checkout' ?>">» <?= lang('checkout') ?> </a></li>
+                        <li><a href="<?= LANG_URL . '/contacts' ?>">» <?= lang('contacts') ?> </a></li>
                     </ul>
                 </div>
-                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6 f-col">
                     <h3><?= lang('categories') ?></h3>
                     <?php if (!empty($footerCategories)) { ?>
                         <ul>
@@ -26,7 +26,7 @@
                         <p><?= lang('no_categories') ?></p>
                     <?php } ?>
                 </div>
-                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6 f-col">
                     <h3><?= lang('contacts') ?></h3>
                     <ul class="footer-icon">
                         <?php if ($footerContactAddr != '') { ?>
@@ -47,7 +47,7 @@
                         <?php } ?>
                     </ul>
                 </div>
-                <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
+                <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 f-col">
                     <h3><?= lang('newsletter') ?></h3>
                     <ul>
                         <li>
@@ -93,7 +93,7 @@
 <?php if ($this->session->flashdata('emailAdded')) { ?>
     <script>
         $(document).ready(function () {
-            ShowNotificator('alert-success', '<?= lang('email_added') ?>');
+            ShowNotificator('alert-info', '<?= lang('email_added') ?>');
         });
     </script>
     <?php

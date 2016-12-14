@@ -23,20 +23,28 @@ if (count($sliderProducts) > 0) {
                     <div class="item <?= $i == 0 ? 'active' : '' ?>">
                         <div class="row">
                             <div class="col-sm-6 left-side">
-                                <img src="<?= base_url('attachments/shop_images/' . $article['image']) ?>" class="img-responsive" alt="">
+                                <a href="<?= LANG_URL . '/' . $article['url'] ?>">
+                                    <img src="<?= base_url('attachments/shop_images/' . $article['image']) ?>" class="img-responsive" alt="">
+                                </a>
                             </div>
                             <div class="col-sm-6 right-side">
-                                <h3 class="text-right"><?= character_limiter($article['title'], 100) ?></h3>
+                                <h3 class="text-right">
+                                    <a href="<?= LANG_URL . '/' . $article['url'] ?>">
+                                        <?= character_limiter($article['title'], 100) ?>
+                                    </a>
+                                </h3>
                                 <div class="description text-right">
                                     <?= character_limiter(strip_tags($article['basic_description']), 150) ?>
                                 </div>
-                                <div class="price text-right"><?= $article['price'] . $currency ?></div>
+                                <div class="price text-right"><?= $article['price'] . CURRENCY ?></div>
                                 <div class="xs-center">
-                                    <a class="option add-to-cart" href="javascript:void(0);" data-id="<?= $article['id'] ?>">
-                                        <span class="glyphicon glyphicon-shopping-cart"></span> <?= lang('buy_now') ?>
+                                    <a class="option add-to-cart" data-goto="<?= base_url('checkout') ?>" href="javascript:void(0);" data-id="<?= $article['id'] ?>">
+                                        <img src="<?= base_url('assets/imgs/shopping-cart-icon-515.png') ?>" alt="">
+                                        <?= lang('buy_now') ?>
                                     </a>
-                                    <a class="option right-5" href="<?= $lang_url . '/' . $article['url'] ?>">
-                                        <span class="glyphicon glyphicon-info-sign"></span> <?= lang('details') ?>
+                                    <a class="option right-5" href="<?= LANG_URL . '/' . $article['url'] ?>">
+                                        <img src="<?= base_url('assets/imgs/info.png') ?>" alt="">
+                                        <?= lang('details') ?>
                                     </a>
                                 </div>
                             </div>
@@ -62,7 +70,7 @@ if (count($sliderProducts) > 0) {
                         <a href="javascript:void(0);" class="clear-filter" data-type-clear="category" data-toggle="tooltip" data-placement="right" title="<?= lang('clear_the_filter') ?>"><i class="fa fa-times" aria-hidden="true"></i></a>
                     <?php } ?>
                 </div>
-                <a href="javascript:void(0)" id="show-xs-nav" class="visible-xs">
+                <a href="javascript:void(0)" id="show-xs-nav" class="visible-xs visible-sm">
                     <span class="show-sp"><?= lang('showXsNav') ?><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i></span>
                     <span class="hidde-sp"><?= lang('hideXsNav') ?><i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i></span>
                 </a>
@@ -87,7 +95,7 @@ if (count($sliderProducts) > 0) {
                                     <?php } else { ?>
                                         <i class="fa fa-circle-o" aria-hidden="true"></i>
                                     <?php } ?>
-                                    <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'selected' : '' ?>"><?= $page['name'] ?></a>
+                                    <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category left-side <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'selected' : '' ?>"><?= $page['name'] ?></a>
                                     <?php
                                     if ($children === true) {
                                         loop_tree($page['children'], true);
@@ -111,29 +119,30 @@ if (count($sliderProducts) > 0) {
                     ?>
                 </div>
             </div>
-            <div class="filter-sidebar">
-                <div class="title">
-                    <span><?= lang('store') ?></span>
-                    <?php if (isset($_GET['in_stock']) && $_GET['in_stock'] != '') { ?>
-                        <a href="javascript:void(0);" class="clear-filter" data-type-clear="in_stock" data-toggle="tooltip" data-placement="right" title="<?= lang('clear_the_filter') ?>"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    <?php } ?>
+            <?php if ($showOutOfStock == 1) { ?>
+                <div class="filter-sidebar">
+                    <div class="title">
+                        <span><?= lang('store') ?></span>
+                        <?php if (isset($_GET['in_stock']) && $_GET['in_stock'] != '') { ?>
+                            <a href="javascript:void(0);" class="clear-filter" data-type-clear="in_stock" data-toggle="tooltip" data-placement="right" title="<?= lang('clear_the_filter') ?>"><i class="fa fa-times" aria-hidden="true"></i></a>
+                        <?php } ?>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" data-in-stock="1" class="in-stock <?= isset($_GET['in_stock']) && $_GET['in_stock'] == '1' ? 'selected' : '' ?>"><?= lang('in_stock') ?> (<?= $countQuantities['in_stock'] ?>)</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-in-stock="0" class="in-stock <?= isset($_GET['in_stock']) && $_GET['in_stock'] == '0' ? 'selected' : '' ?>"><?= lang('out_of_stock') ?> (<?= $countQuantities['out_of_stock'] ?>)</a>
+                        </li>
+                    </ul>
                 </div>
-                <ul>
-                    <li>
-                        <a href="javascript:void(0);" data-in-stock="1" class="in-stock <?= isset($_GET['in_stock']) && $_GET['in_stock'] == '1' ? 'selected' : '' ?>"><?= lang('in_stock') ?> (<?= $countQuantities['in_stock'] ?>)</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-in-stock="0" class="in-stock <?= isset($_GET['in_stock']) && $_GET['in_stock'] == '0' ? 'selected' : '' ?>"><?= lang('out_of_stock') ?> (<?= $countQuantities['out_of_stock'] ?>)</a>
-                    </li>
-                </ul>
-            </div>
-            <?php if ($shippingOrder != 0 && $shippingOrder != null) { ?>
+            <?php } if ($shippingOrder != 0 && $shippingOrder != null) { ?>
                 <div class="filter-sidebar">
                     <div class="title">
                         <span><?= lang('freeShippingHeader') ?></span>
                     </div>
                     <div class="oaerror info">
-                        <strong><?= lang('promo') ?></strong> - <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, $currency), lang('freeShipping')) ?>!
+                        <strong><?= lang('promo') ?></strong> - <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, CURRENCY), lang('freeShipping')) ?>!
                     </div>
                 </div>
             <?php } ?>
@@ -142,7 +151,7 @@ if (count($sliderProducts) > 0) {
             <div class="alone title">
                 <span><?= lang('products') ?></span>
             </div>
-            <div class="product-sort">
+            <div class="product-sort gradient-color">
                 <div class="row">
                     <div class="ord col-sm-4">
                         <div class="form-group">
@@ -174,18 +183,24 @@ if (count($sliderProducts) > 0) {
             </div>
             <?php
             if (!empty($products)) {
-                loop_products($products, $currency, 'col-sm-4 col-md-3', false, $lang_url, $publicQuantity);
+                $load::getProducts($products, 'col-sm-4 col-md-3', false);
             } else {
                 ?>
                 <script>
                     $(document).ready(function () {
-                        ShowNotificator('alert-danger', '<?= lang('no_results') ?>');
+                        ShowNotificator('alert-info', '<?= lang('no_results') ?>');
                     });
                 </script>
                 <?php
             }
-            echo $links_pagination;
             ?>
         </div>
     </div>
+    <?php if ($links_pagination != '') { ?>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <?= $links_pagination ?>
+            </div>
+        </div>
+    <?php } ?>
 </div>

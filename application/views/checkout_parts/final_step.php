@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="container">
+    <?= purchase_steps(1,2) ?>
     <h1>
         <?= lang('you_choose_payment') ?>
         <?php if ($_SESSION['final_step']['payment_type'] == 'cashOnDelivery') { ?>
@@ -68,13 +69,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <td>
                                     <?= $item['num_added'] ?>
                                 </td>
-                                <td><?= $item['price'] . $currency ?></td>
-                                <td><?= $item['sum_price'] . $currency ?></td>
+                                <td><?= $item['price'] . CURRENCY ?></td>
+                                <td><?= $item['sum_price'] . CURRENCY ?></td>
                             </tr>
                         <?php } ?>
                         <tr>
                             <td colspan="4" class="text-right"><?= lang('total') ?></td>
-                            <td><?= $cartItems['finalSum'] . $currency ?></td>
+                            <td><?= $cartItems['finalSum'] . CURRENCY ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -84,6 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <hr>
     <form method="POST" action="<?= base_url('checkout') ?>" class="final-step-form">
         <input type="hidden" name="saveOrder" value="1">
+        <input type="hidden" name="payment_type" value="<?= $_SESSION['final_step']['payment_type'] ?>">
         <a href="<?= base_url('checkout') ?>" class="btn btn-lg btn-primary"><?= lang('order_correction') ?></a>
         <input type="submit" value="<?= lang('final_step') ?>" class="btn btn-lg btn-primary">
     </form>

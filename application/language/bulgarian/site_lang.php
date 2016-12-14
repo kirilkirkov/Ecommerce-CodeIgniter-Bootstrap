@@ -107,6 +107,13 @@ $lang['deleted_product_from_cart'] = 'Продукта е изтрит от ко
 $lang['final_step'] = 'Завърши поръчката';
 $lang['order_correction'] = 'Корекция на поръчката';
 $lang['you_choose_payment'] = 'Вие избрахте плащане с:';
+$lang['shopping_cart_only'] = 'Кошница';
+$lang['your_basket'] = 'Продукти';
+$lang['checkout_top_header'] = 'Плащане';
+$lang['step_your_order'] = 'Вашата поръчка';
+$lang['step_payment_method'] = 'Начин на плащане';
+$lang['step_success_prod'] = 'Успешна поръчка';
+$lang['info_product_list'] = 'Информация за продукта';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'Не сте въвели име';
@@ -117,3 +124,4 @@ $lang['address_empty'] = 'Не сте въвели адрес за получа�
 $lang['invalid_city'] = 'Не сте въвели град';
 $lang['invalid_post_code'] = 'Не сте въвели пощенски код';
 $lang['finded_errors'] = 'Намерихме следните грешки';
+$lang['out_of_stock_product'] = 'Количеството е изчерпано';

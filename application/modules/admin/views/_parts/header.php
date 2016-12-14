@@ -43,15 +43,23 @@
                                                     <label>Change my password</label> <span class="bg-success" id="pass_result">Changed!</span>
                                                     <form class="form-inline" role="form">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="New password" name="new_pass">
+                                                            <input type="text" class="form-control new-pass-field" placeholder="New password" name="new_pass">
                                                         </div>
                                                         <a href="javascript:void(0);" onclick="changePass()" class="btn btn-sm btn-primary">Update</a>
+                                                        <hr>
+                                                        <span>Password Strength:</span>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0;">
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" class="btn btn-default generate-pwd">Generate Password</button> 
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
+                                <li><a href="javascript:void(0);" data-toggle="modal" data-target="#modalCalculator"><i class="fa fa-calculator" aria-hidden="true"></i> Calculator</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="<?= base_url('admin/logout') ?>"><i class="fa fa-sign-out"></i> Logout</a></li>
@@ -94,7 +102,14 @@
                                     <li><a href="<?= base_url('admin/publish') ?>" <?= urldecode(uri_string()) == 'admin/publish' ? 'class="active"' : '' ?>><i class="fa fa-edit"></i> Publish product</a></li>
                                     <li><a href="<?= base_url('admin/products') ?>" <?= urldecode(uri_string()) == 'admin/products' ? 'class="active"' : '' ?>><i class="fa fa-files-o"></i> Products</a></li>
                                     <li><a href="<?= base_url('admin/shop_categories') ?>" <?= urldecode(uri_string()) == 'admin/shop_categories' ? 'class="active"' : '' ?>><i class="fa fa-list-alt"></i> Shop Categories</a></li>
-                                    <li><a href="<?= base_url('admin/orders') ?>" <?= urldecode(uri_string()) == 'admin/orders' ? 'class="active"' : '' ?>><i class="fa fa-money" aria-hidden="true"></i> Orders</a></li>
+                                    <li>
+                                        <a href="<?= base_url('admin/orders') ?>" <?= urldecode(uri_string()) == 'admin/orders' ? 'class="active"' : '' ?>>
+                                            <i class="fa fa-money" aria-hidden="true"></i> Orders 
+                                            <?php if ($numNotPreviewOrders > 0) { ?>
+                                                <img src="<?= base_url('assets/imgs/exlamation-hi.png') ?>" style="position: absolute; right:10px; top:7px;" alt="">
+                                            <?php } ?>
+                                        </a>
+                                    </li>
                                     <?php if (in_array('blog', $activePages)) { ?>
                                         <li class="header">BLOG</li>
                                         <li><a href="<?= base_url('admin/blogPublish') ?>" <?= urldecode(uri_string()) == 'admin/blogPublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> Publish post</a></li>
@@ -116,7 +131,8 @@
                                     }
                                     ?>
                                     <li class="header">SETTINGS</li>
-                                    <li><a href="<?= base_url('admin/styling') ?>" <?= urldecode(uri_string()) == 'admin/styling' ? 'class="active"' : '' ?>><i class="fa fa-laptop" aria-hidden="true"></i> Styling / Settings</a></li>
+                                    <li><a href="<?= base_url('admin/settings') ?>" <?= urldecode(uri_string()) == 'admin/settings' ? 'class="active"' : '' ?>><i class="fa fa-wrench" aria-hidden="true"></i> Settings</a></li>
+                                    <li><a href="<?= base_url('admin/styling') ?>" <?= urldecode(uri_string()) == 'admin/styling' ? 'class="active"' : '' ?>><i class="fa fa-laptop" aria-hidden="true"></i> Styling</a></li>
                                     <li><a href="<?= base_url('admin/titles') ?>" <?= urldecode(uri_string()) == 'admin/titles' ? 'class="active"' : '' ?>><i class="fa fa-font" aria-hidden="true"></i> Titles / Descriptions</a></li>
                                     <li><a href="<?= base_url('admin/pages') ?>" <?= urldecode(uri_string()) == 'admin/pages' ? 'class="active"' : '' ?>><i class="fa fa-file" aria-hidden="true"></i> Active Pages</a></li>
                                     <li><a href="<?= base_url('admin/emails') ?>" <?= urldecode(uri_string()) == 'admin/emails' ? 'class="active"' : '' ?>><i class="fa fa-envelope-o" aria-hidden="true"></i> Subscribed Emails</a></li>

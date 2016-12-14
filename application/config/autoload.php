@@ -58,7 +58,13 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database','session');
+$autoload['libraries'] = array(
+    'database',
+    'session', 
+    'loop',
+    'ShoppingCart', 
+    'Language'
+);
 
 /*
 | -------------------------------------------------------------------
@@ -88,10 +94,9 @@ $autoload['helper'] = array(
     'language', 
     'text', 
     'cookie', 
-    'loop_products', 
-    'loop_items', 
     'getTextualPages', 
-    'mb_ucfirst'
+    'mb_ucfirst',
+    'purchase_steps'
 );
 
 /*
@@ -135,4 +140,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Articles_model');
+$autoload['model'] = array('Publicmodel');

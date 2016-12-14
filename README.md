@@ -20,8 +20,11 @@ Bootsrap Responsive online shop
 15. Easy installation
 16. Easy code change
 17. Edit every text from interface..
-17. Receive ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/paypalLogo.png "Logo Title Text 1") payments, also have option for paypal sandbox testing
-18. Fast Loading
+18. Receive ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/paypalLogo.png "Logo Title Text 1") payments, also have option for paypal sandbox testing
+19. Fast Loading
+20. Site color change with easy to use gradient generator
+21. Add multilanguage cookie notificator from silktide.com for EU Cookie Law 
+22. and more.. and more.. 
 
 ## Easy installation in 3 steps
 1. Import dbDump.sql to your mysql
@@ -29,8 +32,12 @@ Bootsrap Responsive online shop
 3. Set your site domain in application/config/config.php - $config['base_url'] = 'Yoursite.com';
 4. Opss I forgot for last 4 step... ENJOY! ;)
 
+## Login to administration with:
+User: admin
+Pass: admin
+
 ## Screenshot
-![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/screenshot.png "Logo Title Text 1")
+![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/design/redlabel-style/screenshot.png "Logo Title Text 1")
 
 ## Screenshot of admin panel
 ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/admin_panel4.png "Logo Title Text 1")

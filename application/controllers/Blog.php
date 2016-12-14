@@ -14,15 +14,15 @@ class Blog extends MY_Controller
             show_404();
         }
         $this->load->helper(array('pagination'));
-        $this->load->Model('Admin_model');
-        $this->arhives = $this->Articles_model->getArchives();
+        $this->load->Model('admin/AdminModel');
+        $this->arhives = $this->Publicmodel->getArchives();
     }
 
     public function index($page = 0)
     {
         $data = array();
         $head = array();
-        $arrSeo = $this->Articles_model->getSeo('page_blog', $this->my_lang);
+        $arrSeo = $this->Publicmodel->getSeo('page_blog');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
@@ -34,10 +34,10 @@ class Blog extends MY_Controller
             $month = $_GET;
         } else
             $month = null;
-        $data['posts'] = $this->Admin_model->getPosts($this->my_lang, $this->num_rows, $page, $find, $month);
+        $data['posts'] = $this->Publicmodel->getPosts($this->num_rows, $page, $find, $month);
         $data['archives'] = $this->getBlogArchiveHtml();
-        $data['bestSellers'] = $this->Articles_model->getbestSellers($this->my_lang);
-        $rowscount = $this->Admin_model->postsCount($find);
+        $data['bestSellers'] = $this->Publicmodel->getbestSellers();
+        $rowscount = $this->AdminModel->postsCount($find);
         $data['links_pagination'] = pagination('blog', $rowscount, $this->num_rows);
         $this->render('blog', $head, $data);
     }
@@ -49,7 +49,10 @@ class Blog extends MY_Controller
         }
         $data = array();
         $head = array();
-        $data['article'] = $this->Articles_model->getOnePost($this->my_lang, $id);
+        $data['article'] = $this->Publicmodel->getOnePost($id);
+        if ($data['article'] == null) {
+            show_404();
+        }
         $data['archives'] = $this->getBlogArchiveHtml();
         $head['title'] = $data['article']['title'];
         $head['description'] = url_title(character_limiter(strip_tags($data['article']['description']), 130));
@@ -70,7 +73,9 @@ class Blog extends MY_Controller
 
             foreach ($this->arhives as $archive) {
                 $html .= '
-					<li class="item">» <a href="' . $this->lang_url . '/blog?from=' . $archive['mintime'] . '&to=' . $archive['maxtime'] . '">' . $archive['month'] . '</a></li>
+					<li class="item">» <a href="' . LANG_URL . '/blog?from='
+                        . $archive['mintime'] . '&to=' . $archive['maxtime'] . '">'
+                        . $archive['month'] . '</a></li>
 				';
             }
             $html .= '</ul>';

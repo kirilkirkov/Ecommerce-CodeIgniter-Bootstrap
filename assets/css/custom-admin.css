@@ -25,11 +25,21 @@ input.form-control {border:1px solid #dadada; border-radius: 0; box-shadow:none;
 .form-box button.login{    margin-top:15px;    padding: 10px 20px;}
 .animated {  -webkit-animation-duration: 1s;  animation-duration: 1s;  -webkit-animation-fill-mode: both;  animation-fill-mode: both;}
 #theSliderDescrption {display:none;}
-
+.more-info-purchase > tbody > tr > td, .more-info-purchase > tbody > tr > th, .more-info-purchase > tfoot > tr > td, .more-info-purchase > tfoot > tr > th, .more-info-purchase > thead > tr > td, .more-info-purchase > thead > tr > th {border-top: none; border-bottom: 1px solid #ddd;}
+.cookie-law-themes { padding-top: 20px; padding-bottom: 20px; margin-left: 10px; margin-right: 10px;}
+.cookie-law-themes a .theme {margin-bottom:10px;}
+.cookie-law-themes a .ok {display:none; position: absolute; width:40px; top:0; left:0;}
 .show-menu {display: none;}
-#show-xs-nav { border: 1px solid #666; color: #666; font-size: 15px; padding: 3px; text-align: center; text-decoration: none;}
-#show-xs-nav {color: #666;  font-size: 15px; text-align: center;}
-#nav-categories, #show-xs-nav .hidde-sp {   display: none;}
+#show-xs-nav { border: 1px solid #666;  padding: 5px; text-decoration: none; color: #666;  font-size: 13px; text-align: center; margin-top: 10px; border-radius: 5px;}
+#nav-categories, #show-xs-nav .hidde-sp {display: none;}
+
+#calc-board {width:200px; margin:0 auto;}
+#calc-board a {margin-bottom:5px; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #b3b3b3; background: #ffffff;
+               background: -moz-linear-gradient(top,  #ffffff 0%, #e6e6e6 100%);
+               background: -webkit-linear-gradient(top,  #ffffff 0%,#e6e6e6 100%);
+               background: linear-gradient(to bottom,  #ffffff 0%,#e6e6e6 100%);
+               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e6e6e6',GradientType=0 );
+               color:#333;}
 
 .other-img {display: inline-block; position:relative;}
 .other-img a {position:absolute; right:0; top:0; background-color: #fff; color:red;}

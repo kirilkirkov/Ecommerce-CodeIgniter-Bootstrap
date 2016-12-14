@@ -11,18 +11,22 @@ class Home extends MY_Controller
     {
         parent::__construct();
         $this->load->helper(array('pagination'));
-        $this->load->Model('Admin_model');
+        $this->load->Model('AdminModel');
     }
 
     public function index($page = 0)
     {
         $data = array();
         $head = array();
-        $arrSeo = $this->Articles_model->getSeo('page_home', $this->my_lang);
+        $arrSeo = $this->Publicmodel->getSeo('page_home');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
-        $all_categories = $this->Articles_model->getShopCategories($this->my_lang);
+        $all_categories = $this->Publicmodel->getShopCategories();
+
+        /*
+         * Tree Builder for categories menu
+         */
 
         function buildTree(array $elements, $parentId = 0)
         {
@@ -40,66 +44,58 @@ class Home extends MY_Controller
         }
 
         $data['home_categories'] = $tree = buildTree($all_categories);
-        $data['countQuantities'] = $this->Articles_model->getCountQuantities();
-        $data['bestSellers'] = $this->Articles_model->getbestSellers($this->my_lang);
-        $data['sliderProducts'] = $this->Articles_model->getSliderProducts($this->my_lang);
-        $data['shippingOrder'] = $this->Admin_model->getValueStore('shippingOrder');
-        $data['products'] = $this->Articles_model->getProducts($this->my_lang, $this->num_rows, $page, $_GET);
-        $rowscount = $this->Articles_model->productsCount('shop');
+        $data['countQuantities'] = $this->Publicmodel->getCountQuantities();
+        $data['bestSellers'] = $this->Publicmodel->getbestSellers();
+        $data['sliderProducts'] = $this->Publicmodel->getSliderProducts();
+        $data['shippingOrder'] = $this->AdminModel->getValueStore('shippingOrder');
+        $data['products'] = $this->Publicmodel->getProducts($this->num_rows, $page, $_GET);
+        $data['showOutOfStock'] = $this->AdminModel->getValueStore('outOfStock');
+        $rowscount = $this->Publicmodel->productsCount($_GET);
         $data['links_pagination'] = pagination('home', $rowscount, $this->num_rows);
         $this->render('home', $head, $data);
     }
 
+    /*
+     * Called to add/remove quantity from cart
+     * If is ajax request send POST'S to class ShoppingCart
+     */
+
     public function manageShoppingCart()
-    { // called from add/delete to cart buttons
+    {
         if (!$this->input->is_ajax_request()) {
             exit('No direct script access allowed');
         }
-        if ($_POST['action'] == 'add') {
-            if (!isset($_SESSION['shopping_cart']))
-                $_SESSION['shopping_cart'] = array();
-            @$_SESSION['shopping_cart'][] = (int) $_POST['article_id'];
-        }
-        if ($_POST['action'] == 'remove') {
-            if (($key = array_search($_POST['article_id'], $_SESSION['shopping_cart'])) !== false) {
-                unset($_SESSION['shopping_cart'][$key]);
-            }
-        }
-        @set_cookie('shopping_cart', serialize($_SESSION['shopping_cart']), 2678400); // 1 month expire time
-        $result = 0;
-        if (!empty($_SESSION['shopping_cart'])) {
-            $result = $this->getCartItems();
-        }
-        // get items from db and add him to cart from ajax
-        loop_items($result, $this->currency, base_url($this->lang_link . '/'));
+        $this->shoppingcart->manageShoppingCart();
     }
+
+    /*
+     * Called to remove product from cart
+     * If is ajax request and send $_GET variable to the class
+     */
 
     public function removeFromCart()
     {
         $backTo = $_GET['back-to'];
-        $count = count(array_keys($_SESSION['shopping_cart'], $_GET['delete-product']));
-        $i = 1;
-        do {
-            if (($key = array_search($_GET['delete-product'], $_SESSION['shopping_cart'])) !== false) {
-                unset($_SESSION['shopping_cart'][$key]);
-            }
-            $i++;
-        } while ($i <= $count);
-        @set_cookie('shopping_cart', serialize($_SESSION['shopping_cart']), 2678400); // 1 month expire time
+        $this->shoppingcart->removeFromCart();
         $this->session->set_flashdata('deleted', lang('deleted_product_from_cart'));
-        redirect($this->lang_link . '/' . $backTo);
+        redirect(LANG_URL . '/' . $backTo);
+    }
+
+    public function clearShoppingCart()
+    {
+        $this->shoppingcart->clearShoppingCart();
     }
 
     public function viewProduct($id)
     {
         $data = array();
         $head = array();
-        $data['product'] = $this->Articles_model->getOneProduct($id, $this->my_lang);
-        $data['sameCagegoryProducts'] = $this->Articles_model->sameCagegoryProducts($this->my_lang, $data['product']['shop_categorie'], $id);
+        $data['product'] = $this->Publicmodel->getOneProduct($id);
+        $data['sameCagegoryProducts'] = $this->Publicmodel->sameCagegoryProducts($data['product']['shop_categorie'], $id);
         if ($data['product'] === null) {
             show_404();
         }
-        $vars['publicDateAdded'] = $this->Admin_model->getValueStore('publicDateAdded');
+        $vars['publicDateAdded'] = $this->AdminModel->getValueStore('publicDateAdded');
         $this->load->vars($vars);
         $head['title'] = $data['product']['title'];
         $description = url_title(character_limiter(strip_tags($data['product']['description']), 130));

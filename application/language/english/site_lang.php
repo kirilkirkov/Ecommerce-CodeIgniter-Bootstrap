@@ -105,6 +105,13 @@ $lang['deleted_product_from_cart'] = 'The product is deleted from shopping cart'
 $lang['final_step'] = 'Save order';
 $lang['order_correction'] = 'Order correction';
 $lang['you_choose_payment'] = 'You choose payment with:';
+$lang['shopping_cart_only'] = 'Shopping Cart';
+$lang['your_basket'] = 'Your Basket';
+$lang['checkout_top_header'] = 'Checkout';
+$lang['step_your_order'] = 'Your order';
+$lang['step_payment_method'] = 'Method of payment';
+$lang['step_success_prod'] = 'Successful procurement';
+$lang['info_product_list'] = 'Product information';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';
@@ -115,3 +122,4 @@ $lang['address_empty'] = 'You have not entered address';
 $lang['invalid_city'] = 'You have not entered city';
 $lang['invalid_post_code'] = 'You have not entered post code';
 $lang['finded_errors'] = 'I found the following errors';
+$lang['out_of_stock_product'] = 'Product is out of stock';

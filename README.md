@@ -35,7 +35,7 @@ User: admin
 Pass: admin
 
 ## Screenshot
-![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/design/redlabel-style/screenshot.png "Logo Title Text 1")
+![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/screenshot.png "Logo Title Text 1")
 
 ## Screenshot of admin panel
 ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/admin_panel4.png "Logo Title Text 1")

@@ -1054,7 +1054,7 @@ class Admin extends MX_Controller
 
     public function getProductInfo($id)
     {
-        return $this->AdminModel->getOneProduct($id);
+        return $this->AdminModel->getOneProduct($id, true);
     }
 
 }

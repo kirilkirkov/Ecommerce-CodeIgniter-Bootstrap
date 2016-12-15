@@ -364,7 +364,7 @@ class Admin extends MX_Controller
                 $this->session->set_flashdata('result_add', 'This language exsists!');
             redirect('admin/languages');
         }
-
+        $data['max_input_vars'] = ini_get('max_input_vars');
         $this->load->view('_parts/header', $head);
         $this->load->view('languages', $data);
         $this->load->view('_parts/footer');

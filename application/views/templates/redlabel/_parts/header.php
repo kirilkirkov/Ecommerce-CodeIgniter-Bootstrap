@@ -55,7 +55,7 @@
                             <?php
                             if ($footerContactPhone != '') {
                                 ?>
-                                <img src="<?= base_url('assets/imgs/Phone-icon.png') ?>" alt="Call us">
+                                <img src="<?= base_url('template/imgs/Phone-icon.png') ?>" alt="Call us">
                                 <?php
                                 echo $footerContactPhone;
                             }
@@ -68,7 +68,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-3 col-lg-4 left">
                                 <a href="<?= base_url() ?>">
-                                    <img src="<?= base_url('assets/imgs/site-logo/' . $sitelogo) ?>" class="site-logo" alt="<?= $_SERVER['HTTP_HOST'] ?>">
+                                    <img src="<?= base_url('assets/attachments/site-logo/' . $sitelogo) ?>" class="site-logo" alt="<?= $_SERVER['HTTP_HOST'] ?>">
                                 </a>
                             </div>
                             <div class="col-sm-6 col-md-5 col-lg-5">
@@ -134,7 +134,7 @@
                                                 </div>
                                             </div>
                                             <button type="button" onclick="submitForm()" class="btn-go-search mine-color">
-                                                <img src="<?= base_url('assets/imgs/search-ico.png') ?>" alt="Search">
+                                                <img src="<?= base_url('template/imgs/search-ico.png') ?>" alt="Search">
                                             </button>
                                         </div>
                                     </div>
@@ -145,7 +145,7 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <img src="<?= base_url('assets/imgs/green-basket.png') ?>" class="green-basket" alt="">
+                                                <img src="<?= base_url('template/imgs/green-basket.png') ?>" class="green-basket" alt="">
                                             </td>
                                             <td>
                                                 <div class="center">
@@ -159,7 +159,7 @@
                                                     <li class="dropdown text-center">
                                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
                                                             <div><span class="sumOfItems"><?= $cartItems['array'] == 0 ? 0 : $sumOfItems ?></span> <?= lang('items') ?></div>
-                                                            <img src="<?= base_url('assets/imgs/shopping-cart-icon-515.png') ?>" alt="">
+                                                            <img src="<?= base_url('template/imgs/shopping-cart-icon-515.png') ?>" alt="">
                                                             <span class="caret"></span>
                                                         </a>
                                                         <ul class="dropdown-menu dropdown-menu-right dropdown-cart" role="menu">

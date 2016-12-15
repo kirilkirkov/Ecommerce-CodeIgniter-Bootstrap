@@ -39,11 +39,11 @@ if (count($sliderProducts) > 0) {
                                 <div class="price text-right"><?= $article['price'] . CURRENCY ?></div>
                                 <div class="xs-center">
                                     <a class="option add-to-cart" data-goto="<?= base_url('checkout') ?>" href="javascript:void(0);" data-id="<?= $article['id'] ?>">
-                                        <img src="<?= base_url('assets/imgs/shopping-cart-icon-515.png') ?>" alt="">
+                                        <img src="<?= base_url('template/imgs/shopping-cart-icon-515.png') ?>" alt="">
                                         <?= lang('buy_now') ?>
                                     </a>
                                     <a class="option right-5" href="<?= LANG_URL . '/' . $article['url'] ?>">
-                                        <img src="<?= base_url('assets/imgs/info.png') ?>" alt="">
+                                        <img src="<?= base_url('template/imgs/info.png') ?>" alt="">
                                         <?= lang('details') ?>
                                     </a>
                                 </div>

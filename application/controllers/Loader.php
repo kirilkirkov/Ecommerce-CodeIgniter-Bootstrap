@@ -7,11 +7,15 @@ mb_internal_encoding("UTF-8");
 class Loader extends MY_Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->helper('file');
     }
+
+    /*
+     * Load language javascript file
+     */
 
     public function jsFile($file = null)
     {
@@ -26,6 +30,10 @@ class Loader extends MY_Controller
         }
         echo $contents;
     }
+
+    /*
+     * Load css generated from administration -> styles
+     */
 
     public function cssStyle()
     {
@@ -42,9 +50,14 @@ class Loader extends MY_Controller
         echo $style;
     }
 
+    /*
+     * Load css file for template
+     * Can call css file in folder /assets/css/ with templatecss/filename.css
+     */
+
     public function templateCss($template, $file)
     {
-        $style = file_get_contents('./application/views/templates/' . $template . '/assets/css/' . $file);
+        $style = file_get_contents(TEMPLATES_DIR . $template . '/assets/css/' . $file);
         if (!$style) {
             header('HTTP/1.1 404 Not Found');
             return;
@@ -53,9 +66,14 @@ class Loader extends MY_Controller
         echo $style;
     }
 
+    /*
+     * Load js file for template
+     * Can call css file in folder /assets/js/ with templatecss/filename.js
+     */
+
     public function templateJs($template, $file)
     {
-        $js = file_get_contents('./application/views/templates/' . $template . '/assets/js/' . $file);
+        $js = file_get_contents(TEMPLATES_DIR . $template . '/assets/js/' . $file);
         if (!$js) {
             header('HTTP/1.1 404 Not Found');
             return;
@@ -64,15 +82,22 @@ class Loader extends MY_Controller
         echo $js;
     }
 
+    /*
+     * Load images comming with template in folder /assets/imgs/
+     * Can call from view with template/imgs/filename.jpg
+     */
+
     public function templateCssImage($template, $file)
     {
-        $js = file_get_contents('./application/views/templates/' . $template . '/assets/imgs/' . $file);
-        if (!$js) {
+        $path = TEMPLATES_DIR . $template . '/assets/imgs/' . $file;
+        $img = file_get_contents($path);
+        if (!$img) {
             header('HTTP/1.1 404 Not Found');
             return;
         }
-        header('Content-Type: image/png  charset: UTF-8');
-        echo $js;
+        $image_mime = mime_content_type($path);
+        header('Content-Type: ' . $image_mime . '  charset: UTF-8');
+        echo $img;
     }
 
 }

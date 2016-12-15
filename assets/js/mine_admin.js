@@ -270,3 +270,9 @@ $(document).ready(function () {
         $('[name="theme"]').val(theme_name);
     });
 });
+
+//templates chooser
+$('.choose-template').click(function () {
+    var template_name = $(this).data('template-name');
+    $('#saveTemplate .template-name').val(template_name);
+});

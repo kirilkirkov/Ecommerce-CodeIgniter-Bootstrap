@@ -85,7 +85,7 @@ $config['admin_history'] = true;
   | there is an available translation if you intend to use something other
   | than english.
   | Must set currencyKey: BGN, USD or other.. Look in currency
-  | hepler for help.. :) 
+  | hepler for help.. :)
   |
  */
 $config['language'] = 'bulgarian';
@@ -98,7 +98,7 @@ $config['currencyKey'] = 'BGN';
   | Default array of non dynamic pages
   |--------------------------------------------------------------------------
   |
-  | Here must set pages that are not added from interface.. 
+  | Here must set pages that are not added from interface..
   |
  */
 $config['no_dynamic_pages'] = array('blog');
@@ -536,3 +536,13 @@ $config['rewrite_short_tags'] = FALSE;
   | Array:		array('10.0.1.200', '192.168.5.0/24')
  */
 $config['proxy_ips'] = '';
+
+/*
+  |--------------------------------------------------------------------------
+  | Site Template Name That Will Be Loaded
+  |--------------------------------------------------------------------------
+  |
+  | By default is redlabel.
+  |
+ */
+$config['template'] = 'redlabel';

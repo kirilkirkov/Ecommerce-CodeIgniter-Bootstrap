@@ -86,7 +86,7 @@
         </div>
     </div>
 </div>
-<script src="<?= base_url('assets/bootstrap-select-1.9.4/js/bootstrap-select.min.js') ?>"></script>
+<script src="<?= base_url('assets/bootstrap-select-1.12.1/js/bootstrap-select.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/zxcvbn.js') ?>"></script>

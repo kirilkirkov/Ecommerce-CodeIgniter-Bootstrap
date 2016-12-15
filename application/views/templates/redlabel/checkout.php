@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             ?>
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
-                    <img src="<?= base_url('assets/imgs/paypal.png') ?>" class="img-responsive paypal-image">
+                    <img src="<?= base_url('template/imgs/paypal.png') ?>" class="img-responsive paypal-image">
                 </div>
             </div>
             <div class="alert alert-info text-center"><?= lang('you_choose_paypal') ?></div>

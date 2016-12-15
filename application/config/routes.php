@@ -73,9 +73,12 @@ $route[rawurlencode('home') . '/(:num)'] = "home/index/$1";
 $route['loadlanguage/(:any)'] = "Loader/jsFile/$1";
 $route['cssloader/(:any)'] = "Loader/cssStyle";
 
-$route['templatecss/imgs/(:any)'] = "Loader/templateCssImage/redlabel/$1";
-$route['templatecss/(:any)'] = "Loader/templateCss/redlabel/$1";
-$route['templatejs/(:any)'] = "Loader/templateJs/redlabel/$1";
+// Template Routes
+$template = $this->config->item('template');
+$route['template/imgs/(:any)'] = "Loader/templateCssImage/$template/$1";
+$route['templatecss/imgs/(:any)'] = "Loader/templateCssImage/$template/$1";
+$route['templatecss/(:any)'] = "Loader/templateCss/$template/$1";
+$route['templatejs/(:any)'] = "Loader/templateJs/$template/$1";
 
 $route['(:any)_(:num)'] = "home/viewProduct/$2";
 $route['(\w{2})/(:any)_(:num)'] = "home/viewProduct/$3";

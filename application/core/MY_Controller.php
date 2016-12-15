@@ -14,7 +14,14 @@ class MY_Controller extends MX_Controller
         $this->getActivePages();
         $this->checkForPostRequests();
         $this->setReferrer();
+        //set selected template
+        $this->loadTemplate();
     }
+
+    /*
+     * Render page from controller
+     * it loads header and footer auto
+     */
 
     public function render($view, $head, $data = null, $footer = null)
     {
@@ -26,6 +33,11 @@ class MY_Controller extends MX_Controller
         $this->load->view($this->template . $view, $data);
         $this->load->view($this->template . '_parts/footer', $footer);
     }
+
+    /*
+     * Load variables from values-store
+     * texts, social media links, logos, etc.
+     */
 
     private function loadVars()
     {
@@ -55,6 +67,10 @@ class MY_Controller extends MX_Controller
         return $vars;
     }
 
+    /*
+     * Get all added languages from administration
+     */
+
     private function getAllLangs()
     {
         $arr = array();
@@ -65,6 +81,11 @@ class MY_Controller extends MX_Controller
         }
         return $arr;
     }
+
+    /*
+     * Active pages for navigation
+     * Managed from administration
+     */
 
     private function getActivePages()
     {
@@ -80,6 +101,10 @@ class MY_Controller extends MX_Controller
         $dynPages = getTextualPages($activeP);
         $this->dynPages = $this->Publicmodel->getDynPagesLangs($dynPages);
     }
+
+    /*
+     * Email subscribe form from footer
+     */
 
     private function checkForPostRequests()
     {
@@ -102,6 +127,10 @@ class MY_Controller extends MX_Controller
         }
     }
 
+    /*
+     * Set referrer to save it in orders
+     */
+
     private function setReferrer()
     {
         if ($this->session->userdata('referrer') == null) {
@@ -111,6 +140,24 @@ class MY_Controller extends MX_Controller
                 $ref = $_SERVER['HTTP_REFERER'];
             }
             $this->session->set_userdata('referrer', $ref);
+        }
+    }
+
+    /*
+     * Check for selected template 
+     * and set it in config if exists
+     */
+
+    private function loadTemplate()
+    {
+        $template = $this->AdminModel->getValueStore('template');
+        if ($template == null) {
+            $template = $this->config->item('template');
+        } else {
+            $this->config->set_item('template', $template);
+        }
+        if (!is_dir(TEMPLATES_DIR . $template)) {
+            show_error('The selected template does not exists!');
         }
     }
 

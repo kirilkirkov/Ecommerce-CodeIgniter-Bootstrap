@@ -215,4 +215,5 @@ INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
 (22, 'paypal_currency', 'EUR'),
 (23, 'publicDateAdded', '0'),
 (24, 'finalCheckoutPage', '0'),
-(25, 'googleApi', '');
+(25, 'googleApi', ''),
+(26, 'template', 'redlabel');

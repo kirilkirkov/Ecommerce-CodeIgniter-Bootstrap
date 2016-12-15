@@ -597,7 +597,7 @@ class Admin extends MX_Controller
         $head['keywords'] = '';
 
         if (isset($_POST['uploadimage'])) {
-            $config['upload_path'] = './assets/imgs/site-logo/';
+            $config['upload_path'] = './assets/attachments/site-logo/';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['max_size'] = 1500;
             $config['max_width'] = 1024;
@@ -816,10 +816,11 @@ class Admin extends MX_Controller
     {  //called from ajax
         $this->login_check();
         $result = $this->AdminModel->changePass($_POST['new_pass'], $this->username);
-        if ($result == true)
+        if ($result == true) {
             echo 1;
-        else
+        } else {
             echo 0;
+        }
         $this->saveHistory('Password change for user: ' . $this->username);
     }
 
@@ -827,10 +828,11 @@ class Admin extends MX_Controller
     { //called from ajax
         $this->login_check();
         $result = $this->AdminModel->productStatusChange($_POST['id'], $_POST['to_status']);
-        if ($result == true)
+        if ($result == true) {
             echo 1;
-        else
+        } else {
             echo 0;
+        }
         $this->saveHistory('Change product id ' . $_POST['id'] . ' to status ' . $_POST['to_status']);
     }
 
@@ -838,10 +840,11 @@ class Admin extends MX_Controller
     {
         $this->login_check();
         $result = $this->AdminModel->changeOrderStatus($_POST['the_id'], $_POST['to_status']);
-        if ($result == true)
+        if ($result == true) {
             echo 1;
-        else
+        } else {
             echo 0;
+        }
         $this->saveHistory('Change order status on product Id ' . $_POST['the_id'] . ' to status ' . $_POST['to_status']);
     }
 
@@ -1012,10 +1015,11 @@ class Admin extends MX_Controller
     {
         $this->login_check();
         $result = $this->AdminModel->changePageStatus($_POST['id'], $_POST['status']);
-        if ($result == true)
+        if ($result == true) {
             echo 1;
-        else
+        } else {
             echo 0;
+        }
         $this->saveHistory('Page status Changed');
     }
 
@@ -1052,8 +1056,34 @@ class Admin extends MX_Controller
         }
     }
 
+    public function templates()
+    {
+        $this->login_check();
+        $data = array();
+        $head = array();
+        $head['title'] = 'Administration - Templates';
+        $head['description'] = '!';
+        $head['keywords'] = '';
+        if (isset($_POST['template'])) {
+            $this->AdminModel->setValueStore('template', $_POST['template']);
+            redirect('admin/templates');
+        }
+        $templates = scandir(TEMPLATES_DIR);
+        foreach ($templates as $template) {
+            if ($template != "." && $template != "..") {
+                $data['templates'][] = $template;
+            }
+        }
+        $data['seleced_template'] = $this->AdminModel->getValueStore('template');
+        $this->load->view('_parts/header', $head);
+        $this->load->view('templates', $data);
+        $this->load->view('_parts/footer');
+        $this->saveHistory('Go to Templates Page');
+    }
+
     public function getProductInfo($id)
     {
+        $this->login_check();
         return $this->AdminModel->getOneProduct($id, true);
     }
 

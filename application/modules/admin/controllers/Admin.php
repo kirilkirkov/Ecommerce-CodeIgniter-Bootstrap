@@ -597,7 +597,7 @@ class Admin extends MX_Controller
         $head['keywords'] = '';
 
         if (isset($_POST['uploadimage'])) {
-            $config['upload_path'] = './assets/attachments/site-logo/';
+            $config['upload_path'] = './attachments/site_logo/';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['max_size'] = 1500;
             $config['max_width'] = 1024;

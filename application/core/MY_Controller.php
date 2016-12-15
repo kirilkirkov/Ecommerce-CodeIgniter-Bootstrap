@@ -5,7 +5,7 @@ class MY_Controller extends MX_Controller
 
     public $nonDynPages = array();
     private $dynPages = array();
-    private $template = 'templates/redlabel/';
+    private $template;
 
     public function __construct()
     {
@@ -159,6 +159,7 @@ class MY_Controller extends MX_Controller
         if (!is_dir(TEMPLATES_DIR . $template)) {
             show_error('The selected template does not exists!');
         }
+        $this->template = 'templates/' . $template . '/';
     }
 
 }

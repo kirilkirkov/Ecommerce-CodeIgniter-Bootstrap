@@ -12,10 +12,10 @@
         <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/bootstrap-select-1.12.1/bootstrap-select.min.css') ?>">
         <link href="<?= base_url('assets/css/bootstrap-datepicker.min.css') ?>" rel="stylesheet">
-        <link href="<?= base_url('assets/css/custom.css') ?>" rel="stylesheet">
+        <link href="<?= base_url('templatecss/custom.css') ?>" rel="stylesheet">
         <link href="<?= base_url('cssloader/theme.css') ?>" rel="stylesheet">
         <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
-        <script src="<?= base_url('jsloader/all.js') ?>"></script>
+        <script src="<?= base_url('loadlanguage/all.js') ?>"></script>
         <?php if ($cookieLaw != false) { ?>
             <script type="text/javascript">
                 window.cookieconsent_options = {"message": "<?= $cookieLaw['message'] ?>", "dismiss": "<?= $cookieLaw['button_text'] ?>", "learnMore": "<?= $cookieLaw['learn_more'] ?>", "link": "<?= $cookieLaw['link'] ?>", "theme": "<?= $cookieLaw['theme'] ?>"};

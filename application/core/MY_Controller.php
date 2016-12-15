@@ -5,6 +5,7 @@ class MY_Controller extends MX_Controller
 
     public $nonDynPages = array();
     private $dynPages = array();
+    private $template = 'templates/redlabel/';
 
     public function __construct()
     {
@@ -21,9 +22,9 @@ class MY_Controller extends MX_Controller
         $head['sumOfItems'] = $this->shoppingcart->sumValues;
         $vars = $this->loadVars();
         $this->load->vars($vars);
-        $this->load->view('_parts/header', $head);
-        $this->load->view($view, $data);
-        $this->load->view('_parts/footer', $footer);
+        $this->load->view($this->template . '_parts/header', $head);
+        $this->load->view($this->template . $view, $data);
+        $this->load->view($this->template . '_parts/footer', $footer);
     }
 
     private function loadVars()

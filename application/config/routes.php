@@ -70,8 +70,12 @@ $route['(\w{2})/clearShoppingCart'] = 'home/clearShoppingCart';
 
 $route[rawurlencode('home') . '/(:num)'] = "home/index/$1";
 
-$route['jsloader/(:any)'] = "Loader/jsFile/$1";
+$route['loadlanguage/(:any)'] = "Loader/jsFile/$1";
 $route['cssloader/(:any)'] = "Loader/cssStyle";
+
+$route['templatecss/imgs/(:any)'] = "Loader/templateCssImage/redlabel/$1";
+$route['templatecss/(:any)'] = "Loader/templateCss/redlabel/$1";
+$route['templatejs/(:any)'] = "Loader/templateJs/redlabel/$1";
 
 $route['(:any)_(:num)'] = "home/viewProduct/$2";
 $route['(\w{2})/(:any)_(:num)'] = "home/viewProduct/$3";

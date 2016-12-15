@@ -42,4 +42,37 @@ class Loader extends MY_Controller
         echo $style;
     }
 
+    public function templateCss($template, $file)
+    {
+        $style = file_get_contents('./application/views/templates/' . $template . '/assets/css/' . $file);
+        if (!$style) {
+            header('HTTP/1.1 404 Not Found');
+            return;
+        }
+        header("Content-type: text/css; charset: UTF-8");
+        echo $style;
+    }
+
+    public function templateJs($template, $file)
+    {
+        $js = file_get_contents('./application/views/templates/' . $template . '/assets/js/' . $file);
+        if (!$js) {
+            header('HTTP/1.1 404 Not Found');
+            return;
+        }
+        header("Content-type: text/css; charset: UTF-8");
+        echo $js;
+    }
+
+    public function templateCssImage($template, $file)
+    {
+        $js = file_get_contents('./application/views/templates/' . $template . '/assets/imgs/' . $file);
+        if (!$js) {
+            header('HTTP/1.1 404 Not Found');
+            return;
+        }
+        header('Content-Type: image/png  charset: UTF-8');
+        echo $js;
+    }
+
 }

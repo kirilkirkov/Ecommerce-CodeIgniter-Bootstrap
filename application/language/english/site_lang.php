@@ -11,7 +11,7 @@ $lang['categories'] = 'Categories';
 $lang['price'] = 'Price';
 $lang['old_price'] = 'Before';
 $lang['availability'] = 'Quantity';
-$lang['search'] = 'Search';
+$lang['search_now'] = 'Search now';
 $lang['details'] = 'Preview';
 $lang['products_in_your'] = 'products in yours shopp cart';
 $lang['total'] = 'Final sum';
@@ -19,6 +19,7 @@ $lang['items'] = 'Products';
 $lang['view_cart'] = 'Open shopping cart';
 $lang['search_by_keyword_title'] = 'Search for word in the title';
 $lang['search_by_keyword_body'] = 'Search for word in the description';
+$lang['search_for'] = 'Search for';
 $lang['search'] = 'Search';
 $lang['price_low'] = 'Low price';
 $lang['price_high'] = 'High price';
@@ -112,6 +113,10 @@ $lang['step_your_order'] = 'Your order';
 $lang['step_payment_method'] = 'Method of payment';
 $lang['step_success_prod'] = 'Successful procurement';
 $lang['info_product_list'] = 'Product information';
+$lang['empty'] = 'Empty';
+$lang['others'] = 'Others';
+$lang['welcome'] = 'Online store for clothes';
+$lang['social'] = 'Social media';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';

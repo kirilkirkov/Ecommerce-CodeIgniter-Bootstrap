@@ -95,7 +95,9 @@ if (count($sliderProducts) > 0) {
                                     <?php } else { ?>
                                         <i class="fa fa-circle-o" aria-hidden="true"></i>
                                     <?php } ?>
-                                    <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category left-side <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'selected' : '' ?>"><?= $page['name'] ?></a>
+                                    <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category left-side <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'selected' : '' ?>">
+                                        <?= $page['name'] ?>
+                                    </a>
                                     <?php
                                     if ($children === true) {
                                         loop_tree($page['children'], true);

@@ -8,9 +8,9 @@
             <div class="panel-heading">Site Logo</div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('resultSiteLogoPublish')) { ?>
-                    <div class="alert alert-info"><?= print_r($this->session->flashdata('resultSiteLogoPublish')) ?></div>
+                    <div class="alert alert-info"><?= $this->session->flashdata('resultSiteLogoPublish') ?></div>
                 <?php } ?>
-                <img src="<?= base_url('assets/imgs/site-logo/' . $siteLogo) ?>" alt="Logo is deleted. Upload new!" class="img-responsive">
+                <img src="<?= base_url('attachments/site_logo/' . $siteLogo) ?>" alt="Logo is deleted. Upload new!" class="img-responsive">
                 <hr>
                 <form accept-charset="utf-8" method="post" enctype="multipart/form-data" action="">
                 <input type="file" name="sitelogo" size="20" />

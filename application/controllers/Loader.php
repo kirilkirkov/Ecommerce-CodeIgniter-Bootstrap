@@ -19,10 +19,6 @@ class Loader extends MY_Controller
 
     public function jsFile($file = null)
     {
-        if (!$file) {
-            header('HTTP/1.1 404 Not Found');
-            return;
-        }
         $contents = file_get_contents('./application/language/' . MY_LANGUAGE_FULL_NAME . '/js/' . $file);
         if (!$contents) {
             header('HTTP/1.1 404 Not Found');
@@ -40,7 +36,8 @@ class Loader extends MY_Controller
         $this->load->Model('admin/AdminModel');
         $style = $this->AdminModel->getValueStore('newStyle');
         if ($style == null) {
-            $style = file_get_contents('./assets/css/default-gradient.css');
+            $template = $this->template;
+            $style = file_get_contents(VIEWS_DIR . $template . '/assets/css/default-gradient.css');
             if (!$style) {
                 header('HTTP/1.1 404 Not Found');
                 return;
@@ -55,9 +52,10 @@ class Loader extends MY_Controller
      * Can call css file in folder /assets/css/ with templatecss/filename.css
      */
 
-    public function templateCss($template, $file)
+    public function templateCss($file)
     {
-        $style = file_get_contents(TEMPLATES_DIR . $template . '/assets/css/' . $file);
+        $template = $this->template;
+        $style = file_get_contents(VIEWS_DIR . $template . '/assets/css/' . $file);
         if (!$style) {
             header('HTTP/1.1 404 Not Found');
             return;
@@ -71,14 +69,14 @@ class Loader extends MY_Controller
      * Can call css file in folder /assets/js/ with templatecss/filename.js
      */
 
-    public function templateJs($template, $file)
+    public function templateJs($file)
     {
-        $js = file_get_contents(TEMPLATES_DIR . $template . '/assets/js/' . $file);
+        $template = $this->template;
+        $js = file_get_contents(VIEWS_DIR . $template . '/assets/js/' . $file);
         if (!$js) {
             header('HTTP/1.1 404 Not Found');
             return;
         }
-        header("Content-type: text/css; charset: UTF-8");
         echo $js;
     }
 
@@ -87,9 +85,14 @@ class Loader extends MY_Controller
      * Can call from view with template/imgs/filename.jpg
      */
 
-    public function templateCssImage($template, $file)
+    public function templateCssImage($file, $template = null)
     {
-        $path = TEMPLATES_DIR . $template . '/assets/imgs/' . $file;
+        if ($template == null) {
+            $template = $this->template;
+        } else {
+            $template = '/templates/' . $template . '/';
+        }
+        $path = VIEWS_DIR . $template . '/assets/imgs/' . $file;
         $img = file_get_contents($path);
         if (!$img) {
             header('HTTP/1.1 404 Not Found');

@@ -5,7 +5,7 @@ class MY_Controller extends MX_Controller
 
     public $nonDynPages = array();
     private $dynPages = array();
-    private $template;
+    protected $template;
 
     public function __construct()
     {

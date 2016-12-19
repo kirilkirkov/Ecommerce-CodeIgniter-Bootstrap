@@ -7,7 +7,7 @@
     <?php foreach ($templates as $template) { ?>
         <div class="col-sm-4">
             <a href="javascript:void(0);" data-form-id="saveTemplate" data-template-name="<?= $template ?>" class="confirm-save choose-template">
-                <img src="<?= base_url('Loader/templateCssImage/' . $template . '/screenshot.png') ?>" alt="Template Name: <?= $template ?>" class="img-responsive img-thumbnail">
+                <img src="<?= base_url('Loader/templateCssImage/screenshot.png/' . $template ) ?>" alt="Template Name: <?= $template ?>" class="img-responsive img-thumbnail">
                 <?php if ($seleced_template == $template) { ?>
                     <img class="selected-template" alt="CHOOSED" src="<?= base_url('assets/imgs/ok-themes.png') ?>">
                 <?php } ?>

@@ -538,10 +538,7 @@ class AdminModel extends CI_Model
     public function setPost($post, $id)
     {
         if ($id > 0) {
-            unset($post['title']);
-            $result = $this->db->where('id', $id)->update('blog_posts', $post);
-            if ($result === true)
-                $result = $id;
+            return $id;
         } else {
             $post['time'] = time();
             $title = str_replace('"', "'", $post['title']);

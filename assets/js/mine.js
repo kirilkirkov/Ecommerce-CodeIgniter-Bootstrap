@@ -25,7 +25,7 @@ function manageShoppingCart(action, article_id, reload) {
     }
     $.ajax({
         type: "POST",
-        url: "manageShoppingCart",
+        url: variable.manageShoppingCartUrl,
         data: {article_id: article_id, action: action}
     }).done(function (data) {
         $(".dropdown-cart").empty();
@@ -56,7 +56,7 @@ function manageShoppingCart(action, article_id, reload) {
 }
 
 function clearCart() {
-    $.ajax({type: "POST", url: 'clearShoppingCart'});
+    $.ajax({type: "POST", url: variable.clearShoppingCartUrl});
     $('ul.dropdown-cart').empty();
     $('ul.dropdown-cart').append('<li class="text-center">' + lang.no_products + '</li>');
     $('.sumOfItems').text(0);

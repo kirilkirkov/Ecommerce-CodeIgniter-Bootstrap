@@ -74,7 +74,7 @@
                             </div>
                             <div>
                                 <b>Product ID:</b> 
-                                <u><?= $row->product_id ?></u>
+                                <u><?= $row->id ?></u>
                             </div>
                             <div class = "pull-right">
                                 <a href="<?= base_url('admin/publish/' . $row->id) ?>" class="btn btn-info">Edit</a>

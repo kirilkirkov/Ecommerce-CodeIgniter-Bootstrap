@@ -128,22 +128,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php foreach ($cartItems['array'] as $item) { ?>
                                 <tr>
                                     <td class="relative">
-                                        <input type="hidden" name="product_id[]" value="<?= $item['product_id'] ?>">
+                                        <input type="hidden" name="id[]" value="<?= $item['id'] ?>">
                                         <input type="hidden" name="quantity[]" value="<?= $item['num_added'] ?>">
                                         <img class="product-image" src="<?= base_url('/attachments/shop_images/' . $item['image']) ?>" alt="">
-                                        <a href="<?= base_url('home/removeFromCart?delete-product=' . $item['product_id'] . '&back-to=checkout') ?>" class="btn btn-xs btn-danger remove-product">
+                                        <a href="<?= base_url('home/removeFromCart?delete-product=' . $item['id'] . '&back-to=checkout') ?>" class="btn btn-xs btn-danger remove-product">
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </a>
                                     </td>
                                     <td><a href="<?= LANG_URL . '/' . $item['url'] ?>"><?= $item['title'] ?></a></td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary refresh-me add-to-cart" data-id="<?= $item['product_id'] ?>" href="javascript:void(0);">
+                                        <a class="btn btn-xs btn-primary refresh-me add-to-cart" data-id="<?= $item['id'] ?>" href="javascript:void(0);">
                                             <span class="glyphicon glyphicon-plus"></span>
                                         </a>
                                         <span class="quantity-num">
                                             <?= $item['num_added'] ?>
                                         </span>
-                                        <a class="btn  btn-xs btn-danger" onclick="removeProduct(<?= $item['product_id'] ?>, true)" href="javascript:void(0);">
+                                        <a class="btn  btn-xs btn-danger" onclick="removeProduct(<?= $item['id'] ?>, true)" href="javascript:void(0);">
                                             <span class="glyphicon glyphicon-minus"></span>
                                         </a>
                                     </td>

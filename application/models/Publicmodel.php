@@ -161,7 +161,7 @@ class Publicmodel extends CI_Model
 
     public function getOneProduct($id)
     {
-        $this->db->where('products.product_id', $id);
+        $this->db->where('products.id', $id);
 
         $this->db->select('products.*, translations.title,translations.description, translations.price, translations.old_price, products.url, trans2.name as categorie_name');
 
@@ -199,7 +199,7 @@ class Publicmodel extends CI_Model
 
     public function getShopItems($array_items)
     {
-        $this->db->select('products.id, products.product_id, products.image, products.url, translations.price, translations.title');
+        $this->db->select('products.id, products.image, products.url, translations.price, translations.title');
         $this->db->from('products');
         if (count($array_items) > 1) {
             $i = 1;
@@ -243,11 +243,11 @@ class Publicmodel extends CI_Model
 
         $i = 0;
         $post['products'] = array();
-        foreach ($post['product_id'] as $product) {
+        foreach ($post['id'] as $product) {
             $post['products'][$product] = $post['quantity'][$i];
             $i++;
         }
-        unset($post['product_id'], $post['quantity']);
+        unset($post['id'], $post['quantity']);
         $post['date'] = time();
         $post['products'] = serialize($post['products']);
         $result = $this->db->insert('orders', $post);
@@ -259,7 +259,7 @@ class Publicmodel extends CI_Model
 
     public function getSliderProducts()
     {
-        $this->db->select('products.id, products.quantity, products.product_id, products.image, products.url, translations.price, translations.title, translations.basic_description, translations.old_price');
+        $this->db->select('products.id, products.quantity, products.image, products.url, translations.price, translations.title, translations.basic_description, translations.old_price');
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('translations.type', 'product');
@@ -271,7 +271,7 @@ class Publicmodel extends CI_Model
 
     public function getbestSellers($categorie = 0, $noId = 0)
     { //best sellers and for categorie..
-        $this->db->select('products.id, products.quantity, products.product_id, products.image, products.url, translations.price, translations.title, translations.old_price');
+        $this->db->select('products.id, products.quantity, products.image, products.url, translations.price, translations.title, translations.old_price');
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         if ($noId > 0) {
             $this->db->where('products.id !=', $noId);
@@ -290,7 +290,7 @@ class Publicmodel extends CI_Model
 
     public function sameCagegoryProducts($categorie, $noId)
     { //same categorie products
-        $this->db->select('products.id, products.quantity, products.product_id, products.image, products.url, translations.price, translations.title, translations.old_price');
+        $this->db->select('products.id, products.quantity, products.image, products.url, translations.price, translations.title, translations.old_price');
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         $this->db->where('products.id !=', $noId);
         $this->db->where('products.shop_categorie =', $categorie);

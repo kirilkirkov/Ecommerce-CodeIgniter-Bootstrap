@@ -17,10 +17,10 @@ class AdminModel extends CI_Model
 
     public function getMaxProductId()
     {
-        $this->db->select_max('product_id');
+        $this->db->select_max('id');
         $result = $this->db->get('products');
         $obj = $result->row();
-        return $obj->product_id;
+        return $obj->id;
     }
 
     public function productsCount($search = null)
@@ -167,11 +167,11 @@ class AdminModel extends CI_Model
                 $url_fr = 'shop-product';
             }
             unset($post['title_for_url']);
-            $this->db->select_max('product_id');
+            $this->db->select_max('id');
             $query = $this->db->get('products');
             $rr = $query->row_array();
-            $post['product_id'] = $rr['product_id'] + 1;
-            $post['url'] = str_replace(' ', '_', $url_fr . '_' . $post['product_id']);
+            $post['id'] = $rr['id'] + 1;
+            $post['url'] = str_replace(' ', '_', $url_fr . '_' . $post['id']);
             $post['time'] = time();
             $result = $this->db->insert('products', $post);
             $last_id = $this->db->insert_id();
@@ -334,13 +334,9 @@ class AdminModel extends CI_Model
         return $query;
     }
 
-    public function getOneProduct($id, $by_prod = false)
-    {
-		if($by_prod == false) {
-			$this->db->where('id', $id);
-		} else {
-			$this->db->where('product_id', $id);
-		}
+    public function getOneProduct($id)
+    {   
+        $this->db->where('id', $id);
         $query = $this->db->get('products');
         if ($query->num_rows() > 0) {
             return $query->row_array();
@@ -464,9 +460,9 @@ class AdminModel extends CI_Model
         $products = unserialize($arr['products']);
         foreach ($products as $product_id => $quantity) {
             if (isset($operator))
-                $this->db->query('UPDATE products SET quantity=quantity' . $operator . $quantity . ' WHERE product_id=' . $product_id);
+                $this->db->query('UPDATE products SET quantity=quantity' . $operator . $quantity . ' WHERE id = ' . $product_id);
             if (isset($operator_pro))
-                $this->db->query('UPDATE products SET procurement=procurement' . $operator_pro . $quantity . ' WHERE product_id=' . $product_id);
+                $this->db->query('UPDATE products SET procurement=procurement' . $operator_pro . $quantity . ' WHERE id = ' . $product_id);
         }
     }
 

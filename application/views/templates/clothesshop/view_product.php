@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     if (is_file($dir . $file)) {
                                         ?>
                                         <div class="col-xs-4 col-sm-6 col-md-4 text-center">
-                                            <img src="<?= base_url($dir . $file) ?>" class="other-img-preview the-image" alt="<?= str_replace('"', "'", $product['title']) ?>">
+                                            <img src="<?= base_url($dir . $file) ?>" class="other-img-preview img-thumbnail the-image" alt="<?= str_replace('"', "'", $product['title']) ?>">
                                         </div>
                                         <?php
                                     }

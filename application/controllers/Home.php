@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends MY_Controller
 {
 
-    private $num_rows = 10;
+    private $num_rows = 20;
 
     public function __construct()
     {
@@ -44,6 +44,7 @@ class Home extends MY_Controller
         }
 
         $data['home_categories'] = $tree = buildTree($all_categories);
+        $data['all_categories'] = $all_categories;
         $data['countQuantities'] = $this->Publicmodel->getCountQuantities();
         $data['bestSellers'] = $this->Publicmodel->getbestSellers();
         $data['sliderProducts'] = $this->Publicmodel->getSliderProducts();

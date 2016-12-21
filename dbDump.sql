@@ -95,7 +95,6 @@ CREATE TABLE IF NOT EXISTS `orders` (
 
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `product_id` int(10) unsigned NOT NULL COMMENT 'id of products for shop',
   `folder` int(10) unsigned DEFAULT NULL COMMENT 'folder with images',
   `image` varchar(255) NOT NULL,
   `time` int(10) unsigned NOT NULL COMMENT 'time created',

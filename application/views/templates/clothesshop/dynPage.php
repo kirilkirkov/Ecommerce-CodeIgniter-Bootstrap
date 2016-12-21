@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<div id="dynPage">
-    <div class="top-bg">
-
-    </div>
-    <div class="container">
-        <div class="text-content">
-            <?= $content ?>
+<div class="container">
+    <div class="body">
+        <div class="dynPage bottom-30">
+            <div class="text-content">
+                <?= $content ?>
+            </div>
         </div>
+        <?php include 'bodyFooter.php' ?>
     </div>
 </div>

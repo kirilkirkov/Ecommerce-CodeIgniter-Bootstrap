@@ -54,7 +54,7 @@
                     </div>
                     <div class="container">
                         <div class="row logo-and-search">
-                            <div class="col-sm-5">
+                            <div class="col-sm-5 logo-col">
                                 <a href="<?= base_url() ?>">
                                     <img src="<?= base_url('attachments/site_logo/' . $sitelogo) ?>" class="site-logo" alt="<?= $_SERVER['HTTP_HOST'] ?>">
                                 </a>
@@ -66,7 +66,9 @@
                                             <img src="<?= base_url('template/imgs/shop-bag.jpg') ?>" alt="Search">
                                             <a class="my-basket dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                                 <?= lang('your_basket') ?>
-                                                <span>(<?= $cartItems['array'] == 0 ? lang('empty') : $sumOfItems ?>)</span>
+                                                <span class="sum-scope">
+                                                    (<span class="sumOfItems"><?= $cartItems['array'] == 0 ? lang('empty') : $sumOfItems ?></span>)
+                                                </span>
                                                 <i class="fa fa-angle-double-down" aria-hidden="true"></i>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-right dropdown-cart" role="menu">
@@ -75,17 +77,17 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
-                                        <form method="GET" class="search" action="<?= LANG_URL ?>">
+                                        <form method="GET" id="bigger-search" class="search" action="<?= LANG_URL ?>">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="<?= lang('search_for') ?>...">
+                                                <input type="text" id="search_in_title" value="<?= isset($_GET['search_in_title']) ? $_GET['search_in_title'] : '' ?>" class="form-control" placeholder="<?= lang('search_for') ?>...">
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-red" type="button">
+                                                    <button class="btn btn-red cloth-bg-color" onclick="submitForm()" type="button">
                                                         <i class="fa fa-search" aria-hidden="true"></i>
                                                     </button>
                                                 </span>
                                                 <div class="dropdown">
                                                     <a class="advanced-search-btn dropdown-toggle" href="javascript:void(0);" id="dropdownsearch" data-toggle="dropdown">
-                                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                                        <i class="fa fa-2x fa-caret-down cloth-color" aria-hidden="true"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right advanced-search-menu" role="menu" aria-labelledby="dropdownsearch">
                                                         <input type="hidden" name="category" value="<?= isset($_GET['category']) ? $_GET['category'] : '' ?>">
@@ -138,7 +140,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <button type="submit" class="btn btn-inner-search">
+                                                        <button type="submit" class="btn btn-inner-search cloth-bg-color">
                                                             <i class="fa fa-search" aria-hidden="true"></i>
                                                         </button>
                                                         <a class="btn btn-default" id="clear-form" href="javascript:void(0);"><?= lang('clear_form') ?></a>
@@ -151,7 +153,7 @@
                             </div>
                         </div>
                     </div>
-                    <nav class="navbar">
+                    <nav class="navbar cloth">
                         <div class="container">
                             <div class="navbar-header">
                                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

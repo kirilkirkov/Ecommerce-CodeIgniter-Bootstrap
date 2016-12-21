@@ -165,7 +165,7 @@ div.product-sort .form-group { margin-bottom : 0; }
 .add-to-cart.btn-add:active {border-top-color: #1b435e; background: #1b435e;}
 .btn-inner-search { color: #f1f1f1; }
 .add-to-cart a .loader { display: none; left: 50%;margin-left: -12px; position: absolute; width: 25px; }
-div#notificator { display : none; left : 50%; margin-left : -100px; padding : 15px 25px; position : fixed; text-align : center; top : 20px; width : 200px; z-index : 5000; }
+#notificator { display : none; left : 50%; margin-left : -100px; padding : 15px 25px; position : fixed; text-align : center; top : 20px; width : 200px; z-index : 5000; }
 #clear-form { margin-left : -4px; }
 #myImg { border-radius : 5px; cursor : pointer; transition : 0.3s; }
 #myImg:hover { opacity : 0.7; }

@@ -120,3 +120,4 @@ $lang['empty'] = 'άδειο';
 $lang['others'] = 'άλλος';
 $lang['welcome'] = 'Ηλεκτρονικό κατάστημα με είδη ένδυσης';
 $lang['social'] = 'Social';
+$lang['no_sub_categories'] = 'δεν υπάρχουν υποκατηγορίες';

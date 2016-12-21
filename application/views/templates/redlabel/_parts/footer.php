@@ -114,6 +114,6 @@ var variable = {
     manageShoppingCartUrl: "<?= base_url('manageShoppingCart') ?>"
 };
 </script>
-<script src="<?= base_url('templatejs/mine.js') ?>"></script>
+<script src="<?= base_url('assets/js/system.js') ?>"></script>
 </body>
 </html>

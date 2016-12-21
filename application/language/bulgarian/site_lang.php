@@ -119,6 +119,7 @@ $lang['info_product_list'] = 'Информация за продукта';
 $lang['empty'] = 'Празна';
 $lang['welcome'] = 'Онлайн магазин за дрехи';
 $lang['social'] = 'Социялна медия';
+$lang['no_sub_categories'] = 'Няма подкатегории';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'Не сте въвели име';

@@ -1,5 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+$arrCategories = array();
+foreach ($all_categories as $categorie) {
+    if (isset($_GET['category']) && is_numeric($_GET['category']) && $_GET['category'] == $categorie['sub_for']) {
+        $arrCategories[] = $categorie;
+    }
+    if (!isset($_GET['category']) || $_GET['category'] == '') {
+        if ($categorie['sub_for'] == 0) {
+            $arrCategories[] = $categorie;
+        }
+    }
+}
 ?>
 <div class="container">
     <div class="body">
@@ -48,48 +60,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php } ?>
         <div class="h-line"></div>
         <h3 class="categories-label"><?= lang('categories') ?></h3>
+        <?php if (isset($_GET['category']) && $_GET['category'] != '') { ?>
+            <a href="javascript:void(0);" class="clear-filter" data-type-clear="category" data-toggle="tooltip" data-placement="right">
+                <?= lang('clear_the_filter') ?>
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+        <?php } ?>
         <div class="categories">
-            <?php
-
-            function loop_tree($pages, $is_recursion = false)
-            {
-                ?>
+            <?php if (!empty($arrCategories)) { ?>
                 <ul class="list">
                     <?php
-                    foreach ($pages as $page) {
-                        $children = false;
-                        if (isset($page['children']) && !empty($page['children'])) {
-                            $children = true;
-                        }
+                    foreach ($arrCategories as $categorie) {
                         ?>
-                        <li class="<?= $is_recursion === true ? 'children' : 'parent' ?>">
-                            <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category left-side <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'selected' : '' ?>">
-                                <?= $page['name'] ?>
-                                <?php if ($children == true) { ?>
-                                    <i class="fa fa-angle-double-down" aria-hidden="true"></i>
-                                <?php } ?>
+                        <li>
+                            <a href="javascript:void(0);" data-categorie-id="<?= $categorie['id'] ?>" class="go-category left-side <?= isset($_GET['category']) && $_GET['category'] == $categorie['id'] ? 'selected' : '' ?>">
+                                <?= $categorie['name'] ?>
+                                <i class="fa fa-angle-double-down" aria-hidden="true"></i>
                             </a>
-                            <?php
-                            if ($children === true) {
-                                loop_tree($page['children'], true);
-                            } else {
-                                ?>
-                            </li>
-                            <?php
-                        }
+                        </li>
+                        <?php
                     }
                     ?>
                 </ul>
-                <?php
-                if ($is_recursion === true) {
-                    ?>
-                    </li>
-                    <?php
-                }
-            }
-
-            loop_tree($home_categories);
-            ?>
+            <?php } else { ?>
+                <div class="alert alert-info"><?= lang('no_sub_categories') ?></div>
+            <?php } ?>
         </div>
         <div class="h-line"></div>
         <h3 class="products-label"><?= lang('products') ?></h3>
@@ -99,11 +94,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $load::getProducts($products, 'col-sm-4 col-md-3', false);
             } else {
                 ?>
+                <div class="col-xs-12">
+                    <div class="alert alert-danger"><?= lang('no_products') ?></div>
+                </div>
             <?php } ?>
         </div>
         <?= $links_pagination ?>
-        <div class="h-line"></div>
-        <div class="body-footer">
-            <?php include 'bodyFooter.php' ?>
-        </div>
+        <?php include 'bodyFooter.php' ?>
     </div>

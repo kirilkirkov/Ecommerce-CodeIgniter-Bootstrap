@@ -117,6 +117,7 @@ $lang['empty'] = 'Empty';
 $lang['others'] = 'Others';
 $lang['welcome'] = 'Online store for clothes';
 $lang['social'] = 'Social media';
+$lang['no_sub_categories'] = 'No subcategories';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';

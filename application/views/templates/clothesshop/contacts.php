@@ -7,18 +7,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         width: 100%;
     }
 </style>
-<div id="contacts">
-    <div class="jumbotron jumbotron-sm">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-lg-12">
-                    <h1 class="h1">
-                        <?= lang('contact_us') ?> <small><?= lang('contact_us_feel_free') ?></small></h1>
+<div class="container" id="contacts">
+    <div class="body">
+        <div class="jumbotron jumbotron-sm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+                        <h1 class="h1">
+                            <?= lang('contact_us') ?> <small><?= lang('contact_us_feel_free') ?></small></h1>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container">
         <div class="row">
             <div class="col-md-8">
                 <?php
@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <label for="email">
                                         <?= lang('email_address') ?></label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
+                                        <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i>
                                         </span>
                                         <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required="required" /></div>
                                 </div>
@@ -61,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                                <button type="submit" class="btn cloth-bg-color pull-right" id="btnContactUs">
                                     <?= lang('send_message') ?></button>
                             </div>
                         </div>
@@ -70,33 +70,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <div class="col-md-4">
                 <form>
-                    <legend><span class="glyphicon glyphicon-globe"></span> <?= lang('our_office') ?></legend>
+                    <legend><i class="fa fa-info" aria-hidden="true"></i> <?= lang('our_office') ?></legend>
                     <address>
                         <?= $contactsPage ?>
                     </address>
                 </form>
             </div>
         </div>
+        <?php if (trim($googleApi) != null && trim($googleMaps) != null) { ?>
+            <div id="map"></div>
+            <?php $coordinates = explode(',', $googleMaps); ?>
+            <script src="https://maps.googleapis.com/maps/api/js?key=<?= $googleApi ?>"></script>
+            <script>
+                function initialize() {
+                    var myLatlng = new google.maps.LatLng(<?= $coordinates[0] ?>, <?= $coordinates[1] ?>);
+                    var mapOptions = {
+                        zoom: 10,
+                        center: myLatlng
+                    }
+                    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                    var marker = new google.maps.Marker({
+                        position: myLatlng,
+                        title: "Here we are!"
+                    });
+                    marker.setMap(map);
+                }
+                google.maps.event.addDomListener(window, 'load', initialize);
+            </script>
+        <?php } ?>
+        <div class="bottom-30"></div>
+        <?php include 'bodyFooter.php' ?>
     </div>
-    <?php if(trim($googleApi) != null && trim($googleMaps) != null) { ?>
-    <div id="map"></div>
-    <?php $coordinates = explode(',', $googleMaps); ?>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?= $googleApi ?>"></script>
-    <script>
-        function initialize() {
-            var myLatlng = new google.maps.LatLng(<?= $coordinates[0] ?>, <?= $coordinates[1] ?>);
-            var mapOptions = {
-                zoom: 10,
-                center: myLatlng
-            }
-            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                title: "Here we are!"
-            });
-            marker.setMap(map);
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-    <?php } ?>
 </div>

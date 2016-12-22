@@ -173,6 +173,7 @@ class AdminModel extends CI_Model
             $post['id'] = $rr['id'] + 1;
             $post['url'] = str_replace(' ', '_', $url_fr . '_' . $post['id']);
             $post['time'] = time();
+            unset($post['id']);
             $result = $this->db->insert('products', $post);
             $last_id = $this->db->insert_id();
         }

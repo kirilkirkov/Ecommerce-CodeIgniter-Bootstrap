@@ -63,7 +63,7 @@ class Blog extends MY_Controller
     private function getBlogArchiveHtml()
     {
         $html = '
-		<div class="alone title">
+		<div class="alone title cloth-bg-color">
 					<span>' . lang('archive') . '</span>
 				</div>
 				';

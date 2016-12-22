@@ -8,7 +8,7 @@
         <title><?= $title ?></title>
         <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="<?= base_url('assets/bootstrap-select-1.9.4/css/bootstrap-select.min.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/bootstrap-select-1.12.1/bootstrap-select.min.css') ?>">
         <link href="<?= base_url('assets/css/custom-admin.css') ?>" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
         <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
@@ -133,6 +133,7 @@
                                     <li class="header">SETTINGS</li>
                                     <li><a href="<?= base_url('admin/settings') ?>" <?= urldecode(uri_string()) == 'admin/settings' ? 'class="active"' : '' ?>><i class="fa fa-wrench" aria-hidden="true"></i> Settings</a></li>
                                     <li><a href="<?= base_url('admin/styling') ?>" <?= urldecode(uri_string()) == 'admin/styling' ? 'class="active"' : '' ?>><i class="fa fa-laptop" aria-hidden="true"></i> Styling</a></li>
+                                    <li><a href="<?= base_url('admin/templates') ?>" <?= urldecode(uri_string()) == 'admin/templates' ? 'class="active"' : '' ?>><i class="fa fa-binoculars" aria-hidden="true"></i> Templates</a></li>
                                     <li><a href="<?= base_url('admin/titles') ?>" <?= urldecode(uri_string()) == 'admin/titles' ? 'class="active"' : '' ?>><i class="fa fa-font" aria-hidden="true"></i> Titles / Descriptions</a></li>
                                     <li><a href="<?= base_url('admin/pages') ?>" <?= urldecode(uri_string()) == 'admin/pages' ? 'class="active"' : '' ?>><i class="fa fa-file" aria-hidden="true"></i> Active Pages</a></li>
                                     <li><a href="<?= base_url('admin/emails') ?>" <?= urldecode(uri_string()) == 'admin/emails' ? 'class="active"' : '' ?>><i class="fa fa-envelope-o" aria-hidden="true"></i> Subscribed Emails</a></li>
@@ -144,7 +145,20 @@
                                 </ul>
                             </div>
                             <div class="col-sm-9 col-md-9 col-lg-10 col-sm-offset-3 col-md-offset-3 col-lg-offset-2">
-                            <?php } else { ?>
+                                <?php if ($warnings != null) { ?>
+                                    <div class="alert alert-danger">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                        There are some errors that you must fix!
+                                        <ol>
+                                            <?php foreach ($warnings as $warning) { ?>
+                                                <li><?= $warning ?></li>
+                                            <?php } ?>
+                                        </ol>
+                                    </div>
+                                    <?php
+                                }
+                            } else {
+                                ?>
                                 <div class="">
                                 <?php } ?>
 

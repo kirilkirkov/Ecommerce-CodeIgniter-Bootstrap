@@ -83,6 +83,7 @@
             <div class="alert alert-info"><span class="glyphicon glyphicon-alert"></span> Now you edit language: <b><?= ucfirst($_GET['editLang']) ?></b></div>
             <?php
             $o = 1;
+            $countValuesForEdit = 0;
             foreach ($arrPhpFiles as $phpFile => $langFinal) {
                 if (!empty($langFinal)) {
                     foreach ($langFinal as $key => $val) {
@@ -95,6 +96,7 @@
                         </div>
                         <?php
                         $o++;
+                        $countValuesForEdit++;
                     }
                 }
             }
@@ -112,10 +114,20 @@
                     <?php
                     $i++;
                     $o++;
+                    $countValuesForEdit++;
                 }
             }
-            ?>
-            <a href="javascript:void(0);" data-form-id="saveLang" style="margin-left: 10px;" class="btn btn-lg btn-info confirm-save">Save me</a>
+            if ($countValuesForEdit * 6 > $max_input_vars) {
+                ?>
+                <div class="alert alert-danger">
+                    You can't edit this language because the
+                    server have restriction for <b>max_input_vars</b>, it must be more than
+                    <b><?= $countValuesForEdit * 6 ?></b> and now is <b><?= $max_input_vars ?></b>.<br>
+                    Please contact your system administrator.
+                </div>
+            <?php } else { ?>
+                <a href="javascript:void(0);" data-form-id="saveLang" style="margin-left: 10px;" class="btn btn-lg btn-info confirm-save">Save me</a>
+            <?php } ?>
             <a href="<?= base_url('admin/languages') ?>" class="btn btn-lg btn-default">Cancel</a>
         </form>
         <?php

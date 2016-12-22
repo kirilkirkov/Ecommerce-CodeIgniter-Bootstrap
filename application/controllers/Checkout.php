@@ -10,9 +10,10 @@ class Checkout extends MY_Controller
         parent::__construct();
         $this->load->library('email');
         $this->load->helper(array('currency_convertor'));
-        $vars['paypal_sandbox'] = $this->AdminModel->getValueStore('paypal_sandbox');
-        $vars['paypal_email'] = $this->AdminModel->getValueStore('paypal_email');
-        $vars['paypal_currency'] = $this->AdminModel->getValueStore('paypal_currency');
+        /*
+         * Get Bank Account
+         */
+        $vars['bank_account'] = $this->AdminModel->getBankAccountSettings();
         $this->load->vars($vars);
     }
 
@@ -24,7 +25,16 @@ class Checkout extends MY_Controller
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
+
+        /*
+         *  Get Value Stores
+         */
         $haveFinalPage = $this->AdminModel->getValueStore('finalCheckoutPage');
+        $data['cashondelivery_visibility'] = $this->AdminModel->getValueStore('cashondelivery_visibility');
+        $data['paypal_sandbox'] = $this->AdminModel->getValueStore('paypal_sandbox');
+        $data['paypal_email'] = $this->AdminModel->getValueStore('paypal_email');
+        $data['paypal_currency'] = $this->AdminModel->getValueStore('paypal_currency');
+
         $new_request = false;
         $fromFinalPage = false;
         if (isset($_POST['payment_type'])) {
@@ -71,8 +81,11 @@ class Checkout extends MY_Controller
              * Else will clear after receive payment
              * We need products to send it to paypal
              */
-            if ($_POST['payment_type'] == 'cashOnDelivery') {
+            if ($_POST['payment_type'] == 'cashOnDelivery' || $_POST['payment_type'] == 'Bank') {
                 $this->shoppingcart->clearShoppingCart();
+            }
+            if ($_POST['payment_type'] == 'Bank') {
+                $_SESSION['order_id'] = $result;
             }
             if ($_POST['payment_type'] == 'PayPal') {
                 @set_cookie('paypal', $result, 2678400); // $result is order id

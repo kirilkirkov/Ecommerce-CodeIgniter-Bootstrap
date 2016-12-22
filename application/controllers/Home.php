@@ -44,6 +44,7 @@ class Home extends MY_Controller
         }
 
         $data['home_categories'] = $tree = buildTree($all_categories);
+        $data['all_categories'] = $all_categories;
         $data['countQuantities'] = $this->Publicmodel->getCountQuantities();
         $data['bestSellers'] = $this->Publicmodel->getbestSellers();
         $data['sliderProducts'] = $this->Publicmodel->getSliderProducts();

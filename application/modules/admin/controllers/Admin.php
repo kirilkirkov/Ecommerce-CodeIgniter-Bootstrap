@@ -32,6 +32,7 @@ class Admin extends MX_Controller
         $vars['textualPages'] = getTextualPages($this->activePages);
         $vars['nonDynPages'] = $this->config->item('no_dynamic_pages');
         $vars['numNotPreviewOrders'] = $numNotPreviewOrders;
+        $vars['warnings'] = $this->warningChecker();
         $this->load->vars($vars);
     }
 
@@ -364,7 +365,7 @@ class Admin extends MX_Controller
                 $this->session->set_flashdata('result_add', 'This language exsists!');
             redirect('admin/languages');
         }
-
+        $data['max_input_vars'] = ini_get('max_input_vars');
         $this->load->view('_parts/header', $head);
         $this->load->view('languages', $data);
         $this->load->view('_parts/footer');
@@ -511,7 +512,7 @@ class Admin extends MX_Controller
         $head['keywords'] = '';
 
         $order_by = null;
-        if (isset($_GET['order_by']) && $_GET['order_by'] == 'id' && $_GET['order_by'] == 'processed') {
+        if (isset($_GET['order_by'])) {
             $order_by = $_GET['order_by'];
         }
         $rowscount = $this->AdminModel->ordersCount();
@@ -526,23 +527,37 @@ class Admin extends MX_Controller
             }
             $this->session->set_flashdata('paypal_sandbox', $msg);
             $this->saveHistory($msg);
-            redirect('admin/orders');
+            redirect('admin/orders?settings');
         }
         if (isset($_POST['paypal_email'])) {
             $this->AdminModel->setValueStore('paypal_email', $_POST['paypal_email']);
             $this->session->set_flashdata('paypal_email', 'Public quantity visibility changed');
             $this->saveHistory('Change paypal business email to: ' . $_POST['paypal_email']);
-            redirect('admin/orders');
+            redirect('admin/orders?settings');
         }
         if (isset($_POST['paypal_currency'])) {
             $this->AdminModel->setValueStore('paypal_currency', $_POST['paypal_currency']);
             $this->session->set_flashdata('paypal_currency', 'Public quantity visibility changed');
             $this->saveHistory('Change paypal currency to: ' . $_POST['paypal_currency']);
-            redirect('admin/orders');
+            redirect('admin/orders?settings');
+        }
+        if (isset($_POST['cashondelivery_visibility'])) {
+            $this->AdminModel->setValueStore('cashondelivery_visibility', $_POST['cashondelivery_visibility']);
+            $this->session->set_flashdata('cashondelivery_visibility', 'Cash On Delivery Visibility Changed');
+            $this->saveHistory('Change Cash On Delivery Visibility - ' . $_POST['cashondelivery_visibility']);
+            redirect('admin/orders?settings');
+        }
+        if (isset($_POST['iban'])) {
+            $this->AdminModel->setBankAccountSettings($_POST);
+            $this->session->set_flashdata('bank_account', 'Bank account settings saved');
+            $this->saveHistory('Bank account settings saved for : ' . $_POST['name']);
+            redirect('admin/orders?settings');
         }
         $data['paypal_sandbox'] = $this->AdminModel->getValueStore('paypal_sandbox');
         $data['paypal_email'] = $this->AdminModel->getValueStore('paypal_email');
         $data['paypal_currency'] = $this->AdminModel->getValueStore('paypal_currency');
+        $data['cashondelivery_visibility'] = $this->AdminModel->getValueStore('cashondelivery_visibility');
+        $data['bank_account'] = $this->AdminModel->getBankAccountSettings();
         $this->load->view('_parts/header', $head);
         $this->load->view('orders', $data);
         $this->load->view('_parts/footer');
@@ -602,7 +617,7 @@ class Admin extends MX_Controller
         $head['keywords'] = '';
 
         if (isset($_POST['uploadimage'])) {
-            $config['upload_path'] = './assets/imgs/site-logo/';
+            $config['upload_path'] = './attachments/site_logo/';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['max_size'] = 1500;
             $config['max_width'] = 1024;
@@ -821,10 +836,11 @@ class Admin extends MX_Controller
     {  //called from ajax
         $this->login_check();
         $result = $this->AdminModel->changePass($_POST['new_pass'], $this->username);
-        if ($result == true)
+        if ($result == true) {
             echo 1;
-        else
+        } else {
             echo 0;
+        }
         $this->saveHistory('Password change for user: ' . $this->username);
     }
 
@@ -832,10 +848,11 @@ class Admin extends MX_Controller
     { //called from ajax
         $this->login_check();
         $result = $this->AdminModel->productStatusChange($_POST['id'], $_POST['to_status']);
-        if ($result == true)
+        if ($result == true) {
             echo 1;
-        else
+        } else {
             echo 0;
+        }
         $this->saveHistory('Change product id ' . $_POST['id'] . ' to status ' . $_POST['to_status']);
     }
 
@@ -843,10 +860,11 @@ class Admin extends MX_Controller
     {
         $this->login_check();
         $result = $this->AdminModel->changeOrderStatus($_POST['the_id'], $_POST['to_status']);
-        if ($result == true)
+        if ($result == true) {
             echo 1;
-        else
+        } else {
             echo 0;
+        }
         $this->saveHistory('Change order status on product Id ' . $_POST['the_id'] . ' to status ' . $_POST['to_status']);
     }
 
@@ -1017,10 +1035,11 @@ class Admin extends MX_Controller
     {
         $this->login_check();
         $result = $this->AdminModel->changePageStatus($_POST['id'], $_POST['status']);
-        if ($result == true)
+        if ($result == true) {
             echo 1;
-        else
+        } else {
             echo 0;
+        }
         $this->saveHistory('Page status Changed');
     }
 
@@ -1057,9 +1076,81 @@ class Admin extends MX_Controller
         }
     }
 
+    public function templates()
+    {
+        $this->login_check();
+        $data = array();
+        $head = array();
+        $head['title'] = 'Administration - Templates';
+        $head['description'] = '!';
+        $head['keywords'] = '';
+        if (isset($_POST['template'])) {
+            $this->AdminModel->setValueStore('template', $_POST['template']);
+            redirect('admin/templates');
+        }
+        $templates = scandir(TEMPLATES_DIR);
+        foreach ($templates as $template) {
+            if ($template != "." && $template != "..") {
+                $data['templates'][] = $template;
+            }
+        }
+        $data['seleced_template'] = $this->AdminModel->getValueStore('template');
+        $this->load->view('_parts/header', $head);
+        $this->load->view('templates', $data);
+        $this->load->view('_parts/footer');
+        $this->saveHistory('Go to Templates Page');
+    }
+
     public function getProductInfo($id)
     {
+        $this->login_check();
         return $this->AdminModel->getOneProduct($id);
+    }
+
+    private function warningChecker()
+    {
+        $errors = array();
+        
+        // Check application/language folder is writable
+        if (!is_writable('./application/language')) {
+            $errors[] = 'Language folder is not writable!';
+        }
+
+        // Check application/logs folder is writable
+        if (!is_writable('./application/logs')) {
+            $errors[] = 'Logs folder is not writable!';
+        }
+
+        // Check attachments folder is writable
+        if (!is_writable('./attachments')) {
+            $errors[] = 'Attachments folder is not writable!';
+        } else {
+            /*
+             *  Check attachment directories exsists..
+             *  ..and create him if no exsists
+             */
+            if (!file_exists('./attachments/blog_images')) {
+                $old = umask(0);
+                mkdir('./attachments/blog_images', 0777, true);
+                umask($old);
+            }
+            if (!file_exists('./attachments/lang_flags')) {
+                $old = umask(0);
+                mkdir('./attachments/lang_flags', 0777, true);
+                umask($old);
+            }
+            if (!file_exists('./attachments/shop_images')) {
+                $old = umask(0);
+                mkdir('./attachments/shop_images', 0777, true);
+                umask($old);
+            }
+            if (!file_exists('./attachments/site_logo')) {
+                $old = umask(0);
+                mkdir('./attachments/site_logo', 0777, true);
+                umask($old);
+            }
+        }
+        return $errors;
     }
 
 }

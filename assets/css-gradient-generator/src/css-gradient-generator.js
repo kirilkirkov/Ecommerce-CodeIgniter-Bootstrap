@@ -3461,12 +3461,13 @@ var CSSGradientEditor = function(container, options) {
         if (getConfig('config_generation_ms')) {
           out += css.ms;
         }
-
-        //Add custom border and shadow to original output result
+        var gradient_bg = out;
+        
+        // Add custom border and shadow to original output result
         var mine_color = getRenderColor(gradientdata.averagebgcolor);
         cssoutput = selector + ' {\n' + out + 'border : solid 1px ' + mine_color + ';box-shadow : 2px 2px 3px ' + mine_color + '; }\n';
         
-        // Here is custom added output for site design
+        // Here is custom added output for site design - styles for template redlabel
         var more_brigness_color = increase_brightness(mine_color, '20');
         var more_more_brigness_color = increase_brightness(mine_color, '50');
         cssoutput += '.mine-color, .btn-inner-search { background-color:' + mine_color + '; }\n';
@@ -3474,6 +3475,27 @@ var CSSGradientEditor = function(container, options) {
         cssoutput += '.btn-go-search:active,.btn-go-search:focus, .btn-go-search:hover, .button-more:hover, .button-more:focus, .button-more:hover { background-color: ' + more_brigness_color + '; }\n';
         cssoutput += 'div.filter-sidebar .title, .title.alone {border-bottom: 3px solid ' + more_more_brigness_color + '; }\n';
         cssoutput += 'div.filter-sidebar .title span, .title.alone span {border-bottom : 3px solid ' + mine_color + '; }\n';
+        
+        // stylesfor template clothesshop
+        cssoutput += '.cloth-bg-color {background-color:' + mine_color + ';}\n';
+        cssoutput += '.cloth-color {color:' + mine_color + ';}\n';
+        cssoutput += '.cloth--border-color {border-color:' + mine_color + ';}\n';
+        cssoutput += '.cloth-border-top-color {border-top-color: ' + mine_color + ';}\n';
+        cssoutput += '.navbar.cloth .navbar-nav li.active a { color:' + mine_color + ';}\n';
+        cssoutput += '.navbar.cloth .navbar-nav li a:hover, .navbar.cloth .navbar-nav li a:focus {background-color:transparent !important; color:' + mine_color + ';}\n';
+        cssoutput += '.navbar.cloth .navbar-nav li:hover, .navbar.cloth .navbar-nav li.active {border-top:3px solid; border-top-color: ' + mine_color + ';}\n';
+        cssoutput += '#small_carousel .product-list div.add-to-cart, #small_carousel .product-list .info-btn {background-color: ' + mine_color + '; }\n';
+        cssoutput += '.products .product-list div.add-to-cart, .products .product-list .info-btn { background-color: ' + mine_color + ';}\n';
+        cssoutput += '.products-label, .categories-label { background-color: ' + mine_color + ';}\n';
+        cssoutput += '.pagination li a { color:' + mine_color + ';}\n';
+        cssoutput += '.pagination li.active a {background-color: ' + mine_color + '; border-color:' + mine_color + '; }\n';
+        cssoutput += '.categories li a {background-color:' + mine_color + ';}\n';
+        cssoutput += '#home-slider .carousel-indicators .active, #small_carousel .carousel-indicators .active {background-color: ' + mine_color + ';}\n';
+        cssoutput += '.btn-blue-round {' + gradient_bg + '}\n';
+        cssoutput += '.my-basket span.sum-scope {color:' + mine_color + ';}\n';
+        cssoutput += '.search .btn-red { border-bottom: 1px solid '+more_more_brigness_color+  '; border-right: 1px solid ' +more_more_brigness_color+ ' ; border-left: 1px solid '+more_more_brigness_color+' ;}\n';
+        cssoutput += '#small_carousel .product-list h2 a {color:' + mine_color + ';}\n';
+        cssoutput += '#home-slider .item h1 a {color:' + mine_color + ';}\n';
 
         if (getConfig('config_generation_iefilter')) {
           cssoutput = cssoutput + css.filter;

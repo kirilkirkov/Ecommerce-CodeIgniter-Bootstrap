@@ -181,6 +181,13 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `notify`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'your@email.com', 0);
 
+CREATE TABLE `bank_accounts` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `iban` varchar(255) NOT NULL,
+  `bank` varchar(255) NOT NULL,
+  `bic` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `valueStore` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -215,4 +222,5 @@ INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
 (23, 'publicDateAdded', '0'),
 (24, 'finalCheckoutPage', '0'),
 (25, 'googleApi', ''),
-(26, 'template', 'redlabel');
+(26, 'template', 'redlabel'),
+(27, 'cashondelivery_visibility', '1');

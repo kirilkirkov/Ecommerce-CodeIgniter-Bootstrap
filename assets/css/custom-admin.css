@@ -117,6 +117,9 @@ span.dropdown-toggle {cursor: pointer;}
 #categories a.btn-xs {margin-bottom: 15px;}
 footer {padding: 20px 0; color:#333; text-align: center; background-color: #f8f8f8; border-top:1px solid #e7e7e7; width:100%;height:60px;position:absolute;bottom:0;left:0;}
 footer a {color:#333; text-decoration:underline;}
+.orders-settings { margin-top: -60px; font-size:20px; color:#6b6b6b;}
+.orders-settings span {display: block;}
+.orders-settings i {margin-left: 24px;}
 
 @media (min-width: 767px) {
     .sidebar-menu {display: block !important;}

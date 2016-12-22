@@ -15,38 +15,84 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             if ($paypal_sandbox == 1) {
                 $sandbox = '.sandbox.';
             }
-            ?>
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <img src="<?= base_url('template/imgs/paypal.png') ?>" class="img-responsive paypal-image">
-                </div>
-            </div>
-            <div class="alert alert-info text-center"><?= lang('you_choose_paypal') ?></div>
-            <hr>
-            <form action="https://www<?= $sandbox ?>paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-form text-center">
-                <input type="hidden" name="cmd" value="_cart">
-                <input type="hidden" value="<?= $paypal_email ?>" name="business">
-                <input type="hidden" name="upload" value="1">
-                <?php
-                $i = 1;
-                foreach ($cartItems['array'] as $item) {
-                    ?>
-                    <input type="hidden" name="item_name_<?= $i ?>" value="<?= $item['title'] ?>">
-                    <input type="hidden" name="amount_<?= $i ?>" value="<?= convertCurrency($item['price'], CURRENCY_KEY, $paypal_currency) ?>">
-                    <input type="hidden" name="quantity_<?= $i ?>" value="<?= $item['num_added'] ?>">
-                    <?php
-                    $i++;
-                }
+            if (!empty($cartItems['array'])) {
                 ?>
-                <input type="hidden" name="currency_code" value="<?= $paypal_currency ?>">
-                <input type="hidden" value="utf-8" name="charset">
-                <input type="hidden" value="<?= base_url('checkout/paypal_success') ?>" name="return">
-                <input type="hidden" value="<?= base_url('checkout/paypal_cancel') ?>" name="cancel_return">
-                <input type="hidden" value="authorization" name="paymentaction">
-                <a href="<?= base_url('checkout/paypal_cancel') ?>" class="btn btn-lg btn-danger btm-10"><?= lang('cancel_payment') ?></a>
-                <button type="submit" class="btn btn-lg btn-success btm-10"><?= lang('go_to_paypal') ?> <i class="fa fa-cc-paypal" aria-hidden="true"></i></button>
-            </form>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <img src="<?= base_url('template/imgs/paypal.png') ?>" class="img-responsive paypal-image">
+                    </div>
+                </div>
+                <div class="alert alert-info text-center"><?= lang('you_choose_paypal') ?></div>
+                <hr>
+                <form action="https://www<?= $sandbox ?>paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-form text-center">
+                    <input type="hidden" name="cmd" value="_cart">
+                    <input type="hidden" value="<?= $paypal_email ?>" name="business">
+                    <input type="hidden" name="upload" value="1">
+                    <?php
+                    $i = 1;
+                    foreach ($cartItems['array'] as $item) {
+                        ?>
+                        <input type="hidden" name="item_name_<?= $i ?>" value="<?= $item['title'] ?>">
+                        <input type="hidden" name="amount_<?= $i ?>" value="<?= convertCurrency($item['price'], CURRENCY_KEY, $paypal_currency) ?>">
+                        <input type="hidden" name="quantity_<?= $i ?>" value="<?= $item['num_added'] ?>">
+                        <?php
+                        $i++;
+                    }
+                    ?>
+                    <input type="hidden" name="currency_code" value="<?= $paypal_currency ?>">
+                    <input type="hidden" value="utf-8" name="charset">
+                    <input type="hidden" value="<?= base_url('checkout/paypal_success') ?>" name="return">
+                    <input type="hidden" value="<?= base_url('checkout/paypal_cancel') ?>" name="cancel_return">
+                    <input type="hidden" value="authorization" name="paymentaction">
+                    <a href="<?= base_url('checkout/paypal_cancel') ?>" class="btn btn-lg btn-danger btm-10"><?= lang('cancel_payment') ?></a>
+                    <button type="submit" class="btn btn-lg btn-success btm-10"><?= lang('go_to_paypal') ?> <i class="fa fa-cc-paypal" aria-hidden="true"></i></button>
+                </form>
+            <?php } else {
+                ?>
+                <div class="alert alert-info"><?= lang('no_products') ?></div>
+                <?php
+            }
+        } elseif (isset($_GET['payment_type']) && $_GET['payment_type'] == 'Bank') {
+            if (isset($_SESSION['order_id'])) {
+                ?>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td colspan="2"><b class="bg-info"><?= lang('bank_recipient_name') ?></b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><?= $bank_account != null ? $bank_account['name'] : '' ?></td>
+                            </tr>
+                            <tr>
+                                <td><b class="bg-info"><?= lang('bank_iban') ?></b></td>
+                                <td><b class="bg-info"><?= lang('bank_bic') ?></b></td>
+                            </tr>
+                            <tr>
+                                <td><?= $bank_account != null ? $bank_account['iban'] : '' ?></td>
+                                <td><?= $bank_account != null ? $bank_account['bic'] : '' ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><b class="bg-info"><?= lang('bank_name') ?></b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><?= $bank_account != null ? $bank_account['bank'] : '' ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><b class="bg-info"><?= lang('bank_reason') ?></b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><?= lang('the_reason') ?> - <?= $_SESSION['order_id'] ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            <?php } else { ?>
+                <div class="alert alert-info"><?= lang('no_products') ?></div>
+            <?php } ?>
+            <a href="<?= base_url() ?>" class="btn btn-default"><i class="fa fa-angle-left" aria-hidden="true"></i> <?= lang('go_back') ?></a>
         <?php } ?>
+    </div>
     </div>
 <?php } elseif ($cartItems['array'] != null) { ?>
     <?= purchase_steps(1, 2) ?>
@@ -72,9 +118,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 ?>
                 <div class="payment-type-box">
                     <select class="selectpicker payment-type" data-style="btn-blue" name="payment_type">
-                        <option value="cashOnDelivery"><?= lang('cash_on_delivery') ?> </option>
-                        <?php if (filter_var($paypal_email, FILTER_VALIDATE_EMAIL)) { ?>
+                        <?php if ($cashondelivery_visibility == 1) { ?>
+                            <option value="cashOnDelivery"><?= lang('cash_on_delivery') ?> </option>
+                        <?php } if (filter_var($paypal_email, FILTER_VALIDATE_EMAIL)) { ?>
                             <option value="PayPal"><?= lang('paypal') ?> </option>
+                        <?php } if ($bank_account['iban'] != null) { ?>
+                            <option value="Bank"><?= lang('bank_payment') ?> </option>
                         <?php } ?>
                     </select>
                     <span class="top-header text-center"><?= lang('choose_payment') ?></span>

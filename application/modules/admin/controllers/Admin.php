@@ -511,7 +511,7 @@ class Admin extends MX_Controller
         $head['keywords'] = '';
 
         $order_by = null;
-        if (isset($_GET['order_by']) && $_GET['order_by'] == 'id' && $_GET['order_by'] == 'processed') {
+        if (isset($_GET['order_by'])) {
             $order_by = $_GET['order_by'];
         }
         $rowscount = $this->AdminModel->ordersCount();
@@ -526,23 +526,37 @@ class Admin extends MX_Controller
             }
             $this->session->set_flashdata('paypal_sandbox', $msg);
             $this->saveHistory($msg);
-            redirect('admin/orders');
+            redirect('admin/orders?settings');
         }
         if (isset($_POST['paypal_email'])) {
             $this->AdminModel->setValueStore('paypal_email', $_POST['paypal_email']);
             $this->session->set_flashdata('paypal_email', 'Public quantity visibility changed');
             $this->saveHistory('Change paypal business email to: ' . $_POST['paypal_email']);
-            redirect('admin/orders');
+            redirect('admin/orders?settings');
         }
         if (isset($_POST['paypal_currency'])) {
             $this->AdminModel->setValueStore('paypal_currency', $_POST['paypal_currency']);
             $this->session->set_flashdata('paypal_currency', 'Public quantity visibility changed');
             $this->saveHistory('Change paypal currency to: ' . $_POST['paypal_currency']);
-            redirect('admin/orders');
+            redirect('admin/orders?settings');
+        }
+        if (isset($_POST['cashondelivery_visibility'])) {
+            $this->AdminModel->setValueStore('cashondelivery_visibility', $_POST['cashondelivery_visibility']);
+            $this->session->set_flashdata('cashondelivery_visibility', 'Cash On Delivery Visibility Changed');
+            $this->saveHistory('Change Cash On Delivery Visibility - ' . $_POST['cashondelivery_visibility']);
+            redirect('admin/orders?settings');
+        }
+        if (isset($_POST['iban'])) {
+            $this->AdminModel->setBankAccountSettings($_POST);
+            $this->session->set_flashdata('bank_account', 'Bank account settings saved');
+            $this->saveHistory('Bank account settings saved for : ' . $_POST['name']);
+            redirect('admin/orders?settings');
         }
         $data['paypal_sandbox'] = $this->AdminModel->getValueStore('paypal_sandbox');
         $data['paypal_email'] = $this->AdminModel->getValueStore('paypal_email');
         $data['paypal_currency'] = $this->AdminModel->getValueStore('paypal_currency');
+        $data['cashondelivery_visibility'] = $this->AdminModel->getValueStore('cashondelivery_visibility');
+        $data['bank_account'] = $this->AdminModel->getBankAccountSettings();
         $this->load->view('_parts/header', $head);
         $this->load->view('orders', $data);
         $this->load->view('_parts/footer');

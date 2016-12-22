@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 $lang['products'] = '&pi;&rho;&omicron;ϊό&nu;&tau;&alpha;';
 $lang['sort_by'] = '&Tau;&alpha;&xi;&iota;&nu;ό&mu;&eta;&sigma;&eta; &kappa;&alpha;&tau;ά';
 $lang['new'] = '&nu;έ&omicron;&sigmaf;';
@@ -121,3 +122,11 @@ $lang['others'] = 'άλλος';
 $lang['welcome'] = 'Ηλεκτρονικό κατάστημα με είδη ένδυσης';
 $lang['social'] = 'Social';
 $lang['no_sub_categories'] = 'δεν υπάρχουν υποκατηγορίες';
+$lang['bank_payment'] = 'Πληρωμή με τραπεζικό έμβασμα';
+$lang['bank_payment'] = 'Плащане по банков път';
+$lang['bank_recipient_name'] = 'Pay - Το όνομα του παραλήπτη';
+$lang['bank_iban'] = 'ΙΒΑΝ του δικαιούχου';
+$lang['bank_bic'] = 'BIC του δικαιούχου';
+$lang['bank_name'] = 'στην Τράπεζα';
+$lang['bank_reason'] = 'Λόγος για την πληρωμή';
+$lang['the_reason'] = 'Τον αριθμό Εντολής Πληρωμής';

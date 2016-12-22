@@ -335,7 +335,7 @@ class AdminModel extends CI_Model
     }
 
     public function getOneProduct($id)
-    {   
+    {
         $this->db->where('id', $id);
         $query = $this->db->get('products');
         if ($query->num_rows() > 0) {
@@ -476,11 +476,7 @@ class AdminModel extends CI_Model
     public function orders($limit, $page, $order_by)
     {
         if ($order_by != null) {
-            if ($order_by == 'id')
-                $type = 'DESC';
-            else
-                $type = 'ASC';
-            $this->db->order_by($order_by, $type);
+            $this->db->order_by($order_by, 'DESC');
         }
         $this->db->select('*');
         $result = $this->db->get('orders', $limit, $page);
@@ -684,6 +680,25 @@ class AdminModel extends CI_Model
             }
         }
         return $arr;
+    }
+
+    public function setBankAccountSettings($post)
+    {
+        $query = $this->db->query('SELECT id FROM bank_accounts');
+        if ($query->num_rows() == 0) {
+            $id = 1;
+        } else {
+            $result = $query->row_array();
+            $id = $result['id'];
+        }
+        $post['id'] = $id;
+        $this->db->replace('bank_accounts', $post);
+    }
+
+    public function getBankAccountSettings()
+    {
+        $result = $this->db->query("SELECT * FROM bank_accounts LIMIT 1");
+        return $result->row_array();
     }
 
 }

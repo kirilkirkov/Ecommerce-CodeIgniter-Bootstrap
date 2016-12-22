@@ -120,6 +120,13 @@ $lang['empty'] = 'Празна';
 $lang['welcome'] = 'Онлайн магазин за дрехи';
 $lang['social'] = 'Социялна медия';
 $lang['no_sub_categories'] = 'Няма подкатегории';
+$lang['bank_payment'] = 'Плащане по банков път';
+$lang['bank_recipient_name'] = 'Платете на - име на получателя';
+$lang['bank_iban'] = 'IBAN на получателя';
+$lang['bank_bic'] = 'BIC на получателя';
+$lang['bank_name'] = 'При банка';
+$lang['bank_reason'] = 'Основание за плащане';
+$lang['the_reason'] = 'Плащане на поръчка с номер';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'Не сте въвели име';

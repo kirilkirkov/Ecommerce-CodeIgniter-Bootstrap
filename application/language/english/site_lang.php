@@ -118,6 +118,13 @@ $lang['others'] = 'Others';
 $lang['welcome'] = 'Online store for clothes';
 $lang['social'] = 'Social media';
 $lang['no_sub_categories'] = 'No subcategories';
+$lang['bank_payment'] = 'Bank payment';
+$lang['bank_recipient_name'] = 'Pay - The name of the recipient';
+$lang['bank_iban'] = 'IBAN of the beneficiary';
+$lang['bank_bic'] = 'BIC of recipient';
+$lang['bank_name'] = 'in Bank';
+$lang['bank_reason'] = 'Reason for payment';
+$lang['the_reason'] = 'Payment of order with number';
 
 //Validation for checkout type: cash on delivery
 $lang['first_name_empty'] = 'You have not entered name';

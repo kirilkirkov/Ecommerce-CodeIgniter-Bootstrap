@@ -519,8 +519,13 @@ class Admin extends MX_Controller
         $data['links_pagination'] = pagination('admin/orders', $rowscount, 10, 3);
         if (isset($_POST['paypal_sandbox'])) {
             $this->AdminModel->setValueStore('paypal_sandbox', $_POST['paypal_sandbox']);
-            $this->session->set_flashdata('paypal_sandbox', 'Public quantity visibility changed');
-            $this->saveHistory('Change paypal to sandbox mode');
+            if ($_POST['paypal_sandbox'] == 1) {
+                $msg = 'Paypal sandbox mode activated';
+            } else {
+                $msg = 'Paypal sandbox mode disabled';
+            }
+            $this->session->set_flashdata('paypal_sandbox', $msg);
+            $this->saveHistory($msg);
             redirect('admin/orders');
         }
         if (isset($_POST['paypal_email'])) {

@@ -23,7 +23,7 @@ Bootsrap Responsive online shop
 20. Site color change with easy to use gradient generator
 21. Add multilanguage cookie notificator from silktide.com for EU Cookie Law 
 22. Multiple templates.. also can create your own.. 
-23. Bank account payments 
+23. Bank account payments support
 24. and more.. and more.. 
 
 ## Easy installation in 3 steps
@@ -37,7 +37,7 @@ User: admin
 Pass: admin
 
 ## Screenshot
-![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/screenshot.png "Logo Title Text 1")
+![alt text](https://github.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/blob/master/templates.png "Logo Title Text 1")
 
 ## Screenshot of admin panel
 ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/admin_panel4.png "Logo Title Text 1")

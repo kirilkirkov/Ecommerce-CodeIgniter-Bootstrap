@@ -23,7 +23,8 @@ Bootsrap Responsive online shop
 20. Site color change with easy to use gradient generator
 21. Add multilanguage cookie notificator from silktide.com for EU Cookie Law 
 22. Multiple templates.. also can create your own.. 
-23. and more.. and more.. 
+23. Bank account payments 
+24. and more.. and more.. 
 
 ## Easy installation in 3 steps
 1. Import dbDump.sql to your mysql

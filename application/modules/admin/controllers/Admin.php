@@ -32,6 +32,7 @@ class Admin extends MX_Controller
         $vars['textualPages'] = getTextualPages($this->activePages);
         $vars['nonDynPages'] = $this->config->item('no_dynamic_pages');
         $vars['numNotPreviewOrders'] = $numNotPreviewOrders;
+        $vars['warnings'] = $this->warningChecker();
         $this->load->vars($vars);
     }
 
@@ -1104,6 +1105,52 @@ class Admin extends MX_Controller
     {
         $this->login_check();
         return $this->AdminModel->getOneProduct($id);
+    }
+
+    private function warningChecker()
+    {
+        $errors = array();
+        
+        // Check application/language folder is writable
+        if (!is_writable('./application/language')) {
+            $errors[] = 'Language folder is not writable!';
+        }
+
+        // Check application/logs folder is writable
+        if (!is_writable('./application/logs')) {
+            $errors[] = 'Logs folder is not writable!';
+        }
+
+        // Check attachments folder is writable
+        if (!is_writable('./attachments')) {
+            $errors[] = 'Attachments folder is not writable!';
+        } else {
+            /*
+             *  Check attachment directories exsists..
+             *  ..and create him if no exsists
+             */
+            if (!file_exists('./attachments/blog_images')) {
+                $old = umask(0);
+                mkdir('./attachments/blog_images', 0777, true);
+                umask($old);
+            }
+            if (!file_exists('./attachments/lang_flags')) {
+                $old = umask(0);
+                mkdir('./attachments/lang_flags', 0777, true);
+                umask($old);
+            }
+            if (!file_exists('./attachments/shop_images')) {
+                $old = umask(0);
+                mkdir('./attachments/shop_images', 0777, true);
+                umask($old);
+            }
+            if (!file_exists('./attachments/site_logo')) {
+                $old = umask(0);
+                mkdir('./attachments/site_logo', 0777, true);
+                umask($old);
+            }
+        }
+        return $errors;
     }
 
 }

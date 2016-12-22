@@ -145,7 +145,20 @@
                                 </ul>
                             </div>
                             <div class="col-sm-9 col-md-9 col-lg-10 col-sm-offset-3 col-md-offset-3 col-lg-offset-2">
-                            <?php } else { ?>
+                                <?php if ($warnings != null) { ?>
+                                    <div class="alert alert-danger">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                        There are some errors that you must fix!
+                                        <ol>
+                                            <?php foreach ($warnings as $warning) { ?>
+                                                <li><?= $warning ?></li>
+                                            <?php } ?>
+                                        </ol>
+                                    </div>
+                                    <?php
+                                }
+                            } else {
+                                ?>
                                 <div class="">
                                 <?php } ?>
 

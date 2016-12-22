@@ -220,11 +220,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <i class="fa fa-angle-left" aria-hidden="true"></i> 
                     <?= lang('back_to_shop') ?>
                 </a>
-
-                <a href="javascript:void(0);" class="btn cloth-bg-color go-order" onclick="document.getElementById('goOrder').submit();" class="pull-left">
+                <a href="javascript:void(0);" class="btn cloth-bg-color go-order" onclick="document.getElementById('goOrder').submit();">
                     <?= lang('custom_order') ?> 
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </a>
+				<div class="visible-xs bottom-30"></div>
                 <div class="clearfix"></div>
             </div>
         </div>

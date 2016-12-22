@@ -163,11 +163,11 @@
                                     <span class="icon-bar"></span>
                                 </button>
                                 <?php if ($naviText != null) { ?>
-                                    <a class="navbar-brand" href="<?= base_url() ?>"><?= $naviText ?></a>
+                                    <a class="navbar-brand visible-xs" href="<?= base_url() ?>"><?= $naviText ?></a>
                                 <?php } ?>
                             </div>
                             <div id="navbar" class="navbar-collapse collapse">
-                                <ul class="nav navbar-nav"  style="<?= $naviText == null ? 'margin-left:-15px;' : '' ?>">
+                                <ul class="nav navbar-nav">
                                     <li<?= uri_string() == '' || uri_string() == MY_LANGUAGE_ABBR ? ' class="active"' : '' ?>><a href="<?= LANG_URL ?>"><?= lang('home') ?></a></li>
                                     <li class="dropdown dropdown-more">
                                         <a class="dropdown-toggle parent" data-toggle="dropdown" href="#">

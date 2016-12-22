@@ -27,6 +27,7 @@ header {background-color: #fff;}
 .navbar .navbar-brand {color:#171717;}
 .navbar .navbar-nav a {color:#171717; font-weight: bold; text-transform: uppercase; font-size:13px; letter-spacing: 1px;}
 .navbar .navbar-nav li {border-left:1px solid #e5e5e5;}
+#navbar {padding-left:0;}
 .navbar .navbar-nav li:last-child {border-right:1px solid #e5e5e5;}
 .body {background-color: #fff; border:1px solid #e5e5e5; padding:30px;}
 .advanced-search-btn { position: absolute; right: 50px; top: 5px; z-index: 10;}
@@ -57,7 +58,7 @@ header {background-color: #fff;}
 .products .product-list img {width: 100%;}
 .products .product-list h2 {font-size:14px; height: 50px; overflow: hidden;}
 .products .product-list h2 a {color:#787878;}
-.loader {display: none;}
+.loader {display: none; height:1px !important;} /*hack*/
 .products .product-list .price, .product-list .price-discount {font-size:12px; height: 20px;}
 .products .product-list div.add-to-cart, .products .product-list .info-btn, #view-product .add-to-cart {color:#fff; display:block; padding:2px 7px; font-size:12px; margin-bottom: 5px;}
 .products .product-list .price-down {background-color: #181818; padding:2px; color:#fff;}
@@ -139,6 +140,7 @@ footer { bottom : 0;  left : 0; position : absolute; width : 100%; padding-botto
 .quantity-num {padding: 2px; border: 1px solid #f1f1f1; margin-right: 5px;}
 .go-shop, .go-order, .go-checkout {color:#fff; border-radius: 0;}
 .go-shop:hover, .go-order:hover, .go-checkout:hover {color:#fff;}
+.go-order, #shopping-cart .go-checkout {float:right;}
 #contacts .jumbotron h1 {font-size:30px;}
 #contacts .jumbotron h1 small {font-size:15px;}
 #btnContactUs {border-radius: 0; color: #fff;}
@@ -161,8 +163,16 @@ footer { bottom : 0;  left : 0; position : absolute; width : 100%; padding-botto
     .bag-info ul.dropdown-cart { width: auto; }
     .social li {float:none; text-align: center; display: inline-block}
     .other-img-preview { height : 75px; margin-bottom : 50px; width : 75px; }
+	.categories li {display:block;}
+	.categories li a {width:150px; display:inline-block;}
+	.categories li a  i {float:right;}
+	.logo-and-search {padding-top:0;}
+	.languages-bar {margin-bottom:10px;}
+	#navbar {padding-left:15px;}
 }
 
 @media (max-width: 480px) {
     .advanced-search-menu {width:210px;}
+	.go-shop, .go-order, #shopping-cart .go-checkout {margin-top:10px;}
+	.go-order, #shopping-cart .go-checkout {float:none;}
 }

@@ -436,7 +436,7 @@ class Admin extends MX_Controller
     {
         $newLang = strtolower(trim($_POST['name']));
         if ($newLang != '') {
-            $from = 'application/language/' . MY_DEFAULT_LANGUAGE_ABBR;
+            $from = 'application/language/' . MY_DEFAULT_LANGUAGE_NAME;
             $to = 'application/language/' . $newLang;
             rcopy($from, $to);
         }

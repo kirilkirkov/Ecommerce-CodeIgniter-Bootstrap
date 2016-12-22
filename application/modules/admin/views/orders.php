@@ -1,3 +1,4 @@
+<link href="<?= base_url('assets/css/bootstrap-toggle.min.css') ?>" rel="stylesheet">
 <div class="table-responsive">
     <h1><img src="<?= base_url('assets/imgs/orders.png') ?>" class="header-img" style="margin-top:-2px;"> Orders</h1>
     <hr>
@@ -147,20 +148,17 @@
 <div class="row">
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading">Paypal sandbox mode</div>
+            <div class="panel-heading">Paypal sandbox mode (use for paypal account tests)</div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('paypal_sandbox')) { ?>
                     <div class="alert alert-info"><?= $this->session->flashdata('paypal_sandbox') ?></div>
                 <?php } ?>
                 <form method="POST" action="">
-                    <div class="input-group">
-                        <input class="form-control" name="paypal_sandbox" value="<?= $paypal_sandbox ?>" type="text">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" value="" type="submit">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </button>
-                        </span>
-                    </div>
+                    <input type="hidden" name="paypal_sandbox" value="<?= $paypal_sandbox ?>">
+                    <input <?= $paypal_sandbox == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="paypal_sandbox" class="toggle-changer" type="checkbox">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
                 </form>
             </div>
         </div>
@@ -256,3 +254,4 @@
         });
     });
 </script>
+<script src="<?= base_url('assets/js/bootstrap-toggle.min.js') ?>"></script>

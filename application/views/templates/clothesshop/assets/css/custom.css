@@ -159,6 +159,7 @@ footer { bottom : 0;  left : 0; position : absolute; width : 100%; padding-botto
 #show-xs-nav { margin-top: 15px; border : 1px solid #666; color : #666; font-size : 15px; padding : 3px; text-align : center; text-decoration : none; }
 #show-xs-nav span i { margin-left : 5px; }
 #show-xs-nav .hidde-sp {display: none;}
+a.left.carousel-control, a.right.carousel-control {background-image:none; top:30%;}
 
 @media screen and (max-width: 767px) {
     .advanced-search-menu {width:410px;}

@@ -151,9 +151,18 @@ class Loop
                     <?php
                     $i++;
                 }
-                if ($carousel == true)
-                    echo '</div></div>';
-            }
-
+                if ($carousel == true) {
+                    ?>
+                </div>
+                <a class="left carousel-control" href="#small_carousel" role="button" data-slide="prev">
+                    <i class="fa fa-5x fa-angle-left" aria-hidden="true"></i>
+                </a>
+                <a class="right carousel-control" href="#small_carousel" role="button" data-slide="next">
+                    <i class="fa fa-5x fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            <?php
         }
-        
+    }
+
+}

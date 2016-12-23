@@ -131,7 +131,7 @@ div.product-sort .form-group { margin-bottom : 0; }
 #small_carousel .carousel-indicators .active { height : 15px; width : 15px; }
 #small_carousel .add-to-cart {padding-left: 10px; padding-right: 10px;}
 #small_carousel .info-btn {margin-left:10px; margin-right: 10px;}
-#small_carousel a.left.carousel-control, a.right.carousel-control {display: none;}
+#small_carousel a.left.carousel-control, #small_carousel a.right.carousel-control {display: none;}
 #view-product h1 { font-size : 20px; margin-bottom : 40px; margin-top : 0; }
 #view-product .the-image { border : 1px solid #ddd; box-shadow : 0 6px 12px rgba(0, 0, 0, 0.176); padding : 5px; }
 #view-product .orders-from-category { padding-top : 80px; }

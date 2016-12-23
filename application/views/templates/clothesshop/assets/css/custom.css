@@ -36,7 +36,7 @@ header {background-color: #fff;}
 .advanced-search-menu .form-control {float: none;}
 #home-slider { margin-bottom: 70px; display: inline-block; }
 #home-slider .item .absolute-texts {position: absolute; top: 10px; left: 10px;}
-#home-slider .item { position: relative; display: inline-block; }
+#home-slider .item { position: relative; }
 #home-slider .item h1 { font-size: 20px; font-weight: bold; text-transform: uppercase; max-width: 300px;}
 #home-slider .item .description {  max-width: 400px;}
 #home-slider .carousel-indicators {width: auto; left: auto; right: 20px; bottom: 0;}

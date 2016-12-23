@@ -35,15 +35,18 @@ foreach ($all_categories as $categorie) {
                             $i = 0;
                             foreach ($sliderProducts as $article) {
                                 ?>
-                                <div class="item <?= $i == 0 ? 'active' : '' ?>" style="background-image:url('<?= base_url('attachments/shop_images/' . $article['image']) ?>');">
-                                    <h1>
-                                        <a href="<?= LANG_URL . '/' . $article['url'] ?>">
-                                            <?= character_limiter($article['title'], 100) ?>
-                                        </a>
-                                    </h1>
-                                    <div class="description">
-                                        <?= character_limiter(strip_tags($article['basic_description']), 150) ?>
+                                <div class="item <?= $i == 0 ? 'active' : '' ?>">
+                                    <div class="absolute-texts">
+                                        <h1>
+                                            <a href="<?= LANG_URL . '/' . $article['url'] ?>">
+                                                <?= character_limiter($article['title'], 100) ?>
+                                            </a>
+                                        </h1>
+                                        <div class="description">
+                                            <?= character_limiter(strip_tags($article['basic_description']), 150) ?>
+                                        </div>
                                     </div>
+                                    <img src="<?= base_url('attachments/shop_images/' . $article['image']) ?>" alt="" class="img-responsive">
                                 </div>
                                 <?php
                                 $i++;
@@ -61,11 +64,17 @@ foreach ($all_categories as $categorie) {
         <div class="h-line"></div>
         <h3 class="categories-label"><?= lang('categories') ?></h3>
         <?php if (isset($_GET['category']) && $_GET['category'] != '') { ?>
-            <a href="javascript:void(0);" class="clear-filter" data-type-clear="category" data-toggle="tooltip" data-placement="right">
-                <?= lang('clear_the_filter') ?>
+            <a href="javascript:void(0);" class="clear-filter" data-type-clear="category" data-toggle="tooltip" data-placement="top" title="<?= lang('clear_the_filter') ?>">
+                <span class="hidden-xs">
+                    <?= lang('clear_the_filter') ?>
+                </span>
                 <i class="fa fa-times" aria-hidden="true"></i>
             </a>
         <?php } ?>
+        <a href="javascript:void(0)" id="show-xs-nav" class="visible-xs">
+            <span class="show-sp"><?= lang('showXsNav') ?><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i></span>
+            <span class="hidde-sp"><?= lang('hideXsNav') ?><i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i></span>
+        </a>
         <div class="categories">
             <?php if (!empty($arrCategories)) { ?>
                 <ul class="list">

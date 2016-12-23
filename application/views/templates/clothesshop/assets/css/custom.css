@@ -159,6 +159,9 @@ footer { bottom : 0;  left : 0; position : absolute; width : 100%; padding-botto
 #show-xs-nav span i { margin-left : 5px; }
 #show-xs-nav .hidde-sp {display: none;}
 a.left.carousel-control, a.right.carousel-control {background-image:none; top:30%;}
+#home-slider a.left.carousel-control, #home-slider a.right.carousel-control {bottom:auto; left:auto; right:auto; position: static;}
+#home-slider a.left.carousel-control {margin-right: 10px;}
+#home-slider .controls {position: absolute; right: 20px; top:20px;}
 
 @media screen and (max-width: 767px) {
     .advanced-search-menu {width:410px;}

@@ -53,6 +53,14 @@ foreach ($all_categories as $categorie) {
                             }
                             ?>
                         </div>
+                        <div class="controls">
+                            <a class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
+                                <i class="fa fa-2x fa-angle-left" aria-hidden="true"></i>
+                            </a>
+                            <a class="right carousel-control" href="#home-slider" role="button" data-slide="next">
+                                <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
                     </div>
                     <h2 class="hidden-xs"><?= lang('welcome') ?></h2>
                 </div>

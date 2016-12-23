@@ -24,7 +24,7 @@ foreach ($all_categories as $categorie) {
                             $i = 0;
                             while ($i < count($sliderProducts)) {
                                 ?>
-                                <li data-target="#home-slider" data-slide-to="0" class="<?= $i == 0 ? 'active' : '' ?>"></li>
+                                <li data-target="#home-slider" data-slide-to="<?= $i ?>" class="<?= $i == 0 ? 'active' : '' ?>"></li>
                                 <?php
                                 $i++;
                             }

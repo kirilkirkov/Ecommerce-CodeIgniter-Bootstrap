@@ -481,6 +481,8 @@ class AdminModel extends CI_Model
     {
         if ($order_by != null) {
             $this->db->order_by($order_by, 'DESC');
+        } else {
+            $this->db->order_by('id', 'DESC');
         }
         $this->db->select('*');
         $result = $this->db->get('orders', $limit, $page);

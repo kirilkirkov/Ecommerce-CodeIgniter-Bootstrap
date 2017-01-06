@@ -24,8 +24,10 @@
                 <div class="row">
                     <div class="col-xs-4">
                         <select class="form-control selectpicker change-order">
-                            <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'desc' ? 'selected=""' : '' ?> value="desc">Newest</option>
-                            <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'asc' ? 'selected=""' : '' ?> value="asc">Latest</option>
+                            <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'id=desc' ? 'selected=""' : '' ?> value="id=desc">Newest</option>
+                            <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'id=asc' ? 'selected=""' : '' ?> value="id=asc">Latest</option>
+                            <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'quantity=asc' ? 'selected=""' : '' ?> value="quantity=asc">Low Quantity</option>
+                            <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'quantity=desc' ? 'selected=""' : '' ?> value="quantity=desc">High Quantity</option>
                         </select>
                     </div>
                     <div class="col-xs-8">

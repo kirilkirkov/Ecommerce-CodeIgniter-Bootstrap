@@ -324,7 +324,10 @@ class AdminModel extends CI_Model
             $this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
         }
         if ($orderby !== null) {
-            $this->db->order_by('products.id', $orderby);
+            $ord = explode('=', $orderby);
+            if (isset($ord[0]) && isset($ord[1])) {
+                $this->db->order_by('products.' . $ord[0], $ord[1]);
+            }
         } else {
             $this->db->order_by('products.id', 'desc');
         }

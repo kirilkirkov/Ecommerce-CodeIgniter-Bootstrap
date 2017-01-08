@@ -113,7 +113,15 @@ if ($this->session->flashdata('result_publish')) {
         <label>Shop Categories</label>
         <select class="selectpicker form-control show-tick show-menu-arrow" name="shop_categorie">
             <?php foreach ($shop_categories as $key_cat => $shop_categorie) { ?>
-                <option <?= isset($_POST['shop_categorie']) && $_POST['shop_categorie'] == $key_cat ? 'selected=""' : '' ?> value="<?= $key_cat ?>"><?= $shop_categorie['info'][0]['name'] ?></option>
+                <option <?= isset($_POST['shop_categorie']) && $_POST['shop_categorie'] == $key_cat ? 'selected=""' : '' ?> value="<?= $key_cat ?>">
+                <?php 
+				foreach($shop_categorie['info'] as $nameAbbr) {
+				    if($nameAbbr['abbr'] == $this->config->item('language_abbr')) {
+						echo $nameAbbr['name'];
+					}
+				}
+				?>
+            </option>
             <?php } ?>
         </select>
     </div>

@@ -127,8 +127,7 @@ $lang['bank_bic'] = 'BIC of recipient';
 $lang['bank_name'] = 'in Bank';
 $lang['bank_reason'] = 'Reason for payment';
 $lang['the_reason'] = 'Payment of order with number';
-
-//Validation for checkout type: cash on delivery
+$lang['brands'] = 'Brands';
 $lang['first_name_empty'] = 'You have not entered name';
 $lang['last_name_empty'] = 'You have not entered family';
 $lang['invalid_email'] = 'Invalid email address';

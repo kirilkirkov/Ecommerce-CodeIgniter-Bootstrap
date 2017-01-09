@@ -48,10 +48,12 @@ class Home extends MY_Controller
         $data['countQuantities'] = $this->Publicmodel->getCountQuantities();
         $data['bestSellers'] = $this->Publicmodel->getbestSellers();
         $data['sliderProducts'] = $this->Publicmodel->getSliderProducts();
-        $data['shippingOrder'] = $this->AdminModel->getValueStore('shippingOrder');
         $data['products'] = $this->Publicmodel->getProducts($this->num_rows, $page, $_GET);
-        $data['showOutOfStock'] = $this->AdminModel->getValueStore('outOfStock');
         $rowscount = $this->Publicmodel->productsCount($_GET);
+        $data['shippingOrder'] = $this->AdminModel->getValueStore('shippingOrder');
+        $data['showOutOfStock'] = $this->AdminModel->getValueStore('outOfStock');
+        $data['showBrands'] = $this->AdminModel->getValueStore('showBrands');
+        $data['brands'] = $this->AdminModel->getBrands();
         $data['links_pagination'] = pagination('home', $rowscount, $this->num_rows);
         $this->render('home', $head, $data);
     }

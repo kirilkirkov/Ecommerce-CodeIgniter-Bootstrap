@@ -707,4 +707,20 @@ class AdminModel extends CI_Model
         return $result->row_array();
     }
 
+    public function getBrands()
+    {
+        $result = $this->db->get('brands');
+        return $result->result_array();
+    }
+
+    public function setBrand($name)
+    {
+        $this->db->insert('brands', array('name' => $name));
+    }
+
+    public function deleteBrand($id)
+    {
+        $this->db->where('id', $id)->delete('brands');
+    }
+
 }

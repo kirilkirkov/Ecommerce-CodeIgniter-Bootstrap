@@ -13,8 +13,8 @@
                 <img src="<?= base_url('attachments/site_logo/' . $siteLogo) ?>" alt="Logo is deleted. Upload new!" class="img-responsive">
                 <hr>
                 <form accept-charset="utf-8" method="post" enctype="multipart/form-data" action="">
-                <input type="file" name="sitelogo" size="20" />
-                <input type="submit" value="Upload New" name="uploadimage" class="btn btn-default" />
+                    <input type="file" name="sitelogo" size="20" />
+                    <input type="submit" value="Upload New" name="uploadimage" class="btn btn-default" />
                 </form>
             </div>
         </div>
@@ -316,6 +316,23 @@
                 <form method="POST" action="">
                     <input type="hidden" name="moreInfoBtn" value="<?= $moreInfoBtn ?>">
                     <input <?= $moreInfoBtn == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="moreInfoBtn" class="toggle-changer" type="checkbox">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Show brands</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('showBrands')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('showBrands') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="hidden" name="showBrands" value="<?= $showBrands ?>">
+                    <input <?= $showBrands == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="showBrands" class="toggle-changer" type="checkbox">
                     <button class="btn btn-default" value="" type="submit">
                         Save
                     </button>

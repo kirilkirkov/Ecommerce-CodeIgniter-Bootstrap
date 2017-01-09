@@ -3476,7 +3476,7 @@ var CSSGradientEditor = function(container, options) {
         cssoutput += 'div.filter-sidebar .title, .title.alone {border-bottom: 3px solid ' + more_more_brigness_color + '; }\n';
         cssoutput += 'div.filter-sidebar .title span, .title.alone span {border-bottom : 3px solid ' + mine_color + '; }\n';
         
-        // stylesfor template clothesshop
+        // styles for template clothesshop
         cssoutput += '.cloth-bg-color {background-color:' + mine_color + ';}\n';
         cssoutput += '.cloth-color {color:' + mine_color + ';}\n';
         cssoutput += '.cloth--border-color {border-color:' + mine_color + ';}\n';
@@ -3486,10 +3486,10 @@ var CSSGradientEditor = function(container, options) {
         cssoutput += '.navbar.cloth .navbar-nav li:hover, .navbar.cloth .navbar-nav li.active {border-top:3px solid; border-top-color: ' + mine_color + ';}\n';
         cssoutput += '#small_carousel .product-list div.add-to-cart, #small_carousel .product-list .info-btn {background-color: ' + mine_color + '; }\n';
         cssoutput += '.products .product-list div.add-to-cart, .products .product-list .info-btn { background-color: ' + mine_color + ';}\n';
-        cssoutput += '.products-label, .categories-label { background-color: ' + mine_color + ';}\n';
+        cssoutput += '.part-label { background-color: ' + mine_color + ';}\n';
         cssoutput += '.pagination li a { color:' + mine_color + ';}\n';
         cssoutput += '.pagination li.active a {background-color: ' + mine_color + '; border-color:' + mine_color + '; }\n';
-        cssoutput += '.categories li a {background-color:' + mine_color + ';}\n';
+        cssoutput += '.list li a {background-color:' + mine_color + ';}\n';
         cssoutput += '#home-slider .carousel-indicators .active, #small_carousel .carousel-indicators .active {background-color: ' + mine_color + ';}\n';
         cssoutput += '.btn-blue-round {' + gradient_bg + '}\n';
         cssoutput += '.my-basket span.sum-scope {color:' + mine_color + ';}\n';

@@ -33,6 +33,7 @@ class Admin extends MX_Controller
         $vars['nonDynPages'] = $this->config->item('no_dynamic_pages');
         $vars['numNotPreviewOrders'] = $numNotPreviewOrders;
         $vars['warnings'] = $this->warningChecker();
+        $vars['showBrands'] = $this->AdminModel->getValueStore('showBrands');
         $this->load->vars($vars);
     }
 
@@ -129,6 +130,7 @@ class Admin extends MX_Controller
         $data['trans_load'] = $trans_load;
         $data['languages'] = $this->AdminModel->getLanguages();
         $data['shop_categories'] = $this->AdminModel->getShopCategories();
+        $data['brands'] = $this->AdminModel->getBrands();
         $this->load->view('_parts/header', $head);
         $this->load->view('publish', $data);
         $this->load->view('_parts/footer');
@@ -733,6 +735,12 @@ class Admin extends MX_Controller
             $this->saveHistory('Change visibility of More Information button in products list');
             redirect('admin/settings');
         }
+        if (isset($_POST['showBrands'])) {
+            $this->AdminModel->setValueStore('showBrands', $_POST['showBrands']);
+            $this->session->set_flashdata('showBrands', 'Brands visibility changed');
+            $this->saveHistory('Brands visibility changed');
+            redirect('admin/settings');
+        }
         if (isset($_POST['setCookieLaw'])) {
             unset($_POST['setCookieLaw']);
             $this->setCookieLaw($_POST);
@@ -764,6 +772,7 @@ class Admin extends MX_Controller
         $data['googleApi'] = $this->AdminModel->getValueStore('googleApi');
         $data['outOfStock'] = $this->AdminModel->getValueStore('outOfStock');
         $data['moreInfoBtn'] = $this->AdminModel->getValueStore('moreInfoBtn');
+        $data['showBrands'] = $this->AdminModel->getValueStore('showBrands');
         $data['cookieLawInfo'] = $this->getCookieLaw();
         $data['languages'] = $this->AdminModel->getLanguages();
         $data['law_themes'] = array_diff(scandir('./assets/imgs/cookie-law-themes/'), array('..', '.'));
@@ -1101,6 +1110,32 @@ class Admin extends MX_Controller
         $this->saveHistory('Go to Templates Page');
     }
 
+    public function brands()
+    {
+        $this->login_check();
+        $data = array();
+        $head = array();
+        $head['title'] = 'Administration - Brands';
+        $head['description'] = '!';
+        $head['keywords'] = '';
+
+        if (isset($_POST['name'])) {
+            $this->AdminModel->setBrand($_POST['name']);
+            redirect('admin/brands');
+        }
+
+        if (isset($_GET['delete'])) {
+            $this->AdminModel->deleteBrand($_GET['delete']);
+            redirect('admin/brands');
+        }
+
+        $data['brands'] = $this->AdminModel->getBrands();
+
+        $this->load->view('_parts/header', $head);
+        $this->load->view('brands', $data);
+        $this->load->view('_parts/footer');
+    }
+
     public function getProductInfo($id)
     {
         $this->login_check();
@@ -1110,7 +1145,7 @@ class Admin extends MX_Controller
     private function warningChecker()
     {
         $errors = array();
-        
+
         // Check application/language folder is writable
         if (!is_writable('./application/language')) {
             $errors[] = 'Language folder is not writable!';

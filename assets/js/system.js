@@ -115,6 +115,11 @@ $(".order").change(function () {
     $('[name="' + order_to + '"]').val(order_type);
     submitForm();
 });
+$('.brand').click(function () {
+    var brand_id = $(this).data('brand-id');
+    $('[name="brand_id"]').val(brand_id);
+    submitForm()
+});
 $("#search_in_title").keyup(function () {
     $('[name="search_in_title"]').val($(this).val());
 });
@@ -133,5 +138,3 @@ $('.clear-filter').click(function () { //clear filter in right col
 function submitForm() {
     document.getElementById("bigger-search").submit();
 }
-
-

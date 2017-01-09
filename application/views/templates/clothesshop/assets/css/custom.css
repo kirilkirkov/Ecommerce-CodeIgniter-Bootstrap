@@ -63,7 +63,7 @@ header {background-color: #fff;}
 .products .product-list div.add-to-cart, .products .product-list .info-btn, #view-product .add-to-cart {color:#fff; display:block; padding:2px 7px; font-size:12px; margin-bottom: 5px;}
 .products .product-list .price-down {background-color: #181818; padding:2px; color:#fff;}
 .products .product-list div.add-to-cart a { color:#fff;}
-.products-label, .categories-label { color:#fff; padding:5px 15px; display: inline-block; margin-top: 15px;}
+.part-label { color:#fff; padding:5px 15px; display: inline-block; margin-top: 15px;  margin-bottom: -20px;}
 footer { bottom : 0;  left : 0; position : absolute; width : 100%; padding-bottom:20px;}
 .footer-text {font-size:13px; padding-left: 2px;}
 .body-footer {padding-top: 30px; text-align: center;}
@@ -94,10 +94,9 @@ footer { bottom : 0;  left : 0; position : absolute; width : 100%; padding-botto
 .social li { background: #b5b5b5 none repeat scroll 0 0;   border: 2px solid #b5b5b5;  border-radius: 50%;  float: left;  height: 36px;  line-height: 36px; margin: 0 8px 0 0; margin-bottom:5px;  padding: 0;  text-align: center; transition: all 0.5s ease 0s; width: 36px;}
 .social li a i {color: #fff;}
 .categories {margin-left: -10px;}
-.categories .list { display: inline; list-style: none; padding: 0; margin: 0; }
-.categories li {display: inline-block; margin-bottom: 10px; margin-left: 10px;}
-.categories li a { font-size: 13px; color:#fff; padding: 5px 10px;}
-.categories-label { margin-bottom: -20px;}
+.list { display: inline; list-style: none; padding: 0; margin: 0; }
+.list li {display: inline-block; margin-bottom: 10px; margin-left: 10px;}
+.list li a { font-size: 13px; color:#fff; padding: 5px 10px;}
 .pagination li {display: inline-block; margin-right: 5px;}
 .pagination li, .pagination li:first-child, .pagination li a, .pagination li:first-child a, .pagination li:last-child a {border-radius: 0;}
 .pagination li a:hover {color:#b54e4f;}
@@ -162,6 +161,7 @@ a.left.carousel-control, a.right.carousel-control {background-image:none; top:30
 #home-slider a.left.carousel-control, #home-slider a.right.carousel-control {bottom:auto; left:auto; right:auto; position: static;}
 #home-slider a.left.carousel-control {margin-right: 10px;}
 #home-slider .controls {position: absolute; right: 20px; top:20px;}
+.brands {margin-left:-10px;margin-bottom: 20px; padding-top: 30px;}
 
 @media screen and (max-width: 767px) {
     .advanced-search-menu {width:410px;}

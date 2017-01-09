@@ -134,3 +134,4 @@ $lang['checkout_top_header'] = '&pi;&lambda;&eta;&rho;&omega;&mu;ή';
 $lang['step_your_order'] = '&pi;&alpha;&rho;&alpha;&gamma;&gamma;&epsilon;&lambda;ί&alpha; &sigma;&alpha;&sigmaf;';
 $lang['step_payment_method'] = '&Pi;&lambda;&eta;&rho;&omega;&mu;ή';
 $lang['step_success_prod'] = '&epsilon;&pi;&iota;&tau;&upsilon;&chi;&eta;&mu;έ&nu;&epsilon;&sigmaf; &delta;&eta;&mu;ό&sigma;&iota;&epsilon;&sigmaf; &sigma;&upsilon;&mu;&beta;ά&sigma;&epsilon;&iota;&sigmaf;';
+$lang['brands'] = 'μάρκες';

@@ -70,7 +70,7 @@ foreach ($all_categories as $categorie) {
             </div>
         <?php } ?>
         <div class="h-line"></div>
-        <h3 class="categories-label"><?= lang('categories') ?></h3>
+        <h3 class="part-label"><?= lang('categories') ?></h3>
         <?php if (isset($_GET['category']) && $_GET['category'] != '') { ?>
             <a href="javascript:void(0);" class="clear-filter" data-type-clear="category" data-toggle="tooltip" data-placement="top" title="<?= lang('clear_the_filter') ?>">
                 <span class="hidden-xs">
@@ -104,7 +104,25 @@ foreach ($all_categories as $categorie) {
             <?php } ?>
         </div>
         <div class="h-line"></div>
-        <h3 class="products-label"><?= lang('products') ?></h3>
+        <?php if ($showBrands == 1) { ?>
+            <h3 class="part-label"><?= lang('brands') ?></h3>
+            <?php if (isset($_GET['brand_id']) && $_GET['brand_id'] != '') { ?>
+                <a href="javascript:void(0);" class="clear-filter" data-type-clear="brand_id" data-toggle="tooltip" data-placement="right" title="<?= lang('clear_the_filter') ?>"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <?php } ?>
+            <div class="brands">
+                <ul class="list">
+                    <?php foreach ($brands as $brand) { ?>
+                        <li>
+                            <a href="javascript:void(0);" data-brand-id="<?= $brand['id'] ?>" class="brand <?= isset($_GET['brand_id']) && $_GET['brand_id'] == $brand['id'] ? 'selected' : '' ?>">
+                                <span><?= $brand['name'] ?></span>
+                            </a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+            <div class="h-line"></div>
+        <?php } ?>
+        <h3 class="part-label"><?= lang('products') ?></h3>
         <div class="row products">
             <?php
             if (!empty($products)) {

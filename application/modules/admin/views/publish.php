@@ -134,6 +134,16 @@ if ($this->session->flashdata('result_publish')) {
         <label>Quantity</label>
         <input type="text" placeholder="number" name="quantity" value="<?= @$_POST['quantity'] ?>" class="form-control" id="quantity">
     </div>
+    <?php if ($showBrands == 1) { ?>
+        <div class="form-group for-shop">
+            <label>Brand</label>
+            <select class="selectpicker" name="brand_id">
+                <?php foreach ($brands as $brand) { ?>
+                    <option <?= isset($_POST['brand_id']) && $_POST['brand_id'] == $brand['id'] ? 'selected' : '' ?> value="<?= $brand['id'] ?>"><?= $brand['name'] ?></option>
+                <?php } ?>
+            </select>
+        </div>
+    <?php } ?>
     <div class="form-group for-shop">
         <label>In Slider</label>
         <select class="selectpicker" name="in_slider">

@@ -121,7 +121,23 @@ if (count($sliderProducts) > 0) {
                     ?>
                 </div>
             </div>
-            <?php if ($showOutOfStock == 1) { ?>
+            <?php if ($showBrands == 1) { ?>
+                <div class="filter-sidebar">
+                    <div class="title">
+                        <span><?= lang('brands') ?></span>
+                        <?php if (isset($_GET['brand_id']) && $_GET['brand_id'] != '') { ?>
+                            <a href="javascript:void(0);" class="clear-filter" data-type-clear="brand_id" data-toggle="tooltip" data-placement="right" title="<?= lang('clear_the_filter') ?>"><i class="fa fa-times" aria-hidden="true"></i></a>
+                        <?php } ?>
+                    </div>
+                    <ul>
+                        <?php foreach ($brands as $brand) { ?>
+                            <li>
+                                <i class="fa fa-chevron-right" aria-hidden="true"></i> <a href="javascript:void(0);" data-brand-id="<?= $brand['id'] ?>" class="brand <?= isset($_GET['brand_id']) && $_GET['brand_id'] == $brand['id'] ? 'selected' : '' ?>"><?= $brand['name'] ?></a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            <?php } if ($showOutOfStock == 1) { ?>
                 <div class="filter-sidebar">
                     <div class="title">
                         <span><?= lang('store') ?></span>

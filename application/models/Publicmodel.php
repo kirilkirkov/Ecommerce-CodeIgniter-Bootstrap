@@ -112,6 +112,9 @@ class Publicmodel extends CI_Model
         if ($big_get['quantity_more'] != '') {
             $this->db->where('products.quantity > ', $big_get['quantity_more']);
         }
+        if ($big_get['brand_id'] != '') {
+            $this->db->where('products.brand_id = ', $big_get['brand_id']);
+        }
         if ($big_get['added_after'] != '') {
             $time = strtotime($big_get['added_after']);
             $this->db->where('products.time > ', $time);

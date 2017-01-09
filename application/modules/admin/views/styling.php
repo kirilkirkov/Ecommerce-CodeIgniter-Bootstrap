@@ -426,6 +426,7 @@
             <textarea class="form-control" name="newStyle" rows="15" id="new-style" placeholder="Leave empty to load default styles"><?= $newStyle ?></textarea>
         </div>
         <button type="submit" class="btn btn-lg btn-default">Save</button>
+        <a href="javascript:void(0)" class="btn btn-lg btn-default clear-style">Clear Styles</a>
     </form>
 </div>
 
@@ -472,5 +473,8 @@
     }
     $(document).ready(function () {
         $('button, a').tooltip();
+        $('.clear-style').click(function(){
+            $('#new-style').val('');
+        });
     });
 </script>

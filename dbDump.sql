@@ -228,6 +228,7 @@ INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
 (28, 'showBrands', '0');
 
 CREATE TABLE `brands` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(50) NOT NULL
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

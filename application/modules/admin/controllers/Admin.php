@@ -287,17 +287,25 @@ class Admin extends MX_Controller
             redirect('admin/shop_categories');
         }
         if (isset($_POST['submit'])) {
-            $this->saveHistory('Add a shop categorie');
             $result = $this->AdminModel->setShopCategorie($_POST);
             if ($result === true) {
-                $this->session->set_flashdata('result_add', 'shop categorie is added!');
+                $this->session->set_flashdata('result_add', 'Shop categorie is added!');
                 $this->saveHistory('Added shop categorie');
             } else {
                 $this->session->set_flashdata('result_add', 'Problem with Shop categorie add!');
             }
             redirect('admin/shop_categories');
         }
-
+        if (isset($_POST['editSubId'])) {
+            $result = $this->AdminModel->editShopCategorieSub($_POST);
+            if ($result === true) {
+                $this->session->set_flashdata('result_add', 'Subcategory changed!');
+                $this->saveHistory('Change subcategory for category id - ' . $_POST['editSubId']);
+            } else {
+                $this->session->set_flashdata('result_add', 'Problem with Shop category change!');
+            }
+            redirect('admin/shop_categories');
+        }
         $this->load->view('_parts/header', $head);
         $this->load->view('shop_categories', $data);
         $this->load->view('_parts/footer');

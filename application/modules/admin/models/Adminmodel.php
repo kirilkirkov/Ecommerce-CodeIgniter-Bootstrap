@@ -278,6 +278,19 @@ class AdminModel extends CI_Model
         return $result;
     }
 
+    public function editShopCategorieSub($post)
+    {
+        if ($post['editSubId'] != $post['newSubIs']) {
+            $this->db->where('id', $post['editSubId']);
+            $result = $this->db->update('shop_categories', array(
+                'sub_for' => $post['newSubIs']
+            ));
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
     public function deleteShopCategorie($id)
     {
         $this->db->where('for_id', $id);

@@ -307,3 +307,13 @@ $('.saveEditCategorie').click(function () {
         $('#indic-' + indicEditCategorie).text(newValueFromEdit);
     });
 });
+
+$('.editCategorieSub').click(function () {
+    var position = $(this).position();
+    var subForId = $(this).data('sub-for-id');
+    $('[name="editSubId"]').val(subForId);
+    $('#categorieSubEdit').css({top: position.top, left: position.left, display: 'block'});
+});
+$('[name="newSubIs"]').change(function () {
+    $('#categorieEditSubChanger').submit();
+});

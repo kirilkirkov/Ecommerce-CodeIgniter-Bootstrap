@@ -52,6 +52,8 @@ input.form-control {border:1px solid #dadada; border-radius: 0; box-shadow:none;
 #categorieEditor input {width: 150px;}
 #categorieEditor .yesSaveEdit {display: none;}
 #categorieEditor button {width:39px;}
+#categorieSubEdit {display: none; position: absolute;}
+#categorieSubEdit button {width:200px;}
 
 @-webkit-keyframes fadeInUp {
     0% {

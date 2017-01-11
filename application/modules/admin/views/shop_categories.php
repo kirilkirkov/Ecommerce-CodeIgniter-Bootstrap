@@ -31,7 +31,7 @@
                 <tr>
                     <th>#ID</th>
                     <th>Name</th>
-                    <th>SubCategorie</th>
+                    <th>Subcategory for</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
@@ -52,11 +52,14 @@
                 <tr>
                     <td><?= $key_cat ?></td>
                     <td><?= $catName ?></td>
-                    <td><?php foreach ($shop_categorie['sub'] as $sub) {
-                    ?>
-                            <div><?= $sub ?></div>
-                        <?php }
-                        ?></td>
+                    <td> 
+                        <a href="javascript:void(0);" class="editCategorieSub" data-sub-for-id="<?= $key_cat ?>">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <?php foreach ($shop_categorie['sub'] as $sub) { ?>
+                            <div> <?= $sub ?> </div>
+                        <?php } ?>
+                    </td>
                     <td class="text-center">
                         <a href="<?= base_url('admin/shop_categories/?delete=' . $key_cat) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Del</a>
                     </td>
@@ -120,4 +123,21 @@
         <i class="fa fa-spinner fa-spin fa-fw yesSaveEdit"></i>
     </button>
     <button type="button" class="btn btn-default closeEditCategorie"><i class="fa fa-times" aria-hidden="true"></i></button>
+</div>
+<div id="categorieSubEdit">
+    <form method="POST" id="categorieEditSubChanger">
+        <input type="hidden" name="editSubId" value="">
+        <select class="selectpicker" name="newSubIs">
+            <option value="">None</option>
+            <?php
+            foreach ($shop_categories as $key_cat => $shop_categorie) {
+                $aa = '';
+                foreach ($shop_categorie['info'] as $ff) {
+                    $aa .= '[' . $ff['abbr'] . ']' . $ff['name'] . '/';
+                }
+                ?>
+                <option value="<?= $key_cat ?>"><?= $aa ?></option>
+            <?php } ?>
+        </select>
+    </form>
 </div>

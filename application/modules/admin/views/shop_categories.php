@@ -36,9 +36,9 @@
                 </tr>
             </thead>
             <?php
+            $i = 1;
             foreach ($shop_categories as $key_cat => $shop_categorie) {
                 $catName = '';
-                $i = 1;
                 foreach ($shop_categorie['info'] as $ff) {
                     $catName .= '<div>'
                             . '<a href="javascript:void(0);" class="editCategorie" data-indic="' . $i . '" data-for-id="' . $key_cat . '" data-abbr="' . $ff['abbr'] . '" data-toggle="tooltip" data-placement="top" title="Edit this categorie">'

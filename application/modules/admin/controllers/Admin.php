@@ -304,6 +304,13 @@ class Admin extends MX_Controller
         $this->saveHistory('Go to shop categories');
     }
 
+    public function editShopCategorie()
+    { //called from ajax
+        $this->login_check();
+        $result = $this->AdminModel->editShopCategorie($_POST);
+        $this->saveHistory('Edit shop categorie to ' . $_POST['name']);
+    }
+
     public function languages()
     {
         $this->login_check();

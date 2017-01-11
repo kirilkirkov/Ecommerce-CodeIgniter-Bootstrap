@@ -723,4 +723,14 @@ class AdminModel extends CI_Model
         $this->db->where('id', $id)->delete('brands');
     }
 
+    public function editShopCategorie($post)
+    {
+        $this->db->where('abbr', $post['abbr']);
+        $this->db->where('for_id', $post['for_id']);
+        $this->db->where('type', $post['type']);
+        $this->db->update('translations', array(
+            'name' => $post['name']
+        ));
+    }
+
 }

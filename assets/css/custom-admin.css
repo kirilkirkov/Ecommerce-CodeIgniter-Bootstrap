@@ -47,6 +47,11 @@ input.form-control {border:1px solid #dadada; border-radius: 0; box-shadow:none;
 .header-img {float: left;height: 40px;margin-right: 10px;margin-top: -10px;}
 .divLangs { padding:10px; margin-bottom: 10px;}
 #new-style {border-radius: 0;}
+#categorieEditor {position: absolute; display: none; width:230px;}
+#categorieEditor input, #categorieEditor button {float: left;}
+#categorieEditor input {width: 150px;}
+#categorieEditor .yesSaveEdit {display: none;}
+#categorieEditor button {width:39px;}
 
 @-webkit-keyframes fadeInUp {
     0% {

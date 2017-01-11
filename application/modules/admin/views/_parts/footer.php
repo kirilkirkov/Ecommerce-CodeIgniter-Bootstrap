@@ -94,7 +94,8 @@
 <script src="<?= base_url('assets/js/pGenerator.jquery.js') ?>"></script>
 <script>
     var urls = {
-        changePass: '<?= base_url('admin/changePass') ?>'
+        changePass: '<?= base_url('admin/changePass') ?>',
+        editShopCategorie: '<?= base_url('admin/editShopCategorie') ?>'
     };
 </script>
 <script src="<?= base_url('assets/js/mine_admin.js') ?>"></script>

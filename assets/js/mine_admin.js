@@ -276,3 +276,34 @@ $('.choose-template').click(function () {
     var template_name = $(this).data('template-name');
     $('#saveTemplate .template-name').val(template_name);
 });
+
+//Edit Shop Categories
+var indicEditCategorie;
+var forIdEditCategorie;
+var abbrEditCategorie;
+$('.editCategorie').click(function () {
+    indicEditCategorie = $(this).data('indic');
+    forIdEditCategorie = $(this).data('for-id');
+    abbrEditCategorie = $(this).data('abbr');
+    var position = $(this).position();
+    $('#categorieEditor').css({top: position.top, left: position.left, display: 'block'});
+    $('#categorieEditor input').val($('#indic-' + indicEditCategorie).text());
+});
+$('.closeEditCategorie').click(function () {
+    $('#categorieEditor').hide();
+});
+$('.saveEditCategorie').click(function () {
+    $('#categorieEditor .noSaveEdit').hide();
+    $('#categorieEditor .yesSaveEdit').css({display: 'inline-block'});
+    var newValueFromEdit = $('[name="new_value"]').val();
+    $.ajax({
+        type: "POST",
+        url: urls.editShopCategorie,
+        data: {for_id: forIdEditCategorie, abbr: abbrEditCategorie, type: 'shop_categorie', name: newValueFromEdit}
+    }).done(function (data) {
+        $('#categorieEditor .noSaveEdit').show();
+        $('#categorieEditor .yesSaveEdit').hide();
+        $('#categorieEditor').hide();
+        $('#indic-' + indicEditCategorie).text(newValueFromEdit);
+    });
+});

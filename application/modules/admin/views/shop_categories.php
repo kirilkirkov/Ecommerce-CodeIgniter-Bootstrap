@@ -128,7 +128,8 @@
     <form method="POST" id="categorieEditSubChanger">
         <input type="hidden" name="editSubId" value="">
         <select class="selectpicker" name="newSubIs">
-            <option value="">None</option>
+            <option value=""></option>
+            <option value="0">None</option>
             <?php
             foreach ($shop_categories as $key_cat => $shop_categorie) {
                 $aa = '';

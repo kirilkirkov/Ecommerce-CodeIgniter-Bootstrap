@@ -28,12 +28,14 @@ class Blog extends MY_Controller
         $head['keywords'] = str_replace(" ", ",", $head['title']);
         if (isset($_GET['find'])) {
             $find = $_GET['find'];
-        } else
+        } else {
             $find = null;
+        }
         if (isset($_GET['from']) && isset($_GET['to'])) {
             $month = $_GET;
-        } else
+        } else {
             $month = null;
+        }
         $data['posts'] = $this->Publicmodel->getPosts($this->num_rows, $page, $find, $month);
         $data['archives'] = $this->getBlogArchiveHtml();
         $data['bestSellers'] = $this->Publicmodel->getbestSellers();

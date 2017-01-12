@@ -317,3 +317,13 @@ $('.editCategorieSub').click(function () {
 $('[name="newSubIs"]').change(function () {
     $('#categorieEditSubChanger').submit();
 });
+
+// Admin Login
+var username_login = $("input[name=username]");
+var password_login = $("input[name=password]");
+$('button[type="submit"]').click(function (e) {
+    if (username_login.val() == "" || password_login.val() == "") {
+        e.preventDefault();
+        $("#output").addClass("alert alert-danger animated fadeInUp").html("Please.. enter all fields ;)");
+    }
+});

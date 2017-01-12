@@ -27,8 +27,9 @@ class Page extends MY_Controller
 
     private function goOut($page)
     {
-        if ($page == null)
+        if ($page == null) {
             redirect();
+        }
     }
 
 }

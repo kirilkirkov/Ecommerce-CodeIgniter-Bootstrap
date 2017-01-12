@@ -63,7 +63,7 @@ class Admin extends MX_Controller
                     $this->session->set_flashdata('err_login', 'Wrong username or password!');
                 }
             }
-            $this->load->view('login');
+            $this->load->view('login/login');
         }
         $this->load->view('_parts/footer');
     }
@@ -78,8 +78,9 @@ class Admin extends MX_Controller
             $trans_load = $this->AdminModel->getTranslations($id, 'product');
         }
         if (isset($_POST['submit'])) {
-            if ($id > 0)
+            if ($id > 0) {
                 $is_update = true;
+            }
             unset($_POST['submit']);
             $config['upload_path'] = './attachments/shop_images/';
             $config['allowed_types'] = $this->allowed_img_types;
@@ -132,7 +133,7 @@ class Admin extends MX_Controller
         $data['shop_categories'] = $this->AdminModel->getShopCategories();
         $data['brands'] = $this->AdminModel->getBrands();
         $this->load->view('_parts/header', $head);
-        $this->load->view('publish', $data);
+        $this->load->view('ecommerce/publish', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to publish product');
     }
@@ -190,7 +191,7 @@ class Admin extends MX_Controller
         $data['languages'] = $this->AdminModel->getLanguages();
         $data['seo_pages'] = $this->AdminModel->getSeoPages();
         $this->load->view('_parts/header', $head);
-        $this->load->view('titles', $data);
+        $this->load->view('settings/titles', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to Titles / Descriptions page');
     }
@@ -234,7 +235,7 @@ class Admin extends MX_Controller
         $data['languages'] = $this->AdminModel->getLanguages();
 
         $this->load->view('_parts/header', $head);
-        $this->load->view('products', $data);
+        $this->load->view('ecommerce/products', $data);
         $this->load->view('_parts/footer');
     }
 
@@ -265,7 +266,7 @@ class Admin extends MX_Controller
         }
     }
 
-    public function shop_categories()
+    public function shopCategories()
     {
         $this->login_check();
         $data = array();
@@ -284,7 +285,7 @@ class Admin extends MX_Controller
             } else {
                 $this->session->set_flashdata('result_delete', 'Problem with Shop Categorie delete!');
             }
-            redirect('admin/shop_categories');
+            redirect('admin/shopcategories');
         }
         if (isset($_POST['submit'])) {
             $result = $this->AdminModel->setShopCategorie($_POST);
@@ -294,7 +295,7 @@ class Admin extends MX_Controller
             } else {
                 $this->session->set_flashdata('result_add', 'Problem with Shop categorie add!');
             }
-            redirect('admin/shop_categories');
+            redirect('admin/shopcategories');
         }
         if (isset($_POST['editSubId'])) {
             $result = $this->AdminModel->editShopCategorieSub($_POST);
@@ -304,10 +305,10 @@ class Admin extends MX_Controller
             } else {
                 $this->session->set_flashdata('result_add', 'Problem with Shop category change!');
             }
-            redirect('admin/shop_categories');
+            redirect('admin/shopcategories');
         }
         $this->load->view('_parts/header', $head);
-        $this->load->view('shop_categories', $data);
+        $this->load->view('ecommerce/shopcategories', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to shop categories');
     }
@@ -334,8 +335,9 @@ class Admin extends MX_Controller
         }
         if (isset($_GET['editLang'])) {
             $num = $this->AdminModel->countLangs($_GET['editLang']);
-            if ($num == 0)
+            if ($num == 0) {
                 redirect('admin/languages');
+            }
             $langFiles = $this->getLangFolderForEdit();
         }
         if (isset($_POST['goDaddyGo'])) {
@@ -367,8 +369,9 @@ class Admin extends MX_Controller
                     log_message('error', 'Language image upload error: ' . $error);
                 } else {
                     $img = $this->upload->data();
-                    if ($img['file_name'] != null)
+                    if ($img['file_name'] != null) {
                         $_POST['flag'] = $img['file_name'];
+                    }
                 }
                 $result = $this->AdminModel->setLanguage($_POST);
                 if ($result === true) {
@@ -384,7 +387,7 @@ class Admin extends MX_Controller
         }
         $data['max_input_vars'] = ini_get('max_input_vars');
         $this->load->view('_parts/header', $head);
-        $this->load->view('languages', $data);
+        $this->load->view('advanced_settings/languages', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to languages');
     }
@@ -499,7 +502,7 @@ class Admin extends MX_Controller
         }
 
         $this->load->view('_parts/header', $head);
-        $this->load->view('adminUsers', $data);
+        $this->load->view('advanced_settings/adminUsers', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to Admin Users');
     }
@@ -514,7 +517,7 @@ class Admin extends MX_Controller
         $head['keywords'] = '';
 
         $this->load->view('_parts/header', $head);
-        $this->load->view('filemanager', $data);
+        $this->load->view('advanced_settings/filemanager', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to File Manager');
     }
@@ -576,30 +579,11 @@ class Admin extends MX_Controller
         $data['cashondelivery_visibility'] = $this->AdminModel->getValueStore('cashondelivery_visibility');
         $data['bank_account'] = $this->AdminModel->getBankAccountSettings();
         $this->load->view('_parts/header', $head);
-        $this->load->view('orders', $data);
+        $this->load->view('ecommerce/orders', $data);
         $this->load->view('_parts/footer');
         if ($page == 0) {
             $this->saveHistory('Go to orders page');
         }
-    }
-
-    public function querybuilder()
-    {
-        $this->login_check();
-        $data = array();
-        $head = array();
-        $head['title'] = 'Administration - QueryBuilder';
-        $head['description'] = '!';
-        $head['keywords'] = '';
-
-        if (isset($_POST['query'])) {
-            $this->saveHistory('Send query from querybuilder: ' . $_POST['query']);
-        }
-
-        $this->load->view('_parts/header', $head);
-        $this->load->view('querybuilder', $data);
-        $this->load->view('_parts/footer');
-        $this->saveHistory('Go to QueryBuilder Page');
     }
 
     public function history($page = 0)
@@ -617,7 +601,7 @@ class Admin extends MX_Controller
         $data['history'] = $this->history;
 
         $this->load->view('_parts/header', $head);
-        $this->load->view('history', $data);
+        $this->load->view('settings/history', $data);
         $this->load->view('_parts/footer');
         if ($page == 0) {
             $this->saveHistory('Go to History');
@@ -793,7 +777,7 @@ class Admin extends MX_Controller
         $data['law_themes'] = array_diff(scandir('./assets/imgs/cookie-law-themes/'), array('..', '.'));
         $data['cookieLawInfo'] = $this->getCookieLaw();
         $this->load->view('_parts/header', $head);
-        $this->load->view('settings', $data);
+        $this->load->view('settings/settings', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to Settings Page');
     }
@@ -825,7 +809,7 @@ class Admin extends MX_Controller
 
         $data['newStyle'] = $this->AdminModel->getValueStore('newStyle');
         $this->load->view('_parts/header', $head);
-        $this->load->view('styling', $data);
+        $this->load->view('settings/styling', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to Styling page');
     }
@@ -932,7 +916,7 @@ class Admin extends MX_Controller
         $data['page'] = $page;
 
         $this->load->view('_parts/header', $head);
-        $this->load->view('blog', $data);
+        $this->load->view('blog/blogposts', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to Blog');
     }
@@ -989,7 +973,7 @@ class Admin extends MX_Controller
         $data['languages'] = $this->AdminModel->getLanguages();
         $data['trans_load'] = $trans_load;
         $this->load->view('_parts/header', $head);
-        $this->load->view('blogPublish', $data);
+        $this->load->view('blog/blogpublish', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to Blog Publish');
     }
@@ -1019,7 +1003,7 @@ class Admin extends MX_Controller
             redirect('admin/pages');
         }
         $this->load->view('_parts/header', $head);
-        $this->load->view('pages', $data);
+        $this->load->view('settings/pages', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to Pages manage');
     }
@@ -1050,7 +1034,7 @@ class Admin extends MX_Controller
         }
 
         $this->load->view('_parts/header', $head);
-        $this->load->view('pageEdit', $data);
+        $this->load->view('textual_pages/pageEdit', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Edit page - ' . $page);
     }
@@ -1093,7 +1077,7 @@ class Admin extends MX_Controller
         $data['links_pagination'] = pagination('admin/emails', $rowscount, 20, 3);
         $data['emails'] = $this->AdminModel->getSuscribedEmails(20, $page);
         $this->load->view('_parts/header', $head);
-        $this->load->view('emails', $data);
+        $this->load->view('settings/emails', $data);
         $this->load->view('_parts/footer');
         if ($page == 0) {
             $this->saveHistory('Go to Subscribed Emails');
@@ -1120,7 +1104,7 @@ class Admin extends MX_Controller
         }
         $data['seleced_template'] = $this->AdminModel->getValueStore('template');
         $this->load->view('_parts/header', $head);
-        $this->load->view('templates', $data);
+        $this->load->view('settings/templates', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to Templates Page');
     }
@@ -1147,7 +1131,7 @@ class Admin extends MX_Controller
         $data['brands'] = $this->AdminModel->getBrands();
 
         $this->load->view('_parts/header', $head);
-        $this->load->view('brands', $data);
+        $this->load->view('ecommerce/brands', $data);
         $this->load->view('_parts/footer');
     }
 

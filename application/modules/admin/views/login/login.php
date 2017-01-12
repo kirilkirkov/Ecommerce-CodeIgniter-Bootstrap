@@ -27,15 +27,3 @@
         </div>
     </div>
 </div>
-<script>
-    $(function () {
-        var username = $("input[name=username]");
-        var password = $("input[name=password]");
-        $('button[type="submit"]').click(function (e) {
-            if (username.val() == "" || password.val() == "") {
-                e.preventDefault();
-                $("#output").addClass("alert alert-danger animated fadeInUp").html("Please.. enter all fields ;)");
-            }
-        });
-    });
-</script>

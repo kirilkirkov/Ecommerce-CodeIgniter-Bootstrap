@@ -63,7 +63,7 @@
                                 <div class="row">
                                     <div class="col-sm-5">
                                         <div class="bag-info">
-                                            <img src="<?= base_url('template/imgs/shop-bag.jpg') ?>" alt="Search">
+                                            <img src="<?= base_url('template/imgs/white-bag.png') ?>" alt="Search">
                                             <a class="my-basket dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                                 <?= lang('your_basket') ?>
                                                 <span class="sum-scope">

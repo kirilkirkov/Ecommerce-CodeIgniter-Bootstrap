@@ -219,7 +219,7 @@
                         </table>
                     </div>
                     <div class="text-right">
-                        <a href="<?= base_url('admin/products?orderby=procurement=desc') ?>">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="<?= base_url('admin/products?orderby=procurement=desc') ?>">View All Products <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

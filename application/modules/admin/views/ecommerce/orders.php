@@ -67,9 +67,9 @@ if (!isset($_GET['settings'])) {
                                 <div class="status" style="padding:5px; font-size:16px;">
                                     -- <b><?= $type ?></b> --
                                 </div>
-                                <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeStatus(<?= $tr['id'] ?>, 1)" class="btn btn-success btn-xs">Processed</a></div>
-                                <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeStatus(<?= $tr['id'] ?>, 0)" class="btn btn-danger btn-xs">No processed</a></div>
-                                <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeStatus(<?= $tr['id'] ?>, 2)" class="btn btn-warning btn-xs">Rejected</a></div>
+                                <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeOrdersOrderStatus(<?= $tr['id'] ?>, 1)" class="btn btn-success btn-xs">Processed</a></div>
+                                <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeOrdersOrderStatus(<?= $tr['id'] ?>, 0)" class="btn btn-danger btn-xs">No processed</a></div>
+                                <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeOrdersOrderStatus(<?= $tr['id'] ?>, 2)" class="btn btn-warning btn-xs">Rejected</a></div>
                             </td>
                             <td class="text-center">
                                 <a href="javascript:void(0);" class="btn btn-default more-info" data-toggle="modal" data-target="#modalPreviewMoreInfo" style="margin-top:10%;" data-more-info="<?= $tr['order_id'] ?>">
@@ -123,7 +123,7 @@ if (!isset($_GET['settings'])) {
                                                     <?php
                                                     $arr_products = unserialize($tr['products']);
                                                     foreach ($arr_products as $product_id => $product_quantity) {
-                                                        $productInfo = modules::run('admin/admin/getProductInfo', $product_id);
+                                                        $productInfo = modules::run('admin/ecommerce/products/getProductInfo', $product_id);
                                                         ?>
                                                         <div style="word-break: break-all;">
                                                             <div>
@@ -296,38 +296,4 @@ if (isset($_GET['settings'])) {
         </div>
     </div>
 </div>
-<script>
-    function changeStatus(id, to_status) {
-        $.post("<?= base_url('changeOrderStatus') ?>", {the_id: id, to_status: to_status}, function (data) {
-            if (data == '1') {
-                if (to_status == 0) {
-                    $('[data-action-id="' + id + '"] div.status b').text('No processed');
-                    $('[data-action-id="' + id + '"]').removeClass().addClass('bg-danger text-center');
-                }
-                if (to_status == 1) {
-                    $('[data-action-id="' + id + '"] div.status b').text('Processed');
-                    $('[data-action-id="' + id + '"]').removeClass().addClass('bg-success  text-center');
-                }
-                if (to_status == 2) {
-                    $('[data-action-id="' + id + '"] div.status b').text('Rejected');
-                    $('[data-action-id="' + id + '"]').removeClass().addClass('bg-warning  text-center');
-                }
-                $('#new-order-alert-' + id).remove();
-            }
-        });
-    }
-    $(".changeOrder").change(function () {
-        window.location.href = '<?= base_url('admin/orders') ?>?order_by=' + $(this).val();
-    });
-    $(document).ready(function () {
-        $('.more-info').click(function () {
-            $('#preview-info-body').empty();
-            var order_id = $(this).data('more-info');
-            var text = $('#order_id-id-' + order_id).text();
-            $("#client-name").empty().append(text);
-            var html = $('#order-id-' + order_id).html();
-            $("#preview-info-body").append(html);
-        });
-    });
-</script>
 <script src="<?= base_url('assets/js/bootstrap-toggle.min.js') ?>"></script>

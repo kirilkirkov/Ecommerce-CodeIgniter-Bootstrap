@@ -127,6 +127,15 @@ footer a {color:#333; text-decoration:underline;}
 .orders-settings { margin-top: -60px; font-size:20px; color:#6b6b6b;}
 .orders-settings span {display: block;}
 .orders-settings i {margin-left: 24px;}
+.home-page .fast-view-panel {height: 130px;}
+.home-page .panel-green {border-color: #5cb85c;}
+.home-page .panel-green .panel-heading { background-color: #5cb85c; border-color: #5cb85c; color: #fff;}
+.home-page .panel-yellow {  border-color: #f0ad4e;}
+.home-page .panel-yellow .panel-heading {  background-color: #f0ad4e;    border-color: #f0ad4e;    color: #fff;}
+.home-page .panel-red {  border-color: #d9534f;}
+.home-page .panel-red .panel-heading {   background-color: #d9534f;  border-color: #d9534f;  color: #fff;}
+.home-page .huge {font-size: 40px;}
+.home-page .panel {font-size:14px;}
 
 @media (min-width: 767px) {
     .sidebar-menu {display: block !important;}

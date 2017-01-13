@@ -94,7 +94,7 @@ if ($this->session->flashdata('result_publish')) {
                                 ?>
                                 <div class="other-img" id="image-container-<?= $i ?>">
                                     <img src="<?= base_url($dir . $file) ?>" style="width:100px; height: 100px;">
-                                    <a href="javascript:void(0);" onclick="removeImage('<?= $file ?>', '<?= $_POST['folder'] ?>', <?= $i ?>)"><span class="glyphicon glyphicon-remove"></span></a>
+                                    <a href="javascript:void(0);" onclick="removeSecondaryProductImage('<?= $file ?>', '<?= $_POST['folder'] ?>', <?= $i ?>)"><span class="glyphicon glyphicon-remove"></span></a>
                                 </div>
                                 <?php
                             }
@@ -114,14 +114,14 @@ if ($this->session->flashdata('result_publish')) {
         <select class="selectpicker form-control show-tick show-menu-arrow" name="shop_categorie">
             <?php foreach ($shop_categories as $key_cat => $shop_categorie) { ?>
                 <option <?= isset($_POST['shop_categorie']) && $_POST['shop_categorie'] == $key_cat ? 'selected=""' : '' ?> value="<?= $key_cat ?>">
-                <?php 
-				foreach($shop_categorie['info'] as $nameAbbr) {
-				    if($nameAbbr['abbr'] == $this->config->item('language_abbr')) {
-						echo $nameAbbr['name'];
-					}
-				}
-				?>
-            </option>
+                    <?php
+                    foreach ($shop_categorie['info'] as $nameAbbr) {
+                        if ($nameAbbr['abbr'] == $this->config->item('language_abbr')) {
+                            echo $nameAbbr['name'];
+                        }
+                    }
+                    ?>
+                </option>
             <?php } ?>
         </select>
     </div>
@@ -212,41 +212,3 @@ if ($this->session->flashdata('result_publish')) {
         </div>
     </div>
 </div>
-<script>
-    function currency_ajax_convert() {
-        var from = $('#select_from_cur').val();
-        var to = $('#select_to_cur').val();
-        var sum = $('#sum').val();
-        $(".loading-conv").show();
-        $.ajax({
-            type: "POST",
-            url: "<?= base_url('convertCurrency') ?>",
-            data: {sum: sum, from: from, to: to}
-        }).done(function (data) {
-            $(".loading-conv").hide();
-            $("#new_currency").empty().append(data);
-        });
-    }
-
-    $('#modalConvertor').on('hidden.bs.modal', function (e) {
-        $("#new_currency").empty();
-    });
-
-    $(document).ready(function () {
-        $("#showSliderDescrption").click(function () {
-            $("#theSliderDescrption").slideToggle("slow", function () {
-
-            });
-        });
-    });
-
-    function removeImage(image, folder, container) {
-        $.ajax({
-            type: "POST",
-            url: "<?= base_url('removeImage') ?>",
-            data: {image: image, folder: folder}
-        }).done(function (data) {
-            $('#image-container-' + container).remove();
-        });
-    }
-</script>

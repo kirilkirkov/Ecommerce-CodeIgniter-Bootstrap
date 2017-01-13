@@ -318,6 +318,120 @@ $('[name="newSubIs"]').change(function () {
     $('#categorieEditSubChanger').submit();
 });
 
+// textual pages
+function changeTextualPageStatus(id) {
+    var myI = $('li[data-id="' + id + '"] i');
+    if (myI.hasClass('red')) {
+        myI.removeClass('red').addClass('green');
+        var status = 1;
+    } else if (myI.hasClass('green')) {
+        myI.removeClass('green').addClass('red');
+        var status = 0;
+    }
+    $.post(urls.changeTextualPageStatus, {id: id, status: status}, function (data) {
+        if (data == '1') {
+            return true;
+        }
+        return false;
+    });
+}
+
+//products publish
+function removeSecondaryProductImage(image, folder, container) {
+    $.ajax({
+        type: "POST",
+        url: urls.removeSecondaryImage,
+        data: {image: image, folder: folder}
+    }).done(function (data) {
+        $('#image-container-' + container).remove();
+    });
+}
+function currency_ajax_convert() {
+    var from = $('#select_from_cur').val();
+    var to = $('#select_to_cur').val();
+    var sum = $('#sum').val();
+    $(".loading-conv").show();
+    $.ajax({
+        type: "POST",
+        url: urls.convertCurrency,
+        data: {sum: sum, from: from, to: to}
+    }).done(function (data) {
+        $(".loading-conv").hide();
+        $("#new_currency").empty().append(data);
+    });
+}
+$('#modalConvertor').on('hidden.bs.modal', function (e) {
+    $("#new_currency").empty();
+});
+$(document).ready(function () {
+    $("#showSliderDescrption").click(function () {
+        $("#theSliderDescrption").slideToggle("slow", function () {});
+    });
+});
+
+// Products
+$(".change-order-products").change(function () {
+    location.href = urls.productsOrderBy + $(this).val();
+});
+function changeProductStatus(id) {
+    var to_status = $("#to-status").val();
+    $.ajax({
+        type: "POST",
+        url: urls.productStatusChange,
+        data: {id: id, to_status: to_status}
+    }).done(function (data) {
+        if (data == '1') {
+            if (to_status == 1) {
+                $('[data-article-id="' + id + '"] .staus-is').text('Visible');
+                $('[data-article-id="' + id + '"] .status-is-icon').html('<i class="fa fa-unlock"></i>');
+                $('[data-article-id="' + id + '"]').removeClass('invisible-status');
+                $("#to-status").val(0);
+            } else {
+                $('[data-article-id="' + id + '"] .staus-is').text('Invisible');
+                $('[data-article-id="' + id + '"]').addClass('invisible-status');
+                $('[data-article-id="' + id + '"] .status-is-icon').html('<i class="fa fa-lock"></i>');
+                $("#to-status").val(1)
+            }
+        } else {
+            alert('Error change status!');
+        }
+    });
+}
+
+// Orders
+function changeOrdersOrderStatus(id, to_status) {
+    $.post(urls.changeOrdersOrderStatus, {the_id: id, to_status: to_status}, function (data) {
+        if (data == '1') {
+            if (to_status == 0) {
+                $('[data-action-id="' + id + '"] div.status b').text('No processed');
+                $('[data-action-id="' + id + '"]').removeClass().addClass('bg-danger text-center');
+            }
+            if (to_status == 1) {
+                $('[data-action-id="' + id + '"] div.status b').text('Processed');
+                $('[data-action-id="' + id + '"]').removeClass().addClass('bg-success  text-center');
+            }
+            if (to_status == 2) {
+                $('[data-action-id="' + id + '"] div.status b').text('Rejected');
+                $('[data-action-id="' + id + '"]').removeClass().addClass('bg-warning  text-center');
+            }
+            $('#new-order-alert-' + id).remove();
+        }
+    });
+}
+$(".changeOrder").change(function () {
+    window.location.href = urls.ordersOrderBy + $(this).val();
+});
+$(document).ready(function () {
+    $('.more-info').click(function () {
+        $('#preview-info-body').empty();
+        var order_id = $(this).data('more-info');
+        var text = $('#order_id-id-' + order_id).text();
+        $("#client-name").empty().append(text);
+        var html = $('#order-id-' + order_id).html();
+        $("#preview-info-body").append(html);
+    });
+});
+
 // Admin Login
 var username_login = $("input[name=username]");
 var password_login = $("input[name=password]");

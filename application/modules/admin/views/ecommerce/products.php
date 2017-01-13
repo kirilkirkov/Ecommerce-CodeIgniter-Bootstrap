@@ -23,7 +23,7 @@
             <div class="well hidden-xs"> 
                 <div class="row">
                     <div class="col-xs-4">
-                        <select class="form-control selectpicker change-order">
+                        <select class="form-control selectpicker change-order-products">
                             <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'id=desc' ? 'selected=""' : '' ?> value="id=desc">Newest</option>
                             <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'id=asc' ? 'selected=""' : '' ?> value="id=asc">Latest</option>
                             <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'quantity=asc' ? 'selected=""' : '' ?> value="quantity=asc">Low Quantity</option>
@@ -61,7 +61,7 @@
                                         <span class="status-is-icon"><?= $row->visibility == 1 ? '<i class="fa fa-unlock"></i>' : '<i class="fa fa-lock"></i>' ?></span><span class="caret"></span></span>
                                     <span class="staus-is"><?= $row->visibility == 1 ? 'Visible' : 'Invisible' ?></span>
                                     <ul class="dropdown-menu">
-                                        <li><a href="javascript:void(0);" onclick="changeStatus(<?= $row->id ?>)"><?= $row->visibility == 1 ? 'Make Invisible' : 'Make Visible' ?></a></li>
+                                        <li><a href="javascript:void(0);" onclick="changeProductStatus(<?= $row->id ?>)"><?= $row->visibility == 1 ? 'Make Invisible' : 'Make Visible' ?></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -97,32 +97,3 @@
         <div class ="alert alert-info">No products found!</div>
     <?php } ?>
 </div>
-<script>
-    $(".change-order").change(function () {
-        location.href = '<?= base_url('admin/products?orderby=') ?>' + $(this).val();
-    });
-    function changeStatus(id) {
-        var to_status = $("#to-status").val();
-        $.ajax({
-            type: "POST",
-            url: "<?= base_url('admin/productstatusChange') ?>",
-            data: {id: id, to_status: to_status}
-        }).done(function (data) {
-            if (data == '1') {
-                if (to_status == 1) {
-                    $('[data-article-id="' + id + '"] .staus-is').text('Visible');
-                    $('[data-article-id="' + id + '"] .status-is-icon').html('<i class="fa fa-unlock"></i>');
-                    $('[data-article-id="' + id + '"]').removeClass('invisible-status');
-                    $("#to-status").val(0);
-                } else {
-                    $('[data-article-id="' + id + '"] .staus-is').text('Invisible');
-                    $('[data-article-id="' + id + '"]').addClass('invisible-status');
-                    $('[data-article-id="' + id + '"] .status-is-icon').html('<i class="fa fa-lock"></i>');
-                    $("#to-status").val(1)
-                }
-            } else {
-                alert('Error change status!');
-            }
-        });
-    }
-</script>

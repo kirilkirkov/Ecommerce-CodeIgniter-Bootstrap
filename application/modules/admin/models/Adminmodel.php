@@ -11,8 +11,12 @@ class AdminModel extends CI_Model
         );
         $this->db->where($arr);
         $result = $this->db->get('users');
-        $res_arr = $result->row_array();
-        return $res_arr;
+        $resultArray = $result->row_array();
+        if ($result->num_rows() > 0) {
+            $this->db->where('id', $resultArray['id']);
+            $this->db->update('users', array('last_login' => time()));
+        }
+        return $resultArray;
     }
 
     public function getMaxProductId()
@@ -89,23 +93,28 @@ class AdminModel extends CI_Model
 
     public function countLangs($name = null, $abbr = null)
     {
-        if ($name != null)
+        if ($name != null) {
             $this->db->where('name', $name);
-        if ($abbr != null)
+        }
+        if ($abbr != null) {
             $this->db->or_where('abbr', $abbr);
+        }
         return $this->db->count_all_results('languages');
     }
 
-    public function getAdminUsers($id = null)
+    public function getAdminUsers($user = null)
     {
-        if ($id != null) {
-            $this->db->where('id', $id);
+        if ($user != null && is_numeric($user)) {
+            $this->db->where('id', $user);
+        } else if ($user != null && is_string($user)) {
+            $this->db->where('username', $user);
         }
-        $query = $this->db->query('SELECT * FROM users');
-        if ($id != null)
+        $query = $this->db->get('users');
+        if ($user != null) {
             return $query->row_array();
-        else
+        } else {
             return $query;
+        }
     }
 
     public function numShopProducts()
@@ -308,13 +317,29 @@ class AdminModel extends CI_Model
         return $this->db->count_all_results('history');
     }
 
-    public function ordersCount()
+    public function ordersCount($onlyNew = false)
     {
+        if ($onlyNew == true) {
+            $this->db->where('viewed', 0);
+        }
         return $this->db->count_all_results('orders');
+    }
+
+    public function countLowQuantityProducts()
+    {
+        $this->db->where('quantity <=', 5);
+        return $this->db->count_all_results('products');
     }
 
     public function emailsCount()
     {
+        return $this->db->count_all_results('subscribed');
+    }
+
+    public function lastSubscribedEmailsCount()
+    {
+        $yesterday = strtotime('-1 day', time());
+        $this->db->where('time > ', $yesterday);
         return $this->db->count_all_results('subscribed');
     }
 
@@ -368,6 +393,34 @@ class AdminModel extends CI_Model
         $this->db->where('id', $id);
         $result = $this->db->delete('products');
         return $result;
+    }
+
+    public function getMostSoldProducts($limit = 10)
+    {
+        $this->db->select('url, procurement');
+        $this->db->order_by('procurement', 'desc');
+        $this->db->limit($limit);
+        $queryResult = $this->db->get('products');
+        return $queryResult->result_array();
+    }
+
+    public function getMostReferralOrders($limit = 10)
+    {
+
+        $this->db->select('count(id) as num, referrer');
+        $this->db->group_by('referrer');
+        $this->db->limit($limit);
+        $queryResult = $this->db->get('orders');
+        return $queryResult->result_array();
+    }
+
+    public function getMostOrdersByPaymentType($limit = 10)
+    {
+        $this->db->select('count(id) as num, payment_type');
+        $this->db->group_by('payment_type');
+        $this->db->limit($limit);
+        $queryResult = $this->db->get('orders');
+        return $queryResult->result_array();
     }
 
     private function deleteTranslations($id, $type)

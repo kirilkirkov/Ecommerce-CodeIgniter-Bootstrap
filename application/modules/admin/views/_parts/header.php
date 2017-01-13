@@ -30,14 +30,14 @@
                         <div id="navbar" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
                                 <li><a href="<?= base_url('admin') ?>"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a href="<?= base_url() ?>" target="_blank"><i class="glyphicon glyphicon-star"></i> Open site</a></li>
+                                <li><a href="<?= base_url() ?>" target="_blank"><i class="glyphicon glyphicon-star"></i> Production</a></li>
                                 <li>
-                                    <a href="javascript:void(0);" style="margin-left:-10px;" class="h-settings"><i class="fa fa-lg fa-cogs"></i> Settings</a>
+                                    <a href="javascript:void(0);" class="h-settings"><i class="fa fa-key" aria-hidden="true"></i> Pass Change</a>
                                     <div class="relative">
                                         <div class="settings">
                                             <div class="panel panel-primary" >
                                                 <div class="panel-heading">
-                                                    <div class="panel-title">Settings</div>
+                                                    <div class="panel-title">Security</div>
                                                 </div>     
                                                 <div class="panel-body">
                                                     <label>Change my password</label> <span class="bg-success" id="pass_result">Changed!</span>
@@ -115,7 +115,7 @@
                                     </li>
                                     <?php if (in_array('blog', $activePages)) { ?>
                                         <li class="header">BLOG</li>
-                                        <li><a href="<?= base_url('admin/blogPublish') ?>" <?= urldecode(uri_string()) == 'admin/blogPublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> Publish post</a></li>
+                                        <li><a href="<?= base_url('admin/blogpublish') ?>" <?= urldecode(uri_string()) == 'admin/blogpublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> Publish post</a></li>
                                         <li><a href="<?= base_url('admin/blog') ?>" <?= urldecode(uri_string()) == 'admin/blog' ? 'class="active"' : '' ?>><i class="fa fa-th" aria-hidden="true"></i> Posts</a></li>
                                     <?php } ?>
                                     <?php
@@ -128,7 +128,7 @@
                                         ?>
                                         <li class="header">TEXTUAL PAGES</li>
                                         <?php foreach ($textualPages as $textualPage) { ?>
-                                            <li><a href="<?= base_url('admin/pageEdit/' . $textualPage) ?>" <?= strpos(urldecode(uri_string()), $textualPage) ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> <?= strtoupper($textualPage) ?></a></li>
+                                            <li><a href="<?= base_url('admin/pageedit/' . $textualPage) ?>" <?= strpos(urldecode(uri_string()), $textualPage) ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> <?= strtoupper($textualPage) ?></a></li>
                                             <?php
                                         }
                                     }

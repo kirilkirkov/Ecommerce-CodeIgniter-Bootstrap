@@ -175,6 +175,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(32) NOT NULL,
   `email` varchar(100) NOT NULL,
   `notify` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'notifications by email',
+  `last_login` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 

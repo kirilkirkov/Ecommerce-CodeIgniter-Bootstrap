@@ -138,6 +138,8 @@ $route['admin/pageedit/(:any)'] = "admin/textual_pages/TextualPages/pageEdit/$1"
 $route['admin/changePageStatus'] = "admin/textual_pages/TextualPages/changePageStatus";
 // LOGOUT
 $route['admin/logout'] = "admin/home/home/logout";
+// Admin pass change ajax
+$route['admin/changePass'] = "admin/home/home/changePass";
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

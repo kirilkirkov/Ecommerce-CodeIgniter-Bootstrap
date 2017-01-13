@@ -111,20 +111,4 @@ class ADMIN_Controller extends MX_Controller
         return $errors;
     }
 
-    /*
-     * Called from ajax
-     */
-
-    public function changePass()
-    {
-        $this->login_check();
-        $result = $this->AdminModel->changePass($_POST['new_pass'], $this->username);
-        if ($result == true) {
-            echo 1;
-        } else {
-            echo 0;
-        }
-        $this->saveHistory('Password change for user: ' . $this->username);
-    }
-
 }

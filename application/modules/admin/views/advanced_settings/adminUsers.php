@@ -30,10 +30,11 @@
             <thead>
                 <tr>
                     <th>#ID</th>
-                    <th>username</th>
-                    <th>password</th>
-                    <th>email</th>
-                    <th>notifications</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Notifications</th>
+                    <th>Last login</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
@@ -44,6 +45,7 @@
                     <td><b>hidden ;)</b></td>
                     <td><?= $user->email ?></td>
                     <td><?= $user->notify ?></td>
+                    <td><?= date('d.m.Y - H:m:s', $user->last_login) ?></td>
                     <td class="text-center">
                         <div>
                             <a href="?delete=<?= $user->id ?>" class="confirm-delete">Delete</a>
@@ -97,8 +99,8 @@
 </div>
 <script>
 <?php if (isset($_GET['edit'])) { ?>
-$(document).ready(function () {
-    $("#add_edit_users").modal('show');
-});
+        $(document).ready(function () {
+            $("#add_edit_users").modal('show');
+        });
 <?php } ?>
 </script>

@@ -130,7 +130,7 @@
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
-                                <th>Paymnet type</th>
+                                <th>Payment type</th>
                                 <th>Num Orders</th>
                             </tr>
                         </thead>

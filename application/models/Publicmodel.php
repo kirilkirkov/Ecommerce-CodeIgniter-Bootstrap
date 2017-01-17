@@ -78,8 +78,9 @@ class Publicmodel extends CI_Model
             $findInIds = array();
             $findInIds[] = $big_get['category'];
             $query = $this->db->query('SELECT id FROM shop_categories WHERE sub_for = ' . $big_get['category']);
-            foreach ($query->result() as $row)
+            foreach ($query->result() as $row) {
                 $findInIds[] = $row->id;
+            }
             $this->db->where_in('products.shop_categorie', $findInIds);
         }
         if ($big_get['in_stock'] != '') {

@@ -162,6 +162,6 @@
                                 }
                             } else {
                                 ?>
-                                <div class="">
+                                <div>
                                 <?php } ?>
 

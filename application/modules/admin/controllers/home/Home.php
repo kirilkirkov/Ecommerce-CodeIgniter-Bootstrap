@@ -21,8 +21,6 @@ class Home extends ADMIN_Controller
         $head['keywords'] = '';
         $data['newOrdersCount'] = $this->AdminModel->ordersCount(true);
         $data['lowQuantity'] = $this->AdminModel->countLowQuantityProducts();
-        $data['adminUserInfo'] = $this->AdminModel->getAdminUsers($this->username);
-        // 24 hours back
         $data['lastSubscribed'] = $this->AdminModel->lastSubscribedEmailsCount();
         $data['activity'] = $this->AdminModel->getHistory(10, 0);
         $data['mostSold'] = $this->AdminModel->getMostSoldProducts();

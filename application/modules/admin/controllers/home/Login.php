@@ -27,6 +27,7 @@ class Login extends ADMIN_Controller
             if ($this->form_validation->run($this)) {
                 $result = $this->AdminModel->loginCheck($_POST);
                 if (!empty($result)) {
+                    $_SESSION['last_login'] = $result['last_login'];
                     $this->session->set_userdata('logged_in', $result['username']);
                     $this->saveHistory('User ' . $result['username'] . ' logged in');
                     redirect('admin/home');

@@ -175,7 +175,10 @@
                             }
                         } else {
                             ?>
-                            <tr><td colspan="3">No history found!</td></tr>
+                            <a href="#" class="list-group-item">
+                                <i class="fa fa-user" aria-hidden="true"></i>  
+                                <div>  No history found!</div>
+                            </a>
                         <?php } ?>
                     </div>
                     <div class="text-right">

@@ -48,6 +48,7 @@ class Settings extends ADMIN_Controller
         $data['outOfStock'] = $this->AdminModel->getValueStore('outOfStock');
         $data['moreInfoBtn'] = $this->AdminModel->getValueStore('moreInfoBtn');
         $data['showBrands'] = $this->AdminModel->getValueStore('showBrands');
+        $data['showInSlider'] = $this->AdminModel->getValueStore('showInSlider');
         $data['cookieLawInfo'] = $this->getCookieLaw();
         $data['languages'] = $this->AdminModel->getLanguages();
         $data['law_themes'] = array_diff(scandir('./assets/imgs/cookie-law-themes/'), array('..', '.'));
@@ -181,6 +182,12 @@ class Settings extends ADMIN_Controller
             $this->AdminModel->setValueStore('showBrands', $_POST['showBrands']);
             $this->session->set_flashdata('showBrands', 'Brands visibility changed');
             $this->saveHistory('Brands visibility changed');
+            redirect('admin/settings');
+        }
+        if (isset($_POST['showInSlider'])) {
+            $this->AdminModel->setValueStore('showInSlider', $_POST['showInSlider']);
+            $this->session->set_flashdata('showInSlider', 'In Slider products visibility changed');
+            $this->saveHistory('In Slider products visibility changed');
             redirect('admin/settings');
         }
         if (isset($_POST['setCookieLaw'])) {

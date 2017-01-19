@@ -3,10 +3,15 @@
 class Publicmodel extends CI_Model
 {
 
+    private $showOutOfStock;
+    private $showInSliderProducts;
+
     public function __construct()
     {
         parent::__construct();
         $this->load->Model('AdminModel');
+        $this->showOutOfStock = $this->AdminModel->getValueStore('outOfStock');
+        $this->showInSliderProducts = $this->AdminModel->getValueStore('showInSlider');
     }
 
     public function productsCount($big_get)
@@ -18,6 +23,12 @@ class Publicmodel extends CI_Model
             $this->getFilter($big_get);
         }
         $this->db->where('visibility', 1);
+        if ($this->showOutOfStock == 0) {
+            $this->db->where('quantity >', 0);
+        }
+        if ($this->showInSliderProducts == 0) {
+            $this->db->where('in_slider', 0);
+        }
         return $this->db->count_all_results('products');
     }
 
@@ -52,12 +63,12 @@ class Publicmodel extends CI_Model
         $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('translations.type', 'product');
         $this->db->where('visibility', 1);
-        $showOutOfStock = $this->AdminModel->getValueStore('outOfStock');
-        if ($showOutOfStock == 0) {
+        if ($this->showOutOfStock == 0) {
             $this->db->where('quantity >', 0);
         }
-        // $this->db->where('in_slider', 0); Show slider products in categories
-
+        if ($this->showInSliderProducts == 0) {
+            $this->db->where('in_slider', 0);
+        }
         $query = $this->db->get('products');
         return $query->result_array();
     }
@@ -226,8 +237,12 @@ class Publicmodel extends CI_Model
         return $query->result_array();
     }
 
+    /*
+     * Users for notification by email
+     */
+
     public function getNotifyUsers()
-    { // users for notification by email
+    {
         $result = $this->db->query('SELECT email FROM users WHERE notify = 1');
         $arr = array();
         foreach ($result->result_array() as $email) {
@@ -269,12 +284,15 @@ class Publicmodel extends CI_Model
         $this->db->where('translations.type', 'product');
         $this->db->where('visibility', 1);
         $this->db->where('in_slider', 1);
+        if ($this->showOutOfStock == 0) {
+            $this->db->where('quantity >', 0);
+        }
         $query = $this->db->get('products');
         return $query->result_array();
     }
 
     public function getbestSellers($categorie = 0, $noId = 0)
-    { //best sellers and for categorie..
+    {
         $this->db->select('products.id, products.quantity, products.image, products.url, translations.price, translations.title, translations.old_price');
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         if ($noId > 0) {
@@ -286,6 +304,9 @@ class Publicmodel extends CI_Model
         }
         $this->db->where('translations.type', 'product');
         $this->db->where('visibility', 1);
+        if ($this->showOutOfStock == 0) {
+            $this->db->where('quantity >', 0);
+        }
         $this->db->order_by('products.procurement', 'desc');
         $this->db->limit(5);
         $query = $this->db->get('products');
@@ -293,7 +314,7 @@ class Publicmodel extends CI_Model
     }
 
     public function sameCagegoryProducts($categorie, $noId)
-    { //same categorie products
+    {
         $this->db->select('products.id, products.quantity, products.image, products.url, translations.price, translations.title, translations.old_price');
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         $this->db->where('products.id !=', $noId);
@@ -301,6 +322,9 @@ class Publicmodel extends CI_Model
         $this->db->where('translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('translations.type', 'product');
         $this->db->where('visibility', 1);
+        if ($this->showOutOfStock == 0) {
+            $this->db->where('quantity >', 0);
+        }
         $this->db->order_by('products.id', 'desc');
         $this->db->limit(5);
         $query = $this->db->get('products');

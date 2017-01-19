@@ -226,7 +226,8 @@ INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
 (25, 'googleApi', ''),
 (26, 'template', 'redlabel'),
 (27, 'cashondelivery_visibility', '1'),
-(28, 'showBrands', '0');
+(28, 'showBrands', '0'),
+(29, 'showInSlider', '0');
 
 CREATE TABLE `brands` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

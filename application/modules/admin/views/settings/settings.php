@@ -342,6 +342,23 @@
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-success col-h">
+            <div class="panel-heading">Show in slider products to list</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('showInSlider')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('showInSlider') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="hidden" name="showInSlider" value="<?= $showInSlider ?>">
+                    <input <?= $showInSlider == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="showInSlider" class="toggle-changer" type="checkbox">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
             <div class="panel-heading">Cookie Law Notification</div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('cookieNotificator')) { ?>

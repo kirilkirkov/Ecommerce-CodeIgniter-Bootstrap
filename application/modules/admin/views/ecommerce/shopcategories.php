@@ -84,7 +84,7 @@
                             <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
                         <?php } foreach ($languages->result() as $language) { ?>
                             <div class="form-group">
-                                <label>Name (<?= $language->name ?>)</label>
+                                <label>Name (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                                 <input type="text" name="categorie_name[]" class="form-control">
                             </div>
                         <?php } ?>

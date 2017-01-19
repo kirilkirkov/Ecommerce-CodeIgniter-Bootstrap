@@ -799,4 +799,25 @@ class AdminModel extends CI_Model
         ));
     }
 
+    public function getOrdersByMonth()
+    {
+        $result = $this->db->query("SELECT YEAR(FROM_UNIXTIME(date)) as year, MONTH(FROM_UNIXTIME(date)) as month, COUNT(id) as num FROM orders GROUP BY YEAR(FROM_UNIXTIME(date)), MONTH(FROM_UNIXTIME(date)) ASC");
+        $result = $result->result_array();
+        $orders = array();
+        $years = array();
+        foreach ($result as $res) {
+            if (!isset($orders[$res['year']])) {
+                for ($i = 1; $i <= 12; $i++) {
+                    $orders[$res['year']][$i] = 0;
+                }
+            }
+            $years[] = $res['year'];
+            $orders[$res['year']][$res['month']] = $res['num'];
+        }
+        return array(
+            'years' => array_unique($years),
+            'orders' => $orders
+        );
+    }
+
 }

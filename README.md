@@ -24,7 +24,8 @@ Bootsrap Responsive online shop
 21. Add multilanguage cookie notificator from silktide.com for EU Cookie Law 
 22. Multiple templates.. also can create your own.. 
 23. Bank account payments support
-24. and more.. and more.. 
+24. Highcharts statistics for orders
+25. and more.. and more.. 
 
 ## Easy installation in 3 steps
 1. Import dbDump.sql to your mysql

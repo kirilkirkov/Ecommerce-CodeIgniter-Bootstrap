@@ -26,6 +26,7 @@ class Home extends ADMIN_Controller
         $data['mostSold'] = $this->AdminModel->getMostSoldProducts();
         $data['mostReferral'] = $this->AdminModel->getMostReferralOrders();
         $data['mostOrdersByPaymentType'] = $this->AdminModel->getMostOrdersByPaymentType();
+        $data['ordersByMonth'] = $this->AdminModel->getOrdersByMonth();
         $this->load->view('_parts/header', $head);
         $this->load->view('home/home', $data);
         $this->load->view('_parts/footer');

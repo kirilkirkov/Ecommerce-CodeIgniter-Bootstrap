@@ -74,14 +74,6 @@ INSERT INTO `languages` (`id`, `abbr`, `name`, `currency`, `currencyKey`, `flag`
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `address` text NOT NULL,
-  `city` varchar(20) NOT NULL,
-  `post_code` varchar(10) NOT NULL,
-  `notes` text NOT NULL,
   `products` text NOT NULL,
   `date` int(10) unsigned NOT NULL,
   `referrer` varchar(255) NOT NULL,
@@ -93,6 +85,18 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+CREATE TABLE `orders_clients` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(30) NOT NULL,
+  `address` text NOT NULL,
+  `city` varchar(20) NOT NULL,
+  `post_code` varchar(10) NOT NULL,
+  `notes` text NOT NULL,
+  `for_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

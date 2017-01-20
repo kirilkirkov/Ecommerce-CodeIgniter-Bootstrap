@@ -549,7 +549,11 @@ class AdminModel extends CI_Model
         } else {
             $this->db->order_by('id', 'DESC');
         }
-        $this->db->select('*');
+        $this->db->select('orders.*, orders_clients.first_name,'
+                . ' orders_clients.last_name, orders_clients.email, orders_clients.phone, '
+                . 'orders_clients.address, orders_clients.city, orders_clients.post_code,'
+                . ' orders_clients.notes');
+        $this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'inner');
         $result = $this->db->get('orders', $limit, $page);
         return $result->result_array();
     }

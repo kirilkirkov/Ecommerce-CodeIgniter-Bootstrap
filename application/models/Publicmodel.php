@@ -269,8 +269,31 @@ class Publicmodel extends CI_Model
         unset($post['id'], $post['quantity']);
         $post['date'] = time();
         $post['products'] = serialize($post['products']);
-        $result = $this->db->insert('orders', $post);
-        if ($result == true) {
+        echo '<pre>';
+        print_r($post);
+        echo '</pre>';
+        $result = $this->db->insert('orders', array(
+            'order_id' => $post['order_id'],
+            'products' => $post['products'],
+            'date' => $post['date'],
+            'referrer' => $post['referrer'],
+            'clean_referrer' => $post['clean_referrer'],
+            'payment_type' => $post['payment_type'],
+            'paypal_status' => $post['paypal_status']
+        ));
+        $lastId = $this->db->insert_id();
+        $result_2 = $this->db->insert('orders_clients', array(
+            'for_id' => $lastId,
+            'first_name' => $post['first_name'],
+            'last_name' => $post['last_name'],
+            'email' => $post['email'],
+            'phone' => $post['phone'],
+            'address' => $post['address'],
+            'city' => $post['city'],
+            'post_code' => $post['post_code'],
+            'notes' => $post['notes']
+        ));
+        if ($result == true && $result_2 == true) {
             return $post['order_id'];
         }
         return false;
@@ -406,13 +429,13 @@ class Publicmodel extends CI_Model
         return $result->row_array();
     }
 
-    public function changePaypalOrderStatus($id, $status)
+    public function changePaypalOrderStatus($order_id, $status)
     {
         $processed = 0;
         if ($status == 'canceled') {
             $processed = 2;
         }
-        $this->db->where('order_id', $id);
+        $this->db->where('order_id', $order_id);
         $this->db->update('orders', array(
             'paypal_status' => $status,
             'processed' => $processed

@@ -19,7 +19,7 @@ class Loader extends MY_Controller
 
     public function jsFile($file = null)
     {
-        $contents = file_get_contents('./application/language/' . MY_LANGUAGE_FULL_NAME . '/js/' . $file);
+        $contents = file_get_contents('.' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . MY_LANGUAGE_FULL_NAME . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . $file);
         if (!$contents) {
             header('HTTP/1.1 404 Not Found');
             return;
@@ -37,7 +37,7 @@ class Loader extends MY_Controller
         $style = $this->AdminModel->getValueStore('newStyle');
         if ($style == null) {
             $template = $this->template;
-            $style = file_get_contents(VIEWS_DIR . $template . '/assets/css/default-gradient.css');
+            $style = file_get_contents(VIEWS_DIR . $template . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'default-gradient.css');
             if (!$style) {
                 header('HTTP/1.1 404 Not Found');
                 return;
@@ -55,7 +55,7 @@ class Loader extends MY_Controller
     public function templateCss($file)
     {
         $template = $this->template;
-        $style = file_get_contents(VIEWS_DIR . $template . '/assets/css/' . $file);
+        $style = file_get_contents(VIEWS_DIR . $template . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . $file);
         if (!$style) {
             header('HTTP/1.1 404 Not Found');
             return;
@@ -72,7 +72,7 @@ class Loader extends MY_Controller
     public function templateJs($file)
     {
         $template = $this->template;
-        $js = file_get_contents(VIEWS_DIR . $template . '/assets/js/' . $file);
+        $js = file_get_contents(VIEWS_DIR . $template . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . $file);
         if (!$js) {
             header('HTTP/1.1 404 Not Found');
             return;
@@ -90,9 +90,9 @@ class Loader extends MY_Controller
         if ($template == null) {
             $template = $this->template;
         } else {
-            $template = '/templates/' . $template . '/';
+            $template = DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR;
         }
-        $path = VIEWS_DIR . $template . '/assets/imgs/' . $file;
+        $path = VIEWS_DIR . $template . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'imgs' . DIRECTORY_SEPARATOR . $file;
         $img = file_get_contents($path);
         if (!$img) {
             header('HTTP/1.1 404 Not Found');

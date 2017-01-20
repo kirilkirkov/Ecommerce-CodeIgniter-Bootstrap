@@ -23,9 +23,9 @@ class TextualPages extends ADMIN_Controller
         $head['description'] = '!';
         $head['keywords'] = '';
         $data['page'] = $this->AdminModel->getOnePageForEdit($page);
-        if (empty($data['page']))
+        if (empty($data['page'])) {
             redirect('admin/pages');
-
+        }
         if (isset($_POST['updatePage'])) {
             $translations = array(
                 'abbr' => $_POST['translations'],

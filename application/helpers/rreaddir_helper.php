@@ -16,7 +16,7 @@ function rreaddir($dir, &$array = array())
                     $array[$ext][] = $dir . $file;
                 }
             } elseif (is_dir($dir . $file)) {
-                rreadDir($dir . $file . '/', $array);
+                rreadDir($dir . $file . DIRECTORY_SEPARATOR, $array);
             }
         }
     }

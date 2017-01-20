@@ -83,7 +83,7 @@ class Publish extends ADMIN_Controller
 
     private function do_upload_others_images()
     {
-        $upath = './attachments/shop_images/' . $_POST['folder'] . '/';
+        $upath = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
         if (!file_exists($upath)) {
             mkdir($upath, 0777);
         }
@@ -115,7 +115,7 @@ class Publish extends ADMIN_Controller
     public function removeSecondaryImage()
     {
         if ($this->input->is_ajax_request()) {
-            $img = './attachments/shop_images/' . $_POST['folder'] . '/' . $_POST['image'];
+            $img = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . '' . $_POST['folder'] . DIRECTORY_SEPARATOR . $_POST['image'];
             unlink($img);
         }
     }

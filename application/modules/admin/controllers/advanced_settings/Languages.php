@@ -35,7 +35,7 @@ class Languages extends ADMIN_Controller
             $this->saveLanguageFiles();
             redirect('admin/languages');
         }
-        if (!is_writable('application/languages/')) {
+        if (!is_writable('application' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR)) {
             $data['writable'] = 'Languages folder is not writable!';
         }
         $data = array();
@@ -52,7 +52,7 @@ class Languages extends ADMIN_Controller
         if (isset($_POST['name']) && isset($_POST['abbr'])) {
             $dublicates = $this->AdminModel->countLangs($_POST['name'], $_POST['abbr']);
             if ($dublicates == 0) {
-                $config['upload_path'] = './attachments/lang_flags/';
+                $config['upload_path'] = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'lang_flags' . DIRECTORY_SEPARATOR . '';
                 $config['allowed_types'] = 'gif|jpg|png';
                 $this->load->library('upload', $config);
                 if (!$this->upload->do_upload('userfile')) {
@@ -120,7 +120,7 @@ class Languages extends ADMIN_Controller
     private function getLangFolderForEdit()
     {
         $langFiles = array();
-        $files = rreadDir('application/language/' . $_GET['editLang'] . '/');
+        $files = rreadDir('application' . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . '' . $_GET['editLang'] . DIRECTORY_SEPARATOR);
         $arrPhpFiles = $arrJsFiles = array();
         foreach ($files as $ext => $filesLang) {
             foreach ($filesLang as $fileLang) {
@@ -148,8 +148,8 @@ class Languages extends ADMIN_Controller
     {
         $newLang = strtolower(trim($_POST['name']));
         if ($newLang != '') {
-            $from = 'application/language/' . MY_DEFAULT_LANGUAGE_NAME;
-            $to = 'application/language/' . $newLang;
+            $from = 'application' . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . MY_DEFAULT_LANGUAGE_NAME;
+            $to = 'application' . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . $newLang;
             rcopy($from, $to);
         }
     }

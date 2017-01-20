@@ -10,7 +10,7 @@ function rrmdir($dir)
         $files = scandir($dir);
         foreach ($files as $file) {
             if ($file != "." && $file != "..") {
-                rrmdir("$dir/$file");
+                rrmdir($dir . DIRECTORY_SEPARATOR . $file);
                 rmdir($dir);
             }
         }

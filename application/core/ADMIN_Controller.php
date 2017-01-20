@@ -70,41 +70,41 @@ class ADMIN_Controller extends MX_Controller
         $errors = array();
 
         // Check application/language folder is writable
-        if (!is_writable('./application/language')) {
+        if (!is_writable('.' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'language')) {
             $errors[] = 'Language folder is not writable!';
         }
 
         // Check application/logs folder is writable
-        if (!is_writable('./application/logs')) {
+        if (!is_writable('.' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'logs')) {
             $errors[] = 'Logs folder is not writable!';
         }
 
         // Check attachments folder is writable
-        if (!is_writable('./attachments')) {
+        if (!is_writable('.' . DIRECTORY_SEPARATOR . 'attachments')) {
             $errors[] = 'Attachments folder is not writable!';
         } else {
             /*
              *  Check attachment directories exsists..
              *  ..and create him if no exsists
              */
-            if (!file_exists('./attachments/blog_images')) {
+            if (!file_exists('.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'blog_images')) {
                 $old = umask(0);
-                mkdir('./attachments/blog_images', 0777, true);
+                mkdir('.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'blog_images', 0777, true);
                 umask($old);
             }
-            if (!file_exists('./attachments/lang_flags')) {
+            if (!file_exists('.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'lang_flags')) {
                 $old = umask(0);
-                mkdir('./attachments/lang_flags', 0777, true);
+                mkdir('.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'lang_flags', 0777, true);
                 umask($old);
             }
-            if (!file_exists('./attachments/shop_images')) {
+            if (!file_exists('.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images')) {
                 $old = umask(0);
-                mkdir('./attachments/shop_images', 0777, true);
+                mkdir('.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images', 0777, true);
                 umask($old);
             }
-            if (!file_exists('./attachments/site_logo')) {
+            if (!file_exists('.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'site_logo')) {
                 $old = umask(0);
-                mkdir('./attachments/site_logo', 0777, true);
+                mkdir('.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'site_logo', 0777, true);
                 umask($old);
             }
         }

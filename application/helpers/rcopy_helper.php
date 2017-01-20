@@ -14,7 +14,7 @@ function rcopy($from, $to)
         $files = scandir($from);
         foreach ($files as $file) {
             if ($file != "." && $file != "..") {
-                rcopy("$from/$file", "$to/$file");
+                rcopy($from . DIRECTORY_SEPARATOR . $file, $to . DIRECTORY_SEPARATOR . $file);
             }
         }
     } else if (file_exists($from)) {

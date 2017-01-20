@@ -159,7 +159,7 @@ class MY_Controller extends MX_Controller
         if (!is_dir(TEMPLATES_DIR . $template)) {
             show_error('The selected template does not exists!');
         }
-        $this->template = 'templates/' . $template . '/';
+        $this->template = 'templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR;
     }
 
 }

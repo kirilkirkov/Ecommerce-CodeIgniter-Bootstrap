@@ -51,7 +51,7 @@ class Settings extends ADMIN_Controller
         $data['showInSlider'] = $this->AdminModel->getValueStore('showInSlider');
         $data['cookieLawInfo'] = $this->getCookieLaw();
         $data['languages'] = $this->AdminModel->getLanguages();
-        $data['law_themes'] = array_diff(scandir('./assets/imgs/cookie-law-themes/'), array('..', '.'));
+        $data['law_themes'] = array_diff(scandir('.' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'imgs' . DIRECTORY_SEPARATOR . 'cookie-law-themes' . DIRECTORY_SEPARATOR), array('..', '.'));
         $data['cookieLawInfo'] = $this->getCookieLaw();
         $this->load->view('_parts/header', $head);
         $this->load->view('settings/settings', $data);
@@ -62,7 +62,7 @@ class Settings extends ADMIN_Controller
     private function postChecker()
     {
         if (isset($_POST['uploadimage'])) {
-            $config['upload_path'] = './attachments/site_logo/';
+            $config['upload_path'] = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'site_logo' . DIRECTORY_SEPARATOR;
             $config['allowed_types'] = 'gif|jpg|png';
             $config['max_size'] = 1500;
             $config['max_width'] = 1024;

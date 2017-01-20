@@ -24,7 +24,7 @@ class BlogPublish extends ADMIN_Controller
         }
         if (isset($_POST['submit'])) {
             unset($_POST['submit']);
-            $config['upload_path'] = './attachments/blog_images/';
+            $config['upload_path'] = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'blog_images' . DIRECTORY_SEPARATOR;
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
             $this->load->library('upload', $config);
             $this->upload->initialize($config);

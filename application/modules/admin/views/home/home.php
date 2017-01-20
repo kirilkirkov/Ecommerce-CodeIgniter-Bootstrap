@@ -176,24 +176,33 @@
                     <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Last Activity Log</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="list-group">
-                        <?php
-                        if ($activity->result()) {
-                            foreach ($activity->result() as $action) {
-                                ?>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-user" aria-hidden="true"></i> <b><?= $action->username ?></b>
-                                    <div><?= $action->activity . ' on ' . date('d.m.Y / H.m.s', $action->time) ?></div>
-                                </a>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <?php
-                            }
-                        } else {
-                            ?>
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-user" aria-hidden="true"></i>  
-                                <div>  No history found!</div>
-                            </a>
-                        <?php } ?>
+                                if ($activity->result()) {
+                                    foreach ($activity->result() as $action) {
+                                        ?>
+                                        <tr>
+                                            <td><i class="fa fa-user" aria-hidden="true"></i> <b><?= $action->username ?></b></td>
+                                            <td><?= $action->activity . ' on ' . date('d.m.Y / H.m.s', $action->time) ?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <tr>
+                                        <td colspan="2">No history found!</td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="text-right">
                         <a href="<?= base_url('admin/history') ?>">View All Activity <i class="fa fa-arrow-circle-right"></i></a>

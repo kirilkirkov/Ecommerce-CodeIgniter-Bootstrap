@@ -150,8 +150,8 @@
                         </thead>
                         <tbody>
                             <?php
-                            if (!empty($mostOrdersByPaymentType)) {
-                                foreach ($mostOrdersByPaymentType as $paymentT) {
+                            if (!empty($ordersByPaymentType)) {
+                                foreach ($ordersByPaymentType as $paymentT) {
                                     ?>
                                     <tr>
                                         <td><?= $paymentT['payment_type'] ?></td>
@@ -287,7 +287,7 @@
             name: 'Referrer',
                     colorByPoint: true,
                     data: [
-<?php foreach ($mostReferral as $referrer) { ?>
+<?php foreach ($byReferral as $referrer) { ?>
                         {
                         name: '<?= $referrer['referrer'] ?>',
                                 y: <?= $referrer['num'] ?>,

@@ -96,7 +96,8 @@ $autoload['helper'] = array(
     'cookie', 
     'getTextualPages', 
     'mb_ucfirst',
-    'purchase_steps'
+    'purchase_steps',
+    'cleanreferral'
 );
 
 /*

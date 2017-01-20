@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `products` text NOT NULL,
   `date` int(10) unsigned NOT NULL,
   `referrer` varchar(255) NOT NULL,
+  `clean_referrer` varchar(255) NOT NULL,
   `payment_type` varchar(255) NOT NULL,
   `paypal_status` varchar(10) DEFAULT NULL,
   `processed` tinyint(1) NOT NULL DEFAULT '0',

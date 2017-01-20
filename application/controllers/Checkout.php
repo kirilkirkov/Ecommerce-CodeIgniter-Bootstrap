@@ -55,6 +55,8 @@ class Checkout extends MY_Controller
                         $_POST = $_SESSION['final_step'];
                         unset($_SESSION['final_step']);
                     }
+                    $_POST['referrer'] = $this->session->userdata('referrer');
+                    $_POST['clean_referrer'] = cleanReferral($_POST['referrer']);
                     $result = $this->Publicmodel->setOrder($_POST);
                     if ($result == true) {
                         $new_request = true;

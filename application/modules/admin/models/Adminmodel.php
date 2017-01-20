@@ -404,17 +404,16 @@ class AdminModel extends CI_Model
         return $queryResult->result_array();
     }
 
-    public function getMostReferralOrders($limit = 10)
+    public function getReferralOrders()
     {
 
-        $this->db->select('count(id) as num, referrer');
-        $this->db->group_by('referrer');
-        $this->db->limit($limit);
+        $this->db->select('count(id) as num, clean_referrer as referrer');
+        $this->db->group_by('clean_referrer');
         $queryResult = $this->db->get('orders');
         return $queryResult->result_array();
     }
 
-    public function getMostOrdersByPaymentType($limit = 10)
+    public function getOrdersByPaymentType($limit = 10)
     {
         $this->db->select('count(id) as num, payment_type');
         $this->db->group_by('payment_type');

@@ -104,7 +104,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row bottom-30">
         <div class="col-sm-9 left-side">
             <form method="POST" id="goOrder">
-                <input type="hidden" name="referrer" value="<?= $this->session->userdata('referrer') ?>">
                 <div class="title alone cloth-bg-color">
                     <span><?= lang('checkout') ?></span>
                 </div>

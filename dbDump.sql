@@ -192,7 +192,7 @@ CREATE TABLE `bank_accounts` (
   `bic` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `valueStore` (
+CREATE TABLE IF NOT EXISTS `value_store` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `thekey` varchar(50) NOT NULL,
   `value` longtext NOT NULL,
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `valueStore` (
   KEY `key` (`thekey`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-INSERT INTO `valueStore` (`id`, `thekey`, `value`) VALUES
+INSERT INTO `value_store` (`id`, `thekey`, `value`) VALUES
 (1, 'sitelogo', 'NewLogo.jpg'),
 (2, 'navitext', ''),
 (3, 'footercopyright', 'Powered by ECC FZE © All right reserved. '),

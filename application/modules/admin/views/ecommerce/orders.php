@@ -103,7 +103,11 @@ if (!isset($_GET['settings'])) {
                                             </tr>
                                             <tr>
                                                 <td><b>Come from site</b></td>
-                                                <td><?= $tr['referrer'] ?></td>
+                                                <td>
+                                                    <a target="_blank" href="<?= $tr['referrer'] ?>" class="orders-referral">
+                                                        <?= $tr['referrer'] ?>
+                                                    </a>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Payment Type</b></td>

@@ -136,6 +136,7 @@ footer a {color:#333; text-decoration:underline;}
 .home-page .panel-red .panel-heading {   background-color: #d9534f;  border-color: #d9534f;  color: #fff;}
 .home-page .huge {font-size: 40px;}
 .home-page .panel {font-size:14px;}
+a.orders-referral {display:block; word-break:break-all;}
 
 @media (min-width: 767px) {
     .sidebar-menu {display: block !important;}

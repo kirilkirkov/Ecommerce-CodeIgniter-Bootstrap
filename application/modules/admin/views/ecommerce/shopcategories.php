@@ -91,7 +91,7 @@
                         <div class="form-group">
                             <label>Parent <sup>this categorie will be subcategorie of parent</sup>:</label>
                             <select class="form-control" name="sub_for">
-                                <option value="">None</option>
+                                <option value="0">None</option>
                                 <?php
                                 foreach ($shop_categories as $key_cat => $shop_categorie) {
                                     $aa = '';

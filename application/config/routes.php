@@ -55,6 +55,12 @@ $route['default_controller'] = 'home';
 // Load default conrtoller when have only currency from multilanguage
 $route['^(\w{2})$'] = $route['default_controller'];
 
+//Checkout
+$route['checkout/successcash'] = 'checkout/successPaymentCashOnD';
+$route['checkout/successbank'] = 'checkout/successPaymentBank';
+$route['checkout/paypalpayment'] = 'checkout/paypalPayment';
+$route['checkout/order-error'] = 'checkout/orderError';
+
 // Ajax called. Functions for managing shopping cart
 $route['manageShoppingCart'] = 'home/manageShoppingCart';
 $route['(\w{2})/manageShoppingCart'] = 'home/manageShoppingCart';

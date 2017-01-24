@@ -43,7 +43,6 @@ class Settings extends ADMIN_Controller
         $data['addJs'] = $this->AdminModel->getValueStore('addJs');
         $data['publicQuantity'] = $this->AdminModel->getValueStore('publicQuantity');
         $data['publicDateAdded'] = $this->AdminModel->getValueStore('publicDateAdded');
-        $data['finalCheckoutPage'] = $this->AdminModel->getValueStore('finalCheckoutPage');
         $data['googleApi'] = $this->AdminModel->getValueStore('googleApi');
         $data['outOfStock'] = $this->AdminModel->getValueStore('outOfStock');
         $data['moreInfoBtn'] = $this->AdminModel->getValueStore('moreInfoBtn');
@@ -158,12 +157,6 @@ class Settings extends ADMIN_Controller
             $this->AdminModel->setValueStore('publicDateAdded', $_POST['publicDateAdded']);
             $this->session->set_flashdata('publicDateAdded', 'Public date added visibility changed');
             $this->saveHistory('Change public date added visibility');
-            redirect('admin/settings');
-        }
-        if (isset($_POST['finalCheckoutPage'])) {
-            $this->AdminModel->setValueStore('finalCheckoutPage', $_POST['finalCheckoutPage']);
-            $this->session->set_flashdata('finalCheckoutPage', 'Final checkout page visibility changed');
-            $this->saveHistory('Change visibility of final checkout page');
             redirect('admin/settings');
         }
         if (isset($_POST['outOfStock'])) {

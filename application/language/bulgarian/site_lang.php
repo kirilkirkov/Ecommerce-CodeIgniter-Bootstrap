@@ -137,3 +137,4 @@ $lang['invalid_city'] = 'Не сте въвели град';
 $lang['invalid_post_code'] = 'Не сте въвели пощенски код';
 $lang['finded_errors'] = 'Намерихме следните грешки';
 $lang['out_of_stock_product'] = 'Количеството е изчерпано';
+$lang['there_is_payment_error'] = 'Има проблем с поръчването през сайта. Моля свържете се по телефона!';

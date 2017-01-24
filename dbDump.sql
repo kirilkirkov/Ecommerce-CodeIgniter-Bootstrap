@@ -227,12 +227,11 @@ INSERT INTO `value_store` (`id`, `thekey`, `value`) VALUES
 (21, 'paypal_sandbox', '0'),
 (22, 'paypal_currency', 'EUR'),
 (23, 'publicDateAdded', '0'),
-(24, 'finalCheckoutPage', '0'),
-(25, 'googleApi', ''),
-(26, 'template', 'redlabel'),
-(27, 'cashondelivery_visibility', '1'),
-(28, 'showBrands', '0'),
-(29, 'showInSlider', '0');
+(24, 'googleApi', ''),
+(25, 'template', 'redlabel'),
+(26, 'cashondelivery_visibility', '1'),
+(27, 'showBrands', '0'),
+(28, 'showInSlider', '0');
 
 CREATE TABLE `brands` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

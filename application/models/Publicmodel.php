@@ -269,9 +269,6 @@ class Publicmodel extends CI_Model
         unset($post['id'], $post['quantity']);
         $post['date'] = time();
         $post['products'] = serialize($post['products']);
-        echo '<pre>';
-        print_r($post);
-        echo '</pre>';
         $result = $this->db->insert('orders', array(
             'order_id' => $post['order_id'],
             'products' => $post['products'],

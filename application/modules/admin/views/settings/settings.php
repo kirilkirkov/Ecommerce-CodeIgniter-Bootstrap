@@ -272,25 +272,6 @@
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-success col-h">
-            <div class="panel-heading">Add final checkout page</div>
-            <div class="panel-body">
-                <?php if ($this->session->flashdata('finalCheckoutPage')) { ?>
-                    <div class="alert alert-info"><?= $this->session->flashdata('finalCheckoutPage') ?></div>
-                <?php } ?>
-                <form method="POST" action="">
-                    <input type="hidden" name="finalCheckoutPage" value="<?= $finalCheckoutPage ?>">
-                    <input <?= $finalCheckoutPage == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="finalCheckoutPage" class="toggle-changer" type="checkbox">
-                    <button class="btn btn-default" value="" type="submit">
-                        Save
-                    </button>
-                </form>
-                This is the page after fill checkout form and click button order for 
-                last previewing entered data.
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6 col-md-4">
-        <div class="panel panel-success col-h">
             <div class="panel-heading">Show in list out of stock products</div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('outOfStock')) { ?>

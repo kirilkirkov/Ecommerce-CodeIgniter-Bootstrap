@@ -57,9 +57,13 @@ $route['^(\w{2})$'] = $route['default_controller'];
 
 //Checkout
 $route['checkout/successcash'] = 'checkout/successPaymentCashOnD';
+$route['(\w{2})/checkout/successcash'] = 'checkout/successPaymentCashOnD';
 $route['checkout/successbank'] = 'checkout/successPaymentBank';
+$route['(\w{2})/checkout/successbank'] = 'checkout/successPaymentBank';
 $route['checkout/paypalpayment'] = 'checkout/paypalPayment';
+$route['(\w{2})/checkout/paypalpayment'] = 'checkout/paypalPayment';
 $route['checkout/order-error'] = 'checkout/orderError';
+$route['(\w{2})/checkout/order-error'] = 'checkout/orderError';
 
 // Ajax called. Functions for managing shopping cart
 $route['manageShoppingCart'] = 'home/manageShoppingCart';

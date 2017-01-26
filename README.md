@@ -1,6 +1,11 @@
 ## Shopping Cart Solution - CodeIgniter and Bootstrap
 Bootsrap Responsive online shop
 
+Current versions:
+1. Codeigniter 3.1.3
+2. Bootstrap 3.3.7
+
+We support following features:
 1. Bootstrap responsive
 2. MultiLanguage with interface for easy add/edit functionality!!
 3. Beautifle design
@@ -42,3 +47,29 @@ Pass: admin
 
 ## Screenshot of admin panel
 ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution---CodeIgniter/master/admin_panel4.png "Logo Title Text 1")
+
+## How To Write Templates
+1. Every template in /application/views/templates/ folder must have this file structure:
+
+2. Every file name is for the page that will show.
+3. Page urls are
+  * / - for home page (home.php)
+  * /checkout - checkout page (checkout.php)
+  * /shopping-cart - shopping cart page (shopping_cart.php)
+  * /contacts - contacts page (contacts.php)
+  * /page/pageName - every textual page added from administration (dynPage.php)
+  * /blog - blog (blog.php)
+  * /blog/myarticle_1 - blog articles preview (view_blog_post.php)
+  * /myProduct_1 - online store product preview (view_product.php)
+4. *_parts/footer.php* and *_parts/header.php* are loaded in every of this pages
+5. Url for load cssfile.css from your css folder is *base_url('templatecss/nameOfFile.css')*
+6. Url for load jsfile.js from your js folder is *base_url('templatejs/nameOfFile.js')*
+7. Comming variables from controllers to views you can see in each conroller (names of controllers are equal to views)
+
+Shopping cart:
+1. To add article to your shopping cart add this class to your links - **add-to-cart** , if you want to redirect user after add product to shopping cart add also add **data-goto="http://..."**
+2. Variable $cartItems have all your added items
+
+You must include!!
+1. In header - <script src="<?= base_url('loadlanguage/all.js') ?>"></script>
+2. In footer - <script src="<?= base_url('assets/js/system.js') ?>"></script>

@@ -65,7 +65,10 @@
             }
             ?>
         </table>
-    <?php } else { ?>
+        <?php
+        echo $links_pagination;
+    } else {
+        ?>
         <div class="clearfix"></div><hr>
         <div class="alert alert-info">No shop categories found!</div>
     <?php } ?>

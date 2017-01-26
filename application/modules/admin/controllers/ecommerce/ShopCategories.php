@@ -11,7 +11,9 @@ if (!defined('BASEPATH')) {
 class ShopCategories extends ADMIN_Controller
 {
 
-    public function index()
+    private $num_rows = 20;
+
+    public function index($page = 0)
     {
         $this->login_check();
         $data = array();
@@ -19,8 +21,10 @@ class ShopCategories extends ADMIN_Controller
         $head['title'] = 'Administration - Home Categories';
         $head['description'] = '!';
         $head['keywords'] = '';
-        $data['shop_categories'] = $this->AdminModel->getShopCategories();
+        $data['shop_categories'] = $this->AdminModel->getShopCategories($this->num_rows, $page);
         $data['languages'] = $this->AdminModel->getLanguages();
+        $rowscount = $this->AdminModel->categoriesCount();
+        $data['links_pagination'] = pagination('admin/shopcategories', $rowscount, $this->num_rows, 3);
         if (isset($_GET['delete'])) {
             $this->saveHistory('Delete a shop categorie');
             $result = $this->AdminModel->deleteShopCategorie($_GET['delete']);

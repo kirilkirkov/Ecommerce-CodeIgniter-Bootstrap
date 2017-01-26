@@ -119,6 +119,7 @@ $route['admin/products'] = "admin/ecommerce/products";
 $route['admin/products/(:num)'] = "admin/ecommerce/products/index/$1";
 $route['admin/productStatusChange'] = "admin/ecommerce/products/productStatusChange";
 $route['admin/shopcategories'] = "admin/ecommerce/ShopCategories";
+$route['admin/shopcategories/(:num)'] = "admin/ecommerce/ShopCategories/index/$1";
 $route['admin/editshopcategorie'] = "admin/ecommerce/ShopCategories/editShopCategorie";
 $route['admin/orders'] = "admin/ecommerce/orders";
 $route['admin/orders/(:num)'] = "admin/ecommerce/orders/index/$1";

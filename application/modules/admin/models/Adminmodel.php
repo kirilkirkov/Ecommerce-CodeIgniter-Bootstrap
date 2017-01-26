@@ -255,9 +255,14 @@ class AdminModel extends CI_Model
         }
     }
 
-    public function getShopCategories()
+    public function getShopCategories($limit = null, $start = null)
     {
-        $query = $this->db->query('SELECT translations_first.*, (SELECT name FROM translations WHERE for_id = sub_for AND type="shop_categorie" AND abbr = translations_first.abbr) as sub_is FROM translations as translations_first INNER JOIN shop_categories ON shop_categories.id = translations_first.for_id WHERE type="shop_categorie"');
+        $limit_sql = '';
+        if ($limit !== null && $start !== null) {
+            $limit_sql = ' LIMIT ' . $start . ',' . $limit;
+        }
+
+        $query = $this->db->query('SELECT translations_first.*, (SELECT name FROM translations WHERE for_id = sub_for AND type="shop_categorie" AND abbr = translations_first.abbr) as sub_is FROM translations as translations_first INNER JOIN shop_categories ON shop_categories.id = translations_first.for_id WHERE type="shop_categorie"' . $limit_sql);
         $arr = array();
         foreach ($query->result() as $shop_categorie) {
             $arr[$shop_categorie->for_id]['info'][] = array(
@@ -267,6 +272,11 @@ class AdminModel extends CI_Model
             $arr[$shop_categorie->for_id]['sub'][] = $shop_categorie->sub_is;
         }
         return $arr;
+    }
+
+    public function categoriesCount()
+    {
+        return $this->db->count_all_results('shop_categories');
     }
 
     public function setShopCategorie($post)

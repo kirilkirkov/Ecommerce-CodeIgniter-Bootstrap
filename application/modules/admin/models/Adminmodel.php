@@ -409,6 +409,7 @@ class AdminModel extends CI_Model
     {
         $this->db->select('url, procurement');
         $this->db->order_by('procurement', 'desc');
+        $this->db->where('procurement >', 0);
         $this->db->limit($limit);
         $queryResult = $this->db->get('products');
         return $queryResult->result_array();

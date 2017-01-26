@@ -74,8 +74,3 @@ Shopping cart:
 
 1. To add article to your shopping cart add this class to your links - **add-to-cart** , if you want to redirect user after add product to shopping cart add also add **data-goto="http://..."**
 2. Variable $cartItems have all your added items
-
-You must include!!
-
-1. In header - <script src="<?= base_url('loadlanguage/all.js') ?>"></script>
-2. In footer - <script src="<?= base_url('assets/js/system.js') ?>"></script>

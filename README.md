@@ -2,10 +2,12 @@
 Bootsrap Responsive online shop
 
 Current versions:
+
 1. Codeigniter 3.1.3
 2. Bootstrap 3.3.7
 
 We support following features:
+
 1. Bootstrap responsive
 2. MultiLanguage with interface for easy add/edit functionality!!
 3. Beautifle design
@@ -39,8 +41,9 @@ We support following features:
 4. Opss I forgot for last 4 step... ENJOY! ;)
 
 ## Login to administration with:
-User: admin
-Pass: admin
+
+* User: admin
+* Pass: admin
 
 ## Screenshot
 ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/github/templates.png "Logo Title Text 1")
@@ -51,6 +54,7 @@ Pass: admin
 ## How To Write Templates
 1. Every template in /application/views/templates/ folder must have this file structure:
 ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/github/templateFileStructure.png "Logo Title Text 1")
+
 2. Every file name is for the page that will show.
 3. Page urls are
   * / - for home page (home.php)
@@ -67,9 +71,11 @@ Pass: admin
 7. Comming variables from controllers to views you can see in each conroller (names of controllers are equal to views)
 
 Shopping cart:
+
 1. To add article to your shopping cart add this class to your links - **add-to-cart** , if you want to redirect user after add product to shopping cart add also add **data-goto="http://..."**
 2. Variable $cartItems have all your added items
 
 You must include!!
+
 1. In header - <script src="<?= base_url('loadlanguage/all.js') ?>"></script>
 2. In footer - <script src="<?= base_url('assets/js/system.js') ?>"></script>

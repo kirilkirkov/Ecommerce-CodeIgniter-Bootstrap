@@ -80,7 +80,7 @@
                 <form action="" method="POST">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Add Categorie for magazine</h4>
+                        <h4 class="modal-title" id="myModalLabel">Add Category</h4>
                     </div>
                     <div class="modal-body">
                         <?php foreach ($languages->result() as $language) { ?>

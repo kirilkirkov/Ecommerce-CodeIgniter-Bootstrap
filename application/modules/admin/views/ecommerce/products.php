@@ -37,63 +37,73 @@
             <hr>
             <?php
             if ($products->result()) {
-                foreach ($products->result() as $row) {
-                    $u_path = 'attachments/shop_images/';
-                    if ($row->image != null && file_exists($u_path . $row->image)) {
-                        $image = base_url($u_path . $row->image);
-                    } else {
-                        $image = base_url('attachments/no-image.png');
-                    }
-                    ?>
-                    <div class="row article <?= $row->visibility == 1 ? '' : 'invisible-status' ?>" data-article-id="<?= $row->id ?>">
-                        <div class="col-sm-4">
-                            <a href="#" class="article-image" style="position:relative;">
-                                <img src="<?= $image ?>" class="img-responsive">
-                                <div style="color: red;font-size: 40px;left: 10px;position: absolute;top: 20px;"><span class="glyphicon glyphicon-shopping-cart"></span></div>
-                            </a>
-                        </div>
-                        <div class="col-sm-8">
-                            <input type="hidden" value="<?= $row->visibility == 1 ? 0 : 1 ?>" id="to-status">
-                            <h3 class="title"><?= $row->title ?></h3>
-                            <div class="text-muted">
-                                <div class="dropdown">
-                                    <span class="dropdown-toggle" data-toggle="dropdown">
-                                        <span class="status-is-icon"><?= $row->visibility == 1 ? '<i class="fa fa-unlock"></i>' : '<i class="fa fa-lock"></i>' ?></span><span class="caret"></span></span>
-                                    <span class="staus-is"><?= $row->visibility == 1 ? 'Visible' : 'Invisible' ?></span>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="javascript:void(0);" onclick="changeProductStatus(<?= $row->id ?>)"><?= $row->visibility == 1 ? 'Make Invisible' : 'Make Visible' ?></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="description-article"><?= word_limiter(strip_tags($row->description), 70) ?></div>
-                            <div>
-                                <b>Quantity:</b> 
-                                <?= $row->quantity ?>
-                            </div>
-                            <div>
-                                <b>Procurements :</b> 
-                                <?= $row->procurement ?>
-                            </div>
-                            <div>
-                                <b>Product ID:</b> 
-                                <u><?= $row->id ?></u>
-                            </div>
-                            <div class = "pull-right">
-                                <a href="<?= base_url('admin/publish/' . $row->id) ?>" class="btn btn-info">Edit</a>
-                                <a href="<?= base_url('admin/products?delete=' . $row->id) ?>"  class="btn btn-danger confirm-delete">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <?php
-                }
-                echo $links_pagination;
                 ?>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($products->result() as $row) {
+                                $u_path = 'attachments/';
+                                if ($row->image != null && file_exists($u_path . $row->image)) {
+                                    $image = base_url($u_path . $row->image);
+                                } else {
+                                    $image = base_url('attachments/no-image.png');
+                                }
+                                ?>
+
+                                <tr>
+                                    <td>
+                                        <img src="<?= $image ?>" alt="No Image" class="img-thumbnail" style="height:100px;">
+                                    </td>
+                                    <td>
+                                        <?= $row->title ?>
+                                    </td>
+                                    <td>
+                                        <?= $row->price ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if ($row->quantity > 5) {
+                                            $color = 'label-success';
+                                        }
+                                        if ($row->quantity <= 5) {
+                                            $color = 'label-warning';
+                                        }
+                                        if ($row->quantity == 0) {
+                                            $color = 'label-danger';
+                                        }
+                                        ?>
+                                        <span style="font-size:12px;" class="label <?= $color ?>">
+                                            <?= $row->quantity ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="pull-right">
+                                            <a href="<?= base_url('admin/publish/' . $row->id) ?>" class="btn btn-info">Edit</a>
+                                            <a href="<?= base_url('admin/products?delete=' . $row->id) ?>"  class="btn btn-danger confirm-delete">Delete</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <?= $links_pagination ?>
             </div>
-        </div>
-        <?php
-    } else {
-        ?>
-        <div class ="alert alert-info">No products found!</div>
-    <?php } ?>
-</div>
+            <?php
+        } else {
+            ?>
+            <div class ="alert alert-info">No products found!</div>
+        <?php } ?>
+    </div>

@@ -137,6 +137,9 @@ footer a {color:#333; text-decoration:underline;}
 .home-page .huge {font-size: 40px;}
 .home-page .panel {font-size:14px;}
 a.orders-referral {display:block; word-break:break-all;}
+.bordered-group {border:1px solid #e7e7e7; padding: 5px;}
+.loadUploadOthers {display: none;}
+.others-images-container {margin-bottom: 5px;}
 
 @media (min-width: 767px) {
     .sidebar-menu {display: block !important;}

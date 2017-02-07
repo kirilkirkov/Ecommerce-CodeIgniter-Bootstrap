@@ -103,7 +103,9 @@
         productsOrderBy: '<?= base_url('admin/products?orderby=') ?>',
         productStatusChange: '<?= base_url('admin/productStatusChange') ?>',
         changeOrdersOrderStatus: '<?= base_url('admin/changeOrdersOrderStatus') ?>',
-        ordersOrderBy: '<?= base_url('admin/orders?order_by=') ?>'
+        ordersOrderBy: '<?= base_url('admin/orders?order_by=') ?>',
+        uploadOthersImages: '<?= base_url('admin/uploadOthersImages') ?>',
+        loadOthersImages: '<?= base_url('admin/loadOthersImages') ?>'
     };
 </script>
 <script src="<?= base_url('assets/js/mine_admin.js') ?>"></script>

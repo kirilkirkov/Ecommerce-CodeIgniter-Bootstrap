@@ -2,6 +2,7 @@
 <h1><img src="<?= base_url('assets/imgs/shop-cart-add-icon.png') ?>" class="header-img" style="margin-top:-3px;"> Publish product</h1>
 <hr>
 <?php
+$timeNow = time();
 if (validation_errors()) {
     ?>
     <hr>
@@ -18,7 +19,7 @@ if ($this->session->flashdata('result_publish')) {
 }
 ?>
 <form method="POST" action="" enctype="multipart/form-data">
-    <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : time() ?>" name="folder">
+    <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
     <?php foreach ($languages->result() as $language) { ?>
         <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
     <?php } foreach ($languages->result() as $language) { ?>
@@ -63,13 +64,18 @@ if ($this->session->flashdata('result_publish')) {
         $i++;
     }
     ?>
-    <div class="form-group">
+    <div class="form-group bordered-group">
         <?php
         if (isset($_POST['image']) && $_POST['image'] != null) {
-            $u_path = 'attachments/shop_images/';
+            $image = $u_path = 'attachments/shop_images/' . $_POST['image'];
+            if (!file_exists($image)) {
+                $image = base_url('attachments/no-image.png');
+            }
             ?>
             <p>Current image:</p>
-            <img src="<?= base_url($u_path . $_POST['image']) ?>" class="img-responsive" style="max-width:300px;">
+            <div>
+                <img src="<?= $image ?>" class="img-responsive img-thumbnail" style="max-width:300px; margin-bottom: 5px;">
+            </div>
             <?php if (isset($_GET['to_lang'])) { ?>
                 <input type="hidden" name="image" value="<?= $_POST['image'] ?>">
                 <?php
@@ -79,35 +85,11 @@ if ($this->session->flashdata('result_publish')) {
         <label for="userfile">Cover Image</label>
         <input type="file" id="userfile" name="userfile">
     </div>
-    <div class="form-group">
-        <?php
-        if (isset($_POST['folder']) && $_POST['folder'] != null) {
-            ?>
-            <div>       
-                <?php
-                $dir = "attachments/shop_images/" . $_POST['folder'] . '/';
-                if (is_dir($dir)) {
-                    if ($dh = opendir($dir)) {
-                        $i = 0;
-                        while (($file = readdir($dh)) !== false) {
-                            if (is_file($dir . $file)) {
-                                ?>
-                                <div class="other-img" id="image-container-<?= $i ?>">
-                                    <img src="<?= base_url($dir . $file) ?>" style="width:100px; height: 100px;">
-                                    <a href="javascript:void(0);" onclick="removeSecondaryProductImage('<?= $file ?>', '<?= $_POST['folder'] ?>', <?= $i ?>)"><span class="glyphicon glyphicon-remove"></span></a>
-                                </div>
-                                <?php
-                            }
-                            $i++;
-                        }
-                        closedir($dh);
-                    }
-                }
-                ?>
-            </div>
-        <?php } ?>
-        <label for="others">Other Images</label>
-        <input type="file" name="others[]" id="others" multiple />
+    <div class="form-group bordered-group">
+        <div class="others-images-container">
+            <?= $otherImgs ?>
+        </div>
+        <a href="javascript:void(0);" data-toggle="modal" data-target="#modalMoreImages" class="btn btn-default">Upload more images</a>
     </div>
     <div class="form-group for-shop">
         <label>Shop Categories</label>
@@ -208,6 +190,30 @@ if ($this->session->flashdata('result_publish')) {
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" onclick="currency_ajax_convert('0')" class="btn btn-primary">Convert</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Upload More Images -->
+<div class="modal fade" id="modalMoreImages" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Upload more images</h4>
+            </div>
+            <div class="modal-body">
+                <form id="uploadImagesForm">
+                    <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
+                    <label for="others">Select images</label>
+                    <input type="file" name="others[]" id="others" multiple />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default finish-upload">
+                    <span class="finish-text">Finish</span>
+                    <img src="<?= base_url('assets/imgs/load.gif') ?>" class="loadUploadOthers" alt="">
+                </button>
             </div>
         </div>
     </div>

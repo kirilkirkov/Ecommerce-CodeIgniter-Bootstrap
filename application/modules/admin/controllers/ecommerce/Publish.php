@@ -36,7 +36,6 @@ class Publish extends ADMIN_Controller
             if ($img['file_name'] != null) {
                 $_POST['image'] = $img['file_name'];
             }
-            $this->do_upload_others_images();
             if (isset($_GET['to_lang'])) {
                 $id = 0;
             }
@@ -75,36 +74,75 @@ class Publish extends ADMIN_Controller
         $data['languages'] = $this->AdminModel->getLanguages();
         $data['shop_categories'] = $this->AdminModel->getShopCategories();
         $data['brands'] = $this->AdminModel->getBrands();
+        $data['otherImgs'] = $this->loadOthersImages();
         $this->load->view('_parts/header', $head);
         $this->load->view('ecommerce/publish', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to publish product');
     }
 
-    private function do_upload_others_images()
+    /*
+     * called from ajax
+     */
+
+    public function do_upload_others_images()
     {
-        $upath = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
-        if (!file_exists($upath)) {
-            mkdir($upath, 0777);
+        if ($this->input->is_ajax_request()) {
+            $upath = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
+            if (!file_exists($upath)) {
+                mkdir($upath, 0777);
+            }
+
+            $this->load->library('upload');
+
+            $files = $_FILES;
+            $cpt = count($_FILES['others']['name']);
+            for ($i = 0; $i < $cpt; $i++) {
+                unset($_FILES);
+                $_FILES['others']['name'] = $files['others']['name'][$i];
+                $_FILES['others']['type'] = $files['others']['type'][$i];
+                $_FILES['others']['tmp_name'] = $files['others']['tmp_name'][$i];
+                $_FILES['others']['error'] = $files['others']['error'][$i];
+                $_FILES['others']['size'] = $files['others']['size'][$i];
+
+                $this->upload->initialize(array(
+                    'upload_path' => $upath,
+                    'allowed_types' => $this->allowed_img_types
+                ));
+                $this->upload->do_upload('others');
+            }
         }
+    }
 
-        $this->load->library('upload');
-
-        $files = $_FILES;
-        $cpt = count($_FILES['others']['name']);
-        for ($i = 0; $i < $cpt; $i++) {
-            unset($_FILES);
-            $_FILES['others']['name'] = $files['others']['name'][$i];
-            $_FILES['others']['type'] = $files['others']['type'][$i];
-            $_FILES['others']['tmp_name'] = $files['others']['tmp_name'][$i];
-            $_FILES['others']['error'] = $files['others']['error'][$i];
-            $_FILES['others']['size'] = $files['others']['size'][$i];
-
-            $this->upload->initialize(array(
-                'upload_path' => $upath,
-                'allowed_types' => $this->allowed_img_types
-            ));
-            $this->upload->do_upload('others');
+    public function loadOthersImages()
+    {
+        $output = '';
+        if (isset($_POST['folder']) && $_POST['folder'] != null) {
+            $dir = 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
+            if (is_dir($dir)) {
+                if ($dh = opendir($dir)) {
+                    $i = 0;
+                    while (($file = readdir($dh)) !== false) {
+                        if (is_file($dir . $file)) {
+                            $output .= '
+                                <div class="other-img" id="image-container-' . $i . '">
+                                    <img src="' . base_url($dir . $file) . '" style="width:100px; height: 100px;">
+                                    <a href="javascript:void(0);" onclick="removeSecondaryProductImage(\'' . $file . '\', \'' . $_POST['folder'] . '\', ' . $i . ')">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                </div>
+                               ';
+                        }
+                        $i++;
+                    }
+                    closedir($dh);
+                }
+            }
+        }
+        if ($this->input->is_ajax_request()) {
+            echo $output;
+        } else {
+            return $output;
         }
     }
 
@@ -138,7 +176,7 @@ class Publish extends ADMIN_Controller
             $data = file_get_contents($url);
             preg_match("/<span class=bld>(.*)<\/span>/", $data, $converted);
             $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
-            $this->saveHistory('Convert currency from ' . $from . ' to ' . $to . ' with amount ' . $amount);
+            $this->saveHistory('Convert currency from ' . $from . ' to ' . $to . ' with amount  ' . $amount);
             echo round($converted, 2);
         }
     }

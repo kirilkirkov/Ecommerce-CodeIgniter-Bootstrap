@@ -52,7 +52,7 @@
                         <tbody>
                             <?php
                             foreach ($products->result() as $row) {
-                                $u_path = 'attachments/';
+                                $u_path = 'attachments/shop_images/';
                                 if ($row->image != null && file_exists($u_path . $row->image)) {
                                     $image = base_url($u_path . $row->image);
                                 } else {

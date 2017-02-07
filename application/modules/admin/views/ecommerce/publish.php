@@ -67,14 +67,14 @@ if ($this->session->flashdata('result_publish')) {
     <div class="form-group bordered-group">
         <?php
         if (isset($_POST['image']) && $_POST['image'] != null) {
-            $image = $u_path = 'attachments/shop_images/' . $_POST['image'];
+            $image = 'attachments/shop_images/' . $_POST['image'];
             if (!file_exists($image)) {
-                $image = base_url('attachments/no-image.png');
+                $image = 'attachments/no-image.png';
             }
             ?>
             <p>Current image:</p>
             <div>
-                <img src="<?= $image ?>" class="img-responsive img-thumbnail" style="max-width:300px; margin-bottom: 5px;">
+                <img src="<?= base_url($image) ?>" class="img-responsive img-thumbnail" style="max-width:300px; margin-bottom: 5px;">
             </div>
             <?php if (isset($_GET['to_lang'])) { ?>
                 <input type="hidden" name="image" value="<?= $_POST['image'] ?>">

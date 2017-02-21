@@ -370,8 +370,8 @@ $(document).ready(function () {
 });
 
 // Products
-$(".change-order-products").change(function () {
-    location.href = urls.productsOrderBy + $(this).val();
+$(".change-products-form").change(function () {
+    $('#searchProductsForm').submit();
 });
 function changeProductStatus(id) {
     var to_status = $("#to-status").val();
@@ -469,3 +469,30 @@ function reloadOthersImagesContainer() {
     $('.others-images-container').empty();
     $('.others-images-container').load(urls.loadOthersImages, {"folder": $('[name="folder"]').val()});
 }
+
+// Edit Categories Positions
+var editPositionField;
+$('.editPosition').click(function () {
+    var editId = $(this).data('position-for-id');
+    editPositionField = editId;
+    $('[name="positionEditId"]').val(editId);
+    var myPosition = $(this).data('my-position');
+    var position = $(this).position();
+    $('#positionEditor').css({top: position.top, left: position.left, display: 'block'});
+    $('[name="new_position"]').val(myPosition);
+});
+$('.closePositionCategorie').click(function () {
+    $('#positionEditor').hide();
+});
+$('.savePositionCategorie').click(function () {
+    var new_val = $('[name="new_position"]').val();
+    var editId = $('[name="positionEditId"]').val();
+    $.ajax({
+        type: "POST",
+        url: urls.editPositionCategorie,
+        data: {editid: editId, new_pos: new_val}
+    }).done(function (data) {
+        $('#positionEditor').hide();
+        $('#position-' + editPositionField).text(new_val);
+    });
+});

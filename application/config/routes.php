@@ -125,6 +125,7 @@ $route['admin/orders'] = "admin/ecommerce/orders";
 $route['admin/orders/(:num)'] = "admin/ecommerce/orders/index/$1";
 $route['admin/changeOrdersOrderStatus'] = "admin/ecommerce/orders/changeOrdersOrderStatus";
 $route['admin/brands'] = "admin/ecommerce/brands";
+$route['admin/changePosition'] = "admin/ecommerce/ShopCategories/changePosition";
 // BLOG GROUP
 $route['admin/blogpublish'] = "admin/blog/BlogPublish";
 $route['admin/blogpublish/(:num)'] = "admin/blog/BlogPublish/index/$1";

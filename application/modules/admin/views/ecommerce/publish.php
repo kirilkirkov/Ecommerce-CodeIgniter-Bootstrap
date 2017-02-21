@@ -142,6 +142,10 @@ if ($this->session->flashdata('result_publish')) {
         </select>
     </div>
     <div class="form-group for-shop">
+        <label>Position</label>
+        <input type="text" placeholder="Position number" name="position" value="<?= @$_POST['position'] ?>" class="form-control">
+    </div>
+    <div class="form-group for-shop">
         <a class="btn btn-default btn-xs" data-target="#modalConvertor" data-toggle="modal" href="javascript:void(0)">Convert currency <span class="glyphicon glyphicon-euro"></span></a>
     </div>
     <button type="submit" name="submit" class="btn btn-lg btn-default">Publish</button>

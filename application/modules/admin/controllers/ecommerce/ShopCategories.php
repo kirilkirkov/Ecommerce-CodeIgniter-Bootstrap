@@ -73,4 +73,15 @@ class ShopCategories extends ADMIN_Controller
         $this->saveHistory('Edit shop categorie to ' . $_POST['name']);
     }
 
+    /*
+     * Called from ajax
+     */
+
+    public function changePosition()
+    {
+        $this->login_check();
+        $result = $this->AdminModel->editShopCategoriePosition($_POST);
+        $this->saveHistory('Edit shop categorie position ' . $_POST['name']);
+    }
+
 }

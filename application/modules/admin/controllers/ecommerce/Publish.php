@@ -59,7 +59,15 @@ class Publish extends ADMIN_Controller
                 } else {
                     $this->saveHistory('Success updated product');
                 }
-                redirect('admin/products');
+                if (isset($_SESSION['filter']) && $id > 0) {
+                    $get = '';
+                    foreach ($_SESSION['filter'] as $key => $value) {
+                        $get .= trim($key) . '=' . trim($value) . '&';
+                    }
+                    redirect(base_url('admin/products?' . $get));
+                } else {
+                    redirect('admin/products');
+                }
             } else {
                 $this->session->set_flashdata('result_publish', 'Problem with product publish!');
             }

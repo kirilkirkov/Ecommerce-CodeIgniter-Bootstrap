@@ -27,11 +27,14 @@ class AdminModel extends CI_Model
         return $obj->id;
     }
 
-    public function productsCount($search = null)
+    public function productsCount($search_title = null, $category = null)
     {
-        if ($search !== null) {
-            $search = $this->db->escape_like_str($search);
-            $this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
+        if ($search_title != null) {
+            $search_title = trim($this->db->escape_like_str($search_title));
+            $this->db->where("(translations.title LIKE '%$search_title%')");
+        }
+        if ($category != null) {
+            $this->db->where('shop_categorie', $category);
         }
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         $this->db->where('translations.type', 'product');
@@ -262,7 +265,7 @@ class AdminModel extends CI_Model
             $limit_sql = ' LIMIT ' . $start . ',' . $limit;
         }
 
-        $query = $this->db->query('SELECT translations_first.*, (SELECT name FROM translations WHERE for_id = sub_for AND type="shop_categorie" AND abbr = translations_first.abbr) as sub_is FROM translations as translations_first INNER JOIN shop_categories ON shop_categories.id = translations_first.for_id WHERE type="shop_categorie"' . $limit_sql);
+        $query = $this->db->query('SELECT translations_first.*, (SELECT name FROM translations WHERE for_id = sub_for AND type="shop_categorie" AND abbr = translations_first.abbr) as sub_is, shop_categories.position FROM translations as translations_first INNER JOIN shop_categories ON shop_categories.id = translations_first.for_id WHERE type="shop_categorie" ORDER BY position ASC ' . $limit_sql);
         $arr = array();
         foreach ($query->result() as $shop_categorie) {
             $arr[$shop_categorie->for_id]['info'][] = array(
@@ -270,6 +273,7 @@ class AdminModel extends CI_Model
                 'name' => $shop_categorie->name
             );
             $arr[$shop_categorie->for_id]['sub'][] = $shop_categorie->sub_is;
+            $arr[$shop_categorie->for_id]['position'] = $shop_categorie->position;
         }
         return $arr;
     }
@@ -365,11 +369,11 @@ class AdminModel extends CI_Model
         return $query;
     }
 
-    public function getProducts($limit, $page, $search = null, $orderby = null)
+    public function getProducts($limit, $page, $search_title = null, $orderby = null, $category = null)
     {
-        if ($search !== null) {
-            $search = $this->db->escape_like_str($search);
-            $this->db->where("(translations.title LIKE '%$search%' OR translations.description LIKE '%$search%')");
+        if ($search_title != null) {
+            $search_title = trim($this->db->escape_like_str($search_title));
+            $this->db->where("(translations.title LIKE '%$search_title%')");
         }
         if ($orderby !== null) {
             $ord = explode('=', $orderby);
@@ -377,7 +381,10 @@ class AdminModel extends CI_Model
                 $this->db->order_by('products.' . $ord[0], $ord[1]);
             }
         } else {
-            $this->db->order_by('products.id', 'desc');
+            $this->db->order_by('products.position', 'asc');
+        }
+        if ($category != null) {
+            $this->db->where('shop_categorie', $category);
         }
         $this->db->join('translations', 'translations.for_id = products.id', 'left');
         $this->db->where('translations.type', 'product');
@@ -832,6 +839,14 @@ class AdminModel extends CI_Model
             'years' => array_unique($years),
             'orders' => $orders
         );
+    }
+
+    public function editShopCategoriePosition($post)
+    {
+        $this->db->where('id', $post['editid']);
+        $result = $this->db->update('shop_categories', array(
+            'position' => $post['new_pos']
+        ));
     }
 
 }

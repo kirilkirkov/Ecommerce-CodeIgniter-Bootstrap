@@ -140,6 +140,11 @@ a.orders-referral {display:block; word-break:break-all;}
 .bordered-group {border:1px solid #e7e7e7; padding: 5px;}
 .loadUploadOthers {display: none;}
 .others-images-container {margin-bottom: 5px;}
+#positionEditor {position: absolute; display: none; width:230px;}
+#positionEditor input, #positionEditor button {float: left;}
+#positionEditor input {width: 150px;}
+#positionEditor .yesSavePosition {display: none;}
+#positionEditor button {width:39px;}
 
 @media (min-width: 767px) {
     .sidebar-menu {display: block !important;}

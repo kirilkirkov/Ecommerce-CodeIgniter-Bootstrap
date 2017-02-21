@@ -69,6 +69,7 @@ class Publicmodel extends CI_Model
         if ($this->showInSliderProducts == 0) {
             $this->db->where('in_slider', 0);
         }
+        $this->db->order_by('position', 'asc');
         $query = $this->db->get('products');
         return $query->result_array();
     }
@@ -148,6 +149,7 @@ class Publicmodel extends CI_Model
         $this->db->select('shop_categories.sub_for, shop_categories.id, translations.name');
         $this->db->where('abbr', MY_LANGUAGE_ABBR);
         $this->db->where('type', 'shop_categorie');
+        $this->db->order_by('position', 'asc');
         $this->db->join('shop_categories', 'shop_categories.id = translations.for_id', 'INNER');
         $query = $this->db->get('translations');
         $arr = array();

@@ -22,16 +22,45 @@
         <div class="col-xs-12">
             <div class="well hidden-xs"> 
                 <div class="row">
-                    <div class="col-xs-4">
-                        <select class="form-control selectpicker change-order-products">
-                            <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'id=desc' ? 'selected=""' : '' ?> value="id=desc">Newest</option>
-                            <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'id=asc' ? 'selected=""' : '' ?> value="id=asc">Latest</option>
-                            <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'quantity=asc' ? 'selected=""' : '' ?> value="quantity=asc">Low Quantity</option>
-                            <option <?= isset($_GET['orderby']) && $_GET['orderby'] == 'quantity=desc' ? 'selected=""' : '' ?> value="quantity=desc">High Quantity</option>
-                        </select>
-                    </div>
-                    <div class="col-xs-8">
-                    </div>
+                    <form method="GET" id="searchProductsForm" action="">
+                        <div class="col-sm-4">
+                            <label>Order:</label>
+                            <select name="order_by" class="form-control selectpicker change-products-form">
+                                <option <?= isset($_GET['order_by']) && $_GET['order_by'] == 'id=desc' ? 'selected=""' : '' ?> value="id=desc">Newest</option>
+                                <option <?= isset($_GET['order_by']) && $_GET['order_by'] == 'id=asc' ? 'selected=""' : '' ?> value="id=asc">Latest</option>
+                                <option <?= isset($_GET['order_by']) && $_GET['order_by'] == 'quantity=asc' ? 'selected=""' : '' ?> value="quantity=asc">Low Quantity</option>
+                                <option <?= isset($_GET['order_by']) && $_GET['order_by'] == 'quantity=desc' ? 'selected=""' : '' ?> value="quantity=desc">High Quantity</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Title:</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Product Title" type="text" value="<?= isset($_GET['search_title']) ? $_GET['search_title'] : '' ?>" name="search_title">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" value="">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Category:</label>
+                            <select name="category" class="form-control selectpicker change-products-form">
+                                <option value="">None</option>
+                                <?php foreach ($shop_categories as $key_cat => $shop_categorie) { ?>
+                                    <option <?= isset($_GET['category']) && $_GET['category'] == $key_cat ? 'selected=""' : '' ?> value="<?= $key_cat ?>">
+                                        <?php
+                                        foreach ($shop_categorie['info'] as $nameAbbr) {
+                                            if ($nameAbbr['abbr'] == $this->config->item('language_abbr')) {
+                                                echo $nameAbbr['name'];
+                                            }
+                                        }
+                                        ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </form>
                 </div>
             </div>
             <hr>
@@ -46,6 +75,7 @@
                                 <th>Title</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
+                                <th>Position</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
@@ -86,6 +116,7 @@
                                             <?= $row->quantity ?>
                                         </span>
                                     </td>
+                                    <td><?= $row->position ?></td>
                                     <td>
                                         <div class="pull-right">
                                             <a href="<?= base_url('admin/publish/' . $row->id) ?>" class="btn btn-info">Edit</a>

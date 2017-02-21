@@ -33,24 +33,31 @@ class Products extends ADMIN_Controller
         $head['description'] = '!';
         $head['keywords'] = '';
 
-        if ($this->input->get('search') !== NULL) {
-            $search = $this->input->get('search');
-            $this->saveHistory('Search for product - ' . $search);
-        } else {
-            $search = null;
+        unset($_SESSION['filter']);
+        $search_title = null;
+        if ($this->input->get('search_title') !== NULL) {
+            $search_title = $this->input->get('search_title');
+            $_SESSION['filter']['search_title'] = $search_title;
+            $this->saveHistory('Search for product title - ' . $search_title);
         }
-        if ($this->input->get('orderby') !== NULL) {
-            $orderby = $this->input->get('orderby');
-        } else {
-            $orderby = null;
+        $orderby = null;
+        if ($this->input->get('order_by') !== NULL) {
+            $orderby = $this->input->get('order_by');
+            $_SESSION['filter']['order_by '] = $orderby;
+        }
+        $category = null;
+        if ($this->input->get('category') !== NULL) {
+            $category = $this->input->get('category');
+            $_SESSION['filter']['category '] = $category;
+            $this->saveHistory('Search for product code - ' . $category);
         }
         $data['products_lang'] = $products_lang = $this->session->userdata('admin_lang_products');
-        $rowscount = $this->AdminModel->productsCount($search);
-        $data['products'] = $this->AdminModel->getproducts($this->num_rows, $page, $search, $orderby);
+        $rowscount = $this->AdminModel->productsCount($search_title, $category);
+        $data['products'] = $this->AdminModel->getproducts($this->num_rows, $page, $search_title, $orderby, $category);
         $data['links_pagination'] = pagination('admin/products', $rowscount, $this->num_rows, 3);
         $data['num_shop_art'] = $this->AdminModel->numShopproducts();
         $data['languages'] = $this->AdminModel->getLanguages();
-
+        $data['shop_categories'] = $this->AdminModel->getShopCategories(null, null, 2);
         $this->load->view('_parts/header', $head);
         $this->load->view('ecommerce/products', $data);
         $this->load->view('_parts/footer');

@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
             <div class="col-sm-4">
                 <div <?= $product['folder'] != null ? 'style="margin-bottom:20px;"' : '' ?>>
-                    <img src="<?= base_url('/attachments/shop_images/' . $product['image']) ?>" class="img-responsive the-image" alt="<?= str_replace('"', "'", $product['title']) ?>">
+                    <img src="<?= base_url('/attachments/shop_images/' . $product['image']) ?>" style="width:auto; height:auto;" data-num="0" class="other-img-preview img-responsive img-sl the-image" alt="<?= str_replace('"', "'", $product['title']) ?>">
                 </div>
                 <?php
                 if ($product['folder'] != null) {
@@ -16,16 +16,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php
                         if (is_dir($dir)) {
                             if ($dh = opendir($dir)) {
-                                $i = 0;
+                                $i = 1;
                                 while (($file = readdir($dh)) !== false) {
                                     if (is_file($dir . $file)) {
                                         ?>
                                         <div class="col-xs-4 col-sm-6 col-md-4 text-center">
-                                            <img src="<?= base_url($dir . $file) ?>" class="other-img-preview img-thumbnail the-image" alt="<?= str_replace('"', "'", $product['title']) ?>">
+                                            <img src="<?= base_url($dir . $file) ?>"  data-num="<?= $i ?>" class="other-img-preview img-sl img-thumbnail the-image" alt="<?= str_replace('"', "'", $product['title']) ?>">
                                         </div>
                                         <?php
+                                        $i++;
                                     }
-                                    $i++;
                                 }
                                 closedir($dh);
                             }
@@ -130,8 +130,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 <div id="modalImagePreview" class="modal">
-    <span class="close" onclick="document.getElementById('myModal').style.display = 'none'">&times;</span>
-    <img class="modal-content" id="img01" alt="<?= lang('details') ?>">
+    <div class="image-preview-container">
+        <div class="modal-content">
+            <div class="inner-prev-container">
+                <img id="img01" alt="">
+                <span class="close">&times;</span>
+                <span class="img-series"></span>
+            </div>
+        </div>
+        <a href="javascript:void(0);" class="inner-next"></a>
+        <a href="javascript:void(0);" class="inner-prev"></a>
+    </div>
     <div id="caption"></div>
 </div>
 <script src="<?= base_url('assets/js/image-preveiw.js') ?>"></script>

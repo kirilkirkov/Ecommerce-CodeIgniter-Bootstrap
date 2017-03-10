@@ -145,12 +145,21 @@ footer { bottom : 0;  left : 0; position : absolute; width : 100%; padding-botto
 #btnContactUs {border-radius: 0; color: #fff;}
 .bottom-30 {margin-bottom: 30px;}
 .other-img-preview { cursor : pointer; height : 100px; margin-bottom : 10px; width : 100px; }
+/*image preveiw*/
 #modalImagePreview { background-color : rgb(0,0,0); background-color : rgba(0,0,0,0.9); display : none; height : 100%; left : 0; overflow : auto; padding-top : 100px; position : fixed; top : 0; width : 100%; z-index : 100; }
-#modalImagePreview .modal-content { display : block; margin : auto; max-width : 700px; width : 80%; }
+#modalImagePreview .modal-content { text-align: center; display : block; margin : auto; max-width : 700px; width : 80%; }
 #modalImagePreview #caption { color : #ccc; display : block; height : 150px; margin : auto; max-width : 700px; padding : 10px 0; text-align : center; width : 80%; }
 #modalImagePreview .modal-content, #modalImagePreview #caption { animation-duration : 0.6s; animation-name : zoom; webkit-animation-duration : 0.6s; webkit-animation-name : zoom; }
-#modalImagePreview .close { opacity: 1; color : #f1f1f1; font-size : 40px; font-weight : bold; position : absolute; right : 35px; top : 15px; transition : 0.3s; }
+#modalImagePreview .close { opacity: 1; color : #f1f1f1; font-size : 40px; font-weight : bold; position : absolute; right : -10px; top : -40px; transition : 0.3s; }
 #modalImagePreview .close:hover,#modalImagePreview .close:focus { color : #bbb; cursor : pointer; text-decoration : none; }
+#modalImagePreview img {max-width: 100%;}
+.inner-next, .inner-prev {position:absolute; top:50%; margin-top:-120px; background-image: url('imgs/arrows-2x.png');height: 120px; width: 80px;}
+.inner-prev {left:10px;}
+.inner-next {right:10px;  background-position:-110px center;}
+.other-images-container .active img {border:3px solid #b1b1b1;}
+.img-series {    bottom: -17px;    color: #fff;    font-size: 14px;    position: absolute;    right: 0;}
+.img-sl { cursor: pointer;}
+/*image preveiw finish*/
 #myImg { border-radius : 5px; cursor : pointer; transition : 0.3s; }
 #myImg:hover { opacity : 0.7; }
 #bigger-search .dropdown {position:static;}

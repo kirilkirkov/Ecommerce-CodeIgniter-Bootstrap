@@ -154,9 +154,19 @@ class AdminModel extends CI_Model
 
     public function deleteLanguage($id)
     {
+        $this->db->select('abbr');
         $this->db->where('id', $id);
-        $result = $this->db->delete('languages');
-        return $result;
+        $res = $this->db->get('languages');
+        $row = $res->row_array();
+        $this->db->trans_start();
+        $this->db->query('DELETE FROM languages WHERE id = ' . $this->db->escape($id));
+        $this->db->query('DELETE FROM translations WHERE abbr = ' . $row['abbr']);
+        $this->db->query('DELETE FROM cookie_law_translations WHERE abbr = ' . $row['abbr']);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE) {
+            return false;
+        }
+        return true;
     }
 
     public function deleteAdminUser($id)

@@ -102,6 +102,9 @@ $route['(\w{2})/shopping-cart'] = "ShoppingCartPage";
 $route['page/(:any)'] = "page/index/$1";
 $route['(\w{2})/page/(:any)'] = "page/index/$2";
 
+// Confirm link
+$route['confirm/(:any)'] = "home/confirmLink/$1";
+
 // Site Multilanguage
 $route['^(\w{2})/(.*)$'] = '$2';
 

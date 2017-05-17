@@ -32,7 +32,7 @@ input.form-control {border:1px solid #dadada; border-radius: 0; box-shadow:none;
 .show-menu {display: none;}
 #show-xs-nav { border: 1px solid #666;  padding: 5px; text-decoration: none; color: #666;  font-size: 13px; text-align: center; margin-top: 10px; border-radius: 5px;}
 #nav-categories, #show-xs-nav .hidde-sp {display: none;}
-
+.confirm-result {position:absolute; bottom:0; right:0;}
 #calc-board {width:200px; margin:0 auto;}
 #calc-board a {margin-bottom:5px; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #b3b3b3; background: #ffffff;
                background: -moz-linear-gradient(top,  #ffffff 0%, #e6e6e6 100%);

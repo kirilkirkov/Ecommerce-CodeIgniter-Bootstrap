@@ -108,4 +108,23 @@ class Home extends MY_Controller
         $this->render('view_product', $head, $data);
     }
 
+    public function confirmLink($md5)
+    {
+        if (preg_match('/^[a-f0-9]{32}$/', $md5)) {
+            $result = $this->Publicmodel->confirmOrder($md5);
+            if ($result === true) {
+                $data = array();
+                $head = array();
+                $head['title'] = '';
+                $head['description'] = '';
+                $head['keywords'] = '';
+                $this->render('confirmed', $head, $data);
+            } else {
+                show_404();
+            }
+        } else {
+            show_404();
+        }
+    }
+
 }

@@ -138,3 +138,6 @@ $lang['invalid_post_code'] = 'You have not entered post code';
 $lang['finded_errors'] = 'I found the following errors';
 $lang['out_of_stock_product'] = 'Product is out of stock';
 $lang['there_is_payment_error'] = 'There are problem with order. Please contact us by phone!';
+$lang['confirm_order_subj'] = 'Confirm order from - ';
+$lang['please_confirm'] = 'Please confirm your order when click on - ';
+$lang['order_confirmed'] = 'Your order is confirmed!';

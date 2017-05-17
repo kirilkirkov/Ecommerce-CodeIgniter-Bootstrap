@@ -48,13 +48,20 @@ if (!isset($_GET['settings'])) {
                         }
                         ?>
                         <tr>
-                            <td id="order_id-id-<?= $tr['order_id'] ?>">
+                            <td class="relative" id="order_id-id-<?= $tr['order_id'] ?>">
                                 # <?= $tr['order_id'] ?>
                                 <?php if ($tr['viewed'] == 0) { ?>
                                     <div id="new-order-alert-<?= $tr['id'] ?>">
                                         <img src="<?= base_url('assets/imgs/new-blinking.gif') ?>" style="width:100px;" alt="blinking">
                                     </div>
                                 <?php } ?>
+                                <div class="confirm-result">
+                                    <?php if ($tr['confirmed'] == '1') { ?>
+                                        <span class="label label-success">Confirmed by email</span>
+                                    <?php } else { ?> 
+                                        <span class="label label-danger">Not Confirmed</span> 
+                                    <?php } ?>
+                                </div>
                             </td>
                             <td><?= date('d.M.Y / H:m:s', $tr['date']); ?></td>
                             <td>

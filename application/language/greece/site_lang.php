@@ -137,3 +137,6 @@ $lang['step_payment_method'] = '&Pi;&lambda;&eta;&rho;&omega;&mu;ή';
 $lang['step_success_prod'] = '&epsilon;&pi;&iota;&tau;&upsilon;&chi;&eta;&mu;έ&nu;&epsilon;&sigmaf; &delta;&eta;&mu;ό&sigma;&iota;&epsilon;&sigmaf; &sigma;&upsilon;&mu;&beta;ά&sigma;&epsilon;&iota;&sigmaf;';
 $lang['brands'] = 'μάρκες';
 $lang['there_is_payment_error'] = '';
+$lang['confirm_order_subj'] = 'Επιβεβαιώστε την παραγγελία από';
+$lang['please_confirm'] = 'Επιβεβαιώστε την παραγγελία σας όταν κάνετε κλικ στο - ';
+$lang['order_confirmed'] = 'Η παραγγελία σας επιβεβαιώνεται!';

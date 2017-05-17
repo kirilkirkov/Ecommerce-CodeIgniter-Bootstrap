@@ -278,7 +278,7 @@ class Publicmodel extends CI_Model
             'referrer' => $post['referrer'],
             'clean_referrer' => $post['clean_referrer'],
             'payment_type' => $post['payment_type'],
-            'paypal_status' => $post['paypal_status']
+            'paypal_status' => @$post['paypal_status']
         ));
         $lastId = $this->db->insert_id();
         $result_2 = $this->db->insert('orders_clients', array(
@@ -296,6 +296,12 @@ class Publicmodel extends CI_Model
             return $post['order_id'];
         }
         return false;
+    }
+
+    public function setActivationLink($link, $orderId)
+    {
+        $result = $this->db->insert('confirm_links', array('link' => $link, 'for_order' => $orderId));
+        return $result;
     }
 
     public function getSliderProducts()
@@ -452,6 +458,22 @@ class Publicmodel extends CI_Model
         } else {
             return false;
         }
+    }
+
+    public function confirmOrder($md5)
+    {
+        $this->db->limit(1);
+        $this->db->where('link', $md5);
+        $result = $this->db->get('confirm_links');
+        $row = $result->row_array();
+        if (!empty($row)) {
+            $orderId = $row['for_order'];
+            $this->db->limit(1);
+            $this->db->where('order_id', $orderId);
+            $result = $this->db->update('orders', array('confirmed' => '1'));
+            return $result;
+        }
+        return false;
     }
 
 }

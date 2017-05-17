@@ -32,6 +32,7 @@ class Checkout extends MY_Controller
                 $orderId = $this->Publicmodel->setOrder($_POST);
                 if ($orderId != false) {
                     $this->orderId = $orderId;
+                    $this->setActivationLink();
                     $this->goToDestination();
                 } else {
                     log_message('error', 'Cant save order!! ' . implode('::', $_POST));
@@ -45,6 +46,19 @@ class Checkout extends MY_Controller
         $data['paypal_email'] = $this->AdminModel->getValueStore('paypal_email');
         $data['bestSellers'] = $this->Publicmodel->getbestSellers();
         $this->render('checkout', $head, $data);
+    }
+
+    private function setActivationLink()
+    {
+        if ($this->config->item('send_confirm_link') === true) {
+            $link = md5($this->orderId . time());
+            $result = $this->Publicmodel->setActivationLink($link, $this->orderId);
+            if ($result == true) {
+                $url = parse_url(base_url());
+                $msg = lang('please_confirm') . base_url('confirm/' . $link);
+                mail($_POST['email'], lang('confirm_order_subj') . $url['host'], $msg);
+            }
+        }
     }
 
     private function goToDestination()

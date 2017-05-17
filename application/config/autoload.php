@@ -63,7 +63,8 @@ $autoload['libraries'] = array(
     'session', 
     'loop',
     'ShoppingCart', 
-    'Language'
+    'Language',
+    'SendMail'
 );
 
 /*

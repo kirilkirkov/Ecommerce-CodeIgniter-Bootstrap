@@ -56,7 +56,7 @@ class Checkout extends MY_Controller
             if ($result == true) {
                 $url = parse_url(base_url());
                 $msg = lang('please_confirm') . base_url('confirm/' . $link);
-                mail($_POST['email'], lang('confirm_order_subj') . $url['host'], $msg);
+                $this->sendmail->sendTo($_POST['email'], $_POST['first_name'] . ' ' . $_POST['last_name'], lang('confirm_order_subj') . $url['host'], $msg);
             }
         }
     }

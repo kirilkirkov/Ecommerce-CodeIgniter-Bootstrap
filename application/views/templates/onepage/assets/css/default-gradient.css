@@ -1,0 +1,19 @@
+.cloth-bg-color {background-color:#f93131;}
+.cloth-color {color:#f93131;}
+.cloth--border-color {border-color:#f93131;}
+.cloth-border-top-color {border-top-color: #f93131;}
+.navbar.cloth .navbar-nav li.active a { color:#f93131;}
+.navbar.cloth .navbar-nav li a:hover, .navbar.cloth .navbar-nav li a:focus {background-color:transparent !important; color:#f93131;}
+.navbar.cloth .navbar-nav li:hover, .navbar.cloth .navbar-nav li.active {border-top:3px solid; border-top-color: #f93131;}
+#small_carousel .product-list div.add-to-cart, #small_carousel .product-list .info-btn {background-color: #f93131; }
+.products .product-list div.add-to-cart, .products .product-list .info-btn { background-color: #f93131;}
+.part-label { background-color: #f93131;}
+.pagination li a { color:#f93131;}
+.pagination li.active a {background-color: #f93131; border-color:#f93131; }
+.list li a {background-color:#f93131;}
+#home-slider .carousel-indicators .active, #small_carousel .carousel-indicators .active {background-color: #f93131;}
+.btn-blue-round {background: rgb(247,98,98);background: -moz-linear-gradient(top,  rgba(247,98,98,1) 0%, rgba(249,49,49,1) 100%);background: -webkit-linear-gradient(top,  rgba(247,98,98,1) 0%,rgba(249,49,49,1) 100%);background: linear-gradient(to bottom,  rgba(247,98,98,1) 0%,rgba(249,49,49,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f76262', endColorstr='#f93131',GradientType=0 );}
+.my-basket span.sum-scope {color:#fa6868;}
+.search .btn-red { border-bottom: 1px solid #b54e4f; border-right: 1px solid #b54e4f; border-left: 1px solid #b54e4f;}
+#small_carousel .product-list h2 a {color:#fb3131;}
+#home-slider .item h1 a {color:#fb3131;}

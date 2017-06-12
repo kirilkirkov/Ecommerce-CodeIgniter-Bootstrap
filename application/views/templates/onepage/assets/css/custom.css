@@ -1,0 +1,86 @@
+body {font-family:"Open Sans",Arial,sans-serif;}
+.navbar-onepoge {background-image:url('imgs/nav-bg.png'); } 
+.navbar-onepoge  .navbar-nav  li  a {padding-top:30px; padding-bottom:30px; color:#050505; font-size:18px; font-weight:bold;}
+.navbar-onepoge  .navbar-nav  li  a:hover {color:#ff4c28; background-color:transparent;}
+.navbar-onepoge .navbar-brand {padding-top:30px; padding-bottom:30px; margin-left:-35px;}
+.navbar-onepoge .navbar-brand img {height:35px; margin-top:-5px;} 
+.navbar-white {background-image:none; background-color:#fff; border-bottom: 1px solid #dedede;}
+.main-top {position:relative;}
+.main-top .main-top-info {position:absolute; height:300px; top:50%; margin-top:-150px; width:750px; left:50%; margin-left:-375px; text-align:center; z-index:1000;}
+.main-top .main-top-info h2 {color:#000; text-transform:uppercase; font-size:18px; font-weight:bold; margin:0; margin-bottom:10px;}
+.main-top .main-top-info h1 {color:#fff; text-transform:uppercase; margin:0; font-weight:bold; margin-bottom:10px; font-size:60px;  text-shadow: 2px 2px #5f5f5f;}
+.main-top .main-top-info .how-to {font-size:24px; text-transform:uppercase; color:#fff;  margin-bottom:20px; display:block;}
+.main-top .main-top-info .how-to  span {background-color: #fff; border-radius: 5px; color: #0af; font-weight: 700;  margin: 0 5px; padding: 5px 10px;}
+.main-top .woman-right {position:absolute;right:0; bottom:0; width:500px;}
+.main-top .bottle-right {position:absolute; left:50%; margin-left:-200px; bottom:0; width:400px;}
+.main-top .btn {background-color:#08c; border-color:transparent;}
+.after-main, .before-products {border-bottom:5px solid #ddd; background-color:#fff; padding-top:40px; padding-bottom:40px;}
+.after-main p, .before-products p {margin:0; padding:0;}
+.pages-bg {background:rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.56) 56%, rgb(243, 243, 243) 100%) repeat scroll 0 0;}
+.page-second, .page-third { padding-top:30px; padding-bottom:30px; border-bottom:2px solid #ddd; } 
+#products  {padding-top:30px; padding-bottom:30px;}
+#products .product-list { cursor: pointer;}
+#products .product-list img {width:100px;}
+#products .product-list .img-container {text-align:center; margin-bottom:10px;}
+#products  h2{ font-size:18px; background-color: #fff;    border-radius: 10px;    box-shadow: 0 0 7px 1px #ccc;    margin: 0 25px;    padding: 15px;    position: relative; margin-bottom:10px;}
+#products .loader {display:none;}
+#products .price {text-align:center; color:#08c; font-size:22px;}
+#products .price-down {display:none;}
+#products .price-discount  {color:#ff2400;  font-size:22px; text-align:center; text-decoration: line-through; margin-bottom:10px;}
+#products  a.add-to-cart {background-color:#08c; padding:10px 20px; color:#fff; border-radius:5px;}
+#products  div.add-to-cart { margin-bottom:20px; text-align:center;} 
+#checkout-page {padding-top:100px; background-image:url('imgs/main.jpg'); }
+#checkout-page .body {background-color:#fff; padding:10px; border-radius:10px;  margin-bottom:30px;}
+#goOrder {background-color:#ff4c28; color:#fff; padding:20px; border-radius:10px; margin-bottom:20px;}
+.steps { margin-bottom: 30px; padding-left:15px; padding-right: 15px; }
+.steps .step { text-align: center; padding-top: 7px; padding-bottom: 7px; border-left: 2px solid #fff; background-color:#f2f2f2;}
+.table-products img.product-image { width : 80px; }
+.table-products a {color:#fff;}
+
+#notificator { display : none; left : 50%; margin-left : -100px; padding : 15px 25px; position : fixed; text-align : center; top : 20px; width : 200px; z-index : 5000; }
+
+#view-product {padding-top:100px; background-image:url('imgs/main.jpg');}
+#view-product .body {background-color:#fff; padding:10px; border-radius:10px;  margin-bottom:30px;}
+
+.footer .extra {  border-bottom: 1px solid #000;border-top: 1px solid #585858;}
+.footer .extra-inner { background: #1a1a1a none repeat scroll 0 0; color: #bbb; font-size: 11px;padding: 20px 0;}
+.footer .extra-inner h4 {font-size:16px; margin-bottom: 10px;}
+.footer .extra-inner ul {margin: 0; padding: 0;}
+.footer .extra-inner ul li { list-style: outside none none;  margin-bottom: 0.6em;}
+.footer .extra-inner ul li a {color:#666;}
+.footer .footer-bottom {border-top: 1px solid #292929; margin-top: 0;}
+.footer .footer-bottom .bottom-inner { background: #111 none repeat scroll 0 0; color: #999;font-size: 12px; padding: 15px 0;}
+.footer .payments li img {height: 40px;}
+
+@media screen and (max-width: 1199px) {
+	.main-top .woman-right {width:400px;}
+    .main-top .bottle-right { margin-left:-150px; bottom:0; width:300px;}
+}
+
+@media screen and (max-width: 991px) {
+	.navbar-onepoge  .navbar-nav  li  a {font-size:14px; padding-left:5px; padding-right:5px;}
+	.navbar-onepoge .navbar-brand img {height:25px;} 
+	.main-top .woman-right { width:300px;}
+    .main-top .bottle-right { margin-left:-100px; bottom:0; width:200px;}
+	.main-top .main-top-info h1 {font-size:40px;}
+	.main-top .main-top-info h2 {font-size:14px;}
+	.main-top .main-top-info .how-to {font-size:18px;}
+	.after-main { font-size:16px;}
+}
+
+@media screen and (max-width: 767px) {
+	.navbar-onepoge .navbar-brand { margin-left:-15px; }
+	.navbar-onepoge .navbar-brand img { margin-top:-10px; }
+	.navbar-toggle {background-color:#fff; margin-top:12px;}
+	.navbar-toggle span {background-color:#333; color:#333;}
+	.navbar-onepoge .navbar-nav li a {padding-top:7px; padding-bottom:7px; margin-left:10px;}
+	.main-top .main-top-info h1 {font-size:28px;}
+	.main-top img.img-responsive {min-height:400px; width:auto;}
+	.main-top .woman-right { width:200px;}
+	.main-top .main-top-info { margin-top:-120px;}
+	.after-main { font-size:14px;}
+}
+
+@media screen and (max-width: 411px) {
+	.main-top .main-top-info h1 {font-size:22px;}
+}

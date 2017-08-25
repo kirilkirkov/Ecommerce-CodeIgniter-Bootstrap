@@ -24,6 +24,7 @@ class Loader extends MY_Controller
             header('HTTP/1.1 404 Not Found');
             return;
         }
+        header("Content-type: application/javascript; charset: UTF-8");
         echo $contents;
     }
 
@@ -77,6 +78,7 @@ class Loader extends MY_Controller
             header('HTTP/1.1 404 Not Found');
             return;
         }
+        header("Content-type: application/javascript; charset: UTF-8");
         echo $js;
     }
 

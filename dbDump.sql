@@ -240,3 +240,9 @@ CREATE TABLE `brands` (
   `name` varchar(50) NOT NULL,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `confirm_links` (
+  `id` int(11) NOT NULL,
+  `link` char(32) NOT NULL,
+  `for_order` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

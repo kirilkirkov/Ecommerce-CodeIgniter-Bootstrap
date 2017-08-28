@@ -34,6 +34,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <tr>
                         <td colspan="2"><?= lang('the_reason') ?> - <?= $_SESSION['order_id'] ?></td>
                     </tr>
+                    <tr>
+                        <td colspan="2"><?= lang('final_amount_for_pay') ?> <?= $_SESSION['final_amount'] ?></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

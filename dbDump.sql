@@ -82,6 +82,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `paypal_status` varchar(10) DEFAULT NULL,
   `processed` tinyint(1) NOT NULL DEFAULT '0',
   `viewed` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'viewed status is change when change processed status',
+  `confirmed` tinyint(1) NOT NULL DEFAULT '0',
+  `discount_code` varchar(20) NOT NULL
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -233,7 +235,8 @@ INSERT INTO `value_store` (`id`, `thekey`, `value`) VALUES
 (25, 'template', 'redlabel'),
 (26, 'cashondelivery_visibility', '1'),
 (27, 'showBrands', '0'),
-(28, 'showInSlider', '0');
+(28, 'showInSlider', '0'),
+(29, 'codeDiscounts', '1');
 
 CREATE TABLE `brands` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -245,4 +248,14 @@ CREATE TABLE `confirm_links` (
   `id` int(11) NOT NULL,
   `link` char(32) NOT NULL,
   `for_order` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `discount_codes` (
+ `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type` varchar(10) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `amount` varchar(20) NOT NULL,
+  `valid_from_date` int(10) UNSIGNED NOT NULL,
+  `valid_to_date` int(10) UNSIGNED NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1-enabled, 0-disabled'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

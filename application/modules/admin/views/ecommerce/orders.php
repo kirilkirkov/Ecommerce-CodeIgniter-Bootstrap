@@ -120,6 +120,10 @@ if (!isset($_GET['settings'])) {
                                                 <td><b>Payment Type</b></td>
                                                 <td><?= $tr['payment_type'] ?></td>
                                             </tr>
+                                            <tr>
+                                                <td><b>Discount</b></td>
+                                                <td><?= $tr['discount_type'] == 'float' ? '-' . $tr['discount_amount'] : '-' . $tr['discount_amount'] . '%' ?></td>
+                                            </tr>
                                             <?php if ($tr['payment_type'] == 'PayPal') { ?>
                                                 <tr>
                                                     <td><b>PayPal Status</b></td>

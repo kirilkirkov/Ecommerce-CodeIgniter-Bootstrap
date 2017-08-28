@@ -10,5 +10,6 @@
     clear_all: "Clear",
     checkout: "Payment",
     remove_from_cart: "Deleted from shopping cart",
-    enter_valid_email: "Please enter a valid email address"
+    enter_valid_email: "Please enter a valid email address",
+    discountCodeInvalid: "Discount code is invalid"
 };

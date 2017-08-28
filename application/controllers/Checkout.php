@@ -41,7 +41,7 @@ class Checkout extends MY_Controller
                 }
             }
         }
-
+        $data['bank_account'] = $this->AdminModel->getBankAccountSettings();
         $data['cashondelivery_visibility'] = $this->AdminModel->getValueStore('cashondelivery_visibility');
         $data['paypal_email'] = $this->AdminModel->getValueStore('paypal_email');
         $data['bestSellers'] = $this->Publicmodel->getbestSellers();
@@ -69,6 +69,7 @@ class Checkout extends MY_Controller
         }
         if ($_POST['payment_type'] == 'Bank') {
             $_SESSION['order_id'] = $this->orderId;
+            $_SESSION['final_amount'] = $_POST['final_amount'] . $_POST['amount_currency'];
             redirect(LANG_URL . '/checkout/successbank');
         }
         if ($_POST['payment_type'] == 'cashOnDelivery') {
@@ -76,6 +77,7 @@ class Checkout extends MY_Controller
         }
         if ($_POST['payment_type'] == 'PayPal') {
             @set_cookie('paypal', $this->orderId, 2678400);
+            $_SESSION['discountAmount'] = $_POST['discountAmount'];
             redirect(LANG_URL . '/checkout/paypalpayment');
         }
     }

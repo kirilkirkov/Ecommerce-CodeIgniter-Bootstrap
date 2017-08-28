@@ -119,6 +119,7 @@ div.product-sort .form-group { margin-bottom : 0; }
 #checkout-page .form-control { border-radius : 0; box-shadow : none; color : #666; font-size : 13px; }
 #checkout-page .form-group label { color : #666; font-size : 13px; }
 #checkout-page .left-side { margin-bottom : 30px; }
+#checkout-page .discount {margin-bottom: 20px;}
 #small_carousel.carousel { padding-bottom : 60px; }
 #home-slider .carousel-inner .right-side h3 a {color:#424449;}
 #small_carousel.carousel .carousel-inner .item { ms-transition-property : opacity; opacity : 0; text-align : center; transition-property : opacity; }

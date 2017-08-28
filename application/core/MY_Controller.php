@@ -64,6 +64,7 @@ class MY_Controller extends MX_Controller
         $vars['allLanguages'] = $this->getAllLangs();
         $vars['load'] = $this->loop;
         $vars['cookieLaw'] = $this->Publicmodel->getCookieLaw();
+        $vars['codeDiscounts'] = $this->AdminModel->getValueStore('codeDiscounts');
         return $vars;
     }
 

@@ -10,5 +10,6 @@
     clear_all: "Изчисти",
     checkout: "Плащане",
     remove_from_cart: "Изтрито от кошницата",
-    enter_valid_email: "Моля въведете валиден имейл адрес"
+    enter_valid_email: "Моля въведете валиден имейл адрес",
+    discountCodeInvalid: "Кода е невалиден"
 };

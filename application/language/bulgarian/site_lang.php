@@ -141,3 +141,7 @@ $lang['there_is_payment_error'] = 'Има проблем с поръчванет
 $lang['confirm_order_subj'] = 'Потвърждаване на поръчка от - ';
 $lang['please_confirm'] = 'Моля потвърдете поръчката си като натиснете тук - ';
 $lang['order_confirmed'] = 'Вашата поръчка е потвърдена!';
+$lang['discount_code'] = 'Код за отстъпка';
+$lang['check_code'] = 'Провери кода';
+$lang['enter_discount_code'] = 'Въведи кода тук';
+$lang['final_amount_for_pay'] = 'Сума за плащане';

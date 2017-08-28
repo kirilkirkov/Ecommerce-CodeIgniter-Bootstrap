@@ -580,8 +580,9 @@ class AdminModel extends CI_Model
         $this->db->select('orders.*, orders_clients.first_name,'
                 . ' orders_clients.last_name, orders_clients.email, orders_clients.phone, '
                 . 'orders_clients.address, orders_clients.city, orders_clients.post_code,'
-                . ' orders_clients.notes');
+                . ' orders_clients.notes, discount_codes.type as discount_type, discount_codes.amount as discount_amount');
         $this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'inner');
+        $this->db->join('discount_codes', 'discount_codes.code = orders.discount_code', 'left');
         $result = $this->db->get('orders', $limit, $page);
         return $result->result_array();
     }
@@ -856,6 +857,68 @@ class AdminModel extends CI_Model
         $this->db->where('id', $post['editid']);
         $result = $this->db->update('shop_categories', array(
             'position' => $post['new_pos']
+        ));
+    }
+
+    public function discountCodeTakenCheck($post)
+    {
+        if ($post['update'] > 0) {
+            $this->db->where('id !=', $post['update']);
+        }
+        $this->db->where('code', $post['code']);
+        $num_rows = $this->db->count_all_results('discount_codes');
+        if ($num_rows == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public function setDiscountCode($post)
+    {
+        $this->db->insert('discount_codes', array(
+            'type' => $post['type'],
+            'code' => trim($post['code']),
+            'amount' => $post['amount'],
+            'valid_from_date' => strtotime($post['valid_from_date']),
+            'valid_to_date' => strtotime($post['valid_to_date'])
+        ));
+    }
+
+    public function updateDiscountCode($post)
+    {
+        $this->db->where('id', $post['update']);
+        $this->db->update('discount_codes', array(
+            'type' => $post['type'],
+            'code' => trim($post['code']),
+            'amount' => $post['amount'],
+            'valid_from_date' => strtotime($post['valid_from_date']),
+            'valid_to_date' => strtotime($post['valid_to_date'])
+        ));
+    }
+
+    public function discountCodesCount()
+    {
+        return $this->db->count_all_results('discount_codes');
+    }
+
+    public function getDiscountCodes($limit, $page)
+    {
+        $result = $this->db->get('discount_codes', $limit, $page);
+        return $result->result_array();
+    }
+
+    public function getDiscountCodeInfo($id)
+    {
+        $this->db->where('id', $id);
+        $result = $this->db->get('discount_codes');
+        return $result->row_array();
+    }
+
+    public function changeCodeDiscountStatus($codeId, $toStatus)
+    {
+        $this->db->where('id', $codeId);
+        $this->db->update('discount_codes', array(
+            'status' => $toStatus
         ));
     }
 

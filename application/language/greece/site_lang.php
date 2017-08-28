@@ -140,3 +140,7 @@ $lang['there_is_payment_error'] = '';
 $lang['confirm_order_subj'] = 'Επιβεβαιώστε την παραγγελία από';
 $lang['please_confirm'] = 'Επιβεβαιώστε την παραγγελία σας όταν κάνετε κλικ στο - ';
 $lang['order_confirmed'] = 'Η παραγγελία σας επιβεβαιώνεται!';
+$lang['discount_code'] = 'Κωδικός έκπτωσης';
+$lang['check_code'] = 'Ελέγξτε τον κώδικα';
+$lang['enter_discount_code'] = 'Πληκτρολογήστε τον κωδικό εδώ';
+$lang['final_amount_for_pay'] = 'Ποσό ΠΛΗΡΩΜΗΣ';

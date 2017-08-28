@@ -70,6 +70,8 @@ $route['manageShoppingCart'] = 'home/manageShoppingCart';
 $route['(\w{2})/manageShoppingCart'] = 'home/manageShoppingCart';
 $route['clearShoppingCart'] = 'home/clearShoppingCart';
 $route['(\w{2})/clearShoppingCart'] = 'home/clearShoppingCart';
+$route['discountCodeChecker'] = 'home/discountCodeChecker';
+$route['(\w{2})/discountCodeChecker'] = 'home/discountCodeChecker';
 
 // home page pagination
 $route[rawurlencode('home') . '/(:num)'] = "home/index/$1";
@@ -129,6 +131,8 @@ $route['admin/orders/(:num)'] = "admin/ecommerce/orders/index/$1";
 $route['admin/changeOrdersOrderStatus'] = "admin/ecommerce/orders/changeOrdersOrderStatus";
 $route['admin/brands'] = "admin/ecommerce/brands";
 $route['admin/changePosition'] = "admin/ecommerce/ShopCategories/changePosition";
+$route['admin/discounts'] = "admin/ecommerce/discounts";
+$route['admin/discounts/(:num)'] = "admin/ecommerce/discounts/index/$1";
 // BLOG GROUP
 $route['admin/blogpublish'] = "admin/blog/BlogPublish";
 $route['admin/blogpublish/(:num)'] = "admin/blog/BlogPublish/index/$1";

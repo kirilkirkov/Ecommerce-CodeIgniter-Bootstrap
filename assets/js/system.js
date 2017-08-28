@@ -135,6 +135,44 @@ $('.clear-filter').click(function () { //clear filter in right col
     $('[name="' + type_clear + '"]').val('');
     submitForm();
 });
+/*
+ * Submit search form in home page
+ */
 function submitForm() {
     document.getElementById("bigger-search").submit();
+}
+/*
+ * Discount code checker
+ */
+var is_discounted = false;
+function checkDiscountCode() {
+    var enteredCode = $('[name="discountCode"]').val();
+    $.ajax({
+        type: "POST",
+        url: variable.discountCodeChecker,
+        data: {enteredCode: enteredCode}
+    }).done(function (data) {
+        if (data == 0) {
+            ShowNotificator('alert-danger', lang.discountCodeInvalid);
+        } else {
+            if (is_discounted == false) {
+                var obj = jQuery.parseJSON(data);
+                var final_amount_before = parseFloat($('.final-amount').text());
+                var discountAmoun;
+                if (obj.type == 'percent') {
+                    var substract_num = (obj.amount / 100) * final_amount_before;
+                    var final_amount = final_amount_before - substract_num;
+                    discountAmoun = substract_num;
+                }
+                if (obj.type == 'float') {
+                    var final_amount = final_amount_before - obj.amount;
+                    discountAmoun = obj.amount;
+                }
+                $('.final-amount').text(final_amount.toFixed(2));
+                $('.final-amount').val(final_amount.toFixed(2));
+                $('[name="discountAmount"]').val(discountAmoun);
+                is_discounted = true;
+            }
+        }
+    });
 }

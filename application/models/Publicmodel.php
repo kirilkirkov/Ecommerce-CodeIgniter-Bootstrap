@@ -278,7 +278,8 @@ class Publicmodel extends CI_Model
             'referrer' => $post['referrer'],
             'clean_referrer' => $post['clean_referrer'],
             'payment_type' => $post['payment_type'],
-            'paypal_status' => @$post['paypal_status']
+            'paypal_status' => @$post['paypal_status'],
+            'discount_code' => @$post['discountCode']
         ));
         $lastId = $this->db->insert_id();
         $result_2 = $this->db->insert('orders_clients', array(
@@ -474,6 +475,16 @@ class Publicmodel extends CI_Model
             return $result;
         }
         return false;
+    }
+
+    public function getValidDiscountCode($code)
+    {
+        $time = time();
+        $this->db->select('type, amount');
+        $this->db->where('code', $code);
+        $this->db->where($time . ' BETWEEN valid_from_date AND valid_to_date');
+        $query = $this->db->get('discount_codes');
+        return $query->row_array();
     }
 
 }

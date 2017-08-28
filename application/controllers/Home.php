@@ -127,4 +127,17 @@ class Home extends MY_Controller
         }
     }
 
+    public function discountCodeChecker()
+    {
+        if (!$this->input->is_ajax_request()) {
+            exit('No direct script access allowed');
+        }
+        $result = $this->Publicmodel->getValidDiscountCode($_POST['enteredCode']); 
+        if ($result == null) {
+            echo 0;
+        } else {
+            echo json_encode($result);
+        }
+    }
+
 }

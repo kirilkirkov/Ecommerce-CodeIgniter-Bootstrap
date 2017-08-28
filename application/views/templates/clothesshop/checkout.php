@@ -73,6 +73,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <textarea id="notesInput" class="form-control" name="notes" rows="3"><?= @$_POST['notes'] ?></textarea>
                             </div>
                         </div>
+                        <?php if ($codeDiscounts == 1) { ?>
+                            <div class="discount">
+                                <label><?= lang('discount_code') ?></label>
+                                <input class="form-control" name="discountCode" value="<?= @$_POST['discountCode'] ?>" placeholder="<?= lang('enter_discount_code') ?>" type="text">
+                                <a href="javascript:void(0);" class="btn btn-default" onclick="checkDiscountCode()"><?= lang('check_code') ?></a>
+                            </div>
+                        <?php } ?>
                         <div class="table-responsive">
                             <table class="table table-bordered table-products">
                                 <thead>
@@ -113,7 +120,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <?php } ?>
                                     <tr>
                                         <td colspan="4" class="text-right"><?= lang('total') ?></td>
-                                        <td><?= $cartItems['finalSum'] . CURRENCY ?></td>
+                                        <td>
+                                            <span class="final-amount"><?= $cartItems['finalSum'] ?></span><?= CURRENCY ?>
+                                            <input type="hidden" class="final-amount" name="final_amount" value="<?= $cartItems['finalSum'] ?>">
+                                            <input type="hidden" name="amount_currency" value="<?= CURRENCY ?>">
+                                            <input type="hidden" name="discountAmount" value="">
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -154,15 +166,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php
 if ($this->session->flashdata('deleted')) {
     ?>
-    <script>
-        $(document).ready(function () {
-            ShowNotificator('alert-info', '<?= $this->session->flashdata('deleted') ?>');
-        });
-    </script>
+<script>
+$(document).ready(function () {
+    ShowNotificator('alert-info', '<?= $this->session->flashdata('deleted') ?>');
+});
+</script>
+<?php } if ($codeDiscounts == 1 && isset($_POST['discountCode'])) {
+    ?>
+<script>
+$(document).ready(function () {
+    checkDiscountCode();
+});
+</script>
 <?php } ?>
 <script src="<?= base_url('assets/js/jquery.nice-select.min.js') ?>"></script>
 <script>
-    $(document).ready(function () {
-        $('select').niceSelect();
-    });
+$(document).ready(function () {
+    $('select').niceSelect();
+});
 </script>

@@ -141,3 +141,7 @@ $lang['there_is_payment_error'] = 'There are problem with order. Please contact 
 $lang['confirm_order_subj'] = 'Confirm order from - ';
 $lang['please_confirm'] = 'Please confirm your order when click on - ';
 $lang['order_confirmed'] = 'Your order is confirmed!';
+$lang['discount_code'] = 'Discount code';
+$lang['check_code'] = 'Check code';
+$lang['enter_discount_code'] = 'Enter code here';
+$lang['final_amount_for_pay'] = 'Payment amount';

@@ -74,3 +74,7 @@ Shopping cart:
 
 1. To add article to your shopping cart add this class to your links - **add-to-cart** , if you want to redirect user after add product to shopping cart add also add **data-goto="http://..."**
 2. Variable $cartItems have all your added items
+
+## Donate:
+If this project help you reduce time to develop, you can give me a cup of coffee to continue its development :)
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W5BR6K29BQX7E)

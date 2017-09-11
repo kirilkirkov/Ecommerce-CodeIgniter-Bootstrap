@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `processed` tinyint(1) NOT NULL DEFAULT '0',
   `viewed` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'viewed status is change when change processed status',
   `confirmed` tinyint(1) NOT NULL DEFAULT '0',
-  `discount_code` varchar(20) NOT NULL
+  `discount_code` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -257,5 +257,6 @@ CREATE TABLE `discount_codes` (
   `amount` varchar(20) NOT NULL,
   `valid_from_date` int(10) UNSIGNED NOT NULL,
   `valid_to_date` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1-enabled, 0-disabled'
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1-enabled, 0-disabled',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

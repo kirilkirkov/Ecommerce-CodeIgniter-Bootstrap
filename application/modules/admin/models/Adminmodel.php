@@ -160,8 +160,8 @@ class AdminModel extends CI_Model
         $row = $res->row_array();
         $this->db->trans_start();
         $this->db->query('DELETE FROM languages WHERE id = ' . $this->db->escape($id));
-        $this->db->query('DELETE FROM translations WHERE abbr = ' . $row['abbr']);
-        $this->db->query('DELETE FROM cookie_law_translations WHERE abbr = ' . $row['abbr']);
+        $this->db->query('DELETE FROM translations WHERE abbr = "' . $row['abbr'].'"');
+        $this->db->query('DELETE FROM cookie_law_translations WHERE abbr = "' . $row['abbr'].'"');
         $this->db->trans_complete();
         if ($this->db->trans_status() === FALSE) {
             return false;

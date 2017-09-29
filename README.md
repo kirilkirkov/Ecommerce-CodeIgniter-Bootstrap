@@ -37,10 +37,16 @@ We support following features:
 ## Easy installation in 3 steps
 1. Import dbDump.sql to your mysql
 2. Set hostname, username and password in application/config/database.php
-3. Set your site domain in application/config/config.php - $config['base_url'] = 'Yoursite.com';
+3. Set your site domain in application/config/config.php - $config['base_url'] = 'http://yourdomain.com';
 4. Opss I forgot for last 4 step... ENJOY! ;)
 
-## Login to administration with:
+Little explain for installation - if you paste installation of project in directory something like http://localhost/SHOP, you must 
+set this directory to application/config/config.php - $config['base_url'] = 'http://localhost/SHOP'; and must remove from .htaccess file
+"RewriteBase /" line because css and js files will not be loaded! But you must know that the best way to install this platform is to set it
+in root http://localhost directory or if you want to be in other directory just set virtual host for this and point him to there.
+(example: http://shop.dev - point to localhost/shop directory). How to create virtual hosts you can read here: http://goo.gl/UvpYMG
+
+## Login to administration with
 
 * User: admin
 * Pass: admin
@@ -75,6 +81,6 @@ Shopping cart:
 1. To add article to your shopping cart add this class to your links - **add-to-cart** , if you want to redirect user after add product to shopping cart add also add **data-goto="http://..."**
 2. Variable $cartItems have all your added items
 
-## Donate:
+## Donate
 If this project help you reduce time to develop, you can give me a cup of coffee to continue its development :)
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W5BR6K29BQX7E)

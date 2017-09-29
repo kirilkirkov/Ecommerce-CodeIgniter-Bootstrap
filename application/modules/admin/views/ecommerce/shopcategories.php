@@ -23,55 +23,57 @@
     <?php
     if (!empty($shop_categories)) {
         ?>
-        <table class="table table-striped custab">
-            <thead>
-                <tr>
-                    <th>#ID</th>
-                    <th>Name</th>
-                    <th>Subcategory for</th>
-                    <th>Position</th>
-                    <th class="text-center">Action</th>
-                </tr>
-            </thead>
-            <?php
-            $i = 1;
-            foreach ($shop_categories as $key_cat => $shop_categorie) {
-                $catName = '';
-                foreach ($shop_categorie['info'] as $ff) {
-                    $catName .= '<div>'
-                            . '<a href="javascript:void(0);" class="editCategorie" data-indic="' . $i . '" data-for-id="' . $key_cat . '" data-abbr="' . $ff['abbr'] . '" data-toggle="tooltip" data-placement="top" title="Edit this categorie">'
-                            . '<i class="fa fa-pencil" aria-hidden="true"></i>'
-                            . '</a> '
-                            . '[' . $ff['abbr'] . ']<span id="indic-' . $i . '">' . $ff['name'] . '</span>'
-                            . '</div>';
-                    $i++;
+        <div class="table-responsive">
+            <table class="table table-striped custab">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Name</th>
+                        <th>Subcategory for</th>
+                        <th>Position</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <?php
+                $i = 1;
+                foreach ($shop_categories as $key_cat => $shop_categorie) {
+                    $catName = '';
+                    foreach ($shop_categorie['info'] as $ff) {
+                        $catName .= '<div>'
+                                . '<a href="javascript:void(0);" class="editCategorie" data-indic="' . $i . '" data-for-id="' . $key_cat . '" data-abbr="' . $ff['abbr'] . '" data-toggle="tooltip" data-placement="top" title="Edit this categorie">'
+                                . '<i class="fa fa-pencil" aria-hidden="true"></i>'
+                                . '</a> '
+                                . '[' . $ff['abbr'] . ']<span id="indic-' . $i . '">' . $ff['name'] . '</span>'
+                                . '</div>';
+                        $i++;
+                    }
+                    ?>
+                    <tr>
+                        <td><?= $key_cat ?></td>
+                        <td><?= $catName ?></td>
+                        <td> 
+                            <a href="javascript:void(0);" class="editCategorieSub" data-sub-for-id="<?= $key_cat ?>">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                            <?php foreach ($shop_categorie['sub'] as $sub) { ?>
+                                <div> <?= $sub ?> </div>
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0);" class="editPosition" data-position-for-id="<?= $key_cat ?>" data-my-position="<?= $shop_categorie['position'] ?>">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                            <span id="position-<?= $key_cat ?>"><?= $shop_categorie['position'] ?></span>
+                        </td>
+                        <td class="text-center">
+                            <a href="<?= base_url('admin/shopcategories/?delete=' . $key_cat) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                        </td>
+                    </tr>
+                    <?php
                 }
                 ?>
-                <tr>
-                    <td><?= $key_cat ?></td>
-                    <td><?= $catName ?></td>
-                    <td> 
-                        <a href="javascript:void(0);" class="editCategorieSub" data-sub-for-id="<?= $key_cat ?>">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </a>
-                        <?php foreach ($shop_categorie['sub'] as $sub) { ?>
-                            <div> <?= $sub ?> </div>
-                        <?php } ?>
-                    </td>
-                    <td>
-                        <a href="javascript:void(0);" class="editPosition" data-position-for-id="<?= $key_cat ?>" data-my-position="<?= $shop_categorie['position'] ?>">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </a>
-                        <span id="position-<?= $key_cat ?>"><?= $shop_categorie['position'] ?></span>
-                    </td>
-                    <td class="text-center">
-                        <a href="<?= base_url('admin/shopcategories/?delete=' . $key_cat) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Del</a>
-                    </td>
-                </tr>
-                <?php
-            }
-            ?>
-        </table>
+            </table>
+        </div>
         <?php
         echo $links_pagination;
     } else {

@@ -13,6 +13,12 @@ class History extends ADMIN_Controller
 
     private $num_rows = 20;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('History_model');
+    }
+
     public function index($page = 0)
     {
         $this->login_check();
@@ -22,8 +28,8 @@ class History extends ADMIN_Controller
         $head['description'] = '!';
         $head['keywords'] = '';
 
-        $rowscount = $this->AdminModel->historyCount();
-        $data['actions'] = $this->AdminModel->getHistory($this->num_rows, $page);
+        $rowscount = $this->History_model->historyCount();
+        $data['actions'] = $this->History_model->getHistory($this->num_rows, $page);
         $data['links_pagination'] = pagination('admin/history', $rowscount, $this->num_rows, 3);
         $data['history'] = $this->history;
 

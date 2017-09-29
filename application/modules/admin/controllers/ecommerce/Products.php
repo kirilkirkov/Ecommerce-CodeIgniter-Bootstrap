@@ -13,12 +13,23 @@ class Products extends ADMIN_Controller
 
     private $num_rows = 10;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model(array('Products_model', 'Languages_model', 'Categories_model'));
+    }
+
     public function index($page = 0)
     {
         $this->login_check();
-        $this->saveHistory('Go to products');
+        $data = array();
+        $head = array();
+        $head['title'] = 'Administration - View products';
+        $head['description'] = '!';
+        $head['keywords'] = '';
+
         if (isset($_GET['delete'])) {
-            $result = $this->AdminModel->deleteproduct($_GET['delete']);
+            $result = $this->Products_model->deleteProduct($_GET['delete']);
             if ($result == true) {
                 $this->session->set_flashdata('result_delete', 'product is deleted!');
                 $this->saveHistory('Delete product id - ' . $_GET['delete']);
@@ -27,11 +38,6 @@ class Products extends ADMIN_Controller
             }
             redirect('admin/products');
         }
-        $data = array();
-        $head = array();
-        $head['title'] = 'Administration - View products';
-        $head['description'] = '!';
-        $head['keywords'] = '';
 
         unset($_SESSION['filter']);
         $search_title = null;
@@ -52,12 +58,13 @@ class Products extends ADMIN_Controller
             $this->saveHistory('Search for product code - ' . $category);
         }
         $data['products_lang'] = $products_lang = $this->session->userdata('admin_lang_products');
-        $rowscount = $this->AdminModel->productsCount($search_title, $category);
-        $data['products'] = $this->AdminModel->getproducts($this->num_rows, $page, $search_title, $orderby, $category);
+        $rowscount = $this->Products_model->productsCount($search_title, $category);
+        $data['products'] = $this->Products_model->getproducts($this->num_rows, $page, $search_title, $orderby, $category);
         $data['links_pagination'] = pagination('admin/products', $rowscount, $this->num_rows, 3);
-        $data['num_shop_art'] = $this->AdminModel->numShopproducts();
-        $data['languages'] = $this->AdminModel->getLanguages();
-        $data['shop_categories'] = $this->AdminModel->getShopCategories(null, null, 2);
+        $data['num_shop_art'] = $this->Products_model->numShopproducts();
+        $data['languages'] = $this->Languages_model->getLanguages();
+        $data['shop_categories'] = $this->Categories_model->getShopCategories(null, null, 2);
+        $this->saveHistory('Go to products');
         $this->load->view('_parts/header', $head);
         $this->load->view('ecommerce/products', $data);
         $this->load->view('_parts/footer');
@@ -66,7 +73,7 @@ class Products extends ADMIN_Controller
     public function getProductInfo($id)
     {
         $this->login_check();
-        return $this->AdminModel->getOneProduct($id);
+        return $this->Products_model->getOneProduct($id);
     }
 
     /*
@@ -76,7 +83,7 @@ class Products extends ADMIN_Controller
     public function productStatusChange()
     {
         $this->login_check();
-        $result = $this->AdminModel->productStatusChange($_POST['id'], $_POST['to_status']);
+        $result = $this->Products_model->productStatusChange($_POST['id'], $_POST['to_status']);
         if ($result == true) {
             echo 1;
         } else {

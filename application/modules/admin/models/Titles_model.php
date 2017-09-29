@@ -1,0 +1,57 @@
+<?php
+
+class Titles_model extends CI_Model
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function setSeoPageTranslations($translations)
+    {
+        $i = 0;
+        foreach ($translations['pages'] as $page) {
+            foreach ($translations['abbr'] as $abbr) {
+                $this->db->where('type', 'page_' . $page);
+                $this->db->where('abbr', $abbr);
+                $num_rows = $this->db->count_all_results('translations');
+                if ($num_rows == 0) {
+                    $this->db->insert('translations', array(
+                        'type' => 'page_' . $page,
+                        'abbr' => $abbr,
+                        'title' => $translations['title'][$i],
+                        'description' => $translations['description'][$i]
+                    ));
+                } else {
+                    $this->db->where('type', 'page_' . $page);
+                    $this->db->where('abbr', $abbr);
+                    $this->db->update('translations', array(
+                        'title' => $translations['title'][$i],
+                        'description' => $translations['description'][$i]
+                    ));
+                }
+                $i++;
+            }
+        }
+    }
+
+    public function getSeoTranslations()
+    {
+        $this->db->like('type', 'page_');
+        $result = $this->db->get('translations');
+        $arr = array();
+        foreach ($result->result_array() as $row) {
+            $arr[$row['type']][$row['abbr']]['title'] = $row['title'];
+            $arr[$row['type']][$row['abbr']]['description'] = $row['description'];
+        }
+        return $arr;
+    }
+
+    public function getSeoPages()
+    {
+        $result = $this->db->get('seo_pages');
+        return $result->result_array();
+    }
+
+}

@@ -13,11 +13,17 @@ class Blog extends ADMIN_Controller
 
     private $num_rows = 10;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Blog_model');
+    }
+
     public function index($page = 0)
     {
         $this->login_check();
         if (isset($_GET['delete'])) {
-            $this->AdminModel->deletePost($_GET['delete']);
+            $this->Blog_model->deletePost($_GET['delete']);
             redirect('admin/blog');
         }
         $data = array();
@@ -33,8 +39,8 @@ class Blog extends ADMIN_Controller
             $search = null;
         }
         $data = array();
-        $rowscount = $this->AdminModel->postsCount($search);
-        $data['posts'] = $this->AdminModel->getPosts(null, $this->num_rows, $page, $search);
+        $rowscount = $this->Blog_model->postsCount($search);
+        $data['posts'] = $this->Blog_model->getPosts(null, $this->num_rows, $page, $search);
         $data['links_pagination'] = pagination('admin/blog', $rowscount, $this->num_rows, 3);
         $data['page'] = $page;
 

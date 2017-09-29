@@ -11,6 +11,12 @@ if (!defined('BASEPATH')) {
 class BlogPublish extends ADMIN_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model(array('Blog_model', 'Languages_model'));
+    }
+
     public function index($id = 0)
     {
         $this->login_check();
@@ -19,8 +25,8 @@ class BlogPublish extends ADMIN_Controller
         if ($id > 0)
             $is_update = true;
         if ($id > 0 && $_POST == null) {
-            $_POST = $this->AdminModel->getOnePost($id);
-            $trans_load = $this->AdminModel->getTranslations($id, 'blog');
+            $_POST = $this->Blog_model->getOnePost($id);
+            $trans_load = $this->Blog_model->getTranslations($id, 'blog');
         }
         if (isset($_POST['submit'])) {
             unset($_POST['submit']);
@@ -44,9 +50,9 @@ class BlogPublish extends ADMIN_Controller
             $flipped = array_flip($_POST['translations']);
             $_POST['title'] = $_POST['title'][$flipped[MY_DEFAULT_LANGUAGE_ABBR]];
             unset($_POST['description'], $_POST['translations']);
-            $result = $this->AdminModel->setPost($_POST, $id);
+            $result = $this->Blog_model->setPost($_POST, $id);
             if ($result !== false) {
-                $this->AdminModel->setBlogTranslations($translations, $result, $is_update);
+                $this->Blog_model->setBlogTranslations($translations, $result, $is_update);
                 $this->session->set_flashdata('result_publish', 'Successful published!');
                 redirect('admin/blog');
             } else {
@@ -60,7 +66,7 @@ class BlogPublish extends ADMIN_Controller
         $head['title'] = 'Administration - Publish Blog Post';
         $head['description'] = '!';
         $head['keywords'] = '';
-        $data['languages'] = $this->AdminModel->getLanguages();
+        $data['languages'] = $this->Languages_model->getLanguages();
         $data['trans_load'] = $trans_load;
         $this->load->view('_parts/header', $head);
         $this->load->view('blog/blogpublish', $data);

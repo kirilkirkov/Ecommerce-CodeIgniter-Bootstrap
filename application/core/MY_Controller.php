@@ -9,8 +9,7 @@ class MY_Controller extends MX_Controller
 
     public function __construct()
     {
-        parent::__construct();
-        $this->load->model('AdminModel');
+        parent::__construct(); 
         $this->getActivePages();
         $this->checkForPostRequests();
         $this->setReferrer();
@@ -44,27 +43,27 @@ class MY_Controller extends MX_Controller
         $vars = array();
         $vars['nonDynPages'] = $this->nonDynPages;
         $vars['dynPages'] = $this->dynPages;
-        $vars['footerCategories'] = $this->Publicmodel->getFooterCategories();
-        $vars['sitelogo'] = $this->AdminModel->getValueStore('sitelogo');
-        $vars['naviText'] = htmlentities($this->AdminModel->getValueStore('navitext'));
-        $vars['footerCopyright'] = htmlentities($this->AdminModel->getValueStore('footercopyright'));
-        $vars['contactsPage'] = $this->AdminModel->getValueStore('contactspage');
-        $vars['footerContactAddr'] = htmlentities($this->AdminModel->getValueStore('footerContactAddr'));
-        $vars['footerContactPhone'] = htmlentities($this->AdminModel->getValueStore('footerContactPhone'));
-        $vars['footerContactEmail'] = htmlentities($this->AdminModel->getValueStore('footerContactEmail'));
-        $vars['footerAboutUs'] = $this->AdminModel->getValueStore('footerAboutUs');
-        $vars['footerSocialFacebook'] = $this->AdminModel->getValueStore('footerSocialFacebook');
-        $vars['footerSocialTwitter'] = $this->AdminModel->getValueStore('footerSocialTwitter');
-        $vars['footerSocialGooglePlus'] = $this->AdminModel->getValueStore('footerSocialGooglePlus');
-        $vars['footerSocialPinterest'] = $this->AdminModel->getValueStore('footerSocialPinterest');
-        $vars['footerSocialYoutube'] = $this->AdminModel->getValueStore('footerSocialYoutube');
-        $vars['addedJs'] = $this->AdminModel->getValueStore('addJs');
-        $vars['publicQuantity'] = $this->AdminModel->getValueStore('publicQuantity');
-        $vars['moreInfoBtn'] = $this->AdminModel->getValueStore('moreInfoBtn');
+        $vars['footerCategories'] = $this->Public_model->getFooterCategories();
+        $vars['sitelogo'] = $this->Home_admin_model->getValueStore('sitelogo');
+        $vars['naviText'] = htmlentities($this->Home_admin_model->getValueStore('navitext'));
+        $vars['footerCopyright'] = htmlentities($this->Home_admin_model->getValueStore('footercopyright'));
+        $vars['contactsPage'] = $this->Home_admin_model->getValueStore('contactspage');
+        $vars['footerContactAddr'] = htmlentities($this->Home_admin_model->getValueStore('footerContactAddr'));
+        $vars['footerContactPhone'] = htmlentities($this->Home_admin_model->getValueStore('footerContactPhone'));
+        $vars['footerContactEmail'] = htmlentities($this->Home_admin_model->getValueStore('footerContactEmail'));
+        $vars['footerAboutUs'] = $this->Home_admin_model->getValueStore('footerAboutUs');
+        $vars['footerSocialFacebook'] = $this->Home_admin_model->getValueStore('footerSocialFacebook');
+        $vars['footerSocialTwitter'] = $this->Home_admin_model->getValueStore('footerSocialTwitter');
+        $vars['footerSocialGooglePlus'] = $this->Home_admin_model->getValueStore('footerSocialGooglePlus');
+        $vars['footerSocialPinterest'] = $this->Home_admin_model->getValueStore('footerSocialPinterest');
+        $vars['footerSocialYoutube'] = $this->Home_admin_model->getValueStore('footerSocialYoutube');
+        $vars['addedJs'] = $this->Home_admin_model->getValueStore('addJs');
+        $vars['publicQuantity'] = $this->Home_admin_model->getValueStore('publicQuantity');
+        $vars['moreInfoBtn'] = $this->Home_admin_model->getValueStore('moreInfoBtn');
         $vars['allLanguages'] = $this->getAllLangs();
         $vars['load'] = $this->loop;
-        $vars['cookieLaw'] = $this->Publicmodel->getCookieLaw();
-        $vars['codeDiscounts'] = $this->AdminModel->getValueStore('codeDiscounts');
+        $vars['cookieLaw'] = $this->Public_model->getCookieLaw();
+        $vars['codeDiscounts'] = $this->Home_admin_model->getValueStore('codeDiscounts');
         return $vars;
     }
 
@@ -75,7 +74,8 @@ class MY_Controller extends MX_Controller
     private function getAllLangs()
     {
         $arr = array();
-        $langs = $this->AdminModel->getLanguages();
+        $this->load->model('admin/Languages_model');
+        $langs = $this->Languages_model->getLanguages();
         foreach ($langs->result() as $lang) {
             $arr[$lang->abbr]['name'] = $lang->name;
             $arr[$lang->abbr]['flag'] = $lang->flag;
@@ -90,7 +90,8 @@ class MY_Controller extends MX_Controller
 
     private function getActivePages()
     {
-        $activeP = $this->AdminModel->getPages(true);
+        $this->load->model('admin/Pages_model');
+        $activeP = $this->Pages_model->getPages(true);
         $dynPages = $this->config->item('no_dynamic_pages');
         $actDynPages = [];
         foreach ($activeP as $acp) {
@@ -100,7 +101,7 @@ class MY_Controller extends MX_Controller
         }
         $this->nonDynPages = $actDynPages;
         $dynPages = getTextualPages($activeP);
-        $this->dynPages = $this->Publicmodel->getDynPagesLangs($dynPages);
+        $this->dynPages = $this->Public_model->getDynPagesLangs($dynPages);
     }
 
     /*
@@ -117,7 +118,7 @@ class MY_Controller extends MX_Controller
             $arr['email'] = $_POST['subscribeEmail'];
             if (filter_var($arr['email'], FILTER_VALIDATE_EMAIL) && !$this->session->userdata('email_added')) {
                 $this->session->set_userdata('email_added', 1);
-                $res = $this->Publicmodel->setSubscribe($arr);
+                $res = $this->Public_model->setSubscribe($arr);
                 $this->session->set_flashdata('emailAdded', lang('email_added'));
             }
             if (!headers_sent()) {
@@ -151,7 +152,7 @@ class MY_Controller extends MX_Controller
 
     private function loadTemplate()
     {
-        $template = $this->AdminModel->getValueStore('template');
+        $template = $this->Home_admin_model->getValueStore('template');
         if ($template == null) {
             $template = $this->config->item('template');
         } else {

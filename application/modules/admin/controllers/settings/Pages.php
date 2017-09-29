@@ -11,6 +11,12 @@ if (!defined('BASEPATH')) {
 class Pages extends ADMIN_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Pages_model');
+    }
+
     public function index()
     {
         $this->login_check();
@@ -19,14 +25,14 @@ class Pages extends ADMIN_Controller
         $head['title'] = 'Administration - Pages Manage';
         $head['description'] = '!';
         $head['keywords'] = '';
-        $data['pages'] = $this->AdminModel->getPages(null, true);
+        $data['pages'] = $this->Pages_model->getPages(null, true);
         if (isset($_POST['pname'])) {
-            $this->AdminModel->setPage($_POST['pname']);
+            $this->Pages_model->setPage($_POST['pname']);
             $this->saveHistory('Add new page with name - ' . $_POST['pname']);
             redirect('admin/pages');
         }
         if (isset($_GET['delete'])) {
-            $this->AdminModel->deletePage($_GET['delete']);
+            $this->Pages_model->deletePage($_GET['delete']);
             $this->saveHistory('Delete page');
             redirect('admin/pages');
         }

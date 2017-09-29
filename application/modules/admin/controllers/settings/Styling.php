@@ -11,6 +11,11 @@ if (!defined('BASEPATH')) {
 class Styling extends ADMIN_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index()
     {
         $this->login_check();
@@ -21,12 +26,12 @@ class Styling extends ADMIN_Controller
         $head['keywords'] = '';
 
         if (isset($_POST['newStyle'])) {
-            $this->AdminModel->setValueStore('newStyle', $_POST['newStyle']);
+            $this->Home_admin_model->setValueStore('newStyle', $_POST['newStyle']);
             $this->saveHistory('Change site styling');
             redirect('admin/styling');
         }
 
-        $data['newStyle'] = $this->AdminModel->getValueStore('newStyle');
+        $data['newStyle'] = $this->Home_admin_model->getValueStore('newStyle');
         $this->load->view('_parts/header', $head);
         $this->load->view('settings/styling', $data);
         $this->load->view('_parts/footer');

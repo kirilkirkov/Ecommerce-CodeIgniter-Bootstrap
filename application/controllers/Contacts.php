@@ -24,9 +24,9 @@ class Contacts extends MY_Controller
             }
             redirect('contacts');
         }
-        $data['googleMaps'] = $this->AdminModel->getValueStore('googleMaps');
-        $data['googleApi'] = $this->AdminModel->getValueStore('googleApi');
-        $arrSeo = $this->Publicmodel->getSeo('page_contacts');
+        $data['googleMaps'] = $this->Home_admin_model->getValueStore('googleMaps');
+        $data['googleApi'] = $this->Home_admin_model->getValueStore('googleApi');
+        $arrSeo = $this->Public_model->getSeo('page_contacts');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
@@ -35,7 +35,7 @@ class Contacts extends MY_Controller
 
     private function sendEmail()
     {
-        $myEmail = $this->AdminModel->getValueStore('contactsEmailTo');
+        $myEmail = $this->Home_admin_model->getValueStore('contactsEmailTo');
         if (filter_var($myEmail, FILTER_VALIDATE_EMAIL) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $this->load->library('email');
 

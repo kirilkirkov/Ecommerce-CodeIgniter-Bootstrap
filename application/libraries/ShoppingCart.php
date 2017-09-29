@@ -18,7 +18,7 @@ class ShoppingCart
     public function __construct()
     {
         $this->CI = & get_instance();
-        $this->CI->load->model('admin/AdminModel');
+        $this->CI->load->model('admin/Home_admin_model');
     }
 
     public function manageShoppingCart()
@@ -63,7 +63,7 @@ class ShoppingCart
         } elseif (!isset($_SESSION['shopping_cart']) || empty($_SESSION['shopping_cart'])) {
             return 0;
         }
-        $result['array'] = $this->CI->Publicmodel->getShopItems(array_unique($_SESSION['shopping_cart']));
+        $result['array'] = $this->CI->Public_model->getShopItems(array_unique($_SESSION['shopping_cart']));
         if (empty($result['array'])) {
             unset($_SESSION['shopping_cart']);
             @delete_cookie('shopping_cart');
@@ -75,6 +75,7 @@ class ShoppingCart
 
         foreach ($result['array'] as &$article) {
             $article['num_added'] = $count_articles[$article['id']];
+            $article['price'] = $article['price'] == '' ? 0 : $article['price'];
             $article['sum_price'] = $article['price'] * $count_articles[$article['id']];
             $finalSum = $finalSum + $article['sum_price'];
             $article['sum_price'] = number_format($article['sum_price'], 2);

@@ -1,0 +1,73 @@
+<?php
+
+class Discounts_model extends CI_Model
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function getDiscountCodeInfo($id)
+    {
+        $this->db->where('id', $id);
+        $result = $this->db->get('discount_codes');
+        return $result->row_array();
+    }
+
+    public function changeCodeDiscountStatus($codeId, $toStatus)
+    {
+        $this->db->where('id', $codeId);
+        $this->db->update('discount_codes', array(
+            'status' => $toStatus
+        ));
+    }
+
+    public function discountCodesCount()
+    {
+        return $this->db->count_all_results('discount_codes');
+    }
+
+    public function getDiscountCodes($limit, $page)
+    {
+        $result = $this->db->get('discount_codes', $limit, $page);
+        return $result->result_array();
+    }
+
+    public function setDiscountCode($post)
+    {
+        $this->db->insert('discount_codes', array(
+            'type' => $post['type'],
+            'code' => trim($post['code']),
+            'amount' => $post['amount'],
+            'valid_from_date' => strtotime($post['valid_from_date']),
+            'valid_to_date' => strtotime($post['valid_to_date'])
+        ));
+    }
+
+    public function updateDiscountCode($post)
+    {
+        $this->db->where('id', $post['update']);
+        $this->db->update('discount_codes', array(
+            'type' => $post['type'],
+            'code' => trim($post['code']),
+            'amount' => $post['amount'],
+            'valid_from_date' => strtotime($post['valid_from_date']),
+            'valid_to_date' => strtotime($post['valid_to_date'])
+        ));
+    }
+
+    public function discountCodeTakenCheck($post)
+    {
+        if ($post['update'] > 0) {
+            $this->db->where('id !=', $post['update']);
+        }
+        $this->db->where('code', $post['code']);
+        $num_rows = $this->db->count_all_results('discount_codes');
+        if ($num_rows == 0) {
+            return true;
+        }
+        return false;
+    }
+
+}

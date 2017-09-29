@@ -142,4 +142,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Publicmodel');
+$autoload['model'] = array('Public_model', 'Home_admin_model');

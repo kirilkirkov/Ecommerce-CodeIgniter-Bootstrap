@@ -11,8 +11,8 @@ class Language
     public function __construct()
     {
         $this->CI = & get_instance();
-        $this->CI->load->model('AdminModel');
-        $this->CI->load->model('Publicmodel');
+        $this->CI->load->model('Home_admin_model');
+        $this->CI->load->model('Public_model');
         $this->urlAbbrevation = strtolower($this->CI->uri->segment(1));
         $this->setLanguage();
     }
@@ -32,7 +32,7 @@ class Language
         if ($this->urlAbbrevation == $defaultLanguageAbbr) {
             redirect(base_url());
         } else {
-            $myLang = $this->CI->Publicmodel->getOneLanguage($this->urlAbbrevation);
+            $myLang = $this->CI->Public_model->getOneLanguage($this->urlAbbrevation);
             if ($myLang != null) {
                 $myLanguage = $myLang['abbr'];
                 $language = $myLang['name'];

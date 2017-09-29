@@ -1,6 +1,6 @@
 <?php
 
-class Publicmodel extends CI_Model
+class Public_model extends CI_Model
 {
 
     private $showOutOfStock;
@@ -9,9 +9,9 @@ class Publicmodel extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->load->Model('AdminModel');
-        $this->showOutOfStock = $this->AdminModel->getValueStore('outOfStock');
-        $this->showInSliderProducts = $this->AdminModel->getValueStore('showInSlider');
+        $this->load->Model('Home_admin_model');
+        $this->showOutOfStock = $this->Home_admin_model->getValueStore('outOfStock');
+        $this->showInSliderProducts = $this->Home_admin_model->getValueStore('showInSlider');
     }
 
     public function productsCount($big_get)

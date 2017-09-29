@@ -34,13 +34,13 @@ class ADMIN_Controller extends MX_Controller
         );
         $this->history = $this->config->item('admin_history');
         $this->activePages = $vars['activePages'] = $this->getActivePages();
-        $numNotPreviewOrders = $this->AdminModel->newOrdersCheck();
+        $numNotPreviewOrders = $this->Home_admin_model->newOrdersCheck();
         $this->allowed_img_types = $this->config->item('allowed_img_types');
         $vars['textualPages'] = getTextualPages($this->activePages);
         $vars['nonDynPages'] = $this->config->item('no_dynamic_pages');
         $vars['numNotPreviewOrders'] = $numNotPreviewOrders;
         $vars['warnings'] = $this->warningChecker();
-        $vars['showBrands'] = $this->AdminModel->getValueStore('showBrands');
+        $vars['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
         $this->load->vars($vars);
     }
 
@@ -55,14 +55,16 @@ class ADMIN_Controller extends MX_Controller
     protected function saveHistory($activity)
     {
         if ($this->history === true) {
+            $this->load->model('History_model');
             $usr = $this->username;
-            $this->AdminModel->setHistory($activity, $usr);
+            $this->History_model->setHistory($activity, $usr);
         }
     }
 
     public function getActivePages()
     {
-        return $this->AdminModel->getPages(true, false);
+        $this->load->model('Pages_model');
+        return $this->Pages_model->getPages(true, false);
     }
 
     private function warningChecker()

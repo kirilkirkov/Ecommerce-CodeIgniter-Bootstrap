@@ -13,6 +13,12 @@ class ShopCategories extends ADMIN_Controller
 
     private $num_rows = 20;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model(array('Categories_model', 'Languages_model'));
+    }
+
     public function index($page = 0)
     {
         $this->login_check();
@@ -21,13 +27,13 @@ class ShopCategories extends ADMIN_Controller
         $head['title'] = 'Administration - Home Categories';
         $head['description'] = '!';
         $head['keywords'] = '';
-        $data['shop_categories'] = $this->AdminModel->getShopCategories($this->num_rows, $page);
-        $data['languages'] = $this->AdminModel->getLanguages();
-        $rowscount = $this->AdminModel->categoriesCount();
+        $data['shop_categories'] = $this->Categories_model->getShopCategories($this->num_rows, $page);
+        $data['languages'] = $this->Languages_model->getLanguages();
+        $rowscount = $this->Categories_model->categoriesCount();
         $data['links_pagination'] = pagination('admin/shopcategories', $rowscount, $this->num_rows, 3);
         if (isset($_GET['delete'])) {
             $this->saveHistory('Delete a shop categorie');
-            $result = $this->AdminModel->deleteShopCategorie($_GET['delete']);
+            $result = $this->Categories_model->deleteShopCategorie($_GET['delete']);
             if ($result == true) {
                 $this->saveHistory('Home Categorie id - ' . $_GET['delete']);
                 $this->session->set_flashdata('result_delete', 'Shop Categorie is deleted!');
@@ -37,7 +43,7 @@ class ShopCategories extends ADMIN_Controller
             redirect('admin/shopcategories');
         }
         if (isset($_POST['submit'])) {
-            $result = $this->AdminModel->setShopCategorie($_POST);
+            $result = $this->Categories_model->setShopCategorie($_POST);
             if ($result === true) {
                 $this->session->set_flashdata('result_add', 'Shop categorie is added!');
                 $this->saveHistory('Added shop categorie');
@@ -47,7 +53,7 @@ class ShopCategories extends ADMIN_Controller
             redirect('admin/shopcategories');
         }
         if (isset($_POST['editSubId'])) {
-            $result = $this->AdminModel->editShopCategorieSub($_POST);
+            $result = $this->Categories_model->editShopCategorieSub($_POST);
             if ($result === true) {
                 $this->session->set_flashdata('result_add', 'Subcategory changed!');
                 $this->saveHistory('Change subcategory for category id - ' . $_POST['editSubId']);
@@ -69,7 +75,7 @@ class ShopCategories extends ADMIN_Controller
     public function editShopCategorie()
     {
         $this->login_check();
-        $result = $this->AdminModel->editShopCategorie($_POST);
+        $result = $this->Categories_model->editShopCategorie($_POST);
         $this->saveHistory('Edit shop categorie to ' . $_POST['name']);
     }
 
@@ -80,7 +86,7 @@ class ShopCategories extends ADMIN_Controller
     public function changePosition()
     {
         $this->login_check();
-        $result = $this->AdminModel->editShopCategoriePosition($_POST);
+        $result = $this->Categories_model->editShopCategoriePosition($_POST);
         $this->saveHistory('Edit shop categorie position ' . $_POST['name']);
     }
 

@@ -141,32 +141,34 @@
                     <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Most Orders By Payment Type</h3>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th>Payment type</th>
-                                <th>Num Orders</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (!empty($ordersByPaymentType)) {
-                                foreach ($ordersByPaymentType as $paymentT) {
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Payment type</th>
+                                    <th>Num Orders</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (!empty($ordersByPaymentType)) {
+                                    foreach ($ordersByPaymentType as $paymentT) {
+                                        ?>
+                                        <tr>
+                                            <td><?= $paymentT['payment_type'] ?></td>
+                                            <td><?= $paymentT['num'] ?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                } else {
                                     ?>
                                     <tr>
-                                        <td><?= $paymentT['payment_type'] ?></td>
-                                        <td><?= $paymentT['num'] ?></td>
+                                        <td colspan="2">No Orders</td>
                                     </tr>
-                                    <?php
-                                }
-                            } else {
-                                ?>
-                                <tr>
-                                    <td colspan="2">No Orders</td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

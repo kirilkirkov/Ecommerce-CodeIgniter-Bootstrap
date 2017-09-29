@@ -11,14 +11,25 @@ if (!defined('BASEPATH')) {
 class Publish extends ADMIN_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model(array( 
+            'Products_model',
+            'Languages_model',
+            'Brands_model',
+            'Categories_model'
+        ));
+    }
+
     public function index($id = 0)
     {
         $this->login_check();
         $is_update = false;
         $trans_load = null;
         if ($id > 0 && $_POST == null) {
-            $_POST = $this->AdminModel->getOneproduct($id);
-            $trans_load = $this->AdminModel->getTranslations($id, 'product');
+            $_POST = $this->Products_model->getOneProduct($id);
+            $trans_load = $this->Home_admin_model->getTranslations($id, 'product');
         }
         if (isset($_POST['submit'])) {
             if ($id > 0) {
@@ -50,9 +61,9 @@ class Publish extends ADMIN_Controller
             $flipped = array_flip($_POST['translations']);
             $_POST['title_for_url'] = $_POST['title'][$flipped[MY_DEFAULT_LANGUAGE_ABBR]];
             unset($_POST['translations'], $_POST['title'], $_POST['basic_description'], $_POST['description'], $_POST['price'], $_POST['old_price']); //remove for product
-            $result = $this->AdminModel->setProduct($_POST, $id);
+            $result = $this->Products_model->setProduct($_POST, $id);
             if ($result !== false) {
-                $this->AdminModel->setProductTranslation($translations, $result, $is_update); // send to translation table
+                $this->Products_model->setProductTranslation($translations, $result, $is_update); // send to translation table
                 $this->session->set_flashdata('result_publish', 'product is published!');
                 if ($id == 0) {
                     $this->saveHistory('Success published product');
@@ -79,9 +90,9 @@ class Publish extends ADMIN_Controller
         $head['keywords'] = '';
         $data['id'] = $id;
         $data['trans_load'] = $trans_load;
-        $data['languages'] = $this->AdminModel->getLanguages();
-        $data['shop_categories'] = $this->AdminModel->getShopCategories();
-        $data['brands'] = $this->AdminModel->getBrands();
+        $data['languages'] = $this->Languages_model->getLanguages();
+        $data['shop_categories'] = $this->Categories_model->getShopCategories();
+        $data['brands'] = $this->Brands_model->getBrands();
         $data['otherImgs'] = $this->loadOthersImages();
         $this->load->view('_parts/header', $head);
         $this->load->view('ecommerce/publish', $data);

@@ -14,15 +14,15 @@ class Blog extends MY_Controller
             show_404();
         }
         $this->load->helper(array('pagination'));
-        $this->load->Model('admin/AdminModel');
-        $this->arhives = $this->Publicmodel->getArchives();
+        $this->load->Model('admin/Blog_model');
+        $this->arhives = $this->Public_model->getArchives();
     }
 
     public function index($page = 0)
     {
         $data = array();
         $head = array();
-        $arrSeo = $this->Publicmodel->getSeo('page_blog');
+        $arrSeo = $this->Public_model->getSeo('page_blog');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
@@ -36,10 +36,10 @@ class Blog extends MY_Controller
         } else {
             $month = null;
         }
-        $data['posts'] = $this->Publicmodel->getPosts($this->num_rows, $page, $find, $month);
+        $data['posts'] = $this->Public_model->getPosts($this->num_rows, $page, $find, $month);
         $data['archives'] = $this->getBlogArchiveHtml();
-        $data['bestSellers'] = $this->Publicmodel->getbestSellers();
-        $rowscount = $this->AdminModel->postsCount($find);
+        $data['bestSellers'] = $this->Public_model->getbestSellers();
+        $rowscount = $this->Blog_model->postsCount($find);
         $data['links_pagination'] = pagination('blog', $rowscount, $this->num_rows);
         $this->render('blog', $head, $data);
     }
@@ -51,7 +51,7 @@ class Blog extends MY_Controller
         }
         $data = array();
         $head = array();
-        $data['article'] = $this->Publicmodel->getOnePost($id);
+        $data['article'] = $this->Public_model->getOnePost($id);
         if ($data['article'] == null) {
             show_404();
         }

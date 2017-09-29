@@ -19,52 +19,53 @@
 <?php if ($this->session->flashdata('success')) { ?>
     <div class="alert alert-success"><?= $this->session->flashdata('success') ?></div>
 <?php } ?>
-
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr> 
-            <th>Code</th>
-            <th>Amount</th>
-            <th>Valid from</th>
-            <th>Valid to</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        if (!empty($discountCodes)) {
-            foreach ($discountCodes as $code) {
-                if ($code['status'] == 1) {
-                    $tostatus = 0;
-                } else {
-                    $tostatus = 1;
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr> 
+                <th>Code</th>
+                <th>Amount</th>
+                <th>Valid from</th>
+                <th>Valid to</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if (!empty($discountCodes)) {
+                foreach ($discountCodes as $code) {
+                    if ($code['status'] == 1) {
+                        $tostatus = 0;
+                    } else {
+                        $tostatus = 1;
+                    }
+                    ?>
+                    <tr> 
+                        <td><?= $code['code'] ?></td>
+                        <td><?= $code['type'] == 'float' ? '-' . $code['amount'] : '-' . $code['amount'] . '%' ?></td>
+                        <td><?= date('d.m.Y', $code['valid_from_date']) ?></td>
+                        <td <?= time() > $code['valid_to_date'] ? 'class="text-danger"' : '' ?>><?= date('d.m.Y', $code['valid_to_date']) ?></td>
+                        <td class="text-center">
+                            <a href="<?= base_url('admin/discounts?codeid=' . $code['id'] . '&tostatus=' . $tostatus) ?>">
+                                <?= $code['status'] == 1 ? '<span class="label label-success">Enabled</span>' : '<span class="label label-danger">Disabled</span>' ?>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a href="<?= base_url('admin/discounts?edit=' . $code['id']) ?>" class="btn btn-primary btn-xs">Edit</a>
+                        </td>
+                    </tr> 
+                    <?php
                 }
+            } else {
                 ?>
-                <tr> 
-                    <td><?= $code['code'] ?></td>
-                    <td><?= $code['type'] == 'float' ? '-' . $code['amount'] : '-' . $code['amount'] . '%' ?></td>
-                    <td><?= date('d.m.Y', $code['valid_from_date']) ?></td>
-                    <td <?= time() > $code['valid_to_date'] ? 'class="text-danger"' : '' ?>><?= date('d.m.Y', $code['valid_to_date']) ?></td>
-                    <td class="text-center">
-                        <a href="<?= base_url('admin/discounts?codeid=' . $code['id'] . '&tostatus=' . $tostatus) ?>">
-                            <?= $code['status'] == 1 ? '<span class="label label-success">Enabled</span>' : '<span class="label label-danger">Disabled</span>' ?>
-                        </a>
-                    </td>
-                    <td class="text-center">
-                        <a href="<?= base_url('admin/discounts?edit=' . $code['id']) ?>" class="btn btn-primary btn-xs">Edit</a>
-                    </td>
+                <tr>
+                    <td colspan="6">No discount codes added</td> 
                 </tr> 
-                <?php
-            }
-        } else {
-            ?>
-            <tr>
-                <td colspan="6">No discount codes added</td> 
-            </tr> 
-        <?php } ?>
-    </tbody>
-</table>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
 <?= $links_pagination ?>
 <!-- add/edit discounts -->
 <div class="modal fade" id="addDiscountCode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -119,26 +120,26 @@
 <script src="<?= base_url('assets/js/bootstrap-datepicker.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap-toggle.min.js') ?>"></script>
 <script>
-$(document).ready(function () {
-$('[data-toggle="tooltip"]').tooltip();
+                        $(document).ready(function () {
+                            $('[data-toggle="tooltip"]').tooltip();
 <?php if (isset($_POST['code'])) { ?>
-$('#addDiscountCode').modal('show');
+                                $('#addDiscountCode').modal('show');
 <?php } ?>
-});
-$('.datepicker').datepicker({
-    format: "dd.mm.yyyy"
-});
-function generateDiscountCode() {
-    var length = $('.codeLength').val();
-    if (length < 3 || length == '') {
-        alert('Too short discount code!');
-    } else {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for (var i = 0; i < length; i++) {
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-        $('[name="code"]').val(text.toUpperCase());
-    }
-}
+                        });
+                        $('.datepicker').datepicker({
+                            format: "dd.mm.yyyy"
+                        });
+                        function generateDiscountCode() {
+                            var length = $('.codeLength').val();
+                            if (length < 3 || length == '') {
+                                alert('Too short discount code!');
+                            } else {
+                                var text = "";
+                                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                                for (var i = 0; i < length; i++) {
+                                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+                                }
+                                $('[name="code"]').val(text.toUpperCase());
+                            }
+                        }
 </script>

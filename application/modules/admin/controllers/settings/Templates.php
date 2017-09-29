@@ -11,6 +11,11 @@ if (!defined('BASEPATH')) {
 class Templates extends ADMIN_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index()
     {
         $this->login_check();
@@ -20,7 +25,7 @@ class Templates extends ADMIN_Controller
         $head['description'] = '!';
         $head['keywords'] = '';
         if (isset($_POST['template'])) {
-            $this->AdminModel->setValueStore('template', $_POST['template']);
+            $this->Home_admin_model->setValueStore('template', $_POST['template']);
             redirect('admin/templates');
         }
         $templates = scandir(TEMPLATES_DIR);
@@ -29,7 +34,7 @@ class Templates extends ADMIN_Controller
                 $data['templates'][] = $template;
             }
         }
-        $data['seleced_template'] = $this->AdminModel->getValueStore('template');
+        $data['seleced_template'] = $this->Home_admin_model->getValueStore('template');
         $this->load->view('_parts/header', $head);
         $this->load->view('settings/templates', $data);
         $this->load->view('_parts/footer');

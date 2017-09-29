@@ -11,6 +11,12 @@ if (!defined('BASEPATH')) {
 class Brands extends ADMIN_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Brands_model');
+    }
+
     public function index()
     {
         $this->login_check();
@@ -21,16 +27,16 @@ class Brands extends ADMIN_Controller
         $head['keywords'] = '';
 
         if (isset($_POST['name'])) {
-            $this->AdminModel->setBrand($_POST['name']);
+            $this->Brands_model->setBrand($_POST['name']);
             redirect('admin/brands');
         }
 
         if (isset($_GET['delete'])) {
-            $this->AdminModel->deleteBrand($_GET['delete']);
+            $this->Brands_model->deleteBrand($_GET['delete']);
             redirect('admin/brands');
         }
 
-        $data['brands'] = $this->AdminModel->getBrands();
+        $data['brands'] = $this->Brands_model->getBrands();
 
         $this->load->view('_parts/header', $head);
         $this->load->view('ecommerce/brands', $data);

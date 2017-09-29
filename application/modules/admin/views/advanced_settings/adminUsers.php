@@ -23,38 +23,41 @@
     }
     ?>
     <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_users" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add new user</a>
+    <div class="clearfix"></div>
     <?php
     if ($users->result()) {
         ?>
-        <table class="table table-striped custab">
-            <thead>
-                <tr>
-                    <th>#ID</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Email</th>
-                    <th>Notifications</th>
-                    <th>Last login</th>
-                    <th class="text-center">Action</th>
-                </tr>
-            </thead>
-            <?php foreach ($users->result() as $user) { ?>
-                <tr>
-                    <td><?= $user->id ?></td>
-                    <td><?= $user->username ?></td>
-                    <td><b>hidden ;)</b></td>
-                    <td><?= $user->email ?></td>
-                    <td><?= $user->notify ?></td>
-                    <td><?= date('d.m.Y - H:m:s', $user->last_login) ?></td>
-                    <td class="text-center">
-                        <div>
-                            <a href="?delete=<?= $user->id ?>" class="confirm-delete">Delete</a>
-                            <a href="?edit=<?= $user->id ?>">Edit</a>
-                        </div>
-                    </td>
-                </tr>
-            <?php } ?>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped custab">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Email</th>
+                        <th>Notifications</th>
+                        <th>Last login</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <?php foreach ($users->result() as $user) { ?>
+                    <tr>
+                        <td><?= $user->id ?></td>
+                        <td><?= $user->username ?></td>
+                        <td><b>hidden ;)</b></td>
+                        <td><?= $user->email ?></td>
+                        <td><?= $user->notify ?></td>
+                        <td><?= date('d.m.Y - H:m:s', $user->last_login) ?></td>
+                        <td class="text-center">
+                            <div>
+                                <a href="?delete=<?= $user->id ?>" class="confirm-delete">Delete</a>
+                                <a href="?edit=<?= $user->id ?>">Edit</a>
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
+        </div>
     <?php } else { ?>
         <div class="clearfix"></div><hr>
         <div class="alert alert-info">No users found!</div>
@@ -90,7 +93,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <input type="submit" class="btn btn-primary" value="Save">
                     </div>
                 </form>
             </div>

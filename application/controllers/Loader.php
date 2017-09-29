@@ -34,8 +34,8 @@ class Loader extends MY_Controller
 
     public function cssStyle()
     {
-        $this->load->Model('admin/AdminModel');
-        $style = $this->AdminModel->getValueStore('newStyle');
+        $this->load->Model('admin/Home_admin_model');
+        $style = $this->Home_admin_model->getValueStore('newStyle');
         if ($style == null) {
             $template = $this->template;
             $style = file_get_contents(VIEWS_DIR . $template . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'default-gradient.css');

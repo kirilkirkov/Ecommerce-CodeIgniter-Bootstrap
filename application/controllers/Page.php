@@ -8,13 +8,13 @@ class Page extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->Model('Publicmodel');
+        $this->load->Model('Public_model');
     }
 
     public function index($page = null)
     {
         $this->goOut($page);
-        $page = $this->Publicmodel->getOnePage($page);
+        $page = $this->Public_model->getOnePage($page);
         $this->goOut($page);
         $data = array();
         $head = array();

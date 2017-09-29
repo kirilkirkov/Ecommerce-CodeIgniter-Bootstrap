@@ -20,6 +20,7 @@
     }
     ?>
     <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_articles" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add shop categorie</a>
+    <div class="clearfix"></div>
     <?php
     if (!empty($shop_categories)) {
         ?>

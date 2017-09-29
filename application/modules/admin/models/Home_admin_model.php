@@ -151,30 +151,48 @@ class Home_admin_model extends CI_Model
     {
         $query = $this->db->query('SELECT id FROM cookie_law');
         if ($query->num_rows() == 0) {
-            $id = 1;
+            $update = false;
         } else {
             $result = $query->row_array();
-            $id = $result['id'];
+            $update = $result['id'];
         }
 
-        $this->db->replace('cookie_law', array(
-            'id' => $id,
-            'link' => $post['link'],
-            'theme' => $post['theme'],
-            'visibility' => $post['visibility']
-        ));
-        $for_id = $this->db->insert_id();
-
-        $i = 0;
-        foreach ($post['translations'] as $translate) {
-            $this->db->replace('cookie_law_translations', array(
-                'message' => htmlspecialchars($post['message'][$i]),
-                'button_text' => htmlspecialchars($post['button_text'][$i]),
-                'learn_more' => htmlspecialchars($post['learn_more'][$i]),
-                'abbr' => $translate,
-                'for_id' => $for_id
+        if ($update === false) {
+            $this->db->insert('cookie_law', array(
+                'link' => $post['link'],
+                'theme' => $post['theme'],
+                'visibility' => $post['visibility']
             ));
-            $i++;
+            $for_id = $this->db->insert_id();
+            $i = 0;
+            foreach ($post['translations'] as $translate) {
+                $this->db->insert('cookie_law_translations', array(
+                    'message' => htmlspecialchars($post['message'][$i]),
+                    'button_text' => htmlspecialchars($post['button_text'][$i]),
+                    'learn_more' => htmlspecialchars($post['learn_more'][$i]),
+                    'abbr' => $translate,
+                    'for_id' => $for_id
+                ));
+                $i++;
+            }
+        } else {
+            $this->db->where('id', $update);
+            $this->db->update('cookie_law', array(
+                'link' => $post['link'],
+                'theme' => $post['theme'],
+                'visibility' => $post['visibility']
+            ));
+            $i = 0;
+            foreach ($post['translations'] as $translate) {
+                $this->db->where('for_id', $update);
+                $this->db->where('abbr', $translate);
+                $this->db->update('cookie_law_translations', array(
+                    'message' => htmlspecialchars($post['message'][$i]),
+                    'button_text' => htmlspecialchars($post['button_text'][$i]),
+                    'learn_more' => htmlspecialchars($post['learn_more'][$i])
+                ));
+                $i++;
+            }
         }
     }
 

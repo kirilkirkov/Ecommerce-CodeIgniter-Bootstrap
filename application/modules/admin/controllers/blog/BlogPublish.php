@@ -26,7 +26,7 @@ class BlogPublish extends ADMIN_Controller
             $is_update = true;
         if ($id > 0 && $_POST == null) {
             $_POST = $this->Blog_model->getOnePost($id);
-            $trans_load = $this->Blog_model->getTranslations($id, 'blog');
+            $trans_load = $this->Home_admin_model->getTranslations($id, 'blog');
         }
         if (isset($_POST['submit'])) {
             unset($_POST['submit']);

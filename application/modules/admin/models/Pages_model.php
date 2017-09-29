@@ -33,11 +33,12 @@ class Pages_model extends CI_Model
 
     public function setPage($name)
     {
+        $this->load->model('Languages_model');
         $name = strtolower($name);
         $name = str_replace(' ', '-', $name);
         $this->db->insert('active_pages', array('name' => $name, 'enabled' => 1));
         $thisId = $this->db->insert_id();
-        $languages = $this->getLanguages();
+        $languages = $this->Languages_model->getLanguages();
         foreach ($languages->result() as $language) {
             $this->db->insert('translations', array(
                 'type' => 'page',

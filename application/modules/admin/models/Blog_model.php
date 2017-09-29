@@ -72,7 +72,7 @@ class Blog_model extends CI_Model
     public function setBlogTranslations($post, $id, $is_update)
     {
         $i = 0;
-        $current_trans = $this->getTranslations($id, 'blog');
+        $current_trans = $this->Home_admin_model->getTranslations($id, 'blog');
         foreach ($post['abbr'] as $abbr) {
             $arr = array();
             $emergency_insert = false;

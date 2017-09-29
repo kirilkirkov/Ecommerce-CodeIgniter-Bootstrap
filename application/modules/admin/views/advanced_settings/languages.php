@@ -31,6 +31,7 @@
     if (!isset($writable)) {
         ?>
         <a href="javascript:void(0);" data-toggle="modal" data-target="#addLanguage" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add new language</a>
+        <div class="clearfix"></div>
         <?php
     }
     if ($languages->result()) {

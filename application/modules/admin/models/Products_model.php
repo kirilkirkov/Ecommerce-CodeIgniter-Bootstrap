@@ -116,8 +116,9 @@ class Products_model extends CI_Model
 
     public function setProductTranslation($post, $id, $is_update)
     {
+       // $this->load->model('Languages_model', 'getTranslations');
         $i = 0;
-        $current_trans = $this->getTranslations($id, 'product');
+        $current_trans = $this->Home_admin_model->getTranslations($id, 'product');
         foreach ($post['abbr'] as $abbr) {
             $arr = array();
             $emergency_insert = false;

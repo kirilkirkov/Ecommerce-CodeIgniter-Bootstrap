@@ -22,7 +22,14 @@ class History_model extends CI_Model
 
     public function setHistory($activity, $user)
     {
-        $this->db->insert('history', array('activity' => $activity, 'username' => $user, 'time' => time()));
+        if (!$this->db->insert('history', array(
+                    'activity' => $activity,
+                    'username' => $user,
+                    'time' => time())
+                )) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
     }
 
 }

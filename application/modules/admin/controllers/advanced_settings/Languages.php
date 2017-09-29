@@ -70,14 +70,10 @@ class Languages extends ADMIN_Controller
                         $_POST['flag'] = $img['file_name'];
                     }
                 }
-                $result = $this->Languages_model->setLanguage($_POST);
-                if ($result === true) {
-                    $this->createLangFolders();
-                    $this->session->set_flashdata('result_add', 'Language is added!');
-                    $this->saveHistory('Create language - ' . $_POST['abbr']);
-                } else {
-                    $this->session->set_flashdata('result_add', 'Problem with language add!');
-                }
+                $this->Languages_model->setLanguage($_POST);
+                $this->createLangFolders();
+                $this->session->set_flashdata('result_add', 'Language is added!');
+                $this->saveHistory('Create language - ' . $_POST['abbr']);
             } else
                 $this->session->set_flashdata('result_add', 'This language exsists!');
             redirect('admin/languages');

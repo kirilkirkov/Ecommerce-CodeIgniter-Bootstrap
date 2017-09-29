@@ -10,8 +10,15 @@ class Blog_model extends CI_Model
 
     public function deletePost($id)
     {
+        $this->db->trans_begin();
         $this->db->where('id', $id)->delete('blog_posts');
         $this->db->where('for_id', $id)->where('type', 'blog')->delete('translations');
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            show_error(lang('database_error'));
+        } else {
+            $this->db->trans_commit();
+        }
     }
 
     public function postsCount($search = null)
@@ -48,32 +55,57 @@ class Blog_model extends CI_Model
 
     public function setPost($post, $id)
     {
+        $this->db->trans_begin();
+        $is_update = false;
         if ($id > 0) {
-            return $id;
+            $is_update = true;
+            $this->db->where('id', $id);
+            if (!$this->db->update('blog_posts', array(
+                        'image' => $post['image'] != null ? $_POST['image'] : $_POST['old_image']
+                    ))) {
+                log_message('error', print_r($this->db->error(), true));
+            }
         } else {
-            $post['time'] = time();
-            $title = str_replace('"', "'", $post['title']);
-            unset($post['title']);
-            $result = $this->db->insert('blog_posts', $post);
-            $last_id = $this->db->insert_id();
-
-            $arr = array();
-
-            $arr['url'] = str_replace(' ', '-', except_letters($title)) . '_' . $last_id . '';
-            $this->db->where('id', $last_id);
-            $this->db->update('blog_posts', $arr);
-
-            if ($result === true)
-                $result = $last_id;
+            /*
+             * Lets get what is default tranlsation number
+             * in titles and convert it to url
+             * We want our plaform public ulrs to be in default 
+             * language that we use
+             */
+            $i = 0;
+            foreach ($_POST['translations'] as $translation) {
+                if ($translation == MY_DEFAULT_LANGUAGE_ABBR) {
+                    $myTranslationNum = $i;
+                }
+                $i++;
+            }
+            if (!$this->db->insert('blog_posts', array(
+                        'image' => $post['image'],
+                        'time' => time()
+                    ))) {
+                log_message('error', print_r($this->db->error(), true));
+            }
+            $id = $this->db->insert_id();
+            if (!$this->db->update('blog_posts', array(
+                        'url' => except_letters($_POST['title'][$myTranslationNum]) . '_' . $id
+                    ))) {
+                log_message('error', print_r($this->db->error(), true));
+            }
         }
-        return $result;
+        $this->setBlogTranslations($post, $id, $is_update);
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            show_error(lang('database_error'));
+        } else {
+            $this->db->trans_commit();
+        }
     }
 
-    public function setBlogTranslations($post, $id, $is_update)
+    private function setBlogTranslations($post, $id, $is_update)
     {
         $i = 0;
         $current_trans = $this->Home_admin_model->getTranslations($id, 'blog');
-        foreach ($post['abbr'] as $abbr) {
+        foreach ($post['translations'] as $abbr) {
             $arr = array();
             $emergency_insert = false;
             if (!isset($current_trans[$abbr])) {
@@ -90,9 +122,14 @@ class Blog_model extends CI_Model
             if ($is_update === true && $emergency_insert === false) {
                 $abbr = $arr['abbr'];
                 unset($arr['for_id'], $arr['abbr'], $arr['url']);
-                $this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'blog')->update('translations', $arr);
-            } else
-                $this->db->insert('translations', $arr);
+                if (!$this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'blog')->update('translations', $arr)) {
+                    log_message('error', print_r($this->db->error(), true));
+                }
+            } else {
+                if (!$this->db->insert('translations', $arr)) {
+                    log_message('error', print_r($this->db->error(), true));
+                }
+            }
             $i++;
         }
     }

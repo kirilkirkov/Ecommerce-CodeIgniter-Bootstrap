@@ -17,19 +17,25 @@ class Titles_model extends CI_Model
                 $this->db->where('abbr', $abbr);
                 $num_rows = $this->db->count_all_results('translations');
                 if ($num_rows == 0) {
-                    $this->db->insert('translations', array(
-                        'type' => 'page_' . $page,
-                        'abbr' => $abbr,
-                        'title' => $translations['title'][$i],
-                        'description' => $translations['description'][$i]
-                    ));
+                    if (!$this->db->insert('translations', array(
+                                'type' => 'page_' . $page,
+                                'abbr' => $abbr,
+                                'title' => $translations['title'][$i],
+                                'description' => $translations['description'][$i]
+                            ))) {
+                        log_message('error', print_r($this->db->error(), true));
+                        show_error(lang('database_error'));
+                    }
                 } else {
                     $this->db->where('type', 'page_' . $page);
                     $this->db->where('abbr', $abbr);
-                    $this->db->update('translations', array(
-                        'title' => $translations['title'][$i],
-                        'description' => $translations['description'][$i]
-                    ));
+                    if (!$this->db->update('translations', array(
+                                'title' => $translations['title'][$i],
+                                'description' => $translations['description'][$i]
+                            ))) {
+                        log_message('error', print_r($this->db->error(), true));
+                        show_error(lang('database_error'));
+                    }
                 }
                 $i++;
             }

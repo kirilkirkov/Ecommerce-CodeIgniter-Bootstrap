@@ -16,12 +16,18 @@ class Brands_model extends CI_Model
 
     public function setBrand($name)
     {
-        $this->db->insert('brands', array('name' => $name));
+        if (!$this->db->insert('brands', array('name' => $name))) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
     }
 
     public function deleteBrand($id)
     {
-        $this->db->where('id', $id)->delete('brands');
+        if (!$this->db->where('id', $id)->delete('brands')) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
     }
 
 }

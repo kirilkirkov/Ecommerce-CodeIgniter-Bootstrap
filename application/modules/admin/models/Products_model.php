@@ -10,13 +10,23 @@ class Products_model extends CI_Model
 
     public function deleteProduct($id)
     {
+        $this->db->trans_begin();
         $this->db->where('for_id', $id);
         $this->db->where('type', 'product');
-        $this->db->delete('translations');
+        if (!$this->db->delete('translations')) {
+            log_message('error', print_r($this->db->error(), true));
+        }
 
         $this->db->where('id', $id);
-        $result = $this->db->delete('products');
-        return $result;
+        if (!$this->db->delete('products')) {
+            log_message('error', print_r($this->db->error(), true));
+        }
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            show_error(lang('database_error'));
+        } else {
+            $this->db->trans_commit();
+        }
     }
 
     public function productsCount($search_title = null, $category = null)
@@ -104,19 +114,19 @@ class Products_model extends CI_Model
             $result = $this->db->insert('products', $post);
             $last_id = $this->db->insert_id();
         }
-        if ($result == false)
+        if ($result == false) {
             return false;
-        else {
-            if ($id > 0)
+        } else {
+            if ($id > 0) {
                 return $id;
-            else
+            } else {
                 return $last_id;
+            }
         }
     }
 
     public function setProductTranslation($post, $id, $is_update)
     {
-       // $this->load->model('Languages_model', 'getTranslations');
         $i = 0;
         $current_trans = $this->Home_admin_model->getTranslations($id, 'product');
         foreach ($post['abbr'] as $abbr) {
@@ -142,8 +152,9 @@ class Products_model extends CI_Model
                 $abbr = $arr['abbr'];
                 unset($arr['for_id'], $arr['abbr'], $arr['url']);
                 $this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'product')->update('translations', $arr);
-            } else
+            } else {
                 $this->db->insert('translations', $arr);
+            }
             $i++;
         }
     }

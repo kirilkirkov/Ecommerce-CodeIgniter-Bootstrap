@@ -11,8 +11,10 @@ class Admin_users_model extends CI_Model
     public function deleteAdminUser($id)
     {
         $this->db->where('id', $id);
-        $result = $this->db->delete('users');
-        return $result;
+        if (!$this->db->delete('users')) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
     }
 
     public function getAdminUsers($user = null)
@@ -40,13 +42,18 @@ class Admin_users_model extends CI_Model
             }
             $this->db->where('id', $post['edit']);
             unset($post['id'], $post['edit']);
-            $result = $this->db->update('users', $post);
+            if (!$this->db->update('users', $post)) {
+                log_message('error', print_r($this->db->error(), true));
+                show_error(lang('database_error'));
+            }
         } else {
             unset($post['edit']);
             $post['password'] = md5($post['password']);
-            $result = $this->db->insert('users', $post);
+            if (!$this->db->insert('users', $post)) {
+                log_message('error', print_r($this->db->error(), true));
+                show_error(lang('database_error'));
+            }
         }
-        return $result;
     }
 
 }

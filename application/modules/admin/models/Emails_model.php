@@ -22,7 +22,10 @@ class Emails_model extends CI_Model
 
     public function deleteEmail($id)
     {
-        $this->db->where('id', $id)->delete('subscribed');
+        if (!$this->db->where('id', $id)->delete('subscribed')) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
     }
 
 }

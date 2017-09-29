@@ -4,7 +4,10 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-function except_letters($str)
+function except_letters($string)
 {
-    return mb_ereg_replace('[^a-zA-Zа-яА-Я0-9\s]', '', $str);
+    $onlyLetters = mb_ereg_replace('[^\\p{L}\s]', '', $string);
+    $onlyLetters = preg_replace('/([\s])\1+/', ' ', $onlyLetters);
+    $onlyLetters = preg_replace('/\s/', '_', trim($onlyLetters));
+    return $onlyLetters;
 }

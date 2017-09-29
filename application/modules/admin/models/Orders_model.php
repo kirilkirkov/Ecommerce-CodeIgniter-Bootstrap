@@ -68,10 +68,18 @@ class Orders_model extends CI_Model
         $arr = $result->row_array();
         $products = unserialize($arr['products']);
         foreach ($products as $product_id => $quantity) {
-            if (isset($operator))
-                $this->db->query('UPDATE products SET quantity=quantity' . $operator . $quantity . ' WHERE id = ' . $product_id);
-            if (isset($operator_pro))
-                $this->db->query('UPDATE products SET procurement=procurement' . $operator_pro . $quantity . ' WHERE id = ' . $product_id);
+            if (isset($operator)) {
+                if (!$this->db->query('UPDATE products SET quantity=quantity' . $operator . $quantity . ' WHERE id = ' . $product_id)) {
+                    log_message('error', print_r($this->db->error(), true));
+                    show_error(lang('database_error'));
+                }
+            }
+            if (isset($operator_pro)) {
+                if (!$this->db->query('UPDATE products SET procurement=procurement' . $operator_pro . $quantity . ' WHERE id = ' . $product_id)) {
+                    log_message('error', print_r($this->db->error(), true));
+                    show_error(lang('database_error'));
+                }
+            }
         }
     }
 
@@ -85,7 +93,10 @@ class Orders_model extends CI_Model
             $id = $result['id'];
         }
         $post['id'] = $id;
-        $this->db->replace('bank_accounts', $post);
+        if (!$this->db->replace('bank_accounts', $post)) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
     }
 
     public function getBankAccountSettings()

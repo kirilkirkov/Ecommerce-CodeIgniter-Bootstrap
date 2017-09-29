@@ -33,23 +33,13 @@ class ShopCategories extends ADMIN_Controller
         $data['links_pagination'] = pagination('admin/shopcategories', $rowscount, $this->num_rows, 3);
         if (isset($_GET['delete'])) {
             $this->saveHistory('Delete a shop categorie');
-            $result = $this->Categories_model->deleteShopCategorie($_GET['delete']);
-            if ($result == true) {
-                $this->saveHistory('Home Categorie id - ' . $_GET['delete']);
-                $this->session->set_flashdata('result_delete', 'Shop Categorie is deleted!');
-            } else {
-                $this->session->set_flashdata('result_delete', 'Problem with Shop Categorie delete!');
-            }
+            $this->Categories_model->deleteShopCategorie($_GET['delete']);
+            $this->session->set_flashdata('result_delete', 'Shop Categorie is deleted!');
             redirect('admin/shopcategories');
         }
         if (isset($_POST['submit'])) {
-            $result = $this->Categories_model->setShopCategorie($_POST);
-            if ($result === true) {
-                $this->session->set_flashdata('result_add', 'Shop categorie is added!');
-                $this->saveHistory('Added shop categorie');
-            } else {
-                $this->session->set_flashdata('result_add', 'Problem with Shop categorie add!');
-            }
+            $this->Categories_model->setShopCategorie($_POST);
+            $this->session->set_flashdata('result_add', 'Shop categorie is added!');
             redirect('admin/shopcategories');
         }
         if (isset($_POST['editSubId'])) {

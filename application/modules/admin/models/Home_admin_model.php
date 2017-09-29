@@ -104,9 +104,15 @@ class Home_admin_model extends CI_Model
         $query = $this->db->get('value_store');
         if ($query->num_rows() > 0) {
             $this->db->where('thekey', $key);
-            $this->db->update('value_store', array('value' => $value));
+            if (!$this->db->update('value_store', array('value' => $value))) {
+                log_message('error', print_r($this->db->error(), true));
+                show_error(lang('database_error'));
+            }
         } else {
-            $this->db->insert('value_store', array('value' => $value, 'thekey' => $key));
+            if (!$this->db->insert('value_store', array('value' => $value, 'thekey' => $key))) {
+                log_message('error', print_r($this->db->error(), true));
+                show_error(lang('database_error'));
+            }
         }
     }
 
@@ -158,40 +164,62 @@ class Home_admin_model extends CI_Model
         }
 
         if ($update === false) {
-            $this->db->insert('cookie_law', array(
-                'link' => $post['link'],
-                'theme' => $post['theme'],
-                'visibility' => $post['visibility']
-            ));
+            $this->db->trans_begin();
+            if (!$this->db->insert('cookie_law', array(
+                        'link' => $post['link'],
+                        'theme' => $post['theme'],
+                        'visibility' => $post['visibility']
+                    ))) {
+                log_message('error', print_r($this->db->error(), true));
+            }
             $for_id = $this->db->insert_id();
             $i = 0;
             foreach ($post['translations'] as $translate) {
-                $this->db->insert('cookie_law_translations', array(
-                    'message' => htmlspecialchars($post['message'][$i]),
-                    'button_text' => htmlspecialchars($post['button_text'][$i]),
-                    'learn_more' => htmlspecialchars($post['learn_more'][$i]),
-                    'abbr' => $translate,
-                    'for_id' => $for_id
-                ));
+                if (!$this->db->insert('cookie_law_translations', array(
+                            'message' => htmlspecialchars($post['message'][$i]),
+                            'button_text' => htmlspecialchars($post['button_text'][$i]),
+                            'learn_more' => htmlspecialchars($post['learn_more'][$i]),
+                            'abbr' => $translate,
+                            'for_id' => $for_id
+                        ))) {
+                    log_message('error', print_r($this->db->error(), true));
+                }
                 $i++;
             }
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                show_error(lang('database_error'));
+            } else {
+                $this->db->trans_commit();
+            }
         } else {
+            $this->db->trans_begin();
             $this->db->where('id', $update);
-            $this->db->update('cookie_law', array(
-                'link' => $post['link'],
-                'theme' => $post['theme'],
-                'visibility' => $post['visibility']
-            ));
+            if (!$this->db->update('cookie_law', array(
+                        'link' => $post['link'],
+                        'theme' => $post['theme'],
+                        'visibility' => $post['visibility']
+                    ))) {
+                log_message('error', print_r($this->db->error(), true));
+            }
             $i = 0;
             foreach ($post['translations'] as $translate) {
                 $this->db->where('for_id', $update);
                 $this->db->where('abbr', $translate);
-                $this->db->update('cookie_law_translations', array(
-                    'message' => htmlspecialchars($post['message'][$i]),
-                    'button_text' => htmlspecialchars($post['button_text'][$i]),
-                    'learn_more' => htmlspecialchars($post['learn_more'][$i])
-                ));
+                if (!$this->db->update('cookie_law_translations', array(
+                            'message' => htmlspecialchars($post['message'][$i]),
+                            'button_text' => htmlspecialchars($post['button_text'][$i]),
+                            'learn_more' => htmlspecialchars($post['learn_more'][$i])
+                        ))) {
+                    log_message('error', print_r($this->db->error(), true));
+                }
                 $i++;
+            }
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                show_error(lang('database_error'));
+            } else {
+                $this->db->trans_commit();
             }
         }
     }

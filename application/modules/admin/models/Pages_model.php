@@ -36,26 +36,49 @@ class Pages_model extends CI_Model
         $this->load->model('Languages_model');
         $name = strtolower($name);
         $name = str_replace(' ', '-', $name);
-        $this->db->insert('active_pages', array('name' => $name, 'enabled' => 1));
+        $this->db->trans_begin();
+        if (!$this->db->insert('active_pages', array('name' => $name, 'enabled' => 1))) {
+            log_message('error', print_r($this->db->error(), true));
+        }
         $thisId = $this->db->insert_id();
         $languages = $this->Languages_model->getLanguages();
         foreach ($languages->result() as $language) {
-            $this->db->insert('translations', array(
-                'type' => 'page',
-                'for_id' => $thisId,
-                'abbr' => $language->abbr
-            ));
+            if (!$this->db->insert('translations', array(
+                        'type' => 'page',
+                        'for_id' => $thisId,
+                        'abbr' => $language->abbr
+                    ))) {
+                log_message('error', print_r($this->db->error(), true));
+            }
+        }
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            show_error(lang('database_error'));
+        } else {
+            $this->db->trans_commit();
         }
     }
 
     public function deletePage($id)
     {
+        $this->db->trans_begin();
         $this->db->where('id', $id);
-        $this->db->delete('active_pages');
+        if (!$this->db->delete('active_pages')) {
+            log_message('error', print_r($this->db->error(), true));
+        }
 
         $this->db->where('for_id', $id);
         $this->db->where('type', 'page');
-        $this->db->delete('translations');
+        if (!$this->db->delete('translations')) {
+            log_message('error', print_r($this->db->error(), true));
+        }
+
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            show_error(lang('database_error'));
+        } else {
+            $this->db->trans_commit();
+        }
     }
 
 }

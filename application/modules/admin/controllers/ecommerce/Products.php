@@ -29,13 +29,9 @@ class Products extends ADMIN_Controller
         $head['keywords'] = '';
 
         if (isset($_GET['delete'])) {
-            $result = $this->Products_model->deleteProduct($_GET['delete']);
-            if ($result == true) {
-                $this->session->set_flashdata('result_delete', 'product is deleted!');
-                $this->saveHistory('Delete product id - ' . $_GET['delete']);
-            } else {
-                $this->session->set_flashdata('result_delete', 'Problem with product delete!');
-            }
+            $this->Products_model->deleteProduct($_GET['delete']);
+            $this->session->set_flashdata('result_delete', 'product is deleted!');
+            $this->saveHistory('Delete product id - ' . $_GET['delete']);
             redirect('admin/products');
         }
 

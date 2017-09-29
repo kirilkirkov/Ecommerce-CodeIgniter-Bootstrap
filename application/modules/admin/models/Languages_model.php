@@ -46,8 +46,10 @@ class Languages_model extends CI_Model
     {
         $post['name'] = strtolower($post['name']);
         $post['abbr'] = strtolower($post['abbr']);
-        $result = $this->db->insert('languages', $post);
-        return $result;
+        if (!$this->db->insert('languages', $post)) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
     }
 
 }

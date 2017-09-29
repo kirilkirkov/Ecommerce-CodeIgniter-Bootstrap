@@ -18,9 +18,12 @@ class Discounts_model extends CI_Model
     public function changeCodeDiscountStatus($codeId, $toStatus)
     {
         $this->db->where('id', $codeId);
-        $this->db->update('discount_codes', array(
-            'status' => $toStatus
-        ));
+        if (!$this->db->update('discount_codes', array(
+                    'status' => $toStatus
+                ))) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
     }
 
     public function discountCodesCount()
@@ -36,25 +39,31 @@ class Discounts_model extends CI_Model
 
     public function setDiscountCode($post)
     {
-        $this->db->insert('discount_codes', array(
-            'type' => $post['type'],
-            'code' => trim($post['code']),
-            'amount' => $post['amount'],
-            'valid_from_date' => strtotime($post['valid_from_date']),
-            'valid_to_date' => strtotime($post['valid_to_date'])
-        ));
+        if (!$this->db->insert('discount_codes', array(
+                    'type' => $post['type'],
+                    'code' => trim($post['code']),
+                    'amount' => $post['amount'],
+                    'valid_from_date' => strtotime($post['valid_from_date']),
+                    'valid_to_date' => strtotime($post['valid_to_date'])
+                ))) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
     }
 
     public function updateDiscountCode($post)
     {
         $this->db->where('id', $post['update']);
-        $this->db->update('discount_codes', array(
-            'type' => $post['type'],
-            'code' => trim($post['code']),
-            'amount' => $post['amount'],
-            'valid_from_date' => strtotime($post['valid_from_date']),
-            'valid_to_date' => strtotime($post['valid_to_date'])
-        ));
+        if (!$this->db->update('discount_codes', array(
+                    'type' => $post['type'],
+                    'code' => trim($post['code']),
+                    'amount' => $post['amount'],
+                    'valid_from_date' => strtotime($post['valid_from_date']),
+                    'valid_to_date' => strtotime($post['valid_to_date'])
+                ))) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
     }
 
     public function discountCodeTakenCheck($post)

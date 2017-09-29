@@ -21,13 +21,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <input type="hidden" value="<?= $paypal_email ?>" name="business">
             <input type="hidden" name="upload" value="1">
             <?php
-            $discount = $_SESSION['discountAmount'] / count($cartItems['array']); // discount for each item
+            if ($_SESSION['discountAmount'] == '' || $_SESSION['discountAmount'] == 0) {
+                $discount = false;
+            } else {
+                $discount = $_SESSION['discountAmount'] / count($cartItems['array']); // discount for each item
+            }
             $i = 1;
             foreach ($cartItems['array'] as $item) {
                 ?>
                 <input type="hidden" name="item_name_<?= $i ?>" value="<?= $item['title'] ?>">
                 <input type="hidden" name="amount_<?= $i ?>" value="<?= convertCurrency($item['price'], CURRENCY_KEY, $paypal_currency) ?>">
-                <input type="hidden" name="discount_amount_<?= $i ?>" value="<?= convertCurrency($discount, CURRENCY_KEY, $paypal_currency) ?>">
+                <input type="hidden" name="discount_amount_<?= $i ?>" value="<?= $discount !== false ? convertCurrency($discount, CURRENCY_KEY, $paypal_currency) : 0 ?>">
                 <input type="hidden" name="quantity_<?= $i ?>" value="<?= $item['num_added'] ?>">
                 <?php
                 $i++;

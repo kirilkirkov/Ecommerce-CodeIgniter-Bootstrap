@@ -26,7 +26,7 @@ class Contacts extends MY_Controller
         }
         $data['googleMaps'] = $this->Home_admin_model->getValueStore('googleMaps');
         $data['googleApi'] = $this->Home_admin_model->getValueStore('googleApi');
-        $arrSeo = $this->Public_model->getSeo('page_contacts');
+        $arrSeo = $this->Public_model->getSeo('contacts');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);

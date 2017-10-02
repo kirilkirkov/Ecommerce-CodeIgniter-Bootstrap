@@ -15,7 +15,7 @@ class ShoppingCartPage extends MY_Controller
     {
         $data = array();
         $head = array();
-        $arrSeo = $this->Public_model->getSeo('page_shoppingcart');
+        $arrSeo = $this->Public_model->getSeo('shoppingcart');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);

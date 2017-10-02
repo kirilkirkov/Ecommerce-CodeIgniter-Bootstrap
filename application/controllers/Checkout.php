@@ -18,7 +18,7 @@ class Checkout extends MY_Controller
     {
         $data = array();
         $head = array();
-        $arrSeo = $this->Public_model->getSeo('page_checkout');
+        $arrSeo = $this->Public_model->getSeo('checkout');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
@@ -113,7 +113,7 @@ class Checkout extends MY_Controller
         if ($this->session->flashdata('order_error')) {
             $data = array();
             $head = array();
-            $arrSeo = $this->Public_model->getSeo('page_checkout');
+            $arrSeo = $this->Public_model->getSeo('checkout');
             $head['title'] = @$arrSeo['title'];
             $head['description'] = @$arrSeo['description'];
             $head['keywords'] = str_replace(" ", ",", $head['title']);
@@ -127,7 +127,7 @@ class Checkout extends MY_Controller
     {
         $data = array();
         $head = array();
-        $arrSeo = $this->Public_model->getSeo('page_checkout');
+        $arrSeo = $this->Public_model->getSeo('checkout');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
@@ -142,7 +142,7 @@ class Checkout extends MY_Controller
         if ($this->session->flashdata('success_order')) {
             $data = array();
             $head = array();
-            $arrSeo = $this->Public_model->getSeo('page_checkout');
+            $arrSeo = $this->Public_model->getSeo('checkout');
             $head['title'] = @$arrSeo['title'];
             $head['description'] = @$arrSeo['description'];
             $head['keywords'] = str_replace(" ", ",", $head['title']);
@@ -157,7 +157,7 @@ class Checkout extends MY_Controller
         if ($this->session->flashdata('success_order')) {
             $data = array();
             $head = array();
-            $arrSeo = $this->Public_model->getSeo('page_checkout');
+            $arrSeo = $this->Public_model->getSeo('checkout');
             $head['title'] = @$arrSeo['title'];
             $head['description'] = @$arrSeo['description'];
             $head['keywords'] = str_replace(" ", ",", $head['title']);

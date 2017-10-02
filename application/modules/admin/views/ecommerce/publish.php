@@ -149,7 +149,7 @@ if ($this->session->flashdata('result_publish')) {
     <div class="form-group for-shop">
         <a class="btn btn-default btn-xs" data-target="#modalConvertor" data-toggle="modal" href="javascript:void(0)">Convert currency <span class="glyphicon glyphicon-euro"></span></a>
     </div>
-    <button type="submit" name="submit" class="btn btn-lg btn-default">Publish</button>
+    <button type="submit" name="submit" class="btn btn-lg btn-default btn-publish">Publish</button>
     <?php if ($this->uri->segment(3) !== null) { ?>
         <a href="<?= base_url('admin/products') ?>" class="btn btn-lg btn-default">Cancel</a>
     <?php } ?>
@@ -223,3 +223,8 @@ if ($this->session->flashdata('result_publish')) {
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        ShowNotificator('ad','asd');
+    });
+    </script>

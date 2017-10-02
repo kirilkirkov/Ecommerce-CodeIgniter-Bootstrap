@@ -22,7 +22,7 @@ class Blog extends MY_Controller
     {
         $data = array();
         $head = array();
-        $arrSeo = $this->Public_model->getSeo('page_blog');
+        $arrSeo = $this->Public_model->getSeo('blog');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);

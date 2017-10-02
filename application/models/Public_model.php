@@ -360,7 +360,7 @@ class Public_model extends CI_Model
 
     public function getOnePost($id)
     {
-        $this->db->select('translations.title, translations.description, blog_posts.image, blog_posts.time');
+        $this->db->select('blog_translations.title, blog_translations.description, blog_posts.image, blog_posts.time');
         $this->db->where('blog_posts.id', $id);
         $this->db->join('blog_translations', 'blog_translations.for_id = blog_posts.id', 'left');
         $this->db->where('blog_translations.abbr', MY_LANGUAGE_ABBR);

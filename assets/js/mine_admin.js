@@ -2,12 +2,14 @@ if ($(window).width() > 767) {
     var left_side_width = $('.left-side').width();
     $("#brand").css("width", left_side_width - 1);
 }
+
 $(window).resize(function () {
     if ($(window).width() > 767) {
         var left_side_width = $('.left-side').width();
         $("#brand").css("width", left_side_width - 1);
     }
 });
+
 $(document).ready(function () {
     $(".h-settings").click(function () {
         $(".settings").toggle("slow", function () {
@@ -20,26 +22,17 @@ $(document).ready(function () {
         });
     });
 });
-function changePass() {
-    var new_pass = $('[name="new_pass"]').val();
-    if (jQuery.trim(new_pass).length > 3) {
-        $.ajax({
-            type: "POST",
-            url: urls.changePass,
-            data: {new_pass: new_pass}
-        }).done(function (data) {
-            if (data == '1') {
-                $("#pass_result").fadeIn(500).delay(2000).fadeOut(500);
-            } else {
-                alert('Password cant change!');
-            }
-        });
-    } else {
-        alert('Too short pass!');
-    }
-}
+
 $("#dev-zone").click(function () {
     $(".toggle-dev").slideToggle("slow");
+});
+
+$('.btn-publish').click(function (e) {
+    var shop_category = $('[name="shop_categorie"]').val();
+    if (shop_category == null) {
+        e.preventDefault();
+        alert('There is no create and selected shop category!');
+    }
 });
 
 $("a.confirm-delete").click(function (e) {
@@ -64,6 +57,7 @@ $("a.confirm-delete").click(function (e) {
         }
     });
 });
+
 $("a.confirm-save").click(function (e) {
     e.preventDefault();
     var formId = $(this).data('form-id');
@@ -86,9 +80,11 @@ $("a.confirm-save").click(function (e) {
         }
     });
 });
+
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
+
 //xs hidden categories
 $("#show-xs-nav").click(function () {
     $(".sidebar-menu").toggle("slow", function () {
@@ -210,6 +206,7 @@ var Calculator = {
         }
     }
 }
+
 $(document).ready(function () {
     $("#calculator .btn").click(function (e) {
         e.preventDefault();
@@ -346,23 +343,11 @@ function removeSecondaryProductImage(image, folder, container) {
         $('#image-container-' + container).remove();
     });
 }
-function currency_ajax_convert() {
-    var from = $('#select_from_cur').val();
-    var to = $('#select_to_cur').val();
-    var sum = $('#sum').val();
-    $(".loading-conv").show();
-    $.ajax({
-        type: "POST",
-        url: urls.convertCurrency,
-        data: {sum: sum, from: from, to: to}
-    }).done(function (data) {
-        $(".loading-conv").hide();
-        $("#new_currency").empty().append(data);
-    });
-}
+
 $('#modalConvertor').on('hidden.bs.modal', function (e) {
     $("#new_currency").empty();
 });
+
 $(document).ready(function () {
     $("#showSliderDescrption").click(function () {
         $("#theSliderDescrption").slideToggle("slow", function () {});
@@ -373,54 +358,11 @@ $(document).ready(function () {
 $(".change-products-form").change(function () {
     $('#searchProductsForm').submit();
 });
-function changeProductStatus(id) {
-    var to_status = $("#to-status").val();
-    $.ajax({
-        type: "POST",
-        url: urls.productStatusChange,
-        data: {id: id, to_status: to_status}
-    }).done(function (data) {
-        if (data == '1') {
-            if (to_status == 1) {
-                $('[data-article-id="' + id + '"] .staus-is').text('Visible');
-                $('[data-article-id="' + id + '"] .status-is-icon').html('<i class="fa fa-unlock"></i>');
-                $('[data-article-id="' + id + '"]').removeClass('invisible-status');
-                $("#to-status").val(0);
-            } else {
-                $('[data-article-id="' + id + '"] .staus-is').text('Invisible');
-                $('[data-article-id="' + id + '"]').addClass('invisible-status');
-                $('[data-article-id="' + id + '"] .status-is-icon').html('<i class="fa fa-lock"></i>');
-                $("#to-status").val(1)
-            }
-        } else {
-            alert('Error change status!');
-        }
-    });
-}
 
-// Orders
-function changeOrdersOrderStatus(id, to_status) {
-    $.post(urls.changeOrdersOrderStatus, {the_id: id, to_status: to_status}, function (data) {
-        if (data == '1') {
-            if (to_status == 0) {
-                $('[data-action-id="' + id + '"] div.status b').text('No processed');
-                $('[data-action-id="' + id + '"]').removeClass().addClass('bg-danger text-center');
-            }
-            if (to_status == 1) {
-                $('[data-action-id="' + id + '"] div.status b').text('Processed');
-                $('[data-action-id="' + id + '"]').removeClass().addClass('bg-success  text-center');
-            }
-            if (to_status == 2) {
-                $('[data-action-id="' + id + '"] div.status b').text('Rejected');
-                $('[data-action-id="' + id + '"]').removeClass().addClass('bg-warning  text-center');
-            }
-            $('#new-order-alert-' + id).remove();
-        }
-    });
-}
 $(".changeOrder").change(function () {
     window.location.href = urls.ordersOrderBy + $(this).val();
 });
+
 $(document).ready(function () {
     $('.more-info').click(function () {
         $('#preview-info-body').empty();
@@ -465,10 +407,6 @@ $('.finish-upload').click(function () {
         }
     });
 });
-function reloadOthersImagesContainer() {
-    $('.others-images-container').empty();
-    $('.others-images-container').load(urls.loadOthersImages, {"folder": $('[name="folder"]').val()});
-}
 
 // Edit Categories Positions
 var editPositionField;
@@ -481,9 +419,11 @@ $('.editPosition').click(function () {
     $('#positionEditor').css({top: position.top, left: position.left, display: 'block'});
     $('[name="new_position"]').val(myPosition);
 });
+
 $('.closePositionCategorie').click(function () {
     $('#positionEditor').hide();
 });
+
 $('.savePositionCategorie').click(function () {
     var new_val = $('[name="new_position"]').val();
     var editId = $('[name="positionEditId"]').val();
@@ -496,3 +436,88 @@ $('.savePositionCategorie').click(function () {
         $('#position-' + editPositionField).text(new_val);
     });
 });
+
+function reloadOthersImagesContainer() {
+    $('.others-images-container').empty();
+    $('.others-images-container').load(urls.loadOthersImages, {"folder": $('[name="folder"]').val()});
+}
+
+// Orders
+function changeOrdersOrderStatus(id, to_status) {
+    $.post(urls.changeOrdersOrderStatus, {the_id: id, to_status: to_status}, function (data) {
+        if (data == '1') {
+            if (to_status == 0) {
+                $('[data-action-id="' + id + '"] div.status b').text('No processed');
+                $('[data-action-id="' + id + '"]').removeClass().addClass('bg-danger text-center');
+            }
+            if (to_status == 1) {
+                $('[data-action-id="' + id + '"] div.status b').text('Processed');
+                $('[data-action-id="' + id + '"]').removeClass().addClass('bg-success  text-center');
+            }
+            if (to_status == 2) {
+                $('[data-action-id="' + id + '"] div.status b').text('Rejected');
+                $('[data-action-id="' + id + '"]').removeClass().addClass('bg-warning  text-center');
+            }
+            $('#new-order-alert-' + id).remove();
+        }
+    });
+}
+
+function changeProductStatus(id) {
+    var to_status = $("#to-status").val();
+    $.ajax({
+        type: "POST",
+        url: urls.productStatusChange,
+        data: {id: id, to_status: to_status}
+    }).done(function (data) {
+        if (data == '1') {
+            if (to_status == 1) {
+                $('[data-article-id="' + id + '"] .staus-is').text('Visible');
+                $('[data-article-id="' + id + '"] .status-is-icon').html('<i class="fa fa-unlock"></i>');
+                $('[data-article-id="' + id + '"]').removeClass('invisible-status');
+                $("#to-status").val(0);
+            } else {
+                $('[data-article-id="' + id + '"] .staus-is').text('Invisible');
+                $('[data-article-id="' + id + '"]').addClass('invisible-status');
+                $('[data-article-id="' + id + '"] .status-is-icon').html('<i class="fa fa-lock"></i>');
+                $("#to-status").val(1)
+            }
+        } else {
+            alert('Error change status!');
+        }
+    });
+}
+
+function currency_ajax_convert() {
+    var from = $('#select_from_cur').val();
+    var to = $('#select_to_cur').val();
+    var sum = $('#sum').val();
+    $(".loading-conv").show();
+    $.ajax({
+        type: "POST",
+        url: urls.convertCurrency,
+        data: {sum: sum, from: from, to: to}
+    }).done(function (data) {
+        $(".loading-conv").hide();
+        $("#new_currency").empty().append(data);
+    });
+}
+
+function changePass() {
+    var new_pass = $('[name="new_pass"]').val();
+    if (jQuery.trim(new_pass).length > 3) {
+        $.ajax({
+            type: "POST",
+            url: urls.changePass,
+            data: {new_pass: new_pass}
+        }).done(function (data) {
+            if (data == '1') {
+                $("#pass_result").fadeIn(500).delay(2000).fadeOut(500);
+            } else {
+                alert('Password cant change!');
+            }
+        });
+    } else {
+        alert('Too short pass!');
+    }
+}

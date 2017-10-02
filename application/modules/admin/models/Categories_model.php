@@ -20,7 +20,7 @@ class Categories_model extends CI_Model
             $limit_sql = ' LIMIT ' . $start . ',' . $limit;
         }
 
-        $query = $this->db->query('SELECT translations_first.*, (SELECT name FROM translations WHERE for_id = sub_for AND type="shop_categorie" AND abbr = translations_first.abbr) as sub_is, shop_categories.position FROM translations as translations_first INNER JOIN shop_categories ON shop_categories.id = translations_first.for_id WHERE type="shop_categorie" ORDER BY position ASC ' . $limit_sql);
+        $query = $this->db->query('SELECT translations_first.*, (SELECT name FROM shop_categories_translations WHERE for_id = sub_for AND abbr = translations_first.abbr) as sub_is, shop_categories.position FROM shop_categories_translations as translations_first INNER JOIN shop_categories ON shop_categories.id = translations_first.for_id ORDER BY position ASC ' . $limit_sql);
         $arr = array();
         foreach ($query->result() as $shop_categorie) {
             $arr[$shop_categorie->for_id]['info'][] = array(
@@ -37,8 +37,7 @@ class Categories_model extends CI_Model
     {
         $this->db->trans_begin();
         $this->db->where('for_id', $id);
-        $this->db->where('type', 'shop_categorie');
-        if (!$this->db->delete('translations')) {
+        if (!$this->db->delete('shop_categories_translations')) {
             log_message('error', print_r($this->db->error(), true));
         }
 
@@ -68,10 +67,9 @@ class Categories_model extends CI_Model
         foreach ($post['translations'] as $abbr) {
             $arr = array();
             $arr['abbr'] = $abbr;
-            $arr['type'] = 'shop_categorie';
             $arr['name'] = $post['categorie_name'][$i];
             $arr['for_id'] = $id;
-            if (!$this->db->insert('translations', $arr)) {
+            if (!$this->db->insert('shop_categories_translations', $arr)) {
                 log_message('error', print_r($this->db->error(), true));
             }
             $i++;
@@ -105,8 +103,7 @@ class Categories_model extends CI_Model
     {
         $this->db->where('abbr', $post['abbr']);
         $this->db->where('for_id', $post['for_id']);
-        $this->db->where('type', $post['type']);
-        if (!$this->db->update('translations', array(
+        if (!$this->db->update('shop_categories_translations', array(
                     'name' => $post['name']
                 ))) {
             log_message('error', print_r($this->db->error(), true));

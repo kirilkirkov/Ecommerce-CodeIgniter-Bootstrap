@@ -156,27 +156,65 @@ CREATE TABLE IF NOT EXISTS `subscribed` (
   `ip` varchar(255) NOT NULL,
   `time` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
+CREATE TABLE `blog_translations` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  `abbr` varchar(5) NOT NULL,
+  `for_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `translations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ALTER TABLE `blog_translations`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `blog_translations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+CREATE TABLE `products_translations` (
+  `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` longtext NOT NULL,
   `basic_description` text NOT NULL,
   `price` varchar(20) NOT NULL,
   `old_price` varchar(20) NOT NULL,
   `abbr` varchar(5) NOT NULL,
-  `for_id` int(11) NOT NULL COMMENT ' ',
-  `type` varchar(30) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `art_id_abbr` (`abbr`,`for_id`,`type`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `for_id` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `translations` (`id`, `title`, `description`, `basic_description`, `price`, `old_price`, `abbr`, `for_id`, `type`, `name`) VALUES
-(1, '', '', '', '', '', 'bg', 1, 'page', ''),
-(2, '', '', '', '', '', 'en', 1, 'page', '');
+ALTER TABLE `products_translations`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `products_translations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+CREATE TABLE `seo_pages_translations` (
+  `id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `abbr` varchar(5) NOT NULL,
+  `page_type` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `seo_pages_translations`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `seo_pages_translations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+CREATE TABLE `shop_categories_translations` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `abbr` varchar(5) NOT NULL,
+  `for_id` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `shop_categories_translations`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `shop_categories_translations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

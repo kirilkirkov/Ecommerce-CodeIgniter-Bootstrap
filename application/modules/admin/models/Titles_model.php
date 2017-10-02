@@ -13,12 +13,12 @@ class Titles_model extends CI_Model
         $i = 0;
         foreach ($post['pages'] as $page) {
             foreach ($post['translations'] as $abbr) {
-                $this->db->where('type', 'page_' . $page);
                 $this->db->where('abbr', $abbr);
-                $num_rows = $this->db->count_all_results('translations');
+                $this->db->where('page_type', $page);
+                $num_rows = $this->db->count_all_results('seo_pages_translations');
                 if ($num_rows == 0) {
-                    if (!$this->db->insert('translations', array(
-                                'type' => 'page_' . $page,
+                    if (!$this->db->insert('seo_pages_translations', array(
+                                'page_type' => $page,
                                 'abbr' => $abbr,
                                 'title' => $post['title'][$i],
                                 'description' => $post['description'][$i]
@@ -27,9 +27,9 @@ class Titles_model extends CI_Model
                         show_error(lang('database_error'));
                     }
                 } else {
-                    $this->db->where('type', 'page_' . $page);
                     $this->db->where('abbr', $abbr);
-                    if (!$this->db->update('translations', array(
+                    $this->db->where('page_type', $page);
+                    if (!$this->db->update('seo_pages_translations', array(
                                 'title' => $post['title'][$i],
                                 'description' => $post['description'][$i]
                             ))) {
@@ -44,12 +44,11 @@ class Titles_model extends CI_Model
 
     public function getSeoTranslations()
     {
-        $this->db->like('type', 'page_');
-        $result = $this->db->get('translations');
+        $result = $this->db->get('seo_pages_translations');
         $arr = array();
         foreach ($result->result_array() as $row) {
-            $arr[$row['type']][$row['abbr']]['title'] = $row['title'];
-            $arr[$row['type']][$row['abbr']]['description'] = $row['description'];
+            $arr[$row['page_type']][$row['abbr']]['title'] = $row['title'];
+            $arr[$row['page_type']][$row['abbr']]['description'] = $row['description'];
         }
         return $arr;
     }

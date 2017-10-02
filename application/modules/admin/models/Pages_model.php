@@ -43,8 +43,7 @@ class Pages_model extends CI_Model
         $thisId = $this->db->insert_id();
         $languages = $this->Languages_model->getLanguages();
         foreach ($languages->result() as $language) {
-            if (!$this->db->insert('translations', array(
-                        'type' => 'page',
+            if (!$this->db->insert('textual_pages_tanslations', array(
                         'for_id' => $thisId,
                         'abbr' => $language->abbr
                     ))) {
@@ -68,8 +67,7 @@ class Pages_model extends CI_Model
         }
 
         $this->db->where('for_id', $id);
-        $this->db->where('type', 'page');
-        if (!$this->db->delete('translations')) {
+        if (!$this->db->delete('textual_pages_tanslations')) {
             log_message('error', print_r($this->db->error(), true));
         }
 

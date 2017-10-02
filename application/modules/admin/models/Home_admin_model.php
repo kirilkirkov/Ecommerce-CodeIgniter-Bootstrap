@@ -116,22 +116,6 @@ class Home_admin_model extends CI_Model
         }
     }
 
-    public function getTranslations($id, $type)
-    {
-        $this->db->where('for_id', $id);
-        $this->db->where('type', $type);
-        $query = $this->db->select('*')->get('translations');
-        $arr = array();
-        foreach ($query->result() as $row) {
-            $arr[$row->abbr]['title'] = $row->title;
-            $arr[$row->abbr]['basic_description'] = $row->basic_description;
-            $arr[$row->abbr]['description'] = $row->description;
-            $arr[$row->abbr]['price'] = $row->price;
-            $arr[$row->abbr]['old_price'] = $row->old_price;
-        }
-        return $arr;
-    }
-
     public function changePass($new_pass, $username)
     {
         $this->db->where('username', $username);

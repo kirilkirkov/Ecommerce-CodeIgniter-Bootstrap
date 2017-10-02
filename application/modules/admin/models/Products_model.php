@@ -12,8 +12,7 @@ class Products_model extends CI_Model
     {
         $this->db->trans_begin();
         $this->db->where('for_id', $id);
-        $this->db->where('type', 'product');
-        if (!$this->db->delete('translations')) {
+        if (!$this->db->delete('products_translations')) {
             log_message('error', print_r($this->db->error(), true));
         }
 
@@ -33,14 +32,13 @@ class Products_model extends CI_Model
     {
         if ($search_title != null) {
             $search_title = trim($this->db->escape_like_str($search_title));
-            $this->db->where("(translations.title LIKE '%$search_title%')");
+            $this->db->where("(products_translations.title LIKE '%$search_title%')");
         }
         if ($category != null) {
             $this->db->where('shop_categorie', $category);
         }
-        $this->db->join('translations', 'translations.for_id = products.id', 'left');
-        $this->db->where('translations.type', 'product');
-        $this->db->where('translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
+        $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
+        $this->db->where('products_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
         return $this->db->count_all_results('products');
     }
 
@@ -48,7 +46,7 @@ class Products_model extends CI_Model
     {
         if ($search_title != null) {
             $search_title = trim($this->db->escape_like_str($search_title));
-            $this->db->where("(translations.title LIKE '%$search_title%')");
+            $this->db->where("(products_translations.title LIKE '%$search_title%')");
         }
         if ($orderby !== null) {
             $ord = explode('=', $orderby);
@@ -61,11 +59,10 @@ class Products_model extends CI_Model
         if ($category != null) {
             $this->db->where('shop_categorie', $category);
         }
-        $this->db->join('translations', 'translations.for_id = products.id', 'left');
-        $this->db->where('translations.type', 'product');
-        $this->db->where('translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
-        $query = $this->db->select('products.*, translations.title, translations.description, translations.price, translations.old_price, translations.abbr, products.url, translations.for_id, translations.type, translations.basic_description')->get('products', $limit, $page);
-        return $query;
+        $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
+        $this->db->where('products_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
+        $query = $this->db->select('products.*, products_translations.title, products_translations.description, products_translations.price, products_translations.old_price, products_translations.abbr, products.url, products_translations.for_id, products_translations.basic_description')->get('products', $limit, $page);
+        return $query->result();
     }
 
     public function numShopProducts()
@@ -151,7 +148,7 @@ class Products_model extends CI_Model
     private function setProductTranslation($post, $id, $is_update)
     {
         $i = 0;
-        $current_trans = $this->Home_admin_model->getTranslations($id, 'product');
+        $current_trans = $this->getTranslations($id, 'product');
         foreach ($post['translations'] as $abbr) {
             $arr = array();
             $emergency_insert = false;
@@ -168,22 +165,36 @@ class Products_model extends CI_Model
                 'price' => $post['price'][$i],
                 'old_price' => $post['old_price'][$i],
                 'abbr' => $abbr,
-                'for_id' => $id,
-                'type' => 'product'
+                'for_id' => $id
             );
             if ($is_update === true && $emergency_insert === false) {
                 $abbr = $arr['abbr'];
                 unset($arr['for_id'], $arr['abbr'], $arr['url']);
-                if (!$this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'product')->update('translations', $arr)) {
+                if (!$this->db->where('abbr', $abbr)->where('for_id', $id)->update('products_translations', $arr)) {
                     log_message('error', print_r($this->db->error(), true));
                 }
             } else {
-                if (!$this->db->insert('translations', $arr)) {
+                if (!$this->db->insert('products_translations', $arr)) {
                     log_message('error', print_r($this->db->error(), true));
                 }
             }
             $i++;
         }
+    }
+
+    public function getTranslations($id)
+    {
+        $this->db->where('for_id', $id);
+        $query = $this->db->get('products_translations');
+        $arr = array();
+        foreach ($query->result() as $row) {
+            $arr[$row->abbr]['title'] = $row->title;
+            $arr[$row->abbr]['basic_description'] = $row->basic_description;
+            $arr[$row->abbr]['description'] = $row->description;
+            $arr[$row->abbr]['price'] = $row->price;
+            $arr[$row->abbr]['old_price'] = $row->old_price;
+        }
+        return $arr;
     }
 
 }

@@ -10,12 +10,11 @@ class Textual_pages_model extends CI_Model
 
     public function getOnePageForEdit($pname)
     {
-        $this->db->join('translations', 'translations.for_id = active_pages.id', 'left');
-        $this->db->join('languages', 'translations.abbr = languages.abbr', 'left');
-        $this->db->where('translations.type', 'page');
+        $this->db->join('textual_pages_tanslations', 'textual_pages_tanslations.for_id = active_pages.id', 'left');
+        $this->db->join('languages', 'textual_pages_tanslations.abbr = languages.abbr', 'left'); 
         $this->db->where('active_pages.enabled', 1);
         $this->db->where('active_pages.name', $pname);
-        $query = $this->db->select('active_pages.id, translations.description, translations.abbr, translations.name, languages.name as lname, languages.flag')->get('active_pages');
+        $query = $this->db->select('active_pages.id, textual_pages_tanslations.description, textual_pages_tanslations.abbr, textual_pages_tanslations.name, languages.name as lname, languages.flag')->get('active_pages');
         return $query->result_array();
     }
 
@@ -24,9 +23,8 @@ class Textual_pages_model extends CI_Model
         $i = 0;
         foreach ($post['translations'] as $abbr) {
             $this->db->where('abbr', $abbr);
-            $this->db->where('for_id', $post['pageId']);
-            $this->db->where('type', 'page');
-            if (!$this->db->update('translations', array(
+            $this->db->where('for_id', $post['pageId']); 
+            if (!$this->db->update('textual_pages_tanslations', array(
                         'name' => $post['name'][$i],
                         'description' => $post['description'][$i]
                     ))) {

@@ -65,7 +65,7 @@
             </div>
             <hr>
             <?php
-            if ($products->result()) {
+            if ($products) {
                 ?>
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -81,7 +81,7 @@
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($products->result() as $row) {
+                            foreach ($products as $row) {
                                 $u_path = 'attachments/shop_images/';
                                 if ($row->image != null && file_exists($u_path . $row->image)) {
                                     $image = base_url($u_path . $row->image);

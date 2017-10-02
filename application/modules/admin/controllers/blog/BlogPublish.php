@@ -23,7 +23,7 @@ class BlogPublish extends ADMIN_Controller
         $trans_load = null;
         if ($id > 0 && $_POST == null) {
             $_POST = $this->Blog_model->getOnePost($id);
-            $trans_load = $this->Home_admin_model->getTranslations($id, 'blog');
+            $trans_load = $this->Blog_model->getTranslations($id);
         }
         if (isset($_POST['submit'])) {
             $_POST['image'] = $this->uploadImage();

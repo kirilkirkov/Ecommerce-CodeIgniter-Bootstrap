@@ -166,20 +166,14 @@ class Publish extends ADMIN_Controller
 
     public function convertCurrency()
     {
+        $this->load->helper('currency_convertor');
         if ($this->input->is_ajax_request()) {
             $amount = $_POST['sum'];
             if ($amount == null) {
                 echo 'Please type a price';
                 exit;
             }
-            $from = $_POST['from'];
-            $to = $_POST['to'];
-            $url = "https://www.google.com/finance/converter?a=$amount&from=$from&to=$to";
-            $data = file_get_contents($url);
-            preg_match("/<span class=bld>(.*)<\/span>/", $data, $converted);
-            $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
-            $this->saveHistory('Convert currency from ' . $from . ' to ' . $to . ' with amount  ' . $amount);
-            echo round($converted, 2);
+            echo convertCurrency($amount, $_POST['from'], $_POST['to']);
         }
     }
 

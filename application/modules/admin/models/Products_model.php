@@ -127,6 +127,7 @@ class Products_model extends CI_Model
                         'quantity' => $post['quantity'],
                         'in_slider' => $post['in_slider'],
                         'position' => $post['position'],
+                        'time' => time()
                     ))) {
                 log_message('error', print_r($this->db->error(), true));
             }

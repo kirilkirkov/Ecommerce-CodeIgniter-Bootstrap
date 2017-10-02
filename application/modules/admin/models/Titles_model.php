@@ -8,11 +8,11 @@ class Titles_model extends CI_Model
         parent::__construct();
     }
 
-    public function setSeoPageTranslations($translations)
+    public function setSeoPageTranslations($post)
     {
         $i = 0;
-        foreach ($translations['pages'] as $page) {
-            foreach ($translations['abbr'] as $abbr) {
+        foreach ($post['pages'] as $page) {
+            foreach ($post['translations'] as $abbr) {
                 $this->db->where('type', 'page_' . $page);
                 $this->db->where('abbr', $abbr);
                 $num_rows = $this->db->count_all_results('translations');
@@ -20,8 +20,8 @@ class Titles_model extends CI_Model
                     if (!$this->db->insert('translations', array(
                                 'type' => 'page_' . $page,
                                 'abbr' => $abbr,
-                                'title' => $translations['title'][$i],
-                                'description' => $translations['description'][$i]
+                                'title' => $post['title'][$i],
+                                'description' => $post['description'][$i]
                             ))) {
                         log_message('error', print_r($this->db->error(), true));
                         show_error(lang('database_error'));
@@ -30,8 +30,8 @@ class Titles_model extends CI_Model
                     $this->db->where('type', 'page_' . $page);
                     $this->db->where('abbr', $abbr);
                     if (!$this->db->update('translations', array(
-                                'title' => $translations['title'][$i],
-                                'description' => $translations['description'][$i]
+                                'title' => $post['title'][$i],
+                                'description' => $post['description'][$i]
                             ))) {
                         log_message('error', print_r($this->db->error(), true));
                         show_error(lang('database_error'));

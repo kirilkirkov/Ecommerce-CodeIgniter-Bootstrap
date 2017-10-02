@@ -27,13 +27,7 @@ class Titles extends ADMIN_Controller
         $head['keywords'] = '';
 
         if (isset($_POST['save'])) {
-            $translations = array(
-                'pages' => $_POST['pages'],
-                'abbr' => $_POST['translations'],
-                'title' => $_POST['title'],
-                'description' => $_POST['description']
-            );
-            $this->Titles_model->setSeoPageTranslations($translations);
+            $this->Titles_model->setSeoPageTranslations($_POST);
             $this->saveHistory('Changed Titles / Descriptions');
             $this->session->set_flashdata('result_publish', 'Saved successful!');
             redirect('admin/titles');

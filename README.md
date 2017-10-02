@@ -32,7 +32,8 @@ We support following features:
 22. Multiple templates.. also can create your own.. 
 23. Bank account payments support
 24. Highcharts statistics for orders
-25. and more.. and more.. 
+25. Discount codes
+26. and more.. and more.. 
 
 ## Easy installation in 3 steps
 1. Import dbDump.sql to your mysql

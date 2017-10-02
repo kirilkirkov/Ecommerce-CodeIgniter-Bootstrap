@@ -33,12 +33,7 @@ class TextualPages extends ADMIN_Controller
             redirect('admin/pages');
         }
         if (isset($_POST['updatePage'])) {
-            $translations = array(
-                'abbr' => $_POST['translations'],
-                'name' => $_POST['name'],
-                'description' => $_POST['description']
-            );
-            $this->Textual_pages_model->setEditPageTranslations($translations, $_POST['pageId']);
+            $this->Textual_pages_model->setEditPageTranslations($_POST);
             $this->saveHistory('Page ' . $_POST['pageId'] . ' updated!');
             redirect('admin/pageedit/' . $page);
         }

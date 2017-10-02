@@ -19,15 +19,20 @@ class Textual_pages_model extends CI_Model
         return $query->result_array();
     }
 
-    public function setEditPageTranslations($post, $id)
+    public function setEditPageTranslations($post)
     {
         $i = 0;
-        foreach ($post['abbr'] as $abbr) {
-            $arr = array(
-                'name' => $post['name'][$i],
-                'description' => $post['description'][$i]
-            );
-            $this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'page')->update('translations', $arr);
+        foreach ($post['translations'] as $abbr) {
+            $this->db->where('abbr', $abbr);
+            $this->db->where('for_id', $post['pageId']);
+            $this->db->where('type', 'page');
+            if (!$this->db->update('translations', array(
+                        'name' => $post['name'][$i],
+                        'description' => $post['description'][$i]
+                    ))) {
+                log_message('error', print_r($this->db->error(), true));
+                show_error(lang('database_error'));
+            }
             $i++;
         }
     }

@@ -93,43 +93,65 @@ class Products_model extends CI_Model
 
     public function setProduct($post, $id = 0)
     {
+        $this->db->trans_begin();
+        $is_update = false;
         if ($id > 0) {
-            unset($post['title_for_url']);
-            $post['time_update'] = time();
-            $result = $this->db->where('id', $id)->update('products', $post);
-        } else {
-            if (trim($post['title_for_url']) != '') {
-                $url_fr = except_letters($post['title_for_url']);
-            } else {
-                $url_fr = 'shop-product';
+            $is_update = true;
+            if (!$this->db->where('id', $id)->update('products', array(
+                        'image' => $post['image'] != null ? $_POST['image'] : $_POST['old_image'],
+                        'shop_categorie' => $post['shop_categorie'],
+                        'quantity' => $post['quantity'],
+                        'in_slider' => $post['in_slider'],
+                        'position' => $post['position'],
+                        'time_update' => time()
+                    ))) {
+                log_message('error', print_r($this->db->error(), true));
             }
-            unset($post['title_for_url']);
-            $this->db->select_max('id');
-            $query = $this->db->get('products');
-            $rr = $query->row_array();
-            $post['id'] = $rr['id'] + 1;
-            $post['url'] = str_replace(' ', '_', $url_fr . '_' . $post['id']);
-            $post['time'] = time();
-            unset($post['id']);
-            $result = $this->db->insert('products', $post);
-            $last_id = $this->db->insert_id();
+        } else {
+            /*
+             * Lets get what is default tranlsation number
+             * in titles and convert it to url
+             * We want our plaform public ulrs to be in default 
+             * language that we use
+             */
+            $i = 0;
+            foreach ($_POST['translations'] as $translation) {
+                if ($translation == MY_DEFAULT_LANGUAGE_ABBR) {
+                    $myTranslationNum = $i;
+                }
+                $i++;
+            }
+            if (!$this->db->insert('products', array(
+                        'image' => $post['image'],
+                        'shop_categorie' => $post['shop_categorie'],
+                        'quantity' => $post['quantity'],
+                        'in_slider' => $post['in_slider'],
+                        'position' => $post['position'],
+                    ))) {
+                log_message('error', print_r($this->db->error(), true));
+            }
+            $id = $this->db->insert_id();
+
+            if (!$this->db->update('products', array(
+                        'url' => except_letters($_POST['title'][$myTranslationNum]) . '_' . $id
+                    ))) {
+                log_message('error', print_r($this->db->error(), true));
+            }
         }
-        if ($result == false) {
-            return false;
+        $this->setProductTranslation($post, $id, $is_update);
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            show_error(lang('database_error'));
         } else {
-            if ($id > 0) {
-                return $id;
-            } else {
-                return $last_id;
-            }
+            $this->db->trans_commit();
         }
     }
 
-    public function setProductTranslation($post, $id, $is_update)
+    private function setProductTranslation($post, $id, $is_update)
     {
         $i = 0;
         $current_trans = $this->Home_admin_model->getTranslations($id, 'product');
-        foreach ($post['abbr'] as $abbr) {
+        foreach ($post['translations'] as $abbr) {
             $arr = array();
             $emergency_insert = false;
             if (!isset($current_trans[$abbr])) {
@@ -151,9 +173,13 @@ class Products_model extends CI_Model
             if ($is_update === true && $emergency_insert === false) {
                 $abbr = $arr['abbr'];
                 unset($arr['for_id'], $arr['abbr'], $arr['url']);
-                $this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'product')->update('translations', $arr);
+                if (!$this->db->where('abbr', $abbr)->where('for_id', $id)->where('type', 'product')->update('translations', $arr)) {
+                    log_message('error', print_r($this->db->error(), true));
+                }
             } else {
-                $this->db->insert('translations', $arr);
+                if (!$this->db->insert('translations', $arr)) {
+                    log_message('error', print_r($this->db->error(), true));
+                }
             }
             $i++;
         }

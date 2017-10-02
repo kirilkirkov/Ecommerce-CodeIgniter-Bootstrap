@@ -76,6 +76,7 @@ if ($this->session->flashdata('result_publish')) {
             <div>
                 <img src="<?= base_url($image) ?>" class="img-responsive img-thumbnail" style="max-width:300px; margin-bottom: 5px;">
             </div>
+            <input type="hidden" name="old_image" value="<?= $_POST['image'] ?>">
             <?php if (isset($_GET['to_lang'])) { ?>
                 <input type="hidden" name="image" value="<?= $_POST['image'] ?>">
                 <?php

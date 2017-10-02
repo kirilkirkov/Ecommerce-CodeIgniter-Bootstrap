@@ -14,7 +14,7 @@ class Publish extends ADMIN_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array( 
+        $this->load->model(array(
             'Products_model',
             'Languages_model',
             'Brands_model',
@@ -32,55 +32,25 @@ class Publish extends ADMIN_Controller
             $trans_load = $this->Home_admin_model->getTranslations($id, 'product');
         }
         if (isset($_POST['submit'])) {
-            if ($id > 0) {
-                $is_update = true;
-            }
-            unset($_POST['submit']);
-            $config['upload_path'] = './attachments/shop_images/';
-            $config['allowed_types'] = $this->allowed_img_types;
-            $this->load->library('upload', $config);
-            $this->upload->initialize($config);
-            if (!$this->upload->do_upload('userfile')) {
-                log_message('error', 'Image Upload Error: ' . $this->upload->display_errors());
-            }
-            $img = $this->upload->data();
-            if ($img['file_name'] != null) {
-                $_POST['image'] = $img['file_name'];
-            }
             if (isset($_GET['to_lang'])) {
                 $id = 0;
             }
-            $translations = array(
-                'abbr' => $_POST['translations'],
-                'title' => $_POST['title'],
-                'basic_description' => $_POST['basic_description'],
-                'description' => $_POST['description'],
-                'price' => $_POST['price'],
-                'old_price' => $_POST['old_price']
-            );
-            $flipped = array_flip($_POST['translations']);
-            $_POST['title_for_url'] = $_POST['title'][$flipped[MY_DEFAULT_LANGUAGE_ABBR]];
-            unset($_POST['translations'], $_POST['title'], $_POST['basic_description'], $_POST['description'], $_POST['price'], $_POST['old_price']); //remove for product
-            $result = $this->Products_model->setProduct($_POST, $id);
-            if ($result !== false) {
-                $this->Products_model->setProductTranslation($translations, $result, $is_update); // send to translation table
-                $this->session->set_flashdata('result_publish', 'product is published!');
-                if ($id == 0) {
-                    $this->saveHistory('Success published product');
-                } else {
-                    $this->saveHistory('Success updated product');
-                }
-                if (isset($_SESSION['filter']) && $id > 0) {
-                    $get = '';
-                    foreach ($_SESSION['filter'] as $key => $value) {
-                        $get .= trim($key) . '=' . trim($value) . '&';
-                    }
-                    redirect(base_url('admin/products?' . $get));
-                } else {
-                    redirect('admin/products');
-                }
+            $_POST['image'] = $this->uploadImage();
+            $this->Products_model->setProduct($_POST, $id);
+            $this->session->set_flashdata('result_publish', 'product is published!');
+            if ($id == 0) {
+                $this->saveHistory('Success published product');
             } else {
-                $this->session->set_flashdata('result_publish', 'Problem with product publish!');
+                $this->saveHistory('Success updated product');
+            }
+            if (isset($_SESSION['filter']) && $id > 0) {
+                $get = '';
+                foreach ($_SESSION['filter'] as $key => $value) {
+                    $get .= trim($key) . '=' . trim($value) . '&';
+                }
+                redirect(base_url('admin/products?' . $get));
+            } else {
+                redirect('admin/products');
             }
         }
         $data = array();
@@ -98,6 +68,19 @@ class Publish extends ADMIN_Controller
         $this->load->view('ecommerce/publish', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to publish product');
+    }
+
+    private function uploadImage()
+    {
+        $config['upload_path'] = './attachments/shop_images/';
+        $config['allowed_types'] = $this->allowed_img_types;
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload('userfile')) {
+            log_message('error', 'Image Upload Error: ' . $this->upload->display_errors());
+        }
+        $img = $this->upload->data();
+        return $img['file_name'];
     }
 
     /*

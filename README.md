@@ -3,7 +3,7 @@ Bootsrap Responsive online shop
 
 Current versions:
 
-* Codeigniter 3.1.5
+* Codeigniter 3.1.6
 * Bootstrap 3.3.7
 
 We support following features:

@@ -271,32 +271,40 @@ class Public_model extends CI_Model
         unset($post['id'], $post['quantity']);
         $post['date'] = time();
         $post['products'] = serialize($post['products']);
-        $result = $this->db->insert('orders', array(
-            'order_id' => $post['order_id'],
-            'products' => $post['products'],
-            'date' => $post['date'],
-            'referrer' => $post['referrer'],
-            'clean_referrer' => $post['clean_referrer'],
-            'payment_type' => $post['payment_type'],
-            'paypal_status' => @$post['paypal_status'],
-            'discount_code' => @$post['discountCode']
-        ));
+        $this->db->trans_begin();
+        if (!$this->db->insert('orders', array(
+                    'order_id' => $post['order_id'],
+                    'products' => $post['products'],
+                    'date' => $post['date'],
+                    'referrer' => $post['referrer'],
+                    'clean_referrer' => $post['clean_referrer'],
+                    'payment_type' => $post['payment_type'],
+                    'paypal_status' => @$post['paypal_status'],
+                    'discount_code' => @$post['discountCode']
+                ))) {
+            log_message('error', print_r($this->db->error(), true));
+        }
         $lastId = $this->db->insert_id();
-        $result_2 = $this->db->insert('orders_clients', array(
-            'for_id' => $lastId,
-            'first_name' => $post['first_name'],
-            'last_name' => $post['last_name'],
-            'email' => $post['email'],
-            'phone' => $post['phone'],
-            'address' => $post['address'],
-            'city' => $post['city'],
-            'post_code' => $post['post_code'],
-            'notes' => $post['notes']
-        ));
-        if ($result == true && $result_2 == true) {
+        if (!$this->db->insert('orders_clients', array(
+                    'for_id' => $lastId,
+                    'first_name' => $post['first_name'],
+                    'last_name' => $post['last_name'],
+                    'email' => $post['email'],
+                    'phone' => $post['phone'],
+                    'address' => $post['address'],
+                    'city' => $post['city'],
+                    'post_code' => $post['post_code'],
+                    'notes' => $post['notes']
+                ))) {
+            log_message('error', print_r($this->db->error(), true));
+        }
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            return false;
+        } else {
+            $this->db->trans_commit();
             return $post['order_id'];
         }
-        return false;
     }
 
     public function setActivationLink($link, $orderId)
@@ -442,10 +450,12 @@ class Public_model extends CI_Model
             $processed = 2;
         }
         $this->db->where('order_id', $order_id);
-        $this->db->update('orders', array(
-            'paypal_status' => $status,
-            'processed' => $processed
-        ));
+        if (!$this->db->update('orders', array(
+                    'paypal_status' => $status,
+                    'processed' => $processed
+                ))) {
+            log_message('error', print_r($this->db->error(), true));
+        }
     }
 
     public function getCookieLaw()

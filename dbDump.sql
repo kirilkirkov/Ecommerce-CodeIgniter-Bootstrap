@@ -45,6 +45,20 @@ ALTER TABLE `cookie_law`
 ALTER TABLE `cookie_law_translations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
+CREATE TABLE `textual_pages_tanslations` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  `abbr` varchar(5) NOT NULL,
+  `for_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `textual_pages_tanslations`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `textual_pages_tanslations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 CREATE TABLE IF NOT EXISTS `history` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `activity` varchar(255) NOT NULL,

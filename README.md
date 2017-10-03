@@ -1,10 +1,16 @@
-## Shopping Cart Solution - CodeIgniter and Bootstrap
-Bootsrap Responsive online shop
+<p align="center"><img src="https://codeigniter.com/assets/images/ci-logo-big.png"></p>
+<p align="center">Shopping Cart Solution - CodeIgniter and Bootstrap</p>
+ 
+##Bootsrap Responsive online shop
 
 Current versions:
 
 * Codeigniter 3.1.6
 * Bootstrap 3.3.7
+
+## Donate
+If this project help you reduce time to develop, you can give me a cup of coffee to continue its development :)
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W5BR6K29BQX7E)
 
 We support following features:
 
@@ -81,7 +87,3 @@ Shopping cart:
 
 1. To add article to your shopping cart add this class to your links - **add-to-cart** , if you want to redirect user after add product to shopping cart add also add **data-goto="http://..."**
 2. Variable $cartItems have all your added items
-
-## Donate
-If this project help you reduce time to develop, you can give me a cup of coffee to continue its development :)
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W5BR6K29BQX7E)

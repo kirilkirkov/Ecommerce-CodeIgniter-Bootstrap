@@ -100,14 +100,17 @@ class Loader extends MY_Controller
             header('HTTP/1.1 404 Not Found');
             return;
         }
+        $image_mime = null;
         if (function_exists('mime_content_type')) {
             $image_mime = mime_content_type($path);
-        } else {
+        } elseif (function_exists('finfo_open')) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $image_mime = finfo_file($finfo, $path);
             finfo_close($finfo);
         }
-        header('Content-Type: ' . $image_mime . '  charset: UTF-8');
+        if ($image_mime !== null) {
+            header('Content-Type: ' . $image_mime . '  charset: UTF-8');
+        }
         echo $img;
     }
 

@@ -144,3 +144,4 @@ $lang['discount_code'] = 'Κωδικός έκπτωσης';
 $lang['check_code'] = 'Ελέγξτε τον κώδικα';
 $lang['enter_discount_code'] = 'Πληκτρολογήστε τον κωδικό εδώ';
 $lang['final_amount_for_pay'] = 'Ποσό ΠΛΗΡΩΜΗΣ';
+$lang['database_error'] = 'Υπήρξε πρόβλημα! Επικοινωνήστε με την υποστήριξη!';

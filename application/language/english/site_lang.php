@@ -145,3 +145,4 @@ $lang['discount_code'] = 'Discount code';
 $lang['check_code'] = 'Check code';
 $lang['enter_discount_code'] = 'Enter code here';
 $lang['final_amount_for_pay'] = 'Payment amount';
+$lang['database_error'] = 'A problem occured! Please contact support!';

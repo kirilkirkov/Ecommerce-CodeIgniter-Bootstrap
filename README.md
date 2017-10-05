@@ -12,7 +12,7 @@ Current versions:
 If this project help you reduce time to develop, you can give me a cup of coffee to continue its development :)
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W5BR6K29BQX7E)
 
-## We support following features:
+## Support of following features
 
 1. Bootstrap responsive
 2. MultiLanguage with interface for easy add/edit functionality!!

@@ -145,3 +145,4 @@ $lang['discount_code'] = 'Код за отстъпка';
 $lang['check_code'] = 'Провери кода';
 $lang['enter_discount_code'] = 'Въведи кода тук';
 $lang['final_amount_for_pay'] = 'Сума за плащане';
+$lang['database_error'] = 'Възникна проблем! Моля свържете се със съпорта!';

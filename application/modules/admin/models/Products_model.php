@@ -130,6 +130,7 @@ class Products_model extends CI_Model
             }
             $id = $this->db->insert_id();
 
+            $this->db->where('id', $id);
             if (!$this->db->update('products', array(
                         'url' => except_letters($_POST['title'][$myTranslationNum]) . '_' . $id
                     ))) {

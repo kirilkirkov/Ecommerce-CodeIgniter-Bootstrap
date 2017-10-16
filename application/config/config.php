@@ -95,10 +95,10 @@ $config['admin_history'] = false;
   | hepler for help.. :)
   |
  */
-$config['language'] = 'bulgarian';
-$config['language_abbr'] = 'bg';
-$config['currency'] = 'лв';
-$config['currencyKey'] = 'BGN';
+$config['language'] = 'english';
+$config['language_abbr'] = 'en';
+$config['currency'] = '€';
+$config['currencyKey'] = 'EUR';
 
 /*
   |--------------------------------------------------------------------------

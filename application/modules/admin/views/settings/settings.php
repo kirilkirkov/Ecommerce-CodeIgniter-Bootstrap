@@ -397,5 +397,22 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Virtual products</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('virtualProducts')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('virtualProducts') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="hidden" name="virtualProducts" value="<?= $virtualProducts ?>">
+                    <input <?= $virtualProducts == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="virtualProducts" class="toggle-changer" type="checkbox">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="<?= base_url('assets/js/bootstrap-toggle.min.js') ?>"></script>

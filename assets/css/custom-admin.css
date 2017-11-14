@@ -9,7 +9,7 @@ body { color:#6b6b6b; font-size: 13px; }
 #content {padding-bottom:100px;}
 h1 {font-size:30px; }
 nav.navbar, div.left-side, h1 {text-transform: uppercase; }
-input.form-control {border:1px solid #dadada; border-radius: 0; box-shadow:none;}
+input.form-control, textarea.form-control {border:1px solid #dadada; border-radius: 0; box-shadow:none;}
 
 .login-container{    position: relative;    width: 300px;    margin: 80px auto;    padding: 20px 40px 40px;    text-align: center;    background: #fff;    border: 1px solid #ccc;}
 #output{    position: absolute;    width: 300px;    top: -75px;    left: 0;    color: #fff;}

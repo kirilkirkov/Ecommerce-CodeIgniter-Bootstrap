@@ -41,6 +41,7 @@ class ADMIN_Controller extends MX_Controller
         $vars['numNotPreviewOrders'] = $numNotPreviewOrders;
         $vars['warnings'] = $this->warningChecker();
         $vars['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
+        $vars['virtualProducts'] = $this->Home_admin_model->getValueStore('virtualProducts');
         $this->load->vars($vars);
     }
 

@@ -443,8 +443,8 @@ function reloadOthersImagesContainer() {
 }
 
 // Orders
-function changeOrdersOrderStatus(id, to_status) {
-    $.post(urls.changeOrdersOrderStatus, {the_id: id, to_status: to_status}, function (data) {
+function changeOrdersOrderStatus(id, to_status, products, userEmail) {
+    $.post(urls.changeOrdersOrderStatus, {the_id: id, to_status: to_status, products: products, userEmail: userEmail}, function (data) {
         if (data == '1') {
             if (to_status == 0) {
                 $('[data-action-id="' + id + '"] div.status b').text('No processed');
@@ -459,6 +459,8 @@ function changeOrdersOrderStatus(id, to_status) {
                 $('[data-action-id="' + id + '"]').removeClass().addClass('bg-warning  text-center');
             }
             $('#new-order-alert-' + id).remove();
+        } else {
+            alert('Error with status change. Please check logs!');
         }
     });
 }

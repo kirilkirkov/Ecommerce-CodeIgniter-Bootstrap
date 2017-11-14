@@ -126,6 +126,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `procurement` int(10) unsigned NOT NULL,
   `in_slider` tinyint(1) NOT NULL DEFAULT '0',
   `url` varchar(255) NOT NULL,
+  `virtual_products` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `brand_id` int(10) UNSIGNED NOT NULL,
   `position` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
@@ -288,7 +289,8 @@ INSERT INTO `value_store` (`id`, `thekey`, `value`) VALUES
 (26, 'cashondelivery_visibility', '1'),
 (27, 'showBrands', '0'),
 (28, 'showInSlider', '0'),
-(29, 'codeDiscounts', '1');
+(29, 'codeDiscounts', '1'),
+(30, 'virtualProducts', '0');
 
 CREATE TABLE `brands` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

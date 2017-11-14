@@ -134,6 +134,11 @@ if ($this->session->flashdata('result_publish')) {
                 <?php } ?>
             </select>
         </div>
+    <?php } if ($virtualProducts == 1) { ?>
+        <div class="form-group for-shop">
+            <label>Virtual Products <a href="javascript:void(0);" data-toggle="modal" data-target="#virtualProductsHelp"><i class="fa fa-question-circle" aria-hidden="true"></i></a></label>
+            <textarea class="form-control" name="virtual_products"><?= @$_POST['virtual_products'] ?></textarea>
+        </div>
     <?php } ?>
     <div class="form-group for-shop">
         <label>In Slider</label>
@@ -223,8 +228,26 @@ if ($this->session->flashdata('result_publish')) {
         </div>
     </div>
 </div>
+<!-- virtualProductsHelp -->
+<div class="modal fade" id="virtualProductsHelp" tabindex="-1" role="dialog" aria-labelledby="virtualProductsHelp">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">What are virtual products?</h4>
+            </div>
+            <div class="modal-body">
+                Sometimes we want to sell products that are for electronic use such as books. In the box below, you can enter links to products that can be downloaded after you confirm the order as "Processed" through the "Orders" tab, an email will be sent to the customer entered with the entire text entered in the "virtual products" field.
+                We have left only the possibility to add links in this field because sometimes it is necessary that the electronic stuff you provide for downloading will be uploaded to other servers. If you want, you can add your files to "file manager" and take the links to them to add to the "virtual products"
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
-    $(document).ready(function(){
-        ShowNotificator('ad','asd');
+    $(document).ready(function () {
+        ShowNotificator('ad', 'asd');
     });
-    </script>
+</script>

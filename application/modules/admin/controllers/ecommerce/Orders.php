@@ -16,6 +16,7 @@ class Orders extends ADMIN_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('SendMail');
         $this->load->model(array('Orders_model', 'Home_admin_model'));
     }
 
@@ -86,13 +87,52 @@ class Orders extends ADMIN_Controller
     public function changeOrdersOrderStatus()
     {
         $this->login_check();
-        $result = $this->Orders_model->changeOrderStatus($_POST['the_id'], $_POST['to_status']);
-        if ($result == true) {
+
+        $result = false;
+        $sendedVirtualProducts = true;
+        $virtualProducts = $this->Home_admin_model->getValueStore('virtualProducts');
+        /*
+         * If we want to use Virtual Products
+         * Lets send email with download links to user email
+         * In error logs will be saved if cant send email from PhpMailer
+         */
+        if ($virtualProducts == 1) {
+            if ($_POST['to_status'] == 1) {
+                $sendedVirtualProducts = $this->sendVirtualProducts();
+            }
+        }
+
+        if ($sendedVirtualProducts == true) {
+            $result = $this->Orders_model->changeOrderStatus($_POST['the_id'], $_POST['to_status']);
+        }
+
+        if ($result == true && $sendedVirtualProducts == true) {
             echo 1;
         } else {
             echo 0;
         }
-        $this->saveHistory('Change order status on product Id ' . $_POST['the_id'] . ' to status ' . $_POST['to_status']);
+        $this->saveHistory('Change status of Order Id ' . $_POST['the_id'] . ' to status ' . $_POST['to_status']);
+    }
+
+    private function sendVirtualProducts()
+    {
+
+        $products = unserialize(html_entity_decode($_POST['products']));
+        foreach ($products as $product_id => $product_quantity) {
+            $productInfo = modules::run('admin/ecommerce/products/getProductInfo', $product_id);
+            /*
+             * If is virtual product, lets send email to user
+             */
+            if ($productInfo['virtual_products'] != null) {
+                if (!filter_var($_POST['userEmail'], FILTER_VALIDATE_EMAIL)) {
+                    log_message('error', 'Ivalid customer email address! Cant send him virtual products!');
+                    return false;
+                }
+                $result = $this->sendmail->sendTo($_POST['userEmail'], 'Dear Customer', 'Virtual products', $productInfo['virtual_products']);
+                return $result;
+            }
+        }
+        return true;
     }
 
 }

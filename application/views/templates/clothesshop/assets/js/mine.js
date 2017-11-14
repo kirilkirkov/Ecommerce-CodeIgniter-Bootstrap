@@ -2,7 +2,7 @@ $(document).ready(function () {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
-    
+
     //xs hidden categories
     $("#show-xs-nav").click(function () {
         $(".categories").toggle("slow", function () {

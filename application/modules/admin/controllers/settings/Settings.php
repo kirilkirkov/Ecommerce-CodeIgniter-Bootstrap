@@ -53,6 +53,7 @@ class Settings extends ADMIN_Controller
         $data['outOfStock'] = $this->Home_admin_model->getValueStore('outOfStock');
         $data['moreInfoBtn'] = $this->Home_admin_model->getValueStore('moreInfoBtn');
         $data['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
+        $data['virtualProducts'] = $this->Home_admin_model->getValueStore('virtualProducts');
         $data['showInSlider'] = $this->Home_admin_model->getValueStore('showInSlider');
         $data['cookieLawInfo'] = $this->getCookieLaw();
         $data['languages'] = $this->Languages_model->getLanguages();
@@ -181,6 +182,12 @@ class Settings extends ADMIN_Controller
             $this->Home_admin_model->setValueStore('showBrands', $_POST['showBrands']);
             $this->session->set_flashdata('showBrands', 'Brands visibility changed');
             $this->saveHistory('Brands visibility changed');
+            redirect('admin/settings');
+        }
+        if (isset($_POST['virtualProducts'])) {
+            $this->Home_admin_model->setValueStore('virtualProducts', $_POST['virtualProducts']);
+            $this->session->set_flashdata('virtualProducts', 'Virtual products visibility changed');
+            $this->saveHistory('Virtual products visibility changed');
             redirect('admin/settings');
         }
         if (isset($_POST['showInSlider'])) {

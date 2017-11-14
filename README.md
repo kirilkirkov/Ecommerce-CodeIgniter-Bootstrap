@@ -16,7 +16,7 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 
 1. Bootstrap responsive
 2. MultiLanguage with interface for easy add/edit functionality!!
-3. Beautifle design
+3. Virtual products
 4. Advanced search with treeView categories
 5. Easy manage of products (new filed for every added language, subcategories are easy to manage)
 6. Advanced sorting and order products
@@ -35,7 +35,7 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 19. Fast Loading
 20. Site color change with easy to use gradient generator
 21. Add multilanguage cookie notificator from silktide.com for EU Cookie Law 
-22. Multiple templates.. also can create your own.. 
+22. Multiple templates.. also can easy create your own.. 
 23. Bank account payments support
 24. Highcharts statistics for orders
 25. Discount codes

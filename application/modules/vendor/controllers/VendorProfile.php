@@ -25,6 +25,7 @@ class VendorProfile extends VENDOR_Controller
         $head['title'] = lang('vendor_dashboard');
         $head['description'] = lang('vendor_home_page');
         $head['keywords'] = '';
+        $data['ordersByMonth'] = $this->Vendorprofile_model->getOrdersByMonth($this->vendor_id);
         $this->load->view('_parts/header', $head);
         $this->load->view('home', $data);
         $this->load->view('_parts/footer');

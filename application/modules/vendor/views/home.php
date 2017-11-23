@@ -8,6 +8,9 @@
     <script src="<?= base_url('assets/highcharts/highcharts.js') ?>"></script>
     <div id="container-by-month" style="min-width: 310px; height: 400px; margin: 0 auto;"></div>
     <script>
+        /*
+         * Chart for orders by mount/year 
+         */
         $(function () {
             Highcharts.chart('container-by-month', {
                 title: {
@@ -42,10 +45,12 @@
                     borderWidth: 0
                 },
                 series: [
-                    {
-                        name: '2017',
-                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0]
-                    },
+<?php foreach ($ordersByMonth['years'] as $year) { ?>
+                        {
+                            name: '<?= $year ?>',
+                            data: [<?= implode(',', $ordersByMonth['orders'][$year]) ?>]
+                        },
+<?php } ?>
                 ]
             });
         });

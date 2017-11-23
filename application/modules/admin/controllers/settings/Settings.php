@@ -55,6 +55,7 @@ class Settings extends ADMIN_Controller
         $data['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
         $data['virtualProducts'] = $this->Home_admin_model->getValueStore('virtualProducts');
         $data['showInSlider'] = $this->Home_admin_model->getValueStore('showInSlider');
+        $data['multiVendor'] = $this->Home_admin_model->getValueStore('multiVendor');
         $data['cookieLawInfo'] = $this->getCookieLaw();
         $data['languages'] = $this->Languages_model->getLanguages();
         $data['law_themes'] = array_diff(scandir('.' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'imgs' . DIRECTORY_SEPARATOR . 'cookie-law-themes' . DIRECTORY_SEPARATOR), array('..', '.'));
@@ -194,6 +195,12 @@ class Settings extends ADMIN_Controller
             $this->Home_admin_model->setValueStore('showInSlider', $_POST['showInSlider']);
             $this->session->set_flashdata('showInSlider', 'In Slider products visibility changed');
             $this->saveHistory('In Slider products visibility changed');
+            redirect('admin/settings');
+        }
+        if (isset($_POST['multiVendor'])) {
+            $this->Home_admin_model->setValueStore('multiVendor', $_POST['multiVendor']);
+            $this->session->set_flashdata('multiVendor', 'Multi Vendor Support changed');
+            $this->saveHistory('Multi Vendor Support changed');
             redirect('admin/settings');
         }
         if (isset($_POST['setCookieLaw'])) {

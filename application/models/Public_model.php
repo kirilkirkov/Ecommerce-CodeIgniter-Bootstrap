@@ -5,6 +5,7 @@ class Public_model extends CI_Model
 
     private $showOutOfStock;
     private $showInSliderProducts;
+    private $multiVendor;
 
     public function __construct()
     {
@@ -12,6 +13,7 @@ class Public_model extends CI_Model
         $this->load->Model('Home_admin_model');
         $this->showOutOfStock = $this->Home_admin_model->getValueStore('outOfStock');
         $this->showInSliderProducts = $this->Home_admin_model->getValueStore('showInSlider');
+        $this->multiVendor = $this->Home_admin_model->getValueStore('multiVendor');
     }
 
     public function productsCount($big_get)
@@ -27,6 +29,9 @@ class Public_model extends CI_Model
         }
         if ($this->showInSliderProducts == 0) {
             $this->db->where('in_slider', 0);
+        }
+        if ($this->multiVendor == 0) {
+            $this->db->where('vendor_id', 0);
         }
         return $this->db->count_all_results('products');
     }
@@ -69,6 +74,9 @@ class Public_model extends CI_Model
         }
         if ($this->showInSliderProducts == 0) {
             $this->db->where('in_slider', 0);
+        }
+        if ($this->multiVendor == 0) {
+            $this->db->where('vendor_id', 0);
         }
         $this->db->order_by('position', 'asc');
         $query = $this->db->get('products');

@@ -98,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `viewed` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'viewed status is change when change processed status',
   `confirmed` tinyint(1) NOT NULL DEFAULT '0',
   `discount_code` varchar(20) NOT NULL,
+  `vendor_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -290,7 +291,8 @@ INSERT INTO `value_store` (`id`, `thekey`, `value`) VALUES
 (27, 'showBrands', '0'),
 (28, 'showInSlider', '0'),
 (29, 'codeDiscounts', '1'),
-(30, 'virtualProducts', '0');
+(30, 'virtualProducts', '0'),
+(31, 'multiVendor', '0');
 
 CREATE TABLE `brands` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -314,3 +316,62 @@ CREATE TABLE `discount_codes` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1-enabled, 0-disabled',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `vendors` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `url` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `vendors`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique` (`email`),
+  ADD UNIQUE KEY `name` (`name`);
+
+ALTER TABLE `vendors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+CREATE TABLE `vendors_orders` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `products` text NOT NULL,
+  `date` int(10) UNSIGNED NOT NULL,
+  `referrer` varchar(255) NOT NULL,
+  `clean_referrer` varchar(255) NOT NULL,
+  `payment_type` varchar(255) NOT NULL,
+  `paypal_status` varchar(10) DEFAULT NULL,
+  `processed` tinyint(1) NOT NULL DEFAULT '0',
+  `viewed` tinyint(1) NOT NULL DEFAULT '0',
+  `confirmed` tinyint(1) NOT NULL DEFAULT '0',
+  `discount_code` varchar(20) NOT NULL,
+  `vendor_id` int(10) UNSIGNED NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `vendors_orders`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `vendors_orders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+CREATE TABLE `vendors_orders_clients` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(30) NOT NULL,
+  `address` text NOT NULL,
+  `city` varchar(20) NOT NULL,
+  `post_code` varchar(10) NOT NULL,
+  `notes` text NOT NULL,
+  `for_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `vendors_orders_clients`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `vendors_orders_clients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;

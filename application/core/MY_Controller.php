@@ -60,6 +60,7 @@ class MY_Controller extends MX_Controller
         $vars['addedJs'] = $this->Home_admin_model->getValueStore('addJs');
         $vars['publicQuantity'] = $this->Home_admin_model->getValueStore('publicQuantity');
         $vars['moreInfoBtn'] = $this->Home_admin_model->getValueStore('moreInfoBtn');
+        $vars['multiVendor'] = $this->Home_admin_model->getValueStore('multiVendor');
         $vars['allLanguages'] = $this->getAllLangs();
         $vars['load'] = $this->loop;
         $vars['cookieLaw'] = $this->Public_model->getCookieLaw();

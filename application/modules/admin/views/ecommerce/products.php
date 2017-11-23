@@ -75,6 +75,7 @@
                                 <th>Title</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
+                                <th>Vendor</th>
                                 <th>Position</th>
                                 <th class="text-right">Action</th>
                             </tr>
@@ -116,6 +117,7 @@
                                             <?= $row->quantity ?>
                                         </span>
                                     </td>
+                                    <td><?= $row->vendor_id > 0 ? '<a href="?show_vendor=' . $row->vendor_id . '">' . $row->vendor_name . '</a>' : 'No vendor' ?></td>
                                     <td><?= $row->position ?></td>
                                     <td>
                                         <div class="pull-right">

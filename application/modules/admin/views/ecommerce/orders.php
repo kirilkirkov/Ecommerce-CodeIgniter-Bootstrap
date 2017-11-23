@@ -148,6 +148,10 @@ if (!isset($_GET['settings'])) {
                                                                 <?= base_url($productInfo['url']) ?>
                                                                 <div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;"><b>Quantity:</b> <?= $product_quantity ?></div>
                                                             </a>
+                                                            <div class="">
+                                                                <b>Vendor:</b>
+                                                                <a href=""><?= $productInfo['vendor_name'] ?></a>
+                                                            </div>
                                                             <div class="clearfix"></div>
                                                         </div>
                                                         <hr>

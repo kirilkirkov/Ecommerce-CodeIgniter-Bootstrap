@@ -42,7 +42,7 @@ class Products_model extends CI_Model
         return $this->db->count_all_results('products');
     }
 
-    public function getProducts($limit, $page, $search_title = null, $orderby = null, $category = null)
+    public function getProducts($limit, $page, $search_title = null, $orderby = null, $category = null, $vendor = null)
     {
         if ($search_title != null) {
             $search_title = trim($this->db->escape_like_str($search_title));
@@ -59,9 +59,13 @@ class Products_model extends CI_Model
         if ($category != null) {
             $this->db->where('shop_categorie', $category);
         }
+        if ($vendor != null) {
+            $this->db->where('vendor_id', $vendor);
+        }
+        $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
         $this->db->where('products_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
-        $query = $this->db->select('products.*, products_translations.title, products_translations.description, products_translations.price, products_translations.old_price, products_translations.abbr, products.url, products_translations.for_id, products_translations.basic_description')->get('products', $limit, $page);
+        $query = $this->db->select('vendors.name as vendor_name, vendors.id as vendor_id, products.*, products_translations.title, products_translations.description, products_translations.price, products_translations.old_price, products_translations.abbr, products.url, products_translations.for_id, products_translations.basic_description')->get('products', $limit, $page);
         return $query->result();
     }
 
@@ -72,7 +76,9 @@ class Products_model extends CI_Model
 
     public function getOneProduct($id)
     {
-        $this->db->where('id', $id);
+        $this->db->select('vendors.name as vendor_name, vendors.id as vendor_id, products.*');
+        $this->db->where('products.id', $id);
+        $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
         $query = $this->db->get('products');
         if ($query->num_rows() > 0) {
             return $query->row_array();
@@ -126,6 +132,7 @@ class Products_model extends CI_Model
                         'in_slider' => $post['in_slider'],
                         'position' => $post['position'],
                         'virtual_products' => $post['virtual_products'],
+                        'folder' => $post['folder'],
                         'time' => time()
                     ))) {
                 log_message('error', print_r($this->db->error(), true));

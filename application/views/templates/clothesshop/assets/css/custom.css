@@ -171,6 +171,9 @@ a.left.carousel-control, a.right.carousel-control {background-image:none; top:30
 #home-slider a.left.carousel-control {margin-right: 10px;}
 #home-slider .controls {position: absolute; right: 20px; top:20px;}
 .brands {margin-left:-10px;margin-bottom: 20px; padding-top: 30px;}
+#top-user-panel { font-size:12px; padding: 5px 0;background: #ffffff; background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%); background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%);background: linear-gradient(to bottom,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );}
+#top-user-panel form {float: right;}
+#top-user-panel form .form-control {border:1px solid #e1e1e1; border-radius: 3px; height: 32px; max-width: 150px;}
 
 @media screen and (max-width: 767px) {
     .advanced-search-menu {width:410px;}

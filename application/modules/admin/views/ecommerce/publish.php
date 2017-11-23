@@ -109,7 +109,6 @@ if ($this->session->flashdata('result_publish')) {
         </select>
     </div>
     <?php
-    $i = 0;
     foreach ($languages->result() as $language) {
         ?>
         <div class="form-group for-shop">

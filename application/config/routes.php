@@ -100,11 +100,47 @@ $route['(\w{2})/page/(:any)'] = "page/index/$2";
 // Confirm link
 $route['confirm/(:any)'] = "home/confirmLink/$1";
 
+/*
+ * Vendor Controllers Routes
+ */
+$route['vendor/login'] = "vendor/auth/login";
+$route['(\w{2})/vendor/login'] = "vendor/auth/login";
+$route['vendor/register'] = "vendor/auth/register";
+$route['(\w{2})/vendor/register'] = "vendor/auth/register";
+$route['vendor/forgotten-password'] = "vendor/auth/forgotten";
+$route['(\w{2})/vendor/forgotten-password'] = "vendor/auth/forgotten";
+$route['vendor/me'] = "vendor/VendorProfile";
+$route['(\w{2})/vendor/me'] = "vendor/VendorProfile";
+$route['vendor/logout'] = "vendor/VendorProfile/logout";
+$route['(\w{2})/vendor/logout'] = "vendor/VendorProfile/logout";
+$route['vendor/products'] = "vendor/Products";
+$route['(\w{2})/vendor/products'] = "vendor/Products";
+$route['vendor/products/(:num)'] = "vendor/Products/index/$1";
+$route['(\w{2})/vendor/products/(:num)'] = "vendor/Products/index/$2";
+$route['vendor/add/product'] = "vendor/AddProduct";
+$route['(\w{2})/vendor/add/product'] = "vendor/AddProduct";
+$route['vendor/edit/product/(:num)'] = "vendor/AddProduct/index/$1";
+$route['(\w{2})/vendor/edit/product/(:num)'] = "vendor/AddProduct/index/$1";
+$route['vendor/orders'] = "vendor/Orders";
+$route['(\w{2})/vendor/orders'] = "vendor/Orders";
+$route['vendor/uploadOthersImages'] = "vendor/AddProduct/do_upload_others_images";
+$route['vendor/loadOthersImages'] = "vendor/AddProduct/loadOthersImages";
+$route['vendor/removeSecondaryImage'] = "vendor/AddProduct/removeSecondaryImage";
+$route['vendor/delete/product/(:num)'] = "vendor/products/deleteProduct/$1";
+$route['(\w{2})/vendor/delete/product/(:num)'] = "vendor/products/deleteProduct/$1";
+$route['vendor/view/(:any)'] = "Vendor/index/0/$1";
+$route['(\w{2})/vendor/view/(:any)'] = "Vendor/index/0/$2";
+$route['vendor/view/(:any)/(:num)'] = "Vendor/index/$2/$1";
+$route['(\w{2})/vendor/view/(:any)/(:num)'] = "Vendor/index/$3/$2";
+$route['(:any)/(:any)_(:num)'] = "Vendor/viewProduct/$1/$3";
+$route['(\w{2})/(:any)/(:any)_(:num)'] = "Vendor/viewProduct/$2/$4";
+$route['vendor/changeOrderStatus'] = "vendor/orders/changeOrdersOrderStatus";
+
 // Site Multilanguage
 $route['^(\w{2})/(.*)$'] = '$2';
 
 /*
- * Admin Controllers Route
+ * Admin Controllers Routes
  */
 // HOME / LOGIN
 $route['admin'] = "admin/home/login";

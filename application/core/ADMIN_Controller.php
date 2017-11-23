@@ -20,18 +20,6 @@ class ADMIN_Controller extends MX_Controller
     {
         parent::__construct();
         $this->load->library(array('form_validation'));
-        $this->load->helper(
-                array(
-                    'file',
-                    'pagination',
-                    'except_letters',
-                    'currencies',
-                    'rcopy',
-                    'rrmdir',
-                    'rreadDir',
-                    'savefile'
-                )
-        );
         $this->history = $this->config->item('admin_history');
         $this->activePages = $vars['activePages'] = $this->getActivePages();
         $numNotPreviewOrders = $this->Home_admin_model->newOrdersCheck();

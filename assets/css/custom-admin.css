@@ -10,7 +10,6 @@ body { color:#6b6b6b; font-size: 13px; }
 h1 {font-size:30px; }
 nav.navbar, div.left-side, h1 {text-transform: uppercase; }
 input.form-control, textarea.form-control {border:1px solid #dadada; border-radius: 0; box-shadow:none;}
-
 .login-container{    position: relative;    width: 300px;    margin: 80px auto;    padding: 20px 40px 40px;    text-align: center;    background: #fff;    border: 1px solid #ccc;}
 #output{    position: absolute;    width: 300px;    top: -75px;    left: 0;    color: #fff;}
 #output.alert-success{    background: rgb(25, 204, 25);}
@@ -34,13 +33,7 @@ input.form-control, textarea.form-control {border:1px solid #dadada; border-radi
 #nav-categories, #show-xs-nav .hidde-sp {display: none;}
 .confirm-result {position:absolute; bottom:0; right:0;}
 #calc-board {width:200px; margin:0 auto;}
-#calc-board a {margin-bottom:5px; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #b3b3b3; background: #ffffff;
-               background: -moz-linear-gradient(top,  #ffffff 0%, #e6e6e6 100%);
-               background: -webkit-linear-gradient(top,  #ffffff 0%,#e6e6e6 100%);
-               background: linear-gradient(to bottom,  #ffffff 0%,#e6e6e6 100%);
-               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e6e6e6',GradientType=0 );
-               color:#333;}
-
+#calc-board a {margin-bottom:5px; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #b3b3b3; background: #ffffff;  background: -moz-linear-gradient(top,  #ffffff 0%, #e6e6e6 100%);  background: -webkit-linear-gradient(top,  #ffffff 0%,#e6e6e6 100%); background: linear-gradient(to bottom,  #ffffff 0%,#e6e6e6 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e6e6e6',GradientType=0 ); color:#333;}
 .other-img {display: inline-block; position:relative;}
 .other-img a {position:absolute; right:0; top:0; background-color: #fff; color:red;}
 .selected-template {height: 50px; position: absolute; left:25px; top:10px;}
@@ -86,7 +79,6 @@ input.form-control, textarea.form-control {border:1px solid #dadada; border-radi
 }
 
 .fadeInUp {  -webkit-animation-name: fadeInUp;  animation-name: fadeInUp;}
-
 nav.navbar {z-index: 55;}
 nav.navbar a { color:#fff;}
 nav.navbar li a:hover, nav.navbar li a:focus, nav.navbar li a:active {background-color: transparent;}

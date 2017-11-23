@@ -48,7 +48,7 @@ class Public_model extends CI_Model
         return $query->result_array();
     }
 
-    public function getProducts($limit = null, $start = null, $big_get)
+    public function getProducts($limit = null, $start = null, $big_get, $vendor_id = false)
     {
         if ($limit !== null && $start !== null) {
             $this->db->limit($limit, $start);
@@ -56,10 +56,14 @@ class Public_model extends CI_Model
         if (!empty($big_get) && isset($big_get['category'])) {
             $this->getFilter($big_get);
         }
-        $this->db->select('products.id,products.image, products.quantity, products_translations.title, products_translations.price, products_translations.old_price, products.url');
+        $this->db->select('vendors.url as vendor_url, products.id,products.image, products.quantity, products_translations.title, products_translations.price, products_translations.old_price, products.url');
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
+        $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
         $this->db->where('products_translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('visibility', 1);
+        if ($vendor_id !== false) {
+            $this->db->where('vendor_id', $vendor_id);
+        }
         if ($this->showOutOfStock == 0) {
             $this->db->where('quantity >', 0);
         }
@@ -176,14 +180,14 @@ class Public_model extends CI_Model
     {
         $this->db->where('products.id', $id);
 
-        $this->db->select('products.*, products_translations.title,products_translations.description, products_translations.price, products_translations.old_price, products.url, shop_categories_translations.name as categorie_name');
+        $this->db->select('vendors.url as vendor_url, products.*, products_translations.title,products_translations.description, products_translations.price, products_translations.old_price, products.url, shop_categories_translations.name as categorie_name');
 
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
         $this->db->where('products_translations.abbr', MY_LANGUAGE_ABBR);
 
         $this->db->join('shop_categories_translations', 'shop_categories_translations.for_id = products.shop_categorie', 'inner');
         $this->db->where('shop_categories_translations.abbr', MY_LANGUAGE_ABBR);
-
+        $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
         $this->db->where('visibility', 1);
         $query = $this->db->get('products');
         return $query->row_array();
@@ -300,6 +304,71 @@ class Public_model extends CI_Model
         }
     }
 
+    public function setVendorOrder($post)
+    {
+        $i = 0;
+        $post['products'] = array();
+        foreach ($post['id'] as $product) {
+            $post['products'][$product] = $post['quantity'][$i];
+            $i++;
+        }
+
+        /*
+         * Loop products and check if its from vendor - save order for him
+         */
+        foreach ($post['products'] as $product_id => $product_quantity) {
+            $productInfo = $this->getOneProduct($product_id);
+            if ($productInfo['vendor_id'] > 0) {
+
+                $q = $this->db->query('SELECT MAX(order_id) as order_id FROM vendors_orders');
+                $rr = $q->row_array();
+                if ($rr['order_id'] == 0) {
+                    $rr['order_id'] = 1233;
+                }
+                $post['order_id'] = $rr['order_id'] + 1;
+
+
+                unset($post['id'], $post['quantity']);
+                $post['date'] = time();
+                $post['products'] = serialize(array($product_id => $product_quantity));
+                $this->db->trans_begin();
+                if (!$this->db->insert('vendors_orders', array(
+                            'order_id' => $post['order_id'],
+                            'products' => $post['products'],
+                            'date' => $post['date'],
+                            'referrer' => $post['referrer'],
+                            'clean_referrer' => $post['clean_referrer'],
+                            'payment_type' => $post['payment_type'],
+                            'paypal_status' => @$post['paypal_status'],
+                            'discount_code' => @$post['discountCode'],
+                            'vendor_id' => $productInfo['vendor_id']
+                        ))) {
+                    log_message('error', print_r($this->db->error(), true));
+                }
+                $lastId = $this->db->insert_id();
+                if (!$this->db->insert('vendors_orders_clients', array(
+                            'for_id' => $lastId,
+                            'first_name' => $post['first_name'],
+                            'last_name' => $post['last_name'],
+                            'email' => $post['email'],
+                            'phone' => $post['phone'],
+                            'address' => $post['address'],
+                            'city' => $post['city'],
+                            'post_code' => $post['post_code'],
+                            'notes' => $post['notes']
+                        ))) {
+                    log_message('error', print_r($this->db->error(), true));
+                }
+                if ($this->db->trans_status() === FALSE) {
+                    $this->db->trans_rollback();
+                    return false;
+                } else {
+                    $this->db->trans_commit();
+                }
+            }
+        }
+    }
+
     public function setActivationLink($link, $orderId)
     {
         $result = $this->db->insert('confirm_links', array('link' => $link, 'for_order' => $orderId));
@@ -308,8 +377,9 @@ class Public_model extends CI_Model
 
     public function getSliderProducts()
     {
-        $this->db->select('products.id, products.quantity, products.image, products.url, products_translations.price, products_translations.title, products_translations.basic_description, products_translations.old_price');
+        $this->db->select('vendors.url as vendor_url, products.id, products.quantity, products.image, products.url, products_translations.price, products_translations.title, products_translations.basic_description, products_translations.old_price');
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
+        $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
         $this->db->where('products_translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('visibility', 1);
         $this->db->where('in_slider', 1);
@@ -322,8 +392,9 @@ class Public_model extends CI_Model
 
     public function getbestSellers($categorie = 0, $noId = 0)
     {
-        $this->db->select('products.id, products.quantity, products.image, products.url, products_translations.price, products_translations.title, products_translations.old_price');
+        $this->db->select('vendors.url as vendor_url, products.id, products.quantity, products.image, products.url, products_translations.price, products_translations.title, products_translations.old_price');
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
+        $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
         if ($noId > 0) {
             $this->db->where('products.id !=', $noId);
         }
@@ -341,13 +412,17 @@ class Public_model extends CI_Model
         return $query->result_array();
     }
 
-    public function sameCagegoryProducts($categorie, $noId)
+    public function sameCagegoryProducts($categorie, $noId, $vendor_id = false)
     {
-        $this->db->select('products.id, products.quantity, products.image, products.url, products_translations.price, products_translations.title, products_translations.old_price');
+        $this->db->select('vendors.url as vendor_url, products.id, products.quantity, products.image, products.url, products_translations.price, products_translations.title, products_translations.old_price');
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
+        $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
         $this->db->where('products.id !=', $noId);
+        if ($vendor_id !== false) {
+            $this->db->where('vendor_id', $vendor_id);
+        }
         $this->db->where('products.shop_categorie =', $categorie);
-        $this->db->where('products_translations.abbr', MY_LANGUAGE_ABBR); 
+        $this->db->where('products_translations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('visibility', 1);
         if ($this->showOutOfStock == 0) {
             $this->db->where('quantity >', 0);
@@ -381,7 +456,7 @@ class Public_model extends CI_Model
     {
         $this->db->select('shop_categories.id, shop_categories_translations.name');
         $this->db->where('abbr', MY_LANGUAGE_ABBR);
-        $this->db->where('shop_categories.sub_for =', 0); 
+        $this->db->where('shop_categories.sub_for =', 0);
         $this->db->join('shop_categories', 'shop_categories.id = shop_categories_translations.for_id', 'INNER');
         $this->db->limit(10);
         $query = $this->db->get('shop_categories_translations');
@@ -407,7 +482,7 @@ class Public_model extends CI_Model
         if (!empty($dynPages)) {
             $this->db->join('textual_pages_tanslations', 'textual_pages_tanslations.for_id = active_pages.id', 'left');
             $this->db->where_in('active_pages.name', $dynPages);
-            $this->db->where('textual_pages_tanslations.abbr', MY_LANGUAGE_ABBR); 
+            $this->db->where('textual_pages_tanslations.abbr', MY_LANGUAGE_ABBR);
             $result = $this->db->select('textual_pages_tanslations.name as lname, active_pages.name as pname')->get('active_pages');
             $ar = array();
             $i = 0;
@@ -424,7 +499,7 @@ class Public_model extends CI_Model
     public function getOnePage($page)
     {
         $this->db->join('textual_pages_tanslations', 'textual_pages_tanslations.for_id = active_pages.id', 'left');
-        $this->db->where('textual_pages_tanslations.abbr', MY_LANGUAGE_ABBR); 
+        $this->db->where('textual_pages_tanslations.abbr', MY_LANGUAGE_ABBR);
         $this->db->where('active_pages.name', $page);
         $result = $this->db->select('textual_pages_tanslations.description as content, textual_pages_tanslations.name')->get('active_pages');
         return $result->row_array();

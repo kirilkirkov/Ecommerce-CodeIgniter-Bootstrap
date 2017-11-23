@@ -30,6 +30,23 @@
     <body>
         <div id="wrapper">
             <div id="content">
+                <div id="top-user-panel">
+                    <div class="container">
+                        <a href="<?= LANG_URL . '/vendor/register' ?>" class="btn btn-default"><?= lang('register_me') ?></a>
+                        <form class="form-inline" method="POST" action="<?= LANG_URL . '/vendor/login' ?>">
+                            <div class="form-group">
+                                <input type="email" name="u_email" class="form-control" placeholder="<?= lang('email') ?>">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="u_password" class="form-control" placeholder="<?= lang('password') ?>">
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="remember_me"><?= lang('remember_me') ?></label>
+                            </div>
+                            <button type="submit" name="login" class="btn btn-default"><?= lang('u_login') ?></button>
+                        </form> 
+                    </div>
+                </div>
                 <div id="languages-bar">
                     <div class="container">
                         <?php
@@ -79,7 +96,7 @@
                                             <div class="dropdown dropdown-lg">
                                                 <button type="button" class="button-more dropdown-toggle mine-color" data-toggle="dropdown" aria-expanded="false"><?= lang('more') ?> <span class="caret"></span></button>
                                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                                    <form class="form-horizontal" method="GET" action="<?= LANG_URL ?>" id="bigger-search">
+                                                    <form class="form-horizontal" method="GET" action="<?= isset($vendor_url) ? $vendor_url : LANG_URL ?>" id="bigger-search">
                                                         <input type="hidden" name="category" value="<?= isset($_GET['category']) ? $_GET['category'] : '' ?>">
                                                         <input type="hidden" name="in_stock" value="<?= isset($_GET['in_stock']) ? $_GET['in_stock'] : '' ?>">
                                                         <input type="hidden" name="search_in_title" value="<?= isset($_GET['search_in_title']) ? $_GET['search_in_title'] : '' ?>">

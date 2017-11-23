@@ -32,6 +32,10 @@ class Checkout extends MY_Controller
                 $_POST['clean_referrer'] = cleanReferral($_POST['referrer']);
                 $orderId = $this->Public_model->setOrder($_POST);
                 if ($orderId != false) {
+                    /*
+                     * Save product orders in vendors profiles
+                     */
+                    $this->setVendorOrders();
                     $this->orderId = $orderId;
                     $this->setActivationLink();
                     $this->goToDestination();
@@ -47,6 +51,11 @@ class Checkout extends MY_Controller
         $data['paypal_email'] = $this->Home_admin_model->getValueStore('paypal_email');
         $data['bestSellers'] = $this->Public_model->getbestSellers();
         $this->render('checkout', $head, $data);
+    }
+
+    private function setVendorOrders()
+    {
+        $this->Public_model->setVendorOrder($_POST);
     }
 
     private function setActivationLink()

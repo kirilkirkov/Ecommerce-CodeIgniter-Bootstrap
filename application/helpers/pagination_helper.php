@@ -10,7 +10,7 @@ function pagination($url, $rowscount, $per_page, $segment = 2)
     $ci->load->library('pagination');
 
     $config = array();
-    $config["base_url"] = base_url($url);
+    $config["base_url"] = LANG_URL . '/' . $url;
     $config["total_rows"] = $rowscount;
     $config["per_page"] = $per_page;
     $config["uri_segment"] = $segment;

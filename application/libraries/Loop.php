@@ -98,20 +98,21 @@ class Loop
                 }
                 $i = 0;
                 foreach ($products as $article) {
-                    if ($i == 0 && $carousel == true)
+                    if ($i == 0 && $carousel == true) {
                         $active = 'active';
-                    else
+                    } else {
                         $active = '';
+                    }
                     ?>
                     <div class="product-list <?= $carousel == true ? 'item' : '' ?> <?= $classes ?> <?= $active ?>">
                         <div class="inner">
                             <div class="img-container">
-                                <a href="<?= LANG_URL . '/' . $article['url'] ?>">
+                                <a href="<?= $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'] ?>">
                                     <img src="<?= base_url('/attachments/shop_images/' . $article['image']) ?>" alt="<?= str_replace('"', "'", $article['title']) ?>">
                                 </a>
                             </div>
                             <h2>
-                                <a href="<?= LANG_URL . '/' . $article['url'] ?>"><?= character_limiter($article['title'], 70) ?></a>
+                                <a href="<?= $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'] ?>"><?= character_limiter($article['title'], 70) ?></a>
                             </h2>
                             <div class="price">
                                 <span class="underline"><?= lang('price') ?>: <span><?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= CURRENCY ?></span></span>
@@ -130,7 +131,7 @@ class Loop
                                     <?= lang('in_stock') ?>: <span><?= $article['quantity'] ?></span>
                                 </div>
                             <?php } if (self::$CI->load->get_var('moreInfoBtn') == 1) { ?>
-                                <a href="<?= LANG_URL . '/' . $article['url'] ?>" class="info-btn gradient-color">
+                                <a href="<?= $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'] ?>" class="info-btn gradient-color">
                                     <span class="text-to-bg"><?= lang('info_product_list') ?></span>
                                 </a>
                             <?php } ?>

@@ -29,7 +29,7 @@ class Publish extends ADMIN_Controller
         $trans_load = null;
         if ($id > 0 && $_POST == null) {
             $_POST = $this->Products_model->getOneProduct($id);
-            $trans_load = $this->Products_model->getTranslations($id, 'product');
+            $trans_load = $this->Products_model->getTranslations($id);
         }
         if (isset($_POST['submit'])) {
             if (isset($_GET['to_lang'])) {

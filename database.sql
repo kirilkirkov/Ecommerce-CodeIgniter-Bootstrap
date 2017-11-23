@@ -97,8 +97,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `processed` tinyint(1) NOT NULL DEFAULT '0',
   `viewed` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'viewed status is change when change processed status',
   `confirmed` tinyint(1) NOT NULL DEFAULT '0',
-  `discount_code` varchar(20) NOT NULL,
-  `vendor_id` int(11) NOT NULL DEFAULT '0',
+  `discount_code` varchar(20) NOT NULL  
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -130,6 +129,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `virtual_products` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `brand_id` int(10) UNSIGNED NOT NULL,
   `position` int(10) UNSIGNED NOT NULL,
+  `vendor_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

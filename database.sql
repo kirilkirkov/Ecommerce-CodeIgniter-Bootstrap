@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `processed` tinyint(1) NOT NULL DEFAULT '0',
   `viewed` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'viewed status is change when change processed status',
   `confirmed` tinyint(1) NOT NULL DEFAULT '0',
-  `discount_code` varchar(20) NOT NULL  
+  `discount_code` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

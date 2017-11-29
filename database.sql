@@ -114,6 +114,12 @@ CREATE TABLE `orders_clients` (
   `for_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `orders_clients`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `orders_clients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `folder` int(10) unsigned DEFAULT NULL COMMENT 'folder with images',
@@ -254,6 +260,12 @@ CREATE TABLE `bank_accounts` (
   `bic` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `bank_accounts`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `bank_accounts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 CREATE TABLE IF NOT EXISTS `value_store` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `thekey` varchar(50) NOT NULL,
@@ -305,6 +317,13 @@ CREATE TABLE `confirm_links` (
   `link` char(32) NOT NULL,
   `for_order` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `confirm_links`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `confirm_links`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 
 CREATE TABLE `discount_codes` (
  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

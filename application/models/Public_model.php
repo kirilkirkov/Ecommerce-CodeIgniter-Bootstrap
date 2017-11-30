@@ -98,7 +98,7 @@ class Public_model extends CI_Model
             (int) $big_get['category'];
             $findInIds = array();
             $findInIds[] = $big_get['category'];
-            $query = $this->db->query('SELECT id FROM shop_categories WHERE sub_for = ' . $big_get['category']);
+            $query = $this->db->query('SELECT id FROM shop_categories WHERE sub_for = ' . $this->db->escape($big_get['category']));
             foreach ($query->result() as $row) {
                 $findInIds[] = $row->id;
             }
@@ -118,7 +118,7 @@ class Public_model extends CI_Model
             $this->db->like('products_translations.description', $big_get['search_in_body']);
         }
         if ($big_get['order_price'] != '') {
-            $this->db->order_by('CAST(price AS DECIMAL(10.2)) ' . $big_get['order_price']);
+            $this->db->order_by('products_translations.price', $big_get['order_price']);
         }
         if ($big_get['order_procurement'] != '') {
             $this->db->order_by('products.procurement', $big_get['order_procurement']);

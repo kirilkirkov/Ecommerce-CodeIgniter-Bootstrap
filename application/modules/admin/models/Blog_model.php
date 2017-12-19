@@ -85,6 +85,7 @@ class Blog_model extends CI_Model
                 log_message('error', print_r($this->db->error(), true));
             }
             $id = $this->db->insert_id();
+            $this->db->where('id', $id);
             if (!$this->db->update('blog_posts', array(
                         'url' => except_letters($_POST['title'][$myTranslationNum]) . '_' . $id
                     ))) {

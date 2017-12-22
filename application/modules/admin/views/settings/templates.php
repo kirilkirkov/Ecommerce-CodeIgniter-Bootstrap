@@ -5,7 +5,7 @@
 </form>
 <div class="row">
     <?php foreach ($templates as $template) { ?>
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="margin-bottom: 10px;">
             <a href="javascript:void(0);" data-form-id="saveTemplate" data-template-name="<?= $template ?>" class="confirm-save choose-template">
                 <img src="<?= base_url('Loader/templateCssImage/screenshot.png/' . $template ) ?>" alt="Template Name: <?= $template ?>" class="img-responsive img-thumbnail">
                 <?php if ($seleced_template == $template) { ?>

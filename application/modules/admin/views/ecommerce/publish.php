@@ -246,9 +246,4 @@ if ($this->session->flashdata('result_publish')) {
             </div>
         </div>
     </div>
-</div>
-<script>
-    $(document).ready(function () {
-        ShowNotificator('ad', 'asd');
-    });
-</script>
+</div> 

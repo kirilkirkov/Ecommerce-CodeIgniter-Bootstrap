@@ -46,7 +46,9 @@ class Home extends MY_Controller
         $data['all_categories'] = $all_categories;
         $data['countQuantities'] = $this->Public_model->getCountQuantities();
         $data['bestSellers'] = $this->Public_model->getbestSellers();
+        $data['newProducts'] = $this->Public_model->getNewProducts();
         $data['sliderProducts'] = $this->Public_model->getSliderProducts();
+        $data['lastBlogs'] = $this->Public_model->getLastBlogs();
         $data['products'] = $this->Public_model->getProducts($this->num_rows, $page, $_GET);
         $rowscount = $this->Public_model->productsCount($_GET);
         $data['shippingOrder'] = $this->Home_admin_model->getValueStore('shippingOrder');

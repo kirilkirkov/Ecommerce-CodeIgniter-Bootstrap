@@ -9,7 +9,7 @@ class MY_Controller extends MX_Controller
 
     public function __construct()
     {
-        parent::__construct(); 
+        parent::__construct();
         $this->getActivePages();
         $this->checkForPostRequests();
         $this->setReferrer();
@@ -28,6 +28,24 @@ class MY_Controller extends MX_Controller
         $head['sumOfItems'] = $this->shoppingcart->sumValues;
         $vars = $this->loadVars();
         $this->load->vars($vars);
+        $all_categories = $this->Public_model->getShopCategories();
+
+        function buildTree1(array $elements, $parentId = 0)
+        {
+            $branch = array();
+            foreach ($elements as $element) {
+                if ($element['sub_for'] == $parentId) {
+                    $children = buildTree1($elements, $element['id']);
+                    if ($children) {
+                        $element['children'] = $children;
+                    }
+                    $branch[] = $element;
+                }
+            }
+            return $branch;
+        }
+
+        $head['nav_categories'] = $tree = buildTree1($all_categories);
         $this->load->view($this->template . '_parts/header', $head);
         $this->load->view($this->template . $view, $data);
         $this->load->view($this->template . '_parts/footer', $footer);

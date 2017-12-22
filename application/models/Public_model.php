@@ -36,6 +36,32 @@ class Public_model extends CI_Model
         return $this->db->count_all_results('products');
     }
 
+    public function getNewProducts()
+    {
+        $this->db->select('vendors.url as vendor_url, products.id, products.quantity, products.image, products.url, products_translations.price, products_translations.title, products_translations.old_price');
+        $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
+        $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
+        $this->db->where('products_translations.abbr', MY_LANGUAGE_ABBR);
+        $this->db->where('products.in_slider', 0);
+        $this->db->where('visibility', 1);
+        if ($this->showOutOfStock == 0) {
+            $this->db->where('quantity >', 0);
+        }
+        $this->db->order_by('products.id', 'desc');
+        $this->db->limit(5);
+        $query = $this->db->get('products');
+        return $query->result_array();
+    }
+
+    public function getLastBlogs()
+    {
+        $this->db->limit(5);
+        $this->db->join('blog_translations', 'blog_translations.for_id = blog_posts.id', 'left');
+        $this->db->where('blog_translations.abbr', MY_LANGUAGE_ABBR);
+        $query = $this->db->select('blog_posts.id, blog_translations.title, blog_translations.description, blog_posts.url, blog_posts.time, blog_posts.image')->get('blog_posts');
+        return $query->result_array();
+    }
+
     public function getPosts($limit, $page, $search = null, $month = null)
     {
         if ($search !== null) {

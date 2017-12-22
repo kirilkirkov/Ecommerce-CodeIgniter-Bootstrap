@@ -348,10 +348,9 @@ $('#modalConvertor').on('hidden.bs.modal', function (e) {
     $("#new_currency").empty();
 });
 
-$(document).ready(function () {
-    $("#showSliderDescrption").click(function () {
-        $("#theSliderDescrption").slideToggle("slow", function () {});
-    });
+
+$("#showSliderDescrption").click(function () {
+    $("#theSliderDescrption").slideToggle("slow", function () {});
 });
 
 // Products

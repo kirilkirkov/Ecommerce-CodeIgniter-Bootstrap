@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="<?= MY_LANGUAGE_ABBR ?>">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title><?= $title ?></title>
-        <meta name="description" content="<?= $description ?>">
-        <meta name="keywords" content="<?= $keywords ?>">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+        <meta name="description" content="<?= $description ?>" />
+        <meta name="keywords" content="<?= $keywords ?>" />
+        <meta property="og:title" content="<?= $title ?>" />
+        <meta property="og:description" content="<?= $description ?>" />
+        <meta property="og:url" content="<?= LANG_URL ?>" />
+        <meta property="og:type" content="website" />
         <meta property="og:image" content="<?= base_url('assets/img/site-overview.png') ?>" />
-        <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/bootstrap-select-1.12.1/bootstrap-select.min.css') ?>">
-        <link href="<?= base_url('assets/css/bootstrap-datepicker.min.css') ?>" rel="stylesheet">
-        <link href="<?= base_url('templatecss/custom.css') ?>" rel="stylesheet">
-        <link href="<?= base_url('cssloader/theme.css') ?>" rel="stylesheet">
+        <title><?= $title ?></title>
+        <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>" />
+        <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>" />
+        <link rel="stylesheet" href="<?= base_url('assets/bootstrap-select-1.12.1/bootstrap-select.min.css') ?>" />
+        <link href="<?= base_url('assets/css/bootstrap-datepicker.min.css') ?>" rel="stylesheet" />
+        <link href="<?= base_url('templatecss/custom.css') ?>" rel="stylesheet" />
+        <link href="<?= base_url('cssloader/theme.css') ?>" rel="stylesheet" />
         <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
         <script src="<?= base_url('loadlanguage/all.js') ?>"></script>
         <?php if ($cookieLaw != false) { ?>

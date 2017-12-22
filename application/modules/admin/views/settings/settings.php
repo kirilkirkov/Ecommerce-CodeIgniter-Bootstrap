@@ -79,6 +79,7 @@
         </div>
         <script>
             CKEDITOR.replace('contacts-page');
+            CKEDITOR.config.entities = false;
         </script>
     </div>
     <div class="col-sm-6 col-md-4">

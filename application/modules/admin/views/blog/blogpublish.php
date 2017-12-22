@@ -32,6 +32,7 @@
                     <textarea name="description[]" id="description<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
                     <script>
                         CKEDITOR.replace('description<?= $i ?>');
+                        CKEDITOR.config.entities = false;
                     </script>
                 </div>
                 <?php

@@ -34,6 +34,7 @@ $timeNow = time();
                     </div>
                     <script>
                         CKEDITOR.replace('description<?= $i ?>');
+                        CKEDITOR.config.entities = false;
                     </script>
                     <?php
                     $i++;

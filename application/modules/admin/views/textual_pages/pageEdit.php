@@ -20,6 +20,7 @@
                     <textarea name="description[]" id="description<?= $i ?>" rows="200" class="form-control"><?= $p['description'] ?></textarea>
                     <script>
                         CKEDITOR.replace('description<?= $i ?>');
+                        CKEDITOR.config.entities = false;
                     </script>
                 </div>
                 <?php

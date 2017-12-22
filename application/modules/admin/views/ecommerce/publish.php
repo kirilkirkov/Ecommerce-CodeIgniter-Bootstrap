@@ -42,6 +42,7 @@ if ($this->session->flashdata('result_publish')) {
                 <textarea name="basic_description[]" id="basic_description<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['basic_description']) ? $trans_load[$language->abbr]['basic_description'] : '' ?></textarea>
                 <script>
                     CKEDITOR.replace('basic_description<?= $i ?>');
+                    CKEDITOR.config.entities = false;
                 </script>
             </div>
             <?php
@@ -58,6 +59,7 @@ if ($this->session->flashdata('result_publish')) {
             <textarea name="description[]" id="description<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
             <script>
                 CKEDITOR.replace('description<?= $i ?>');
+                CKEDITOR.config.entities = false;
             </script>
         </div>
         <?php

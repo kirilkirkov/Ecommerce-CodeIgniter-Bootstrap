@@ -133,12 +133,47 @@ class Home extends MY_Controller
         if (!$this->input->is_ajax_request()) {
             exit('No direct script access allowed');
         }
-        $result = $this->Public_model->getValidDiscountCode($_POST['enteredCode']); 
+        $result = $this->Public_model->getValidDiscountCode($_POST['enteredCode']);
         if ($result == null) {
             echo 0;
         } else {
             echo json_encode($result);
         }
+    }
+
+    public function sitemap()
+    {
+        header("Content-Type:text/xml");
+        echo '<?xml version="1.0" encoding="UTF-8"?>
+                <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        $products = $this->Public_model->sitemap();
+        $blogPosts = $this->Public_model->sitemapBlog();
+
+        foreach ($blogPosts->result() as $row1) {
+            echo '<url>
+
+      <loc>' . base_url('blog/' . $row1->url) . '</loc>
+
+      <changefreq>monthly</changefreq>
+
+      <priority>0.1</priority>
+
+   </url>';
+        }
+
+        foreach ($products->result() as $row) {
+            echo '<url>
+
+      <loc>' . base_url($row->url) . '</loc>
+
+      <changefreq>monthly</changefreq>
+
+      <priority>0.1</priority>
+
+   </url>';
+        }
+
+        echo '</urlset>';
     }
 
 }

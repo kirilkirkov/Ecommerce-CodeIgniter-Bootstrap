@@ -593,4 +593,70 @@ class Public_model extends CI_Model
         return $query->row_array();
     }
 
+    public function countPublicUsersWithEmail($email, $id = 0)
+    {
+        if ($id > 0) {
+            $this->db->where('id !=', $id);
+        }
+        $this->db->where('email', $email);
+        return $this->db->count_all_results('users_public');
+    }
+
+    public function registerUser($post)
+    {
+        $this->db->insert('users_public', array(
+            'name' => $post['name'],
+            'phone' => $post['phone'],
+            'email' => $post['email'],
+            'password' => md5($post['pass'])
+        ));
+        return $this->db->insert_id();
+    }
+
+    public function updateProfile($post)
+    {
+        $array = array(
+            'name' => $post['name'],
+            'phone' => $post['phone'],
+            'email' => $post['email']
+        );
+        if (trim($post['pass']) != '') {
+            $array['password'] = md5($post['pass']);
+        }
+        $this->db->where('id', $post['id']);
+        $this->db->update('users_public', $array);
+    }
+
+    public function checkPublicUserIsValid($post)
+    {
+        $this->db->where('email', $post['email']);
+        $this->db->where('password', md5($post['pass']));
+        $query = $this->db->get('users_public');
+        $result = $query->row_array();
+        if (empty($result)) {
+            return false;
+        } else {
+            return $result['id'];
+        }
+    }
+
+    public function getUserProfileInfo($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('users_public');
+        return $query->row_array();
+    }
+
+    public function sitemap()
+    {
+        $query = $this->db->select('url')->get('products');
+        return $query;
+    }
+
+    public function sitemapBlog()
+    {
+        $query = $this->db->select('url')->get('blog_posts');
+        return $query;
+    }
+
 }

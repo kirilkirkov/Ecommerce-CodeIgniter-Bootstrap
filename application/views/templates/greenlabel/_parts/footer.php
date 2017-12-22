@@ -91,24 +91,38 @@
     </div>
 </footer>
 <?php if ($this->session->flashdata('emailAdded')) { ?>
+<script>
+    $(document).ready(function () {
+        ShowNotificator('alert-info', '<?= lang('email_added') ?>');
+    });
+</script>
+    <?php
+}
+echo $addedJs;
+if ($this->session->flashdata('userError')) {
+    if (is_array($this->session->flashdata('userError'))) {
+        $usr_err = implode(' ', $this->session->flashdata('userError'));
+    } else {
+        $usr_err = $this->session->flashdata('userError');
+    }
+    ?>
     <script>
         $(document).ready(function () {
-            ShowNotificator('alert-info', '<?= lang('email_added') ?>');
+            ShowNotificator('alert-danger', '<?= $usr_err ?>');
         });
     </script>
     <?php
 }
-echo $addedJs;
 ?>
 <div id="notificator" class="alert"></div>
 <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/placeholders.min.js') ?>"></script>
 <script>
-    var variable = {
-        clearShoppingCartUrl: "<?= base_url('clearShoppingCart') ?>",
-        manageShoppingCartUrl: "<?= base_url('manageShoppingCart') ?>",
-        discountCodeChecker: "<?= base_url('discountCodeChecker') ?>"
-    };
+var variable = {
+    clearShoppingCartUrl: "<?= base_url('clearShoppingCart') ?>",
+    manageShoppingCartUrl: "<?= base_url('manageShoppingCart') ?>",
+    discountCodeChecker: "<?= base_url('discountCodeChecker') ?>"
+};
 </script>
 <script src="<?= base_url('assets/js/system.js') ?>"></script>
 <script src="<?= base_url('templatejs/mine.js') ?>"></script>

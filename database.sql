@@ -88,6 +88,7 @@ INSERT INTO `languages` (`id`, `abbr`, `name`, `currency`, `currencyKey`, `flag`
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'point to public_users ID',
   `products` text NOT NULL,
   `date` int(10) unsigned NOT NULL,
   `referrer` varchar(255) NOT NULL,
@@ -119,6 +120,18 @@ ALTER TABLE `orders_clients`
 
 ALTER TABLE `orders_clients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+CREATE TABLE `users_public` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `users_public`
+  ADD PRIMARY KEY (`id`);
 
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

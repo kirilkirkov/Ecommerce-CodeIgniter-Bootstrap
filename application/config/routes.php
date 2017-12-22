@@ -97,6 +97,24 @@ $route['(\w{2})/shopping-cart'] = "ShoppingCartPage";
 $route['page/(:any)'] = "page/index/$1";
 $route['(\w{2})/page/(:any)'] = "page/index/$2";
 
+// Login Public Users Page
+$route['login'] = "Users/login";
+$route['(\w{2})/login'] = "Users/login";
+
+// Register Public Users Page
+$route['register'] = "Users/register";
+$route['(\w{2})/register'] = "Users/register";
+
+// Users Profiles Public Users Page
+$route['myaccount'] = "Users/myaccount";
+$route['(\w{2})/myaccount'] = "Users/myaccount";
+
+// Logout Profiles Public Users Page
+$route['logout'] = "Users/logout";
+$route['(\w{2})/logout'] = "Users/logout";
+
+$route['sitemap.xml'] = "home/sitemap";
+
 // Confirm link
 $route['confirm/(:any)'] = "home/confirmLink/$1";
 

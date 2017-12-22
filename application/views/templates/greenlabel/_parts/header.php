@@ -32,6 +32,21 @@
     </head>
     <body>
         <div class="container">
+            <div class="user-panel">
+                <?php if (isset($_SESSION['logged_user'])) { ?>
+                    <a href="<?= LANG_URL . '/myaccount' ?>" class="my-acc">
+                        <?= lang('my_acc') ?>
+                    </a>
+                <?php } else { ?>
+                    <a href="<?= LANG_URL . '/login' ?>" class="my-acc-login">
+                        <?= lang('login') ?>
+                    </a>
+                    <a href="<?= LANG_URL . '/register' ?>" class="my-acc-register">
+                        <?= lang('register') ?>
+                    </a>
+                <?php } ?>
+                <div class="clearfix"></div>
+            </div>
             <div class="row header">
                 <div class="col-md-4 col-xs-12">
                     <div class="logo">

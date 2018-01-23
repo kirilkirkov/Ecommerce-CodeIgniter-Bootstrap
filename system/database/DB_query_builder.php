@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
@@ -1405,7 +1405,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		// for selecting COUNT(*) ...
 		$qb_orderby       = $this->qb_orderby;
 		$qb_cache_orderby = $this->qb_cache_orderby;
-		$this->qb_orderby = $this->qb_cache_orderby = NULL;
+		$this->qb_orderby = $this->qb_cache_orderby = array();
 
 		$result = ($this->qb_distinct === TRUE OR ! empty($this->qb_groupby) OR ! empty($this->qb_cache_groupby) OR $this->qb_limit OR $this->qb_offset)
 			? $this->query($this->_count_string.$this->protect_identifiers('numrows')."\nFROM (\n".$this->_compile_select()."\n) CI_count_all_results")

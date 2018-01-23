@@ -122,7 +122,7 @@ ALTER TABLE `orders_clients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 CREATE TABLE `users_public` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(100) NOT NULL,
@@ -132,6 +132,9 @@ CREATE TABLE `users_public` (
 
 ALTER TABLE `users_public`
   ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `users_public`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

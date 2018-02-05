@@ -107,6 +107,7 @@ class Products_model extends CI_Model
                         'in_slider' => $post['in_slider'],
                         'position' => $post['position'],
                         'virtual_products' => $post['virtual_products'],
+                        'brand_id' => $post['brand_id'],
                         'time_update' => time()
                     ))) {
                 log_message('error', print_r($this->db->error(), true));
@@ -133,6 +134,7 @@ class Products_model extends CI_Model
                         'position' => $post['position'],
                         'virtual_products' => $post['virtual_products'],
                         'folder' => $post['folder'],
+                        'brand_id' => $post['brand_id'],
                         'time' => time()
                     ))) {
                 log_message('error', print_r($this->db->error(), true));

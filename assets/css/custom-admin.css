@@ -23,7 +23,7 @@ input.form-control, textarea.form-control {border:1px solid #dadada; border-radi
 .form-box input[type="password"]{    border-radius: 0 0 5px 5px;    border-top: 0;}
 .form-box button.login{    margin-top:15px;    padding: 10px 20px;}
 .animated {  -webkit-animation-duration: 1s;  animation-duration: 1s;  -webkit-animation-fill-mode: both;  animation-fill-mode: both;}
-#theSliderDescrption {display:none;}
+.theSliderDescrption {display:none;}
 .more-info-purchase > tbody > tr > td, .more-info-purchase > tbody > tr > th, .more-info-purchase > tfoot > tr > td, .more-info-purchase > tfoot > tr > th, .more-info-purchase > thead > tr > td, .more-info-purchase > thead > tr > th {border-top: none; border-bottom: 1px solid #ddd;}
 .cookie-law-themes { padding-top: 20px; padding-bottom: 20px; margin-left: 10px; margin-right: 10px;}
 .cookie-law-themes a .theme {margin-bottom:10px;}
@@ -47,6 +47,7 @@ input.form-control, textarea.form-control {border:1px solid #dadada; border-radi
 #categorieEditor button {width:39px;}
 #categorieSubEdit {display: none; position: absolute;}
 #categorieSubEdit button {width:200px;}
+.locale-container {display: none;}
 
 @-webkit-keyframes fadeInUp {
     0% {

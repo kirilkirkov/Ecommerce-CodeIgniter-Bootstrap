@@ -349,8 +349,9 @@ $('#modalConvertor').on('hidden.bs.modal', function (e) {
 });
 
 
-$("#showSliderDescrption").click(function () {
-    $("#theSliderDescrption").slideToggle("slow", function () {});
+$(".showSliderDescrption").click(function () {
+    var desc_id = $(this).data('descr');
+    $("#theSliderDescrption-" + desc_id).slideToggle("slow", function () {});
 });
 
 // Products
@@ -434,6 +435,14 @@ $('.savePositionCategorie').click(function () {
         $('#positionEditor').hide();
         $('#position-' + editPositionField).text(new_val);
     });
+});
+
+$('.locale-change').click(function () {
+    var toLocale = $(this).data('locale-change');
+    $('.locale-container').hide();
+    $('.locale-container-' + toLocale).show();
+    $('.locale-change').removeClass('active');
+    $(this).addClass('active');
 });
 
 function reloadOthersImagesContainer() {

@@ -20,47 +20,47 @@ if ($this->session->flashdata('result_publish')) {
 ?>
 <form method="POST" action="" enctype="multipart/form-data">
     <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
-    <?php foreach ($languages->result() as $language) { ?>
-        <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
-    <?php } foreach ($languages->result() as $language) { ?>
-        <div class="form-group"> 
-            <label>Title (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
-            <input type="text" name="title[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
-        </div>
-        <?php
-    } $i = 0;
-    ?>
-    <div class="form-group">
-        <a href="javascript:void(0);" class="btn btn-default" id="showSliderDescrption">Show Slider Description <span class="glyphicon glyphicon-circle-arrow-down"></span></a>
-    </div>
-    <div id="theSliderDescrption" <?= isset($_POST['in_slider']) && $_POST['in_slider'] == 1 ? 'style="display:block;"' : '' ?>>
-        <?php
-        foreach ($languages->result() as $language) {
-            ?>
-            <div class="form-group">
-                <label for="basic_description<?= $i ?>">Slider Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
-                <textarea name="basic_description[]" id="basic_description<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['basic_description']) ? $trans_load[$language->abbr]['basic_description'] : '' ?></textarea>
-                <script>
-                    CKEDITOR.replace('basic_description<?= $i ?>');
-                    CKEDITOR.config.entities = false;
-                </script>
-            </div>
-            <?php
-            $i++;
-        }
-        ?> 
+    <div class="form-group available-translations">
+        <b>Languages</b>
+        <?php foreach ($languages->result() as $language) { ?>
+            <button type="button" data-locale-change="<?= $language->abbr ?>" class="btn btn-default locale-change text-uppercase <?= $language->abbr == 'en' ? 'active' : '' ?>">
+                <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">
+                <?= $language->abbr ?>
+            </button>
+        <?php } ?>
     </div>
     <?php
     $i = 0;
     foreach ($languages->result() as $language) {
         ?>
-        <div class="form-group">
-            <label for="description<?= $i ?>">Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
-            <textarea name="description[]" id="description<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
-            <script>
-                CKEDITOR.replace('description<?= $i ?>');
-                CKEDITOR.config.entities = false;
-            </script>
+        <div class="locale-container locale-container-<?= $language->abbr ?>" <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'style="display:block;"' : '' ?>>
+            <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
+            <div class="form-group"> 
+                <label>Title (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <input type="text" name="title[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <a href="javascript:void(0);" class="btn btn-default showSliderDescrption" data-descr="<?= $i ?>">Show Slider Description <span class="glyphicon glyphicon-circle-arrow-down"></span></a>
+            </div>
+            <div class="theSliderDescrption" id="theSliderDescrption-<?= $i ?>" <?= isset($_POST['in_slider']) && $_POST['in_slider'] == 1 ? 'style="display:block;"' : '' ?>>
+                <div class="form-group">
+                    <label for="basic_description<?= $i ?>">Slider Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                    <textarea name="basic_description[]" id="basic_description<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['basic_description']) ? $trans_load[$language->abbr]['basic_description'] : '' ?></textarea>
+                    <script>
+                        CKEDITOR.replace('basic_description<?= $i ?>');
+                        CKEDITOR.config.entities = false;
+                    </script>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description<?= $i ?>">Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <textarea name="description[]" id="description<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
+                <script>
+                    CKEDITOR.replace('description<?= $i ?>');
+                    CKEDITOR.config.entities = false;
+                </script>
+            </div>
         </div>
         <?php
         $i++;
@@ -246,4 +246,4 @@ if ($this->session->flashdata('result_publish')) {
             </div>
         </div>
     </div>
-</div> 
+</div>

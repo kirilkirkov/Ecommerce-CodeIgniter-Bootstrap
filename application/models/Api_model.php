@@ -23,4 +23,115 @@ class Api_model extends CI_Model
         return $query->row_array();
     }
 
+    public function setProduct($post)
+    {
+        if (!isset($post['brand_id'])) {
+            $post['brand_id'] = null;
+        }
+        if (!isset($post['virtual_products'])) {
+            $post['virtual_products'] = null;
+        }
+        $this->db->trans_begin();
+        $i = 0;
+        foreach ($_POST['translations'] as $translation) {
+            if ($translation == MY_DEFAULT_LANGUAGE_ABBR) {
+                $myTranslationNum = $i;
+            }
+            $i++;
+        }
+        if (!$this->db->insert('products', array(
+                    'image' => $post['image'],
+                    'shop_categorie' => $post['shop_categorie'],
+                    'quantity' => $post['quantity'],
+                    'in_slider' => $post['in_slider'],
+                    'position' => $post['position'],
+                    'virtual_products' => $post['virtual_products'],
+                    'folder' => time(),
+                    'brand_id' => $post['brand_id'],
+                    'time' => time()
+                ))) {
+            log_message('error', print_r($this->db->error(), true));
+        }
+        $id = $this->db->insert_id();
+
+        $this->db->where('id', $id);
+        if (!$this->db->update('products', array(
+                    'url' => except_letters($_POST['title'][$myTranslationNum]) . '_' . $id
+                ))) {
+            log_message('error', print_r($this->db->error(), true));
+        }
+        $this->setProductTranslation($post, $id);
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            return false;
+        } else {
+            $this->db->trans_commit();
+            return true;
+        }
+    }
+
+    private function setProductTranslation($post, $id)
+    {
+        $i = 0;
+        $current_trans = $this->getTranslations($id);
+        foreach ($post['translations'] as $abbr) {
+            $arr = array();
+            $emergency_insert = false;
+            if (!isset($current_trans[$abbr])) {
+                $emergency_insert = true;
+            }
+            $post['title'][$i] = str_replace('"', "'", $post['title'][$i]);
+            $post['price'][$i] = str_replace(' ', '', $post['price'][$i]);
+            $post['price'][$i] = str_replace(',', '', $post['price'][$i]);
+            $arr = array(
+                'title' => $post['title'][$i],
+                'basic_description' => $post['basic_description'][$i],
+                'description' => $post['description'][$i],
+                'price' => $post['price'][$i],
+                'old_price' => $post['old_price'][$i],
+                'abbr' => $abbr,
+                'for_id' => $id
+            );
+
+            if (!$this->db->insert('products_translations', $arr)) {
+                log_message('error', print_r($this->db->error(), true));
+            }
+            $i++;
+        }
+    }
+
+    private function getTranslations($id)
+    {
+        $this->db->where('for_id', $id);
+        $query = $this->db->get('products_translations');
+        $arr = array();
+        foreach ($query->result() as $row) {
+            $arr[$row->abbr]['title'] = $row->title;
+            $arr[$row->abbr]['basic_description'] = $row->basic_description;
+            $arr[$row->abbr]['description'] = $row->description;
+            $arr[$row->abbr]['price'] = $row->price;
+            $arr[$row->abbr]['old_price'] = $row->old_price;
+        }
+        return $arr;
+    }
+
+    public function deleteProduct($id)
+    {
+        $this->db->trans_begin();
+        $this->db->where('for_id', $id);
+        if (!$this->db->delete('products_translations')) {
+            log_message('error', print_r($this->db->error(), true));
+        }
+
+        $this->db->where('id', $id);
+        if (!$this->db->delete('products')) {
+            log_message('error', print_r($this->db->error(), true));
+        }
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+        } else {
+            $this->db->trans_commit();
+        }
+    }
+
 }

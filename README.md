@@ -14,25 +14,25 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 
 ## Support of following features
 
-1. Multivendor support
-2. MultiLanguage with interface for easily add/edit functionality!!
+1. Multi-Vendor
+2. MultiLanguage
 3. Virtual products support
-4. Advanced search with treeView categories
-5. Easy manage of products (new filed for every added language, subcategories are easy to manage)
-6. Advanced sorting and order products
+4. Multi Templates support
+5. API
+6. Beautiful administration with high level of access
 7. Ajax based shopping cart
 8. Checkouts are saved to administration, email notifications for every new order
-9. Quantity of products maganed from orders
+9. Quantity of products managed from orders
 10. Add textual pages
 11. Activate and disable pages
 12. File manager in administration
-13. Blog integrated
+13. Integrated blog
 14. Email subscribe
 15. Easy installation
-16. Easy code change
-17. Edit every text from administration
+16. Readable source
+17. Complete editing of public texts
 18. Receive ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/github/paypalLogo.png "Logo Title Text 1") payments, also have option for paypal sandbox testing
-19. Fast loading
+19. Fast-loading templates for good seo
 20. Site color change with easy to use gradient generator
 21. Add multilanguage cookie notificator from silktide.com for EU Cookie Law 
 22. Multiple templates.. also can easy create your own.. 
@@ -40,8 +40,11 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 24. Highcharts statistics for orders
 25. Discount codes
 26. Available on English, Greek, Bulgarian
-27. Resposive public pages, responsive administration, responsive vendor pages
-28. etc.
+27. Responsive public pages, responsive administration, responsive vendor pages
+28. Advanced search with treeView categories
+29. Easy manage of products (new filed for every added language, subcategories are easy to manage)
+30. Advanced sorting and order products
+31. etc.
 
 ## Easy installation in 3 steps
 1. Import database.sql to your mysql
@@ -77,3 +80,6 @@ Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgn
 
 ## Multi Vendor Support
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/Multi-Vendor-Support
+
+## API Documentation
+Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/API

@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `in_slider` tinyint(1) NOT NULL DEFAULT '0',
   `url` varchar(255) NOT NULL,
   `virtual_products` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `brand_id` int(10) UNSIGNED NOT NULL,
+  `brand_id` int(5) DEFAULT NULL,
   `position` int(10) UNSIGNED NOT NULL,
   `vendor_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -340,7 +340,6 @@ ALTER TABLE `confirm_links`
 ALTER TABLE `confirm_links`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
-
 CREATE TABLE `discount_codes` (
  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(10) NOT NULL,
@@ -410,3 +409,12 @@ ALTER TABLE `vendors_orders_clients`
 
 ALTER TABLE `vendors_orders_clients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+CREATE TABLE `keys` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`key` VARCHAR(40) NOT NULL,
+	`level` INT(2) NOT NULL,
+	`ignore_limits` TINYINT(1) NOT NULL DEFAULT '0',
+	`date_created` INT(11) NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

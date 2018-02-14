@@ -96,6 +96,12 @@ class Products_model extends CI_Model
 
     public function setProduct($post, $id = 0)
     {
+        if (!isset($post['brand_id'])) {
+            $post['brand_id'] = null;
+        }
+        if (!isset($post['virtual_products'])) {
+            $post['virtual_products'] = null;
+        }
         $this->db->trans_begin();
         $is_update = false;
         if ($id > 0) {

@@ -209,5 +209,13 @@ $route['admin/changePass'] = "admin/home/home/changePass";
 $route['admin/uploadOthersImages'] = "admin/ecommerce/publish/do_upload_others_images";
 $route['admin/loadOthersImages'] = "admin/ecommerce/publish/loadOthersImages";
 
+/*
+  | -------------------------------------------------------------------------
+  | Sample REST API Routes
+  | -------------------------------------------------------------------------
+ */
+$route['api/products/(\w{2})/get'] = 'Api/Products/all/$1';
+$route['api/product/(\w{2})/(:num)/get'] = 'Api/Products/one/$1/$2';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -61,6 +61,14 @@ if ($this->session->flashdata('result_publish')) {
                     CKEDITOR.config.entities = false;
                 </script>
             </div>
+            <div class="form-group for-shop">
+                <label>Price (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <input type="text" name="price[]" placeholder="without currency at the end" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" class="form-control">
+            </div>
+            <div class="form-group for-shop">
+                <label>Old Price (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <input type="text" name="old_price[]" placeholder="without currency at the end" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['old_price']) ? $trans_load[$language->abbr]['old_price'] : '' ?>" class="form-control">
+            </div>
         </div>
         <?php
         $i++;
@@ -110,18 +118,6 @@ if ($this->session->flashdata('result_publish')) {
             <?php } ?>
         </select>
     </div>
-    <?php
-    foreach ($languages->result() as $language) {
-        ?>
-        <div class="form-group for-shop">
-            <label>Price (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
-            <input type="text" name="price[]" placeholder="without currency at the end" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" class="form-control">
-        </div>
-        <div class="form-group for-shop">
-            <label>Old Price (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
-            <input type="text" name="old_price[]" placeholder="without currency at the end" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['old_price']) ? $trans_load[$language->abbr]['old_price'] : '' ?>" class="form-control">
-        </div>
-    <?php } ?>
     <div class="form-group for-shop">
         <label>Quantity</label>
         <input type="text" placeholder="number" name="quantity" value="<?= @$_POST['quantity'] ?>" class="form-control" id="quantity">

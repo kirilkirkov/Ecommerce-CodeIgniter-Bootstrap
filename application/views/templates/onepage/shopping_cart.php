@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </td>
                                 <td><a href="<?= LANG_URL . '/' . $item['url'] ?>"><?= $item['title'] ?></a></td>
                                 <td>
-                                    <a class="btn btn-xs btn-primary refresh-me add-to-cart" data-id="<?= $item['id'] ?>" href="javascript:void(0);">
+                                    <a class="btn btn-xs btn-primary refresh-me add-to-cart <?= $item['quantity'] <= $item['num_added'] ? 'disabled' : '' ?>" data-id="<?= $item['id'] ?>" href="javascript:void(0);">
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </a>
                                     <span class="quantity-num">

@@ -24,8 +24,9 @@ class ShoppingCart
     public function manageShoppingCart()
     {
         if ($_POST['action'] == 'add') {
-            if (!isset($_SESSION['shopping_cart']))
+            if (!isset($_SESSION['shopping_cart'])) {
                 $_SESSION['shopping_cart'] = array();
+            }
             @$_SESSION['shopping_cart'][] = (int) $_POST['article_id'];
         }
         if ($_POST['action'] == 'remove') {

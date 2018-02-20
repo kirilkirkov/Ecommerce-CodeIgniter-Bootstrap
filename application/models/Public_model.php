@@ -248,7 +248,7 @@ class Public_model extends CI_Model
 
     public function getShopItems($array_items)
     {
-        $this->db->select('products.id, products.image, products.url, products_translations.price, products_translations.title');
+        $this->db->select('products.id, products.image, products.url, products.quantity, products_translations.price, products_translations.title');
         $this->db->from('products');
         if (count($array_items) > 1) {
             $i = 1;

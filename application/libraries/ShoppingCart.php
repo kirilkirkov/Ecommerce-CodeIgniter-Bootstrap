@@ -61,7 +61,7 @@ class ShoppingCart
     {
         if ((!isset($_SESSION['shopping_cart']) || empty($_SESSION['shopping_cart'])) && get_cookie('shopping_cart') != NULL) {
             $_SESSION['shopping_cart'] = unserialize(get_cookie('shopping_cart'));
-        } elseif (!isset($_SESSION['shopping_cart']) || empty($_SESSION['shopping_cart'])) {
+        } elseif (!isset($_SESSION['shopping_cart']) || !is_array($_SESSION['shopping_cart'])) {
             return 0;
         }
         $result['array'] = $this->CI->Public_model->getShopItems(array_unique($_SESSION['shopping_cart']));

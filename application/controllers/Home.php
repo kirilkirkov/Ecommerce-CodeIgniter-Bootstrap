@@ -22,6 +22,51 @@ class Home extends MY_Controller
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = str_replace(" ", ",", $head['title']);
         $all_categories = $this->Public_model->getShopCategories();
+        $data['home_categories'] = $this->getHomeCategories($all_categories);
+        $data['all_categories'] = $all_categories;
+        $data['countQuantities'] = $this->Public_model->getCountQuantities();
+        $data['bestSellers'] = $this->Public_model->getbestSellers();
+        $data['newProducts'] = $this->Public_model->getNewProducts();
+        $data['sliderProducts'] = $this->Public_model->getSliderProducts();
+        $data['lastBlogs'] = $this->Public_model->getLastBlogs();
+        $data['products'] = $this->Public_model->getProducts($this->num_rows, $page, $_GET);
+        $rowscount = $this->Public_model->productsCount($_GET);
+        $data['shippingOrder'] = $this->Home_admin_model->getValueStore('shippingOrder');
+        $data['showOutOfStock'] = $this->Home_admin_model->getValueStore('outOfStock');
+        $data['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
+        $data['brands'] = $this->Brands_model->getBrands();
+        $data['links_pagination'] = pagination('home', $rowscount, $this->num_rows);
+        $this->render('home', $head, $data);
+    }
+
+    /*
+     * Used from greenlabel template
+     * shop page
+     */
+
+    public function shop($page = 0)
+    {
+        $data = array();
+        $head = array();
+        $arrSeo = $this->Public_model->getSeo('shop');
+        $head['title'] = @$arrSeo['title'];
+        $head['description'] = @$arrSeo['description'];
+        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $all_categories = $this->Public_model->getShopCategories();
+        $data['home_categories'] = $this->getHomeCategories($all_categories);
+        $data['all_categories'] = $all_categories;
+        $data['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
+        $data['brands'] = $this->Brands_model->getBrands();
+        $data['showOutOfStock'] = $this->Home_admin_model->getValueStore('outOfStock');
+        $data['shippingOrder'] = $this->Home_admin_model->getValueStore('shippingOrder');
+        $data['products'] = $this->Public_model->getProducts($this->num_rows, $page, $_GET);
+        $rowscount = $this->Public_model->productsCount($_GET);
+        $data['links_pagination'] = pagination('home', $rowscount, $this->num_rows);
+        $this->render('shop', $head, $data);
+    }
+
+    private function getHomeCategories($categories)
+    {
 
         /*
          * Tree Builder for categories menu
@@ -42,21 +87,7 @@ class Home extends MY_Controller
             return $branch;
         }
 
-        $data['home_categories'] = $tree = buildTree($all_categories);
-        $data['all_categories'] = $all_categories;
-        $data['countQuantities'] = $this->Public_model->getCountQuantities();
-        $data['bestSellers'] = $this->Public_model->getbestSellers();
-        $data['newProducts'] = $this->Public_model->getNewProducts();
-        $data['sliderProducts'] = $this->Public_model->getSliderProducts();
-        $data['lastBlogs'] = $this->Public_model->getLastBlogs();
-        $data['products'] = $this->Public_model->getProducts($this->num_rows, $page, $_GET);
-        $rowscount = $this->Public_model->productsCount($_GET);
-        $data['shippingOrder'] = $this->Home_admin_model->getValueStore('shippingOrder');
-        $data['showOutOfStock'] = $this->Home_admin_model->getValueStore('outOfStock');
-        $data['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
-        $data['brands'] = $this->Brands_model->getBrands();
-        $data['links_pagination'] = pagination('home', $rowscount, $this->num_rows);
-        $this->render('home', $head, $data);
+        return buildTree($categories);
     }
 
     /*

@@ -17,9 +17,11 @@ $('a.add-to-cart').click(function () {
 });
 
 //DatePicker
-$('.input-group.date').datepicker({
-    format: "dd/mm/yy"
-});
+if (typeof datepicker !== 'undefined') {
+    $('.input-group.date').datepicker({
+        format: "dd/mm/yy"
+    });
+}
 
 //Filters Technique
 $('.go-category').click(function () {

@@ -93,6 +93,10 @@ $route['(\w{2})/blog/(:any)_(:num)'] = "blog/viewPost/$3";
 $route['shopping-cart'] = "ShoppingCartPage";
 $route['(\w{2})/shopping-cart'] = "ShoppingCartPage";
 
+// Shop page (greenlabel template)
+$route['shop'] = "home/shop";
+$route['(\w{2})/shop'] = "home/shop";
+
 // Textual Pages links
 $route['page/(:any)'] = "page/index/$1";
 $route['(\w{2})/page/(:any)'] = "page/index/$2";

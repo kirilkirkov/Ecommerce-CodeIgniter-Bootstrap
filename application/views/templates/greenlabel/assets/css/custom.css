@@ -113,8 +113,8 @@ nav .navbar-header .menu-text-xs {text-transform: uppercase;float: left;margin-t
 .orders-from-category h2 {color: #4c4c4c;font-size: 28px;font-weight: bold;text-transform: capitalize; font-family: 'Lobster Two', cursive; text-align: center;}
 .product-inner h3 {text-transform: uppercase; text-align: center;  font-weight: bold;  padding-top: 5px;margin: 5px 0;  margin-bottom: 5px;display: block;font-size: 16px;}
 .product-inner .price {display: block; text-align: center; color:#98ab3f; font-weight: bold;}
-.product-inner .add-to-cart { display: block; width: 150px; margin: 0 auto; background: rgba(0, 0, 0, 0) none repeat scroll 0 0;border: 1px solid #e2dfdb;border-radius: 30px;color: #6d604c;font-size: 14px;font-weight: 700;padding: 11px 25px;text-transform: uppercase;transition: all .5s;}
-.product-inner .add-to-cart:hover {background-color:#98ab3f; color:#fff;}
+.product-inner .add-to-cart { display: block; width: 150px; margin: 0 auto; background: rgba(0, 0, 0, 0) none repeat scroll 0 0;border: 1px solid #e2dfdb;border-radius: 30px;color: #6d604c;font-size: 12px; text-align:center; font-weight: 700;padding: 11px 25px;text-transform: uppercase;transition: all .5s;}
+.product-inner .add-to-cart:hover {background-color:#98ab3f; color:#fff; text-decoration: none;}
 #checkout-page { margin-bottom: 20px;}
 #checkout-page #goOrder {background-color: #f6f7fb; padding: 10px;}
 #checkout-page #goOrder .form-control { border:1px solid #ebebeb; border-radius: 0; box-shadow: none;}

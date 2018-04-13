@@ -11,10 +11,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php
     if ($cartItems['array'] != null) {
         ?> 
-        <div class="row">
-            <div class="col-sm-6 left-side">
-                <h4><?= lang('billing_details') ?></h4>
-                <form method="POST" id="goOrder">
+        <form method="POST" id="goOrder">
+            <div class="row">
+                <div class="col-sm-6 left-side">
+                    <h4><?= lang('billing_details') ?></h4>
                     <div class="title alone">
                         <span><?= lang('checkout') ?></span>
                     </div>
@@ -86,69 +86,69 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <input class="form-control" name="discountCode" value="<?= @$_POST['discountCode'] ?>" placeholder="<?= lang('enter_discount_code') ?>" type="text">
                             <a href="javascript:void(0);" class="btn btn-default" onclick="checkDiscountCode()"><?= lang('check_code') ?></a>
                         </div>
-                    <?php } ?> 
-                </form>
-                <div>
-                    <a href="javascript:void(0);" class="btn go-order" onclick="document.getElementById('goOrder').submit();" class="pull-left">
-                        <?= lang('custom_order') ?> 
-                    </a>
-                    <div class="clearfix"></div>
+                    <?php } ?>
+                    <div>
+                        <a href="javascript:void(0);" class="btn go-order" onclick="document.getElementById('goOrder').submit();" class="pull-left">
+                            <?= lang('custom_order') ?> 
+                        </a>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <h4><?= lang('your_order') ?></h4>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-products">
-                        <thead>
-                            <tr>
-                                <th><?= lang('product') ?></th>
-                                <th><?= lang('title') ?></th>
-                                <th><?= lang('quantity') ?></th>
-                                <th><?= lang('price') ?></th>
-                                <th><?= lang('total') ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($cartItems['array'] as $item) { ?>
+                <div class="col-sm-6">
+                    <h4><?= lang('your_order') ?></h4>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-products">
+                            <thead>
                                 <tr>
-                                    <td class="relative">
-                                        <input type="hidden" name="id[]" value="<?= $item['id'] ?>">
-                                        <input type="hidden" name="quantity[]" value="<?= $item['num_added'] ?>">
-                                        <img class="product-image" src="<?= base_url('/attachments/shop_images/' . $item['image']) ?>" alt="">
-                                        <a href="<?= base_url('home/removeFromCart?delete-product=' . $item['id'] . '&back-to=checkout') ?>" class="btn btn-xs btn-danger remove-product">
-                                            <span class="glyphicon glyphicon-remove"></span>
-                                        </a>
-                                    </td>
-                                    <td><a href="<?= LANG_URL . '/' . $item['url'] ?>"><?= $item['title'] ?></a></td>
-                                    <td>
-                                        <a class="btn btn-xs btn-primary refresh-me add-to-cart <?= $item['quantity'] <= $item['num_added'] ? 'disabled' : '' ?>" data-id="<?= $item['id'] ?>" href="javascript:void(0);">
-                                            <span class="glyphicon glyphicon-plus"></span>
-                                        </a>
-                                        <span class="quantity-num">
-                                            <?= $item['num_added'] ?>
-                                        </span>
-                                        <a class="btn  btn-xs btn-danger" onclick="removeProduct(<?= $item['id'] ?>, true)" href="javascript:void(0);">
-                                            <span class="glyphicon glyphicon-minus"></span>
-                                        </a>
-                                    </td>
-                                    <td><?= $item['price'] . CURRENCY ?></td>
-                                    <td><?= $item['sum_price'] . CURRENCY ?></td>
+                                    <th><?= lang('product') ?></th>
+                                    <th><?= lang('title') ?></th>
+                                    <th><?= lang('quantity') ?></th>
+                                    <th><?= lang('price') ?></th>
+                                    <th><?= lang('total') ?></th>
                                 </tr>
-                            <?php } ?>
-                            <tr>
-                                <td colspan="4" class="text-right"><?= lang('total') ?></td>
-                                <td>
-                                    <span class="final-amount"><?= $cartItems['finalSum'] ?></span><?= CURRENCY ?>
-                                    <input type="hidden" class="final-amount" name="final_amount" value="<?= $cartItems['finalSum'] ?>">
-                                    <input type="hidden" name="amount_currency" value="<?= CURRENCY ?>">
-                                    <input type="hidden" name="discountAmount" value="">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($cartItems['array'] as $item) { ?>
+                                    <tr>
+                                        <td class="relative">
+                                            <input type="hidden" name="id[]" value="<?= $item['id'] ?>">
+                                            <input type="hidden" name="quantity[]" value="<?= $item['num_added'] ?>">
+                                            <img class="product-image" src="<?= base_url('/attachments/shop_images/' . $item['image']) ?>" alt="">
+                                            <a href="<?= base_url('home/removeFromCart?delete-product=' . $item['id'] . '&back-to=checkout') ?>" class="btn btn-xs btn-danger remove-product">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </a>
+                                        </td>
+                                        <td><a href="<?= LANG_URL . '/' . $item['url'] ?>"><?= $item['title'] ?></a></td>
+                                        <td>
+                                            <a class="btn btn-xs btn-primary refresh-me add-to-cart <?= $item['quantity'] <= $item['num_added'] ? 'disabled' : '' ?>" data-id="<?= $item['id'] ?>" href="javascript:void(0);">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </a>
+                                            <span class="quantity-num">
+                                                <?= $item['num_added'] ?>
+                                            </span>
+                                            <a class="btn  btn-xs btn-danger" onclick="removeProduct(<?= $item['id'] ?>, true)" href="javascript:void(0);">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </a>
+                                        </td>
+                                        <td><?= $item['price'] . CURRENCY ?></td>
+                                        <td><?= $item['sum_price'] . CURRENCY ?></td>
+                                    </tr>
+                                <?php } ?>
+                                <tr>
+                                    <td colspan="4" class="text-right"><?= lang('total') ?></td>
+                                    <td>
+                                        <span class="final-amount"><?= $cartItems['finalSum'] ?></span><?= CURRENCY ?>
+                                        <input type="hidden" class="final-amount" name="final_amount" value="<?= $cartItems['finalSum'] ?>">
+                                        <input type="hidden" name="amount_currency" value="<?= CURRENCY ?>">
+                                        <input type="hidden" name="discountAmount" value="">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 <?php } else { ?>
     <div class="alert alert-info"><?= lang('no_products_in_cart') ?></div>

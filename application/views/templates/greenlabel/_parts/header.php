@@ -12,10 +12,10 @@
         <meta property="og:type" content="website" />
         <meta property="og:image" content="<?= base_url('assets/img/site-overview.png') ?>" />
         <title><?= $title ?></title>
-        <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet" />
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />  
+        <link href="<?= base_url('assets/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet" />  
         <link href="<?= base_url('templatecss/custom.css') ?>" rel="stylesheet" />
         <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
         <script src="<?= base_url('loadlanguage/all.js') ?>"></script>

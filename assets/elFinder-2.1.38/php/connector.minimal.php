@@ -110,8 +110,8 @@ $opts = array(
 		// Items volume
 		array(
 			'driver'        => 'LocalFileSystem',           // driver for accessing file system (REQUIRED)
-			'path'          => '/var/www/html/shop/',                 // path to files (REQUIRED)
-			'URL'           => '/var/www/html/shop/', // URL to files (REQUIRED)
+			'path'          => preg_replace('/assets.*/', '', realpath(dirname(__FILE__))),                 // path to files (REQUIRED)
+			'URL'           => preg_replace('/assets.*/', '', realpath(dirname(__FILE__))), // URL to files (REQUIRED)
 			'trashHash'     => 't1_Lw',                     // elFinder's hash of trash folder
 			'winHashFix'    => DIRECTORY_SEPARATOR !== '/', // to make hash same to Linux one on windows too
 			'uploadDeny'    => array('all'),                // All Mimetypes not allowed to upload
@@ -123,8 +123,8 @@ $opts = array(
 		array(
 			'id'            => '1',
 			'driver'        => 'Trash',
-			'path'          => '/var/www/html/shop/.trash/',
-			'tmbURL'        => '/var/www/html/shop/.trash/.tmb/',
+			'path'          => preg_replace('/assets.*/', '', realpath(dirname(__FILE__))).'.trash/',
+			'tmbURL'        => preg_replace('/assets.*/', '', realpath(dirname(__FILE__))).'.trash/.tmb/',
 			'winHashFix'    => DIRECTORY_SEPARATOR !== '/', // to make hash same to Linux one on windows too
 			'uploadDeny'    => array('all'),                // Recomend the same settings as the original volume that uses the trash
 			'uploadAllow'   => array('image', 'text/plain'),// Same as above

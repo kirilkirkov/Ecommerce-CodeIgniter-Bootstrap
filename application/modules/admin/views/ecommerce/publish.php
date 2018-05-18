@@ -148,59 +148,11 @@ if ($this->session->flashdata('result_publish')) {
         <label>Position</label>
         <input type="text" placeholder="Position number" name="position" value="<?= @$_POST['position'] ?>" class="form-control">
     </div>
-    <div class="form-group for-shop">
-        <a class="btn btn-default btn-xs" data-target="#modalConvertor" data-toggle="modal" href="javascript:void(0)">Convert currency <span class="glyphicon glyphicon-euro"></span></a>
-    </div>
     <button type="submit" name="submit" class="btn btn-lg btn-default btn-publish">Publish</button>
     <?php if ($this->uri->segment(3) !== null) { ?>
         <a href="<?= base_url('admin/products') ?>" class="btn btn-lg btn-default">Cancel</a>
     <?php } ?>
 </form>
-<!-- Modal Convertor Currency -->
-<div class="modal fade" id="modalConvertor" tabindex="-1" role="dialog" aria-labelledby="modalConvertor">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Convert currency</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="control-label" for="select_cur">Convert from:</label>
-                    <br>
-                    <input type="text" class="form-control" placeholder="Give a price.." id="sum" name="sum" style="margin-bottom:6px;">
-                    <select class="selectpicker form-control" data-live-search="true" name="select_from_cur" id="select_from_cur">
-                        <?php
-                        $curr = currencies();
-                        foreach ($curr as $key => $val) {
-                            ?>
-                            <option value="<?= $key ?>"><?= $val ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="select_cur">Convert to:</label>
-                    <select class="selectpicker form-control" data-live-search="true" name="select_to_cur" id="select_to_cur">
-                        <?php
-                        $curr = currencies();
-                        foreach ($curr as $key => $val) {
-                            ?>
-                            <option value="<?= $key ?>"><?= $val ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="text-center">
-                    <img src="<?= base_url('assets/imgs/load.gif') ?>" alt="loading" class="loading-conv" style="display:none;">
-                </div>
-                <div id="new_currency" class="text-center"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" onclick="currency_ajax_convert('0')" class="btn btn-primary">Convert</button>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Modal Upload More Images -->
 <div class="modal fade" id="modalMoreImages" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">

@@ -498,21 +498,6 @@ function changeProductStatus(id) {
     });
 }
 
-function currency_ajax_convert() {
-    var from = $('#select_from_cur').val();
-    var to = $('#select_to_cur').val();
-    var sum = $('#sum').val();
-    $(".loading-conv").show();
-    $.ajax({
-        type: "POST",
-        url: urls.convertCurrency,
-        data: {sum: sum, from: from, to: to}
-    }).done(function (data) {
-        $(".loading-conv").hide();
-        $("#new_currency").empty().append(data);
-    });
-}
-
 function changePass() {
     var new_pass = $('[name="new_pass"]').val();
     if (jQuery.trim(new_pass).length > 3) {

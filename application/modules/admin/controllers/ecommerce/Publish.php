@@ -160,21 +160,4 @@ class Publish extends ADMIN_Controller
         }
     }
 
-    /*
-     * called from ajax
-     */
-
-    public function convertCurrency()
-    {
-        $this->load->helper('currency_convertor');
-        if ($this->input->is_ajax_request()) {
-            $amount = $_POST['sum'];
-            if ($amount == null) {
-                echo 'Please type a price';
-                exit;
-            }
-            echo convertCurrency($amount, $_POST['from'], $_POST['to']);
-        }
-    }
-
 }

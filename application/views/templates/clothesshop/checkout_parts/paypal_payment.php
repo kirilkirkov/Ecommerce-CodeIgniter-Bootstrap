@@ -27,14 +27,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 foreach ($cartItems['array'] as $item) {
                     ?>
                     <input type="hidden" name="item_name_<?= $i ?>" value="<?= $item['title'] ?>">
-                    <input type="hidden" name="amount_<?= $i ?>" value="<?= convertCurrency($item['price'], CURRENCY_KEY, $paypal_currency) ?>">
-                    <input type="hidden" name="discount_amount_<?= $i ?>" value="<?= convertCurrency($discount, CURRENCY_KEY, $paypal_currency) ?>">
+                    <input type="hidden" name="amount_<?= $i ?>" value="<?= CURRENCY_KEY ?>">
+                    <input type="hidden" name="discount_amount_<?= $i ?>" value="<?= CURRENCY_KEY ?>">
                     <input type="hidden" name="quantity_<?= $i ?>" value="<?= $item['num_added'] ?>">
                     <?php
                     $i++;
                 }
                 ?>
-                <input type="hidden" name="currency_code" value="<?= $paypal_currency ?>">
+                <input type="hidden" name="currency_code" value="<?= CURRENCY_KEY ?>">
                 <input type="hidden" value="utf-8" name="charset">
                 <input type="hidden" value="<?= base_url('checkout/paypal_success') ?>" name="return">
                 <input type="hidden" value="<?= base_url('checkout/paypal_cancel') ?>" name="cancel_return">

@@ -201,7 +201,7 @@ if (isset($_GET['settings'])) {
     <hr>
     <h3>Paypal Account Settings</h3>
     <div class="row">
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-heading">Paypal sandbox mode (use for paypal account tests)</div>
                 <div class="panel-body">
@@ -218,7 +218,7 @@ if (isset($_GET['settings'])) {
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-heading">Paypal business email</div>
                 <div class="panel-body">
@@ -237,27 +237,7 @@ if (isset($_GET['settings'])) {
                     </form>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">Paypal currency (make sure is supported from paypal!)</div>
-                <div class="panel-body">
-                    <?php if ($this->session->flashdata('paypal_currency')) { ?>
-                        <div class="alert alert-info"><?= $this->session->flashdata('paypal_currency') ?></div>
-                    <?php } ?>
-                    <form method="POST" action="">
-                        <div class="input-group">
-                            <input class="form-control" name="paypal_currency" value="<?= $paypal_currency ?>" type="text">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" value="" type="submit">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        </div> 
     </div>
     <hr>
     <h3>Bank Account Settings</h3>

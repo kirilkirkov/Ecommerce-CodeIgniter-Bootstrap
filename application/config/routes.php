@@ -170,7 +170,6 @@ $route['admin'] = "admin/home/login";
 $route['admin/publish'] = "admin/ecommerce/publish";
 $route['admin/publish/(:num)'] = "admin/ecommerce/publish/index/$1";
 $route['admin/removeSecondaryImage'] = "admin/ecommerce/publish/removeSecondaryImage";
-$route['admin/convertCurrency'] = "admin/ecommerce/publish/convertCurrency";
 $route['admin/products'] = "admin/ecommerce/products";
 $route['admin/products/(:num)'] = "admin/ecommerce/products/index/$1";
 $route['admin/productStatusChange'] = "admin/ecommerce/products/productStatusChange";

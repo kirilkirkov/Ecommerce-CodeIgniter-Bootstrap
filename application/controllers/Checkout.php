@@ -9,8 +9,7 @@ class Checkout extends MY_Controller
 
     public function __construct()
     {
-        parent::__construct();
-        $this->load->helper(array('currency_convertor'));
+        parent::__construct(); 
         $this->load->model('admin/Orders_model');
     }
 
@@ -142,7 +141,6 @@ class Checkout extends MY_Controller
         $head['keywords'] = str_replace(" ", ",", $head['title']);
         $data['paypal_sandbox'] = $this->Home_admin_model->getValueStore('paypal_sandbox');
         $data['paypal_email'] = $this->Home_admin_model->getValueStore('paypal_email');
-        $data['paypal_currency'] = $this->Home_admin_model->getValueStore('paypal_currency');
         $this->render('checkout_parts/paypal_payment', $head, $data);
     }
 

@@ -311,16 +311,15 @@ INSERT INTO `value_store` (`id`, `thekey`, `value`) VALUES
 (19, 'publicQuantity', '0'),
 (20, 'paypal_email', ''),
 (21, 'paypal_sandbox', '0'),
-(22, 'paypal_currency', 'EUR'),
-(23, 'publicDateAdded', '0'),
-(24, 'googleApi', ''),
-(25, 'template', 'redlabel'),
-(26, 'cashondelivery_visibility', '1'),
-(27, 'showBrands', '0'),
-(28, 'showInSlider', '0'),
-(29, 'codeDiscounts', '1'),
-(30, 'virtualProducts', '0'),
-(31, 'multiVendor', '0');
+(22, 'publicDateAdded', '0'),
+(23, 'googleApi', ''),
+(24, 'template', 'redlabel'),
+(25, 'cashondelivery_visibility', '1'),
+(26, 'showBrands', '0'),
+(27, 'showInSlider', '0'),
+(28, 'codeDiscounts', '1'),
+(29, 'virtualProducts', '0'),
+(30, 'multiVendor', '0');
 
 CREATE TABLE `brands` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

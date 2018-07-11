@@ -10,15 +10,17 @@ class SendMail
 
     public function __construct()
     {
-        $this->mail = new PHPMailer;
-        $this->mail->SMTPDebug = 2; 
-        $this->mail->isMail();                                      // Set mailer to use SMTP
-        $this->mail->Host = '';  // Specify main and backup SMTP servers
-        $this->mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $this->mail->Username = '';                 // SMTP username
-        $this->mail->Password = '';                           // SMTP password
-        $this->mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-        $this->mail->Port = 587;                                    // TCP port to connect to
+		$this->mail = new PHPMailer; 
+		$this->mail->isSMTP(); 
+		// $this->mail->SMTPDebug = 2; 
+		$this->mail->Debugoutput = 'html'; 
+		$this->mail->Host = 'smtp.gmail.com'; 
+		$this->mail->Port = 587; 
+		$this->mail->SMTPSecure = 'tls'; 
+		$this->mail->SMTPAuth = true; 
+		$this->mail->Username = "you@gmail.com"; 
+		$this->mail->Password = "secretpass";
+		$this->mail->CharSet = 'UTF-8';
     }
 
     public function sendTo($toEmail, $recipientName, $subject, $msg)

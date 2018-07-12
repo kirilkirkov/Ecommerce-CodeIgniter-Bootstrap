@@ -16,7 +16,7 @@ class Auth extends VENDOR_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Auth_model');
+        $this->load->model(array('Auth_model', 'Vendorprofile_model'));
     }
 
     public function index()
@@ -108,6 +108,17 @@ class Auth extends VENDOR_Controller
 
     public function forgotten()
     {
+        if (isset($_POST['u_email'])) {
+            $vendor = $this->Vendorprofile_model->getVendorInfoFromEmail($_POST['u_email']);
+            if ($vendor != null) {
+                $myDomain = $this->config->item('base_url');
+                $newPass = $this->Auth_model->updateVendorPassword($_POST['u_email']);
+                $this->sendmail->sendTo($_POST['u_email'], 'Admin', 'New password for ' . $myDomain, 'Hello, your new password is ' . $newPass);
+                $this->session->set_flashdata('login_error', lang('new_pass_sended'));
+                redirect(LANG_URL . '/vendor/login');
+            }
+        }
+
         $data = array();
         $head = array();
         $head['title'] = lang('user_forgotten_page');

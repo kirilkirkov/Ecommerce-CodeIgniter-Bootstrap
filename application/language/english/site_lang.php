@@ -234,3 +234,4 @@ $lang['logout'] = 'Logout';
 $lang['price_qua']  = 'Price for quantity';
 $lang['total_prod']  = 'Total';
 $lang['my_order'] = 'My order';
+$lang['new_pass_sended'] = 'New password sended';

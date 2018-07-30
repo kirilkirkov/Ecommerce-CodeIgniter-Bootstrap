@@ -298,7 +298,8 @@ class Public_model extends CI_Model
                     'clean_referrer' => $post['clean_referrer'],
                     'payment_type' => $post['payment_type'],
                     'paypal_status' => @$post['paypal_status'],
-                    'discount_code' => @$post['discountCode']
+                    'discount_code' => @$post['discountCode'],
+                    'user_id' => $post['user_id']
                 ))) {
             log_message('error', print_r($this->db->error(), true));
         }

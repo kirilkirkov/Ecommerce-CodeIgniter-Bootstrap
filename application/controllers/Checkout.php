@@ -29,6 +29,7 @@ class Checkout extends MY_Controller
             } else {
                 $_POST['referrer'] = $this->session->userdata('referrer');
                 $_POST['clean_referrer'] = cleanReferral($_POST['referrer']);
+                $_POST['user_id'] = isset($_SESSION['logged_user']) ? $_SESSION['logged_user'] : 0;
                 $orderId = $this->Public_model->setOrder($_POST);
                 if ($orderId != false) {
                     /*

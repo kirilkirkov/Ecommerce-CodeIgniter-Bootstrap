@@ -16,16 +16,16 @@
         <?php }
         ?>
         <form method="POST" enctype="multipart/form-data">
-            <?php foreach ($languages->result() as $language) { ?>
+            <?php foreach ($languages as $language) { ?>
                 <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
-            <?php } foreach ($languages->result() as $language) { ?>
+            <?php } foreach ($languages as $language) { ?>
                 <div class="form-group"> 
                     <label>Title (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                     <input type="text" name="title[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
                 </div>
                 <?php
             } $i = 0;
-            foreach ($languages->result() as $language) {
+            foreach ($languages as $language) {
                 ?>
                 <div class="form-group">
                     <label for="description<?= $i ?>">Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>

@@ -42,7 +42,7 @@ class Languages_model extends CI_Model
     public function getLanguages()
     {
         $query = $this->db->query('SELECT * FROM languages');
-        return $query;
+        return $query->result();
     }
 
     public function setLanguage($post)

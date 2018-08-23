@@ -93,9 +93,9 @@
                         <h4 class="modal-title" id="myModalLabel">Add Category</h4>
                     </div>
                     <div class="modal-body">
-                        <?php foreach ($languages->result() as $language) { ?>
+                        <?php foreach ($languages as $language) { ?>
                             <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
-                        <?php } foreach ($languages->result() as $language) { ?>
+                        <?php } foreach ($languages as $language) { ?>
                             <div class="form-group">
                                 <label>Name (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                                 <input type="text" name="categorie_name[]" class="form-control">

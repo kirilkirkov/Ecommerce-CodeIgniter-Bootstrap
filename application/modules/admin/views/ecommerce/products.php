@@ -13,8 +13,7 @@
         <div class="alert alert-success"><?= $this->session->flashdata('result_publish') ?></div>
         <hr>
         <?php
-    }
-    $langs = $languages->result();
+    } 
     ?>
     <h1><img src="<?= base_url('assets/imgs/products-img.png') ?>" class="header-img" style="margin-top:-2px;"> Products</h1>
     <hr>

@@ -42,7 +42,7 @@ class Pages_model extends CI_Model
         }
         $thisId = $this->db->insert_id();
         $languages = $this->Languages_model->getLanguages();
-        foreach ($languages->result() as $language) {
+        foreach ($languages as $language) {
             if (!$this->db->insert('textual_pages_tanslations', array(
                         'for_id' => $thisId,
                         'abbr' => $language->abbr

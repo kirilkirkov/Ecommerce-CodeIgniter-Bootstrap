@@ -23,7 +23,7 @@ if ($this->session->flashdata('result_publish')) {
     <div class="form-group available-translations">
         <b>Languages</b>
         <?php foreach ($languages as $language) { ?>
-            <button type="button" data-locale-change="<?= $language->abbr ?>" class="btn btn-default locale-change text-uppercase <?= $language->abbr == 'en' ? 'active' : '' ?>">
+            <button type="button" data-locale-change="<?= $language->abbr ?>" class="btn btn-default locale-change text-uppercase <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'active' : '' ?>">
                 <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">
                 <?= $language->abbr ?>
             </button>

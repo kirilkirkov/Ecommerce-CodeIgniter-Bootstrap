@@ -95,7 +95,7 @@ class MY_Controller extends MX_Controller
         $arr = array();
         $this->load->model('admin/Languages_model');
         $langs = $this->Languages_model->getLanguages();
-        foreach ($langs->result() as $lang) {
+        foreach ($langs as $lang) {
             $arr[$lang->abbr]['name'] = $lang->name;
             $arr[$lang->abbr]['flag'] = $lang->flag;
         }

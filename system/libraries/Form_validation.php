@@ -1234,11 +1234,7 @@ class CI_Form_validation {
 			$domain = defined('INTL_IDNA_VARIANT_UTS46')
 				? idn_to_ascii($matches[2], 0, INTL_IDNA_VARIANT_UTS46)
 				: idn_to_ascii($matches[2]);
-
-			if ($domain !== FALSE)
-			{
-				$str = $matches[1].'@'.$domain;
-			}
+			$str = $matches[1].'@'.$domain;
 		}
 
 		return (bool) filter_var($str, FILTER_VALIDATE_EMAIL);

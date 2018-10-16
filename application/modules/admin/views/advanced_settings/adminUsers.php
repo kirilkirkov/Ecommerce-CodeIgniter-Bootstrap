@@ -47,7 +47,7 @@
                         <td><b>hidden ;)</b></td>
                         <td><?= $user->email ?></td>
                         <td><?= $user->notify ?></td>
-                        <td><?= date('d.m.Y - H:m:s', $user->last_login) ?></td>
+                        <td><?= date('d.m.Y - H:i:s', $user->last_login) ?></td>
                         <td class="text-center">
                             <div>
                                 <a href="?delete=<?= $user->id ?>" class="confirm-delete">Delete</a>

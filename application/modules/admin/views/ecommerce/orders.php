@@ -63,7 +63,7 @@ if (!isset($_GET['settings'])) {
                                     <?php } ?>
                                 </div>
                             </td>
-                            <td><?= date('d.M.Y / H:m:s', $tr['date']); ?></td>
+                            <td><?= date('d.M.Y / H:i:s', $tr['date']); ?></td>
                             <td>
                                 <i class="fa fa-user" aria-hidden="true"></i> 
                                 <?= $tr['first_name'] . ' ' . $tr['last_name'] ?>

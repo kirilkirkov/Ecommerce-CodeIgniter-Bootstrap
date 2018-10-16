@@ -604,7 +604,7 @@ class CI_Session {
 	// ------------------------------------------------------------------------
 
 	/**
-	 * Unmark temp
+	 * Unmark flash
 	 *
 	 * @param	mixed	$key	Session data key(s)
 	 * @return	void

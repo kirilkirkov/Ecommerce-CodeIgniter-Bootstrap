@@ -78,8 +78,8 @@ Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgn
 ## Shopping cart peculiarities
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/Shopping-cart-peculiarities
 
-## Multi Vendor Support
+### Multi Vendor Support
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/Multi-Vendor-Support
 
-## API Documentation
+### API Documentation
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/API

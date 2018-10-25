@@ -70,7 +70,6 @@ if (!isset($_GET['settings'])) {
                             </td>
                             <td><i class="fa fa-phone" aria-hidden="true"></i> <?= $tr['phone'] ?></td>
                             <td class="<?= $class ?> text-center" data-action-id="<?= $tr['id'] ?>">
-                                <?php ?>
                                 <div class="status" style="padding:5px; font-size:16px;">
                                     -- <b><?= $type ?></b> --
                                 </div>

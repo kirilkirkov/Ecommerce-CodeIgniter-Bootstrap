@@ -175,7 +175,11 @@ class Products_model extends CI_Model
             }
             $post['title'][$i] = str_replace('"', "'", $post['title'][$i]);
             $post['price'][$i] = str_replace(' ', '', $post['price'][$i]);
-            $post['price'][$i] = str_replace(',', '', $post['price'][$i]);
+            $post['price'][$i] = str_replace(',', '.', $post['price'][$i]);
+            $post['price'][$i] = preg_replace("/[^0-9,.]/", "", $post['price'][$i]);
+            $post['old_price'][$i] = str_replace(' ', '', $post['old_price'][$i]);
+            $post['old_price'][$i] = str_replace(',', '.', $post['old_price'][$i]);
+            $post['old_price'][$i] = preg_replace("/[^0-9,.]/", "", $post['old_price'][$i]);
             $arr = array(
                 'title' => $post['title'][$i],
                 'basic_description' => $post['basic_description'][$i],

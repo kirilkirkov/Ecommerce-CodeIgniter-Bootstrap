@@ -233,19 +233,6 @@ class Public_model extends CI_Model
         return $query->row_array();
     }
 
-    public function setToCart($post)
-    {
-        if (!is_numeric($post['article_id'])) {
-            return false;
-        }
-        $query = $this->db->insert('shopping_cart', array(
-            'session_id' => session_id(),
-            'article_id' => $post['article_id'],
-            'time' => time()
-        ));
-        return $query;
-    }
-
     public function getShopItems($array_items)
     {
         $this->db->select('products.id, products.image, products.url, products.quantity, products_translations.price, products_translations.title');
@@ -311,7 +298,8 @@ class Public_model extends CI_Model
                     'clean_referrer' => $post['clean_referrer'],
                     'payment_type' => $post['payment_type'],
                     'paypal_status' => @$post['paypal_status'],
-                    'discount_code' => @$post['discountCode']
+                    'discount_code' => @$post['discountCode'],
+                    'user_id' => $post['user_id']
                 ))) {
             log_message('error', print_r($this->db->error(), true));
         }

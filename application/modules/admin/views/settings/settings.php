@@ -368,20 +368,20 @@
                     <label>Enable:</label>
                     <input <?= isset($cookieLawInfo['cookieInfo']['visibility']) && $cookieLawInfo['cookieInfo']['visibility'] == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="visibility" class="toggle-changer" type="checkbox">
                     <hr>
-                    <?php foreach ($languages->result() as $language) { ?>
+                    <?php foreach ($languages as $language) { ?>
                         <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
-                    <?php } foreach ($languages->result() as $language) { ?>
+                    <?php } foreach ($languages as $language) { ?>
                         <div class="form-group">
                             <label for="message-cookie-law">Message (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                             <input type="text" name="message[]" value="<?= isset($cookieLawInfo['cookieTranslate'][$language->abbr]['message']) ? $cookieLawInfo['cookieTranslate'][$language->abbr]['message'] : '' ?>" class="form-control" id="message-cookie-law">
                         </div>
-                    <?php } foreach ($languages->result() as $language) {
+                    <?php } foreach ($languages as $language) {
                         ?>
                         <div class="form-group">
                             <label for="btn-cookie-law">Button Text (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                             <input type="text" name="button_text[]" value="<?= isset($cookieLawInfo['cookieTranslate'][$language->abbr]['button_text']) ? $cookieLawInfo['cookieTranslate'][$language->abbr]['button_text'] : '' ?>" class="form-control" id="btn-cookie-law">
                         </div>
-                    <?php } foreach ($languages->result() as $language) { ?>
+                    <?php } foreach ($languages as $language) { ?>
                         <div class="form-group">
                             <label for="learn_more">Learn More (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">):</label>
                             <input type="text" name="learn_more[]" value="<?= isset($cookieLawInfo['cookieTranslate'][$language->abbr]['learn_more']) ? $cookieLawInfo['cookieTranslate'][$language->abbr]['learn_more'] : '' ?>" class="form-control" id="learn_more">

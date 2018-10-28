@@ -9,7 +9,7 @@ class Checkout extends MY_Controller
 
     public function __construct()
     {
-        parent::__construct(); 
+        parent::__construct();
         $this->load->model('admin/Orders_model');
     }
 
@@ -29,6 +29,7 @@ class Checkout extends MY_Controller
             } else {
                 $_POST['referrer'] = $this->session->userdata('referrer');
                 $_POST['clean_referrer'] = cleanReferral($_POST['referrer']);
+                $_POST['user_id'] = isset($_SESSION['logged_user']) ? $_SESSION['logged_user'] : 0;
                 $orderId = $this->Public_model->setOrder($_POST);
                 if ($orderId != false) {
                     /*
@@ -37,6 +38,7 @@ class Checkout extends MY_Controller
                     $this->setVendorOrders();
                     $this->orderId = $orderId;
                     $this->setActivationLink();
+                    $this->sendNotifications();
                     $this->goToDestination();
                 } else {
                     log_message('error', 'Cant save order!! ' . implode('::', $_POST));
@@ -55,6 +57,21 @@ class Checkout extends MY_Controller
     private function setVendorOrders()
     {
         $this->Public_model->setVendorOrder($_POST);
+    }
+
+    /*
+     * Send notifications to users that have nofify=1 in /admin/adminusers
+     */
+
+    private function sendNotifications()
+    {
+        $users = $this->Public_model->getNotifyUsers();
+        $myDomain = $this->config->item('base_url');
+        if (!empty($users)) {
+            foreach ($users as $user) {
+                $this->sendmail->sendTo($user, 'Admin', 'New order in ' . $myDomain, 'Hello, you have new order. Can check it in /admin/orders');
+            }
+        }
     }
 
     private function setActivationLink()

@@ -34,7 +34,7 @@
         <div class="clearfix"></div>
         <?php
     }
-    if ($languages->result()) {
+    if ($languages) {
         ?>
         <div class="table-responsive">
             <table class="table table-striped custab">
@@ -48,7 +48,7 @@
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
-                <?php foreach ($languages->result() as $language) { ?>
+                <?php foreach ($languages as $language) { ?>
                     <tr>
                         <td><?= $language->id ?></td>
                         <td><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="No country flag" style="width:16px; height:11px;"></td>

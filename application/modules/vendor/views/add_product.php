@@ -16,7 +16,7 @@ $timeNow = time();
             <form class="form-box" action="" method="POST" enctype="multipart/form-data">
                 <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
                 <?php
-                foreach ($languages->result() as $language) {
+                foreach ($languages as $language) {
                     ?>
                     <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
                     <div class="form-group">
@@ -26,7 +26,7 @@ $timeNow = time();
                     <?php
                 }
                 $i = 0;
-                foreach ($languages->result() as $language) {
+                foreach ($languages as $language) {
                     ?>
                     <label><?= lang('vendor_product_description') ?> <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"></label>
                     <div class="form-group">
@@ -85,7 +85,7 @@ $timeNow = time();
                     </select>
                 </div>
                 <?php
-                foreach ($languages->result() as $language) {
+                foreach ($languages as $language) {
                     ?>
                     <div class="form-group">
                         <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="" class="language">

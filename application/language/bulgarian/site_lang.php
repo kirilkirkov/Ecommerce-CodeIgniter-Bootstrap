@@ -234,3 +234,4 @@ $lang['logout'] = 'Изход';
 $lang['price_qua']  = 'Цена за количество';
 $lang['total_prod']  = 'Крайна сума';
 $lang['my_order'] = 'Мояата поръчка';
+$lang['new_pass_sended'] = 'Новата парола е изпратена';

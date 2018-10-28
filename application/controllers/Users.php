@@ -28,7 +28,6 @@ class Users extends MY_Controller
                 redirect(LANG_URL . '/checkout');
             } else {
                 $this->session->set_flashdata('userError', lang('wrong_user'));
-                redirect(LANG_URL . '/login');
             }
         }
         $head = array();
@@ -63,7 +62,7 @@ class Users extends MY_Controller
     {
         if (isset($_POST['update'])) {
             $_POST['id'] = $_SESSION['logged_user'];
-            $count_emails = $this->Public_model->countPublicUsersWithEmail($_POST['email'], $_POST['id']); 
+            $count_emails = $this->Public_model->countPublicUsersWithEmail($_POST['email'], $_POST['id']);
             if ($count_emails == 0) {
                 $this->Public_model->updateProfile($_POST);
             }

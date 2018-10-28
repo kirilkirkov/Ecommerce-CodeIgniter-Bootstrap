@@ -233,3 +233,4 @@ $lang['logout'] = 'Αποσυνδέση';
 $lang['price_qua']  = 'Τιμή για ποσότητα';
 $lang['total_prod']  = 'Σύνολο';
 $lang['my_order'] = 'Η παραγγελία μου';
+$lang['new_pass_sended'] = 'Ο νέος κωδικός πρόσβασης έχει σταλεί';

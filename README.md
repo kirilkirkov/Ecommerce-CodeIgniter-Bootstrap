@@ -5,7 +5,7 @@
 
 Current versions:
 
-* Codeigniter 3.1.8
+* Codeigniter 3.1.9
 * Bootstrap 3.3.7
 
 ## Donate
@@ -72,14 +72,14 @@ in root http://localhost directory or if you want to be in other directory just 
 ## Screenshot of admin panel
 ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/github/admin_panel4.png "Logo Title Text 1")
 
-## How To Write Templates
+### How To Write Templates
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/How-to-write-templates
 
-## Shopping cart peculiarities
+### Shopping cart peculiarities
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/Shopping-cart-peculiarities
 
-## Multi Vendor Support
+### Multi Vendor Support
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/Multi-Vendor-Support
 
-## API Documentation
+### API Documentation
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/API

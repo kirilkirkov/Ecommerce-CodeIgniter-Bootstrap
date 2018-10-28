@@ -22,8 +22,8 @@ if ($this->session->flashdata('result_publish')) {
     <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
     <div class="form-group available-translations">
         <b>Languages</b>
-        <?php foreach ($languages->result() as $language) { ?>
-            <button type="button" data-locale-change="<?= $language->abbr ?>" class="btn btn-default locale-change text-uppercase <?= $language->abbr == 'en' ? 'active' : '' ?>">
+        <?php foreach ($languages as $language) { ?>
+            <button type="button" data-locale-change="<?= $language->abbr ?>" class="btn btn-default locale-change text-uppercase <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'active' : '' ?>">
                 <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">
                 <?= $language->abbr ?>
             </button>
@@ -31,7 +31,7 @@ if ($this->session->flashdata('result_publish')) {
     </div>
     <?php
     $i = 0;
-    foreach ($languages->result() as $language) {
+    foreach ($languages as $language) {
         ?>
         <div class="locale-container locale-container-<?= $language->abbr ?>" <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'style="display:block;"' : '' ?>>
             <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">

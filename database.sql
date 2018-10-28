@@ -169,16 +169,6 @@ INSERT INTO `seo_pages` (`id`, `name`) VALUES
 (3, 'contacts'),
 (4, 'blog');
 
-
-CREATE TABLE IF NOT EXISTS `shopping_cart` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `session_id` varchar(100) NOT NULL,
-  `article_id` int(11) NOT NULL,
-  `time` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-
 CREATE TABLE IF NOT EXISTS `shop_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `sub_for` int(11) NOT NULL,

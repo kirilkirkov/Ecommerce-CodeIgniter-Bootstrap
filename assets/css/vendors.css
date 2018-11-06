@@ -73,4 +73,5 @@ table.table td, table.table th {padding: 20px !important;}
 .vendor-update {max-width: 300px;float: left;margin-top: 17px;margin-left: 20px;}
 .vendor-update .form-control {font: left; max-width: 100px; display: inline;}
 
+.locale-container {display: none;}
 footer {width:100%; position:absolute;bottom:0;left:0; }

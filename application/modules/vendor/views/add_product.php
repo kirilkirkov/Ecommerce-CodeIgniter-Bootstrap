@@ -15,27 +15,42 @@ $timeNow = time();
         <div class="content">
             <form class="form-box" action="" method="POST" enctype="multipart/form-data">
                 <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
+                <div class="form-group available-translations">
+                    <b>Languages</b>
+                    <?php foreach ($languages as $language) { ?>
+                        <button type="button" data-locale-change="<?= $language->abbr ?>" class="btn btn-default locale-change text-uppercase <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'active' : '' ?>">
+                            <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">
+                            <?= $language->abbr ?>
+                        </button>
+                    <?php } ?>
+                </div>
                 <?php
-                foreach ($languages as $language) {
-                    ?>
-                    <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
-                    <div class="form-group">
-                        <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>" class="language">
-                        <input type="text" name="title[]" placeholder="<?= lang('vendor_product_name') ?>" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
-                    </div>
-                    <?php
-                }
                 $i = 0;
                 foreach ($languages as $language) {
                     ?>
-                    <label><?= lang('vendor_product_description') ?> <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"></label>
-                    <div class="form-group">
-                        <textarea class="form-control" name="description[]" id="description<?= $i ?>"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
+                    <div class="locale-container locale-container-<?= $language->abbr ?>" <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'style="display:block;"' : '' ?>>
+                        <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
+                        <div class="form-group">
+                            <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>" class="language">
+                            <input type="text" name="title[]" placeholder="<?= lang('vendor_product_name') ?>" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
+                        </div> 
+                        <label><?= lang('vendor_product_description') ?> <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"></label>
+                        <div class="form-group">
+                            <textarea class="form-control" name="description[]" id="description<?= $i ?>"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
+                        </div>
+                        <script>
+                            CKEDITOR.replace('description<?= $i ?>');
+                            CKEDITOR.config.entities = false;
+                        </script>
+                        <div class="form-group">
+                            <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="" class="language">
+                            <input type="text" name="price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" placeholder="<?= lang('vendor_price') ?>" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="" class="language">
+                            <input type="text" name="old_price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" placeholder="<?= lang('vendor_old_price') ?>" class="form-control">
+                        </div>
                     </div>
-                    <script>
-                        CKEDITOR.replace('description<?= $i ?>');
-                        CKEDITOR.config.entities = false;
-                    </script>
                     <?php
                     $i++;
                 }
@@ -83,19 +98,7 @@ $timeNow = time();
                             </option>
                         <?php } ?>
                     </select>
-                </div>
-                <?php
-                foreach ($languages as $language) {
-                    ?>
-                    <div class="form-group">
-                        <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="" class="language">
-                        <input type="text" name="price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" placeholder="<?= lang('vendor_price') ?>" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="" class="language">
-                        <input type="text" name="old_price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" placeholder="<?= lang('vendor_old_price') ?>" class="form-control">
-                    </div>
-                <?php } ?>
+                </div> 
                 <div class="form-group">
                     <input type="text" placeholder="<?= lang('vendor_quantity') ?>" name="quantity" value="<?= @$_POST['quantity'] ?>" class="form-control">
                 </div>

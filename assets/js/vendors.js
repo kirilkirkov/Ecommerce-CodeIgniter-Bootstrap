@@ -48,7 +48,7 @@ $('.orders-page .show-more').click(function () {
 
 });
 
-$('.change-ord-status').change(function() {
+$('.change-ord-status').change(function () {
     var the_id = $(this).data('ord-id');
     var to_status = $(this).val();
 
@@ -57,6 +57,14 @@ $('.change-ord-status').change(function() {
             alert('Error with status change. Please check logs!');
         }
     });
+});
+
+$('.locale-change').click(function () {
+    var toLocale = $(this).data('locale-change');
+    $('.locale-container').hide();
+    $('.locale-container-' + toLocale).show();
+    $('.locale-change').removeClass('active');
+    $(this).addClass('active');
 });
 
 function reloadOthersImagesContainer() {

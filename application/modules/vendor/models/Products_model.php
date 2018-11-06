@@ -27,10 +27,11 @@ class Products_model extends CI_Model
         if ($id > 0) {
             $is_update = true;
             if (!$this->db->where('id', $id)->where('vendor_id', $post['vendor_id'])->update('products', array(
-                        'image' => $post['image'] != null ? $_POST['image'] : $_POST['old_image'],
+                        'image' => $post['image'] != null ? $_POST['image'] : @$_POST['old_image'],
                         'shop_categorie' => $post['shop_categorie'],
                         'quantity' => $post['quantity'],
                         'position' => $post['position'],
+                        'brand_id' => $post['brand_id'],
                         'time_update' => time()
                     ))) {
                 log_message('error', print_r($this->db->error(), true));
@@ -48,6 +49,7 @@ class Products_model extends CI_Model
                         'shop_categorie' => $post['shop_categorie'],
                         'quantity' => $post['quantity'],
                         'position' => $post['position'],
+                        'brand_id' => $post['brand_id'],
                         'folder' => $post['folder'],
                         'vendor_id' => $post['vendor_id'],
                         'time' => time()

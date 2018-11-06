@@ -17,7 +17,9 @@ class AddProduct extends VENDOR_Controller
         $this->load->model(array(
             'Products_model',
             'admin/Languages_model',
-            'admin/Categories_model'
+            'admin/Categories_model',
+            'admin/Home_admin_model',
+            'admin/Brands_model'
         ));
     }
 
@@ -48,6 +50,10 @@ class AddProduct extends VENDOR_Controller
         $data['languages'] = $this->Languages_model->getLanguages();
         $data['shop_categories'] = $this->Categories_model->getShopCategories();
         $data['otherImgs'] = $this->loadOthersImages();
+        $data['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
+        if($data['showBrands'] == 1) {
+            $data['brands'] = $this->Brands_model->getBrands();
+        }
         $data['trans_load'] = $trans_load;
         $this->load->view('_parts/header', $head);
         $this->load->view('add_product', $data);

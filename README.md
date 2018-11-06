@@ -59,9 +59,17 @@ in root http://localhost directory or if you want to be in other directory just 
 (example: http://shop.dev - point to localhost/shop directory). How to create virtual hosts you can read here: http://goo.gl/UvpYMG
 
 ## Login to administration with
+User: admin
+Pass: admin
 
-* User: admin
-* Pass: admin
+## Vendors support
+Login url is - vendor/login. Vendors are not supported only from "onepage" template.
+Can register new vendor from url - vendor/register. 
+Vendors must be enabled from /admin (administration) ->Settings->Multi-Vendor Support.
+
+## Users registration
+Users registration/login is added only in greenlabel template. (easily can be added to any other template, just copy files: login.php, signup.php, user.php and change your design)
+Users can track their orders history only.
 
 ## Screenshots of public pages
 ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/github/templates.png "Logo Title Text 1")

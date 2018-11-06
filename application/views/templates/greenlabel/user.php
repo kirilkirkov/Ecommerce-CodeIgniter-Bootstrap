@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 <div class="container user-page">
     <div class="row">
-        <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+        <div class="col-sm-4">
             <div class="loginmodal-container">
                 <h1><?= lang('my_acc') ?></h1><br>
                 <form method="POST" action="">
@@ -21,5 +21,60 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </form>
             </div>
         </div>
+        <div class="col-sm-8">
+            <?= lang('user_order_history') ?>
+
+            <div class="table-responsive">
+                <table class="table table-condensed table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th><?= lang('usr_order_id') ?></th>
+                            <th><?= lang('usr_order_date') ?></th>
+                            <th><?= lang('usr_order_address') ?></th>
+                            <th><?= lang('usr_order_phone') ?></th>
+                            <th><?= lang('user_order_products') ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if (!empty($orders_history)) {
+                            foreach ($orders_history as $order) {
+                                ?>
+                                <tr>
+                                    <td><?= $order['order_id'] ?></td>
+                                    <td><?= date('d.m.Y', $order['date']) ?></td>
+                                    <td><?= $order['address'] ?></td>
+                                    <td><?= $order['phone'] ?></td>
+                                    <td>    
+                                        <?php
+                                        $arr_products = unserialize($order['products']);
+                                        foreach ($arr_products as $product_id => $product_quantity) {
+                                            $productInfo = modules::run('admin/ecommerce/products/getProductInfo', $product_id);
+                                            ?>
+                                            <div style="word-break: break-all;">
+                                                <div>
+                                                    <img src="<?= base_url('attachments/shop_images/' . $productInfo['image']) ?>" alt="Product" style="width:100px; margin-right:10px;" class="img-responsive">
+                                                </div>
+                                                <a target="_blank" href="<?= base_url($productInfo['url']) ?>">
+                                                    <?= base_url($productInfo['url']) ?> 
+                                                </a> 
+                                                <div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;"><b><?= lang('user_order_quantity') ?></b> <?= $product_quantity ?></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <hr>
+                                        <?php }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        } else {
+                            ?>
+
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <?= $links_pagination ?>
+            </div>
+        </div>
     </div>
-</div>

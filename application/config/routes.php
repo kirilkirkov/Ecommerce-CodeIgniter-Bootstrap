@@ -111,7 +111,9 @@ $route['(\w{2})/register'] = "Users/register";
 
 // Users Profiles Public Users Page
 $route['myaccount'] = "Users/myaccount";
+$route['myaccount/(:num)'] = "Users/myaccount/$1";
 $route['(\w{2})/myaccount'] = "Users/myaccount";
+$route['(\w{2})/myaccount/(:num)'] = "Users/myaccount/$2";
 
 // Logout Profiles Public Users Page
 $route['logout'] = "Users/logout";

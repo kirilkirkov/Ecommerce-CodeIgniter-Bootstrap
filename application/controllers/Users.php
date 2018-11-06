@@ -7,6 +7,7 @@ class Users extends MY_Controller
 
     private $registerErrors = array();
     private $user_id;
+    private $num_rows = 5;
 
     public function __construct()
     {
@@ -58,7 +59,7 @@ class Users extends MY_Controller
         $this->render('signup', $head, $data);
     }
 
-    public function myaccount()
+    public function myaccount($page = 0)
     {
         if (isset($_POST['update'])) {
             $_POST['id'] = $_SESSION['logged_user'];
@@ -70,10 +71,13 @@ class Users extends MY_Controller
         }
         $head = array();
         $data = array();
-        $data['userInfo'] = $this->Public_model->getUserProfileInfo($_SESSION['logged_user']);
         $head['title'] = lang('my_acc');
         $head['description'] = lang('my_acc');
         $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $data['userInfo'] = $this->Public_model->getUserProfileInfo($_SESSION['logged_user']);
+        $rowscount = $this->Public_model->getUserOrdersHistoryCount($_SESSION['logged_user']);
+        $data['orders_history'] = $this->Public_model->getUserOrdersHistory($_SESSION['logged_user'], $this->num_rows, $page);
+        $data['links_pagination'] = pagination('myaccount', $rowscount, $this->num_rows, 2);
         $this->render('user', $head, $data);
     }
 

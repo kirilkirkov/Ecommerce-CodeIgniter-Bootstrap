@@ -647,4 +647,24 @@ class Public_model extends CI_Model
         return $query;
     }
 
+    public function getUserOrdersHistoryCount($userId)
+    {
+        $this->db->where('user_id', $userId);
+        return $this->db->count_all_results('orders');
+    }
+
+    public function getUserOrdersHistory($userId, $limit, $page)
+    {
+        $this->db->where('user_id', $userId);
+        $this->db->order_by('id', 'DESC');
+        $this->db->select('orders.*, orders_clients.first_name,'
+                . ' orders_clients.last_name, orders_clients.email, orders_clients.phone, '
+                . 'orders_clients.address, orders_clients.city, orders_clients.post_code,'
+                . ' orders_clients.notes, discount_codes.type as discount_type, discount_codes.amount as discount_amount');
+        $this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'inner');
+        $this->db->join('discount_codes', 'discount_codes.code = orders.discount_code', 'left');
+        $result = $this->db->get('orders', $limit, $page);
+        return $result->result_array();
+    }
+
 }

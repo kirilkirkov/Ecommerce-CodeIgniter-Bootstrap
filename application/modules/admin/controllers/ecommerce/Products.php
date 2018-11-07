@@ -70,9 +70,14 @@ class Products extends ADMIN_Controller
         $this->load->view('_parts/footer');
     }
 
-    public function getProductInfo($id)
+    public function getProductInfo($id, $noLoginCheck = false)
     {
-        $this->login_check();
+        /* 
+         * if method is called from public(template) page
+         */
+        if ($noLoginCheck == false) {
+            $this->login_check();
+        }
         return $this->Products_model->getOneProduct($id);
     }
 

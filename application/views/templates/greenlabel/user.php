@@ -23,7 +23,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div class="col-sm-8">
             <?= lang('user_order_history') ?>
-
             <div class="table-responsive">
                 <table class="table table-condensed table-bordered table-striped">
                     <thead>
@@ -49,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <?php
                                         $arr_products = unserialize($order['products']);
                                         foreach ($arr_products as $product_id => $product_quantity) {
-                                            $productInfo = modules::run('admin/ecommerce/products/getProductInfo', $product_id);
+                                            $productInfo = modules::run('admin/ecommerce/products/getProductInfo', $product_id, true);
                                             ?>
                                             <div style="word-break: break-all;">
                                                 <div>
@@ -70,7 +69,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             }
                         } else {
                             ?>
-
+                            <tr>
+                                <td colspan="5"><?= lang('usr_no_orders') ?></td>
+                            </tr>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -78,3 +79,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
     </div>
+</div>

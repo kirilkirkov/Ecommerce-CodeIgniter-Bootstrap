@@ -240,3 +240,4 @@ $lang['usr_order_address'] = 'Διεύθυνση';
 $lang['usr_order_phone'] = 'Τηλέφωνο';
 $lang['user_order_products'] = 'Προϊόντα';
 $lang['user_order_quantity'] = 'Ποσότητα:';
+$lang['usr_no_orders'] = 'Δεν έχουν γίνει αγορές μέχρι στιγμής';

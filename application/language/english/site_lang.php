@@ -241,3 +241,4 @@ $lang['usr_order_address'] = 'Address';
 $lang['usr_order_phone'] = 'Phone';
 $lang['user_order_products'] = 'Products';
 $lang['user_order_quantity'] = 'Quantity:';
+$lang['usr_no_orders'] = 'No purchases made';

@@ -95,7 +95,9 @@ class Languages extends ADMIN_Controller
                 savefile($prevFile, $phpFileInclude);
                 $phpFileInclude = "<?php \n";
             }
-            $phpFileInclude .= '$lang[\'' . htmlentities($_POST['php_keys'][$i]) . '\'] = \'' . htmlentities($_POST['php_values'][$i]) . '\';' . "\n";
+            $php_value = str_replace("'", '&#39;', $_POST['php_values'][$i]);
+			$php_value = str_replace('"', '&#34;', $php_value);
+            $phpFileInclude .= '$lang[\'' . htmlentities($_POST['php_keys'][$i]) . '\'] = \'' . $php_value . '\';' . "\n";
             $prevFile = $phpFile;
             $i++;
         }

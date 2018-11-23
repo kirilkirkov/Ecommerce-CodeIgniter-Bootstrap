@@ -61,12 +61,12 @@ class ADMIN_Controller extends MX_Controller
         $errors = array();
 
         // Check application/language folder is writable
-        if (!is_writable('.' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'language')) {
+        if (!is_writable(APPPATH . 'language')) {
             $errors[] = 'Language folder is not writable!';
         }
 
         // Check application/logs folder is writable
-        if (!is_writable('.' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'logs')) {
+        if (!is_writable(APPPATH . 'logs')) {
             $errors[] = 'Logs folder is not writable!';
         }
 

@@ -141,7 +141,9 @@ if (!isset($_GET['settings'])) {
                                                     <?php
                                                     $arr_products = unserialize($tr['products']);
                                                     foreach ($arr_products as $product_id => $product_quantity) {
+                                                        $total_amount = 0;
                                                         $productInfo = modules::run('admin/ecommerce/products/getProductInfo', $product_id);
+                                                        $total_amount += str_replace(' ', '', str_replace(',', '.',$productInfo['price']));
                                                         ?>
                                                         <div style="word-break: break-all;">
                                                             <div>
@@ -149,7 +151,10 @@ if (!isset($_GET['settings'])) {
                                                             </div>
                                                             <a data-toggle="tooltip" data-placement="top" title="Click to preview" target="_blank" href="<?= base_url($productInfo['url']) ?>">
                                                                 <?= base_url($productInfo['url']) ?>
-                                                                <div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;"><b>Quantity:</b> <?= $product_quantity ?></div>
+                                                                <div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;">
+                                                                    <b>Quantity:</b> <?= $product_quantity ?> / 
+                                                                    <b>Price: <?= $productInfo['price'].' '.$this->config->item('currency') ?></b>
+                                                                </div>
                                                             </a>
                                                             <div class="">
                                                                 <b>Vendor:</b>
@@ -157,6 +162,7 @@ if (!isset($_GET['settings'])) {
                                                             </div>
                                                             <div class="clearfix"></div>
                                                         </div>
+                                                        <div style="padding-top:10px; font-size:16px;">Total amount of products: <?= $total_amount.' '.$this->config->item('currency') ?></div>
                                                         <hr>
                                                     <?php }
                                                     ?>

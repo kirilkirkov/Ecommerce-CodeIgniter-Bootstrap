@@ -288,7 +288,16 @@ class Public_model extends CI_Model
         }
         unset($post['id'], $post['quantity']);
         $post['date'] = time();
-        $post['products'] = serialize($post['products']);
+        $products_to_order = [];
+        if(!empty($post['products'])) {
+            foreach($post['products'] as $pr_id => $pr_qua) {
+                $products_to_order[] = [
+                    'product_info' => $this->getOneProductForSerialize($pr_id),
+                    'product_quantity' => $pr_qua
+                    ];
+            }
+        }
+        $post['products'] = serialize($products_to_order);
         $this->db->trans_begin();
         if (!$this->db->insert('orders', array(
                     'order_id' => $post['order_id'],
@@ -323,6 +332,21 @@ class Public_model extends CI_Model
         } else {
             $this->db->trans_commit();
             return $post['order_id'];
+        }
+    }
+    
+    private function getOneProductForSerialize($id)
+    {
+        $this->db->select('vendors.name as vendor_name, vendors.id as vendor_id, products.*, products_translations.price');
+        $this->db->where('products.id', $id);
+        $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
+        $this->db->join('products_translations', 'products_translations.for_id = products.id', 'inner');
+        $this->db->where('products_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
+        $query = $this->db->get('products');
+        if ($query->num_rows() > 0) {
+            return $query->row_array();
+        } else {
+            return false;
         }
     }
 

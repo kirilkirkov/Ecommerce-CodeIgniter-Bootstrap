@@ -140,25 +140,24 @@ if (!isset($_GET['settings'])) {
                                                 <td colspan="2">
                                                     <?php
                                                     $arr_products = unserialize($tr['products']);
-                                                    foreach ($arr_products as $product_id => $product_quantity) {
+                                                    foreach ($arr_products as $product) {
                                                         $total_amount = 0;
-                                                        $productInfo = modules::run('admin/ecommerce/products/getProductInfo', $product_id);
-                                                        $total_amount += str_replace(' ', '', str_replace(',', '.',$productInfo['price']));
+                                                        $total_amount += str_replace(' ', '', str_replace(',', '.',$product['product_info']['price']));
                                                         ?>
                                                         <div style="word-break: break-all;">
                                                             <div>
-                                                                <img src="<?= base_url('attachments/shop_images/' . $productInfo['image']) ?>" alt="Product" style="width:100px; margin-right:10px;" class="img-responsive">
+                                                                <img src="<?= base_url('attachments/shop_images/' . $product['product_info']['image']) ?>" alt="Product" style="width:100px; margin-right:10px;" class="img-responsive">
                                                             </div>
-                                                            <a data-toggle="tooltip" data-placement="top" title="Click to preview" target="_blank" href="<?= base_url($productInfo['url']) ?>">
-                                                                <?= base_url($productInfo['url']) ?>
+                                                            <a data-toggle="tooltip" data-placement="top" title="Click to preview" target="_blank" href="<?= base_url($product['product_info']['url']) ?>">
+                                                                <?= base_url($product['product_info']['url']) ?>
                                                                 <div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;">
-                                                                    <b>Quantity:</b> <?= $product_quantity ?> / 
-                                                                    <b>Price: <?= $productInfo['price'].' '.$this->config->item('currency') ?></b>
+                                                                    <b>Quantity:</b> <?= $product['product_quantity'] ?> / 
+                                                                    <b>Price: <?= $product['product_info']['price'].' '.$this->config->item('currency') ?></b>
                                                                 </div>
                                                             </a>
                                                             <div class="">
                                                                 <b>Vendor:</b>
-                                                                <a href=""><?= $productInfo['vendor_name'] ?></a>
+                                                                <a href=""><?= $product['product_info']['vendor_name'] ?></a>
                                                             </div>
                                                             <div class="clearfix"></div>
                                                         </div>

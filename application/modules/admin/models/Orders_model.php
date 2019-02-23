@@ -40,14 +40,13 @@ class Orders_model extends CI_Model
         $result1 = $this->db->get('orders');
         $res = $result1->row_array();
 
+        $result = true;
         if ($res['processed'] != $to_status) {
             $this->db->where('id', $id);
             $result = $this->db->update('orders', array('processed' => $to_status, 'viewed' => '1'));
             if ($result == true) {
                 $this->manageQuantitiesAndProcurement($id, $to_status, $res['processed']);
             }
-        } else {
-            $result = false;
         }
         return $result;
     }
@@ -67,19 +66,19 @@ class Orders_model extends CI_Model
         $result = $this->db->get('orders');
         $arr = $result->row_array();
         $products = unserialize($arr['products']);
-        foreach ($products as $product_id => $quantity) {
-            if (isset($operator)) {
-                if (!$this->db->query('UPDATE products SET quantity=quantity' . $operator . $quantity . ' WHERE id = ' . $product_id)) {
-                    log_message('error', print_r($this->db->error(), true));
-                    show_error(lang('database_error'));
+        foreach ($products as $product) {
+                if (isset($operator)) {
+                    if (!$this->db->query('UPDATE products SET quantity=quantity' . $operator . $product['product_quantity'] . ' WHERE id = ' . $product['product_info']['id'])) {
+                        log_message('error', print_r($this->db->error(), true));
+                        show_error(lang('database_error'));
+                    }
                 }
-            }
-            if (isset($operator_pro)) {
-                if (!$this->db->query('UPDATE products SET procurement=procurement' . $operator_pro . $quantity . ' WHERE id = ' . $product_id)) {
-                    log_message('error', print_r($this->db->error(), true));
-                    show_error(lang('database_error'));
-                }
-            }
+                if (isset($operator_pro)) {
+                    if (!$this->db->query('UPDATE products SET procurement=procurement' . $operator_pro . $product['product_quantity'] . ' WHERE id = ' . $product['product_info']['id'])) {
+                        log_message('error', print_r($this->db->error(), true));
+                        show_error(lang('database_error'));
+                    }
+                } 
         }
     }
 

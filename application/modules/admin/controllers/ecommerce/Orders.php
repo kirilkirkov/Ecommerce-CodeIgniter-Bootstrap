@@ -109,23 +109,24 @@ class Orders extends ADMIN_Controller
 
     private function sendVirtualProducts()
     {
-
-        $products = unserialize(html_entity_decode($_POST['products']));
-        foreach ($products as $product_id => $product_quantity) {
-            $productInfo = modules::run('admin/ecommerce/products/getProductInfo', $product_id);
-            /*
-             * If is virtual product, lets send email to user
-             */
-            if ($productInfo['virtual_products'] != null) {
-                if (!filter_var($_POST['userEmail'], FILTER_VALIDATE_EMAIL)) {
-                    log_message('error', 'Ivalid customer email address! Cant send him virtual products!');
-                    return false;
+        if(isset($_POST['products']) && $_POST['products'] != '') {
+            $products = unserialize(html_entity_decode($_POST['products']));
+            foreach ($products as $product_id => $product_quantity) {
+                $productInfo = modules::run('admin/ecommerce/products/getProductInfo', $product_id);
+                /*
+                 * If is virtual product, lets send email to user
+                 */
+                if ($productInfo['virtual_products'] != null) {
+                    if (!filter_var($_POST['userEmail'], FILTER_VALIDATE_EMAIL)) {
+                        log_message('error', 'Ivalid customer email address! Cant send him virtual products!');
+                        return false;
+                    }
+                    $result = $this->sendmail->sendTo($_POST['userEmail'], 'Dear Customer', 'Virtual products', $productInfo['virtual_products']);
+                    return $result;
                 }
-                $result = $this->sendmail->sendTo($_POST['userEmail'], 'Dear Customer', 'Virtual products', $productInfo['virtual_products']);
-                return $result;
             }
+            return true;
         }
-        return true;
     }
 
 }

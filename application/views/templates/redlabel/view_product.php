@@ -33,8 +33,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
                 <?php
             }
+            var_dump($product);
             ?>
-        </div>
+        </div>        
+
         <div class="col-sm-8">
             <h1><?= $product['title'] ?></h1>
             <div class="row row-info">

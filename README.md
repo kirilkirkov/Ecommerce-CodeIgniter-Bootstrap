@@ -52,7 +52,7 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 3. Set your site domain in application/config/config.php - $config['base_url'] = 'http://yourdomain.com';
 4. Opss I forgot for last 4 step... ENJOY! ;)
 
-Little explain for installation - if you paste installation of project in directory something like http://localhost/SHOP, you must 
+Little explanation about the installation - if you paste installation of project in directory something like http://localhost/SHOP, you must 
 set this directory to application/config/config.php - $config['base_url'] = 'http://localhost/SHOP'; and must remove from .htaccess file
 "RewriteBase /" line because css and js files will not be loaded! But you must know that the best way to install this platform is to set it
 in root http://localhost directory or if you want to be in other directory just set virtual host for this and point him to there.

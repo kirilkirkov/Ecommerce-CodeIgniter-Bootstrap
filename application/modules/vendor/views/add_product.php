@@ -48,7 +48,7 @@ $timeNow = time();
                         </div>
                         <div class="form-group">
                             <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="" class="language">
-                            <input type="text" name="old_price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" placeholder="<?= lang('vendor_old_price') ?>" class="form-control">
+                            <input type="text" name="old_price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['old_price']) ? $trans_load[$language->abbr]['old_price'] : '' ?>" placeholder="<?= lang('vendor_old_price') ?>" class="form-control">
                         </div>
                     </div>
                     <?php

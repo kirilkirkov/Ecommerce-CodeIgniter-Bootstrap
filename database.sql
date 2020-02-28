@@ -309,7 +309,8 @@ INSERT INTO `value_store` (`id`, `thekey`, `value`) VALUES
 (27, 'showInSlider', '0'),
 (28, 'codeDiscounts', '1'),
 (29, 'virtualProducts', '0'),
-(30, 'multiVendor', '0');
+(30, 'multiVendor', '0'),
+(31, 'outOfStock', '0');
 
 CREATE TABLE `brands` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

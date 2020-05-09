@@ -324,6 +324,23 @@
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-success col-h">
+            <div class="panel-heading">Do not open shopping cart after add product to it</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('refreshAfterAddToCart')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('refreshAfterAddToCart') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="hidden" name="refreshAfterAddToCart" value="<?= $refreshAfterAddToCart ?>">
+                    <input <?= $refreshAfterAddToCart == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="refreshAfterAddToCart" class="toggle-changer" type="checkbox">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
             <div class="panel-heading">Show 'More information' button in products list</div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('moreInfoBtn')) { ?>

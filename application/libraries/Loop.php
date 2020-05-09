@@ -135,9 +135,14 @@ class Loop
                                     <span class="text-to-bg"><?= lang('info_product_list') ?></span>
                                 </a>
                             <?php } 
-                            if (self::$CI->load->get_var('hideBuyButtonsOfOutOfStock') == 0) { ?>
+                            if (self::$CI->load->get_var('hideBuyButtonsOfOutOfStock') == 0) {
+                                $hasRefresh = false;
+                                if(self::$CI->load->get_var('refreshAfterAddToCart') == 1) {
+                                    $hasRefresh = true;
+                                }
+                            ?>
                             <div class="add-to-cart">
-                                <a href="javascript:void(0);" class="add-to-cart btn-add" data-goto="<?= LANG_URL . '/shopping-cart' ?>" data-id="<?= $article['id'] ?>">
+                                <a href="javascript:void(0);" class="add-to-cart btn-add <?= $hasRefresh === true ? 'refresh-me' : '' ?>" data-goto="<?= LANG_URL . '/shopping-cart' ?>" data-id="<?= $article['id'] ?>">
                                     <img class="loader" src="<?= base_url('assets/imgs/ajax-loader.gif') ?>" alt="Loding">
                                     <span class="text-to-bg"><?= lang('add_to_cart') ?></span>
                                 </a>

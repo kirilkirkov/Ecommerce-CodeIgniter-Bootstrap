@@ -203,8 +203,14 @@ class Settings extends ADMIN_Controller
         }
         if (isset($_POST['hideBuyButtonsOfOutOfStock'])) {
             $this->Home_admin_model->setValueStore('hideBuyButtonsOfOutOfStock', $_POST['hideBuyButtonsOfOutOfStock']);
-            $this->session->set_flashdata('hideBuyButtonsOfOutOfStock', 'But buttons of Out of stock products visibility changed');
+            $this->session->set_flashdata('hideBuyButtonsOfOutOfStock', 'Buy buttons of Out of stock products visibility changed');
             $this->saveHistory('Buy buttons visibility changed for out of stock products');
+            redirect('admin/settings');
+        }
+        if (isset($_POST['refreshAfterAddToCart'])) {
+            $this->Home_admin_model->setValueStore('refreshAfterAddToCart', $_POST['refreshAfterAddToCart']);
+            $this->session->set_flashdata('refreshAfterAddToCart', 'Saved');
+            $this->saveHistory('Option to open shopping cart after click add to cart button changed');
             redirect('admin/settings');
         }
     }

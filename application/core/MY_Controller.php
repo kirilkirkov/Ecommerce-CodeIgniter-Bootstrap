@@ -83,6 +83,7 @@ class MY_Controller extends MX_Controller
         $vars['load'] = $this->loop;
         $vars['cookieLaw'] = $this->Public_model->getCookieLaw();
         $vars['codeDiscounts'] = $this->Home_admin_model->getValueStore('codeDiscounts');
+        $vars['hideBuyButtonsOfOutOfStock'] = $this->Home_admin_model->getValueStore('hideBuyButtonsOfOutOfStock');
         return $vars;
     }
 

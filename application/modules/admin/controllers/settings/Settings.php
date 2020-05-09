@@ -14,7 +14,7 @@ class Settings extends ADMIN_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Languages_model');
+        $this->load->model(['Languages_model', 'Settings_model']);
     }
 
     public function index()
@@ -23,39 +23,22 @@ class Settings extends ADMIN_Controller
         $data = array();
         $head = array();
         $head['title'] = 'Administration - Settings';
-        $head['description'] = '!';
+        $head['description'] = '';
         $head['keywords'] = '';
 
         $this->postChecker();
 
-        $data['siteLogo'] = $this->Home_admin_model->getValueStore('sitelogo');
-        $data['naviText'] = $this->Home_admin_model->getValueStore('navitext');
-        $data['footerCopyright'] = $this->Home_admin_model->getValueStore('footercopyright');
-        $data['contactsPage'] = $this->Home_admin_model->getValueStore('contactspage');
-        $data['footerContactAddr'] = $this->Home_admin_model->getValueStore('footerContactAddr');
-        $data['footerContactPhone'] = $this->Home_admin_model->getValueStore('footerContactPhone');
-        $data['footerContactEmail'] = $this->Home_admin_model->getValueStore('footerContactEmail');
-
-        $data['footerSocialFacebook'] = $this->Home_admin_model->getValueStore('footerSocialFacebook');
-        $data['footerSocialTwitter'] = $this->Home_admin_model->getValueStore('footerSocialTwitter');
-        $data['footerSocialGooglePlus'] = $this->Home_admin_model->getValueStore('footerSocialGooglePlus');
-        $data['footerSocialPinterest'] = $this->Home_admin_model->getValueStore('footerSocialPinterest');
-        $data['footerSocialYoutube'] = $this->Home_admin_model->getValueStore('footerSocialYoutube');
-
-        $data['contactsEmailTo'] = $this->Home_admin_model->getValueStore('contactsEmailTo');
-        $data['googleMaps'] = $this->Home_admin_model->getValueStore('googleMaps');
-        $data['footerAboutUs'] = $this->Home_admin_model->getValueStore('footerAboutUs');
-        $data['shippingOrder'] = $this->Home_admin_model->getValueStore('shippingOrder');
-        $data['addJs'] = $this->Home_admin_model->getValueStore('addJs');
-        $data['publicQuantity'] = $this->Home_admin_model->getValueStore('publicQuantity');
-        $data['publicDateAdded'] = $this->Home_admin_model->getValueStore('publicDateAdded');
-        $data['googleApi'] = $this->Home_admin_model->getValueStore('googleApi');
-        $data['outOfStock'] = $this->Home_admin_model->getValueStore('outOfStock');
-        $data['moreInfoBtn'] = $this->Home_admin_model->getValueStore('moreInfoBtn');
-        $data['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
-        $data['virtualProducts'] = $this->Home_admin_model->getValueStore('virtualProducts');
-        $data['showInSlider'] = $this->Home_admin_model->getValueStore('showInSlider');
-        $data['multiVendor'] = $this->Home_admin_model->getValueStore('multiVendor');
+        $value_stores = $this->getValueStores();
+        if(!is_null($value_stores)) {
+            // Map to data
+            foreach($value_stores as $value_s) {
+                if (!array_key_exists($value_s['thekey'], $data)) {
+                    $data[$value_s['thekey']] = $value_s['value'];
+                }
+            }
+            unset($value_stores);
+        }
+        
         $data['cookieLawInfo'] = $this->getCookieLaw();
         $data['languages'] = $this->Languages_model->getLanguages();
         $data['law_themes'] = array_diff(scandir('.' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'imgs' . DIRECTORY_SEPARATOR . 'cookie-law-themes' . DIRECTORY_SEPARATOR), array('..', '.'));
@@ -64,6 +47,15 @@ class Settings extends ADMIN_Controller
         $this->load->view('settings/settings', $data);
         $this->load->view('_parts/footer');
         $this->saveHistory('Go to Settings Page');
+    }
+
+    private function getValueStores()
+    {
+        $values = $this->Settings_model->getValueStores();
+        if(is_countable($values) && count($values) > 0) {
+            return $values;
+        }
+        return null;
     }
 
     private function postChecker()
@@ -207,6 +199,12 @@ class Settings extends ADMIN_Controller
             unset($_POST['setCookieLaw']);
             $this->setCookieLaw($_POST);
             $this->saveHistory('Cookie law information changed');
+            redirect('admin/settings');
+        }
+        if (isset($_POST['hideBuyButtonsOfOutOfStock'])) {
+            $this->Home_admin_model->setValueStore('hideBuyButtonsOfOutOfStock', $_POST['hideBuyButtonsOfOutOfStock']);
+            $this->session->set_flashdata('hideBuyButtonsOfOutOfStock', 'But buttons of Out of stock products visibility changed');
+            $this->saveHistory('Buy buttons visibility changed for out of stock products');
             redirect('admin/settings');
         }
     }

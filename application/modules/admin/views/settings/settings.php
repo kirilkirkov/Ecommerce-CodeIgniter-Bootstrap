@@ -10,7 +10,7 @@
                 <?php if ($this->session->flashdata('resultSiteLogoPublish')) { ?>
                     <div class="alert alert-info"><?= $this->session->flashdata('resultSiteLogoPublish') ?></div>
                 <?php } ?>
-                <img src="<?= base_url('attachments/site_logo/' . $siteLogo) ?>" alt="Logo is deleted. Upload new!" class="img-responsive">
+                <img src="<?= base_url('attachments/site_logo/' . $sitelogo) ?>" alt="Logo is deleted. Upload new!" class="img-responsive">
                 <hr>
                 <form accept-charset="utf-8" method="post" enctype="multipart/form-data" action="">
                     <input type="file" name="sitelogo" size="20" />
@@ -28,7 +28,7 @@
                 <?php } ?>
                 <form method="POST" action="">
                     <div class="input-group">
-                        <input class="form-control" name="naviText" value="<?= $naviText ?>" type="text">
+                        <input class="form-control" name="naviText" value="<?= $navitext ?>" type="text">
                         <span class="input-group-btn">
                             <button class="btn btn-default" value="" type="submit">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -48,7 +48,7 @@
                 <?php } ?>
                 <form method="POST" action="">
                     <div class="input-group">
-                        <input class="form-control" name="footerCopyright" value="<?= $footerCopyright ?>" type="text">
+                        <input class="form-control" name="footerCopyright" value="<?= $footercopyright ?>" type="text">
                         <span class="input-group-btn">
                             <button class="btn btn-default" value="" placeholder="Find product.." type="submit">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -68,7 +68,7 @@
                 <?php } ?>
                 <form method="POST" action="">
                     <div class="form-group">
-                        <textarea name="contactsPage" id="contacts-page"><?= $contactsPage ?></textarea></div>
+                        <textarea name="contactsPage" id="contacts-page"><?= $contactspage ?></textarea></div>
                     <div class="form-group">
                         <button class="btn btn-default" value="" placeholder="Find product.." type="submit">
                             Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -298,6 +298,23 @@
                 <form method="POST" action="">
                     <input type="hidden" name="outOfStock" value="<?= $outOfStock ?>">
                     <input <?= $outOfStock == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="outOfStock" class="toggle-changer" type="checkbox">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Hide buy button if product is shown but is out of stock</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('hideBuyButtonsOfOutOfStock')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('hideBuyButtonsOfOutOfStock') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="hidden" name="hideBuyButtonsOfOutOfStock" value="<?= $hideBuyButtonsOfOutOfStock ?>">
+                    <input <?= $hideBuyButtonsOfOutOfStock == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="hideBuyButtonsOfOutOfStock" class="toggle-changer" type="checkbox">
                     <button class="btn btn-default" value="" type="submit">
                         Save
                     </button>

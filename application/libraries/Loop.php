@@ -134,7 +134,8 @@ class Loop
                                 <a href="<?= $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'] ?>" class="info-btn gradient-color">
                                     <span class="text-to-bg"><?= lang('info_product_list') ?></span>
                                 </a>
-                            <?php } ?>
+                            <?php } 
+                            if (self::$CI->load->get_var('hideBuyButtonsOfOutOfStock') == 0) { ?>
                             <div class="add-to-cart">
                                 <a href="javascript:void(0);" class="add-to-cart btn-add" data-goto="<?= LANG_URL . '/shopping-cart' ?>" data-id="<?= $article['id'] ?>">
                                     <img class="loader" src="<?= base_url('assets/imgs/ajax-loader.gif') ?>" alt="Loding">
@@ -147,6 +148,11 @@ class Loop
                                     <span class="text-to-bg"><?= lang('buy_now') ?></span>
                                 </a>
                             </div>
+                            <?php } else { ?>
+                            <div>
+                                Product is out of stock
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                     <?php

@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,8 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -970,7 +970,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 					$v = "'{$v}'";
 					break;
 				case 'before':
-					$v = "%'{$v}'";
+					$v = "'%{$v}'";
 					break;
 				case 'after':
 					$v = "'{$v}%'";
@@ -987,7 +987,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 				$v .= sprintf($this->_like_escape_str, $this->_like_escape_chr);
 			}
 
-			$qb_where = array('condition' => "{$prefix} {$k} {$not} LIKE", 'value' => $v, 'escape' => $escape);
+			$qb_where = array('condition' => "{$prefix} {$k} {$not} LIKE {$v}", 'value' => NULL, 'escape' => $escape);
 			$this->qb_where[] = $qb_where;
 			if ($this->qb_caching === TRUE)
 			{
@@ -2215,7 +2215,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	protected function _delete($table)
 	{
 		return 'DELETE FROM '.$table.$this->_compile_wh('qb_where')
-			.($this->qb_limit ? ' LIMIT '.$this->qb_limit : '');
+			.($this->qb_limit !== FALSE ? ' LIMIT '.$this->qb_limit : '');
 	}
 
 	// --------------------------------------------------------------------
@@ -2365,7 +2365,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			.$this->_compile_order_by(); // ORDER BY
 
 		// LIMIT
-		if ($this->qb_limit OR $this->qb_offset)
+		if ($this->qb_limit !== FALSE OR $this->qb_offset)
 		{
 			return $this->_limit($sql."\n");
 		}

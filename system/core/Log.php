@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,8 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -247,11 +247,11 @@ class CI_Log {
 	 * @param	string	$level 	The error level
 	 * @param	string	$date 	Formatted date string
 	 * @param	string	$message 	The log message
-	 * @return	string	Formatted log line with a new line character '\n' at the end
+	 * @return	string	Formatted log line with a new line character at the end
 	 */
 	protected function _format_line($level, $date, $message)
 	{
-		return $level.' - '.$date.' --> '.$message."\n";
+		return $level.' - '.$date.' --> '.$message.PHP_EOL;
 	}
 
 	// --------------------------------------------------------------------

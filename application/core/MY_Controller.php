@@ -62,29 +62,20 @@ class MY_Controller extends MX_Controller
         $vars['nonDynPages'] = $this->nonDynPages;
         $vars['dynPages'] = $this->dynPages;
         $vars['footerCategories'] = $this->Public_model->getFooterCategories();
-        $vars['sitelogo'] = $this->Home_admin_model->getValueStore('sitelogo');
-        $vars['naviText'] = htmlentities($this->Home_admin_model->getValueStore('navitext'));
-        $vars['footerCopyright'] = htmlentities($this->Home_admin_model->getValueStore('footercopyright'));
-        $vars['contactsPage'] = $this->Home_admin_model->getValueStore('contactspage');
-        $vars['footerContactAddr'] = htmlentities($this->Home_admin_model->getValueStore('footerContactAddr'));
-        $vars['footerContactPhone'] = htmlentities($this->Home_admin_model->getValueStore('footerContactPhone'));
-        $vars['footerContactEmail'] = htmlentities($this->Home_admin_model->getValueStore('footerContactEmail'));
-        $vars['footerAboutUs'] = $this->Home_admin_model->getValueStore('footerAboutUs');
-        $vars['footerSocialFacebook'] = $this->Home_admin_model->getValueStore('footerSocialFacebook');
-        $vars['footerSocialTwitter'] = $this->Home_admin_model->getValueStore('footerSocialTwitter');
-        $vars['footerSocialGooglePlus'] = $this->Home_admin_model->getValueStore('footerSocialGooglePlus');
-        $vars['footerSocialPinterest'] = $this->Home_admin_model->getValueStore('footerSocialPinterest');
-        $vars['footerSocialYoutube'] = $this->Home_admin_model->getValueStore('footerSocialYoutube');
-        $vars['addedJs'] = $this->Home_admin_model->getValueStore('addJs');
-        $vars['publicQuantity'] = $this->Home_admin_model->getValueStore('publicQuantity');
-        $vars['moreInfoBtn'] = $this->Home_admin_model->getValueStore('moreInfoBtn');
-        $vars['multiVendor'] = $this->Home_admin_model->getValueStore('multiVendor');
+
+        $this->load->model('admin/Settings_model');
+        $values = $this->Settings_model->getValueStores();
+        if(is_countable($values) && count($values) > 0) {
+            foreach($values as $value) {
+                if (!array_key_exists($value['thekey'], $vars)) {
+                    $vars[$value['thekey']] = htmlentities($value['value']);
+                }
+            }
+        }
+        
         $vars['allLanguages'] = $this->getAllLangs();
         $vars['load'] = $this->loop;
         $vars['cookieLaw'] = $this->Public_model->getCookieLaw();
-        $vars['codeDiscounts'] = $this->Home_admin_model->getValueStore('codeDiscounts');
-        $vars['hideBuyButtonsOfOutOfStock'] = $this->Home_admin_model->getValueStore('hideBuyButtonsOfOutOfStock');
-        $vars['refreshAfterAddToCart'] = $this->Home_admin_model->getValueStore('refreshAfterAddToCart');
         return $vars;
     }
 
@@ -139,7 +130,7 @@ class MY_Controller extends MX_Controller
             $arr['email'] = $_POST['subscribeEmail'];
             if (filter_var($arr['email'], FILTER_VALIDATE_EMAIL) && !$this->session->userdata('email_added')) {
                 $this->session->set_userdata('email_added', 1);
-                $res = $this->Public_model->setSubscribe($arr);
+                $this->Public_model->setSubscribe($arr);
                 $this->session->set_flashdata('emailAdded', lang('email_added'));
             }
             if (!headers_sent()) {

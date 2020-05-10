@@ -187,8 +187,8 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <?php if ($naviText != null) { ?>
-                                    <a class="navbar-brand visible-xs" href="<?= base_url() ?>"><?= $naviText ?></a>
+                                <?php if ($navitext != null) { ?>
+                                    <a class="navbar-brand visible-xs" href="<?= base_url() ?>"><?= $navitext ?></a>
                                 <?php } ?>
                             </div>
                             <div id="navbar" class="navbar-collapse collapse">

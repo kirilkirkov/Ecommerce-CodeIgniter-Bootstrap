@@ -78,7 +78,7 @@
     </div>
     <div class="footer-bottom">
         <div class="container">
-            <p class="pull-left"><?= $footerCopyright ?></p>
+            <p class="pull-left"><?= $footercopyright ?></p>
             <div class="pull-right">
                 <ul class="nav nav-pills payments">
                     <li><i class="fa fa-cc-visa"></i></li>
@@ -98,7 +98,7 @@
 </script>
     <?php
 }
-echo $addedJs;
+echo $addJs;
 if ($this->session->flashdata('userError')) {
     if (is_array($this->session->flashdata('userError'))) {
         $usr_err = implode(' ', $this->session->flashdata('userError'));

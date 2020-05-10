@@ -208,12 +208,12 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <?php if ($naviText != null) { ?>
-                                <a class="navbar-brand" href="<?= base_url() ?>"><?= $naviText ?></a>
+                            <?php if ($navitext != null) { ?>
+                                <a class="navbar-brand" href="<?= base_url() ?>"><?= $navitext ?></a>
                             <?php } ?>
                         </div>
                         <div id="navbar" class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav" style="<?= $naviText == null ? 'margin-left:-15px;' : '' ?>">
+                            <ul class="nav navbar-nav" style="<?= $navitext == null ? 'margin-left:-15px;' : '' ?>">
                                 <li<?= uri_string() == '' || uri_string() == MY_LANGUAGE_ABBR ? ' class="active"' : '' ?>><a href="<?= LANG_URL ?>"><?= lang('home') ?></a></li>
                                 <?php
                                 if (!empty($nonDynPages)) {

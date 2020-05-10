@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <form>
                     <legend><span class="glyphicon glyphicon-globe"></span> <?= lang('our_office') ?></legend>
                     <address>
-                        <?= $contactsPage ?>
+                        <?= $contactspage ?>
                     </address>
                 </form>
             </div>

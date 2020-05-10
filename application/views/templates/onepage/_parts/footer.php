@@ -36,7 +36,7 @@
 </script>
 <?php
 }
-echo $addedJs;
+echo $addJs;
 ?>
 <script src="<?= base_url('templatejs/bootstrap.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/placeholders.min.js') ?>"></script>

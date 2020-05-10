@@ -78,7 +78,7 @@
     </div>
     <div class="footer-bottom">
         <div class="container">
-            <p class="pull-left"><?= $footerCopyright ?></p>
+            <p class="pull-left"><?= $footercopyright ?></p>
             <div class="pull-right">
                 <ul class="nav nav-pills payments">
                     <li><i class="fa fa-cc-visa"></i></li>
@@ -98,7 +98,7 @@
     </script>
     <?php
 }
-echo $addedJs;
+echo $addJs;
 ?>
 </div>
 </div>

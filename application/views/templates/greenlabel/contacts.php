@@ -48,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="contact-details">
                     <legend><?= lang('contact_details') ?></legend>
                     <address>
-                        <?= $contactsPage ?>
+                        <?= $contactspage ?>
                     </address>
                 </div>
             </div>

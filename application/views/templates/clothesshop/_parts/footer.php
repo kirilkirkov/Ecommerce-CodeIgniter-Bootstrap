@@ -1,6 +1,6 @@
 <footer>
     <div class="container">
-        <span class="footer-text"><?= $footerCopyright ?></span>
+        <span class="footer-text"><?= $footercopyright ?></span>
     </div>
 </footer>
 <?php if ($this->session->flashdata('emailAdded')) { ?>
@@ -11,7 +11,7 @@
 </script>
 <?php
 }
-echo $addedJs;
+echo $addJs;
 ?>
 </div>
 </div>

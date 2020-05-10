@@ -65,7 +65,7 @@ class MY_Controller extends MX_Controller
 
         $this->load->model('admin/Settings_model');
         $values = $this->Settings_model->getValueStores();
-        if(is_countable($values) && count($values) > 0) {
+        if(is_array($values) && count($values) > 0) {
             foreach($values as $value) {
                 if (!array_key_exists($value['thekey'], $vars)) {
                     $vars[$value['thekey']] = htmlentities($value['value']);

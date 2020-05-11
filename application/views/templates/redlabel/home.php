@@ -38,10 +38,12 @@ if (count($sliderProducts) > 0) {
                                 </div>
                                 <div class="price text-right"><?= $article['price'] . CURRENCY ?></div>
                                 <div class="xs-center">
+                                    <?php if ($hideBuyButtonsOfOutOfStock == 0 || (int)$article['quantity'] > 0) { ?>
                                     <a class="option add-to-cart" data-goto="<?= base_url('checkout') ?>" href="javascript:void(0);" data-id="<?= $article['id'] ?>">
                                         <img src="<?= base_url('template/imgs/shopping-cart-icon-515.png') ?>" alt="">
                                         <?= lang('buy_now') ?>
                                     </a>
+                                    <?php } ?>
                                     <a class="option right-5" href="<?= LANG_URL . '/' . $article['url'] ?>">
                                         <img src="<?= base_url('template/imgs/info.png') ?>" alt="">
                                         <?= lang('details') ?>

@@ -31,9 +31,11 @@ if (count($sliderProducts) > 0) {
                                 <div class="description">
                                     <?= character_limiter(strip_tags($article['basic_description']), 150) ?>
                                 </div>
+                                <?php if ($hideBuyButtonsOfOutOfStock == 0 || (int)$article['quantity'] > 0) { ?>
                                 <a class="option add-to-cart" data-goto="<?= LANG_URL . '/checkout' ?>" href="javascript:void(0);" data-id="<?= $article['id'] ?>">
                                     <?= lang('buy_now') ?>
                                 </a>
+                                <?php } ?>
                             </div>
                             <div class="col-sm-6">
 

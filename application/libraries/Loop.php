@@ -135,7 +135,7 @@ class Loop
                                     <span class="text-to-bg"><?= lang('info_product_list') ?></span>
                                 </a>
                             <?php } 
-                            if (self::$CI->load->get_var('hideBuyButtonsOfOutOfStock') == 0) {
+                            if (self::$CI->load->get_var('hideBuyButtonsOfOutOfStock') == 0 || (int)$article['quantity'] > 0) {
                                 $hasRefresh = false;
                                 if(self::$CI->load->get_var('refreshAfterAddToCart') == 1) {
                                     $hasRefresh = true;

@@ -52,7 +52,7 @@ class Settings extends ADMIN_Controller
     private function getValueStores()
     {
         $values = $this->Settings_model->getValueStores();
-        if(is_countable($values) && count($values) > 0) {
+        if(is_array($values) && count($values) > 0) {
             return $values;
         }
         return null;

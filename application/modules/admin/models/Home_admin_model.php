@@ -125,9 +125,12 @@ class Home_admin_model extends CI_Model
 
     public function getValueStore($key)
     {
-        $query = $this->db->query("SELECT value FROM value_store WHERE thekey = '$key'");
-        $img = $query->row_array();
-        return $img['value'];
+        $query = $this->db->query("SELECT value FROM value_store WHERE thekey = ? LIMIT 1", [$key]);
+        $value = $query->row_array();
+        if(!$value) {
+            return null;
+        }
+        return $value['value'];
     }
 
     public function newOrdersCheck()

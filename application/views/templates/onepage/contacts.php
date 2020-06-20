@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <form>
                     <legend><i class="fa fa-info" aria-hidden="true"></i> <?= lang('our_office') ?></legend>
                     <address>
-                        <?= $contactspage ?>
+                        <?= html_entity_decode($contactspage) ?>
                     </address>
                 </form>
             </div>

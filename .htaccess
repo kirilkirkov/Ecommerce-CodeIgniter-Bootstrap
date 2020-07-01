@@ -1,5 +1,22 @@
-RewriteEngine on
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?/$1 [L]
+#==============================================================
+#	DISABLE INDEX FOLDER
+#==============================================================
+	Options -Indexes
+#--------------------------------------------------------------#
+
+#==============================================================
+#	CODEIGNITER HTACCESS
+#==============================================================
+	RewriteEngine on
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule .* index.php/ [PT,L]
+#--------------------------------------------------------------#
+
+#==============================================================
+#	CODEIGNITER ENVIRONMENT
+#==============================================================
+	<IfModule mod_env.c>
+		SetEnv CI_ENV production
+	</IfModule>
+#--------------------------------------------------------------#

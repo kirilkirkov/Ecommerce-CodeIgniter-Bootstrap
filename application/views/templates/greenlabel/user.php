@@ -47,17 +47,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <td>    
                                         <?php
                                         $arr_products = unserialize($order['products']);
-                                        foreach ($arr_products as $product_id => $product_quantity) {
-                                            $productInfo = modules::run('admin/ecommerce/products/getProductInfo', $product_id, true);
+                                        foreach ($arr_products as $product) {
                                             ?>
                                             <div style="word-break: break-all;">
                                                 <div>
-                                                    <img src="<?= base_url('attachments/shop_images/' . $productInfo['image']) ?>" alt="Product" style="width:100px; margin-right:10px;" class="img-responsive">
+                                                    <img src="<?= base_url('attachments/shop_images/' . $product['product_info']['image']) ?>" alt="Product" style="width:100px; margin-right:10px;" class="img-responsive">
                                                 </div>
-                                                <a target="_blank" href="<?= base_url($productInfo['url']) ?>">
-                                                    <?= base_url($productInfo['url']) ?> 
+                                                <a target="_blank" href="<?= base_url($product['product_info']['url']) ?>">
+                                                    <?= base_url($product['product_info']['url']) ?> 
                                                 </a> 
-                                                <div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;"><b><?= lang('user_order_quantity') ?></b> <?= $product_quantity ?></div>
+                                                <div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;"><b><?= lang('user_order_quantity') ?></b> <?= $product['product_quantity']; ?></div>
                                                 <div class="clearfix"></div>
                                             </div>
                                             <hr>

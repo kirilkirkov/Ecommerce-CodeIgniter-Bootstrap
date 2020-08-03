@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div id="search-input-blog">
                 <div class="input-group col-md-12">
                     <form method="GET" action="">
-                        <input type="text" class="search-query form-control" value="<?= isset($_GET['find']) ? $_GET['find'] : '' ?>" name="find" placeholder="<?= lang('search') ?>" />
+                        <input type="text" class="search-query form-control" value="<?= isset($_GET['find']) ? htmlspecialchars($_GET['find']) : '' ?>" name="find" placeholder="<?= lang('search') ?>" />
                         <span class="input-group-btn">
                             <button class="btn btn-danger" type="submit">
                                 <span class="glyphicon glyphicon-search"></span>

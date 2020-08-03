@@ -14,7 +14,7 @@ $timeNow = time();
         ?>
         <div class="content">
             <form class="form-box" action="" method="POST" enctype="multipart/form-data">
-                <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
+                <input type="hidden" value="<?= isset($_POST['folder']) ? htmlspecialchars($_POST['folder']) : $timeNow ?>" name="folder">
                 <div class="form-group available-translations">
                     <b>Languages</b>
                     <?php foreach ($languages as $language) { ?>
@@ -58,7 +58,7 @@ $timeNow = time();
                 <div class="form-group bordered-group">
                     <?php
                     if (isset($_POST['image']) && $_POST['image'] != null) {
-                        $image = 'attachments/shop_images/' . $_POST['image'];
+                        $image = 'attachments/shop_images/' . htmlspecialchars($_POST['image']);
                         if (!file_exists($image)) {
                             $image = 'attachments/no-image.png';
                         }
@@ -67,9 +67,9 @@ $timeNow = time();
                         <div>
                             <img src="<?= base_url($image) ?>" class="img-responsive img-thumbnail" style="max-width:300px; margin-bottom: 5px;">
                         </div>
-                        <input type="hidden" name="old_image" value="<?= $_POST['image'] ?>">
+                        <input type="hidden" name="old_image" value="<?= htmlspecialchars($_POST['image']) ?>">
                         <?php if (isset($_GET['to_lang'])) { ?>
-                            <input type="hidden" name="image" value="<?= $_POST['image'] ?>">
+                            <input type="hidden" name="image" value="<?= htmlspecialchars($_POST['image']) ?>">
                             <?php
                         }
                     }
@@ -110,10 +110,10 @@ $timeNow = time();
                     </div>
                 <?php } ?>
                 <div class="form-group">
-                    <input type="text" placeholder="<?= lang('vendor_quantity') ?>" name="quantity" value="<?= @$_POST['quantity'] ?>" class="form-control">
+                    <input type="text" placeholder="<?= lang('vendor_quantity') ?>" name="quantity" value="<?= isset($_POST['quantity']) ? htmlspecialchars($_POST['quantity']) : '' ?>" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="text" placeholder="<?= lang('vendor_position') ?>" name="position" value="<?= @$_POST['position'] ?>" class="form-control">
+                    <input type="text" placeholder="<?= lang('vendor_position') ?>" name="position" value="<?= isset($_POST['quantity']) ? htmlspecialchars($_POST['position']) : '' ?>" class="form-control">
                 </div>
                 <button type="submit" name="setProduct" class="btn btn-green"><?= lang('vendor_submit_product') ?></button>
             </form> 
@@ -130,7 +130,7 @@ $timeNow = time();
             </div>
             <div class="modal-body">
                 <form id="uploadImagesForm">
-                    <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
+                    <input type="hidden" value="<?= isset($_POST['folder']) ? htmlspecialchars($_POST['folder']) : $timeNow ?>" name="folder">
                     <label for="others"><?= lang('vendor_select_images') ?></label>
                     <input type="file" name="others[]" id="others" multiple />
                 </form>

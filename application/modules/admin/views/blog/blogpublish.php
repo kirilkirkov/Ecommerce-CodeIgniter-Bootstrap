@@ -41,7 +41,7 @@
             ?>
             <div class="form-group">
                 <?php if (isset($_POST['image'])) { ?>
-                    <input type="hidden" name="old_image" value="<?= $_POST['image'] ?>">
+                    <input type="hidden" name="old_image" value="<?= htmlspecialchars($_POST['image']) ?>">
                     <div><img class="img-responsive" src="<?= base_url('attachments/blog_images/' . $_POST['image']) ?>"></div>
                     <label for="userfile">Choose another image:</label>
                 <?php } else { ?>

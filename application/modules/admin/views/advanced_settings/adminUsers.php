@@ -73,10 +73,10 @@
                         <h4 class="modal-title" id="myModalLabel">Add Administrator</h4>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="edit" value="<?= isset($_GET['edit']) ? $_GET['edit'] : '0' ?>">
+                        <input type="hidden" name="edit" value="<?= isset($_GET['edit']) ? (int)$_GET['edit'] : '0' ?>">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" name="username" value="<?= isset($_POST['username']) ? $_POST['username'] : '' ?>" class="form-control" id="username">
+                            <input type="text" name="username" value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>" class="form-control" id="username">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
@@ -84,11 +84,11 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" name="email" class="form-control" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>" id="email">
+                            <input type="text" name="email" class="form-control" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>" id="email">
                         </div>
                         <div class="form-group">
                             <label for="notify">Notifications</label>
-                            <input type="text" name="notify" class="form-control" value="<?= isset($_POST['notify']) ? $_POST['notify'] : '' ?>" placeholder="Get notifications by email: 1 / 0 (yes or no)" id="notify">
+                            <input type="text" name="notify" class="form-control" value="<?= isset($_POST['notify']) ? htmlspecialchars($_POST['notify']) : '' ?>" placeholder="Get notifications by email: 1 / 0 (yes or no)" id="notify">
                         </div>
                     </div>
                     <div class="modal-footer">

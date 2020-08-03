@@ -19,7 +19,7 @@ if ($this->session->flashdata('result_publish')) {
 }
 ?>
 <form method="POST" action="" enctype="multipart/form-data">
-    <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
+    <input type="hidden" value="<?= isset($_POST['folder']) ? htmlspecialchars($_POST['folder']) : $timeNow ?>" name="folder">
     <div class="form-group available-translations">
         <b>Languages</b>
         <?php foreach ($languages as $language) { ?>
@@ -77,7 +77,7 @@ if ($this->session->flashdata('result_publish')) {
     <div class="form-group bordered-group">
         <?php
         if (isset($_POST['image']) && $_POST['image'] != null) {
-            $image = 'attachments/shop_images/' . $_POST['image'];
+            $image = 'attachments/shop_images/' . htmlspecialchars($_POST['image']);
             if (!file_exists($image)) {
                 $image = 'attachments/no-image.png';
             }
@@ -86,9 +86,9 @@ if ($this->session->flashdata('result_publish')) {
             <div>
                 <img src="<?= base_url($image) ?>" class="img-responsive img-thumbnail" style="max-width:300px; margin-bottom: 5px;">
             </div>
-            <input type="hidden" name="old_image" value="<?= $_POST['image'] ?>">
+            <input type="hidden" name="old_image" value="<?= htmlspecialchars($_POST['image']) ?>">
             <?php if (isset($_GET['to_lang'])) { ?>
-                <input type="hidden" name="image" value="<?= $_POST['image'] ?>">
+                <input type="hidden" name="image" value="<?= htmlspecialchars($_POST['image']) ?>">
                 <?php
             }
         }
@@ -120,7 +120,7 @@ if ($this->session->flashdata('result_publish')) {
     </div>
     <div class="form-group for-shop">
         <label>Quantity</label>
-        <input type="text" placeholder="number" name="quantity" value="<?= @$_POST['quantity'] ?>" class="form-control" id="quantity">
+        <input type="text" placeholder="number" name="quantity" value="<?= isset($_POST['quantity']) ? htmlspecialchars($_POST['quantity']) : '' ?>" class="form-control" id="quantity">
     </div>
     <?php if ($showBrands == 1) { ?>
         <div class="form-group for-shop">
@@ -134,7 +134,7 @@ if ($this->session->flashdata('result_publish')) {
     <?php } if ($virtualProducts == 1) { ?>
         <div class="form-group for-shop">
             <label>Virtual Products <a href="javascript:void(0);" data-toggle="modal" data-target="#virtualProductsHelp"><i class="fa fa-question-circle" aria-hidden="true"></i></a></label>
-            <textarea class="form-control" name="virtual_products"><?= @$_POST['virtual_products'] ?></textarea>
+            <textarea class="form-control" name="virtual_products"><?= isset($_POST['virtual_products']) ? htmlspecialchars($_POST['virtual_products']) : '' ?></textarea>
         </div>
     <?php } ?>
     <div class="form-group for-shop">
@@ -146,7 +146,7 @@ if ($this->session->flashdata('result_publish')) {
     </div>
     <div class="form-group for-shop">
         <label>Position</label>
-        <input type="text" placeholder="Position number" name="position" value="<?= @$_POST['position'] ?>" class="form-control">
+        <input type="text" placeholder="Position number" name="position" value="<?= isset($_POST['position']) ? htmlspecialchars($_POST['position']) : '' ?>" class="form-control">
     </div>
     <button type="submit" name="submit" class="btn btn-lg btn-default btn-publish">Publish</button>
     <?php if ($this->uri->segment(3) !== null) { ?>
@@ -163,7 +163,7 @@ if ($this->session->flashdata('result_publish')) {
             </div>
             <div class="modal-body">
                 <form id="uploadImagesForm">
-                    <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
+                    <input type="hidden" value="<?= isset($_POST['folder']) ? htmlspecialchars($_POST['folder']) : $timeNow ?>" name="folder">
                     <label for="others">Select images</label>
                     <input type="file" name="others[]" id="others" multiple />
                 </form>

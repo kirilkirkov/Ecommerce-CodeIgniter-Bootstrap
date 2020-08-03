@@ -83,7 +83,7 @@
         ?>
         <form method="POST" id="saveLang">
             <input type="hidden" name="goDaddyGo" value="">
-            <div class="alert alert-info"><span class="glyphicon glyphicon-alert"></span> Now you edit language: <b><?= ucfirst($_GET['editLang']) ?></b></div>
+            <div class="alert alert-info"><span class="glyphicon glyphicon-alert"></span> Now you edit language: <b><?= ucfirst(htmlspecialchars($_GET['editLang'])) ?></b></div>
             <?php
             $o = 1;
             $countValuesForEdit = 0;

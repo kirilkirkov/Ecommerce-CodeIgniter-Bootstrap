@@ -137,6 +137,10 @@ class Home extends MY_Controller
         $description = str_replace("-", " ", $description) . '..';
         $head['description'] = $description;
         $head['keywords'] = str_replace(" ", ",", $data['product']['title']);
+        $head['image'] = null;
+        if(isset($data['product']['image'])) {
+            $head['image'] = base_url('/attachments/shop_images/' . $data['product']['image']);
+        }
         $this->render('view_product', $head, $data);
     }
 

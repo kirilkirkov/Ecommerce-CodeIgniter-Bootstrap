@@ -68,6 +68,7 @@ class Checkout extends MY_Controller
         $users = $this->Public_model->getNotifyUsers();
         $myDomain = $this->config->item('base_url');
         if (!empty($users)) {
+            $this->sendmail->clearAddresses();
             foreach ($users as $user) {
                 $this->sendmail->sendTo($user, 'Admin', 'New order in ' . $myDomain, 'Hello, you have new order. Can check it in /admin/orders');
             }

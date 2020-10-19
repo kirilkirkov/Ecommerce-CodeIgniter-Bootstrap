@@ -10,7 +10,7 @@
         <meta property="og:description" content="<?= $description ?>" />
         <meta property="og:url" content="<?= LANG_URL ?>" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="<?= !is_null($image) ? $image : base_url('assets/img/site-overview.png') ?>" />
+        <meta property="og:image" content="<?= isset($image) && !is_null($image) ? $image : base_url('assets/img/site-overview.png') ?>" />
         <title><?= $title ?></title>
         <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>" />
         <link href="<?= base_url('templatecss/bootstrap.min.css') ?>" rel="stylesheet" />

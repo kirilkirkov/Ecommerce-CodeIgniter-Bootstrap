@@ -79,7 +79,7 @@ class Public_model extends CI_Model
         return $query->result_array();
     }
 
-    public function getProducts($limit = null, $start = null, $big_get, $vendor_id = false)
+    public function getProducts($limit = null, $start = null, $big_get = [], $vendor_id = false)
     {
         if ($limit !== null && $start !== null) {
             $this->db->limit($limit, $start);

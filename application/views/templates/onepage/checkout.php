@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="checkout-page">
     <div class="container">
         <div class="body">
-            <?php if ($cartItems['array'] != null) { ?>
+            <?php if (isset($cartItems['array']) && $cartItems['array'] != null) { ?>
                 <?= purchase_steps(1, 2) ?>
                 <div class="row">
                     <div class="col-sm-4">

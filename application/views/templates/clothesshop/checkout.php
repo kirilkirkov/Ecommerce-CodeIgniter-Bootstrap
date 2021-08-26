@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <link href="<?= base_url('assets/css/nice-select.css') ?>" rel="stylesheet">
 <div class="container" id="checkout-page">
     <div class="body">
-        <?php if ($cartItems['array'] != null) { ?>
+        <?php if (isset($cartItems['array']) && $cartItems['array'] != null) { ?>
             <?= purchase_steps(1, 2) ?>
             <div class="row bottom-30">
                 <div class="col-sm-9 left-side">

@@ -3,7 +3,7 @@
 </div>
 </div>
 <?php if ($this->session->userdata('logged_in')) { ?>
-<footer>Powered by <a href="http://gmmbsolutions.com/">GMMB SOLUTIONS LTD.</a> / Developer <a href="https://github.com/kirilkirkov">Kiril Kirkov</a></footer>
+<footer>Powered by <a href="https://github.com/kirilkirkov">Kiril Kirkov</a></footer>
 <?php } ?>
 </div>
 <!-- Modal Calculator -->

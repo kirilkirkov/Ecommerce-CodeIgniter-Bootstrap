@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <h1><?= lang('shopping_cart') ?></h1>
         <hr>
         <?php
-        if ($cartItems['array'] == null) {
+        if (!isset($cartItems['array']) || $cartItems['array'] == null) {
             ?>
             <div class="alert alert-info"><?= lang('no_products_in_cart') ?></div>
             <?php

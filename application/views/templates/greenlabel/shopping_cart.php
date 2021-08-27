@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 <div class="container" id="shopping-cart">
     <?php
-    if ($cartItems['array'] == null) {
+    if (!isset($cartItems['array']) || $cartItems['array'] == null) {
         ?>
         <div class="alert alert-info"><?= lang('no_products_in_cart') ?></div>
         <?php

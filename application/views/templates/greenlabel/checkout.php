@@ -143,6 +143,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <input type="hidden" name="discountAmount" value="">
                                     </td>
                                 </tr>
+                                
+                                <?php
+                                $total_parsed = str_replace(' ', '', str_replace(',', '', $cartItems['finalSum']));
+                                if((int)$shippingAmount > 0 && ((int)$shippingOrder > $total_parsed)) {
+                                ?>
+                                <tr>
+                                    <td colspan="4" class="text-right"><?= lang('shipping') ?></td>
+                                    <td>
+                                        <span class="final-amount"><?= (int)$shippingAmount ?></span><?= CURRENCY ?>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+
                             </tbody>
                         </table>
                     </div>

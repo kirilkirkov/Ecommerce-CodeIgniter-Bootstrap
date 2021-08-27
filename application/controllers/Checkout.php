@@ -50,6 +50,7 @@ class Checkout extends MY_Controller
         $data['bank_account'] = $this->Orders_model->getBankAccountSettings();
         $data['cashondelivery_visibility'] = $this->Home_admin_model->getValueStore('cashondelivery_visibility');
         $data['paypal_email'] = $this->Home_admin_model->getValueStore('paypal_email');
+        $data['shippingAmount'] = $this->Home_admin_model->getValueStore('shippingAmount');
         $data['bestSellers'] = $this->Public_model->getbestSellers();
         $this->render('checkout', $head, $data);
     }

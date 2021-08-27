@@ -22,6 +22,7 @@ $lang['search_by_keyword_body'] = 'Search for word in the description';
 $lang['search_for'] = 'Search for';
 $lang['search'] = 'Search';
 $lang['price_low'] = 'Low price';
+$lang['shipping'] = 'Shipping';
 $lang['price_high'] = 'High price';
 $lang['add_to_cart'] = 'Add to shopping cart';
 $lang['del_from_cart'] = 'Remove from shopping cart';

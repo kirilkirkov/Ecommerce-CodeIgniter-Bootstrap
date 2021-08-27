@@ -54,6 +54,7 @@ class Home extends MY_Controller
         $head['keywords'] = str_replace(" ", ",", $head['title']);
         $all_categories = $this->Public_model->getShopCategories();
         $data['home_categories'] = $this->getHomeCategories($all_categories);
+        $data['countQuantities'] = $this->Public_model->getCountQuantities();
         $data['all_categories'] = $all_categories;
         $data['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
         $data['brands'] = $this->Brands_model->getBrands();

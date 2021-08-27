@@ -67,6 +67,8 @@ class Orders extends ADMIN_Controller
         }
         $data['paypal_sandbox'] = $this->Home_admin_model->getValueStore('paypal_sandbox');
         $data['paypal_email'] = $this->Home_admin_model->getValueStore('paypal_email'); 
+        $data['shippingAmount'] = $this->Home_admin_model->getValueStore('shippingAmount');
+        $data['shippingOrder'] = $this->Home_admin_model->getValueStore('shippingOrder');
         $data['cashondelivery_visibility'] = $this->Home_admin_model->getValueStore('cashondelivery_visibility');
         $data['bank_account'] = $this->Orders_model->getBankAccountSettings();
         $this->load->view('_parts/header', $head);

@@ -203,7 +203,7 @@
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-success col-h">
-            <div class="panel-heading">Free Shipping for order equal or more than:</div>
+            <div class="panel-heading">Free Shipping for order equal or more than (Final purchase amount):</div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('shippingOrder')) { ?>
                     <div class="alert alert-info"><?= $this->session->flashdata('shippingOrder') ?></div>
@@ -211,6 +211,26 @@
                 <form method="POST" action="">
                     <div class="input-group">
                         <input class="form-control" name="shippingOrder" value="<?= $shippingOrder ?>" type="text">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" value="" type="submit">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Shipping amount (leave 0 or empty for no shipping price):</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('shippingAmount')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('shippingAmount') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <div class="input-group">
+                        <input class="form-control" name="shippingAmount" value="<?= isset($shippingAmount) ? $shippingAmount: '' ?>" type="text">
                         <span class="input-group-btn">
                             <button class="btn btn-default" value="" type="submit">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

@@ -20,6 +20,7 @@ $lang['view_cart'] = 'lihat troli';
 $lang['search_by_keyword_title'] = 'Cari berdasarkan teks pada judul';
 $lang['search_by_keyword_body'] = 'Cari berdasarkan teks pada deskripsi';
 $lang['search_for'] = 'Cari untuk';
+$lang['shipping'] = 'Shipping';
 $lang['search'] = 'Cari';
 $lang['price_low'] = 'Termurah';
 $lang['price_high'] = 'Termahal';

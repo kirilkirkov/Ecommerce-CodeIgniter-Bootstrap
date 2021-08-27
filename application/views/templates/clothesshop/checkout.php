@@ -4,7 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <link href="<?= base_url('assets/css/nice-select.css') ?>" rel="stylesheet">
 <div class="container" id="checkout-page">
     <div class="body">
-        <?php if (isset($cartItems['array']) && $cartItems['array'] != null) { ?>
+        <?php if (isset($cartItems['array']) && $cartItems['array'] != null) { 
+            
+            if ($shippingOrder != 0 && $shippingOrder != null) { ?>
+                <div style="padding: 20px 0;">
+                    <div style="color:red">
+                        <strong><?= lang('promo') ?></strong> - <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, CURRENCY), lang('freeShipping')) ?>!
+                    </div>
+                </div>
+            <?php } ?>
+
             <?= purchase_steps(1, 2) ?>
             <div class="row bottom-30">
                 <div class="col-sm-9 left-side">
@@ -127,6 +136,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <input type="hidden" name="discountAmount" value="">
                                         </td>
                                     </tr>
+
+                                    <?php
+                                    $total_parsed = str_replace(' ', '', str_replace(',', '', $cartItems['finalSum']));
+                                    if((int)$shippingAmount > 0 && ((int)$shippingOrder > $total_parsed)) {
+                                    ?>
+                                    <tr>
+                                        <td colspan="4" class="text-right"><?= lang('shipping') ?></td>
+                                        <td>
+                                            <span class="final-amount"><?= (int)$shippingAmount ?></span><?= CURRENCY ?>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+
                                 </tbody>
                             </table>
                         </div>

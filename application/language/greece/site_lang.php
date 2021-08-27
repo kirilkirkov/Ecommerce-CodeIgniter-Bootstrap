@@ -22,6 +22,7 @@ $lang['search_by_keyword_title'] = 'Αναζήτηση λέξης στον τί�
 $lang['search_by_keyword_body'] = 'Αναζήτηση για λέξη στην περιγραφή';
 $lang['price_low'] = 'χαμηλή τιμή';
 $lang['price_high'] = 'υψηλή τιμή';
+$lang['shipping'] = 'Shipping';
 $lang['search_for'] = 'Αναζήτηση';
 $lang['add_to_cart'] = 'Προσθήκη στο Καλάθι';
 $lang['del_from_cart'] = 'Απομάκρυνση από το καλάθι';

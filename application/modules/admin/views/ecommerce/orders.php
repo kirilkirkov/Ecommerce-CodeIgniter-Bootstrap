@@ -166,6 +166,16 @@ if (!isset($_GET['settings'])) {
                                                     <?php }
                                                     ?>
                                                 </td>
+
+                                                <?php 
+                                                $total_parsed = str_replace(' ', '', str_replace(',', '', $total_amount));
+                                                if((int)$shippingAmount > 0 && ((int)$shippingOrder > $total_parsed)) { ?>
+                                                    <tr>
+                                                        <td><b>Shipping amount is</b></td>
+                                                        <td><?= (int)$shippingAmount.' '.$this->config->item('currency') ?></td>
+                                                    </tr>
+                                                <?php } ?>
+
                                             </tr>
                                         </tbody>
                                     </table>

@@ -93,6 +93,7 @@ $lang['our_office'] = 'Нашият офис';
 $lang['email_added'] = 'Имейл адреса ви е добавен успешно';
 $lang['freeShippingHeader'] = 'Друго';
 $lang['freeShipping'] = 'За поръчка над %price%%currency% доставката е безплатна';
+$lang['shipping'] = 'Цена за доставка';
 $lang['promo'] = 'Промоция';
 $lang['paypal'] = 'PayPal';
 $lang['showXsNav'] = 'Покажи категорийте';

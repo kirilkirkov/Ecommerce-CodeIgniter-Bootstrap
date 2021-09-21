@@ -84,6 +84,7 @@ if ( ! function_exists('base_url'))
 	 */
 	function base_url($uri = '', $protocol = NULL)
 	{
+		$url = htmlspecialchars($url);
 		return get_instance()->config->base_url($uri, $protocol);
 	}
 }

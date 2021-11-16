@@ -105,13 +105,13 @@ CREATE TABLE IF NOT EXISTS `orders` (
 
 CREATE TABLE `orders_clients` (
   `id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(30) NOT NULL,
+  `first_name` varchar(500) NOT NULL,
+  `last_name` varchar(500) NOT NULL,
+  `email` varchar(500) NOT NULL,
+  `phone` varchar(500) NOT NULL,
   `address` text NOT NULL,
-  `city` varchar(20) NOT NULL,
-  `post_code` varchar(10) NOT NULL,
+  `city` varchar(500) NOT NULL,
+  `post_code` varchar(500) NOT NULL,
   `notes` text NOT NULL,
   `for_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -387,13 +387,13 @@ ALTER TABLE `vendors_orders`
 
 CREATE TABLE `vendors_orders_clients` (
   `id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(30) NOT NULL,
+  `first_name` varchar(500) NOT NULL,
+  `last_name` varchar(500) NOT NULL,
+  `email` varchar(500) NOT NULL,
+  `phone` varchar(500) NOT NULL,
   `address` text NOT NULL,
-  `city` varchar(20) NOT NULL,
-  `post_code` varchar(10) NOT NULL,
+  `city` varchar(500) NOT NULL,
+  `post_code` varchar(500) NOT NULL,
   `notes` text NOT NULL,
   `for_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

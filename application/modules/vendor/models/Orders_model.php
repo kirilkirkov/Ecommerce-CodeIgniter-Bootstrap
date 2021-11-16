@@ -6,6 +6,7 @@ class Orders_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('encryption');
     }
 
     public function ordersCount($vendor_id)
@@ -25,7 +26,17 @@ class Orders_model extends CI_Model
         $this->db->join('vendors_orders_clients', 'vendors_orders_clients.for_id = vendors_orders.id', 'inner');
         $this->db->join('discount_codes', 'discount_codes.code = vendors_orders.discount_code', 'left');
         $result = $this->db->get('vendors_orders', $limit, $page);
-        return $result->result_array();
+        $result = $result->result_array();
+        if(!count($result)) return $result;
+        
+        foreach($result as $k => $v) {
+            $result[$k] = array_map(function($v) {
+                $d = $this->encryption->decrypt($v);
+                return $d !== false ? $d : $v;
+            }, $v);
+        }
+
+        return $result;
     }
 
     public function changeOrderStatus($id, $to_status)

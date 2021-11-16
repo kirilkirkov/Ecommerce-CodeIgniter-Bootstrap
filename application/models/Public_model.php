@@ -10,10 +10,13 @@ class Public_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        
         $this->load->Model('Home_admin_model');
         $this->showOutOfStock = $this->Home_admin_model->getValueStore('outOfStock');
         $this->showInSliderProducts = $this->Home_admin_model->getValueStore('showInSlider');
         $this->multiVendor = $this->Home_admin_model->getValueStore('multiVendor');
+
+        $this->load->library('encryption');
     }
 
     public function productsCount($big_get)
@@ -315,14 +318,14 @@ class Public_model extends CI_Model
         $lastId = $this->db->insert_id();
         if (!$this->db->insert('orders_clients', array(
                     'for_id' => $lastId,
-                    'first_name' => $post['first_name'],
-                    'last_name' => $post['last_name'],
-                    'email' => $post['email'],
-                    'phone' => $post['phone'],
-                    'address' => $post['address'],
-                    'city' => $post['city'],
-                    'post_code' => $post['post_code'],
-                    'notes' => $post['notes']
+                    'first_name' => $this->encryption->encrypt($post['first_name']),
+                    'last_name' => $this->encryption->encrypt($post['last_name']),
+                    'email' => $this->encryption->encrypt($post['email']),
+                    'phone' => $this->encryption->encrypt($post['phone']),
+                    'address' => $this->encryption->encrypt($post['address']),
+                    'city' => $this->encryption->encrypt($post['city']),
+                    'post_code' => $this->encryption->encrypt($post['post_code']),
+                    'notes' => $this->encryption->encrypt($post['notes'])
                 ))) {
             log_message('error', print_r($this->db->error(), true));
         }
@@ -394,14 +397,14 @@ class Public_model extends CI_Model
                 $lastId = $this->db->insert_id();
                 if (!$this->db->insert('vendors_orders_clients', array(
                             'for_id' => $lastId,
-                            'first_name' => $post['first_name'],
-                            'last_name' => $post['last_name'],
-                            'email' => $post['email'],
-                            'phone' => $post['phone'],
-                            'address' => $post['address'],
-                            'city' => $post['city'],
-                            'post_code' => $post['post_code'],
-                            'notes' => $post['notes']
+                            'first_name' => $this->encryption->encrypt($post['first_name']),
+                            'last_name' => $this->encryption->encrypt($post['last_name']),
+                            'email' => $this->encryption->encrypt($post['email']),
+                            'phone' => $this->encryption->encrypt($post['phone']),
+                            'address' => $this->encryption->encrypt($post['address']),
+                            'city' => $this->encryption->encrypt($post['city']),
+                            'post_code' => $this->encryption->encrypt($post['post_code']),
+                            'notes' => $this->encryption->encrypt($post['notes'])
                         ))) {
                     log_message('error', print_r($this->db->error(), true));
                 }
@@ -688,7 +691,17 @@ class Public_model extends CI_Model
         $this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'inner');
         $this->db->join('discount_codes', 'discount_codes.code = orders.discount_code', 'left');
         $result = $this->db->get('orders', $limit, $page);
-        return $result->result_array();
+        $result = $result->result_array();
+        if(!count($result)) return $result;
+        
+        foreach($result as $k => $v) {
+            $result[$k] = array_map(function($v) {
+                $d = $this->encryption->decrypt($v);
+                return $d !== false ? $d : $v;
+            }, $v);
+        }
+
+        return $result;
     }
 
 }

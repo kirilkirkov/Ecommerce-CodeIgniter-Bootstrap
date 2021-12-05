@@ -1,4 +1,4 @@
-<p align="center"><img src="https://codeigniter.com/assets/images/ci-logo-big.png"></p>
+<p align="center"><img src="https://cdn.worldvectorlogo.com/logos/codeigniter-1.svg" width="100"></p>
 <p align="center">Shopping Cart Solution - CodeIgniter and Bootstrap</p>
  
 ## Bootsrap Responsive Multi-Vendor, MultiLanguage Online Shop Platform

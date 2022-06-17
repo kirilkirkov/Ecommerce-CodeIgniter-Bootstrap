@@ -23,6 +23,13 @@ class SendMail
 		$this->mail->CharSet = 'UTF-8';
     }
 
+    public function clearAddresses()
+    {
+        if(method_exists($this->mail, 'clearAddresses')) {
+            $this->mail->clearAddresses();
+        }
+    }
+
     public function sendTo($toEmail, $recipientName, $subject, $msg)
     {
         $this->mail->setFrom('email@example.com', 'My Name');

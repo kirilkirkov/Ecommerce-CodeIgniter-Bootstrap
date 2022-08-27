@@ -57,8 +57,9 @@ Current versions:
 2. Set <b>database</b>, <b>username</b> and <b>password</b> in application/config/database.php
 
 ## Login to administration with
-User: admin, 
-Pass: admin
+- Administration url - /admin (eg. https://yourwebsite.com/admin)
+- Username: admin 
+- Password: admin
 
 ## Vendors support
 Login url is - vendor/login. Vendors are not supported only from "onepage" template.

@@ -1,11 +1,11 @@
 <style>
     body {
-        background-image:url('/assets/imgs/login-bg.png');
+        background-image:url('<?php echo base_url('assets/imgs/login-bg.png') ?>');
         background-position: bottom  right;
         background-repeat: no-repeat;
         background-color:#548fd0;
     }
-    .avatar {background-image:url('/assets/imgs/login-cover.png')}
+    .avatar {background-image:url('<?php echo base_url('assets/imgs/login-cover.png') ?>')}
 </style>
 <div class="container">
     <div class="login-container">

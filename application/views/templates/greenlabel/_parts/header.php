@@ -215,7 +215,7 @@
                     <ul class="shop-dropdown">
                         <li class="dropdown text-center">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
-                                <span class="badge"><?= is_array($cartItems) && isset($cartItems['array']) == 0 ? 0 : $sumOfItems ?></span>
+                                <span class="badge"><?php echo !is_array($cartItems) || (!isset($cartItems['array']) || count($cartItems['array'])) < 1 ? lang('empty') : $sumOfItems ?></span>
                                 <i class="fa fa-shopping-basket"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right dropdown-cart" role="menu">

@@ -52,17 +52,9 @@ Current versions:
 30. Advanced sorting and order products
 31. etc.
 
-## Easy installation in 3 steps
-1. Import database.sql to your mysql
-2. Set hostname, username and password in application/config/database.php
-3. Set your site domain in application/config/config.php - $config['base_url'] = 'http://yourdomain.com';
-4. Opss I forgot for last 4 step... ENJOY! ;)
-
-Little explanation about the installation - if you paste installation of project in directory something like http://localhost/SHOP, you must 
-set this directory to application/config/config.php - $config['base_url'] = 'http://localhost/SHOP'; and must remove from .htaccess file
-"RewriteBase /" line because css and js files will not be loaded! But you must know that the best way to install this platform is to set it
-in root http://localhost directory or if you want to be in other directory just set virtual host for this and point him to there.
-(example: http://shop.dev - point to localhost/shop directory). How to create virtual hosts you can read here: http://goo.gl/UvpYMG
+## Easy installation in 2 steps
+1. Import database.sql to your MySQL database
+2. Set <b>database</b>, <b>username</b> and <b>password</b> in application/config/database.php
 
 ## Login to administration with
 User: admin, 

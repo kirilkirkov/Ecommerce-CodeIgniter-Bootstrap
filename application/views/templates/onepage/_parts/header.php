@@ -41,16 +41,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="<?= LANG_URL ?>">
                         <img src="<?= base_url('template/imgs/logo.png') ?>" class="animated bounce" alt="">
                     </a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse"> 
                     <ul class="nav navbar-nav navbar-right animated fadeInRight">
-                        <li><a href="../navbar/">Forskolin 1020</a></li>
-                        <li><a href="../navbar-static-top/">Защо Работи</a></li>
-                        <li class="active"><a href="./">Сертификати</a></li>
-                        <li class="active"><a href="./">Сертификати</a></li>
+                        <li><a href="<?= LANG_URL ?>"><?= lang('home') ?></a></li>
+                        <li><a href="<?= LANG_URL . '/checkout' ?>"><?= lang('checkout') ?></a></li>
                     </ul>
                 </div>
             </div>

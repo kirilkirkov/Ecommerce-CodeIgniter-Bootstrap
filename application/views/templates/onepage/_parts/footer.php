@@ -5,16 +5,16 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3">
-                       asd
+                        
                     </div>
                     <div class="col-sm-3">
-                       asd
+                        
                     </div> 
                     <div class="col-sm-3">
-                     asd
+                      
                     </div>
                     <div class="col-sm-3">
-                       asd
+                        
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
     <div class="footer-bottom">
         <div class="bottom-inner">
             <div class="container">
-                <span>pminvoice.com © 2017</span>
+                <span><?= base_url() ?> © 2017</span>
             </div>
         </div>
     </div>

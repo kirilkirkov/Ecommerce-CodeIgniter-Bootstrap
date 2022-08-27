@@ -91,7 +91,7 @@
                                             <a class="my-basket dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                                 <?= lang('your_basket') ?>
                                                 <span class="sum-scope">
-                                                    (<span class="sumOfItems"><?= $cartItems['array'] == 0 ? lang('empty') : $sumOfItems ?></span>)
+                                                    (<span class="sumOfItems"><?php echo !is_array($cartItems) || (!isset($cartItems['array']) || count($cartItems['array'])) < 1 ? lang('empty') : $sumOfItems ?></span>)
                                                 </span>
                                                 <i class="fa fa-angle-double-down" aria-hidden="true"></i>
                                             </a>

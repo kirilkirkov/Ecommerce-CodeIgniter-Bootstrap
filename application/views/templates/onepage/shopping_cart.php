@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<div class="container" id="shopping-cart">
+<div class="container" id="shopping-cart" style="padding-top:200px; padding-bottom:200px;">
     <div class="body">
         <h1><?= lang('shopping_cart') ?></h1>
         <hr>
@@ -58,17 +58,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </tbody>
                 </table>
             </div>
-            <a href="<?= LANG_URL ?>" class="btn cloth-bg-color go-shop">
+            <a href="<?= LANG_URL ?>" class="btn btn-default go-shop">
                 <i class="fa fa-angle-left" aria-hidden="true"></i> 
                 <?= lang('back_to_shop') ?>
             </a>
-            <a class="btn cloth-bg-color go-checkout" href="<?= LANG_URL . '/checkout' ?>">
+            <a class="btn btn-default go-checkout" href="<?= LANG_URL . '/checkout' ?>">
                 <?= lang('checkout') ?> 
                 <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
             </a>
         <?php } ?>
-        <div class="bottom-30"></div>
-        <?php include 'bodyFooter.php' ?>
+        <div class="bottom-30"></div> 
     </div>
 </div>
 <?php

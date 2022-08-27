@@ -95,11 +95,13 @@ class Loader extends MY_Controller
             $template = DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR;
         }
         $path = VIEWS_DIR . $template . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'imgs' . DIRECTORY_SEPARATOR . $file;
-        $img = file_get_contents($path);
+        
+        $img = @file_get_contents($path);
         if (!$img) {
-            header('HTTP/1.1 404 Not Found');
-            return;
+            $this->output->set_status_header('404');
+            return $this->load->view('errors/error_404');
         }
+
         $image_mime = null;
         if (function_exists('mime_content_type')) {
             $image_mime = mime_content_type($path);

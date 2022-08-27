@@ -62,13 +62,14 @@ Current versions:
 - Password: admin
 
 ## Vendors support
-Login url is - vendor/login. Vendors are not supported only from "onepage" template.
-Can register new vendor from url - vendor/register. 
-Vendors must be enabled from /admin (administration) ->Settings->Multi-Vendor Support.
+- Login url is - /vendor/login (eg. https://yourwebsite.com/vendor/login)
+- Vendors are not supported only from "onepage" template.
+- Can register new vendor from url - /vendor/register.  (eg. https://yourwebsite.com/vendor/register)
+- Vendors must be enabled from administration - /admin (eg. https://yourwebsite.com/admin/settings) Settings -> Multi-Vendor Support (panel).
 
 ## Users registration
-Users registration/login is added only in greenlabel template. (easily can be added to any other template, just copy files: login.php, signup.php, user.php and change your design).
-Users can track their orders history only.
+<p>Users /registration/login (https://yourwebsite.com/registration/login) is added only in <b>greenlabel template</b>. (easily can be added to any other template, just copy files: login.php, signup.php, user.php to the new template directory (application/views/templates) and change your design).</p>
+<b>Users can track their orders history only.</b>
 
 ## Screenshots of public pages
 ![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/github/templates.png "Logo Title Text 1")

@@ -5,7 +5,7 @@
 
 Current versions:
 
-* Codeigniter 3.1.11
+* Codeigniter 3.1.13 (CodeIgniter Foundation)
 * Bootstrap 3.3.7
 
 ## Donate

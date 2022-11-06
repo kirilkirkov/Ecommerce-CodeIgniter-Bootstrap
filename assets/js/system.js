@@ -16,14 +16,12 @@ $('a.add-to-cart').click(function () {
     manageShoppingCart('add', article_id, reload);
 });
 
-//DatePicker
-if (typeof datepicker !== 'undefined') {
-    $('.input-group.date').datepicker({
-        format: "dd/mm/yy"
-    });
-}
+// DatePicker
+$('.input-group.date').datepicker({
+    format: "dd/mm/yyyy"
+});
 
-//Filters Technique
+// Filters Technique
 $('.go-category').click(function () {
     var category = $(this).data('categorie-id');
     $('[name="category"]').val(category);

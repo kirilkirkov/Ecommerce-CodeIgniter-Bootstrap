@@ -97,8 +97,7 @@ div.product-list { cursor : pointer; margin-bottom : 5px; padding-bottom : 15px;
 .info-btn { color: #fff; margin-bottom:5px;    display: block;    font-size: 13px;    padding: 5px 10px;    text-decoration: none;    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);    vertical-align: middle; border-radius:8px;}
 .info-btn:hover {color:#f2f2f2;}
 div.product-list div.inner div.img-container { margin-bottom : 10px; overflow : hidden; }
-div.product-list div.inner div.img-container a { display : block; overflow : hidden; }
-div.product-list div.inner div.img-container a img { height : 200px; }
+div.product-list div.inner div.img-container a { height: 200px; display: inline-block; background-position: center; background-size: cover; width: 100%;  transition: all 0.2s linear 0s;}
 div.product-list h2 { height: 55px; overflow: hidden; line-height: 10px; margin: 0; margin-bottom: 10px; }
 div.product-list h2 a { color : #666; font-size : 12px; }
 div.product-list h2 a:hover { text-decoration : none; }

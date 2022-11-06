@@ -54,8 +54,8 @@ header {background-color: #fff;}
 .categories {padding-top:30px; margin-bottom: 20px;}
 .products  {padding-top:30px; margin-bottom: 30px;}
 .products .product-list {margin-bottom: 30px;}
-.products .product-list .img-container {height: 300px; overflow: hidden;}
-.products .product-list img {width: 100%;}
+.products .product-list .img-container a { height: 200px; display: inline-block; background-position: center; background-size: cover; width: 100%;  transition: all 0.2s linear 0s;}
+
 .products .product-list h2 {font-size:14px; height: 50px; overflow: hidden;}
 .products .product-list h2 a {color:#787878;}
 .loader {display: none; height:1px !important;} /*hack*/

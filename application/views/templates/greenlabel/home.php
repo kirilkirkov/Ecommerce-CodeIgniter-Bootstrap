@@ -75,7 +75,15 @@ if (count($sliderProducts) > 0) {
                             <div class="item <?= $i == 0 ? 'active' : '' ?>">
                                 <div class="col-xs-12 col-sm-4">
                                     <a href="<?= LANG_URL . '/' . $product['url'] ?>">
-                                        <img src="<?= base_url('attachments/shop_images/' . $product['image']) ?>" class="img-responsive">
+                                        
+                                        <?php 
+                                            $productImage = base_url('/attachments/no-image-frontend.png');
+                                            if(is_file('attachments/shop_images/' . $product['image'])) {
+                                                $productImage = base_url('/attachments/shop_images/' . $product['image']);
+                                            }
+                                        ?>
+                                        <img src="<?= $productImage ?>" class="img-responsive">
+                                        
                                         <h1><?= $product['title'] ?></h1>
                                         <span class="price"><?= $product['price'] ?> &#8377;</span>
                                     </a>

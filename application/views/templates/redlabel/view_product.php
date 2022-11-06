@@ -5,7 +5,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">
         <div class="col-sm-4">
             <div <?= $product['folder'] != null ? 'style="margin-bottom:20px;"' : '' ?>>
-                <img src="<?= base_url('/attachments/shop_images/' . $product['image']) ?>" style="width:auto; height:auto;" data-num="0" class="other-img-preview img-responsive img-sl the-image" alt="<?= str_replace('"', "'", $product['title']) ?>">
+                <?php 
+                    $productImage = base_url('/attachments/no-image-frontend.png');
+                    if(is_file('attachments/shop_images/' . $product['image'])) {
+                        $productImage = base_url('/attachments/shop_images/' . $product['image']);
+                    }
+                ?>
+                <img src="<?= $productImage; ?>" style="width:auto; height:auto;" data-num="0" class="other-img-preview img-responsive img-sl the-image" alt="<?= str_replace('"', "'", $product['title']) ?>">
             </div>
             <?php
             if ($product['folder'] != null) {

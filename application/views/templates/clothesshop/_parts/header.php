@@ -123,7 +123,7 @@
                                                         <input type="hidden" name="brand_id" value="<?= isset($_GET['brand_id']) ? htmlspecialchars($_GET['brand_id']) : '' ?>">
                                                         <div class="form-group">
                                                             <label for="quantity_more"><?= lang('quantity_more_than') ?></label>
-                                                            <input type="text" value="<?= isset($_GET['quantity_more']) ? htmlspecialchars($_GET['quantity_more']) : '' ?>" name="quantity_more" id="quantity_more" placeholder="<?= lang('type_a_number') ?>" class="form-control">
+                                                            <input type="number" value="<?= isset($_GET['quantity_more']) ? htmlspecialchars($_GET['quantity_more']) : '' ?>" name="quantity_more" id="quantity_more" placeholder="<?= lang('type_a_number') ?>" class="form-control">
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-6">

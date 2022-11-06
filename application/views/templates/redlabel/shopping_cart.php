@@ -29,7 +29,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <td class="relative">
                                 <input type="hidden" name="id[]" value="<?= $item['id'] ?>">
                                 <input type="hidden" name="quantity[]" value="<?= $item['num_added'] ?>">
-                                <img class="product-image" src="<?= base_url('/attachments/shop_images/' . $item['image']) ?>" alt="">
+                                
+                                <?php 
+                                    $productImage = base_url('/attachments/no-image-frontend.png');
+                                    if(is_file('attachments/shop_images/' . $item['image'])) {
+                                        $productImage = base_url('/attachments/shop_images/' . $item['image']);
+                                    }
+                                ?>
+                                <img class="product-image" src="<?= $productImage ?>" alt="">
+                                
                                 <a href="<?= base_url('home/removeFromCart?delete-product=' . $item['id'] . '&back-to=shopping-cart') ?>" class="btn btn-xs btn-danger remove-product">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </a>

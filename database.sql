@@ -284,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `value_store` (
 INSERT INTO `value_store` (`id`, `thekey`, `value`) VALUES
 (1, 'sitelogo', 'NewLogo.jpg'),
 (2, 'navitext', ''),
-(3, 'footercopyright', 'Powered by ECC FZE © All right reserved. '),
+(3, 'footercopyright', 'Powered by github.com/kirilkirkov © All right reserved.'),
 (4, 'contactspage', 'Hello dear client'),
 (5, 'footerContactAddr', ''),
 (6, 'footerContactEmail', 'support@shop.dev'),

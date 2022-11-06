@@ -55,7 +55,7 @@ table.table td, table.table th {padding: 20px !important;}
 
 .product-list { margin-bottom: 20px; background-color: #fff; border:0 none; border-radius: 2px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); padding: 20px;}
 .product-list .img-container { border-radius: 4px; box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  cursor: default;   overflow: hidden;    position: relative;  text-align: center; margin-bottom: 20px;}
-.product-list .img-container img { display: inline-block;    height: 200px;     border-bottom-left-radius: 0;     max-width: 100%;  border-bottom-right-radius: 0;  position: relative;    text-align: center;    transition: all 0.2s linear 0s;}
+.product-list .img-container a { height: 200px; display: inline-block; background-position: center; background-size: cover; width: 100%;  transition: all 0.2s linear 0s;}
 .product-list .product-body h4 {font-weight: 300; font-size: 18px; text-align: center;}
 .product-list .product-body h4 a { display: inline-block;    height: 20px;    cursor: pointer;  overflow: hidden;color: #424242;    transition: all 0.4s ease 0s;}
 .product-list .product-body h4 a:hover {text-decoration: none;}

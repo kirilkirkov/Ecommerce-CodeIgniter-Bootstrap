@@ -19,8 +19,7 @@ if ($this->session->flashdata('result_delete')) {
             <div class="col-md-4 col-lg-3">
                 <div class="product-list"> 
                     <div class="img-container">
-                        <img src="<?= $image ?>" class="img-fluid" alt="No image">
-                        <a>
+                        <a href="javascript:;" style="background-image:url('<?= $image ?>')">
                             <div class="mask"></div>
                         </a>
                     </div> 

@@ -167,12 +167,18 @@ class Public_model extends CI_Model
             $this->db->where('products.brand_id = ', $big_get['brand_id']);
         }
         if ($big_get['added_after'] != '') {
-            $time = strtotime($big_get['added_after']);
-            $this->db->where('products.time > ', $time);
+            $added_after = \DateTime::createFromFormat('d/m/Y', $big_get['added_after']);
+            if($added_after) {
+                $time = $added_after->getTimestamp();
+                $this->db->where('products.time > ', $time);
+            }
         }
         if ($big_get['added_before'] != '') {
-            $time = strtotime($big_get['added_before']);
-            $this->db->where('products.time < ', $time);
+            $added_before = \DateTime::createFromFormat('d/m/Y', $big_get['added_before']);
+            if($added_before) {
+                $time = $added_before->getTimestamp();
+                $this->db->where('products.time < ', $time);
+            }
         }
         if ($big_get['price_from'] != '') {
             $this->db->where('products_translations.price >= ', $big_get['price_from']);
@@ -520,7 +526,7 @@ class Public_model extends CI_Model
 
     public function setSubscribe($array)
     {
-        $num = $this->db->where('email', $arr['email'])->count_all_results('subscribed');
+        $num = $this->db->where('email', $array['email'])->count_all_results('subscribed');
         if ($num == 0) {
             $this->db->insert('subscribed', $array);
         }

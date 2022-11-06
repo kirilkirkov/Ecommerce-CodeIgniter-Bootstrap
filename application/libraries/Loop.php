@@ -29,7 +29,13 @@ class Loop
                     <div class="item">
                         <div class="item-in">
                             <div class="left-side">
-                                <img src="<?= base_url('/attachments/shop_images/' . $cartItem['image']) ?>" alt="" />
+                                <?php 
+                                    $productImage = base_url('/attachments/no-image-frontend.png');
+                                    if(is_file('attachments/shop_images/' . $cartItem['image'])) {
+                                        $productImage = base_url('/attachments/shop_images/' . $cartItem['image']);
+                                    }
+                                ?>
+                                <img src="<?= $productImage; ?>" alt="" />
                             </div>
                             <div class="right-side">
                                 <a href="<?= LANG_URL . '/' . $cartItem['url'] ?>" class="item-info">
@@ -107,9 +113,13 @@ class Loop
                     <div class="product-list <?= $carousel == true ? 'item' : '' ?> <?= $classes ?> <?= $active ?>">
                         <div class="inner">
                             <div class="img-container">
-                                <a href="<?= $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'] ?>">
-                                    <img src="<?= base_url('/attachments/shop_images/' . $article['image']) ?>" alt="<?= str_replace('"', "'", $article['title']) ?>">
-                                </a>
+                                <?php 
+                                    $backgroundImageFile = base_url('/attachments/no-image-frontend.png');
+                                    if(is_file('attachments/shop_images/' . $article['image'])) {
+                                        $backgroundImageFile = base_url('/attachments/shop_images/' . $article['image']);
+                                    }
+                                ?>
+                                <a href="<?= $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'] ?>" style="background-image:url('<?= htmlentities($backgroundImageFile) ?>')"></a>
                             </div>
                             <h2>
                                 <a href="<?= $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'] ?>"><?= character_limiter($article['title'], 70) ?></a>

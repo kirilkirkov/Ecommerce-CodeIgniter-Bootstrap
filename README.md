@@ -15,8 +15,8 @@ Current versions:
 
 <p><b>BTC Address:</b> 3Qwge1rMAqb7ko3g6AeJraV4ms1pDu2pFd</p>
 
-![alt text](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/github/btc.png "Bitcoin address")
-
+## See also
+<p><a href="https://codecanyon.net/item/wp-invoices-pdf-electronic-invoicing-system/36891583" title="Electronic invoicing and warehouse management plugin which allows you to issue, send and download invoices as pdf file">WordPress PDF Invoices Plugin</a> - Create, Send, Manage and Download as PDF or CSV Invoices in Multiple Templates</p>
 
 ## Support of following features
 
@@ -91,3 +91,7 @@ Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgn
 
 ### API Documentation
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/API
+
+### Server Requirements
+- PHP version 5.6 or newer is recommended.
+<p>It should work on 5.3.7 as well, but we strongly advise you NOT to run such old versions of PHP, because of potential security and performance issues, as well as missing features.</p>

@@ -35,7 +35,7 @@ class Loop
                                         $productImage = base_url('/attachments/shop_images/' . $cartItem['image']);
                                     }
                                 ?>
-                                <img src="<?= $productImage; ?>" alt="" />
+                                <img src="<?= $productImage; ?>" alt="<?= htmlentities($cartItem['title']) ?>" />
                             </div>
                             <div class="right-side">
                                 <a href="<?= LANG_URL . '/' . $cartItem['url'] ?>" class="item-info">
@@ -99,7 +99,7 @@ class Loop
                     }
                     ?>
                 </ol>
-                <div class="carousel-inner">
+                <div class="carousel-inner products">
                     <?php
                 }
                 $i = 0;

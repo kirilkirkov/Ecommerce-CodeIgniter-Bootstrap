@@ -46,7 +46,13 @@ foreach ($all_categories as $categorie) {
                                             <?= character_limiter(strip_tags($article['basic_description']), 150) ?>
                                         </div>
                                     </div>
-                                    <img src="<?= base_url('attachments/shop_images/' . $article['image']) ?>" alt="" class="img-responsive">
+                                    <?php 
+                                        $productImage = base_url('/attachments/no-image-frontend.png');
+                                        if(is_file('attachments/shop_images/' . $article['image'])) {
+                                            $productImage = base_url('/attachments/shop_images/' . $article['image']);
+                                        }
+                                    ?>
+                                    <img src="<?= $productImage ?>" alt="<?= htmlentities($article['title']) ?>" class="img-responsive">
                                 </div>
                                 <?php
                                 $i++;
@@ -122,7 +128,7 @@ foreach ($all_categories as $categorie) {
             </div>
             <div class="h-line"></div>
         <?php } ?>
-        <h3 class="part-label"><?= lang('products') ?></h3>
+        <h3 class="part-label mb-4"><?= lang('products') ?></h3>
         <div class="row products">
             <?php
             if (!empty($products)) {

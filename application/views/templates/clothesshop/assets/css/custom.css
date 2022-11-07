@@ -47,12 +47,12 @@ header {background-color: #fff;}
 #small_carousel .product-list div.add-to-cart, #small_carousel .product-list .info-btn {color:#fff; display:block; padding:2px 7px; font-size:12px; margin-bottom: 5px;}
 #small_carousel .product-list .price-down {background-color: #181818; padding:2px; color:#fff;}
 #small_carousel .product-list div.add-to-cart a { color:#fff;}
-#small_carousel .carousel-indicators {bottom:auto; top:270px;}
+#small_carousel .carousel-indicators {top: 0;}
 .h-line {width:100%; height: 1px; background-color: #e5e5e5;}
 .row-of-slider {margin-bottom: 30px;}
 .site-logo {max-height:60px;}
 .categories {padding-top:30px; margin-bottom: 20px;}
-.products  {padding-top:30px; margin-bottom: 30px;}
+.products  { margin-bottom: 30px;}
 .products .product-list {margin-bottom: 30px;}
 .products .product-list .img-container a { height: 200px; display: inline-block; background-position: center; background-size: cover; width: 100%;  transition: all 0.2s linear 0s;}
 
@@ -174,6 +174,7 @@ a.left.carousel-control, a.right.carousel-control {background-image:none; top:30
 #top-user-panel { font-size:12px; padding: 5px 0;background: #ffffff; background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%); background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%);background: linear-gradient(to bottom,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );}
 #top-user-panel form {float: right;}
 #top-user-panel form .form-control {border:1px solid #e1e1e1; border-radius: 3px; height: 32px; max-width: 150px;}
+.mb-4 { margin-bottom: 4rem; }
 
 @media screen and (max-width: 767px) {
     .advanced-search-menu {width:410px;}

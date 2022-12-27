@@ -18,9 +18,9 @@ $timeNow = time();
                 <div class="form-group available-translations">
                     <b>Languages</b>
                     <?php foreach ($languages as $language) { ?>
-                        <button type="button" data-locale-change="<?= $language->abbr ?>" class="btn btn-default locale-change text-uppercase <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'active' : '' ?>">
-                            <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">
-                            <?= $language->abbr ?>
+                        <button type="button" data-locale-change="<?= htmlspecialchars($language->abbr) ?>" class="btn btn-default locale-change text-uppercase <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'active' : '' ?>">
+                            <img src="<?= base_url('attachments/lang_flags/' . htmlspecialchars($language->flag)) ?>" alt="">
+                            <?= htmlspecialchars($language->abbr) ?>
                         </button>
                     <?php } ?>
                 </div>
@@ -28,27 +28,27 @@ $timeNow = time();
                 $i = 0;
                 foreach ($languages as $language) {
                     ?>
-                    <div class="locale-container locale-container-<?= $language->abbr ?>" <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'style="display:block;"' : '' ?>>
-                        <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
+                    <div class="locale-container locale-container-<?= htmlspecialchars($language->abbr) ?>" <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'style="display:block;"' : '' ?>>
+                        <input type="hidden" name="translations[]" value="<?= htmlspecialchars($language->abbr) ?>">
                         <div class="form-group">
-                            <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>" class="language">
-                            <input type="text" name="title[]" placeholder="<?= lang('vendor_product_name') ?>" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
+                            <img src="<?= base_url('attachments/lang_flags/' . htmlspecialchars($language->flag)) ?>" alt="<?= htmlspecialchars($language->name) ?>" class="language">
+                            <input type="text" name="title[]" placeholder="<?= lang('vendor_product_name') ?>" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? htmlentities($trans_load[$language->abbr]['title'], ENT_QUOTES, 'UTF-8') : '' ?>" class="form-control">
                         </div> 
-                        <label><?= lang('vendor_product_description') ?> <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"></label>
+                        <label><?= lang('vendor_product_description') ?> <img src="<?= base_url('attachments/lang_flags/' . htmlspecialchars($language->flag)) ?>" alt="<?= htmlspecialchars($language->name) ?>"></label>
                         <div class="form-group">
-                            <textarea class="form-control" name="description[]" id="description<?= $i ?>"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
+                            <textarea class="form-control" name="description[]" id="description<?= $i ?>"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? htmlentities($trans_load[$language->abbr]['description'], ENT_QUOTES, 'UTF-8') : '' ?></textarea>
                         </div>
                         <script>
                             CKEDITOR.replace('description<?= $i ?>');
                             CKEDITOR.config.entities = false;
                         </script>
                         <div class="form-group">
-                            <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="" class="language">
-                            <input type="text" name="price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" placeholder="<?= lang('vendor_price') ?>" class="form-control">
+                            <img src="<?= base_url('attachments/lang_flags/' . htmlspecialchars($language->flag)) ?>" alt="" class="language">
+                            <input type="text" name="price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price']) ? htmlentities($trans_load[$language->abbr]['price'], ENT_QUOTES, 'UTF-8') : '' ?>" placeholder="<?= lang('vendor_price') ?>" class="form-control">
                         </div>
                         <div class="form-group">
-                            <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="" class="language">
-                            <input type="text" name="old_price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['old_price']) ? $trans_load[$language->abbr]['old_price'] : '' ?>" placeholder="<?= lang('vendor_old_price') ?>" class="form-control">
+                            <img src="<?= base_url('attachments/lang_flags/' . htmlspecialchars($language->flag)) ?>" alt="" class="language">
+                            <input type="text" name="old_price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['old_price']) ? htmlentities($trans_load[$language->abbr]['old_price'], ENT_QUOTES, 'UTF-8') : '' ?>" placeholder="<?= lang('vendor_old_price') ?>" class="form-control">
                         </div>
                     </div>
                     <?php

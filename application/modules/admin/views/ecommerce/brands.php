@@ -10,7 +10,7 @@
                 foreach ($brands as $brand) {
                     ?>
                     <li class="list-group-item">
-                        <?= $brand['name'] ?>
+                        <?= htmlspecialchars($brand['name']) ?>
 						<a href="?delete=<?= $brand['id'] ?>" class="pull-right confirm-delete">X</a>
                     </li>
                 <?php }

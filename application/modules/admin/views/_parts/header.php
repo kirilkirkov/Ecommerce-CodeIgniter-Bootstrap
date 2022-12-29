@@ -88,7 +88,7 @@
                                         <div class="input-group custom-search-form">
                                             <form method="GET" action="<?= base_url('admin/products') ?>">
                                                 <div class="input-group">
-                                                    <input class="form-control" name="search_title" value="<?= isset($_GET['search_title']) ? $_GET['search_title'] : '' ?>" type="text" placeholder="Search in products...">
+                                                    <input class="form-control" name="search_title" value="<?= isset($_GET['search_title']) ? htmlspecialchars($_GET['search_title']) : '' ?>" type="text" placeholder="Search in products...">
                                                     <span class="input-group-btn">
                                                         <button class="btn btn-default" value="" placeholder="Find product.." type="submit">
                                                             <i class="fa fa-search"></i>

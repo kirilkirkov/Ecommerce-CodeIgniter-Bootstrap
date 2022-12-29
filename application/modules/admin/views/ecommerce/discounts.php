@@ -8,7 +8,7 @@
     </a>
     <form method="POST" action="" class="pull-right">
         <label>Code discounts</label>
-        <input type="hidden" name="codeDiscounts" value="<?= $codeDiscounts ?>">
+        <input type="hidden" name="codeDiscounts" value="<?= htmlspecialchars($codeDiscounts) ?>">
         <input <?= $codeDiscounts == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="codeDiscounts" class="toggle-changer" type="checkbox">
         <button class="btn btn-default" value="" type="submit">
             Save

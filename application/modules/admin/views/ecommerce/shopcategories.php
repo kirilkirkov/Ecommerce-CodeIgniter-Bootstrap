@@ -94,10 +94,10 @@
                     </div>
                     <div class="modal-body">
                         <?php foreach ($languages as $language) { ?>
-                            <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
+                            <input type="hidden" name="translations[]" value="<?= htmlspecialchars($language->abbr) ?>">
                         <?php } foreach ($languages as $language) { ?>
                             <div class="form-group">
-                                <label>Name (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                                <label>Name (<?= htmlspecialchars($language->name) ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                                 <input type="text" name="categorie_name[]" class="form-control">
                             </div>
                         <?php } ?>

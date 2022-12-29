@@ -206,7 +206,7 @@ if (isset($_GET['settings'])) {
                         <div class="alert alert-info"><?= $this->session->flashdata('cashondelivery_visibility') ?></div>
                     <?php } ?>
                     <form method="POST" action="">
-                        <input type="hidden" name="cashondelivery_visibility" value="<?= $cashondelivery_visibility ?>">
+                        <input type="hidden" name="cashondelivery_visibility" value="<?= htmlspecialchars($cashondelivery_visibility) ?>">
                         <input <?= $cashondelivery_visibility == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="cashondelivery_visibility" class="toggle-changer" type="checkbox">
                         <button class="btn btn-default" value="" type="submit">
                             Save
@@ -224,10 +224,10 @@ if (isset($_GET['settings'])) {
                 <div class="panel-heading">Paypal sandbox mode (use for paypal account tests)</div>
                 <div class="panel-body">
                     <?php if ($this->session->flashdata('paypal_sandbox')) { ?>
-                        <div class="alert alert-info"><?= $this->session->flashdata('paypal_sandbox') ?></div>
+                        <div class="alert alert-info"><?= htmlspecialchars($this->session->flashdata('paypal_sandbox')) ?></div>
                     <?php } ?>
                     <form method="POST" action="">
-                        <input type="hidden" name="paypal_sandbox" value="<?= $paypal_sandbox ?>">
+                        <input type="hidden" name="paypal_sandbox" value="<?= htmlspecialchars($paypal_sandbox) ?>">
                         <input <?= $paypal_sandbox == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="paypal_sandbox" class="toggle-changer" type="checkbox">
                         <button class="btn btn-default" value="" type="submit">
                             Save
@@ -241,11 +241,11 @@ if (isset($_GET['settings'])) {
                 <div class="panel-heading">Paypal business email</div>
                 <div class="panel-body">
                     <?php if ($this->session->flashdata('paypal_email')) { ?>
-                        <div class="alert alert-info"><?= $this->session->flashdata('paypal_email') ?></div>
+                        <div class="alert alert-info"><?= htmlspecialchars($this->session->flashdata('paypal_email')) ?></div>
                     <?php } ?>
                     <form method="POST" action="">
                         <div class="input-group">
-                            <input class="form-control" placeholder="Leave empty for no paypal available method" name="paypal_email" value="<?= $paypal_email ?>" type="text">
+                            <input class="form-control" placeholder="Leave empty for no paypal available method" name="paypal_email" value="<?= htmlspecialchars($paypal_email) ?>" type="text">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" value="" type="submit">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

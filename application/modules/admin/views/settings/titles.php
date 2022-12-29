@@ -29,7 +29,7 @@
                 foreach ($languages as $language) {
                     ?>
                     <div class="form-group"> 
-                        <label>Title (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                        <label>Title (<?= htmlspecialchars($language->name) ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                         <input type="text" name="title[]" value="<?= @$seo_trans[$page['name']][$language->abbr]['title'] ?>" class="form-control">
                     </div>
                     <?php
@@ -37,7 +37,7 @@
                 foreach ($languages as $language) {
                     ?>
                     <div class="form-group"> 
-                        <label>Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                        <label>Description (<?= htmlspecialchars($language->name) ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                         <input type="text" name="description[]" value="<?= @$seo_trans[$page['name']][$language->abbr]['description'] ?>" class="form-control">
                     </div>
                     <?php

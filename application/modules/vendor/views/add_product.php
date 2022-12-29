@@ -104,7 +104,7 @@ $timeNow = time();
                         <label>Brand</label>
                         <select class="selectpicker" name="brand_id">
                             <?php foreach ($brands as $brand) { ?>
-                                <option <?= isset($_POST['brand_id']) && $_POST['brand_id'] == $brand['id'] ? 'selected' : '' ?> value="<?= $brand['id'] ?>"><?= $brand['name'] ?></option>
+                                <option <?= isset($_POST['brand_id']) && $_POST['brand_id'] == $brand['id'] ? 'selected' : '' ?> value="<?= $brand['id'] ?>"><?= htmlspecialchars($brand['name']) ?></option>
                             <?php } ?>
                         </select>
                     </div>

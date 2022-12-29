@@ -52,9 +52,9 @@
                     <tr>
                         <td><?= $language->id ?></td>
                         <td><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="No country flag" style="width:16px; height:11px;"></td>
-                        <td><?= strtoupper($language->abbr) ?></td>
-                        <td><?= ucfirst($language->name) ?></td>
-                        <td><?= $language->currency ?></td>
+                        <td><?= htmlspecialchars(strtoupper($language->abbr)) ?></td>
+                        <td><?= htmlspecialchars(ucfirst($language->name)) ?></td>
+                        <td><?= htmlspecialchars($language->currency) ?></td>
                         <td class="text-center">
                             <?php if (MY_DEFAULT_LANGUAGE_ABBR != $language->abbr) { ?>
                                 <a href="<?= base_url('admin/languages/?delete=' . $language->id) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Delete</a>

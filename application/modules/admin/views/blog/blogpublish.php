@@ -17,10 +17,10 @@
         ?>
         <form method="POST" enctype="multipart/form-data">
             <?php foreach ($languages as $language) { ?>
-                <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
+                <input type="hidden" name="translations[]" value="<?= htmlspecialchars($language->abbr) ?>">
             <?php } foreach ($languages as $language) { ?>
                 <div class="form-group"> 
-                    <label>Title (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                    <label>Title (<?= htmlspecialchars($language->name) ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                     <input type="text" name="title[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
                 </div>
                 <?php
@@ -28,7 +28,7 @@
             foreach ($languages as $language) {
                 ?>
                 <div class="form-group">
-                    <label for="description<?= $i ?>">Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                    <label for="description<?= $i ?>">Description (<?= htmlspecialchars($language->name) ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                     <textarea name="description[]" id="description<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
                     <script>
                         CKEDITOR.replace('description<?= $i ?>');

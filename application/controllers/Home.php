@@ -197,6 +197,16 @@ class Home extends MY_Controller
    </url>';
         }
 
+        echo '<url>
+
+        <loc>' . base_url('/kirilkirkov-ecommerce-ci-b3-hcheck') . '</loc>
+
+        <changefreq>monthly</changefreq>
+
+        <priority>0.1</priority>
+
+        </url>';
+
         foreach ($products->result() as $row) {
             echo '<url>
 
@@ -212,4 +222,8 @@ class Home extends MY_Controller
         echo '</urlset>';
     }
 
+    public function platform()
+    {
+        $this->load->view('main/platform/index');
+    }
 }

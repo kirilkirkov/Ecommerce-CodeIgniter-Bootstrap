@@ -36,7 +36,7 @@ input.form-control, textarea.form-control {border:1px solid #dadada; border-radi
 #calc-board a {margin-bottom:5px; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #b3b3b3; background: #ffffff;  background: -moz-linear-gradient(top,  #ffffff 0%, #e6e6e6 100%);  background: -webkit-linear-gradient(top,  #ffffff 0%,#e6e6e6 100%); background: linear-gradient(to bottom,  #ffffff 0%,#e6e6e6 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e6e6e6',GradientType=0 ); color:#333;}
 .other-img {display: inline-block; position:relative;}
 .other-img a {position:absolute; right:0; top:0; background-color: #fff; color:red;}
-.selected-template {height: 50px; position: absolute; left:25px; top:10px;}
+.selected-template {height: 50px; position: absolute; left:25px; top:40px;}
 .header-img {float: left;height: 40px;margin-right: 10px;margin-top: -10px;}
 .divLangs { padding:10px; margin-bottom: 10px;}
 #new-style {border-radius: 0;}

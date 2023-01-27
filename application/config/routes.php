@@ -120,6 +120,7 @@ $route['logout'] = "Users/logout";
 $route['(\w{2})/logout'] = "Users/logout";
 
 $route['sitemap.xml'] = "home/sitemap";
+$route['kirilkirkov-ecommerce-ci-bs3-plafrom'] = "home/platform";
 
 // Confirm link
 $route['confirm/(:any)'] = "home/confirmLink/$1";

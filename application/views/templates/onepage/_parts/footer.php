@@ -24,10 +24,14 @@
         <div class="bottom-inner">
             <div class="container">
                 <span><?= base_url() ?> © 2017</span>
+                <br>
+                <!-- Please do not remove this referention -->
+                Powered by <a href="https://github.com/kirilkirkov">Kiril Kirkov</a>
             </div>
         </div>
     </div>
-</div> 
+</div>
+<a style="display:none !important;" id="kk-refer-gh" href="https://github.com/kirilkirkov">Kiril Kirkov</a>
 <?php if ($this->session->flashdata('emailAdded')) { ?>
 <script>
     $(document).ready(function () {

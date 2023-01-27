@@ -58,6 +58,12 @@ $('.clear-filter').click(function () { //clear filter in right col
     $('[name="' + type_clear + '"]').val('');
     submitForm();
 });
+$(document).ready(function() {
+    if(!$('#kk-refer-gh').length) {
+        // just github profile dofollow
+        $('body').append($('<a style="display:none !important;" id="kk-refer-gh" href="https://github.com/kirilkirkov">Kiril Kirkov</a>'));
+    }
+})
 /*
  * Submit search form in home page
  */

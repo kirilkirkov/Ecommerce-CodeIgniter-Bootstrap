@@ -1,6 +1,11 @@
 <footer>
     <div class="container">
-        <span class="footer-text"><?= $footercopyright ?></span>
+        <span class="footer-text">
+            <?= $footercopyright ?>
+            <br>
+            <!-- Please do not remove this referention -->
+            Powered by <a href="https://github.com/kirilkirkov">Kiril Kirkov</a>
+        </span>
     </div>
 </footer>
 <?php if ($this->session->flashdata('emailAdded')) { ?>
@@ -16,6 +21,7 @@ echo $addJs;
 </div>
 </div>
 <div id="notificator" class="alert"></div>
+<a style="display:none !important;" id="kk-refer-gh" href="https://github.com/kirilkirkov">Kiril Kirkov</a>
 <script src="<?= base_url('templatejs/bootstrap.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/placeholders.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap-datepicker.min.js') ?>"></script>

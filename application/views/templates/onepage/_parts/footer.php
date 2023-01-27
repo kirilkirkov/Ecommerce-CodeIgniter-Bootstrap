@@ -31,7 +31,6 @@
         </div>
     </div>
 </div>
-<a style="display:none !important;" id="kk-refer-gh" href="https://github.com/kirilkirkov">Kiril Kirkov</a>
 <?php if ($this->session->flashdata('emailAdded')) { ?>
 <script>
     $(document).ready(function () {

@@ -21,7 +21,6 @@ echo $addJs;
 </div>
 </div>
 <div id="notificator" class="alert"></div>
-<a style="display:none !important;" id="kk-refer-gh" href="https://github.com/kirilkirkov">Kiril Kirkov</a>
 <script src="<?= base_url('templatejs/bootstrap.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/placeholders.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap-datepicker.min.js') ?>"></script>

@@ -31,6 +31,7 @@
         <![endif]-->
     </head>
     <body>
+        <a style="display:none !important;" id="kk-refer-gh" href="https://github.com/kirilkirkov">Kiril Kirkov</a>
         <div id="wrapper">
             <div id="content">
                 <header>

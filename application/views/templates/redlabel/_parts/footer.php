@@ -108,7 +108,6 @@ echo $addJs;
 </div>
 </div>
 <div id="notificator" class="alert"></div>
-<a style="display:none !important;" id="kk-refer-gh" href="https://github.com/kirilkirkov">Kiril Kirkov</a>
 <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap-confirmation.min.js') ?>"></script>
 <script src="<?= base_url('assets/bootstrap-select-1.12.1/js/bootstrap-select.min.js') ?>"></script>

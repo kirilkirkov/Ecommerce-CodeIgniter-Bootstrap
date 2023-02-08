@@ -7,7 +7,7 @@
         <meta name="description" content="<?= $description ?>">
         <title><?= $title ?></title>
         <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="<?= base_url('assets/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
         <link rel="stylesheet" href="<?= base_url('assets/bootstrap-select-1.12.1/bootstrap-select.min.css') ?>">
         <link href="<?= base_url('assets/css/custom-admin.css') ?>" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>

@@ -19,6 +19,7 @@ class ADMIN_Controller extends MX_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->languages(array('site', 'admin'));
         $this->load->library(array('form_validation'));
         $this->history = $this->config->item('admin_history');
         $this->activePages = $vars['activePages'] = $this->getActivePages();

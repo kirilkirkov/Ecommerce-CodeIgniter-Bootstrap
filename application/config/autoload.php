@@ -65,7 +65,8 @@ $autoload['libraries'] = array(
     'loop',
     'ShoppingCart',
     'Language',
-    'SendMail'
+    'SendMail',
+    'form_validation'
 );
 
 /*

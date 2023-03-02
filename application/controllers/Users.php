@@ -19,7 +19,10 @@ class Users extends MY_Controller
     {
         show_404();
     }
-
+    public function sayhello()
+    {
+        
+    }
     public function login()
     {
         if (isset($_POST['login'])) {

@@ -97,6 +97,8 @@ $autoload['helper'] = array(
     'url',
     'language',
     'text',
+    'html',
+    'form',
     'cookie',
     'getTextualPages',
     'mb_ucfirst',

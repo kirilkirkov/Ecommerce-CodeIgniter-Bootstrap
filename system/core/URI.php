@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CodeIgniter
  *
@@ -50,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link		https://codeigniter.com/userguide3/libraries/uri.html
  */
 class CI_URI {
-
+	public $config;
 	/**
 	 * List of cached URI segments
 	 *

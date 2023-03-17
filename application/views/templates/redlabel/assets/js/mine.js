@@ -8,7 +8,12 @@ $('[data-toggle=confirmation]').confirmation({
 
 //Tootip activator
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
+    $('.search-field-header').on("keydown", function(event) {
+        if(event.which == 13) {
+            $('#bigger-search').submit();
+        }
+    });
 });
 
 //xs hidden categories

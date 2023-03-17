@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-sm-6 col-md-5 col-lg-5">
                                 <div class="input-group" id="adv-search">
-                                    <input type="text" value="<?= isset($_GET['search_in_title']) ? htmlspecialchars($_GET['search_in_title']) : '' ?>" id="search_in_title" class="form-control" placeholder="<?= lang('search_by_keyword_title') ?>" />
+                                    <input type="text" value="<?= isset($_GET['search_in_title']) ? htmlspecialchars($_GET['search_in_title']) : '' ?>" id="search_in_title" class="form-control search-field-header" placeholder="<?= lang('search_by_keyword_title') ?>" />
                                     <div class="input-group-btn">
                                         <div class="btn-group" role="group">
                                             <div class="dropdown dropdown-lg">

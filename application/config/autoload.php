@@ -92,6 +92,7 @@ $autoload['drivers'] = array();
   |	$autoload['helper'] = array('url', 'file');
  */
 $autoload['helper'] = array(
+    'overwrite_functions',
     'url',
     'language',
     'text',

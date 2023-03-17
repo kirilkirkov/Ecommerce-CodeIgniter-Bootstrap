@@ -12,7 +12,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Calculator</h4>
+                <h4 class="modal-title" id="myModalLabel"><?= lang('calculator') ?></h4>
             </div>
             <div class="modal-body" id="calculator">
                 <div class="hero-unit" id="calculator-wrapper">
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="well">
-                    <legend>History</legend>
+                    <legend><?= lang('history') ?></legend>
                     <div id="calc-panel">
                         <div id="calc-history">
                             <ol id="calc-history-list"></ol>
@@ -81,7 +81,7 @@
                 <hr>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?= lang('close') ?></button>
             </div>
         </div>
     </div>

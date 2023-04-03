@@ -303,6 +303,7 @@ footer .footer-icon li { display : block; height : 40px; width : 100%; }
     #footer .f-col {height:220px;}
     #top-user-panel form {width: 100%; margin-top: 5px;}
     #top-user-panel form .form-control {max-width: 100%; width: 100%;}
+    .social-media-product-share {margin-bottom: 20px;}
 }
 
 @media (max-width: 480px) { 

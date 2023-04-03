@@ -211,6 +211,7 @@ footer .footer-bottom { padding-top: 20px; padding-bottom: 20px; border-bottom: 
     .multi-item-carousel .item .col-xs-12:nth-child(2), .multi-item-carousel .item .col-xs-12:nth-child(3) {display: none;}
     .multi-item-carousel .item a .img-responsive { margin: 0 auto;}
     #nav-categories, #show-xs-nav .hidde-sp { display : none; }
+    .social-media-product-share {margin-bottom: 20px;}
 }
 
 @media (max-width: 480px) { 

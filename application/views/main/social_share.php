@@ -1,11 +1,11 @@
 <?php if($this->config->item('show_social_share_btns') === true) { ?>
-<div>
+<div class="social-media-product-share">
     <div><?= lang('social_share') ?></div>
     <?php 
         $social_width = '50';
         $social_height = '50';
     ?>
-    <a href="http://www.facebook.com/sharer/sharer.php?u=<?= current_url() ?>" target="_blank">
+    <a href="https://facebook.com/sharer/sharer.php?u=<?= current_url() ?>" target="_blank">
         <?php
             include rtrim(APPPATH, '/') . '/views/main/svg/facebook.php';
         ?>

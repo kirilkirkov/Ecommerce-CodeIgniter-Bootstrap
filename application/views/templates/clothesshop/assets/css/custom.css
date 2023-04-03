@@ -191,6 +191,7 @@ a.left.carousel-control, a.right.carousel-control {background-image:none; top:30
     #navbar {padding-left:15px;}
     .bag-info .dropdown-menu-right {left:10px; right:auto;}
     .categories {display:none;}
+    .social-media-product-share {margin-bottom: 20px;}
 }
 
 @media (max-width: 480px) {

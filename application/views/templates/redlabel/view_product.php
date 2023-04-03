@@ -40,6 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php
             }
             ?>
+            <?php include rtrim(APPPATH, '/') . '/views/main/social_share.php'; ?>
         </div>        
 
         <div class="col-sm-8">

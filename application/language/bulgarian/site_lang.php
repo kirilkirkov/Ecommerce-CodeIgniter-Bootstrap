@@ -243,3 +243,4 @@ $lang['usr_order_phone'] = 'Телефон';
 $lang['user_order_products'] = 'Продукти';
 $lang['user_order_quantity'] = 'Количество:';
 $lang['usr_no_orders'] = 'Няма направени покупки до момента';
+$lang['social_share'] = 'Сподели';

@@ -240,3 +240,4 @@ $lang['usr_order_phone'] = 'Téléphone';
 $lang['user_order_products'] = 'Produits';
 $lang['user_order_quantity'] = 'Quantité:';
 $lang['usr_no_orders'] = 'Aucun achat effectué';
+$lang['social_share'] = 'Partager';

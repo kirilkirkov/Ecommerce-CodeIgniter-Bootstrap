@@ -182,6 +182,7 @@ $route['admin/editshopcategorie'] = "admin/ecommerce/ShopCategories/editShopCate
 $route['admin/orders'] = "admin/ecommerce/orders";
 $route['admin/orders/(:num)'] = "admin/ecommerce/orders/index/$1";
 $route['admin/changeOrdersOrderStatus'] = "admin/ecommerce/orders/changeOrdersOrderStatus";
+$route['admin/orders/delete/(:num)'] = "admin/ecommerce/orders/deleteOrder/$1";
 $route['admin/brands'] = "admin/ecommerce/brands";
 $route['admin/changePosition'] = "admin/ecommerce/ShopCategories/changePosition";
 $route['admin/discounts'] = "admin/ecommerce/discounts";

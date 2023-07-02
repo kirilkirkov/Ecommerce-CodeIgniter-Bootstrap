@@ -79,6 +79,17 @@ class Orders extends ADMIN_Controller
         }
     }
 
+    public function deleteOrder($id)
+    {
+        $id = (int) $id;
+        if($id == 0) {
+            redirect('admin/orders');
+        }
+        
+        $this->Orders_model->deleteOrder($id);
+        redirect('admin/orders');
+    }
+
     public function changeOrdersOrderStatus()
     {
         $this->login_check();

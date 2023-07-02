@@ -78,9 +78,13 @@ if (!isset($_GET['settings'])) {
                                 <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeOrdersOrderStatus(<?= $tr['id'] ?>, 2)" class="btn btn-warning btn-xs">Rejected</a></div>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0);" class="btn btn-default more-info" data-toggle="modal" data-target="#modalPreviewMoreInfo" style="margin-top:10%;" data-more-info="<?= $tr['order_id'] ?>">
+                            <a href="javascript:void(0);" class="btn btn-default more-info" data-toggle="modal" data-target="#modalPreviewMoreInfo" style="margin-top:10%;" data-more-info="<?= $tr['order_id'] ?>">
                                     More Info 
                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                </a>
+                                <a href="<?= base_url('/admin/orders/delete/'. $tr['id']) ?>" onclick="return confirm('Are you sure want to delete this order?')" class="btn btn-danger" style="margin-top:10%;">
+                                    Delete 
+                                    <i class="fa fa-remove" aria-hidden="true"></i>
                                 </a>
                             </td>
                             <td class="hidden" id="order-id-<?= $tr['order_id'] ?>">

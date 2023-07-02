@@ -115,4 +115,17 @@ class Orders_model extends CI_Model
         return $result->row_array();
     }
 
+    public function deleteOrder($id)
+    {
+        $id = (int) $id;
+        $this->db->trans_begin();
+        $this->db->where('id', $id)->delete('orders');
+        $this->db->where('for_id', $id)->delete('orders_clients');
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            show_error(lang('database_error'));
+        } else {
+            $this->db->trans_commit();
+        }
+    }
 }

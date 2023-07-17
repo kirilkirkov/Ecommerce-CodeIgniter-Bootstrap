@@ -215,6 +215,8 @@ $route['admin/logout'] = "admin/home/home/logout";
 $route['admin/changePass'] = "admin/home/home/changePass";
 $route['admin/uploadOthersImages'] = "admin/ecommerce/publish/do_upload_others_images";
 $route['admin/loadOthersImages'] = "admin/ecommerce/publish/loadOthersImages";
+// VENDORS
+$route['admin/listvendors'] = "admin/vendors/listvendors";
 
 /*
   | -------------------------------------------------------------------------

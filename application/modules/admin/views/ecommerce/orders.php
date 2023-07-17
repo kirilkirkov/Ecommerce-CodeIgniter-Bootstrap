@@ -161,7 +161,7 @@ if (!isset($_GET['settings'])) {
                                                             </a>
                                                             <div class="">
                                                                 <b>Vendor:</b>
-                                                                <a href=""><?= $product['product_info']['vendor_name'] ?></a>
+                                                                <a href="<?= base_url('admin/listvendors?id=' . $product['product_info']['vendor_id']) ?>"><?= isset($product['product_info']['vendor_name']) ? $product['product_info']['vendor_name'] : '-Vendor name is missing-' ?></a>
                                                             </div>
                                                             <div class="clearfix"></div>
                                                         </div>

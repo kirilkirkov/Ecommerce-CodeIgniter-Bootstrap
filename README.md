@@ -99,5 +99,5 @@ Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgn
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/API
 
 ### Server Requirements
-- PHP version 5.6 or newer is recommended.
+- PHP version 5.6 or newer (up to 8.1) is recommended.
 <p>It should work on 5.3.7 as well, but we strongly advise you NOT to run such old versions of PHP, because of potential security and performance issues, as well as missing features.</p>

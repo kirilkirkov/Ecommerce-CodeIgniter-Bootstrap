@@ -97,7 +97,7 @@ class Languages extends ADMIN_Controller
             }
             $php_value = str_replace("'", '&#39;', $_POST['php_values'][$i]);
 			$php_value = str_replace('"', '&#34;', $php_value);
-            $phpFileInclude .= '$lang[\'' . htmlentities($_POST['php_keys'][$i]) . '\'] = \'' . $php_value . '\';' . "\n";
+            $phpFileInclude .= '$lang[\'' . htmlentities(addslashes($_POST['php_keys'][$i])) . '\'] = \'' . $php_value . '\';' . "\n";
             $prevFile = $phpFile;
             $i++;
         }
@@ -113,7 +113,7 @@ class Languages extends ADMIN_Controller
                 savefile($prevFile, $jsFileInclude);
                 $jsFileInclude = "var lang = { \n";
             }
-            $jsFileInclude .= htmlentities($_POST['js_keys'][$i]) . ':' . '"' . htmlentities($_POST['js_values'][$i]) . '",' . "\n";
+            $jsFileInclude .= htmlentities(addslashes($_POST['js_keys'][$i])) . ':' . '"' . htmlentities(addslashes($_POST['js_values'][$i])) . '",' . "\n";
             $prevFile = $jsFile;
             $i++;
         }
@@ -123,12 +123,33 @@ class Languages extends ADMIN_Controller
 
     private function getLangFolderForEdit()
     {
+        if(!ctype_alnum($_GET['editLang'])) {
+            redirect('admin/languages');
+        }
+
+        $dir = 'application' . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . '' . $_GET['editLang'] . DIRECTORY_SEPARATOR;
+        if(!is_dir(rtrim($dir, DIRECTORY_SEPARATOR))) {
+            redirect('admin/languages');
+        }
+
         $langFiles = array();
-        $files = rreadDir('application' . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . '' . $_GET['editLang'] . DIRECTORY_SEPARATOR);
+        $files = rreadDir($dir);
         $arrPhpFiles = $arrJsFiles = array();
         foreach ($files as $ext => $filesLang) {
             foreach ($filesLang as $fileLang) {
                 if ($ext == 'php') {
+
+                    $file_content = file_get_contents($fileLang);
+                    $tokens = token_get_all($file_content);
+                    foreach ($tokens as $tokenK => $token) {
+                        if ($token[0] == T_VARIABLE) {
+                            if($token[1] != '$lang') {
+                                throw new \Exception('Invalid variable name in file ' . $fileLang . ' on line ' . $token[2] . '');
+                            }
+                        }
+                        unset($tokens[$tokenK]);
+                    }
+
                     require $fileLang;
                     if (isset($lang)) {
                         $arrPhpFiles[$fileLang] = $lang;

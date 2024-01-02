@@ -151,13 +151,16 @@ class Publish extends ADMIN_Controller
     /*
      * called from ajax
      */
-
-    public function removeSecondaryImage()
-    {
+    public function removeSecondaryImage() {
         if ($this->input->is_ajax_request()) {
-            $img = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . '' . $_POST['folder'] . DIRECTORY_SEPARATOR . $_POST['image'];
-            unlink($img);
+            $basePath = realpath('.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR);
+    
+            $folder = realpath($basePath . DIRECTORY_SEPARATOR . $_POST['folder']);
+            $image = $_POST['image'];
+    
+            if ($folder !== false && strpos($folder, $basePath) === 0 && is_file($folder . DIRECTORY_SEPARATOR . $image)) {
+                unlink($folder . DIRECTORY_SEPARATOR . $image);
+            }
         }
     }
-
 }

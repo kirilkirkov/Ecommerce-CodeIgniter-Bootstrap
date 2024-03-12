@@ -573,6 +573,6 @@ $config['template'] = 'redlabel';
 
 /**
  * Add allowed FTP hosts for elFinder plugin into the administration
- * (prevent of SSRF attacks)
+ * (prevent of SSRF attacks, do not allow to connect to the internal network, etc.)
  */
 $config['elfinder_ftp_allowed_hosts'] = array();

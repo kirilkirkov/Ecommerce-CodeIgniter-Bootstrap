@@ -255,6 +255,12 @@ class elFinderVolumeFTP extends elFinderVolumeDriver {
 	 * @author Dmitry (dio) Levashov
 	 **/
 	protected function connect() {
+		define('BASEPATH', dirname(__DIR__).'/../../');
+		require dirname(__DIR__).'/../../application/config/config.php';
+		if(!isset($config['elfinder_ftp_allowed_hosts']) || !in_array($this->options['host'], $config['elfinder_ftp_allowed_hosts'])) {
+			return $this->setError('Host not allowed. Please update the configuration file. (elfinder_ftp_allowed_hosts)');
+		}
+
 		$withSSL = empty($this->options['ssl'])? '' : ' with SSL';
 		if ($withSSL) {
 			if (!function_exists('ftp_ssl_connect') || !($this->connect = ftp_ssl_connect($this->options['host'], $this->options['port'], $this->options['timeout']))) {

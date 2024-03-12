@@ -570,3 +570,9 @@ $config['proxy_ips'] = '';
   |
  */
 $config['template'] = 'redlabel';
+
+/**
+ * Add allowed FTP hosts for elFinder plugin into the administration
+ * (prevent of SSRF attacks)
+ */
+$config['elfinder_ftp_allowed_hosts'] = array();

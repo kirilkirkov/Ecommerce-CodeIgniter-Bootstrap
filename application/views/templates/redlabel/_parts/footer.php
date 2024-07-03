@@ -19,7 +19,7 @@
                     <?php if (!empty($footerCategories)) { ?>
                         <ul>
                             <?php foreach ($footerCategories as $key => $categorie) { ?>
-                                <li><a href="javascript:void(0);" data-categorie-id="<?= $key ?>" class="go-category"><?= $categorie ?></a></li>
+                                <li><a href="javascript:void(0);" data-categorie-id="<?= $key ?>" class="go-category"><?= htmlspecialchars($categorie, ENT_QUOTES, 'UTF-8') ?></a></li>
                             <?php } ?>
                         </ul>
                     <?php } else { ?>

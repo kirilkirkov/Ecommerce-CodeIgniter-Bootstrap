@@ -104,7 +104,7 @@ if (count($sliderProducts) > 0) {
                                         <i class="fa fa-circle-o" aria-hidden="true"></i>
                                     <?php } ?>
                                     <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category left-side <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'selected' : '' ?>">
-                                        <?= $page['name'] ?>
+                                        <?= htmlspecialchars($page['name'], ENT_QUOTES, 'UTF-8') ?>
                                     </a>
                                     <?php
                                     if ($children === true) {

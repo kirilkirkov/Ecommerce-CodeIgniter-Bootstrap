@@ -19,7 +19,7 @@
                 <?php foreach ($vendors->result() as $vendor) { ?>
                     <tr>
                         <td><?= $vendor->id ?></td>
-                        <td><?= isset($vendor->name) ? $vendor->name : 'Vendor name is empty' ?></td>
+                        <td><?= isset($vendor->name) ? htmlspecialchars($vendor->name, ENT_QUOTES, 'UTF-8') : 'Vendor name is empty' ?></td>
                         <td><?= $vendor->email ?></td>
                         <td>
                             <?php
@@ -31,7 +31,7 @@
                              } else {
                                 $countSales = 0;
                                 foreach($orders as $order) {
-                                    $product = unserialize($order['products']);
+                                    $product = unserialize($order['products'], ["allowed_classes" => false]);
                                     foreach ($product as $key => $value) {
                                         $countSales += (int)$value;
                                     }

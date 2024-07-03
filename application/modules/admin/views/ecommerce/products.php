@@ -34,7 +34,7 @@
                         <div class="col-sm-4">
                             <label>Title:</label>
                             <div class="input-group">
-                                <input class="form-control" placeholder="Product Title" type="text" value="<?= isset($_GET['search_title']) ? $_GET['search_title'] : '' ?>" name="search_title">
+                                <input class="form-control" placeholder="Product Title" type="text" value="<?= isset($_GET['search_title']) ? htmlspecialchars($_GET['search_title'], ENT_QUOTES, 'UTF-8') : '' ?>" name="search_title">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="submit" value="">
                                         <i class="fa fa-search"></i>

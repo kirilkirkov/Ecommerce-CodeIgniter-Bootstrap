@@ -51,13 +51,13 @@
                     ?>
                     <tr>
                         <td><?= $key_cat ?></td>
-                        <td><?= $catName ?></td>
+                        <td><?= htmlspecialchars($catName, ENT_QUOTES, 'UTF-8') ?></td>
                         <td> 
                             <a href="javascript:void(0);" class="editCategorieSub" data-sub-for-id="<?= $key_cat ?>">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
                             <?php foreach ($shop_categorie['sub'] as $sub) { ?>
-                                <div> <?= $sub ?> </div>
+                                <div> <?= htmlspecialchars($sub, ENT_QUOTES, 'UTF-8') ?> </div>
                             <?php } ?>
                         </td>
                         <td>
@@ -109,7 +109,7 @@
                                 foreach ($shop_categories as $key_cat => $shop_categorie) {
                                     $aa = '';
                                     foreach ($shop_categorie['info'] as $ff) {
-                                        $aa .= '[' . $ff['abbr'] . ']' . $ff['name'] . '/';
+                                        $aa .= '[' . $ff['abbr'] . ']' . htmlspecialchars($ff['name'], ENT_QUOTES, 'UTF-8') . '/';
                                     }
                                     ?>
                                     <option value="<?= $key_cat ?>"><?= $aa ?></option>
@@ -144,7 +144,7 @@
             foreach ($shop_categories as $key_cat => $shop_categorie) {
                 $aa = '';
                 foreach ($shop_categorie['info'] as $ff) {
-                    $aa .= '[' . $ff['abbr'] . ']' . $ff['name'] . '/';
+                    $aa .= '[' . $ff['abbr'] . ']' . htmlspecialchars($ff['name'], ENT_QUOTES, 'UTF-8') . '/';
                 }
                 ?>
                 <option value="<?= $key_cat ?>"><?= $aa ?></option>

@@ -36,7 +36,7 @@ foreach ($all_categories as $categorie) {
                         ?>
                         <li>
                             <a href="javascript:void(0);" data-categorie-id="<?= $categorie['id'] ?>" class="go-category left-side <?= isset($_GET['category']) && $_GET['category'] == $categorie['id'] ? 'selected' : '' ?>">
-                                <span><?= $categorie['name'] ?></span>
+                                <span><?= htmlspecialchars($categorie['name'], ENT_QUOTES, 'UTF-8') ?></span>
                                 <i class="fa fa-angle-double-down" aria-hidden="true"></i>
                             </a>
                         </li>

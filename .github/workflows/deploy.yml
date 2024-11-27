@@ -24,7 +24,7 @@ jobs:
       env:
         SERVER_IP: "103.215.229.63"
       run: |
-        ssh -i ~/.ssh/id_rsa dev@$SERVER_IP << EOF
+        ssh -i ~dev/.ssh/id_rsa dev@$SERVER_IP << EOF
           cd $HOME_DIR
           if [ ! -d "$HOME_DIR/Ecommerce-CodeIgniter-Bootstrap" ]; then
             git clone $REPO_URL
@@ -39,7 +39,7 @@ jobs:
       env:
         SERVER_IP: "103.160.63.157"
       run: |
-        ssh -i ~/.ssh/id_rsa dev@$SERVER_IP << EOF
+        ssh -i ~dev/.ssh/id_rsa dev@$SERVER_IP << EOF
           cd $HOME_DIR
           if [ ! -d "$HOME_DIR/Ecommerce-CodeIgniter-Bootstrap" ]; then
             git clone $REPO_URL
@@ -54,7 +54,7 @@ jobs:
       env:
         SERVER_IP: "206.237.97.37"
       run: |
-        ssh -i ~/.ssh/id_rsa dev@$SERVER_IP << EOF
+        ssh -i ~dev/.ssh/id_rsa dev@$SERVER_IP << EOF
           cd $HOME_DIR
           if [ ! -d "$HOME_DIR/Ecommerce-CodeIgniter-Bootstrap" ]; then
             git clone $REPO_URL

@@ -1,0 +1,65 @@
+name: Deploy to Servers
+
+on:
+  push:
+    branches:
+      - main      # Trigger auto-deploy for staging and development on "main" branch
+      - develop   # Trigger auto-deploy for development on "develop" branch
+  workflow_dispatch: # Allow manual trigger for production deployment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      HOME_DIR: /home/dev
+      REPO_URL: https://github.com/ryannovyansah/Ecommerce-CodeIgniter-Bootstrap.git
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Deploy to Development Server
+      if: contains(github.ref, 'develop') || github.ref == 'refs/heads/main'
+      env:
+        SERVER_IP: "103.215.229.63"
+      run: |
+        ssh -i ~/.ssh/id_rsa dev@$SERVER_IP << EOF
+          cd $HOME_DIR
+          if [ ! -d "$HOME_DIR/Ecommerce-CodeIgniter-Bootstrap" ]; then
+            git clone $REPO_URL
+          else
+            cd Ecommerce-CodeIgniter-Bootstrap
+            git pull origin $(echo ${GITHUB_REF#refs/heads/})
+          fi
+        EOF
+
+    - name: Deploy to Staging Server
+      if: github.ref == 'refs/heads/main'
+      env:
+        SERVER_IP: "103.160.63.157"
+      run: |
+        ssh -i ~/.ssh/id_rsa dev@$SERVER_IP << EOF
+          cd $HOME_DIR
+          if [ ! -d "$HOME_DIR/Ecommerce-CodeIgniter-Bootstrap" ]; then
+            git clone $REPO_URL
+          else
+            cd Ecommerce-CodeIgniter-Bootstrap
+            git pull origin $(echo ${GITHUB_REF#refs/heads/})
+          fi
+        EOF
+
+    - name: Deploy to Production Server
+      if: github.event_name == 'workflow_dispatch'
+      env:
+        SERVER_IP: "206.237.97.37"
+      run: |
+        ssh -i ~/.ssh/id_rsa dev@$SERVER_IP << EOF
+          cd $HOME_DIR
+          if [ ! -d "$HOME_DIR/Ecommerce-CodeIgniter-Bootstrap" ]; then
+            git clone $REPO_URL
+          else
+            cd Ecommerce-CodeIgniter-Bootstrap
+            git pull origin main
+          fi
+        EOF

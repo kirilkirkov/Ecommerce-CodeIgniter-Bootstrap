@@ -3,9 +3,8 @@ name: Deploy to Servers
 on:
   push:
     branches:
-      - main      # Trigger auto-deploy for staging and development on "main" branch
-      - develop   # Trigger auto-deploy for development on "develop" branch
-  workflow_dispatch: # Allow manual trigger for production deployment
+      - develop  # Auto-deploy for staging and development servers on 'develop' branch
+  workflow_dispatch: # Manual trigger for production deployment
 
 jobs:
   deploy:
@@ -19,15 +18,20 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
-    - name: Setup SSH
+    # Setup SSH and Deploy to Development Server
+    - name: Setup SSH for Development Server
+      if: github.ref == 'refs/heads/develop'
+      env:
+        SERVER_IP: ${{ secrets.DEV_SERVER_IP }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.DEV_SERVER_IP }} ${{ secrets.STAGING_SERVER_IP }} ${{ secrets.PROD_SERVER_IP }} >> ~/.ssh/known_hosts
+        ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
 
     - name: Deploy to Development Server
-      if: contains(github.ref, 'develop') || github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/develop'
       env:
         SERVER_IP: ${{ secrets.DEV_SERVER_IP }}
       run: |
@@ -37,12 +41,24 @@ jobs:
             git clone $REPO_URL
           else
             cd Ecommerce-CodeIgniter-Bootstrap
-            git pull origin $(echo ${GITHUB_REF#refs/heads/})
+            git pull origin develop
           fi
         EOF
 
+    # Setup SSH and Deploy to Staging Server
+    - name: Setup SSH for Staging Server
+      if: github.ref == 'refs/heads/develop'
+      env:
+        SERVER_IP: ${{ secrets.STAGING_SERVER_IP }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
+
     - name: Deploy to Staging Server
-      if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/develop'
       env:
         SERVER_IP: ${{ secrets.STAGING_SERVER_IP }}
       run: |
@@ -52,11 +68,23 @@ jobs:
             git clone $REPO_URL
           else
             cd Ecommerce-CodeIgniter-Bootstrap
-            git pull origin $(echo ${GITHUB_REF#refs/heads/})
+            git pull origin develop
           fi
         EOF
 
-    - name: Deploy to Production Server (Manual Trigger Only)
+    # Setup SSH and Deploy to Production Server (Manual Trigger Only)
+    - name: Setup SSH for Production Server
+      if: github.event_name == 'workflow_dispatch'
+      env:
+        SERVER_IP: ${{ secrets.PROD_SERVER_IP }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
+
+    - name: Deploy to Production Server
       if: github.event_name == 'workflow_dispatch'
       env:
         SERVER_IP: ${{ secrets.PROD_SERVER_IP }}

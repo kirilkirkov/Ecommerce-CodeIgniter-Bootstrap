@@ -26,7 +26,7 @@ class Vendor extends MY_Controller
         $head = array();
         $head['title'] = $vendorInfo['name'];
         $head['description'] = lang('vendor_view') . $vendorInfo['name'];
-        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
         $head['vendor_url'] = LANG_URL . '/vendor/view/' . $vendor;
         $all_categories = $this->Public_model->getShopCategories();
 

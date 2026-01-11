@@ -20,7 +20,7 @@ class Checkout extends MY_Controller
         $arrSeo = $this->Public_model->getSeo('checkout');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
-        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
 
         if (isset($_POST['payment_type'])) {
             $errors = $this->userInfoValidate($_POST);
@@ -143,7 +143,7 @@ class Checkout extends MY_Controller
             $arrSeo = $this->Public_model->getSeo('checkout');
             $head['title'] = @$arrSeo['title'];
             $head['description'] = @$arrSeo['description'];
-            $head['keywords'] = str_replace(" ", ",", $head['title']);
+            $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
             $this->render('checkout_parts/order_error', $head, $data);
         } else {
             redirect(LANG_URL . '/checkout');
@@ -157,7 +157,7 @@ class Checkout extends MY_Controller
         $arrSeo = $this->Public_model->getSeo('checkout');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
-        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
         $data['paypal_sandbox'] = $this->Home_admin_model->getValueStore('paypal_sandbox');
         $data['paypal_email'] = $this->Home_admin_model->getValueStore('paypal_email');
         $this->render('checkout_parts/paypal_payment', $head, $data);
@@ -171,7 +171,7 @@ class Checkout extends MY_Controller
             $arrSeo = $this->Public_model->getSeo('checkout');
             $head['title'] = @$arrSeo['title'];
             $head['description'] = @$arrSeo['description'];
-            $head['keywords'] = str_replace(" ", ",", $head['title']);
+            $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
             $this->render('checkout_parts/payment_success_cash', $head, $data);
         } else {
             redirect(LANG_URL . '/checkout');
@@ -186,7 +186,7 @@ class Checkout extends MY_Controller
             $arrSeo = $this->Public_model->getSeo('checkout');
             $head['title'] = @$arrSeo['title'];
             $head['description'] = @$arrSeo['description'];
-            $head['keywords'] = str_replace(" ", ",", $head['title']);
+            $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
             $data['bank_account'] = $this->Orders_model->getBankAccountSettings();
             $this->render('checkout_parts/payment_success_bank', $head, $data);
         } else {

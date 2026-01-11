@@ -20,7 +20,7 @@ class Home extends MY_Controller
         $arrSeo = $this->Public_model->getSeo('home');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
-        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
         $all_categories = $this->Public_model->getShopCategories();
         $data['home_categories'] = $this->getHomeCategories($all_categories);
         $data['all_categories'] = $all_categories;
@@ -51,7 +51,7 @@ class Home extends MY_Controller
         $arrSeo = $this->Public_model->getSeo('shop');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
-        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
         $all_categories = $this->Public_model->getShopCategories();
         $data['home_categories'] = $this->getHomeCategories($all_categories);
         $data['countQuantities'] = $this->Public_model->getCountQuantities();

@@ -6,6 +6,13 @@ class Blog extends MY_Controller
 {
 
     private $num_rows = 20;
+    
+    /**
+     * Blog archives data
+     *
+     * @var	array|bool
+     */
+    public $arhives;
 
     public function __construct()
     {
@@ -25,7 +32,7 @@ class Blog extends MY_Controller
         $arrSeo = $this->Public_model->getSeo('blog');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
-        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
         if (isset($_GET['find'])) {
             $find = $_GET['find'];
         } else {

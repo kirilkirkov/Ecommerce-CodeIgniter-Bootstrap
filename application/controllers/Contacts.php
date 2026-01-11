@@ -29,7 +29,7 @@ class Contacts extends MY_Controller
         $arrSeo = $this->Public_model->getSeo('contacts');
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
-        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
         $this->render('contacts', $head, $data);
     }
 

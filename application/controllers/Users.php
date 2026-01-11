@@ -35,7 +35,7 @@ class Users extends MY_Controller
         $data = array();
         $head['title'] = lang('user_login');
         $head['description'] = lang('user_login');
-        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
         $this->render('login', $head, $data);
     }
 
@@ -55,7 +55,7 @@ class Users extends MY_Controller
         $data = array();
         $head['title'] = lang('user_register');
         $head['description'] = lang('user_register');
-        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
         $this->render('signup', $head, $data);
     }
 
@@ -73,7 +73,7 @@ class Users extends MY_Controller
         $data = array();
         $head['title'] = lang('my_acc');
         $head['description'] = lang('my_acc');
-        $head['keywords'] = str_replace(" ", ",", $head['title']);
+        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
         $data['userInfo'] = $this->Public_model->getUserProfileInfo($_SESSION['logged_user']);
         $rowscount = $this->Public_model->getUserOrdersHistoryCount($_SESSION['logged_user']);
         $data['orders_history'] = $this->Public_model->getUserOrdersHistory($_SESSION['logged_user'], $this->num_rows, $page);

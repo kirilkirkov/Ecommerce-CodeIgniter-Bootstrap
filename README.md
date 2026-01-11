@@ -5,7 +5,7 @@
 
 Current versions:
 
-* Codeigniter 3.1.13 (CodeIgniter Foundation)
+* Codeigniter 3.1.13 (CodeIgniter Foundation) - modified version with PHP 8.5 support
 * Bootstrap 3.3.7
 
 ## Donate
@@ -14,7 +14,7 @@ Current versions:
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W5BR6K29BQX7E)
 
 ## See also
-<p><a href="https://codecanyon.net/item/wp-invoices-pdf-electronic-invoicing-system/36891583" title="Electronic invoicing and warehouse management plugin which allows you to issue, send and download invoices as pdf file">WordPress Invoice Generator Plugin</a> - with WooCommerce Support, Stripe Payments, Recurring Invoicing, Currency Exchange, and More...</p>
+<p><a href="https://wordpress.org/plugins/kirilkirkov-pdf-invoice-manager/" title="Electronic invoicing and warehouse management plugin which allows you to issue, send and download invoices as pdf file">WordPress Invoice Generator Plugin</a> - with WooCommerce Support, Stripe Payments, Recurring Invoicing, Currency Exchange, and More...</p>
 
 ## Support of following features
 
@@ -97,5 +97,6 @@ Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgn
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/API
 
 ### Server Requirements
-- PHP version 5.6 or newer (up to 8.1) is recommended.
-<p>It should work on 5.3.7 as well, but we strongly advise you NOT to run such old versions of PHP, because of potential security and performance issues, as well as missing features.</p>
+- PHP 7.4 or 8.5
+- MySQL 5.7 or 8.4.7
+<p>Note: It may work on older PHP versions as well, but only PHP 7.4 and PHP 8.5 are currently supported/tested.</p>

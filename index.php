@@ -297,6 +297,70 @@ switch (ENVIRONMENT)
 
 /*
  * --------------------------------------------------------------------
+ * SIMPLE INSTALLER REDIRECT (pre-bootstrap)
+ * --------------------------------------------------------------------
+ *
+ * If the app isn't installed yet (no DB connection or missing schema),
+ * redirect to /installation.php before CodeIgniter bootstraps.
+ *
+ * This runs before CI loads because the database library is autoloaded
+ * and would otherwise fatally error on invalid DB credentials.
+ */
+if (!defined('STDIN')) {
+	$lockFile = FCPATH.'application/config/installed.lock';
+	if (!is_file($lockFile)) {
+		// Don't interfere if the installer itself is being accessed.
+		$requestUri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+		if (stripos($requestUri, 'installation.php') === false) {
+			$dbConfigPath = FCPATH.'application/config/database.php';
+			$configText = @file_get_contents($dbConfigPath);
+
+			// Parse just the 4 needed values from the config file (it can't be included here).
+			$hostname = $username = $password = $database = null;
+			if (is_string($configText)) {
+				if (preg_match("/'hostname'\\s*=>\\s*'((?:\\\\\\\\'|[^'])*)'/", $configText, $m)) {
+					$hostname = stripcslashes($m[1]);
+				}
+				if (preg_match("/'username'\\s*=>\\s*'((?:\\\\\\\\'|[^'])*)'/", $configText, $m)) {
+					$username = stripcslashes($m[1]);
+				}
+				if (preg_match("/'password'\\s*=>\\s*'((?:\\\\\\\\'|[^'])*)'/", $configText, $m)) {
+					$password = stripcslashes($m[1]);
+				}
+				if (preg_match("/'database'\\s*=>\\s*'((?:\\\\\\\\'|[^'])*)'/", $configText, $m)) {
+					$database = stripcslashes($m[1]);
+				}
+			}
+
+			$shouldRedirect = true;
+			if ($hostname !== null && $username !== null && $password !== null && $database !== null) {
+				mysqli_report(MYSQLI_REPORT_OFF);
+				$mysqli = @mysqli_connect($hostname, $username, $password);
+				if ($mysqli) {
+					if (@mysqli_select_db($mysqli, $database)) {
+						// Schema presence check (blank DB should still show installer)
+						$res = @mysqli_query($mysqli, "SHOW TABLES LIKE 'active_pages'");
+						if ($res && @mysqli_num_rows($res) > 0) {
+							$shouldRedirect = false;
+						}
+						if ($res) {
+							@mysqli_free_result($res);
+						}
+					}
+					@mysqli_close($mysqli);
+				}
+			}
+
+			if ($shouldRedirect) {
+				header('Location: /installation.php');
+				exit;
+			}
+		}
+	}
+}
+
+/*
+ * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
  * --------------------------------------------------------------------
  *

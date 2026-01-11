@@ -51,8 +51,14 @@ Current versions:
 31. etc.
 
 ## Easy installation in 2 steps
-1. Import database.sql to your MySQL database
-2. Set <b>database</b>, <b>username</b> and <b>password</b> in application/config/database.php
+1. Create an empty MySQL database (or use an existing one)
+2. Choose ONE of the following options:
+   - <b>Option A (installer)</b>: open the project locally in your browser. If the database is not configured / schema is missing, the app will redirect you to <code>/installation.php</code>. Enter <b>hostname</b>, <b>username</b>, <b>password</b>, <b>database</b> and click <b>Install</b> (it will automatically import <code>database.sql</code>).
+   - <b>Option B (manual)</b>: import <code>database.sql</code> manually to your database and set <b>hostname</b>, <b>username</b>, <b>password</b>, <b>database</b> in <code>application/config/database.php</code>.
+
+Notes:
+- The installer writes credentials into <code>application/config/database.php</code>, so the file must be writable by PHP.
+- After successful install, a lock file <code>application/config/installed.lock</code> is created (delete it if you need to re-run the installer).
 
 ## Available Languages
 - ![CodeIgniter Ecommerce English](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/en.jpg "English Translation CodeIgniter") English

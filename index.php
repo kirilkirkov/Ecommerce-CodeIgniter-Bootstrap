@@ -38,6 +38,19 @@
 
 /*
  *---------------------------------------------------------------
+ * OUTPUT BUFFERING
+ *---------------------------------------------------------------
+ *
+ * Start output buffering as early as possible to prevent
+ * "headers already sent" errors that can break session functionality
+ * in PHP 8.4+ when deprecation warnings are displayed
+ */
+if (!ob_get_level()) {
+	ob_start();
+}
+
+/*
+ *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
  *---------------------------------------------------------------
  *

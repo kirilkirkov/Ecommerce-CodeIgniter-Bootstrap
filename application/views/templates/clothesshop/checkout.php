@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <option value="cashOnDelivery"><?= lang('cash_on_delivery') ?> </option>
                                     <?php } if (filter_var($paypal_email, FILTER_VALIDATE_EMAIL)) { ?>
                                         <option value="PayPal"><?= lang('paypal') ?> </option>
-                                    <?php } if ($bank_account['iban'] != null) { ?>
+                                    <?php } if (isset($bank_account['iban']) && $bank_account['iban'] != null) { ?>
                                         <option value="Bank"><?= lang('bank_payment') ?> </option>
                                     <?php } ?>
                                 </select>

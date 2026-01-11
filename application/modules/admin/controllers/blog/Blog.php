@@ -40,7 +40,7 @@ class Blog extends ADMIN_Controller
         }
         $data = array();
         $rowscount = $this->Blog_model->postsCount($search);
-        $data['posts'] = $this->Blog_model->getPosts(null, $this->num_rows, $page, $search);
+        $data['posts'] = $this->Blog_model->getPosts($this->num_rows, $page, null, $search);
         $data['links_pagination'] = pagination('admin/blog', $rowscount, $this->num_rows, 3);
         $data['page'] = $page;
 

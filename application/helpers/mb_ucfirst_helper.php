@@ -4,6 +4,7 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
+if (!function_exists('mb_ucfirst')) {
 function mb_ucfirst($str, $encoding = "UTF-8", $lower_str_end = false)
 {
     $first_letter = mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding);
@@ -15,4 +16,5 @@ function mb_ucfirst($str, $encoding = "UTF-8", $lower_str_end = false)
     }
     $str = $first_letter . $str_end;
     return $str;
+}
 }

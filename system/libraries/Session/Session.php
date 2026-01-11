@@ -134,7 +134,57 @@ class CI_Session {
 			unset($_COOKIE[$this->_config['cookie_name']]);
 		}
 
-		session_start();
+		// For PHP 8.4+, use session_start() with options array (recommended approach)
+		// This avoids deprecated session_set_cookie_params() array form
+		if (PHP_VERSION_ID >= 80400) {
+			// Ensure output buffering is active before session_start() in PHP 8.4+
+			// This is critical to prevent "headers already sent" errors
+			if (ob_get_level() == 0) {
+				ob_start();
+			}
+			
+			// Check if headers are already sent (critical for PHP 8.4+)
+			if (headers_sent($file, $line)) {
+				log_message('error', 'Session: Headers already sent in '.$file.' on line '.$line.'. Session may not work properly.');
+				// Try to continue anyway, but session may fail
+			}
+			
+			// Use session_start() with options array for PHP 8.4+
+			// This is the recommended way to set cookie parameters in PHP 8.4+
+			// Note: session_start() options array was introduced in PHP 7.0
+			$session_options = array();
+			
+			// Set cookie parameters via session_start() options (PHP 7.0+)
+			if (isset($this->_config['cookie_name'])) {
+				$session_options['name'] = $this->_config['cookie_name'];
+			}
+			if (isset($this->_config['cookie_lifetime'])) {
+				$session_options['cookie_lifetime'] = (int) $this->_config['cookie_lifetime'];
+			}
+			if (isset($this->_config['cookie_path'])) {
+				$session_options['cookie_path'] = $this->_config['cookie_path'];
+			}
+			if (isset($this->_config['cookie_domain'])) {
+				$session_options['cookie_domain'] = $this->_config['cookie_domain'];
+			}
+			if (isset($this->_config['cookie_secure'])) {
+				$session_options['cookie_secure'] = (bool) $this->_config['cookie_secure'];
+			}
+			$session_options['cookie_httponly'] = TRUE;
+			if (isset($this->_config['cookie_samesite'])) {
+				$session_options['cookie_samesite'] = $this->_config['cookie_samesite'];
+			}
+			
+			// Start session with options
+			$session_started = @session_start($session_options);
+			if (!$session_started) {
+				log_message('error', 'Session: session_start() failed in PHP 8.4+. Check for output before session_start() or headers already sent.');
+			}
+		} else {
+			// For PHP < 8.4, use the traditional approach
+			// session_set_cookie_params() was already called in _configure() for PHP < 8.4
+			session_start();
+		}
 
 		// Is session ID auto-regeneration configured? (ignoring ajax requests)
 		if ((empty($_SERVER['HTTP_X_REQUESTED_WITH']) OR strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest')
@@ -323,27 +373,36 @@ class CI_Session {
 			$params['cookie_samesite'] = 'Lax';
 		}
 
-		if (is_php('7.3'))
-		{
-			session_set_cookie_params(array(
-				'lifetime' => $params['cookie_lifetime'],
-				'path'     => $params['cookie_path'],
-				'domain'   => $params['cookie_domain'],
-				'secure'   => $params['cookie_secure'],
-				'httponly' => TRUE,
-				'samesite' => $params['cookie_samesite']
-			));
+		// In PHP 8.4+, session_set_cookie_params() with array is deprecated
+		// For PHP 8.4+, we'll use session_start() with options array instead
+		// For PHP < 8.4, we use session_set_cookie_params() as before
+		if (PHP_VERSION_ID < 80400) {
+			// PHP < 8.4: Use session_set_cookie_params()
+			if (is_php('7.3'))
+			{
+				// PHP 7.3-8.3: array form works without deprecation
+				session_set_cookie_params(array(
+					'lifetime' => $params['cookie_lifetime'],
+					'path'     => $params['cookie_path'],
+					'domain'   => $params['cookie_domain'],
+					'secure'   => $params['cookie_secure'],
+					'httponly' => TRUE,
+					'samesite' => $params['cookie_samesite']
+				));
+			}
+			else
+			{
+				// PHP < 7.3: Use individual parameters
+				session_set_cookie_params(
+					$params['cookie_lifetime'],
+					$params['cookie_path'].'; SameSite='.$params['cookie_samesite'],
+					$params['cookie_domain'],
+					$params['cookie_secure'],
+					TRUE // HttpOnly; Yes, this is intentional and not configurable for security reasons
+				);
+			}
 		}
-		else
-		{
-			session_set_cookie_params(
-				$params['cookie_lifetime'],
-				$params['cookie_path'].'; SameSite='.$params['cookie_samesite'],
-				$params['cookie_domain'],
-				$params['cookie_secure'],
-				TRUE // HttpOnly; Yes, this is intentional and not configurable for security reasons
-			);
-		}
+		// For PHP 8.4+, cookie parameters will be set via session_start() options array
 
 		if (empty($expiration))
 		{
@@ -362,10 +421,15 @@ class CI_Session {
 		$this->_config = $params;
 
 		// Security is king
-		ini_set('session.use_trans_sid', 0);
+		// Note: session.use_trans_sid and session.use_only_cookies are deprecated in PHP 8.4+
+		// They still work but generate warnings. We'll only set them for PHP < 8.4
+		if (PHP_VERSION_ID < 80400) {
+			ini_set('session.use_trans_sid', 0);
+			ini_set('session.use_only_cookies', 1);
+		}
+		// session.use_strict_mode and session.use_cookies are not deprecated
 		ini_set('session.use_strict_mode', 1);
 		ini_set('session.use_cookies', 1);
-		ini_set('session.use_only_cookies', 1);
 
 		$this->_configure_sid_length();
 	}
@@ -419,11 +483,43 @@ class CI_Session {
 		{
 			$bits_per_character = (int) ini_get('session.sid_bits_per_character');
 			$sid_length         = (int) ini_get('session.sid_length');
-			if (($bits = $sid_length * $bits_per_character) < 160)
+
+			// PHP 8.5+ may remove session.sid_length; derive it from session_create_id()
+			// to avoid generating an invalid regexp that would reject valid cookies.
+			if ($sid_length <= 0)
 			{
-				// Add as many more characters as necessary to reach at least 160 bits
-				$sid_length += (int) ceil((160 % $bits) / $bits_per_character);
-				ini_set('session.sid_length', $sid_length);
+				$sample_id = session_create_id();
+				$sid_length = strlen($sample_id);
+
+				if ($bits_per_character <= 0)
+				{
+					if (preg_match('/\A[0-9a-f]+\z/', $sample_id))
+					{
+						$bits_per_character = 4;
+					}
+					elseif (preg_match('/\A[0-9a-v]+\z/', $sample_id))
+					{
+						$bits_per_character = 5;
+					}
+					else
+					{
+						$bits_per_character = 6;
+					}
+				}
+			}
+
+			$bits = $sid_length * $bits_per_character;
+			if ($bits < 160)
+			{
+				// Only enforce >=160 bits if we can actually apply it.
+				// On PHP 8.4+ we avoid changing the expected regexp length, because
+				// session.sid_length can't be reliably set without deprecation/removal.
+				if (PHP_VERSION_ID < 80400)
+				{
+					// Add as many more characters as necessary to reach at least 160 bits
+					$sid_length += (int) ceil((160 % $bits) / $bits_per_character);
+					ini_set('session.sid_length', $sid_length);
+				}
 			}
 		}
 

@@ -13,14 +13,16 @@ class Language
         $this->CI = & get_instance();
         $this->CI->load->model('Home_admin_model');
         $this->CI->load->model('Public_model');
-        $this->urlAbbrevation = strtolower($this->CI->uri->segment(1));
+        $segment = $this->CI->uri->segment(1);
+        $this->urlAbbrevation = $segment !== null ? strtolower($segment) : '';
         $this->setLanguage();
     }
 
     private function setLanguage()
     {
         $defaultLanguageName = $language = $this->CI->config->item('language');
-        $defaultLanguageAbbr = $myLanguage = strtolower($this->CI->config->item('language_abbr'));
+        $languageAbbr = $this->CI->config->item('language_abbr');
+        $defaultLanguageAbbr = $myLanguage = $languageAbbr !== null ? strtolower($languageAbbr) : '';
         $currency = $this->CI->config->item('currency');
         $currencyKey = $this->CI->config->item('currencyKey');
         $langLinkStart = '';

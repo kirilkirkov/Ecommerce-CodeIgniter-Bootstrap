@@ -70,9 +70,17 @@ if (count($sliderProducts) > 0) {
                     <div class="carousel-inner">
                         <?php
                         $i = 0;
+                        $itemIndex = 0;
                         foreach ($newProducts as $product) {
+                            // Start new item every 3 products
+                            if ($i % 3 == 0) {
+                                if ($i > 0) {
+                                    echo '</div>'; // Close previous item
+                                }
+                                echo '<div class="item' . ($itemIndex == 0 ? ' active' : '') . '">';
+                                $itemIndex++;
+                            }
                             ?>
-                            <div class="item <?= $i == 0 ? 'active' : '' ?>">
                                 <div class="col-xs-12 col-sm-4">
                                     <a href="<?= LANG_URL . '/' . $product['url'] ?>">
                                         
@@ -91,9 +99,12 @@ if (count($sliderProducts) > 0) {
                                         <?= lang('add_to_cart') ?>
                                     </a>
                                 </div>
-                            </div>
                             <?php
                             $i++;
+                        }
+                        // Close last item if needed
+                        if ($i > 0) {
+                            echo '</div>';
                         }
                         ?>
                     </div>
@@ -113,9 +124,17 @@ if (count($sliderProducts) > 0) {
                     <div class="carousel-inner">
                         <?php
                         $i = 0;
+                        $itemIndex = 0;
                         foreach ($lastBlogs as $post) {
+                            // Start new item every 3 posts
+                            if ($i % 3 == 0) {
+                                if ($i > 0) {
+                                    echo '</div>'; // Close previous item
+                                }
+                                echo '<div class="item' . ($itemIndex == 0 ? ' active' : '') . '">';
+                                $itemIndex++;
+                            }
                             ?>
-                            <div class="item <?= $i == 0 ? 'active' : '' ?>">
                                 <div class="col-xs-12 col-sm-4">
                                     <a href="<?= LANG_URL . '/blog/' . $post['url'] ?>">
                                         <img src="<?= base_url('attachments/blog_images/' . $post['image']) ?>" class="img-responsive">
@@ -125,9 +144,12 @@ if (count($sliderProducts) > 0) {
                                         <span class="read-more"><?= lang('read_more') ?> <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
                                     </a> 
                                 </div>
-                            </div>
                             <?php
                             $i++;
+                        }
+                        // Close last item if needed
+                        if ($i > 0) {
+                            echo '</div>';
                         }
                         ?>
                     </div>

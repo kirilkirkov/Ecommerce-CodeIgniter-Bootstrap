@@ -40,6 +40,13 @@ class MX_Loader extends CI_Loader
 	public $_ci_plugins = array();
 	public $_ci_cached_vars = array();
 	
+	/**
+	 * Reference to the module controller
+	 *
+	 * @var	object
+	 */
+	public $controller;
+	
 	/** Initialize the loader variables **/
 	public function initialize($controller = NULL) 
 	{
@@ -157,7 +164,7 @@ class MX_Loader extends CI_Loader
 		if (isset($this->_ci_classes[$class]) && $_alias = $this->_ci_classes[$class])
 			return $this;
 			
-		($_alias = strtolower($object_name)) OR $_alias = $class;
+		($_alias = $object_name !== null ? strtolower($object_name) : null) OR $_alias = $class;
 		
 		list($path, $_library) = Modules::find($library, $this->_module, 'libraries/');
 		
@@ -202,7 +209,7 @@ class MX_Loader extends CI_Loader
 			return $this;
 			
 		/* check module */
-		list($path, $_model) = Modules::find(strtolower($model), $this->_module, 'models/');
+		list($path, $_model) = Modules::find($model !== null ? strtolower($model) : '', $this->_module, 'models/');
 		
 		if ($path == FALSE)
 		{

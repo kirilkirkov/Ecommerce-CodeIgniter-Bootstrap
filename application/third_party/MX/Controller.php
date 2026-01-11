@@ -40,9 +40,17 @@ class MX_Controller
 {
 	public $autoload = array();
 	
+	/**
+	 * CI_Loader instance
+	 *
+	 * @var	CI_Loader
+	 */
+	public $load;
+	
 	public function __construct() 
 	{
-		$class = str_replace(CI::$APP->config->item('controller_suffix'), '', get_class($this));
+		$controller_suffix = CI::$APP->config->item('controller_suffix');
+		$class = $controller_suffix !== null ? str_replace($controller_suffix, '', get_class($this)) : get_class($this);
 		log_message('debug', $class." MX_Controller Initialized");
 		Modules::$registry[strtolower($class)] = $this;	
 		

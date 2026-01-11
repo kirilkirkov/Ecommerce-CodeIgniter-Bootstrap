@@ -40,11 +40,13 @@
                 foreach ($shop_categories as $key_cat => $shop_categorie) {
                     $catName = '';
                     foreach ($shop_categorie['info'] as $ff) {
+                        $abbr = isset($ff['abbr']) && $ff['abbr'] !== null ? $ff['abbr'] : '';
+                        $name = isset($ff['name']) && $ff['name'] !== null ? $ff['name'] : '';
                         $catName .= '<div>'
-                                . '<a href="javascript:void(0);" class="editCategorie" data-indic="' . $i . '" data-for-id="' . $key_cat . '" data-abbr="' . htmlspecialchars($ff['abbr'], ENT_QUOTES, 'UTF-8') . '" data-toggle="tooltip" data-placement="top" title="Edit this categorie">'
+                                . '<a href="javascript:void(0);" class="editCategorie" data-indic="' . $i . '" data-for-id="' . $key_cat . '" data-abbr="' . htmlspecialchars($abbr, ENT_QUOTES, 'UTF-8') . '" data-toggle="tooltip" data-placement="top" title="Edit this categorie">'
                                 . '<i class="fa fa-pencil" aria-hidden="true"></i>'
                                 . '</a> '
-                                . '[' . htmlspecialchars($ff['abbr'], ENT_QUOTES, 'UTF-8') . ']<span id="indic-' . $i . '">' . htmlspecialchars($ff['name'], ENT_QUOTES, 'UTF-8') . '</span>'
+                                . '[' . htmlspecialchars($abbr, ENT_QUOTES, 'UTF-8') . ']<span id="indic-' . $i . '">' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . '</span>'
                                 . '</div>';
                         $i++;
                     }
@@ -57,7 +59,7 @@
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
                             <?php foreach ($shop_categorie['sub'] as $sub) { ?>
-                                <div> <?= htmlspecialchars($sub, ENT_QUOTES, 'UTF-8') ?> </div>
+                                <div> <?= htmlspecialchars($sub !== null ? $sub : '', ENT_QUOTES, 'UTF-8') ?> </div>
                             <?php } ?>
                         </td>
                         <td>
@@ -94,10 +96,10 @@
                     </div>
                     <div class="modal-body">
                         <?php foreach ($languages as $language) { ?>
-                            <input type="hidden" name="translations[]" value="<?= htmlspecialchars($language->abbr) ?>">
+                            <input type="hidden" name="translations[]" value="<?= htmlspecialchars($language->abbr !== null ? $language->abbr : '') ?>">
                         <?php } foreach ($languages as $language) { ?>
                             <div class="form-group">
-                                <label>Name (<?= htmlspecialchars($language->name) ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                                <label>Name (<?= htmlspecialchars($language->name !== null ? $language->name : '') ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                                 <input type="text" name="categorie_name[]" class="form-control">
                             </div>
                         <?php } ?>
@@ -109,7 +111,9 @@
                                 foreach ($shop_categories as $key_cat => $shop_categorie) {
                                     $aa = '';
                                     foreach ($shop_categorie['info'] as $ff) {
-                                        $aa .= '[' . $ff['abbr'] . ']' . htmlspecialchars($ff['name'], ENT_QUOTES, 'UTF-8') . '/';
+                                        $abbr = isset($ff['abbr']) && $ff['abbr'] !== null ? $ff['abbr'] : '';
+                                        $name = isset($ff['name']) && $ff['name'] !== null ? $ff['name'] : '';
+                                        $aa .= '[' . $abbr . ']' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . '/';
                                     }
                                     ?>
                                     <option value="<?= $key_cat ?>"><?= $aa ?></option>
@@ -144,7 +148,9 @@
             foreach ($shop_categories as $key_cat => $shop_categorie) {
                 $aa = '';
                 foreach ($shop_categorie['info'] as $ff) {
-                    $aa .= '[' . $ff['abbr'] . ']' . htmlspecialchars($ff['name'], ENT_QUOTES, 'UTF-8') . '/';
+                    $abbr = isset($ff['abbr']) && $ff['abbr'] !== null ? $ff['abbr'] : '';
+                    $name = isset($ff['name']) && $ff['name'] !== null ? $ff['name'] : '';
+                    $aa .= '[' . $abbr . ']' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . '/';
                 }
                 ?>
                 <option value="<?= $key_cat ?>"><?= $aa ?></option>

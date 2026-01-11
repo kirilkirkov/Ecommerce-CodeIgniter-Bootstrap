@@ -621,7 +621,42 @@ if ( ! function_exists('_error_handler'))
 		// Should we display the error?
 		if (str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors')))
 		{
-			$_error->show_php_error($severity, $message, $filepath, $line);
+			// CRITICAL for PHP 8.4+: Check if session is started BEFORE displaying ANY errors
+			// This prevents "headers already sent" errors that break session functionality
+			$session_started = false;
+			if (function_exists('session_status')) {
+				$session_started = (session_status() === PHP_SESSION_ACTIVE);
+			} else {
+				// For older PHP versions, check if session is active via different method
+				$session_started = (isset($_SESSION) || (function_exists('session_id') && session_id() !== ''));
+			}
+			
+			// For PHP 8.4+, NEVER display ANY warnings/errors before session is started
+			// This is critical to prevent "headers already sent" errors
+			if (PHP_VERSION_ID >= 80400 && !$session_started) {
+				// In PHP 8.4+, suppress ALL error output before session_start()
+				// This ensures session functionality works properly
+				// Errors are still logged, just not displayed
+				return;
+			}
+			
+			// For PHP < 8.4, or if session is already started, display errors normally
+			// For deprecation warnings (8192/E_DEPRECATED), only show if session is already started
+			if (($severity & E_DEPRECATED) === E_DEPRECATED || $severity == 8192) {
+				// Only display deprecation warnings if session is already started
+				if ($session_started) {
+					$_error->show_php_error($severity, $message, $filepath, $line);
+				}
+				// Otherwise, just log it without displaying to prevent headers issues
+			} else {
+				// For non-deprecation errors, display normally (but only if session started in PHP 8.4+)
+				if (PHP_VERSION_ID >= 80400 && !$session_started) {
+					// Should not reach here due to early return above, but just in case
+					return;
+				} else {
+					$_error->show_php_error($severity, $message, $filepath, $line);
+				}
+			}
 		}
 
 		// If the error is fatal, the execution of the script should be stopped because

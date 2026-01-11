@@ -24,7 +24,7 @@ class Login extends ADMIN_Controller
         } else {
             $this->form_validation->set_rules('username', 'Username', 'trim|required');
             $this->form_validation->set_rules('password', 'Password', 'trim|required');
-            if ($this->form_validation->run($this)) {
+            if ($this->form_validation->run()) {
                 $result = $this->Home_admin_model->loginCheck($_POST);
                 if (!empty($result)) {
                     $_SESSION['last_login'] = $result['last_login'];

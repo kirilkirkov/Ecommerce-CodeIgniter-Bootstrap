@@ -19,34 +19,34 @@ Current versions:
 ## Support of following features
 
 1. Multi-Vendor
-2. MultiLanguage
-3. Virtual products support
-4. Multi Templates support
+2. Multilingual (MultiLanguage)
+3. Virtual products
+4. Multi-template support (Bootstrap 3 templates and TailwindCSS 4.1 templates)
 5. API
-6. Beautiful administration with high level of access
-7. Ajax based shopping cart
-8. Checkouts are saved to administration, email notifications for every new order
-9. Quantity of products managed from orders
-10. Add textual pages
+6. Powerful administration panel with role-based access
+7. AJAX-based shopping cart
+8. Orders are saved in the admin panel + email notifications for each new order
+9. Product stock quantity is updated from orders
+10. Add content pages
 11. Activate and disable pages
-12. File manager in administration
+12. File manager in the admin panel
 13. Integrated blog
-14. Email subscribe
+14. Email subscriptions
 15. Easy installation
 16. Readable source
-17. Complete editing of public texts
-18. Receive ![PayPal Ecommerce Integration](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/github/paypalLogo.png "Paypal Integration") payments, also have option for paypal sandbox testing
-19. Fast-loading templates for good seo
-20. Site color change with easy to use gradient generator
-21. Add multilanguage cookie notificator from silktide.com for EU Cookie Law 
-22. Multiple templates.. also can easy create your own.. 
+17. Fully editable public texts (translations)
+18. Accept ![PayPal Ecommerce Integration](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/github/paypalLogo.png "Paypal Integration") payments + PayPal Sandbox support
+19. Fast-loading templates for better SEO
+20. Site color themes with an easy-to-use gradient generator
+21. Multilingual cookie notification (Silktide) for EU Cookie Law compliance
+22. Multiple templates (you can easily create your own; see `application/views/templates/`)
 23. Bank account payments support
 24. Highcharts statistics for orders
 25. Discount codes
 26. Available on English, Greek, Bulgarian
 27. Responsive public pages, responsive administration, responsive vendor pages
 28. Advanced search with treeView categories
-29. Easy manage of products (new filed for every added language, subcategories are easy to manage)
+29. Easy product management (a new field for each added language; subcategories are easy to manage)
 30. Advanced sorting and order products
 31. etc.
 

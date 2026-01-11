@@ -16,10 +16,12 @@ $('a.add-to-cart').click(function () {
     manageShoppingCart('add', article_id, reload);
 });
 
-// DatePicker
-$('.input-group.date').datepicker({
-    format: "dd/mm/yyyy"
-});
+// DatePicker (optional - some templates may not load the plugin)
+if ($.fn && typeof $.fn.datepicker === 'function') {
+    $('.input-group.date').datepicker({
+        format: "dd/mm/yyyy"
+    });
+}
 
 // Filters Technique
 $('.go-category').click(function () {

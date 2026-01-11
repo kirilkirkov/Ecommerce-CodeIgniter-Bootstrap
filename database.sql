@@ -305,7 +305,7 @@ INSERT INTO `value_store` (`id`, `thekey`, `value`) VALUES
 (21, 'paypal_sandbox', '0'),
 (22, 'publicDateAdded', '0'),
 (23, 'googleApi', ''),
-(24, 'template', 'redlabel'),
+(24, 'template', 'wind2026'),
 (25, 'cashondelivery_visibility', '1'),
 (26, 'showBrands', '0'),
 (27, 'showInSlider', '0'),

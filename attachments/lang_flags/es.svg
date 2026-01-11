@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="32" viewBox="0 0 3 2" role="img" aria-label="Spain flag">
+  <!-- Red / Yellow / Red -->
+  <rect width="3" height="2" fill="#aa151b"/>
+  <rect width="3" height="1" y="0.5" fill="#f1bf00"/>
+</svg>
+

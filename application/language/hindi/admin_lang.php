@@ -1,0 +1,41 @@
+<?php
+
+$lang['home'] = 'होम';
+$lang['production'] = 'उत्पादन';
+$lang['pass_change'] = 'पासवर्ड बदलें';
+$lang['security'] = 'सुरक्षा';
+$lang['changed'] = 'बदला गया';
+$lang['change_my_password'] = 'मेरा पासवर्ड बदलें';
+$lang['calculator'] = 'कैलकुलेटर';
+$lang['new_password'] = 'नया पासवर्ड';
+$lang['password_strength'] = 'पासवर्ड की मजबूती';
+$lang['generate_password'] = 'पासवर्ड बनाएँ';
+$lang['ECOMMERCE'] = 'ई-कॉमर्स';
+$lang['find_product'] = 'उत्पाद खोजें';
+$lang['search_in_products'] = 'उत्पादों में खोजें';
+$lang['publish_product'] = 'उत्पाद प्रकाशित करें';
+$lang['brands'] = 'ब्रांड';
+$lang['shop_categories'] = 'शॉप श्रेणियाँ';
+$lang['orders'] = 'ऑर्डर';
+$lang['discount_codes'] = 'डिस्काउंट कोड';
+$lang['publish_post'] = 'पोस्ट प्रकाशित करें';
+$lang['BLOG'] = 'ब्लॉग';
+$lang['posts'] = 'पोस्ट';
+$lang['TEXTUAL_PAGES'] = 'टेक्स्ट पेज';
+$lang['SETTINGS'] = 'सेटिंग्स';
+$lang['styling'] = 'स्टाइलिंग';
+$lang['templates'] = 'टेम्पलेट्स';
+$lang['titles_/_descriptions'] = 'शीर्षक / विवरण';
+$lang['active_pages'] = 'सक्रिय पेज';
+$lang['subscribed_emails'] = 'सब्सक्राइब किए गए ईमेल';
+$lang['activity_history'] = 'गतिविधि इतिहास';
+$lang['ADVANCED_SETTINGS'] = 'उन्नत सेटिंग्स';
+$lang['VENDORS'] = 'विक्रेता';
+$lang['list_vendors'] = 'विक्रेताओं की सूची';
+$lang['languages'] = 'भाषाएँ';
+$lang['file_manager'] = 'फ़ाइल मैनेजर';
+$lang['admin_users'] = 'एडमिन उपयोगकर्ता';
+$lang['there_are_some_errors_that_you_must_fix'] = 'कुछ त्रुटियाँ हैं जिन्हें आपको ठीक करना होगा';
+$lang['history'] = 'इतिहास';
+$lang['close'] = 'बंद करें';
+

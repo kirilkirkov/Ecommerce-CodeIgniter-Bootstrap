@@ -1,0 +1,41 @@
+<?php
+
+$lang['home'] = 'Startseite';
+$lang['production'] = 'Produktion';
+$lang['pass_change'] = 'Passwort ändern';
+$lang['security'] = 'Sicherheit';
+$lang['changed'] = 'Geändert';
+$lang['change_my_password'] = 'Mein Passwort ändern';
+$lang['calculator'] = 'Rechner';
+$lang['new_password'] = 'Neues Passwort';
+$lang['password_strength'] = 'Passwortstärke';
+$lang['generate_password'] = 'Passwort generieren';
+$lang['ECOMMERCE'] = 'E-Commerce';
+$lang['find_product'] = 'Produkt finden';
+$lang['search_in_products'] = 'In Produkten suchen';
+$lang['publish_product'] = 'Produkt veröffentlichen';
+$lang['brands'] = 'Marken';
+$lang['shop_categories'] = 'Shop-Kategorien';
+$lang['orders'] = 'Bestellungen';
+$lang['discount_codes'] = 'Rabattcodes';
+$lang['publish_post'] = 'Beitrag veröffentlichen';
+$lang['BLOG'] = 'Blog';
+$lang['posts'] = 'Beiträge';
+$lang['TEXTUAL_PAGES'] = 'Textseiten';
+$lang['SETTINGS'] = 'Einstellungen';
+$lang['styling'] = 'Design';
+$lang['templates'] = 'Vorlagen';
+$lang['titles_/_descriptions'] = 'Titel / Beschreibungen';
+$lang['active_pages'] = 'Aktive Seiten';
+$lang['subscribed_emails'] = 'Abonnierte E-Mails';
+$lang['activity_history'] = 'Aktivitätsverlauf';
+$lang['ADVANCED_SETTINGS'] = 'Erweiterte Einstellungen';
+$lang['VENDORS'] = 'ANBIETER';
+$lang['list_vendors'] = 'Anbieter auflisten';
+$lang['languages'] = 'Sprachen';
+$lang['file_manager'] = 'Dateimanager';
+$lang['admin_users'] = 'Admin-Benutzer';
+$lang['there_are_some_errors_that_you_must_fix'] = 'Es gibt einige Fehler, die Sie beheben müssen';
+$lang['history'] = 'Historie';
+$lang['close'] = 'Schließen';
+

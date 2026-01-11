@@ -64,12 +64,19 @@ Notes:
 - ![CodeIgniter Ecommerce English](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/en.jpg "English Translation CodeIgniter") English
 - ![CodeIgniter Ecommerce Greece](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/gr.png "Greece Translation CodeIgniter") Greece
 - ![CodeIgniter Ecommerce Bulgarian](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/bg.jpg "Bulgarian Translation CodeIgniter") Bulgarian
+- ![CodeIgniter Ecommerce French](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/fr.jpg "French Translation CodeIgniter") French
+- ![CodeIgniter Ecommerce Hindi](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/hi.svg "Hindi Translation CodeIgniter") Hindi
+- ![CodeIgniter Ecommerce German](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/de.svg "German Translation CodeIgniter") German
+- ![CodeIgniter Ecommerce Spanish](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/es.svg "Spanish Translation CodeIgniter") Spanish
+- ![CodeIgniter Ecommerce Chinese](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/zh.svg "Simplified Chinese Translation CodeIgniter") Chinese (Simplified)
 - ![CodeIgniter Ecommerce Indonesian](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/id.jpg "Indonesian Translation CodeIgniter") Indonesian
 
 ## Login to administration with
 - Administration url - /admin (eg. https://yourwebsite.com/admin)
 - Username: admin 
 - Password: admin
+
+<p>Its good then to change your password for the administration from the Password Change button into the navigation.</p>
 
 ## Vendors support
 - Login url is - /vendor/login (eg. https://yourwebsite.com/vendor/login)

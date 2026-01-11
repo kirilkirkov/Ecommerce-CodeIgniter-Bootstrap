@@ -1,0 +1,41 @@
+<?php
+
+$lang['home'] = 'Inicio';
+$lang['production'] = 'Producción';
+$lang['pass_change'] = 'Cambiar contraseña';
+$lang['security'] = 'Seguridad';
+$lang['changed'] = 'Cambiado';
+$lang['change_my_password'] = 'Cambiar mi contraseña';
+$lang['calculator'] = 'Calculadora';
+$lang['new_password'] = 'Nueva contraseña';
+$lang['password_strength'] = 'Fortaleza de la contraseña';
+$lang['generate_password'] = 'Generar contraseña';
+$lang['ECOMMERCE'] = 'Comercio electrónico';
+$lang['find_product'] = 'Buscar producto';
+$lang['search_in_products'] = 'Buscar en productos';
+$lang['publish_product'] = 'Publicar producto';
+$lang['brands'] = 'Marcas';
+$lang['shop_categories'] = 'Categorías';
+$lang['orders'] = 'Pedidos';
+$lang['discount_codes'] = 'Códigos de descuento';
+$lang['publish_post'] = 'Publicar entrada';
+$lang['BLOG'] = 'Blog';
+$lang['posts'] = 'Entradas';
+$lang['TEXTUAL_PAGES'] = 'Páginas de texto';
+$lang['SETTINGS'] = 'Ajustes';
+$lang['styling'] = 'Estilo';
+$lang['templates'] = 'Plantillas';
+$lang['titles_/_descriptions'] = 'Títulos / descripciones';
+$lang['active_pages'] = 'Páginas activas';
+$lang['subscribed_emails'] = 'Correos suscritos';
+$lang['activity_history'] = 'Historial de actividad';
+$lang['ADVANCED_SETTINGS'] = 'Ajustes avanzados';
+$lang['VENDORS'] = 'VENDEDORES';
+$lang['list_vendors'] = 'Lista de vendedores';
+$lang['languages'] = 'Idiomas';
+$lang['file_manager'] = 'Gestor de archivos';
+$lang['admin_users'] = 'Usuarios admin';
+$lang['there_are_some_errors_that_you_must_fix'] = 'Hay algunos errores que debes corregir';
+$lang['history'] = 'Historial';
+$lang['close'] = 'Cerrar';
+

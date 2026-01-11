@@ -1,0 +1,41 @@
+<?php
+
+$lang['home'] = 'Beranda';
+$lang['production'] = 'Produksi';
+$lang['pass_change'] = 'Ubah kata sandi';
+$lang['security'] = 'Keamanan';
+$lang['changed'] = 'Diubah';
+$lang['change_my_password'] = 'Ubah kata sandi saya';
+$lang['calculator'] = 'Kalkulator';
+$lang['new_password'] = 'Kata sandi baru';
+$lang['password_strength'] = 'Kekuatan kata sandi';
+$lang['generate_password'] = 'Buat kata sandi';
+$lang['ECOMMERCE'] = 'E-commerce';
+$lang['find_product'] = 'Cari produk';
+$lang['search_in_products'] = 'Cari di produk';
+$lang['publish_product'] = 'Terbitkan produk';
+$lang['brands'] = 'Merek';
+$lang['shop_categories'] = 'Kategori toko';
+$lang['orders'] = 'Pesanan';
+$lang['discount_codes'] = 'Kode diskon';
+$lang['publish_post'] = 'Terbitkan posting';
+$lang['BLOG'] = 'Blog';
+$lang['posts'] = 'Postingan';
+$lang['TEXTUAL_PAGES'] = 'Halaman teks';
+$lang['SETTINGS'] = 'Pengaturan';
+$lang['styling'] = 'Gaya';
+$lang['templates'] = 'Templat';
+$lang['titles_/_descriptions'] = 'Judul / deskripsi';
+$lang['active_pages'] = 'Halaman aktif';
+$lang['subscribed_emails'] = 'Email berlangganan';
+$lang['activity_history'] = 'Riwayat aktivitas';
+$lang['ADVANCED_SETTINGS'] = 'Pengaturan lanjutan';
+$lang['VENDORS'] = 'PENJUAL';
+$lang['list_vendors'] = 'Daftar penjual';
+$lang['languages'] = 'Bahasa';
+$lang['file_manager'] = 'Pengelola berkas';
+$lang['admin_users'] = 'Admin';
+$lang['there_are_some_errors_that_you_must_fix'] = 'Ada beberapa kesalahan yang harus Anda perbaiki';
+$lang['history'] = 'Riwayat';
+$lang['close'] = 'Tutup';
+

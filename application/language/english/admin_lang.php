@@ -1,10 +1,10 @@
 <?php 
 $lang['home'] = 'Home';
 $lang['production'] = 'Production';
-$lang['pass_change'] = 'Pass Change';
+$lang['pass_change'] = 'Password change';
 $lang['security'] = 'Security';
 $lang['changed'] = 'Changed';
-$lang['change_my_password'] = 'Changee my password';
+$lang['change_my_password'] = 'Change my password';
 $lang['calculator'] = 'Calculator';
 $lang['new_password'] = 'New password';
 $lang['password_strength'] = 'Password Strength';

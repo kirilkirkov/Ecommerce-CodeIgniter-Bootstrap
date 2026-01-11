@@ -1,0 +1,41 @@
+<?php
+
+$lang['home'] = 'Начало';
+$lang['production'] = 'Продукция';
+$lang['pass_change'] = 'Смяна на парола';
+$lang['security'] = 'Сигурност';
+$lang['changed'] = 'Променено';
+$lang['change_my_password'] = 'Смени паролата си';
+$lang['calculator'] = 'Калкулатор';
+$lang['new_password'] = 'Нова парола';
+$lang['password_strength'] = 'Сила на паролата';
+$lang['generate_password'] = 'Генерирай парола';
+$lang['ECOMMERCE'] = 'Електронна търговия';
+$lang['find_product'] = 'Намери продукт';
+$lang['search_in_products'] = 'Търси в продукти';
+$lang['publish_product'] = 'Публикувай продукт';
+$lang['brands'] = 'Марки';
+$lang['shop_categories'] = 'Категории';
+$lang['orders'] = 'Поръчки';
+$lang['discount_codes'] = 'Кодове за отстъпка';
+$lang['publish_post'] = 'Публикувай публикация';
+$lang['BLOG'] = 'Блог';
+$lang['posts'] = 'Публикации';
+$lang['TEXTUAL_PAGES'] = 'Текстови страници';
+$lang['SETTINGS'] = 'Настройки';
+$lang['styling'] = 'Стилизация';
+$lang['templates'] = 'Шаблони';
+$lang['titles_/_descriptions'] = 'Заглавия / описания';
+$lang['active_pages'] = 'Активни страници';
+$lang['subscribed_emails'] = 'Абонирани имейли';
+$lang['activity_history'] = 'История на активността';
+$lang['ADVANCED_SETTINGS'] = 'Разширени настройки';
+$lang['VENDORS'] = 'ПРОДАВАЧИ';
+$lang['list_vendors'] = 'Списък продавачи';
+$lang['languages'] = 'Езици';
+$lang['file_manager'] = 'Файлов мениджър';
+$lang['admin_users'] = 'Администратори';
+$lang['there_are_some_errors_that_you_must_fix'] = 'Има грешки, които трябва да поправите';
+$lang['history'] = 'История';
+$lang['close'] = 'Затвори';
+

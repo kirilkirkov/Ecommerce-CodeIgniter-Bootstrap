@@ -1,0 +1,41 @@
+<?php
+
+$lang['home'] = '首页';
+$lang['production'] = '商品';
+$lang['pass_change'] = '修改密码';
+$lang['security'] = '安全';
+$lang['changed'] = '已更改';
+$lang['change_my_password'] = '修改我的密码';
+$lang['calculator'] = '计算器';
+$lang['new_password'] = '新密码';
+$lang['password_strength'] = '密码强度';
+$lang['generate_password'] = '生成密码';
+$lang['ECOMMERCE'] = '电商';
+$lang['find_product'] = '查找商品';
+$lang['search_in_products'] = '在商品中搜索';
+$lang['publish_product'] = '发布商品';
+$lang['brands'] = '品牌';
+$lang['shop_categories'] = '商品分类';
+$lang['orders'] = '订单';
+$lang['discount_codes'] = '优惠码';
+$lang['publish_post'] = '发布文章';
+$lang['BLOG'] = '博客';
+$lang['posts'] = '文章';
+$lang['TEXTUAL_PAGES'] = '文本页面';
+$lang['SETTINGS'] = '设置';
+$lang['styling'] = '样式';
+$lang['templates'] = '模板';
+$lang['titles_/_descriptions'] = '标题 / 描述';
+$lang['active_pages'] = '启用页面';
+$lang['subscribed_emails'] = '订阅邮箱';
+$lang['activity_history'] = '操作记录';
+$lang['ADVANCED_SETTINGS'] = '高级设置';
+$lang['VENDORS'] = '卖家';
+$lang['list_vendors'] = '卖家列表';
+$lang['languages'] = '语言';
+$lang['file_manager'] = '文件管理';
+$lang['admin_users'] = '管理员';
+$lang['there_are_some_errors_that_you_must_fix'] = '有一些错误需要修复';
+$lang['history'] = '历史';
+$lang['close'] = '关闭';
+

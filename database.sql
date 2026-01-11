@@ -76,15 +76,19 @@ CREATE TABLE IF NOT EXISTS `languages` (
   `currencyKey` varchar(5) NOT NULL,
   `flag` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 
 INSERT INTO `languages` (`id`, `abbr`, `name`, `currency`, `currencyKey`, `flag`) VALUES
 (1, 'bg', 'bulgarian', 'лв', 'BGN', 'bg.jpg'),
 (2, 'en', 'english', '$', 'USD', 'en.jpg'),
-(3, 'gr', 'greece', 'EUR', 'EUR', 'gr.png'),
+(3, 'gr', 'greek', 'EUR', 'EUR', 'gr.png'),
 (4, 'id', 'indonesian', 'RP', 'IDR', 'id.jpg'),
-(5, 'fr', 'francais', 'EUR', 'EUR', 'fr.jpg');
+(5, 'fr', 'francais', 'EUR', 'EUR', 'fr.jpg'),
+(6, 'hi', 'hindi', '₹', 'INR', 'hi.svg'),
+(7, 'de', 'german', '€', 'EUR', 'de.svg'),
+(8, 'es', 'spanish', '€', 'EUR', 'es.svg'),
+(9, 'zh', 'chinese', '¥', 'CNY', 'zh.svg');
 
 
 CREATE TABLE IF NOT EXISTS `orders` (

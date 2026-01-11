@@ -1,0 +1,41 @@
+<?php
+
+$lang['home'] = 'Αρχική';
+$lang['production'] = 'Παραγωγή';
+$lang['pass_change'] = 'Αλλαγή κωδικού';
+$lang['security'] = 'Ασφάλεια';
+$lang['changed'] = 'Αλλάχθηκε';
+$lang['change_my_password'] = 'Αλλαγή του κωδικού μου';
+$lang['calculator'] = 'Υπολογιστής';
+$lang['new_password'] = 'Νέος κωδικός';
+$lang['password_strength'] = 'Ισχύς κωδικού';
+$lang['generate_password'] = 'Δημιουργία κωδικού';
+$lang['ECOMMERCE'] = 'Ηλεκτρονικό εμπόριο';
+$lang['find_product'] = 'Εύρεση προϊόντος';
+$lang['search_in_products'] = 'Αναζήτηση στα προϊόντα';
+$lang['publish_product'] = 'Δημοσίευση προϊόντος';
+$lang['brands'] = 'Μάρκες';
+$lang['shop_categories'] = 'Κατηγορίες';
+$lang['orders'] = 'Παραγγελίες';
+$lang['discount_codes'] = 'Κωδικοί έκπτωσης';
+$lang['publish_post'] = 'Δημοσίευση άρθρου';
+$lang['BLOG'] = 'Blog';
+$lang['posts'] = 'Άρθρα';
+$lang['TEXTUAL_PAGES'] = 'Σελίδες κειμένου';
+$lang['SETTINGS'] = 'Ρυθμίσεις';
+$lang['styling'] = 'Εμφάνιση';
+$lang['templates'] = 'Πρότυπα';
+$lang['titles_/_descriptions'] = 'Τίτλοι / περιγραφές';
+$lang['active_pages'] = 'Ενεργές σελίδες';
+$lang['subscribed_emails'] = 'Εγγεγραμμένα emails';
+$lang['activity_history'] = 'Ιστορικό δραστηριότητας';
+$lang['ADVANCED_SETTINGS'] = 'Προχωρημένες ρυθμίσεις';
+$lang['VENDORS'] = 'ΠΩΛΗΤΕΣ';
+$lang['list_vendors'] = 'Λίστα πωλητών';
+$lang['languages'] = 'Γλώσσες';
+$lang['file_manager'] = 'Διαχείριση αρχείων';
+$lang['admin_users'] = 'Διαχειριστές';
+$lang['there_are_some_errors_that_you_must_fix'] = 'Υπάρχουν ορισμένα σφάλματα που πρέπει να διορθώσετε';
+$lang['history'] = 'Ιστορικό';
+$lang['close'] = 'Κλείσιμο';
+

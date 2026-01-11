@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="32" viewBox="0 0 3 2" role="img" aria-label="India flag">
+  <!-- Tricolour -->
+  <rect width="3" height="2" fill="#ffffff"/>
+  <rect width="3" height="0.6666667" y="0" fill="#FF9933"/>
+  <rect width="3" height="0.6666667" y="1.3333333" fill="#128807"/>
+
+  <!-- Ashoka Chakra (simplified) -->
+  <g transform="translate(1.5 1)">
+    <circle r="0.22" fill="none" stroke="#000080" stroke-width="0.03"/>
+    <circle r="0.02" fill="#000080"/>
+    <g stroke="#000080" stroke-width="0.02">
+      <line x1="0" y1="-0.22" x2="0" y2="0.22"/>
+      <line x1="-0.22" y1="0" x2="0.22" y2="0"/>
+      <line x1="-0.155" y1="-0.155" x2="0.155" y2="0.155"/>
+      <line x1="-0.155" y1="0.155" x2="0.155" y2="-0.155"/>
+      <line x1="0.11" y1="-0.19" x2="-0.11" y2="0.19"/>
+      <line x1="-0.11" y1="-0.19" x2="0.11" y2="0.19"/>
+    </g>
+  </g>
+</svg>
+

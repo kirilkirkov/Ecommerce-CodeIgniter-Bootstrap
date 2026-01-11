@@ -1,2 +1,3 @@
 /attachments/shop_images/*
 /application/logs/*
+/application/config/installed.lock

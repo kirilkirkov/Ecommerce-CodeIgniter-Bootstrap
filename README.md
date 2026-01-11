@@ -110,6 +110,7 @@ Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgn
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/API
 
 ### Server Requirements
-- PHP 7.4 or 8.5
-- MySQL 5.7 or 8.4.7
-<p>Note: It may work on older PHP versions as well, but only PHP 7.4 and PHP 8.5 are currently supported/tested.</p>
+- PHP 7.4–8.5 (any version in this range)
+- MySQL 5.7–8.4.7 (any version in this range)
+
+Note: Versions outside these ranges (e.g., PHP 5.6) may work, but are not officially supported or tested.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="32" viewBox="0 0 3 2" role="img" aria-label="China flag">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="11" viewBox="0 0 3 2" role="img" aria-label="China flag">
   <rect width="3" height="2" fill="#de2910"/>
   <!-- Stars (simplified) -->
   <g fill="#ffde00" transform="translate(0.55 0.55) scale(0.18)">

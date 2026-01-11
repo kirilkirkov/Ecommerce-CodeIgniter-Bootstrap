@@ -41,17 +41,17 @@
                     $catName = '';
                     foreach ($shop_categorie['info'] as $ff) {
                         $catName .= '<div>'
-                                . '<a href="javascript:void(0);" class="editCategorie" data-indic="' . $i . '" data-for-id="' . $key_cat . '" data-abbr="' . $ff['abbr'] . '" data-toggle="tooltip" data-placement="top" title="Edit this categorie">'
+                                . '<a href="javascript:void(0);" class="editCategorie" data-indic="' . $i . '" data-for-id="' . $key_cat . '" data-abbr="' . htmlspecialchars($ff['abbr'], ENT_QUOTES, 'UTF-8') . '" data-toggle="tooltip" data-placement="top" title="Edit this categorie">'
                                 . '<i class="fa fa-pencil" aria-hidden="true"></i>'
                                 . '</a> '
-                                . '[' . $ff['abbr'] . ']<span id="indic-' . $i . '">' . $ff['name'] . '</span>'
+                                . '[' . htmlspecialchars($ff['abbr'], ENT_QUOTES, 'UTF-8') . ']<span id="indic-' . $i . '">' . htmlspecialchars($ff['name'], ENT_QUOTES, 'UTF-8') . '</span>'
                                 . '</div>';
                         $i++;
                     }
                     ?>
                     <tr>
                         <td><?= $key_cat ?></td>
-                        <td><?= htmlspecialchars($catName, ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= $catName ?></td>
                         <td> 
                             <a href="javascript:void(0);" class="editCategorieSub" data-sub-for-id="<?= $key_cat ?>">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>

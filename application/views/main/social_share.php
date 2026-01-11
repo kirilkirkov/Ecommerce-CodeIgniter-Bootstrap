@@ -10,7 +10,7 @@
             include rtrim(APPPATH, '/') . '/views/main/svg/facebook.php';
         ?>
     </a>
-    <a href="https://twitter.com/intent/tweet?url=<?= current_url() ?>" target="_blank">
+    <a href="https://x.com/intent/tweet?url=<?= current_url() ?>" target="_blank">
         <?php
             include rtrim(APPPATH, '/') . '/views/main/svg/twitter.php';
         ?>

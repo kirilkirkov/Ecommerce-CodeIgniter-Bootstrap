@@ -68,7 +68,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="row row-info">
                 <div class="col-sm-6"><b><?= lang('num_added_to_cart') ?>:</b></div>
                 <div class="col-sm-6"><?php
-                    @$result = array_count_values($_SESSION['shopping_cart']);
+                    $result = array();
+                    if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
+                        $result = array_count_values($_SESSION['shopping_cart']);
+                    }
                     if (isset($result[$product['id']]))
                         echo $result[$product['id']];
                     else

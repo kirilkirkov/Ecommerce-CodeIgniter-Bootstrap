@@ -123,7 +123,7 @@ class Orders extends ADMIN_Controller
     private function sendVirtualProducts()
     {
         if(isset($_POST['products']) && $_POST['products'] != '') {
-            $products = unserialize(html_entity_decode($_POST['products']));
+            $products = unserialize(html_entity_decode($_POST['products']), ['allowed_classes' => false]);
             foreach ($products as $product_id => $product_quantity) {
                 $productInfo = modules::run('admin/ecommerce/products/getProductInfo', $product_id);
                 /*

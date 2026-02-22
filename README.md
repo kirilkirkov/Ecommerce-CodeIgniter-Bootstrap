@@ -14,7 +14,8 @@ Current versions:
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W5BR6K29BQX7E)
 
 ## See also
-<p><a href="https://wordpress.org/plugins/kirilkirkov-pdf-invoice-manager/" title="Electronic invoicing and warehouse management plugin which allows you to issue, send and download invoices as pdf file">WordPress Invoice Generator Plugin</a> - with WooCommerce Support, Stripe Payments, Recurring Invoicing, Currency Exchange, and More...</p>
+- <a href="https://wordpress.org/plugins/kirilkirkov-pdf-invoice-manager/" title="Electronic invoicing and warehouse management plugin which allows you to issue, send and download invoices as pdf file">Invoct – PDF Invoices & Billing for WooCommerce and WordPress</a> - <b>Invoct</b> is FREE powerful Invoice Generator for WordPress — designed to work standalone or seamlessly with WooCommerce including <b>Periodic Invoicing</b>, <b>PDF Generation</b>, <b>API Integration</b> and many more..
+- <a href="https://apps.shopify.com/smartsellio" title="Upsell, Cross Sell & AOV with Frequently Bought Together, bundles, smart product recommendations based on user behavior">SmartSellio</a> - <b>SmartSellio</b> is powerful AOV which helps Shopify merchants increase revenue by automatically showing the right products to the right customers at the perfect moment. SmartSellio support <b>post-purchase</b>, <b>checkout page</b>, <b>product pages</b> and <b>cart page</b>.
 
 ## Support of following features
 

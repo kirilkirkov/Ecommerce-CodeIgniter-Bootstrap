@@ -10,7 +10,7 @@
     <div class="col-sm-6">
         <form method="GET">
             <div class="input-group">
-                <input type="text" class="form-control" name="search" value="<?= @$_GET['search'] ?>" placeholder="Find here">
+                <input type="text" class="form-control" name="search" value="<?= htmlspecialchars((string)($_GET['search'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" placeholder="Find here">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit">Search</button>
                 </span>

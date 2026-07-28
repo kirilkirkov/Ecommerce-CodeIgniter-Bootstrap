@@ -66,14 +66,14 @@ if (!isset($_GET['settings'])) {
                             <td><?= date('d.M.Y / H:i:s', $tr['date']); ?></td>
                             <td>
                                 <i class="fa fa-user" aria-hidden="true"></i> 
-                                <?= $tr['first_name'] . ' ' . $tr['last_name'] ?>
+                                <?= htmlspecialchars($tr['first_name'] . ' ' . $tr['last_name'], ENT_QUOTES, 'UTF-8') ?>
                             </td>
-                            <td><i class="fa fa-phone" aria-hidden="true"></i> <?= $tr['phone'] ?></td>
+                            <td><i class="fa fa-phone" aria-hidden="true"></i> <?= htmlspecialchars($tr['phone'], ENT_QUOTES, 'UTF-8') ?></td>
                             <td class="<?= $class ?> text-center" data-action-id="<?= $tr['id'] ?>">
                                 <div class="status" style="padding:5px; font-size:16px;">
                                     -- <b><?= $type ?></b> --
                                 </div>
-                                <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeOrdersOrderStatus(<?= $tr['id'] ?>, 1, '<?= htmlentities($tr['products']) ?>', '<?= $tr['email'] ?>')" class="btn btn-success btn-xs">Processed</a></div>
+                                <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeOrdersOrderStatus(<?= (int) $tr['id'] ?>, 1, <?= htmlspecialchars(json_encode($tr['products'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>, <?= htmlspecialchars(json_encode($tr['email'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>)" class="btn btn-success btn-xs">Processed</a></div>
                                 <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeOrdersOrderStatus(<?= $tr['id'] ?>, 0)" class="btn btn-danger btn-xs">No processed</a></div>
                                 <div style="margin-bottom:4px;"><a href="javascript:void(0);" onclick="changeOrdersOrderStatus(<?= $tr['id'] ?>, 2)" class="btn btn-warning btn-xs">Rejected</a></div>
                             </td>
@@ -93,23 +93,23 @@ if (!isset($_GET['settings'])) {
                                         <tbody>
                                             <tr>
                                                 <td><b>Email</b></td>
-                                                <td><a href="mailto:<?= $tr['email'] ?>"><?= $tr['email'] ?></a></td>
+                                                <td><a href="mailto:<?= htmlspecialchars($tr['email'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($tr['email'], ENT_QUOTES, 'UTF-8') ?></a></td>
                                             </tr>
                                             <tr>
                                                 <td><b>City</b></td>
-                                                <td><?= $tr['city'] ?></td>
+                                                <td><?= htmlspecialchars($tr['city'], ENT_QUOTES, 'UTF-8') ?></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Address</b></td>
-                                                <td><?= $tr['address'] ?></td>
+                                                <td><?= htmlspecialchars($tr['address'], ENT_QUOTES, 'UTF-8') ?></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Postcode</b></td>
-                                                <td><?= $tr['post_code'] ?></td>
+                                                <td><?= htmlspecialchars($tr['post_code'], ENT_QUOTES, 'UTF-8') ?></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Notes</b></td>
-                                                <td><?= $tr['notes'] ?></td>
+                                                <td><?= htmlspecialchars($tr['notes'], ENT_QUOTES, 'UTF-8') ?></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Come from site</b></td>

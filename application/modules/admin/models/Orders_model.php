@@ -19,7 +19,8 @@ class Orders_model extends CI_Model
 
     public function orders($limit, $page, $order_by)
     {
-        if ($order_by != null) {
+        $allowed_order_by = array('id', 'processed');
+        if ($order_by != null && in_array($order_by, $allowed_order_by, true)) {
             $this->db->order_by($order_by, 'DESC');
         } else {
             $this->db->order_by('id', 'DESC');
@@ -46,10 +47,19 @@ class Orders_model extends CI_Model
 
     public function changeOrderStatus($id, $to_status)
     {
+        $id = (int) $id;
+        $to_status = (int) $to_status;
+        if ($id < 1 || !in_array($to_status, array(0, 1, 2), true)) {
+            return false;
+        }
+
         $this->db->where('id', $id);
         $this->db->select('processed');
         $result1 = $this->db->get('orders');
         $res = $result1->row_array();
+        if (empty($res)) {
+            return false;
+        }
 
         $result = true;
         if ($res['processed'] != $to_status) {

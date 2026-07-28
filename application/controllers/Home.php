@@ -111,7 +111,15 @@ class Home extends MY_Controller
 
     public function removeFromCart()
     {
-        $backTo = $_GET['back-to'];
+        $backTo = trim((string) $this->input->get('back-to', true), '/');
+        if (
+            $backTo === ''
+            || strpos($backTo, '..') !== false
+            || preg_match('#^(?:https?:)?//#i', $backTo)
+            || !preg_match('/^[a-zA-Z0-9_\/-]+$/', $backTo)
+        ) {
+            $backTo = 'checkout';
+        }
         $this->shoppingcart->removeFromCart();
         $this->session->set_flashdata('deleted', lang('deleted_product_from_cart'));
         redirect(LANG_URL . '/' . $backTo);

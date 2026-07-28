@@ -21,7 +21,13 @@
         <script src="<?= base_url('loadlanguage/all.js') ?>"></script>
         <?php if ($cookieLaw != false) { ?>
             <script type="text/javascript">
-                window.cookieconsent_options = {"message": "<?= $cookieLaw['message'] ?>", "dismiss": "<?= $cookieLaw['button_text'] ?>", "learnMore": "<?= $cookieLaw['learn_more'] ?>", "link": "<?= $cookieLaw['link'] ?>", "theme": "<?= $cookieLaw['theme'] ?>"};
+                window.cookieconsent_options = {
+                    "message": <?= json_encode($cookieLaw['message']) ?>,
+                    "dismiss": <?= json_encode($cookieLaw['button_text']) ?>,
+                    "learnMore": <?= json_encode($cookieLaw['learn_more']) ?>,
+                    "link": <?= json_encode($cookieLaw['link']) ?>,
+                    "theme": <?= json_encode($cookieLaw['theme']) ?>
+                };
             </script>
             <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
         <?php } ?>

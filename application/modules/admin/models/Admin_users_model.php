@@ -38,7 +38,7 @@ class Admin_users_model extends CI_Model
             if (trim($post['password']) == '') {
                 unset($post['password']);
             } else {
-                $post['password'] = md5($post['password']);
+                $post['password'] = password_hash($post['password'], PASSWORD_DEFAULT);
             }
             $this->db->where('id', $post['edit']);
             unset($post['id'], $post['edit']);
@@ -48,7 +48,7 @@ class Admin_users_model extends CI_Model
             }
         } else {
             unset($post['edit']);
-            $post['password'] = md5($post['password']);
+            $post['password'] = password_hash($post['password'], PASSWORD_DEFAULT);
             if (!$this->db->insert('users', $post)) {
                 log_message('error', print_r($this->db->error(), true));
                 show_error(lang('database_error'));

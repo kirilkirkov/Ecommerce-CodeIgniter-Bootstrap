@@ -132,7 +132,7 @@ CREATE TABLE `users_public` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(100) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -253,16 +253,18 @@ ALTER TABLE `shop_categories_translations`
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `notify` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'notifications by email',
   `last_login` int(10) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
-
+-- Default admin credentials for fresh install:
+-- username: admin
+-- password: admin123
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `notify`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'your@email.com', 0);
+(1, 'admin', '$2y$12$bUS.5X2sHbJlKtYpE5uQFOuKRVQEYs8XEFbLxZF2RsDdVBqLgEGcW', 'your@email.com', 0);
 
 CREATE TABLE `bank_accounts` (
   `id` int(11) NOT NULL,

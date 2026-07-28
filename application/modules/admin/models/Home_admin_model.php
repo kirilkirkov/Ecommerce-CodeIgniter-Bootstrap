@@ -10,18 +10,33 @@ class Home_admin_model extends CI_Model
 
     public function loginCheck($values)
     {
-        $arr = array(
-            'username' => $values['username'],
-            'password' => md5($values['password']),
-        );
-        $this->db->where($arr);
+        $this->db->where('username', $values['username']);
         $result = $this->db->get('users');
         $resultArray = $result->row_array();
-        if ($result->num_rows() > 0) {
+
+        if (empty($resultArray) || !isset($resultArray['password'])) {
+            return array();
+        }
+
+        $valid = false;
+        if (password_get_info($resultArray['password'])['algo'] !== 0) {
+            $valid = password_verify($values['password'], $resultArray['password']);
+        } else {
+            // Backward compatibility for legacy md5 hashes.
+            $valid = hash_equals($resultArray['password'], md5($values['password']));
+            if ($valid) {
+                $this->db->where('id', $resultArray['id']);
+                $this->db->update('users', array('password' => password_hash($values['password'], PASSWORD_DEFAULT)));
+            }
+        }
+
+        if ($valid) {
             $this->db->where('id', $resultArray['id']);
             $this->db->update('users', array('last_login' => time()));
+            return $resultArray;
         }
-        return $resultArray;
+
+        return array();
     }
 
     /*
@@ -119,7 +134,7 @@ class Home_admin_model extends CI_Model
     public function changePass($new_pass, $username)
     {
         $this->db->where('username', $username);
-        $result = $this->db->update('users', array('password' => md5($new_pass)));
+        $result = $this->db->update('users', array('password' => password_hash($new_pass, PASSWORD_DEFAULT)));
         return $result;
     }
 

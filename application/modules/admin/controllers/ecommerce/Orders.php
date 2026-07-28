@@ -30,8 +30,12 @@ class Orders extends ADMIN_Controller
         $head['keywords'] = '';
 
         $order_by = null;
-        if (isset($_GET['order_by'])) {
-            $order_by = $_GET['order_by'];
+        $requested_order_by = $this->input->get('order_by', true);
+        if ($requested_order_by !== null) {
+            $allowed_order_by = array('id', 'processed');
+            if (in_array($requested_order_by, $allowed_order_by, true)) {
+                $order_by = $requested_order_by;
+            }
         }
         $rowscount = $this->Orders_model->ordersCount();
         $data['orders'] = $this->Orders_model->orders($this->num_rows, $page, $order_by);
@@ -94,6 +98,13 @@ class Orders extends ADMIN_Controller
     {
         $this->login_check();
 
+        $order_id = (int) ($this->input->post('the_id', true) ?? 0);
+        $to_status = (int) ($this->input->post('to_status', true) ?? -1);
+        if ($order_id < 1 || !in_array($to_status, array(0, 1, 2), true)) {
+            echo 0;
+            return;
+        }
+
         $result = false;
         $sendedVirtualProducts = true;
         $virtualProducts = $this->Home_admin_model->getValueStore('virtualProducts');
@@ -103,13 +114,13 @@ class Orders extends ADMIN_Controller
          * In error logs will be saved if cant send email from PhpMailer
          */
         if ($virtualProducts == 1) {
-            if ($_POST['to_status'] == 1) {
+            if ($to_status == 1) {
                 $sendedVirtualProducts = $this->sendVirtualProducts();
             }
         }
 
         if ($sendedVirtualProducts == true) {
-            $result = $this->Orders_model->changeOrderStatus($_POST['the_id'], $_POST['to_status']);
+            $result = $this->Orders_model->changeOrderStatus($order_id, $to_status);
         }
 
         if ($result == true && $sendedVirtualProducts == true) {
@@ -117,7 +128,7 @@ class Orders extends ADMIN_Controller
         } else {
             echo 0;
         }
-        $this->saveHistory('Change status of Order Id ' . $_POST['the_id'] . ' to status ' . $_POST['to_status']);
+        $this->saveHistory('Change status of Order Id ' . $order_id . ' to status ' . $to_status);
     }
 
     private function sendVirtualProducts()

@@ -76,7 +76,7 @@ Notes:
 ## Login to administration with
 - Administration url - /admin (eg. https://yourwebsite.com/admin)
 - Username: admin 
-- Password: admin
+- Password: admin123
 
 <p>Its good then to change your password for the administration from the Password Change button into the navigation.</p>
 

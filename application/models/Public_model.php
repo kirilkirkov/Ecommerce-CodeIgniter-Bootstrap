@@ -629,7 +629,7 @@ class Public_model extends CI_Model
             'name' => $post['name'],
             'phone' => $post['phone'],
             'email' => $post['email'],
-            'password' => md5($post['pass'])
+            'password' => password_hash($post['pass'], PASSWORD_DEFAULT)
         ));
         return $this->db->insert_id();
     }
@@ -642,7 +642,7 @@ class Public_model extends CI_Model
             'email' => $post['email']
         );
         if (trim($post['pass']) != '') {
-            $array['password'] = md5($post['pass']);
+            $array['password'] = password_hash($post['pass'], PASSWORD_DEFAULT);
         }
         $this->db->where('id', $post['id']);
         $this->db->update('users_public', $array);
@@ -651,14 +651,32 @@ class Public_model extends CI_Model
     public function checkPublicUserIsValid($post)
     {
         $this->db->where('email', $post['email']);
-        $this->db->where('password', md5($post['pass']));
         $query = $this->db->get('users_public');
         $result = $query->row_array();
-        if (empty($result)) {
+        if (empty($result) || !isset($result['password'])) {
             return false;
-        } else {
-            return $result['id'];
         }
+
+        $valid = false;
+        $stored_hash = $result['password'];
+        if (password_get_info($stored_hash)['algo'] !== 0) {
+            $valid = password_verify($post['pass'], $stored_hash);
+        } else {
+            // Backward compatibility for legacy md5 hashes.
+            $valid = hash_equals($stored_hash, md5($post['pass']));
+            if ($valid) {
+                $this->db->where('id', $result['id']);
+                $this->db->update('users_public', array(
+                    'password' => password_hash($post['pass'], PASSWORD_DEFAULT)
+                ));
+            }
+        }
+
+        if (!$valid) {
+            return false;
+        }
+
+        return $result['id'];
     }
 
     public function getUserProfileInfo($id)

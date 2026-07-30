@@ -14,8 +14,6 @@ Current versions:
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W5BR6K29BQX7E)
 
 ## See also
-- <a href="https://apps.shopify.com/qubly" title="AI Product Search & AI Sales Assistant for Shopify">Qubly</a> – LLM-powered AI Product Search and AI Sales Assistant for Shopify. Helps shoppers find products instantly using natural language, vector search, and LLM intent understanding. Includes a floating conversational AI widget with product cards and direct add to cart. <b>Multilingual</b>, <b>no-code theme blocks</b>, 7-day free trial.
-- <a href="https://apps.shopify.com/smartsellio" title="Upsell, Cross Sell & AOV with Frequently Bought Together, bundles, and smart product recommendations">SmartSellio</a> – a powerful Shopify upsell and AOV app that helps merchants increase average order value with product recommendations, Frequently Bought Together offers, Spin to Win promotions, and Free Shipping Bars, displaying targeted offers across <b>post-purchase</b>, <b>checkout</b>, <b>product pages</b>, and <b>cart pages</b>.
 - <a href="https://wordpress.org/plugins/kirilkirkov-pdf-invoice-manager/" title="Electronic invoicing and warehouse management plugin which allows you to issue, send and download invoices as pdf file">Invoct – PDF Invoices & Billing for WooCommerce and WordPress</a> - <b>Invoct</b> is FREE powerful Invoice Generator for WordPress — designed to work standalone or seamlessly with WooCommerce including <b>Periodic Invoicing</b>, <b>PDF Generation</b>, <b>API Integration</b> and many more..
 
 ## Support of following features

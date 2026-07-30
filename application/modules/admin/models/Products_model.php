@@ -104,12 +104,14 @@ class Products_model extends CI_Model
         if (!isset($post['virtual_products'])) {
             $post['virtual_products'] = null;
         }
+        $image = isset($post['image']) && $post['image'] !== '' ? $post['image'] : null;
+        $old_image = isset($post['old_image']) ? $post['old_image'] : null;
         $this->db->trans_begin();
         $is_update = false;
         if ($id > 0) {
             $is_update = true;
             if (!$this->db->where('id', $id)->update('products', array(
-                        'image' => $post['image'] != null ? $_POST['image'] : $_POST['old_image'],
+                        'image' => $image !== null ? $image : $old_image,
                         'shop_categorie' => $post['shop_categorie'],
                         'quantity' => $post['quantity'],
                         'in_slider' => $post['in_slider'],
@@ -127,6 +129,7 @@ class Products_model extends CI_Model
              * We want our plaform public ulrs to be in default 
              * language that we use
              */
+            $myTranslationNum = 0;
             $i = 0;
             foreach ($_POST['translations'] as $translation) {
                 if ($translation == MY_DEFAULT_LANGUAGE_ABBR) {
@@ -135,7 +138,7 @@ class Products_model extends CI_Model
                 $i++;
             }
             if (!$this->db->insert('products', array(
-                        'image' => $post['image'],
+                        'image' => $image,
                         'shop_categorie' => $post['shop_categorie'],
                         'quantity' => $post['quantity'],
                         'in_slider' => $post['in_slider'],

@@ -89,10 +89,24 @@ class Publish extends ADMIN_Controller
 
     public function do_upload_others_images()
     {
+        $this->login_check();
         if ($this->input->is_ajax_request()) {
-            $upath = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
+            $base_dir = realpath('./attachments/shop_images');
+            if ($base_dir === false) {
+                return;
+            }
+            $folder = basename($_POST['folder'] ?? '');
+            if ($folder === '' || $folder === '.') {
+                return;
+            }
+            $upath = $base_dir . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
             if (!file_exists($upath)) {
-                mkdir($upath, 0777);
+                mkdir($upath, 0755);
+            }
+
+            $resolved_dir = realpath($upath);
+            if ($resolved_dir === false || strpos($resolved_dir . DIRECTORY_SEPARATOR, $base_dir . DIRECTORY_SEPARATOR) !== 0) {
+                return;
             }
 
             $this->load->library('upload');
@@ -108,7 +122,7 @@ class Publish extends ADMIN_Controller
                 $_FILES['others']['size'] = $files['others']['size'][$i];
 
                 $this->upload->initialize(array(
-                    'upload_path' => $upath,
+                    'upload_path' => $resolved_dir . DIRECTORY_SEPARATOR,
                     'allowed_types' => $this->allowed_img_types
                 ));
                 $this->upload->do_upload('others');
@@ -118,18 +132,22 @@ class Publish extends ADMIN_Controller
 
     public function loadOthersImages()
     {
+        $this->login_check();
         $output = '';
-        if (isset($_POST['folder']) && $_POST['folder'] != null) {
-            $dir = 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
-            if (is_dir($dir)) {
-                if ($dh = opendir($dir)) {
+        $base_dir = realpath('./attachments/shop_images');
+        $folder = basename($_POST['folder'] ?? '');
+        if ($base_dir !== false && isset($_POST['folder']) && $folder !== '' && $folder !== '.') {
+            $dir = $base_dir . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
+            $resolved_dir = realpath($dir);
+            if ($resolved_dir !== false && strpos($resolved_dir . DIRECTORY_SEPARATOR, $base_dir . DIRECTORY_SEPARATOR) === 0 && is_dir($resolved_dir)) {
+                if ($dh = opendir($resolved_dir)) {
                     $i = 0;
                     while (($file = readdir($dh)) !== false) {
-                        if (is_file($dir . $file)) {
+                        if (is_file($resolved_dir . DIRECTORY_SEPARATOR . $file)) {
                             $output .= '
                                 <div class="other-img" id="image-container-' . $i . '">
-                                    <img src="' . base_url('attachments/shop_images/' . htmlspecialchars($_POST['folder']) . '/' . $file) . '" style="width:100px; height: 100px;">
-                                    <a href="javascript:void(0);" onclick="removeSecondaryProductImage(\'' . $file . '\', \'' . htmlspecialchars($_POST['folder']) . '\', ' . $i . ')">
+                                    <img src="' . base_url('attachments/shop_images/' . htmlspecialchars($folder, ENT_QUOTES, 'UTF-8') . '/' . $file) . '" style="width:100px; height: 100px;">
+                                    <a href="javascript:void(0);" onclick="removeSecondaryProductImage(\'' . $file . '\', \'' . htmlspecialchars($folder, ENT_QUOTES, 'UTF-8') . '\', ' . $i . ')">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </a>
                                 </div>
@@ -152,15 +170,23 @@ class Publish extends ADMIN_Controller
      * called from ajax
      */
     public function removeSecondaryImage() {
+        $this->login_check();
         if ($this->input->is_ajax_request()) {
-            $basePath = realpath('.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR);
-    
-            $folder = realpath($basePath . DIRECTORY_SEPARATOR . $_POST['folder']);
-            $image = $_POST['image'];
-    
-            if ($folder !== false && strpos($folder, $basePath) === 0 && is_file($folder . DIRECTORY_SEPARATOR . $image)) {
-                unlink($folder . DIRECTORY_SEPARATOR . $image);
+            $base_dir = realpath('./attachments/shop_images');
+            if ($base_dir === false) {
+                return;
             }
+            $folder = basename($_POST['folder'] ?? '');
+            $image = basename($_POST['image'] ?? '');
+            if ($folder === '' || $folder === '.' || $image === '') {
+                return;
+            }
+            $img_path = $base_dir . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $image;
+            $resolved = realpath($img_path);
+            if ($resolved === false || strpos($resolved, $base_dir . DIRECTORY_SEPARATOR) !== 0) {
+                return;
+            }
+            unlink($resolved);
         }
     }
 }

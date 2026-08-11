@@ -35,6 +35,13 @@ class Products extends ADMIN_Controller
             redirect('admin/products');
         }
 
+        if (isset($_GET['approve'])) {
+            $this->Products_model->productStatusChange($_GET['approve'], 1);
+            $this->session->set_flashdata('result_publish', 'Product is approved!');
+            $this->saveHistory('Approve product id - ' . $_GET['approve']);
+            redirect('admin/products');
+        }
+
         unset($_SESSION['filter']);
         $search_title = null;
         if ($this->input->get('search_title') !== NULL) {
@@ -59,9 +66,14 @@ class Products extends ADMIN_Controller
             $_SESSION['filter']['show_vendor'] = $vendor;
             $this->saveHistory('Search for vendor id - ' . $vendor);
         }
+        $status = null;
+        if ($this->input->get('status') !== NULL && $this->input->get('status') !== '') {
+            $status = $this->input->get('status');
+            $_SESSION['filter']['status'] = $status;
+        }
         $data['products_lang'] = $products_lang = $this->session->userdata('admin_lang_products');
-        $rowscount = $this->Products_model->productsCount($search_title, $category, $vendor);
-        $data['products'] = $this->Products_model->getproducts($this->num_rows, $page, $search_title, $orderby, $category, $vendor);
+        $rowscount = $this->Products_model->productsCount($search_title, $category, $vendor, $status);
+        $data['products'] = $this->Products_model->getproducts($this->num_rows, $page, $search_title, $orderby, $category, $vendor, $status);
         $data['links_pagination'] = pagination('admin/products', $rowscount, $this->num_rows, 3);
         $data['num_shop_art'] = $this->Products_model->numShopproducts();
         $data['languages'] = $this->Languages_model->getLanguages();

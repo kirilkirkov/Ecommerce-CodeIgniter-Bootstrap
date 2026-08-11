@@ -28,6 +28,13 @@ class Listvendors extends ADMIN_Controller
             redirect('admin/listvendors');
         }
 
+        if (isset($_GET['approve'])) {
+            $this->Vendors_model->approveVendor($_GET['approve']);
+            $this->session->set_flashdata('result_add', 'Vendor is approved!');
+            $this->saveHistory('Approve vendor id - ' . $_GET['approve']);
+            redirect('admin/listvendors');
+        }
+
         if (isset($_GET['edit']) && !isset($_POST['name'])) {
             $_POST = $this->Vendors_model->getVendors($_GET['edit'])->row_array();
             $_POST['edit'] = $_GET['edit'];
@@ -42,6 +49,10 @@ class Listvendors extends ADMIN_Controller
         if(isset($_GET['id'])){
             $id = $_GET['id'];
         }
+        $status = null;
+        if (isset($_GET['status']) && $_GET['status'] !== '') {
+            $status = $_GET['status'];
+        }
 
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
@@ -53,7 +64,7 @@ class Listvendors extends ADMIN_Controller
             redirect('admin/listvendors');
         }
 
-        $data['vendors'] = $this->Vendors_model->getVendors($id);
+        $data['vendors'] = $this->Vendors_model->getVendors($id, $status);
         $data['controller'] = $this;
 
         $this->load->view('_parts/header', $head);

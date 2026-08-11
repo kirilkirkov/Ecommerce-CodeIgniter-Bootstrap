@@ -33,9 +33,10 @@ class AddProduct extends VENDOR_Controller
         if (isset($_POST['setProduct'])) {
             $_POST['image'] = $this->uploadImage();
             $_POST['vendor_id'] = $this->vendor_id;
-            $result = $this->Products_model->setProduct($_POST, $id);
+            $requiresApproval = $id == 0 && $this->Home_admin_model->getValueStore('requireProductApproval') == 1;
+            $result = $this->Products_model->setProduct($_POST, $id, $requiresApproval ? 2 : 1);
             if ($result === true) {
-                $result_msg = lang('vendor_product_published');
+                $result_msg = $requiresApproval ? lang('vendor_product_pending_approval') : lang('vendor_product_published');
             } else {
                 $result_msg = lang('vendor_product_publish_err');
             }

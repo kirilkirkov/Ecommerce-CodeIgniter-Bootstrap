@@ -148,6 +148,14 @@ if ($this->session->flashdata('result_publish')) {
         <label>Position</label>
         <input type="text" placeholder="Position number" name="position" value="<?= isset($_POST['position']) ? htmlspecialchars($_POST['position']) : '' ?>" class="form-control">
     </div>
+    <div class="form-group for-shop">
+        <label>Status</label>
+        <select class="selectpicker" name="visibility">
+            <option value="1" <?= !isset($_POST['visibility']) || $_POST['visibility'] == 1 ? 'selected' : '' ?>>Live</option>
+            <option value="2" <?= isset($_POST['visibility']) && $_POST['visibility'] == 2 ? 'selected' : '' ?>>Pending Approval</option>
+            <option value="0" <?= isset($_POST['visibility']) && $_POST['visibility'] == 0 ? 'selected' : '' ?>>Hidden</option>
+        </select>
+    </div>
     <button type="submit" name="submit" class="btn btn-lg btn-default btn-publish">Publish</button>
     <?php if ($this->uri->segment(3) !== null) { ?>
         <a href="<?= base_url('admin/products') ?>" class="btn btn-lg btn-default">Cancel</a>

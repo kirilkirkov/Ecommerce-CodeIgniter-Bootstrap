@@ -22,6 +22,20 @@
         <?php
     }
     ?>
+    <div class="well hidden-xs">
+        <div class="row">
+            <form method="GET" action="">
+                <div class="col-sm-3">
+                    <label>Status:</label>
+                    <select name="status" class="form-control selectpicker" onchange="this.form.submit()">
+                        <option value="">All</option>
+                        <option <?= isset($_GET['status']) && $_GET['status'] == '1' ? 'selected=""' : '' ?> value="1">Approved</option>
+                        <option <?= isset($_GET['status']) && $_GET['status'] == '0' ? 'selected=""' : '' ?> value="0">Pending</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="clearfix"></div>
     <?php
     if ($vendors->result()) {
@@ -33,6 +47,7 @@
                         <th>#ID</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Status</th>
                         <th>Sold products amount</th>
                         <th>Created At</th>
                         <th class="text-center">Action</th>
@@ -43,6 +58,13 @@
                         <td><?= $vendor->id ?></td>
                         <td><?= isset($vendor->name) ? htmlspecialchars($vendor->name, ENT_QUOTES, 'UTF-8') : 'Vendor name is empty' ?></td>
                         <td><?= $vendor->email ?></td>
+                        <td>
+                            <?php if ($vendor->status == 1) { ?>
+                                <span class="label label-success">Approved</span>
+                            <?php } else { ?>
+                                <span class="label label-warning">Pending</span>
+                            <?php } ?>
+                        </td>
                         <td>
                             <?php
                              $orders = $controller->getVendorOrders($vendor->id);
@@ -66,6 +88,9 @@
                         <td><?= $vendor->created_at ?></td>
                         <td class="text-center">
                             <div>
+                                <?php if ($vendor->status == 0) { ?>
+                                    <a href="?approve=<?= $vendor->id ?>">Approve</a>
+                                <?php } ?>
                                 <a href="?edit=<?= $vendor->id ?>">Edit</a>
                                 <a href="?delete=<?= $vendor->id ?>" class="confirm-delete">Delete</a>
                             </div>

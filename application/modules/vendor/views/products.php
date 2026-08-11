@@ -24,7 +24,14 @@ if ($this->session->flashdata('result_delete')) {
                         </a>
                     </div> 
                     <div class="product-body">
-                        <h4><strong><a href=""><?= $row->title ?></a></strong></h4> 
+                        <?php if ($row->visibility == 2) { ?>
+                            <span class="label label-warning"><?= lang('vendor_status_pending') ?></span>
+                        <?php } elseif ($row->visibility == 0) { ?>
+                            <span class="label label-default"><?= lang('vendor_status_hidden') ?></span>
+                        <?php } else { ?>
+                            <span class="label label-success"><?= lang('vendor_status_live') ?></span>
+                        <?php } ?>
+                        <h4><strong><a href=""><?= $row->title ?></a></strong></h4>
                         <p class="product-text">
                             <?= word_limiter(strip_tags($row->description), 120) ?>
                         </p> 

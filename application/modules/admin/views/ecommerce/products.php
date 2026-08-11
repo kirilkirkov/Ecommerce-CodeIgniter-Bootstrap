@@ -70,6 +70,15 @@
                                 <?php } ?>
                             </select>
                         </div>
+                        <div class="col-sm-3">
+                            <label>Status:</label>
+                            <select name="status" class="form-control selectpicker change-products-form">
+                                <option value="">All</option>
+                                <option <?= isset($_GET['status']) && $_GET['status'] == '1' ? 'selected=""' : '' ?> value="1">Live</option>
+                                <option <?= isset($_GET['status']) && $_GET['status'] == '2' ? 'selected=""' : '' ?> value="2">Pending Approval</option>
+                                <option <?= isset($_GET['status']) && $_GET['status'] == '0' ? 'selected=""' : '' ?> value="0">Hidden</option>
+                            </select>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -86,6 +95,7 @@
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Vendor</th>
+                                <th>Status</th>
                                 <th>Position</th>
                                 <th class="text-right">Action</th>
                             </tr>
@@ -128,9 +138,21 @@
                                         </span>
                                     </td>
                                     <td><?= $row->vendor_id > 0 ? '<a href="?show_vendor=' . $row->vendor_id . '">' . $row->vendor_name . '</a>' : 'No vendor' ?></td>
+                                    <td>
+                                        <?php if ($row->visibility == 2) { ?>
+                                            <span class="label label-warning">Pending</span>
+                                        <?php } elseif ($row->visibility == 0) { ?>
+                                            <span class="label label-default">Hidden</span>
+                                        <?php } else { ?>
+                                            <span class="label label-success">Live</span>
+                                        <?php } ?>
+                                    </td>
                                     <td><?= $row->position ?></td>
                                     <td>
                                         <div class="pull-right">
+                                            <?php if ($row->visibility == 2) { ?>
+                                                <a href="<?= base_url('admin/products?approve=' . $row->id) ?>" class="btn btn-success">Approve</a>
+                                            <?php } ?>
                                             <a href="<?= base_url('admin/publish/' . $row->id) ?>" class="btn btn-info">Edit</a>
                                             <a href="<?= base_url('admin/products?delete=' . $row->id) ?>"  class="btn btn-danger confirm-delete">Delete</a>
                                         </div>

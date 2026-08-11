@@ -28,7 +28,7 @@ class Products_model extends CI_Model
         }
     }
 
-    public function productsCount($search_title = null, $category = null, $vendor = null)
+    public function productsCount($search_title = null, $category = null, $vendor = null, $status = null)
     {
         if ($search_title != null) {
             $search_title = trim($this->db->escape_like_str($search_title));
@@ -40,12 +40,15 @@ class Products_model extends CI_Model
         if ($vendor != null) {
             $this->db->where('vendor_id', $vendor);
         }
+        if ($status !== null) {
+            $this->db->where('visibility', $status);
+        }
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
         $this->db->where('products_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
         return $this->db->count_all_results('products');
     }
 
-    public function getProducts($limit, $page, $search_title = null, $orderby = null, $category = null, $vendor = null)
+    public function getProducts($limit, $page, $search_title = null, $orderby = null, $category = null, $vendor = null, $status = null)
     {
         if ($search_title != null) {
             $search_title = trim($this->db->escape_like_str($search_title));
@@ -64,6 +67,9 @@ class Products_model extends CI_Model
         }
         if ($vendor != null) {
             $this->db->where('vendor_id', $vendor);
+        }
+        if ($status !== null) {
+            $this->db->where('visibility', $status);
         }
         $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
@@ -121,6 +127,7 @@ class Products_model extends CI_Model
                         'position' => $post['position'],
                         'virtual_products' => $post['virtual_products'],
                         'brand_id' => $post['brand_id'],
+                        'visibility' => isset($post['visibility']) ? $post['visibility'] : 1,
                         'time_update' => time()
                     ))) {
                 log_message('error', print_r($this->db->error(), true));
@@ -149,6 +156,7 @@ class Products_model extends CI_Model
                         'virtual_products' => $post['virtual_products'],
                         'folder' => $post['folder'],
                         'brand_id' => $post['brand_id'],
+                        'visibility' => isset($post['visibility']) ? $post['visibility'] : 1,
                         'time' => time()
                     ))) {
                 log_message('error', print_r($this->db->error(), true));

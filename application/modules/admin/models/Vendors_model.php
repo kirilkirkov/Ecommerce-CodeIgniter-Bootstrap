@@ -8,13 +8,25 @@ class Vendors_model extends CI_Model
         parent::__construct();
     }
 
-    public function getVendors($id = null)
+    public function getVendors($id = null, $status = null)
     {
         if($id !== null && (int)$id > 0) {
             $this->db->where('id', $id);
         }
+        if ($status !== null && $status !== '') {
+            $this->db->where('status', $status);
+        }
         $query = $this->db->get('vendors');
         return $query;
+    }
+
+    public function approveVendor($id)
+    {
+        $this->db->where('id', $id);
+        if (!$this->db->update('vendors', array('status' => 1))) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
     }
 
     public function getVendorOrders($vendor_id)

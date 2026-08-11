@@ -321,7 +321,9 @@ INSERT INTO `value_store` (`id`, `thekey`, `value`) VALUES
 (31, 'outOfStock', '0'),
 (32, 'hideBuyButtonsOfOutOfStock', '0'),
 (33, 'moreInfoBtn', ''),
-(34, 'refreshAfterAddToCart', 0);
+(34, 'refreshAfterAddToCart', 0),
+(35, 'requireVendorApproval', '0'),
+(36, 'requireProductApproval', '0');
 
 CREATE TABLE `brands` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -357,6 +359,7 @@ CREATE TABLE `vendors` (
   `name` varchar(50) DEFAULT NULL,
   `url` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1-approved, 0-pending',
   `password` varchar(100) NOT NULL,
   `remember_token` varchar(64) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

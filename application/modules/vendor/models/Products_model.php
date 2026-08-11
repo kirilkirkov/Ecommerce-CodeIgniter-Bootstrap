@@ -20,7 +20,7 @@ class Products_model extends CI_Model
         }
     }
 
-    public function setProduct($post, $id = 0)
+    public function setProduct($post, $id = 0, $visibility = 1)
     {
         $this->db->trans_begin();
         $is_update = false;
@@ -52,6 +52,7 @@ class Products_model extends CI_Model
                         'brand_id' => $post['brand_id'],
                         'folder' => $post['folder'],
                         'vendor_id' => $post['vendor_id'],
+                        'visibility' => $visibility,
                         'time' => time()
                     ))) {
                 log_message('error', print_r($this->db->error(), true));

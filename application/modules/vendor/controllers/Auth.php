@@ -33,9 +33,12 @@ class Auth extends VENDOR_Controller
         $head['keywords'] = '';
 
         if (isset($_POST['login'])) {
-            $result = $this->verifyVendorLogin();
-            if ($result == false) {
+            $vendor = $this->verifyVendorLogin();
+            if ($vendor == false) {
                 $this->session->set_flashdata('login_error', lang('login_vendor_error'));
+                redirect(LANG_URL . '/vendor/login');
+            } elseif ($vendor['status'] == 0) {
+                $this->session->set_flashdata('login_error', lang('vendor_pending_approval'));
                 redirect(LANG_URL . '/vendor/login');
             } else {
                 $remember_me = false;
@@ -69,6 +72,9 @@ class Auth extends VENDOR_Controller
                 $this->session->set_flashdata('error_register', $this->registerErrors);
                 $this->session->set_flashdata('email', $_POST['u_email']);
                 redirect(LANG_URL . '/vendor/register');
+            } elseif ($result === 'pending') {
+                $this->session->set_flashdata('login_error', lang('vendor_pending_approval'));
+                redirect(LANG_URL . '/vendor/login');
             } else {
                 $this->setLoginSession($_POST['u_email'], false);
                 redirect(LANG_URL . '/vendor/me');
@@ -102,8 +108,9 @@ class Auth extends VENDOR_Controller
             $this->registerErrors = $errors;
             return false;
         }
-        $this->Auth_model->registerVendor($_POST);
-        return true;
+        $status = $this->Home_admin_model->getValueStore('requireVendorApproval') == 1 ? 0 : 1;
+        $this->Auth_model->registerVendor($_POST, $status);
+        return $status == 1 ? true : 'pending';
     }
 
     public function forgotten()

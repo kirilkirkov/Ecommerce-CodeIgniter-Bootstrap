@@ -201,6 +201,18 @@ class Settings extends ADMIN_Controller
             $this->saveHistory('Multi Vendor Support changed');
             redirect('admin/settings');
         }
+        if (isset($_POST['requireVendorApproval'])) {
+            $this->Home_admin_model->setValueStore('requireVendorApproval', $_POST['requireVendorApproval']);
+            $this->session->set_flashdata('requireVendorApproval', 'Vendor Approval Required setting changed');
+            $this->saveHistory('Vendor Approval Required setting changed');
+            redirect('admin/settings');
+        }
+        if (isset($_POST['requireProductApproval'])) {
+            $this->Home_admin_model->setValueStore('requireProductApproval', $_POST['requireProductApproval']);
+            $this->session->set_flashdata('requireProductApproval', 'Product Approval Required setting changed');
+            $this->saveHistory('Product Approval Required setting changed');
+            redirect('admin/settings');
+        }
         if (isset($_POST['setCookieLaw'])) {
             unset($_POST['setCookieLaw']);
             $this->setCookieLaw($_POST);

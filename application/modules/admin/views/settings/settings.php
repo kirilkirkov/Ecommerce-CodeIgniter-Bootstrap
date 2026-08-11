@@ -310,6 +310,42 @@
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-success col-h">
+            <div class="panel-heading">Require Vendor Approval</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('requireVendorApproval')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('requireVendorApproval') ?></div>
+                <?php } ?>
+                <p class="help-block">When enabled, new vendors must be approved from Admin &rarr; Vendors before they can log in.</p>
+                <form method="POST" action="">
+                    <input type="hidden" name="requireVendorApproval" value="<?= isset($requireVendorApproval) ? $requireVendorApproval : 0 ?>">
+                    <input <?= (isset($requireVendorApproval) && $requireVendorApproval == 1) ? 'checked' : '' ?> data-toggle="toggle" data-for-field="requireVendorApproval" class="toggle-changer" type="checkbox">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
+            <div class="panel-heading">Require Product Approval</div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('requireProductApproval')) { ?>
+                    <div class="alert alert-info"><?= $this->session->flashdata('requireProductApproval') ?></div>
+                <?php } ?>
+                <p class="help-block">When enabled, new products published by vendors stay hidden from the storefront until approved from Admin &rarr; Products.</p>
+                <form method="POST" action="">
+                    <input type="hidden" name="requireProductApproval" value="<?= isset($requireProductApproval) ? $requireProductApproval : 0 ?>">
+                    <input <?= (isset($requireProductApproval) && $requireProductApproval == 1) ? 'checked' : '' ?> data-toggle="toggle" data-for-field="requireProductApproval" class="toggle-changer" type="checkbox">
+                    <button class="btn btn-default" value="" type="submit">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-success col-h">
             <div class="panel-heading">Show in list out of stock products</div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('outOfStock')) { ?>

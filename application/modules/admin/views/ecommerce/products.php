@@ -22,7 +22,7 @@
             <div class="well hidden-xs"> 
                 <div class="row">
                     <form method="GET" id="searchProductsForm" action="">
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label>Order:</label>
                             <select name="order_by" class="form-control selectpicker change-products-form">
                                 <option <?= isset($_GET['order_by']) && $_GET['order_by'] == 'id=desc' ? 'selected=""' : '' ?> value="id=desc">Newest</option>
@@ -31,7 +31,7 @@
                                 <option <?= isset($_GET['order_by']) && $_GET['order_by'] == 'quantity=desc' ? 'selected=""' : '' ?> value="quantity=desc">High Quantity</option>
                             </select>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label>Title:</label>
                             <div class="input-group">
                                 <input class="form-control" placeholder="Product Title" type="text" value="<?= isset($_GET['search_title']) ? htmlspecialchars($_GET['search_title'], ENT_QUOTES, 'UTF-8') : '' ?>" name="search_title">
@@ -42,7 +42,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label>Category:</label>
                             <select name="category" class="form-control selectpicker change-products-form">
                                 <option value="">None</option>
@@ -55,6 +55,17 @@
                                             }
                                         }
                                         ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Vendor:</label>
+                            <select name="show_vendor" class="form-control selectpicker change-products-form">
+                                <option value="">All vendors</option>
+                                <?php foreach ($vendors->result() as $vendor_row) { ?>
+                                    <option <?= isset($_GET['show_vendor']) && $_GET['show_vendor'] == $vendor_row->id ? 'selected=""' : '' ?> value="<?= $vendor_row->id ?>">
+                                        <?= htmlspecialchars($vendor_row->name, ENT_QUOTES, 'UTF-8') ?>
                                     </option>
                                 <?php } ?>
                             </select>

@@ -25,4 +25,30 @@ class Vendors_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function deleteVendor($id)
+    {
+        $this->db->where('id', $id);
+        if (!$this->db->delete('vendors')) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
+    }
+
+    public function setVendor($post)
+    {
+        $data = array(
+            'name' => $post['name'],
+            'email' => $post['email'],
+            'url' => $post['url']
+        );
+        if (trim($post['password']) != '') {
+            $data['password'] = password_hash($post['password'], PASSWORD_DEFAULT);
+        }
+        $this->db->where('id', $post['edit']);
+        if (!$this->db->update('vendors', $data)) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
+    }
 }

@@ -28,7 +28,7 @@ class Products_model extends CI_Model
         }
     }
 
-    public function productsCount($search_title = null, $category = null)
+    public function productsCount($search_title = null, $category = null, $vendor = null)
     {
         if ($search_title != null) {
             $search_title = trim($this->db->escape_like_str($search_title));
@@ -36,6 +36,9 @@ class Products_model extends CI_Model
         }
         if ($category != null) {
             $this->db->where('shop_categorie', $category);
+        }
+        if ($vendor != null) {
+            $this->db->where('vendor_id', $vendor);
         }
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
         $this->db->where('products_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);

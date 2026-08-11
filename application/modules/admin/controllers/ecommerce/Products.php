@@ -16,7 +16,7 @@ class Products extends ADMIN_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Products_model', 'Languages_model', 'Categories_model'));
+        $this->load->model(array('Products_model', 'Languages_model', 'Categories_model', 'Vendors_model'));
     }
 
     public function index($page = 0)
@@ -56,14 +56,17 @@ class Products extends ADMIN_Controller
         $vendor = null;
         if ($this->input->get('show_vendor') !== NULL) {
             $vendor = $this->input->get('show_vendor');
+            $_SESSION['filter']['show_vendor'] = $vendor;
+            $this->saveHistory('Search for vendor id - ' . $vendor);
         }
         $data['products_lang'] = $products_lang = $this->session->userdata('admin_lang_products');
-        $rowscount = $this->Products_model->productsCount($search_title, $category);
+        $rowscount = $this->Products_model->productsCount($search_title, $category, $vendor);
         $data['products'] = $this->Products_model->getproducts($this->num_rows, $page, $search_title, $orderby, $category, $vendor);
         $data['links_pagination'] = pagination('admin/products', $rowscount, $this->num_rows, 3);
         $data['num_shop_art'] = $this->Products_model->numShopproducts();
         $data['languages'] = $this->Languages_model->getLanguages();
         $data['shop_categories'] = $this->Categories_model->getShopCategories(null, null, 2);
+        $data['vendors'] = $this->Vendors_model->getVendors();
         $this->saveHistory('Go to products');
         $this->load->view('_parts/header', $head);
         $this->load->view('ecommerce/products', $data);

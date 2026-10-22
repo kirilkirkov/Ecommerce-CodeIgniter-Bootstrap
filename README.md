@@ -5,7 +5,7 @@
 
 Current versions:
 
-* Codeigniter 3.1.13 (CodeIgniter Foundation) - modified version with PHP 8.5 support
+* Codeigniter 3.1.13 (CodeIgniter Foundation) - modified version with PHP 8.5.12 support, including the php2shell security fix.
 * Bootstrap 3.3.7
 
 ## Donate
@@ -110,7 +110,7 @@ Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgn
 Read in our wiki - https://github.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/wiki/API
 
 ### Server Requirements
-- PHP 7.4–8.5 (any version in this range)
-- MySQL 5.7–8.4.7 (any version in this range)
+- PHP 7.4 – 8.5 (PHP 8.5.12 or later recommended for PHP2Shell security fixes)
+- MySQL 5.7 – 8.4.7 (any version in this range)
 
 Note: Versions outside these ranges (e.g., PHP 5.6) may work, but are not officially supported or tested.
